@@ -92,49 +92,6 @@ gantt
 
 ---
 
-## 📖 토픽별 노트 마인드맵
-
-```mermaid
-mindmap
-  root((🛡️ 가상자산 AML))
-    1️⃣ Foundations
-      AML 3단계
-      가상자산 특수성
-      핵심 용어
-    2️⃣ Regulations
-      한국 특금법
-      이용자보호법
-      FATF
-      US BSA·OFAC
-      EU MiCA·AMLR
-    3️⃣ Crypto AML
-      VASP 9 의무
-      Travel Rule
-      온체인 유형
-      DeFi·NFT
-    4️⃣ Technology
-      KYC vs KYT
-      블록체인 분석
-      Travel Rule 프로토콜
-    5️⃣ Compliance
-      CDD·EDD
-      STR·CTR
-      제재 스크리닝
-      내부통제
-    6️⃣ Cases
-      DPRK Lazarus
-      Tornado Cash
-      Major Enforcement
-    7️⃣ Vendors
-      KYT 벤더
-      Travel Rule 솔루션
-      한국 시장
-```
-
-자세히 → [`notes/README.md`](notes/README.md)
-
----
-
 ## 🛠️ 미니 프로젝트 6개
 
 | # | 프로젝트 | 주차 | 학습 포인트 |
