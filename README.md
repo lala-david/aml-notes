@@ -1,153 +1,260 @@
-# AML Study — 가상자산/온체인 자금세탁방지 학습 노트
+# 🛡️ AML Notes — 가상자산 자금세탁방지 학습
 
-> 가상자산/온체인 업계 종사자를 위한 AML 자율 학습 노트.
-> 시작: 2026-04-17
+> 가상자산/온체인 업계의 AML(Anti-Money Laundering) 학습 노트. **60일 데일리 챌린지** + **토픽별 노트** + **자동화 미니 프로젝트**.
 
----
-
-## 1. 학습 방식 두 가지
-
-### 🎯 [60-Day Daily Challenge](_curriculum/README.md) ← 추천 시작점
-**가장 빠르고 체계적으로** 가상자산 AML을 끝내고 싶다면:
-- 60일 = 8주 + 캡스톤
-- 매일 60~120분 + 매주 미니 프로젝트 + 마지막 설계 캡스톤
-- 8개 자동화 미니 프로젝트 ([`09_automation/`](09_automation/))
-- 시작: [`_curriculum/day_01.md`](_curriculum/day_01.md)
-- 진척도: [`_curriculum/progress.md`](_curriculum/progress.md)
-
-### 📚 자유 학습 (지식베이스로만 활용)
-원하는 토픽만 골라 보고 싶다면 아래 폴더들을 참조:
-
-1. **`00_overview/`** — AML이 뭔가? 왜 가상자산은 다른가? 핵심 용어 (KYC/KYT/CDD/EDD/STR/CTR)
-2. **`01_regulations/`** — 한국 (특금법, 이용자보호법) → FATF → US (BSA/FinCEN/OFAC) → EU (MiCA/AMLR)
-3. **`02_crypto_aml/`** — 가상자산 특화: VASP 의무, Travel Rule, 온체인 자금세탁 유형
-4. **`03_technology/`** — KYC/KYT, 블록체인 분석, Travel Rule 프로토콜
-5. **`04_compliance_ops/`** — 실제 운영: CDD/EDD, STR/CTR, 제재 스크리닝, 내부통제
-6. **`05_solutions_market/`** — 시장에 나와 있는 솔루션과 벤더 지도
-7. **`06_cases_typologies/`** — 실제 사례 (라자루스, Tornado Cash, 주요 enforcement)
-8. **`07_glossary/`** — 용어 사전
-9. **`08_advanced/`** — 학술 논문 + 산업 리포트 + 컨퍼런스
-10. **`09_automation/`** — 자동화 / 미니 프로젝트 코드
-11. **`references/`** — 원문 링크 / 추가 학습 자료
+![Made with Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f?logo=markdown)
+![Last updated](https://img.shields.io/badge/updated-2026--04--17-blue)
+![License CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
+![Topics](https://img.shields.io/badge/topics-30%2B-orange)
+![Daily Plans](https://img.shields.io/badge/daily%20plans-60-success)
+![Mini Projects](https://img.shields.io/badge/projects-6-purple)
 
 ---
 
-## 2. 디렉토리 규칙
+## 👋 처음이라면 — 5초 안에 시작
 
-```
-aml/
-├── README.md                       # 이 문서. 마스터 인덱스.
-├── 00_overview/                    # 두 자리 prefix는 학습 순서를 의미
-├── 01_regulations/
-│   └── README.md                   # 하위 주제 인덱스가 있으면 README.md 추가
-├── 02_crypto_aml/
-├── 03_technology/
-├── 04_compliance_ops/
-├── 05_solutions_market/
-├── 06_cases_typologies/
-├── 07_glossary/
-└── references/
+```mermaid
+flowchart LR
+    Start([🙋 어떻게 학습할래?]) --> Q{어떤 스타일?}
+    Q -->|🎯 처음부터 체계적으로| A["📅 curriculum/<br/>60일 데일리 챌린지"]
+    Q -->|📚 토픽만 빠르게| B["📖 notes/<br/>주제별 학습 노트"]
+    Q -->|🛠️ 코드로 배우기| C["⚙️ projects/<br/>자동화 미니 프로젝트"]
+    Q -->|🔬 깊이 파기| D["🎓 deep/<br/>논문·리포트·링크"]
+
+    A --> A1[curriculum/day_01.md]
+    B --> B1[notes/README.md]
+    C --> C1[projects/README.md]
+    D --> D1[deep/README.md]
+
+    style Start fill:#fef3c7,stroke:#f59e0b
+    style A fill:#dbeafe,stroke:#3b82f6
+    style B fill:#fce7f3,stroke:#ec4899
+    style C fill:#d1fae5,stroke:#10b981
+    style D fill:#ede9fe,stroke:#8b5cf6
 ```
 
-**파일 네이밍**
-- 영문 snake_case (`korea_fiu_act.md`, `travel_rule.md`)
-- 한국 관련은 `korea_` prefix, 글로벌은 `global_`, 미국 `us_`, EU `eu_`
-- 사례 파일은 `사건명_주체.md` (`lazarus_dprk.md`, `tornado_cash.md`)
-- 한글 파일명 금지 (Windows 인코딩 이슈 + git diff 가독성)
+> 🚀 **추천 시작점** → [`curriculum/day_01.md`](curriculum/day_01.md)
 
-**파일 내용 규칙**
-- 본문은 **한국어**, 법/기술 용어는 영문 병기 (예: 자금세탁방지(AML), 고객확인(KYC))
-- 문서 상단에 **한 줄 요약 + 출처 링크 + 마지막 업데이트 날짜**
-- 사실 주장에는 **출처 URL + 발행일** 표기 (규제는 빠르게 변함)
-- "현재"/"최근" 같은 상대 표현 금지 → "2026년 4월 기준" 으로 명시
-- 각 파일 하단에 **`## 더 읽을거리`** 섹션으로 관련 문서/링크 정리
+---
 
-**문서 구조 권장**
-```markdown
-# 제목
+## 📁 폴더 구조 (단 4개)
 
-> 한 줄 요약. 마지막 업데이트: YYYY-MM-DD.
+```
+aml-notes/
+├── 📅 curriculum/   ← 60일 데일리 챌린지 + 진척 트래커
+├── 📖 notes/        ← 토픽별 학습 노트 (7카테고리 + 용어집)
+├── 🛠️ projects/     ← 자동화 미니 프로젝트 6개 (코드 사양)
+└── 🎓 deep/         ← 학술 논문·산업 리포트·컨퍼런스·외부 링크
+```
 
-## TL;DR
-- 3~5개 bullet
+| 폴더 | 누가 봐야 | 입구 |
+|---|---|---|
+| 📅 **`curriculum/`** | "처음부터 끝까지 끌고 가줘" | [`curriculum/README.md`](curriculum/README.md) |
+| 📖 **`notes/`** | "특정 주제 빨리 보고 싶음" | [`notes/README.md`](notes/README.md) |
+| 🛠️ **`projects/`** | "손으로 만들어야 이해됨" | [`projects/README.md`](projects/README.md) |
+| 🎓 **`deep/`** | "논문/리포트 더 줘" | [`deep/README.md`](deep/README.md) |
 
-## 본문 섹션들...
+---
 
-## 더 읽을거리
-- [링크 제목](url) — 한 줄 설명
+## 🎯 60일 챌린지 한눈에
+
+```mermaid
+gantt
+    title 60일 가상자산 AML 데일리 챌린지
+    dateFormat X
+    axisFormat D%d
+
+    section Week 1
+    AML 기초 (D1-7)              :w1, 0, 7d
+    section Week 2
+    한국 규제 (D8-14)             :w2, 7, 7d
+    section Week 3
+    FATF + 글로벌 (D15-21)       :w3, 14, 7d
+    section Week 4
+    🛠️ Travel Rule + IVMS101    :w4, 21, 7d
+    section Week 5
+    🛠️ 온체인 분석              :w5, 28, 7d
+    section Week 6
+    🛠️ 자금세탁 유형            :w6, 35, 7d
+    section Week 7
+    🛠️ 컴플라이언스 운영         :w7, 42, 7d
+    section Week 8
+    🛠️ 사례 + 리서치            :w8, 49, 7d
+    section Capstone
+    🎓 통합 설계 + 90일 로드맵   :cap, 56, 4d
+```
+
+- **하루 60~120분 × 60일** = 8주 + 캡스톤 4일
+- 매주 끝에 **🛠️ 미니 프로젝트** (총 6개)
+- 마지막 **🎓 캡스톤** = Mini AML Risk Engine 설계서
+
+자세히 → [`curriculum/README.md`](curriculum/README.md) | 매일 진척 → [`curriculum/progress.md`](curriculum/progress.md)
+
+---
+
+## 📖 토픽별 노트 마인드맵
+
+```mermaid
+mindmap
+  root((🛡️ 가상자산 AML))
+    1️⃣ Foundations
+      AML 3단계
+      가상자산 특수성
+      핵심 용어
+    2️⃣ Regulations
+      한국 특금법
+      이용자보호법
+      FATF
+      US BSA·OFAC
+      EU MiCA·AMLR
+    3️⃣ Crypto AML
+      VASP 9 의무
+      Travel Rule
+      온체인 유형
+      DeFi·NFT
+    4️⃣ Technology
+      KYC vs KYT
+      블록체인 분석
+      Travel Rule 프로토콜
+    5️⃣ Compliance
+      CDD·EDD
+      STR·CTR
+      제재 스크리닝
+      내부통제
+    6️⃣ Cases
+      DPRK Lazarus
+      Tornado Cash
+      Major Enforcement
+    7️⃣ Vendors
+      KYT 벤더
+      Travel Rule 솔루션
+      한국 시장
+```
+
+자세히 → [`notes/README.md`](notes/README.md)
+
+---
+
+## 🛠️ 미니 프로젝트 6개
+
+| # | 프로젝트 | 주차 | 학습 포인트 |
+|---|---|---|---|
+| 01 | [IVMS101 빌더](projects/01-ivms101-builder/) | W4 | Travel Rule 메시지 표준 직접 작성 |
+| 02 | [Onchain Tracer](projects/02-onchain-tracer/) | W5 | Etherscan API로 2-hop 자금 추적 |
+| 03 | [Mixer Fetcher](projects/03-mixer-fetcher/) | W6 | OSINT 위험 wallet 데이터셋 구축 |
+| 04 | [OFAC Screener](projects/04-ofac-screener/) | W7 | 제재 스크리닝 엔진 |
+| 05 | [KYT Wrapper](projects/05-kyt-wrapper/) | W8 | 통합 위험 평가 API |
+| 🎓 | [Risk Engine 설계](projects/06-capstone-risk-engine/) | Capstone | 시스템 통합 + 설계 문서 |
+
+→ [`projects/README.md`](projects/README.md)
+
+---
+
+## 🗺️ 학습 경로 추천
+
+### 🟢 입문자 (AML 0)
+```
+curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
+```
+
+### 🟡 한국 규제만 빨리
+```
+1. notes/2-regulations/korea-fiu-act.md       (특금법)
+2. notes/2-regulations/korea-user-protection.md (이용자보호법)
+3. notes/3-crypto-aml/vasp-obligations.md     (VASP 9 의무)
+4. notes/3-crypto-aml/travel-rule.md          (Travel Rule 운영)
+```
+
+### 🔵 기술 / 분석가
+```
+1. notes/4-technology/kyc-kyt.md
+2. notes/4-technology/blockchain-analytics.md
+3. projects/02-onchain-tracer/  (실습)
+4. projects/05-kyt-wrapper/     (실습)
+```
+
+### 🟣 솔루션 / 사업
+```
+1. notes/7-vendors/analytics-vendors.md
+2. notes/7-vendors/travel-rule-vendors.md
+3. notes/7-vendors/korea-solutions.md
+4. deep/reports.md  (Chainalysis Crypto Crime Report 등)
 ```
 
 ---
 
-## 3. 적용 영역별 학습 우선순위
+## ⚡ 약어 빠른 참조 (Top 12)
 
-가상자산 업계의 주요 사업 유형별로 무엇을 더 봐야 하는가:
-
-| 사업 유형 | 우선 학습 영역 |
-|---|---|
-| **가상자산 거래소** | VASP 의무 풀스택 + Travel Rule + 시세조종 규제 |
-| **수탁업 (custody)** | 자기/고객자산 분리 + KYT (출금 주소) + 보안/MPC |
-| **온체인 분석/솔루션** | 블록체인 분석 기법 + attribution + cross-chain |
-| **결제 PG** | 가맹점 KYC + 실시간 거래 모니터링 + Travel Rule |
-| **OTC desk** | EDD + STR + 거액 거래 모니터링 |
-
-→ **VASP 컴플라이언스 + 온체인 분석 + Travel Rule 솔루션** 이 한국 시장의 핵심 학습 영역.
-
----
-
-## 4. 우선순위 Top 5 (시간 없을 때)
-
-먼저 봐야 할 5개 문서:
-
-1. [`00_overview/what_is_aml.md`](00_overview/what_is_aml.md) — 자금세탁의 3단계 (Placement → Layering → Integration)
-2. [`01_regulations/korea_fiu_act.md`](01_regulations/korea_fiu_act.md) — 특금법, 우리 회사들이 직접 적용받는 법
-3. [`02_crypto_aml/travel_rule.md`](02_crypto_aml/travel_rule.md) — Travel Rule (FATF R.16), 가장 핫한 운영 이슈
-4. [`02_crypto_aml/onchain_typology.md`](02_crypto_aml/onchain_typology.md) — 믹서/체인호핑/peel chain 등 자금세탁 패턴
-5. [`06_cases_typologies/lazarus_dprk.md`](06_cases_typologies/lazarus_dprk.md) — Bybit $1.5B 해킹, 업계 1순위 위협 행위자
-
----
-
-## 5. 주요 약어 빠른 참조
+<details>
+<summary>가장 자주 나오는 12개 — 펼쳐 보기</summary>
 
 | 약어 | 풀이 |
 |---|---|
-| AML | Anti-Money Laundering, 자금세탁방지 |
-| CFT | Combating the Financing of Terrorism, 테러자금조달방지 |
-| KYC | Know Your Customer, 고객확인 |
-| KYT | Know Your Transaction, 거래확인 (블록체인 분석 기반) |
-| CDD / EDD | Customer Due Diligence / Enhanced DD, 고객실사/강화실사 |
-| STR / CTR | Suspicious / Currency Transaction Report, 의심거래/고액현금거래 보고 |
-| VASP | Virtual Asset Service Provider, 가상자산사업자 |
-| CASP | Crypto-Asset Service Provider (EU MiCA 용어, ≈ VASP) |
-| FATF | Financial Action Task Force, 국제자금세탁방지기구 |
-| FIU | Financial Intelligence Unit, 금융정보분석원 (한국) |
-| FinCEN | Financial Crimes Enforcement Network (미국 FIU) |
-| OFAC | Office of Foreign Assets Control (미국 제재 당국) |
-| MiCA | Markets in Crypto-Assets Regulation (EU) |
-| AMLR | EU AML Regulation |
-| BSA | Bank Secrecy Act (미국 1970) |
-| IVMS101 | InterVASP Messaging Standard 101 (Travel Rule 메시지 표준) |
-| TFR | Transfer of Funds Regulation (EU Travel Rule) |
+| **AML** | Anti-Money Laundering, 자금세탁방지 |
+| **KYC** | Know Your Customer, 고객확인 |
+| **KYT** | Know Your Transaction (가상자산 특화) |
+| **VASP** | Virtual Asset Service Provider, 가상자산사업자 |
+| **FATF** | Financial Action Task Force (국제 표준) |
+| **FIU** | Financial Intelligence Unit (한국 KoFIU) |
+| **STR** | Suspicious Transaction Report, 의심거래보고 |
+| **CDD/EDD** | Customer Due Diligence / Enhanced |
+| **OFAC** | US 제재 집행 기관 |
+| **MiCA** | EU 가상자산 통합 규제 |
+| **IVMS101** | Travel Rule 메시지 표준 |
+| **AMLO** | AML Officer, 자금세탁방지 보고책임자 |
 
-전체 용어는 [`07_glossary/terms.md`](07_glossary/terms.md) 참고.
+전체 → [`notes/glossary.md`](notes/glossary.md)
+
+</details>
 
 ---
 
-## 6. 진척도
+## 📊 컨텐츠 현황
 
-| 영역 | 상태 |
-|---|---|
-| 00_overview | ✅ 초안 완료 |
-| 01_regulations | ✅ 초안 완료 (한국/FATF/US/EU) |
-| 02_crypto_aml | ✅ 초안 완료 |
-| 03_technology | ✅ 초안 완료 |
-| 04_compliance_ops | ✅ 초안 완료 |
-| 05_solutions_market | ✅ 초안 완료 |
-| 06_cases_typologies | ✅ 초안 완료 |
-| 07_glossary | ✅ 초안 완료 |
-| 08_advanced | ✅ 인덱스 + 큐레이션 |
-| 09_automation | ✅ 6개 프로젝트 사양 |
-| _curriculum | ✅ 60일 데일리 + 진척트래커 |
-| references | ✅ 초안 완료 |
+| 영역 | 항목 | 수량 |
+|---|---|---|
+| 📅 일일 학습 플랜 | `curriculum/day_NN.md` | **60** |
+| 📖 토픽 노트 | `notes/**/*.md` | **27** |
+| 🛠️ 미니 프로젝트 사양 | `projects/**/README.md` | **6** |
+| 🎓 학술/리포트 큐레이션 | `deep/*.md` | **4** |
+| 🔗 외부 참고 링크 | (총 카운트) | **150+** |
 
-> **Note:** 모든 문서는 **2026년 4월 17일 기준**의 1차 초안. 정확성/최신성은 원문(법령정보센터, FATF, FSC, ESMA 등) 재확인 필수.
+---
+
+## 🤝 사용 가이드
+
+### 이 노트의 성격
+- ✅ **학습용 노트** — 빠르게 일별/토픽별로 흡수하기 위한 구조
+- ✅ **참조용 1차 자료** — 항상 출처 링크 포함
+- ❌ **법률 자문 아님** — 실무 적용 전 법무/컨설팅 검토 필수
+- ❌ **벤더 추천 아님** — 시장 정보 정리, 평가/선정은 별개
+
+### 컨트리뷰션
+이 저장소는 개인 학습 노트지만, 다음은 환영:
+- 오타·링크 깨짐·사실 오류 PR
+- 새 사례·논문·리포트 추가 제안
+- 한국어 번역 개선
+
+---
+
+## ⚠️ 면책
+
+- 모든 문서는 **2026년 4월 17일 기준** 1차 초안
+- 가상자산 규제는 **빠르게 변동** — 원문 (법령정보센터 / FATF / FSC / ESMA / OFAC) 재확인 필수
+- 사실 주장에는 출처 + 발행일 표기. 의심 시 원문 우선
+
+---
+
+## 📜 라이선스
+
+[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+- 자유 사용 / 공유 / 수정 가능
+- 출처 명시만 부탁드립니다
+
+---
+
+<div align="center">
+
+### 🚀 [지금 Day 1 시작하기 →](curriculum/day_01.md)
+
+</div>
