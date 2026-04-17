@@ -5,20 +5,30 @@
 
 ---
 
-## 1. 학습 로드맵
+## 1. 학습 방식 두 가지
 
-가상자산 업계에서 AML을 0부터 배우는 사람을 위한 권장 순서:
+### 🎯 [60-Day Daily Challenge](_curriculum/README.md) ← 추천 시작점
+**가장 빠르고 체계적으로** 가상자산 AML을 끝내고 싶다면:
+- 60일 = 8주 + 캡스톤
+- 매일 60~120분 + 매주 미니 프로젝트 + 마지막 설계 캡스톤
+- 8개 자동화 미니 프로젝트 ([`09_automation/`](09_automation/))
+- 시작: [`_curriculum/day_01.md`](_curriculum/day_01.md)
+- 진척도: [`_curriculum/progress.md`](_curriculum/progress.md)
+
+### 📚 자유 학습 (지식베이스로만 활용)
+원하는 토픽만 골라 보고 싶다면 아래 폴더들을 참조:
 
 1. **`00_overview/`** — AML이 뭔가? 왜 가상자산은 다른가? 핵심 용어 (KYC/KYT/CDD/EDD/STR/CTR)
-2. **`01_regulations/`** — 누가 뭘 시키는가
-   - 한국 (특금법, 가상자산이용자보호법) → FATF → US (BSA/FinCEN/OFAC) → EU (MiCA/AMLR) 순
+2. **`01_regulations/`** — 한국 (특금법, 이용자보호법) → FATF → US (BSA/FinCEN/OFAC) → EU (MiCA/AMLR)
 3. **`02_crypto_aml/`** — 가상자산 특화: VASP 의무, Travel Rule, 온체인 자금세탁 유형
 4. **`03_technology/`** — KYC/KYT, 블록체인 분석, Travel Rule 프로토콜
-5. **`04_compliance_ops/`** — 실제 운영: CDD/EDD, STR/CTR, 제재 스크리닝
+5. **`04_compliance_ops/`** — 실제 운영: CDD/EDD, STR/CTR, 제재 스크리닝, 내부통제
 6. **`05_solutions_market/`** — 시장에 나와 있는 솔루션과 벤더 지도
 7. **`06_cases_typologies/`** — 실제 사례 (라자루스, Tornado Cash, 주요 enforcement)
 8. **`07_glossary/`** — 용어 사전
-9. **`references/`** — 원문 링크 / 추가 학습 자료
+9. **`08_advanced/`** — 학술 논문 + 산업 리포트 + 컨퍼런스
+10. **`09_automation/`** — 자동화 / 미니 프로젝트 코드
+11. **`references/`** — 원문 링크 / 추가 학습 자료
 
 ---
 
@@ -127,14 +137,17 @@ aml/
 
 | 영역 | 상태 |
 |---|---|
-| 00_overview | 초안 완료 |
-| 01_regulations | 초안 완료 (한국/FATF/US/EU) |
-| 02_crypto_aml | 초안 완료 |
-| 03_technology | 초안 완료 |
-| 04_compliance_ops | 초안 완료 |
-| 05_solutions_market | 초안 완료 |
-| 06_cases_typologies | 초안 완료 |
-| 07_glossary | 초안 완료 |
-| references | 초안 완료 |
+| 00_overview | ✅ 초안 완료 |
+| 01_regulations | ✅ 초안 완료 (한국/FATF/US/EU) |
+| 02_crypto_aml | ✅ 초안 완료 |
+| 03_technology | ✅ 초안 완료 |
+| 04_compliance_ops | ✅ 초안 완료 |
+| 05_solutions_market | ✅ 초안 완료 |
+| 06_cases_typologies | ✅ 초안 완료 |
+| 07_glossary | ✅ 초안 완료 |
+| 08_advanced | ✅ 인덱스 + 큐레이션 |
+| 09_automation | ✅ 6개 프로젝트 사양 |
+| _curriculum | ✅ 60일 데일리 + 진척트래커 |
+| references | ✅ 초안 완료 |
 
 > **Note:** 모든 문서는 **2026년 4월 17일 기준**의 1차 초안. 정확성/최신성은 원문(법령정보센터, FATF, FSC, ESMA 등) 재확인 필수.
