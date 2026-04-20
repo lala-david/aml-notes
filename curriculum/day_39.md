@@ -2,6 +2,10 @@
 
 > 무중개 금융이 layering 인프라가 되는 방식. ⏱️ ~80분.
 
+## 📖 오늘 뭘 배우나
+
+DeFi는 원래 AML 목적을 위해 설계된 게 아니지만, **운영자 없음 + KYC 없음 + 전역 접근**이라는 속성 때문에 자연스럽게 layering 인프라가 됐습니다. DEX swap·LP 입출금·Flash loan의 layering 메커니즘, 그리고 **frontend 운영자**에게 규제가 집중되는 이유(Uniswap Labs 사례)까지.
+
 ## 🎯 핵심 질문
 1. DEX swap이 layering에 효과적인 이유?
 2. Liquidity Pool 입출금이 출처 단절시키는 메커니즘?

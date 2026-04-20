@@ -2,6 +2,10 @@
 
 > 사람을 안다 vs 거래/지갑을 안다. ⏱️ ~70분.
 
+## 📖 오늘 뭘 배우나
+
+Week 5는 온체인 분석 주간. 먼저 **KYC(사람)와 KYT(거래·지갑)**가 상호 보완적임을 확실히 하고, KYT 5단계 파이프라인(Discovery → Attribution → Exposure → Behavior → Decision)을 이해합니다. 두 시스템이 하나의 Risk Engine에서 통합되어야 STR 작성이 가능한 구조까지.
+
 ## 🎯 핵심 질문
 1. KYC와 KYT 차이 핵심 5가지?
 2. KYC 5단계 + KYT 5단계 흐름은?

@@ -159,7 +159,7 @@
 - **TFR** (Transfer of Funds Regulation) — EU Travel Rule
 - **Tipping-off** — STR 사실을 고객에게 알리는 행위 (금지)
 - **TM** (Transaction Monitoring) — 거래 모니터링
-- **Tornado Cash** — 이더리움 mixer (2022 OFAC 제재 → 2025 해제)
+- **Tornado Cash** — 이더리움 mixer (2022-08 OFAC 제재 → 2024-11 Van Loon v. Treasury 5th Cir. 판결 → 2025-03-21 지정 해제)
 - **TraderTraitor** — FBI가 명명한 Lazarus sub-cluster
 - **Travel Rule** — FATF R.16, 송수신인 정보 동반 의무
 - **TRISA** — Travel Rule 분산 프로토콜

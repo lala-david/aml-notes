@@ -2,6 +2,10 @@
 
 > 2025-2026 가장 큰 자금세탁 인프라. ⏱️ ~70분.
 
+## 📖 오늘 뭘 배우나
+
+2025년 자금세탁의 중심축이 된 **CMLN (Chinese Money Laundering Networks)**. 텔레그램·위챗 OTC 네트워크가 5~15% 수수료로 **Laundering-as-a-Service**를 제공하며, Lazarus도 이 네트워크를 통해 OTC 환전합니다. 단일 범죄자가 아닌 **분업 생태계**의 등장이 왜 방어를 어렵게 만드는지 이해.
+
 ## 🎯 핵심 질문
 1. CMLN의 2025 처리 규모?
 2. Laundering-as-a-Service 모델?

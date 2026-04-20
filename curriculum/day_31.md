@@ -2,6 +2,10 @@
 
 > 거스름돈 식별 + 거래소 입금 패턴. ⏱️ ~70분.
 
+## 📖 오늘 뭘 배우나
+
+CIOH 다음으로 중요한 두 휴리스틱. **Change Detection**은 거스름돈 주소를 같은 클러스터로 묶고, **Deposit Heuristic**은 거래소의 consolidation 패턴으로 거래소 전체 주소 체계를 드러냅니다. 이 두 휴리스틱이 결합되면 Chainalysis 같은 회사의 attribution DB가 어떻게 거래소 계정까지 연결하는지 감이 잡힙니다.
+
 ## 🎯 핵심 질문
 1. 비트코인 거스름돈 주소는 어떻게 식별?
 2. Deposit Heuristic이 거래소 attribution의 핵심인 이유?

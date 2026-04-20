@@ -2,6 +2,10 @@
 
 > 강화실사가 발동하는 6가지 + 자금출처 추적. ⏱️ ~75분.
 
+## 📖 오늘 뭘 배우나
+
+EDD의 본질은 **자금원천 증빙**. 일반 CDD 위에 **SoF(Source of Funds)·SoW(Source of Wealth) 서류 요구 + 고위경영진 승인**을 얹는 강화 절차이며, PEP·고위험국·비대면+위험 같은 6가지 트리거가 자동 발동됩니다. 가상자산 특화의 **Wallet Ownership Verification**(지갑 소유 증명)까지 연결.
+
 ## 🎯 핵심 질문
 1. EDD 트리거 6가지?
 2. Source of Funds vs Source of Wealth 차이?

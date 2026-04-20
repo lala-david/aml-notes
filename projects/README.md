@@ -1,17 +1,34 @@
 # 🛠️ projects — 자동화 미니 프로젝트
 
-> 60일 챌린지의 6개 미니 프로젝트 코드 + 사양. 마지막 업데이트: 2026-04-17.
+> 60일 챌린지의 **6개 미니 프로젝트** 코드 + 사양. 이 프로젝트들은 주별로 배운 개념을 **손으로 실행 가능한 코드**로 바꿔보고, 최종적으로 Capstone Risk Engine 설계서로 통합하기 위한 점진적 빌딩 블록입니다. 마지막 업데이트: 2026-04-17.
+
+## 왜 코드까지 작성하나
+
+법·규제·운영을 문서로 읽는 것과, **실제 OFAC SDN XML을 파싱해보고 Etherscan API로 2-hop 추적을 직접 해보는 것**은 이해의 깊이가 다릅니다. 6개 프로젝트는 난이도를 낮게 유지하되, Week 4~8 동안의 지식을 **손에 익도록** 반복시키는 것이 목적. 마지막 Capstone에서 이 6개가 하나의 시스템 설계도로 묶입니다.
 
 ## 프로젝트 목록
 
 | 번호 | 폴더 | 주차 | 주제 |
 |---|---|---|---|
-| 01 | [`01_ivms101_builder/`](01_ivms101_builder/README.md) | W4 (D28) | IVMS101 메시지 빌더 + 검증 |
-| 02 | [`02_onchain_tracer/`](02_onchain_tracer/README.md) | W5 (D35) | Etherscan API 2-hop tracer |
-| 03 | [`03_mixer_fetcher/`](03_mixer_fetcher/README.md) | W6 (D42) | Mixer 주소 공개소스 fetcher |
-| 04 | [`04_ofac_screener/`](04_ofac_screener/README.md) | W7 (D49) | OFAC SDN crypto wallet 스크리너 |
-| 05 | [`05_kyt_wrapper/`](05_kyt_wrapper/README.md) | W8 (D56) | KYT API 호출 wrapper |
-| 06 | [`06_capstone_risk_engine/`](06_capstone_risk_engine/DESIGN.md) | Capstone (D59) | Mini AML Risk Engine 설계서 |
+| 01 | [`01-ivms101-builder/`](01-ivms101-builder/README.md) | W4 (D28) | IVMS101 메시지 빌더 + 검증 |
+| 02 | [`02-onchain-tracer/`](02-onchain-tracer/README.md) | W5 (D35) | Etherscan API 2-hop tracer |
+| 03 | [`03-mixer-fetcher/`](03-mixer-fetcher/README.md) | W6 (D42) | Mixer 주소 공개소스 fetcher |
+| 04 | [`04-ofac-screener/`](04-ofac-screener/README.md) | W7 (D49) | OFAC SDN crypto wallet 스크리너 |
+| 05 | [`05-kyt-wrapper/`](05-kyt-wrapper/README.md) | W8 (D56) | KYT API 호출 wrapper |
+| 06 | [`06-capstone-risk-engine/`](06-capstone-risk-engine/DESIGN.md) | Capstone (D59) | Mini AML Risk Engine 설계서 |
+
+## 연결 구조 — 6개가 어떻게 합쳐지나
+
+```
+01 IVMS101 Builder  ─┐
+02 Onchain Tracer   ─┤
+03 Mixer Fetcher    ─┼──► 05 KYT Wrapper ──► 06 Capstone Risk Engine
+04 OFAC Screener    ─┘          (통합)           (전체 설계서)
+```
+
+- **01~04**는 각기 **독립된 학습용 기능**을 구현합니다.
+- **05 KYT Wrapper**에서 03(mixer)·04(OFAC)·02(tracer)를 조합해 `kyt_check(address)`라는 **통합 함수**를 만듭니다.
+- **06 Capstone**은 여기까지 만든 코드 모듈을 엮어 **하나의 AML Risk Engine 설계서**로 결산합니다.
 
 ## 활용 가이드
 

@@ -2,6 +2,10 @@
 
 > 위험 노출도 계산법. ⏱️ ~70분.
 
+## 📖 오늘 뭘 배우나
+
+Attribution이 끝나면 **"이 주소가 얼마나 위험한가"** 를 숫자로 표현해야 합니다. Direct(1-hop) vs Indirect(N-hop) 노출, 금액·시간·카테고리 가중치를 조합해 Risk Score를 만드는 로직을 오늘 이해합니다. 이 점수가 threshold를 넘으면 자동 차단이 발동하는 KYT의 핵심 의사결정 로직.
+
 ## 🎯 핵심 질문
 1. Direct vs Indirect (N-hop) exposure 차이?
 2. 가중치 적용 3요소?

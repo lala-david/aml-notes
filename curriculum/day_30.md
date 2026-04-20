@@ -2,6 +2,10 @@
 
 > 비트코인 분석의 가장 중요한 휴리스틱. ⏱️ ~80분.
 
+## 📖 오늘 뭘 배우나
+
+비트코인이 계좌가 아닌 **"돈봉투(UTXO)" 모음**으로 작동하는 구조, 그리고 이 구조에서 자연스럽게 도출되는 **Common Input Ownership Heuristic(CIOH)** 를 이해합니다. "한 트랜잭션의 여러 input은 같은 사람이 통제한다"는 단순한 논리가 왜 Chainalysis 같은 회사의 기술적 moat가 됐는지, CoinJoin이 어떻게 이를 깨는지까지.
+
 ## 🎯 핵심 질문
 1. UTXO 모델이 뭔가? (vs Account 모델)
 2. Common Input Ownership 휴리스틱의 논리?

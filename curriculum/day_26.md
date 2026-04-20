@@ -2,6 +2,10 @@
 
 > 멀티프로토콜 게이트웨이가 부상한 이유. ⏱️ ~70분.
 
+## 📖 오늘 뭘 배우나
+
+Travel Rule의 구조적 난제는 **Sunrise Issue** — 전 세계 VASP가 서로 다른 프로토콜·시행 수준을 가진 상황. Notabene은 "다양한 프로토콜을 다 중개해주는 허브" 포지션으로 1,500+ VASP를 모았고, 이게 글로벌 Travel Rule의 사실상 표준이 된 사정을 오늘 이해합니다.
+
 ## 🎯 핵심 질문
 1. Sunrise Issue가 뭔가? (한 줄)
 2. Notabene Gateway가 어떻게 해결?

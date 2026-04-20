@@ -56,8 +56,8 @@
 ### Updated Guidance for RBA on VAs and VASPs (2021)
 - VASP 의무 가이드라인 원전
 
-### Best Practices on Travel Rule Supervision (2026-06-26)
-- 최신 감독 모범사례
+### Best Practices on Travel Rule Supervision (2025-06 발표)
+- FATF Plenary 2025-06 발표된 감독 모범사례 문서
 
 ## 6. UN
 

@@ -2,6 +2,10 @@
 
 > 직접 온체인 데이터 만져보기. ⏱️ ~150분.
 
+## 📖 오늘 뭘 배우나
+
+Week 5의 결산. Etherscan API로 **한 주소에서 2-hop 추적**을 직접 구현해보며, 지난 6일간 배운 Clustering·Attribution·Exposure가 실제 공개 데이터에서 어떻게 나타나는지 체감. 이 프로젝트의 결과물은 Capstone의 Risk Engine에 통합될 '온체인 분석 모듈'의 출발점입니다.
+
 ## 🎯 회고 질문
 1. 클러스터링·Attribution·Exposure 중 가장 어려운 영역?
 2. 자체 vs 벤더 KYT — 회사 입장에서 답?

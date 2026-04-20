@@ -2,6 +2,10 @@
 
 > 코드를 제재할 수 있는가? ⏱️ ~80분.
 
+## 📖 오늘 뭘 배우나
+
+Tornado Cash 사건은 "**코드 자체를 제재할 수 있는가**"라는 질문의 사법적 답을 처음 보여준 판례입니다. 2022 OFAC 제재 → 2024 5th Circuit Van Loon 판결 → 2025-03 해제라는 3년 흐름과, 동시에 진행 중인 **Roman Storm 개발자 형사재판**(별개)을 정리합니다. "코드는 제재 못 해도 개발자는 책임질 수 있다"는 결론이 DeFi 규제의 뉴노멀.
+
 ## 🎯 핵심 질문
 1. Tornado Cash 제재 timeline (2022-08 → 2024-11 → 2025-03)?
 2. 5th Circuit 판결의 핵심 논리?
@@ -19,7 +23,7 @@
 - 다른 mixer 운명 5개 (Blender/Sinbad/Wasabi/Samourai/JoinMarket) 정리
 
 ## ✅ 체크포인트
-- [ ] Tornado 2022 제재, 2025 해제 안다
+- [ ] Tornado Cash 전체 타임라인: 2022-08 OFAC 제재 → 2024-11 5th Cir. Van Loon 판결 → 2025-03-21 지정 해제
 - [ ] 5th Circuit "코드는 property 아니다" 안다
 - [ ] 개발자 형사책임 가능성 안다 (Storm 재판)
 - [ ] 회사 정책: mixer = 위험 카테고리 유지 안다

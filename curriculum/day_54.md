@@ -2,6 +2,10 @@
 
 > AML의 학술적 뿌리. ⏱️ ~90분.
 
+## 📖 오늘 뭘 배우나
+
+Chainalysis·Elliptic·TRM의 알고리즘은 **학계에서 시작**됐습니다. 2013 Meiklejohn의 "A Fistful of Bitcoins", Ron & Shamir, Androulaki 같은 논문이 Common Input Ownership을 학문적으로 검증했고, Weber et al. 2019(Elliptic dataset), Bellei et al. 2024(Elliptic2) 같은 ML 논문이 최신 방향. 오늘은 이 흐름을 통해 산업의 기술 깊이를 이해.
+
 ## 🎯 핵심 질문
 1. Common Input Ownership 휴리스틱 첫 제안 논문은?
 2. 학계가 보고한 클러스터링 정확도/한계?

@@ -2,6 +2,10 @@
 
 > 클러스터 → 알려진 엔티티 매핑. ⏱️ ~75분.
 
+## 📖 오늘 뭘 배우나
+
+Clustering이 "구조"라면 Attribution은 "정체성". 클러스터가 Binance인지 Tornado인지 OFAC SDN인지 **라벨링**하는 작업이며, 이 라벨 DB가 KYT 벤더의 **진짜 경쟁력**(moat)입니다. 4대 벤더(Chainalysis·Elliptic·TRM·Crystal)의 라벨 DB 차별점을 오늘 비교하면서 벤더 선정의 판단 기준을 세웁니다.
+
 ## 🎯 핵심 질문
 1. Attribution = Clustering + 무엇?
 2. 라벨 DB의 데이터 소스 5가지?

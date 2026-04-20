@@ -2,6 +2,10 @@
 
 > 가상자산 자금세탁의 7가지 핵심 패턴. ⏱️ ~80분.
 
+## 📖 오늘 뭘 배우나
+
+Week 6은 자금세탁 유형 주간. 오늘은 그 전체 지도인 **7개 typology**(Mixer·Chain hop·Bridge·Peel·DEX·Privacy coin·OTC)를 한 장에 정리합니다. 각 유형의 정의·탐지 신호·한국 적용도를 비교하면서, 이후 6일간 각 유형을 deep하게 들어가는 준비를 합니다.
+
 ## 🎯 핵심 질문
 1. 7유형 (Mixer/Chain hop/Bridge/Peel/DEX/Privacy coin/OTC) 각 한 줄 정의?
 2. 어떤 유형이 가장 빠른가? 가장 큰 규모?

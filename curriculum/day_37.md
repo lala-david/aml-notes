@@ -2,6 +2,10 @@
 
 > Tornado Cash, Wasabi, Monero — 익명 도구 deep. ⏱️ ~80분.
 
+## 📖 오늘 뭘 배우나
+
+익명 도구의 두 축 — **Mixer**(서비스로서의 익명화)와 **Privacy Coin**(프로토콜로서의 익명화). Tornado Cash의 **zk-SNARK**, Monero의 **Ring Signature + Stealth Address**, Wasabi의 **CoinJoin** — 각 기술의 원리를 이해하면 왜 어떤 mixer는 폐쇄됐고 어떤 건 여전히 운영 중인지가 보입니다.
+
 ## 🎯 핵심 질문
 1. Tornado Cash가 OFAC 제재 → 해제된 경위?
 2. Monero가 거의 추적 불가능한 기술적 이유?
@@ -20,7 +24,7 @@
 
 ## ✅ 체크포인트
 - [ ] zk-SNARK 작동 원리 (대략) 안다
-- [ ] Tornado Cash 2022 제재 → 2025 해제 안다
+- [ ] Tornado Cash 2022-08 OFAC 제재 → 2024-11 Van Loon 판결 → 2025-03-21 지정 해제 흐름 안다
 - [ ] Monero ring signature + stealth address 안다
 - [ ] 한국 4대 거래소 privacy coin 미상장 안다
 

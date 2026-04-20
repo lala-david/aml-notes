@@ -2,6 +2,10 @@
 
 > 자체 또는 외부 KYT를 통합 인터페이스로. (D56 미니 프로젝트)
 
+## 왜 이걸 만드나
+
+앞서 만든 **D42(mixer)·D49(OFAC)·D35(tracer)** 가 각기 따로 작동하던 것을, 하나의 `kyt_check(address)` 함수로 **통합**하는 프로젝트. Risk Score를 계산하고 ALLOW·REVIEW·BLOCK 중 하나의 action을 추천하는 구조를 만들면, Capstone에서 설계할 Risk Engine의 **핵심 로직**이 이미 구현된 상태로 도착합니다. 6개 프로젝트 중 **가장 통합적이고 실무에 가까운** 산출물.
+
 ## 학습 목표
 
 1. KYT API 통합 패턴 익히기
