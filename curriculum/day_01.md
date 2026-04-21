@@ -2,6 +2,24 @@
 
 > 자금세탁(ML)의 본질과 고전 3단계 모델을 머릿속에 박는다. ⏱️ ~75분.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    A["💰 범죄수익"] --> P["Placement<br/>배치"]
+    P --> L["Layering<br/>은닉"]
+    L --> I["Integration<br/>통합"]
+    I --> C["✅ 합법 자산"]
+    style A fill:#f7f5ef,stroke:#c9a646
+    style C fill:#d1fae5,stroke:#10b981
+    style P fill:#e5eaf2,stroke:#1a2e4a
+    style L fill:#e5eaf2,stroke:#1a2e4a
+    style I fill:#e5eaf2,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 자금세탁의 목적 3가지는?
 2. Placement / Layering / Integration 각 단계 예시 1개씩?

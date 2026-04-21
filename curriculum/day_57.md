@@ -6,6 +6,23 @@
 
 Capstone 시작 전 마지막 주제 — **AI·ML의 AML 활용**. ML이 강한 5영역(클러스터링 보조·이상거래·NFT wash·새 mixer 식별·scam 사전탐지)과 한계 3가지(라벨 부족·adversarial·**설명가능성**)를 정리합니다. 생성 AI(LLM)가 STR 초안·정책 비교·알람 분류에서 실무에 들어오는 시나리오까지.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    ML["🤖 AI·ML"] --> C["클러스터링 보조"]
+    ML --> I["이상 탐지"]
+    ML --> W["NFT wash trading"]
+    ML --> N["새 mixer 식별"]
+    ML --> S["Scam 사전 탐지"]
+    ML -.한계.-> L["라벨 부족 · Adversarial · 설명가능성"]
+    style ML fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style L fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. AML에서 ML이 강한 영역 5가지?
 2. ML의 한계 (라벨/adversarial/설명가능성)?

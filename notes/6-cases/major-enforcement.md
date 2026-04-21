@@ -14,6 +14,9 @@
 
 ## 1. 글로벌 Top Cases — 서사로 읽기
 
+![가상자산 AML 벌금 궤적 — 5년 만에 $98K → $4.3B](../../charts/output/enforcement_fines.svg)
+
+
 ### Binance — $4.3B (2023-11)
 
 **왜 이 사건이 상징적인가**: 가상자산 업계 **사상 최대 AML 벌금**이자 **CEO가 실제 실형**을 받은 첫 사건. 미국 DOJ + FinCEN + OFAC + CFTC의 **4개 기관 공동 합의**라는 점도 전례 없었습니다.

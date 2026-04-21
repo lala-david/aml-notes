@@ -65,6 +65,9 @@ Travel Rule은 "기술적 구현 문제"처럼 포장되지만 본질은 **"전 
 
 ## 3. 임계금액 비교 — 관할별 선택의 차이
 
+![관할별 Travel Rule 임계금액 — EU가 가장 엄격](../../charts/output/travel_rule_thresholds.svg)
+
+
 ### 이 표를 어떻게 읽어야 하나
 
 임계금액이 낮을수록 더 많은 거래가 Travel Rule 대상이 되어 운영 부담이 큽니다. 한국은 중간, EU는 극단(임계 없음), 미국은 상대적으로 완화. 관할 선택은 **"우리 고객이 어느 나라 VASP와 주로 거래하나"** 로 결정해야 합니다.
@@ -218,17 +221,27 @@ Travel Rule은 본질적으로 **PII(Personally Identifiable Information, 개인
 
 ## 8. 운영 흐름 — 한국 거래소 출금 예시
 
-```
-1. 사용자 A → Upbit에서 1억원 ETH를 빗썸 사용자 B에게 출금 요청
-2. Upbit 시스템 → 출금 요청을 KYT 시스템에 통과
-3. KYT → 수신 주소 위험도 체크 (mixer? SDN? 화이트리스트?)
-4. Upbit 시스템 → VerifyVASP Travel Rule 메시지 생성 (IVMS101)
-5. VerifyVASP ↔ CODE 게이트웨이를 통해 빗썸으로 메시지 전송
-6. 빗썸 → 메시지 수신, 수신인 B 정보 확인 (자기 고객인지)
-7. 빗썸 → 수락 응답 → Upbit
-8. Upbit → 온체인 송금 실행 (트랜잭션 broadcast)
-9. 빗썸 → 입금 확인, B의 잔고에 반영
-10. 양사 → Travel Rule 메시지 보관 (15년)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant A as 👤 사용자 A
+    participant U as 🏦 Upbit<br/>(VerifyVASP)
+    participant K as 🔍 KYT<br/>(Chainalysis)
+    participant V as 🌐 VerifyVASP<br/>↔ CODE Gateway
+    participant B as 🏦 빗썸<br/>(CODE)
+    participant C as ⛓️ Ethereum
+
+    A->>U: 1️⃣ 1억원 ETH → 빗썸 B에게 출금 요청
+    U->>K: 2️⃣ 수신 주소 위험도 체크
+    K-->>U: 3️⃣ mixer·SDN·mixer 노출 없음 ✓
+    U->>V: 4️⃣ IVMS101 메시지 생성·전송
+    V->>B: 5️⃣ 메시지 라우팅
+    B->>B: 6️⃣ 수신인 B 확인
+    B-->>V: 7️⃣ Accept 응답
+    V-->>U: Accept
+    U->>C: 8️⃣ 온체인 브로드캐스트
+    C->>B: 9️⃣ 입금 감지 → B 잔고 반영
+    Note over U,B: 🔐 메시지 15년 보관 (양사)
 ```
 
 ### 실무 포인트

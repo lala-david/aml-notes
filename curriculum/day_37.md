@@ -6,6 +6,27 @@
 
 익명 도구의 두 축 — **Mixer**(서비스로서의 익명화)와 **Privacy Coin**(프로토콜로서의 익명화). Tornado Cash의 **zk-SNARK**, Monero의 **Ring Signature + Stealth Address**, Wasabi의 **CoinJoin** — 각 기술의 원리를 이해하면 왜 어떤 mixer는 폐쇄됐고 어떤 건 여전히 운영 중인지가 보입니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    subgraph Mixer["🔀 Mixer"]
+        TC["Tornado Cash<br/>(zk-SNARK)"]
+        W["Wasabi CoinJoin"]
+        S["Samourai (폐쇄)"]
+    end
+    subgraph Privacy["🔒 Privacy Coin"]
+        XMR["Monero<br/>Ring Sig + Stealth + RingCT"]
+        ZEC["Zcash<br/>zk-SNARK shielded"]
+    end
+    Mixer --> HR["거래소 차단 카테고리"]
+    Privacy --> D["한국·일본 상장폐지"]
+    style HR fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Tornado Cash가 OFAC 제재 → 해제된 경위?
 2. Monero가 거의 추적 불가능한 기술적 이유?

@@ -6,6 +6,22 @@
 
 Week 6의 결산. 위험 주소 데이터셋을 **OSINT(OFAC SDN, Etherscan label 등 공개 소스)** 에서 수집해 표준 형식으로 저장하는 스크립트를 짭니다. 자체 라벨 DB의 어려움과 가치를 체감하는 과정이며, 결과물은 Capstone의 Sanctions 모듈로 연결됩니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    O["OFAC SDN.xml"] --> P["🔨 Parser"]
+    E["Etherscan Labels"] --> P
+    G["GitHub OSINT"] --> P
+    P --> N["🏷 Normalize"]
+    N --> J["📄 JSON · CSV"]
+    N --> D["🔄 일별 diff"]
+    style P fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. 자금세탁 7유형 중 한국 시장 1위?
 2. CMLN의 영향이 한국 사업자에게 미치는 길은?

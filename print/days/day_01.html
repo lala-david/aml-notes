@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 01 — AML이 뭔가 + 자금세탁 3단계</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 01 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">01</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 1 / 7</div>
+        <div class="page-meta__theme">AML 기초 + 가상자산 특수성</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">AML이 뭔가 + 자금세탁 3단계</h1>
+      <p class="title-block__lead">자금세탁(ML)의 본질과 고전 3단계 모델을 머릿속에 박는다.</p>
+      <span class="title-block__time">⏱ ~75분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 849px; background-color: transparent;" viewBox="0 0 849 88" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M139.141,44L143.307,44C147.474,44,155.807,44,163.474,44C171.141,44,178.141,44,181.641,44L185.141,44" id="my-svg-L_A_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_P_0" data-points="W3sieCI6MTM5LjE0MDYyNSwieSI6NDR9LHsieCI6MTY0LjE0MDYyNSwieSI6NDR9LHsieCI6MTg5LjE0MDYyNSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M315.266,44L319.432,44C323.599,44,331.932,44,339.599,44C347.266,44,354.266,44,357.766,44L361.266,44" id="my-svg-L_P_L_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_L_0" data-points="W3sieCI6MzE1LjI2NTYyNSwieSI6NDR9LHsieCI6MzQwLjI2NTYyNSwieSI6NDR9LHsieCI6MzY1LjI2NTYyNSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M478.672,44L482.839,44C487.005,44,495.339,44,503.005,44C510.672,44,517.672,44,521.172,44L524.672,44" id="my-svg-L_L_I_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_I_0" data-points="W3sieCI6NDc4LjY3MTg3NSwieSI6NDR9LHsieCI6NTAzLjY3MTg3NSwieSI6NDR9LHsieCI6NTI4LjY3MTg3NSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M656.344,44L660.51,44C664.677,44,673.01,44,680.677,44C688.344,44,695.344,44,698.844,44L702.344,44" id="my-svg-L_I_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_I_C_0" data-points="W3sieCI6NjU2LjM0Mzc1LCJ5Ijo0NH0seyJ4Ijo2ODEuMzQzNzUsInkiOjQ0fSx7IngiOjcwNi4zNDM3NSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P_L_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_I_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_I_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-A-0" data-look="classic" transform="translate(73.5703125, 44)"><rect class="basic label-container" style="fill:#f7f5ef !important;stroke:#c9a646 !important" x="-65.5703125" y="-25.5" width="131.140625" height="51"/><g class="label" style="" transform="translate(-35.5703125, -10.5)"><rect/><foreignObject width="71.140625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>💰 범죄수익</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-P-1" data-look="classic" transform="translate(252.203125, 44)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-63.0625" y="-36" width="126.125" height="72"/><g class="label" style="" transform="translate(-33.0625, -21)"><rect/><foreignObject width="66.125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Placement<br />배치</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-L-3" data-look="classic" transform="translate(421.96875, 44)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-56.703125" y="-36" width="113.40625" height="72"/><g class="label" style="" transform="translate(-26.703125, -21)"><rect/><foreignObject width="53.40625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Layering<br />은닉</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-I-5" data-look="classic" transform="translate(592.5078125, 44)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-63.8359375" y="-36" width="127.671875" height="72"/><g class="label" style="" transform="translate(-33.8359375, -21)"><rect/><foreignObject width="67.671875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Integration<br />통합</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-7" data-look="classic" transform="translate(773.671875, 44)"><rect class="basic label-container" style="fill:#d1fae5 !important;stroke:#10b981 !important" x="-67.328125" y="-25.5" width="134.65625" height="51"/><g class="label" style="" transform="translate(-37.328125, -10.5)"><rect/><foreignObject width="74.65625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>✅ 합법 자산</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>자금세탁의 목적 3가지는?</li>
+<li>Placement / Layering / Integration 각 단계 예시 1개씩?</li>
+<li>AML과 CFT의 결정적 차이는?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/1-foundations/what-is-aml.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>FATF — Money Laundering 페이지<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.fatf-gafi.org/en/topics/money-laundering.html</span></li>
+<li>UNODC — Money Laundering Overview<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.unodc.org/unodc/en/money-laundering/overview.html</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>종이 또는 메모장에 <strong>3단계 모델을 직접 그려라</strong> (박스 + 화살표)</li>
+<li>각 단계에 <strong>가상자산 예시 1개씩</strong> 적기</li>
+<li>예: Placement = OTC desk에서 현금→BTC 매수</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>자금세탁의 3단계 이름을 외운다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>AML 9대 의무 (신고/KYC/EDD/TM/제재/STR/CTR/Travel Rule/기록보관/내부통제) 중 5개 이상 떠올린다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>AML vs CFT 차이를 한 문장으로 설명할 수 있다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>한국 AML 감독기관 이름을 말할 수 있다 (FIU, KoFIU)</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">직접 작성: 오늘 가장 의외였던 것 한 줄</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        <span class="ref">../notes/1-foundations/key-concepts.md</span> — ../notes/1-foundations/key-concepts.md
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 01 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">What is AML? — 자금세탁방지 기초</h2>
+    <p class="article-divider__lead">자금세탁(Money Laundering)이란 무엇이고, AML(Anti-Money Laundering)이 왜 존재하는가. 이 글을 읽고 나면 "자금세탁 3단계"가 머릿속 그림으로 남고, 왜 AML이 단순 금융규제가 아니라 **범죄 억제 인프라**인지 설명할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/1-foundations/what-is-aml.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 01</span>
+      <span class="article-head__path">notes/1-foundations/what-is-aml.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>자금세탁(ML, Money Laundering)</strong>: 범죄로 얻은 돈의 출처를 숨겨 합법적인 자금처럼 보이게 하는 행위</li>
+<li><strong>AML(Anti-Money Laundering)</strong>: 그걸 막기 위한 법·제도·기술·운영의 총합. 짝꿍 개념으로 <strong>CFT</strong>(테러자금조달방지)가 있음</li>
+<li>자금세탁은 전통적으로 <strong>3단계 모델</strong>: Placement → Layering → Integration</li>
+<li>가상자산은 이 3단계가 다 <strong>온체인에서</strong> 일어날 수 있어서 추적은 쉬워졌지만 속도·규모가 폭증</li>
+<li>AML 의무의 큰 줄기: <strong>고객을 알고(KYC) → 거래를 모니터링하고(KYT/TM) → 의심되면 신고(STR)</strong></li>
+</ul>
+<hr />
+<h2>1. 자금세탁이 뭔가 — "왜 굳이 세탁하나"부터</h2>
+<h3>핵심 아이디어</h3>
+<p>범죄로 번 돈은 당장 써도 문제입니다. 현금 다발을 들고 부동산을 계약하면 공인중개사가 의심 신고를 하고, 은행에 한 번에 10억을 입금하면 은행이 FIU(금융정보분석원)에 보고합니다. 그래서 범죄조직은 <strong>"이 돈이 어디서 왔는지 모르게 만든 뒤, 합법적인 소득처럼 보이도록 포장하는 일"</strong> 에 시간과 수수료를 쓰게 됩니다. 이게 자금세탁입니다.</p>
+<p>용어 정의:
+- <strong>ML (Money Laundering)</strong> — 자금세탁. 범죄수익의 출처를 은닉하고 합법성을 가장하는 일련의 과정.
+- <strong>AML (Anti-Money Laundering)</strong> — 자금세탁방지. 그걸 탐지·차단하기 위한 법·제도·기술·운영 전체.
+- <strong>Predicate Offense (전제범죄)</strong> — 자금세탁의 대상이 된 원범죄. 마약, 뇌물, 탈세, 해킹 등이 대표. 전제범죄가 없으면 자금세탁죄도 성립하지 않음.</p>
+<h3>자금세탁의 3가지 목적</h3>
+<p>범죄조직 관점에서 자금세탁의 목적은 단순합니다.</p>
+<ol>
+<li><strong>출처(origin)를 숨긴다</strong> — 돈이 마약 판매금인지 랜섬웨어 몸값인지 알 수 없게 한다.</li>
+<li><strong>추적(trail)을 끊는다</strong> — 자금 흐름이 수사기관 눈에 안 보이게 만든다.</li>
+<li><strong>합법 경제에 통합(integration)한다</strong> — 부동산·사업체·럭셔리 자산 형태로 "정상 소득"이 된다.</li>
+</ol>
+<p>이 셋이 달성되면 범죄자는 번 돈을 마음대로 쓸 수 있고, 수사기관이 뒤늦게 발견해도 <strong>몰수(asset forfeiture)가 어려워집니다</strong>. 그래서 AML은 단순한 "금융 규제"가 아니라 <strong>마약·조직범죄·테러·사이버범죄·대량살상무기 확산 그 자체를 억제하는 수단</strong>으로 다뤄집니다. 이게 AML이 금융위·FSC가 아닌 <strong>FIU</strong>(Financial Intelligence Unit, 금융정보분석원) 같은 전담기구와 국가정보기관이 관여하는 이유입니다.</p>
+<h3>실무 포인트</h3>
+<p>AML 부서에서 일한다는 건 결국 "범죄수익이 우리 회사를 통과하지 못하게 막는 일"입니다. 그래서 AML 실무자는 금융지식 + 규제지식 + 수사적 감(조금 낯선 패턴을 놓치지 않는 본능)을 동시에 요구받습니다. 이 감각이 <strong>거래 모니터링 룰을 설계</strong>하는 출발점이 됩니다.</p>
+<hr />
+<h2>2. 고전적 3단계 모델 (Placement → Layering → Integration)</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1380.3px; background-color: transparent;" viewBox="0 0 1380.296875 244.75" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M153.703,155.5L161.725,155.5C169.747,155.5,185.792,155.5,201.169,155.5C216.547,155.5,231.258,155.5,238.613,155.5L245.969,155.5" id="my-svg-L_Dirty_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Dirty_P_0" data-points="W3sieCI6MTUzLjcwMzEyNSwieSI6MTU1LjV9LHsieCI6MjAxLjgzNTkzNzUsInkiOjE1NS41fSx7IngiOjI0OS45Njg3NSwieSI6MTU1LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M398.828,121.929L407.023,118.232C415.219,114.536,431.609,107.143,455.727,103.446C479.844,99.75,511.688,99.75,527.609,99.75L543.531,99.75" id="my-svg-L_P_L_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_L_0" data-points="W3sieCI6Mzk4LjgyODEyNSwieSI6MTIxLjkyODc4MTM2NjUzODE1fSx7IngiOjQ0OCwieSI6OTkuNzV9LHsieCI6NTQ3LjUzMTI1LCJ5Ijo5OS43NX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M683.672,77.136L700.296,71.613C716.919,66.091,750.167,55.045,783.169,49.523C816.172,44,848.93,44,865.309,44L881.688,44" id="my-svg-L_L_I_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_I_0" data-points="W3sieCI6NjgzLjY3MTg3NSwieSI6NzcuMTM1OTUyMDQ4NDE3MTJ9LHsieCI6NzgzLjQxNDA2MjUsInkiOjQ0fSx7IngiOjg4NS42ODc1LCJ5Ijo0NH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M398.828,189.071L407.023,192.768C415.219,196.464,431.609,203.857,447.333,207.554C463.057,211.25,478.115,211.25,485.643,211.25L493.172,211.25" id="my-svg-L_P_PEX_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_PEX_0" data-points="W3sieCI6Mzk4LjgyODEyNSwieSI6MTg5LjA3MTIxODYzMzQ2MTg1fSx7IngiOjQ0OCwieSI6MjExLjI1fSx7IngiOjQ5Ny4xNzE4NzUsInkiOjIxMS4yNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M683.672,122.364L700.296,127.887C716.919,133.409,750.167,144.455,774.354,149.977C798.542,155.5,813.669,155.5,821.233,155.5L828.797,155.5" id="my-svg-L_L_LEX_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_LEX_0" data-points="W3sieCI6NjgzLjY3MTg3NSwieSI6MTIyLjM2NDA0Nzk1MTU4Mjg4fSx7IngiOjc4My40MTQwNjI1LCJ5IjoxNTUuNX0seyJ4Ijo4MzIuNzk2ODc1LCJ5IjoxNTUuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1036.094,44L1051.092,44C1066.091,44,1096.089,44,1116.604,44C1137.12,44,1148.154,44,1153.671,44L1159.188,44" id="my-svg-L_I_IEX_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_I_IEX_0" data-points="W3sieCI6MTAzNi4wOTM3NSwieSI6NDR9LHsieCI6MTEyNi4wODU5Mzc1LCJ5Ijo0NH0seyJ4IjoxMTYzLjE4NzUsInkiOjQ0fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(201.8359375, 155.5)"><g class="label" data-id="L_Dirty_P_0" transform="translate(-23.1328125, -10.5)"><foreignObject width="46.265625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Stage 1</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(448, 99.75)"><g class="label" data-id="L_P_L_0" transform="translate(-24.171875, -10.5)"><foreignObject width="48.34375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Stage 2</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(783.4140625, 44)"><g class="label" data-id="L_L_I_0" transform="translate(-24.3828125, -10.5)"><foreignObject width="48.765625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Stage 3</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(448, 211.25)"><g class="label" data-id="L_P_PEX_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>예시</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(783.4140625, 155.5)"><g class="label" data-id="L_L_LEX_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>예시</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1126.0859375, 44)"><g class="label" data-id="L_I_IEX_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>예시</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-Dirty-0" data-look="classic" transform="translate(80.8515625, 155.5)"><rect class="basic label-container" style="fill:#f7f5ef !important;stroke:#c9a646 !important" x="-72.8515625" y="-36" width="145.703125" height="72"/><g class="label" style="" transform="translate(-42.8515625, -21)"><rect/><foreignObject width="85.703125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>💰 범죄수익<br />(현금·가상자산)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-P-1" data-look="classic" transform="translate(324.3984375, 155.5)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-74.4296875" y="-36" width="148.859375" height="72"/><g class="label" style="" transform="translate(-44.4296875, -21)"><rect/><foreignObject width="88.859375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📥 Placement<br />금융시스템 진입</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-L-3" data-look="classic" transform="translate(615.6015625, 99.75)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-68.0703125" y="-36" width="136.140625" height="72"/><g class="label" style="" transform="translate(-38.0703125, -21)"><rect/><foreignObject width="76.140625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🔀 Layering<br />흐름 복잡화</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-I-5" data-look="classic" transform="translate(960.890625, 44)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-75.203125" y="-36" width="150.40625" height="72"/><g class="label" style="" transform="translate(-45.203125, -21)"><rect/><foreignObject width="90.40625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🏢 Integration<br />합법 자산화</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-PEX-7" data-look="classic" transform="translate(615.6015625, 211.25)"><rect class="basic label-container" style="fill:none !important;stroke:none !important" x="-118.4296875" y="-25.5" width="236.859375" height="51"/><g class="label" style="" transform="translate(-88.4296875, -10.5)"><rect/><foreignObject width="176.859375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>smurfing · 카지노 · 거래소 입금</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-LEX-9" data-look="classic" transform="translate(960.890625, 155.5)"><rect class="basic label-container" style="fill:none !important;stroke:none !important" x="-128.09375" y="-25.5" width="256.1875" height="51"/><g class="label" style="" transform="translate(-98.09375, -10.5)"><rect/><foreignObject width="196.1875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>mixer · bridge · peel chain · DEX</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-IEX-11" data-look="classic" transform="translate(1267.7421875, 44)"><rect class="basic label-container" style="fill:none !important;stroke:none !important" x="-104.5546875" y="-25.5" width="209.109375" height="51"/><g class="label" style="" transform="translate(-74.5546875, -10.5)"><rect/><foreignObject width="149.109375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>부동산 · 사업체 · OTC 환전</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+<h3>왜 3단계인가</h3>
+<p>1984년 미국 관세청 산하 조직이 처음 제안하고 FATF·UNODC가 표준으로 채택한 모델. 실제 자금세탁은 단계가 뚜렷이 구분되지 않고 섞여 돌아가지만, 이 모델은 <strong>"어디에 방어선을 칠지"</strong> 설계하는 데 유용해서 40년째 기본 프레임으로 쓰입니다.</p>
+<p>용어:
+- <strong>FATF (Financial Action Task Force)</strong> — 국제자금세탁방지기구. 1989년 G7이 만든 국제기구로, 회원국에 권고안(Recommendation)을 발표.
+- <strong>UNODC (UN Office on Drugs and Crime)</strong> — UN 마약범죄국. 자금세탁 관련 통계·연구 발간.</p>
+<h3>한 줄 서사로 보는 3단계</h3>
+<p>마약상 A가 길거리에서 번 현금 10억을 부동산으로 바꿔 은퇴하려 합니다.</p>
+<ul>
+<li><strong>Stage 1 Placement (배치)</strong> — A가 현금 10억을 100개 계좌에 100만원씩 나눠 입금(<strong>structuring/smurfing</strong>). 또는 현금→카지노칩→환전 전표로 바꾸기. 또는 현금→가상자산 거래소 입금.</li>
+<li><strong>Stage 2 Layering (은닉)</strong> — A가 100개 계좌의 돈을 해외법인(쉘컴퍼니)으로 송금, 다시 3국을 거쳐 다른 법인으로 재송금. 가상자산이라면 mixer(믹서)를 거쳐 chain hopping(체인호핑)으로 Tron-USDT로 변환.</li>
+<li><strong>Stage 3 Integration (통합)</strong> — A가 해외법인 명의로 서울 아파트를 매입. 이 아파트에서 나오는 임대소득은 이제 <strong>"합법적 부동산 임대수익"</strong> 으로 보입니다.</li>
+</ul>
+<h3>Stage 1. Placement (배치)</h3>
+<p><strong>정의</strong>: 더러운 돈을 금융 시스템에 <strong>처음 집어넣는</strong> 단계.</p>
+<p>예:
+- 현금다발을 여러 계좌에 분할 입금(<strong>structuring/smurfing</strong> — "스머프"들이 각자 소액씩 입금한다고 해서 붙은 이름)
+- 카지노에서 현금 → 칩 → 체크 환전
+- 현금 → 가상자산 거래소 입금 (P2P 또는 OTC)
+- 실물 자산(금, 고가 시계, 미술품) 구매</p>
+<p>이 단계가 <strong>가장 위험하고 가장 탐지하기 쉬운</strong> 구간입니다. 현금이 금융 시스템에 들어오는 순간 은행·거래소의 KYC(Know Your Customer, 고객확인)와 CTR(Currency Transaction Report, 고액현금거래보고) 규제와 맞닥뜨리기 때문. 그래서 AML 1차 방어선이 여기에 집중됩니다. 즉 "Placement를 포기시키면 나머지 단계는 의미가 없다"는 게 규제의 설계 철학입니다.</p>
+<h3>Stage 2. Layering (은닉)</h3>
+<p><strong>정의</strong>: 여러 번의 거래를 통해 돈의 흐름을 복잡하게 만들어 <strong>추적을 끊는</strong> 단계.</p>
+<p>예:
+- 여러 계좌·국가·법인 간 반복 송금
+- 가상자산: <strong>mixer</strong>(Tornado Cash 등), <strong>chain hopping</strong>(BTC→ETH→Tron→BNB), <strong>peel chain</strong>(큰 금액을 계속 조금씩 떼어내 이전), DeFi swap, NFT wash trading</p>
+<p>용어:
+- <strong>Mixer</strong> — 여러 사용자의 자금을 섞어서 입출금 관계를 끊는 서비스.
+- <strong>Chain Hopping</strong> — 서로 다른 블록체인 사이를 점프해 흔적을 흐리는 기법.
+- <strong>Peel Chain</strong> — 큰 금액에서 소액을 떼어내(peel) 다른 주소로 보내고 나머지는 또 다른 주소로, 긴 사슬 패턴.</p>
+<p>이 단계가 <strong>가장 길고 창의적</strong>입니다. 가상자산 환경에서는 layering 도구가 매년 새로 나옵니다 — 크로스체인 브리지가 2022~2023년에 터졌다면 2024~2025년엔 DeFi 프로토콜 기반 믹싱이 대세입니다. <strong>온체인 분석(blockchain analytics)</strong> 산업이 돈을 버는 지점이 바로 이 구간 — Chainalysis·Elliptic·TRM Labs 같은 회사의 기술은 대부분 "Layering을 풀어내는 휴리스틱"에 투자되어 있습니다.</p>
+<h3>Stage 3. Integration (통합)</h3>
+<p><strong>정의</strong>: 세탁된 돈이 <strong>합법 자산으로 다시 등장</strong>하는 단계.</p>
+<p>예:
+- 부동산 매입 (자금출처 증빙 모호하게)
+- 럭셔리 자산 (요트, 시계, 미술품) 구매
+- 합법 사업체 인수 → 매출 부풀리기
+- 대출 상환 (가장한 대출 계약)
+- 가상자산 → OTC desk → 법정화폐 → 사업 투자</p>
+<p>이 시점에 잡히면 자산몰수가 <strong>극도로 어렵습니다</strong>. 왜냐하면 돈이 이미 "정당한 계약"과 "정당한 소유권" 옆에 붙어 있어서, 수사기관이 이를 몰수하려면 민사상 제3자 권리(선의취득자, 담보권자 등)를 건드려야 하기 때문. 그래서 AML 설계는 <strong>"그 전 단계에서 막는다"</strong> 에 집중합니다.</p>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>아래 표는 3단계를 <strong>전통 금융 vs 가상자산</strong> 관점에서 같은 행위가 어떻게 다른 도구로 나타나는지 대조합니다. 왼쪽이 익숙한 형태, 오른쪽이 가상자산 산업에서 보게 될 형태.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>전통 금융 도구</th>
+<th>가상자산 도구</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placement</td>
+<td>현금 분할입금, 카지노, 전신환, 차명계좌</td>
+<td>P2P/OTC 거래, 현금→거래소 입금, 선불카드→거래소</td>
+</tr>
+<tr>
+<td>Layering</td>
+<td>해외법인 송금, shell company, back-to-back loan</td>
+<td>Mixer, cross-chain bridge, DEX swap, peel chain, NFT wash trade</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>부동산, 사업체 인수, 가공매출</td>
+<td>OTC → 법정화폐 → 부동산, 스테이블코인 보유 후 글로벌 결제</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>가상자산에서는 이 3단계가 <strong>모두 한 트랜잭션 안에 압축</strong>되거나 <strong>24시간 내에 다 끝날 수도</strong> 있습니다 — 2025-02 Bybit 해킹(Lazarus)에서 48시간 내 $160M이 layering 완료된 게 상징적 사례입니다. 그래서 가상자산 AML은 <strong>실시간성</strong>이 절대적이고, 사후 조사로는 자산을 회수하지 못합니다. 이게 KYT(Know Your Transaction, 거래 확인) 실시간 모니터링이 사업 필수 기능이 된 배경입니다.</p>
+<hr />
+<h2>3. AML과 CFT의 관계 — 왜 짝꿍인가</h2>
+<h3>세 약어의 차이</h3>
+<ul>
+<li><strong>AML (Anti-Money Laundering)</strong> — 자금세탁방지. <strong>범죄수익 → 합법자산</strong> 전환을 막는다.</li>
+<li><strong>CFT (Combating the Financing of Terrorism)</strong> — 테러자금조달방지. <strong>자금(합법이든 불법이든) → 테러조직</strong>으로의 이동을 막는다.</li>
+<li><strong>CPF (Counter-Proliferation Financing)</strong> — 대량살상무기 확산금융 차단. 주로 북한·이란 관련.</li>
+</ul>
+<h3>ML과 TF는 방향이 정반대</h3>
+<p>여기가 혼동 지점입니다. ML은 "더러운 돈이 합법이 되는 과정"을 다루고 TF는 "합법 자금이 테러에 쓰이는 과정"을 다룹니다.</p>
+<ul>
+<li><strong>ML</strong>: 더러운 돈 → (세탁) → 깨끗한 돈. 관심은 <strong>출처</strong>.</li>
+<li><strong>TF</strong>: 깨끗한 돈이어도 → (이동) → 테러 자금. 관심은 <strong>수취인/용도</strong>.</li>
+</ul>
+<p>그래서 TF는 <strong>자금출처가 합법이어도</strong> 차단 대상이 될 수 있습니다. 예를 들어 이슬라믹 스테이트(IS)가 자선단체를 가장해 정당한 기부금을 모은 뒤 무기 구매에 쓴다면, 그 기부금 자체는 범죄수익이 아니지만 CFT 위반이 됩니다. 이 차이가 <strong>제재(sanctions) 스크리닝</strong>을 실무의 핵심 통제로 만든 이유입니다 — 수취인 쪽 명단을 보는 일이기 때문.</p>
+<p>용어:
+- <strong>Sanctions Screening (제재 스크리닝)</strong> — 거래 당사자가 OFAC SDN, UN, EU, 외교부 제재대상자 명단에 해당하는지 실시간 매칭.
+- <strong>OFAC (Office of Foreign Assets Control)</strong> — 미국 재무부 해외자산통제국. 제재 대상을 지정·집행하는 권한 보유.
+- <strong>SDN List (Specially Designated Nationals List)</strong> — OFAC가 발표하는 제재대상자 목록. 가상자산 주소도 포함됨.</p>
+<h3>실무 포인트</h3>
+<p>회사 AML 문서가 흔히 "AML/CFT" 또는 "AML/CFT/CPF"로 한 덩어리로 표기되는데, <strong>운영 관점에서는 둘의 통제 지점이 다릅니다</strong>. ML 통제는 "의심거래 탐지(STR)"에 집중하고, TF·CPF 통제는 "제재 명단 매칭(Sanctions Screening)"에 집중합니다. 거래 모니터링 룰을 설계할 때 이 둘을 섞지 말고, 별도 룰 세트로 관리하는 게 분석 품질에 유리합니다.</p>
+<hr />
+<h2>4. AML 의무의 큰 줄기 (어떤 회사든 비슷함)</h2>
+<h3>개요</h3>
+<p>가상자산사업자(VASP, Virtual Asset Service Provider — 거래소·수탁·OTC 등)든 은행이든 결제사든, AML 의무의 뼈대는 거의 동일합니다. 관할(한국·미국·EU)에 따라 세부 조항과 임계금액만 달라집니다. 이 9개는 어떤 AML 교재에서도 반복 등장하므로 순서째로 암기해두면 이후 규제 문서를 읽을 때 뼈대가 됩니다.</p>
+<h3>9개 의무 (가상자산 기준 Travel Rule 포함 시 10개)</h3>
+<ol>
+<li><strong>신고·등록(Licensing)</strong> — 당국에 사업자 등록. 한국은 FIU 신고, 미국은 FinCEN MSB 등록, EU는 MiCA CASP 라이선스.</li>
+<li><strong>고객확인(KYC/CDD)</strong> — 누구와 거래하는지 확인. 신분증, 주소, 거래목적.</li>
+<li><strong>위험기반접근(RBA, Risk-Based Approach)</strong> — 고객·상품·지역별 위험등급을 매기고 그에 비례해 통제 강도 조정. 저위험은 간소하게, 고위험은 두껍게.</li>
+<li><strong>강화실사(EDD, Enhanced Due Diligence)</strong> — 고위험(PEP, 고위험국, 비대면+기타 위험요소) 고객에 추가 확인. 자금원천 증빙이 핵심.</li>
+<li><strong>거래모니터링(TM/KYT)</strong> — 비정상 거래 패턴 탐지. 전통 금융은 TM(Transaction Monitoring), 가상자산은 KYT(Know Your Transaction)로 부름.</li>
+<li><strong>제재 스크리닝(Sanctions Screening)</strong> — 고객·카운터파티·지갑주소가 제재 대상인지 실시간 대조.</li>
+<li><strong>의심거래보고(STR/SAR)</strong> — 의심되면 즉시 FIU에 보고. STR(Suspicious Transaction Report, 한국·FATF 용어), SAR(Suspicious Activity Report, 미국 FinCEN 용어).</li>
+<li><strong>기록보관(Record Keeping)</strong> — 한국은 <strong>가상자산이용자보호법 §11로 거래정보 15년</strong>, <strong>특금법 §5의4로 AML 기록 5년</strong>. 대상이 다르므로 둘 다 준수.</li>
+<li><strong>내부통제(Internal Controls)</strong> — AML 책임자(AMLO/MLRO) 임명, 정책·절차 문서화, 임직원 교육, 내부감사.</li>
+</ol>
+<p><strong>가상자산 추가 10번째</strong>:</p>
+<ol start="10">
+<li><strong>Travel Rule (FATF R.16)</strong> — 일정 금액 이상 VASP 간 이전 시 송수신인 정보 동반. 한국은 100만원, 미국은 $3,000, EU는 임계 없음(1유로부터).</li>
+</ol>
+<p>용어:
+- <strong>PEP (Politically Exposed Person)</strong> — 정치적 주요인물. 고위 공직자·그 가족·측근. 부패 위험이 구조적으로 높아 자동 EDD.
+- <strong>Travel Rule</strong> — FATF 권고 16조. 전통 금융의 SWIFT 송금정보 동반을 가상자산으로 확장한 개념.</p>
+<h3>실무 포인트</h3>
+<p>"우리 회사 AML 프로그램이 완성됐는가"를 점검할 때는 이 10개를 체크리스트로 만들어 각각에 <strong>담당자·시스템·SLA·증빙</strong>이 있는지 본다. 이 중 어느 하나라도 "사람만 있고 시스템이 없다"면 규제 검사에서 지적 대상입니다.</p>
+<hr />
+<h2>5. 누가 만든 룰을 따르는가 — 글로벌 거버넌스 지도</h2>
+<h3>FATF → 국내법의 구조</h3>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1219.88px; background-color: transparent;" viewBox="0 0 1219.875 374" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M562.086,68.929L485.102,80.191C408.117,91.453,254.148,113.976,177.164,130.488C100.18,147,100.18,157.5,100.18,162.75L100.18,168" id="my-svg-L_F_KR_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_KR_0" data-points="W3sieCI6NTYyLjA4NTkzNzUsInkiOjY4LjkyODc3MjUyNjQ0NjM3fSx7IngiOjEwMC4xNzk2ODc1LCJ5IjoxMzYuNX0seyJ4IjoxMDAuMTc5Njg3NSwieSI6MTcyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M562.086,82.548L530.465,91.54C498.844,100.532,435.602,118.516,403.98,132.758C372.359,147,372.359,157.5,372.359,162.75L372.359,168" id="my-svg-L_F_US_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_US_0" data-points="W3sieCI6NTYyLjA4NTkzNzUsInkiOjgyLjU0Nzk1NDQ4Mzg3OTd9LHsieCI6MzcyLjM1OTM3NSwieSI6MTM2LjV9LHsieCI6MzcyLjM1OTM3NSwieSI6MTcyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M660.719,101L660.719,106.917C660.719,112.833,660.719,124.667,660.719,135.833C660.719,147,660.719,157.5,660.719,162.75L660.719,168" id="my-svg-L_F_EU_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_EU_0" data-points="W3sieCI6NjYwLjcxODc1LCJ5IjoxMDF9LHsieCI6NjYwLjcxODc1LCJ5IjoxMzYuNX0seyJ4Ijo2NjAuNzE4NzUsInkiOjE3Mn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M759.352,89.001L781.983,96.918C804.615,104.834,849.878,120.667,872.509,135.584C895.141,150.5,895.141,164.5,895.141,171.5L895.141,178.5" id="my-svg-L_F_JP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_JP_0" data-points="W3sieCI6NzU5LjM1MTU2MjUsInkiOjg5LjAwMTQzMzA0NjcyMzk5fSx7IngiOjg5NS4xNDA2MjUsInkiOjEzNi41fSx7IngiOjg5NS4xNDA2MjUsInkiOjE4Mi41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M100.18,244L100.18,248.167C100.18,252.333,100.18,260.667,100.18,270.083C100.18,279.5,100.18,290,100.18,295.25L100.18,300.5" id="my-svg-L_KR_KRS_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_KR_KRS_0" data-points="W3sieCI6MTAwLjE3OTY4NzUsInkiOjI0NH0seyJ4IjoxMDAuMTc5Njg3NSwieSI6MjY5fSx7IngiOjEwMC4xNzk2ODc1LCJ5IjozMDQuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M372.359,244L372.359,248.167C372.359,252.333,372.359,260.667,372.359,268.333C372.359,276,372.359,283,372.359,286.5L372.359,290" id="my-svg-L_US_USS_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_US_USS_0" data-points="W3sieCI6MzcyLjM1OTM3NSwieSI6MjQ0fSx7IngiOjM3Mi4zNTkzNzUsInkiOjI2OX0seyJ4IjozNzIuMzU5Mzc1LCJ5IjoyOTR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M660.719,244L660.719,248.167C660.719,252.333,660.719,260.667,660.719,270.083C660.719,279.5,660.719,290,660.719,295.25L660.719,300.5" id="my-svg-L_EU_EUS_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_EU_EUS_0" data-points="W3sieCI6NjYwLjcxODc1LCJ5IjoyNDR9LHsieCI6NjYwLjcxODc1LCJ5IjoyNjl9LHsieCI6NjYwLjcxODc1LCJ5IjozMDQuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M759.352,71.863L820.549,82.636C881.747,93.408,1004.143,114.954,1065.341,130.977C1126.539,147,1126.539,157.5,1126.539,162.75L1126.539,168" id="my-svg-L_F_ME_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_ME_0" data-points="W3sieCI6NzU5LjM1MTU2MjUsInkiOjcxLjg2MjY4MzQzODE1NTEzfSx7IngiOjExMjYuNTM5MDYyNSwieSI6MTM2LjV9LHsieCI6MTEyNi41MzkwNjI1LCJ5IjoxNzJ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(100.1796875, 136.5)"><g class="label" data-id="L_F_KR_0" transform="translate(-46.2109375, -10.5)"><foreignObject width="92.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>권고 → 국내법화</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(372.359375, 136.5)"><g class="label" data-id="L_F_US_0" transform="translate(-46.2109375, -10.5)"><foreignObject width="92.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>권고 → 국내법화</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(660.71875, 136.5)"><g class="label" data-id="L_F_EU_0" transform="translate(-46.2109375, -10.5)"><foreignObject width="92.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>권고 → 국내법화</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(895.140625, 136.5)"><g class="label" data-id="L_F_JP_0" transform="translate(-46.2109375, -10.5)"><foreignObject width="92.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>권고 → 국내법화</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_KR_KRS_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_US_USS_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_EU_EUS_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1126.5390625, 136.5)"><g class="label" data-id="L_F_ME_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>평가</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-F-0" data-look="classic" transform="translate(660.71875, 54.5)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-98.6328125" y="-46.5" width="197.265625" height="93"/><g class="label" style="color:#fff !important" transform="translate(-68.6328125, -31.5)"><rect/><foreignObject width="137.265625" height="63"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🌍 FATF<br />40 Recommendations<br />(국제 표준)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-KR-2" data-look="classic" transform="translate(100.1796875, 208)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-89.7421875" y="-36" width="179.484375" height="72"/><g class="label" style="" transform="translate(-59.7421875, -21)"><rect/><foreignObject width="119.484375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇰🇷 한국<br />특금법 · 이용자보호법</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-US-4" data-look="classic" transform="translate(372.359375, 208)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-87.8203125" y="-36" width="175.640625" height="72"/><g class="label" style="" transform="translate(-57.8203125, -21)"><rect/><foreignObject width="115.640625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇺🇸 미국<br />BSA · PATRIOT Act</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-EU-6" data-look="classic" transform="translate(660.71875, 208)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-88.359375" y="-36" width="176.71875" height="72"/><g class="label" style="" transform="translate(-58.359375, -21)"><rect/><foreignObject width="116.71875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇪🇺 EU<br />MiCA · AMLR · TFR</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-JP-8" data-look="classic" transform="translate(895.140625, 208)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-96.0625" y="-25.5" width="192.125" height="51"/><g class="label" style="" transform="translate(-66.0625, -10.5)"><rect/><foreignObject width="132.125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇯🇵 일본 · 싱가포르 · 홍콩</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-KRS-10" data-look="classic" transform="translate(100.1796875, 330)"><rect class="basic label-container" style="" x="-92.1796875" y="-25.5" width="184.359375" height="51"/><g class="label" style="" transform="translate(-62.1796875, -10.5)"><rect/><foreignObject width="124.359375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>감독: FIU · FSC · FSS</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-USS-12" data-look="classic" transform="translate(372.359375, 330)"><rect class="basic label-container" style="" x="-130" y="-36" width="260" height="72"/><g class="label" style="" transform="translate(-100, -21)"><rect/><foreignObject width="200" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>감독: FinCEN · OFAC · SEC · CFTC</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-EUS-14" data-look="classic" transform="translate(660.71875, 330)"><rect class="basic label-container" style="" x="-108.359375" y="-25.5" width="216.71875" height="51"/><g class="label" style="" transform="translate(-78.359375, -10.5)"><rect/><foreignObject width="156.71875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>감독: AMLA · ESMA · NCA</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-ME-16" data-look="classic" transform="translate(1126.5390625, 208)"><rect class="basic label-container" style="fill:#fff7d6 !important;stroke:#c9a646 !important" x="-85.3359375" y="-36" width="170.671875" height="72"/><g class="label" style="" transform="translate(-55.3359375, -21)"><rect/><foreignObject width="110.671875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Mutual Evaluation<br />Grey/Black List</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+<h3>FATF는 법을 만들지 않는다</h3>
+<p>중요한 오해 하나를 먼저 풀면, <strong>FATF는 국제법을 만드는 기구가 아닙니다</strong>. FATF가 하는 일은 권고안(Recommendation, 40개)을 발표하고, 회원국이 이를 국내법으로 얼마나 잘 이행했는지 주기적으로 <strong>상호평가(Mutual Evaluation, ME)</strong> 하는 것입니다.</p>
+<p>그러면 왜 각국이 FATF 권고를 열심히 따르는가? <strong>제재보다 무서운 게 평판이기 때문</strong>입니다. 상호평가에서 낮은 점수를 받으면 FATF는 그 나라를 <strong>Grey List</strong>(강화 모니터링) 또는 <strong>Black List</strong>(Call for Action)에 올릴 수 있고, 그러면:</p>
+<ul>
+<li>외국 은행이 그 나라 금융기관과의 <strong>코르레스(correspondent) 관계</strong>를 끊거나 제한</li>
+<li>국가 신용등급 강등, 자본 유출</li>
+<li>외국인 투자 기피</li>
+</ul>
+<p>즉 국가 경제 자체가 타격을 입습니다. 2021~2025년 사이 터키·남아공·나이지리아·파키스탄이 Grey List에 올랐다가 빠지는 과정에서 이런 압력을 체감했습니다. 한국은 Grey List에 오른 적이 없지만, 바로 그 이유로 FATF 권고 이행에 민감합니다.</p>
+<h3>가상자산에 대한 결정적 권고 2개</h3>
+<p>가상자산 산업이 FATF 권고를 체감하는 지점은 거의 이 둘로 압축됩니다.</p>
+<ul>
+<li><strong>FATF Recommendation 15 — VASP에 AML/CFT 의무 부과.</strong> 가상자산사업자를 전통 금융기관과 동일한 AML 체계에 편입. 2019년 신설, 2021·2025년 개정.</li>
+<li><strong>FATF Recommendation 16 — Travel Rule.</strong> VASP 간 이전 시 송수신인 정보 동반 의무. 2019년 확장, 2025-06 해석지침 업데이트.</li>
+</ul>
+<p>R.15와 R.16은 한국 특금법 개정(2020-03, 2021-03)과 EU MiCA·TFR 제정(2023~2024)의 <strong>직접 모태</strong>가 됐습니다. 두 권고의 정확한 문언을 아는 것은 이후 모든 국가별 규제 학습의 출발점입니다. 자세한 내용은 <a href="../2-regulations/fatf.md"><code>../2-regulations/fatf.md</code></a> 참조.</p>
+<h3>실무 포인트</h3>
+<p>회사 AML 정책 문서 맨 앞에 "본 정책은 FATF Recommendation 10, 15, 16 및 한국 특금법 §5의2~§5의4에 근거한다"고 명시하면, 규제 검사관이 문서 구조를 이해하기 쉬워지고 내부 교육 자료에서도 "이 룰이 왜 있는가"를 거슬러 올라가 설명할 수 있습니다. 법적 근거 추적성(traceability)을 문서에 내재화하는 게 성숙한 AML 프로그램의 표식입니다.</p>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>3단계 모델</strong>: Placement → Layering → Integration (전통·가상자산 공통 틀)
+<strong>AML 9대 의무</strong>: 신고 · KYC/CDD · RBA · EDD · TM/KYT · 제재 스크리닝 · STR · 기록보관 · 내부통제 (+ 가상자산 Travel Rule)
+<strong>글로벌 구조</strong>: FATF 권고 → 각국 국내법 → 감독기관 집행 → Mutual Evaluation 피드백 루프</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="why-crypto-different.md"><code>why-crypto-different.md</code></a> — 왜 가상자산 AML은 다른가</li>
+<li><a href="key-concepts.md"><code>key-concepts.md</code></a> — KYC/KYT/CDD/EDD/STR/CTR 정의 상세</li>
+<li><a href="../2-regulations/fatf.md"><code>../2-regulations/fatf.md</code></a> — FATF 권고안 R.15/R.16 deep</li>
+<li><a href="https://www.fatf-gafi.org/en/topics/money-laundering.html">FATF — Money Laundering</a></li>
+<li><a href="https://www.unodc.org/unodc/en/money-laundering/overview.html">UNODC — Money Laundering Overview</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 01 / 60 · READING</span>
+    </div>
+  </article>
+
+  <div class="article-divider">
+    <div class="article-divider__kicker">더 깊이 (선택)</div>
+    <h2 class="article-divider__title">Key Concepts — AML 핵심 용어 정리</h2>
+    <p class="article-divider__lead">외우기 전에 차이부터 잡고 가야 할 핵심 용어들. 이 글의 목표는 "용어 A를 봤을 때 A가 B와 어떻게 다른지, 실무에서 어떤 판단을 바꾸는지 즉시 말할 수 있게" 하는 것입니다..</p>
+    <div class="article-divider__meta">notes/1-foundations/key-concepts.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">더 깊이 (선택) · Day 01</span>
+      <span class="article-head__path">notes/1-foundations/key-concepts.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>KYC ≠ CDD ≠ EDD</strong> — 점점 강도가 세지는 동심원</li>
+<li><strong>KYC vs KYT</strong> — KYC는 사람을 안다, KYT는 거래·지갑을 안다 (가상자산 특화)</li>
+<li><strong>STR vs CTR</strong> — STR은 의심거래, CTR은 임계금액 초과 현금거래</li>
+<li><strong>AMLO / MLRO / CCO</strong> — AML 책임자, 회사 안에 반드시 있어야 하는 직책</li>
+<li><strong>PEP</strong> — 정치적 주요인물, 자동으로 EDD 대상</li>
+</ul>
+<hr />
+<h2>1. 고객 식별·실사 라인 (KYC / CDD / EDD / SDD)</h2>
+<h3>왜 이 네 용어가 헷갈리나</h3>
+<p>네 용어 모두 "고객을 확인한다"는 같은 의미처럼 들리지만, 실무에서는 <strong>적용 대상 고객군</strong>과 <strong>확인 강도</strong>가 다릅니다. 내부 정책서에 이 넷을 명확히 구분하지 않고 섞어 쓰면 운영팀이 "이 고객에게 뭘 적용해야 하나"에서 혼선을 겪고, 규제 검사에서도 지적을 받기 쉽습니다. 동심원 그림 하나로 기억하면 잘 안 흔들립니다.</p>
+<h3>동심원 구조</h3>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 623.625px; background-color: transparent;" viewBox="0 0 623.625 326" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"/><g class="edgeLabels"/><g class="nodes"><g class="root" transform="translate(0, 0)"><g class="clusters"><g class="cluster" id="my-svg-KYC" data-look="classic"><rect style="fill:#fff !important;stroke:#1a2e4a !important;stroke-width:2px !important" x="8" y="8" width="607.625" height="310"/><g class="cluster-label" transform="translate(122.9765625, 8)"><foreignObject width="377.671875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="nodeLabel"><p>🌂 KYC (Know Your Customer) — 우산 개념, 신원확인 행위 일반</p></span></div></foreignObject></g></g></g><g class="edgePaths"/><g class="edgeLabels"/><g class="nodes"><g class="root" transform="translate(35, 37.5)"><g class="clusters"><g class="cluster" id="my-svg-CDD" data-look="classic"><rect style="fill:#f7f5ef !important;stroke:#c9a646 !important;stroke-width:1.5px !important" x="8" y="8" width="537.625" height="235"/><g class="cluster-label" transform="translate(132.8125, 8)"><foreignObject width="288" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="nodeLabel"><p>📋 CDD (Customer Due Diligence) — 모든 고객</p></span></div></foreignObject></g></g></g><g class="edgePaths"/><g class="edgeLabels"/><g class="nodes"><g class="node default" id="my-svg-flowchart-EDD-0" data-look="classic" transform="translate(146.984375, 125.5)"><rect class="basic label-container" style="fill:#fed7aa !important;stroke:#ea580c !important;stroke-width:1.5px !important" x="-103.984375" y="-67.5" width="207.96875" height="135"/><g class="label" style="" transform="translate(-73.984375, -52.5)"><rect/><foreignObject width="147.96875" height="105"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🔒 EDD (Enhanced DD)<br />고위험 고객만<br />• PEP · 고위험국<br />• 자금원천 증빙<br />• 임원 승인</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-SDD-1" data-look="classic" transform="translate(405.796875, 125.5)"><rect class="basic label-container" style="fill:#d1fae5 !important;stroke:#10b981 !important;stroke-width:1.5px !important" x="-104.828125" y="-46.5" width="209.65625" height="93"/><g class="label" style="" transform="translate(-74.828125, -31.5)"><rect/><foreignObject width="149.65625" height="63"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🟢 SDD (Simplified DD)<br />저위험만 (한국 가상자산 X)<br />• 정부기관 · 상장사</p></span></div></foreignObject></g></g></g></g></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+<h3>KYC (Know Your Customer)</h3>
+<p><strong>정의</strong>: "이 사람이 정말 본인이 맞는가"를 확인하는 <strong>광범위 개념</strong>. 흔히 "KYC 심사"라고 하면 신분증 제출, 셀카, 주소증빙 등 전체 과정을 통칭.</p>
+<p><strong>실무 예시</strong>:
+- 업비트 가입 시 주민등록증 OCR + 얼굴 매칭 + 휴대폰 본인인증
+- 실명확인 입출금계정(은행 실명계좌) 연결</p>
+<p><strong>왜 중요한가</strong>: KYC가 부실하면 그 위에 쌓는 CDD·EDD·모니터링이 <strong>모두 사상누각</strong>이 됩니다. AML 사고 분석을 해 보면 80% 이상이 onboarding 단계에서 놓친 신호에서 시작됩니다.</p>
+<h3>CDD (Customer Due Diligence)</h3>
+<p><strong>정의</strong>: KYC를 수행한 뒤 고객의 <strong>위험을 평가하고 지속 모니터링</strong>하는 과정. FATF R.10의 이름이 Customer Due Diligence이기 때문에 가장 공식적인 용어.</p>
+<p><strong>4단계 구성</strong>:
+1. 신원확인 (Identification)
+2. 실소유자(Beneficial Owner) 확인 — 법인이면 25% 이상 지분 자연인
+3. 거래 목적·자금 원천 파악
+4. 지속 모니터링 (Ongoing Monitoring)</p>
+<p><strong>왜 중요한가</strong>: KYC는 "한 번 찍으면 끝"이라는 인상이 있지만 CDD는 <strong>거래관계가 유지되는 한 계속</strong> 해야 합니다. 고객 정보가 낡으면 재실사(refresh). 이게 빠지면 "처음에는 멀쩡했던 고객이 2년 후 고위험으로 변했는데 놓치는" 사고가 납니다.</p>
+<h3>EDD (Enhanced Due Diligence)</h3>
+<p><strong>정의</strong>: CDD를 <strong>이미 한 위에 추가로</strong> 강화된 확인을 덧붙이는 단계. 고위험 고객에게만 적용.</p>
+<p><strong>트리거</strong>:
+- PEP (정치적 주요인물)
+- 고위험국(FATF Grey/Black List) 거주·국적
+- 비대면 + 기타 위험요소 조합
+- 거액 거래 또는 복잡한 소유구조
+- 현금 집약적 사업 (카지노, 귀금속)</p>
+<p><strong>추가 절차</strong>:
+- <strong>자금출처(SoF, Source of Funds)</strong> 증빙 — 월급? 사업수익? 상속? 문서 요구
+- <strong>자산출처(SoW, Source of Wealth)</strong> 증빙 — 전체 재산이 어떻게 형성됐는가
+- <strong>고위경영진 승인</strong> — 계좌 개설·유지 결정을 팀장이 아닌 임원 레벨에서
+- 더 빈번한 재실사 (연 1회 → 분기 1회)</p>
+<p><strong>실무 예시</strong>: 고액 OTC 거래 고객이 러시아 국적자로 신고됐다면, 단순 KYC로 끝나지 않고 SoF 증빙(세무서류, 고용계약서, 매매계약서)과 임원 approval 기록을 시스템에 남깁니다.</p>
+<h3>SDD (Simplified Due Diligence)</h3>
+<p><strong>정의</strong>: 저위험 고객에게만 적용 가능한 <strong>간소화</strong> 실사. 정부기관, 상장기업, 다른 규제받는 금융기관 등.</p>
+<p><strong>한국 가상자산 분야 현실</strong>: 거의 적용 안 됨. 감독당국이 "가상자산 산업은 고위험"이라는 기본 가정을 가지므로, 모든 고객에 최소 CDD를 요구.</p>
+<h3>실무 포인트</h3>
+<p>내부 정책서에 이 넷을 정확히 쓰려면 "KYC는 프로세스, CDD는 프로그램, EDD는 추가 강화, SDD는 예외"라는 틀로 문장을 쓰면 혼선이 줄어듭니다. 예: "모든 고객에 대해 CDD 프로그램을 수행하며, PEP·고위험국·거액거래 트리거 발생 시 EDD 절차를 추가 적용한다."</p>
+<hr />
+<h2>2. KYC vs KYT — 가상자산의 핵심 구분</h2>
+<h3>왜 KYT가 따로 있나</h3>
+<p>전통 금융 AML에는 KYC와 TM(Transaction Monitoring, 거래 모니터링)이 있지 "KYT"는 없었습니다. 가상자산 산업에서 <strong>블록체인 특유의 분석(온체인 KYT)이 너무 큰 비중</strong>을 차지하다 보니, TM 중에서 온체인 부분을 따로 빼서 이름을 준 게 KYT입니다.</p>
+<p>용어:
+- <strong>KYT (Know Your Transaction)</strong> — 가상자산 거래와 지갑 주소의 위험을 상시 분석. 전통 금융 TM의 블록체인 확장판.
+- <strong>TM (Transaction Monitoring)</strong> — 일반 용어. 거래 패턴 이상을 탐지하는 시스템 전반. KYT의 상위 개념.</p>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>같은 "모니터링" 기능이 KYC와 KYT에서 어떻게 다른 지점을 보는지 대조. 두 영역은 <strong>서로 대체가 아니라 보완</strong> 관계 — 가상자산 AML은 반드시 둘 다 필요.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>KYC (Know Your Customer)</th>
+<th>KYT (Know Your Transaction)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대상</td>
+<td><strong>사람·법인</strong></td>
+<td><strong>거래·지갑주소</strong></td>
+</tr>
+<tr>
+<td>시점</td>
+<td>주로 onboarding 때</td>
+<td><strong>상시 (real-time)</strong></td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>신분증, 셀카, 주소</td>
+<td>온체인 흐름, 클러스터, exposure</td>
+</tr>
+<tr>
+<td>도구</td>
+<td>Sumsub, Onfido, ARGOS</td>
+<td>Chainalysis KYT, TRM, Elliptic Lens</td>
+</tr>
+<tr>
+<td>가상자산 특화 여부</td>
+<td>전통 금융과 동일</td>
+<td><strong>가상자산 특화 (블록체인 분석)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>KYT는 결과가 <strong>Risk Score</strong>로 나옵니다 — "이 주소는 직접 Tornado Cash에서 자금을 받았음, risk 95점". 이 점수를 KYC로 식별한 고객과 연결하면 <strong>"고위험 고객의 고위험 거래"</strong> 같은 복합 신호가 탐지됩니다. KYT만 있고 KYC가 부실하면 "주소는 위험한데 사람은 누군지 모름"이 돼 STR 작성이 안 됩니다. 반대로 KYC만 있고 KYT가 부실하면 "사람은 알지만 그 사람의 지갑이 OFAC에 연결됐는지 몰라 차단하지 못합니다".</p>
+<hr />
+<h2>3. 보고 의무 — STR / SAR / CTR</h2>
+<h3>왜 세 약어가 있나</h3>
+<p>같은 "의심거래 보고" 개념이 관할별로 다른 이름입니다. 한국·FATF는 STR, 미국은 SAR, 그리고 "현금거래" 만을 따로 보고하는 게 CTR입니다.</p>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>실무에서는 어느 나라 규제를 적용받는지에 따라 양식과 보고처가 달라집니다. 한국 회사는 STR을 FIU에, 미국 회사는 SAR을 FinCEN에 제출.</p>
+<table>
+<thead>
+<tr>
+<th>약어</th>
+<th>풀이</th>
+<th>트리거</th>
+<th>한국에서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STR</strong></td>
+<td>Suspicious Transaction Report</td>
+<td>의심스러운 거래 (<strong>금액 무관</strong>)</td>
+<td>FIU에 보고</td>
+</tr>
+<tr>
+<td><strong>SAR</strong></td>
+<td>Suspicious Activity Report (US 용어)</td>
+<td>위와 동일 (FinCEN 용어)</td>
+<td>(미국 BSA 관할)</td>
+</tr>
+<tr>
+<td><strong>CTR</strong></td>
+<td>Currency Transaction Report</td>
+<td><strong>임계금액 초과 현금거래</strong> (한국 1천만원, 미국 $10,000)</td>
+<td>FIU에 자동 보고</td>
+</tr>
+</tbody>
+</table>
+<h3>STR의 핵심 속성</h3>
+<ul>
+<li><strong>금액 무관</strong>: 1,000원짜리 거래여도 의심이 있으면 보고</li>
+<li><strong>의심 자체가 기준</strong>: "의심의 합리적 근거"만 있으면 충분. 실제 범죄 확정 필요 없음</li>
+<li><strong>Tipping-off 금지</strong>: 고객에게 "너 STR 대상이야" 알리면 <strong>별도 형사처벌</strong></li>
+<li><strong>보호</strong>: STR 보고는 민·형사 면책 (정상 절차라면)</li>
+</ul>
+<h3>CTR이 가상자산에서 애매한 이유</h3>
+<p>CTR은 본래 "<strong>현금</strong>이 금융 시스템에 들어오는 순간"을 잡는 제도. 가상자산은 대부분 은행 실명계좌 경유라 <strong>현금 취급 자체가 드뭅니다</strong>. 그래서 한국 특금법 §4의2의 1천만원 CTR이 VASP에도 명문상 적용되지만, 실제 트리거는 <strong>거의 없음</strong> — OTC desk에서 현금을 받는 극소수 사례 정도. 실무에서는 STR이 압도적으로 중요합니다.</p>
+<h3>실무 포인트</h3>
+<p>STR 결정은 "의심이 든다"라는 1차 신호만으로 충분하므로, 분석가가 <strong>입증 책임에 부담을 느껴 보고를 미루는 문화</strong>가 AML 조직의 최악의 병입니다. 감독당국은 오히려 "STR 수가 적으면 의심"하며, 품질보다 양이 많은 편이 안전합니다. 회사 정책에 "의심이 들면 문서화 후 STR, 아니라고 판단된 경우 사유 기록"을 기본값으로 명시해야 합니다.</p>
+<hr />
+<h2>4. RBA — Risk-Based Approach (위험기반접근)</h2>
+<h3>한 줄 정의</h3>
+<p>FATF가 2012년 권고 개정에서 명시화한 핵심 원칙:</p>
+<blockquote>
+<p>"고객·상품·거래·지역의 <strong>위험 수준에 비례해서</strong> AML 통제를 적용하라"</p>
+</blockquote>
+<h3>왜 중요한가</h3>
+<p>규제의 방식에는 크게 두 가지가 있습니다: <strong>Rule-Based</strong>(모든 고객에 동일 규칙)와 <strong>Risk-Based</strong>(위험에 따라 차등). 예전 AML은 Rule-Based였으나 고비용에 비해 효과가 떨어져 FATF가 <strong>RBA를 표준으로 전환</strong>. 이제는 모든 권고가 RBA를 가정하고 작성됩니다.</p>
+<p>RBA의 실질적 의미는 <strong>"모든 고객을 똑같이 취급하지 말라"</strong> 입니다. 저위험 고객에게 두꺼운 통제를 적용하면 비용만 낭비되고 고위험 고객이 묻혀 버림. 반대로 고위험에 얇은 통제를 적용하면 사고를 놓침. 자원이 유한한 AML 조직에게 이 전략이 유일한 생존 방식입니다.</p>
+<h3>가상자산에서 RBA의 실질적 의미</h3>
+<ul>
+<li>고객 Risk Score 자동 산정 (KYC 정보 + 거래 패턴 + 지갑 exposure)</li>
+<li>Score ≥ Threshold 이면 EDD 트리거</li>
+<li>Score 변화 시 재실사 및 통제 수준 재조정</li>
+<li>저위험: SDD 또는 축소 CDD (한국에선 드묾)</li>
+<li>고위험: EDD + 고위경영진 승인</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"우리는 RBA를 한다"고 말하려면 문서에 <strong>Risk Score 산정 공식·가중치·임계값</strong>이 명시되어 있어야 합니다. 감독당국은 "어떻게 RBA를 구현했는지 보여달라"고 요구하며, "직원 판단으로 위험을 평가합니다"는 답은 불합격입니다. 숫자로 된 공식이 있어야 정답.</p>
+<hr />
+<h2>5. PEP — Politically Exposed Person (정치적 주요인물)</h2>
+<h3>정의</h3>
+<p><strong>고위 공직자, 그 가족, 그 측근</strong> — 부패와 뇌물 위험에 구조적으로 노출된 사람들.</p>
+<h3>3가지 분류</h3>
+<ul>
+<li><strong>Foreign PEP (외국 PEP)</strong> — 외국 정부 고위직. 항상 EDD 대상 (자동).</li>
+<li><strong>Domestic PEP (국내 PEP)</strong> — 자국 고위직. 위험기반 평가 후 EDD 여부 결정.</li>
+<li><strong>International Organization PEP</strong> — UN, World Bank 등 국제기구 고위직. 위험기반 평가.</li>
+</ul>
+<h3>중요한 오해 풀기</h3>
+<p>PEP라는 건 <strong>범죄자라는 뜻이 아닙니다</strong>. 한국 국회의원이 거래소에서 코인을 사는 건 합법이고 정상적인 활동입니다. 다만 <strong>"부패·뇌물 수수에 노출될 구조적 환경"</strong>에 있으므로, 금융기관은 이 사람의 거래를 <strong>더 주의 깊게</strong> 보자는 게 PEP 제도의 취지.</p>
+<h3>어떻게 스크리닝하나</h3>
+<p>전 세계 PEP 리스트를 스스로 유지하는 것은 불가능 — 상용 DB를 구독:
+- <strong>World-Check (LSEG)</strong> — 업계 표준
+- <strong>Dow Jones Risk Center</strong>
+- <strong>ComplyAdvantage</strong>
+- <strong>Refinitiv</strong></p>
+<h3>실무 포인트</h3>
+<p>PEP 매칭이 떴다고 <strong>자동 거래 차단</strong>이 되는 건 아닙니다. 우선 <strong>가짜 동명이인(False Positive)</strong> 여부를 판단해야 합니다. 한국인 "김민수" 이름은 PEP가 아닌 사람도 수천 명이므로, 출생년도·국적·직업 맥락으로 필터링하는 <strong>Secondary Review</strong> 절차가 반드시 있어야 합니다.</p>
+<hr />
+<h2>6. Beneficial Owner — 실소유자</h2>
+<h3>한 줄 정의</h3>
+<p><strong>법인 고객의 실제 지배자·수익자</strong>. 명의상 대표가 아니라 <strong>실질 지배 25% 이상</strong> 소유 자연인.</p>
+<h3>왜 25%인가</h3>
+<p>Shell company(껍데기 회사)를 통한 익명화를 차단하기 위한 FATF 기준. "25% 이상이면 실질 지배로 간주"가 국제 표준이며, 한국 특금법과 EU AMLR 모두 25%를 채택. EU는 AMLR 논의 과정에서 <strong>15%로 인하 가능성</strong>이 언급되고 있으나 2026-04 현재 확정 안 됨.</p>
+<h3>실무에서 어려운 이유</h3>
+<p>Beneficial Owner 확인은 <strong>법인 문서를 통해 재귀적으로 파고드는</strong> 작업입니다. 예:
+- 고객 법인 A → 주주: 법인 B(50%)
+- 법인 B → 주주: 법인 C(60%)
+- 법인 C → 주주: 자연인 X(100%)
+- → X가 A의 실소유자 (50% × 60% × 100% = 30%, 25% 이상)</p>
+<p>이 작업을 수동으로 하면 고객 등록이 며칠씩 걸리므로, 상용 UBO(Ultimate Beneficial Owner) 확인 서비스(예: Moody's, Dun &amp; Bradstreet, 국내는 CRETOP/NICE)를 연동하는 게 표준.</p>
+<h3>실무 포인트</h3>
+<p>UBO 확인이 안 되는 고객은 <strong>거래 거절</strong>이 원칙. 규제는 "확인 불가능 시 관계를 맺지 말라"를 명시하며, 억지로 받으면 STR + 영업정지 리스크로 돌아옵니다.</p>
+<hr />
+<h2>7. Sanctions Screening — 제재 스크리닝</h2>
+<h3>핵심</h3>
+<p>차단해야 할 <strong>명단</strong>과 고객·거래 당사자·지갑 주소를 <strong>실시간으로 매칭</strong>하는 통제.</p>
+<h3>5대 리스트</h3>
+<table>
+<thead>
+<tr>
+<th>리스트</th>
+<th>발행</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OFAC SDN List</strong> (Specially Designated Nationals)</td>
+<td>미국 재무부 OFAC</td>
+<td>가장 영향력 큼, 역외적용</td>
+</tr>
+<tr>
+<td><strong>UN Consolidated Sanctions List</strong></td>
+<td>UN 안보리</td>
+<td>회원국 의무</td>
+</tr>
+<tr>
+<td><strong>EU Consolidated Financial Sanctions</strong></td>
+<td>EU</td>
+<td>유럽 VASP 필수</td>
+</tr>
+<tr>
+<td><strong>HM Treasury Sanctions List</strong></td>
+<td>영국</td>
+<td>브렉시트 후 독자 운영</td>
+</tr>
+<tr>
+<td><strong>한국 외교부 제재대상자</strong></td>
+<td>한국</td>
+<td>국내 VASP 필수</td>
+</tr>
+</tbody>
+</table>
+<h3>가상자산 추가 속성</h3>
+<ul>
+<li><strong>OFAC SDN의 가상자산 지갑 주소</strong> — SDN.XML 파일의 <code>&lt;feature&gt;&lt;type&gt;Digital Currency Address&lt;/type&gt;</code> 필드로 공개</li>
+<li>예: Lazarus 관련 주소 수백 개, 과거 Tornado Cash(2022 제재) 스마트컨트랙트 주소</li>
+<li>거래 발생 <strong>전</strong> 송신·수신 주소를 모두 스크리닝 (Pre-transaction)</li>
+</ul>
+<h3>OFAC의 역외적용 공포</h3>
+<p>OFAC 제재는 <strong>미국 시민·미국 달러·미국 기술 인프라</strong>를 쓰는 모든 주체에 적용됩니다. 스테이블코인(USDT/USDC)은 달러에 페그돼 있고 미국 발행자가 있으므로, <strong>실질적으로 전 세계 VASP가 OFAC 제재를 준수</strong>해야 합니다. 한국 거래소가 OFAC 제재 주소로 스테이블코인을 송금하면 Tether/Circle이 freeze 걸고, 나아가 OFAC가 해당 거래소를 <strong>2차 제재(secondary sanctions)</strong> 대상으로 지정할 수 있습니다.</p>
+<h3>실무 포인트</h3>
+<p>제재 스크리닝의 최대 적은 <strong>False Positive</strong>. "Kim, Min Su"라는 이름이 SDN에 있다고 해서 모든 김민수를 차단하면 업무 마비. 이름 매칭 + 생년월일 + 국적 + 주소를 조합한 <strong>스코어링 매칭</strong>과, 1차 차단 후 분석가 리뷰 후 해제하는 <strong>Disposition Workflow</strong>가 실무 표준.</p>
+<hr />
+<h2>8. AMLO / MLRO / CCO — AML 책임자</h2>
+<h3>같은 직무, 다른 이름</h3>
+<table>
+<thead>
+<tr>
+<th>약어</th>
+<th>풀이</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AMLO</strong></td>
+<td>Anti-Money Laundering Officer</td>
+<td>일반 명칭 (한국·FATF 권고)</td>
+</tr>
+<tr>
+<td><strong>MLRO</strong></td>
+<td>Money Laundering Reporting Officer</td>
+<td>영국·EU 명칭, STR 보고 최종책임</td>
+</tr>
+<tr>
+<td><strong>CCO</strong></td>
+<td>Chief Compliance Officer</td>
+<td>컴플라이언스 총괄 (AML은 그 하위 영역)</td>
+</tr>
+<tr>
+<td><strong>DMLRO</strong></td>
+<td>Deputy MLRO</td>
+<td>부책임자 (MLRO 부재 시 대행)</td>
+</tr>
+</tbody>
+</table>
+<h3>한국 특금법의 요구</h3>
+<p>"<strong>자금세탁방지 보고책임자</strong>" 임명 의무 — <strong>임원급</strong>이어야 함. 팀장·부장으로는 안 됨. 이유는 STR 보고 결정이 때때로 <strong>회사에 불리한 방향</strong>(고객·임원의 거래를 신고해야 할 때)이 될 수 있으므로, 영업 압력에 휘둘리지 않도록 의사결정권이 있는 임원에게 부여.</p>
+<h3>실무 포인트</h3>
+<p>외국계 VASP가 한국에서 AMLO를 임명할 때 <strong>실권 없는 명목직</strong>으로 두면 감독 검사에서 즉시 지적 대상. "이 AMLO가 STR 발송 여부를 결정할 수 있는가"를 증명할 수 있는 권한 문서가 있어야 합니다.</p>
+<hr />
+<h2>9. Three Lines of Defense (3중 방어선)</h2>
+<h3>은행·VASP 내부 통제 모델</h3>
+<ol>
+<li><strong>1선 (Business / Frontline)</strong> — 영업 부서. 고객 응대, KYC 1차 수행, 일상 모니터링.</li>
+<li><strong>2선 (Compliance / Risk)</strong> — 컴플라이언스 팀. 정책 수립, TM 시스템 운영, STR 신고, 2차 리뷰.</li>
+<li><strong>3선 (Internal Audit)</strong> — 내부감사. 1선·2선이 제대로 돌아가는지 <strong>독립 검증</strong>.</li>
+</ol>
+<h3>핵심은 "독립성"</h3>
+<p>3선 내부감사가 AMLO나 CCO에 보고하면 "감독자가 감독자를 감사"하는 꼴이라 무의미. <strong>이사회 직속</strong>이어야 실효성 있음. 규제 검사관이 이 보고라인을 꼭 확인합니다.</p>
+<h3>실무 포인트</h3>
+<p>신생 가상자산 회사에서 가장 먼저 무너지는 게 3선. 사람이 없어서 2선이 1선도 하고 3선 흉내도 내는 구조가 흔한데, 이건 감독 검사에서 바로 지적. 외부 감사법인(EY, Deloitte, 삼일 등)에 3선 역할을 <strong>연 1회 아웃소싱</strong>하는 게 현실적 해결.</p>
+<hr />
+<h2>10. 자주 헷갈리는 짝 — 한 눈 대조표</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>용어 암기 완료 체크용입니다. 한 줄씩 보며 <strong>차이를 바로 설명할 수 있으면</strong> 해당 용어는 내 것입니다. 애매하면 위 섹션으로 돌아가 다시.</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AML</strong> vs <strong>CFT</strong></td>
+<td>자금세탁방지 vs 테러자금조달방지</td>
+<td>ML은 사후 출처 은닉, TF는 사전 목적지 차단</td>
+</tr>
+<tr>
+<td><strong>KYC</strong> vs <strong>CDD</strong></td>
+<td>신원확인 vs 종합실사</td>
+<td>CDD가 더 큰 개념 (KYC 포함)</td>
+</tr>
+<tr>
+<td><strong>CDD</strong> vs <strong>EDD</strong></td>
+<td>표준 vs 강화</td>
+<td>EDD = 고위험에 SoF/SoW 증빙 + 임원 승인 추가</td>
+</tr>
+<tr>
+<td><strong>KYC</strong> vs <strong>KYT</strong></td>
+<td>사람 vs 거래·지갑</td>
+<td>KYT = 가상자산 특화, 온체인 분석</td>
+</tr>
+<tr>
+<td><strong>STR</strong> vs <strong>CTR</strong></td>
+<td>의심거래 vs 임계초과 현금</td>
+<td>가상자산은 STR 위주 (CTR 실효성 낮음)</td>
+</tr>
+<tr>
+<td><strong>STR</strong> vs <strong>SAR</strong></td>
+<td>한국·FATF vs 미국 용어</td>
+<td>본질 동일, 제출처 다름 (FIU vs FinCEN)</td>
+</tr>
+<tr>
+<td><strong>VASP</strong> vs <strong>CASP</strong></td>
+<td>글로벌·한국 vs EU 용어</td>
+<td>본질 동일 (CASP = Crypto-Asset Service Provider)</td>
+</tr>
+<tr>
+<td><strong>FATF</strong> vs <strong>FIU</strong></td>
+<td>국제 표준제정 vs 각국 집행</td>
+<td>FATF는 권고, FIU는 집행 및 정보분석</td>
+</tr>
+<tr>
+<td><strong>AMLR</strong> vs <strong>AMLD</strong></td>
+<td>EU 규정 vs EU 지침</td>
+<td>AMLR 직접효력 / AMLD 국내법화 필요 (AMLR이 더 강력)</td>
+</tr>
+<tr>
+<td><strong>OFAC</strong> vs <strong>FinCEN</strong></td>
+<td>제재 집행 vs FIU</td>
+<td>둘 다 미국 재무부 산하, 역할 다름</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>동심원</strong>: KYC ⊃ CDD ⊃ EDD / CDD ⊃ SDD (범위만 좁음)
+<strong>가상자산 특화 3대</strong>: KYT · Travel Rule · 지갑 주소 스크리닝
+<strong>조직 필수 2대</strong>: AMLO(개인) · 3LoD(구조)</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="what-is-aml.md"><code>what-is-aml.md</code></a> — AML 3단계 모델 기초</li>
+<li><a href="why-crypto-different.md"><code>why-crypto-different.md</code></a> — 가상자산 AML의 특수성</li>
+<li><a href="../5-compliance/cdd-edd.md"><code>../5-compliance/cdd-edd.md</code></a> — CDD·EDD 실무 상세</li>
+<li><a href="../glossary.md"><code>../glossary.md</code></a> — 전체 용어 사전 (ABC 순)</li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 01 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

@@ -6,6 +6,23 @@
 
 Week 4의 결산인 첫 미니 프로젝트. Python으로 **IVMS101 메시지를 직접 생성·검증**하는 코드를 짜면서, 지난 6일간 배운 Travel Rule·프로토콜·VerifyVASP·CODE의 내용이 손에 익도록 만듭니다. 완성된 코드는 이후 D35(온체인 tracer)·D56(KYT wrapper)과 결합되어 Capstone의 리스크 엔진으로 확장됩니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    I["📥 Input<br/>송수신 정보"] --> B["🔨 Builder"]
+    B --> M["📝 IVMS101 JSON"]
+    M --> V["🔍 Validator"]
+    V --> O["✅ 성공"]
+    V --> E["⚠️ 필드 누락<br/>포맷 오류"]
+    style B fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style O fill:#d1fae5,stroke:#10b981
+    style E fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. Travel Rule이 왜 가상자산 운영의 가장 큰 골칫거리인가?
 2. IVMS101이 표준이라는 게 왜 중요한가?

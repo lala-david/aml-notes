@@ -2,6 +2,22 @@
 
 > 위험 wallet 데이터셋을 공개 소스에서 자동 수집. (D42 미니 프로젝트)
 
+## 🏗 아키텍처
+
+```mermaid
+flowchart LR
+    O["🇺🇸 OFAC SDN.xml"] --> P["🔨 XML Parser"]
+    E["🔍 Etherscan<br/>Labels"] --> P
+    G["📦 GitHub OSINT<br/>labels repos"] --> P
+    P --> N["🏷 Normalize<br/>(lowercase · source · time)"]
+    N --> J["📄 mixer_addresses.json"]
+    N --> CSV["📄 mixer_addresses.csv"]
+    N --> HIST["📁 history/YYYY-MM-DD.json"]
+    HIST --> D["🔄 daily diff<br/>(added/removed)"]
+    style P fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style D fill:#fff7d6,stroke:#c9a646
+```
+
 ## 왜 이걸 만드나
 
 "KYT 벤더의 진짜 경쟁력은 라벨 DB"라는 말을 **직접 체감**하는 프로젝트. OFAC SDN XML을 파싱하고 Etherscan 라벨을 긁어서 자체 mixer 데이터셋을 만들어보면, 왜 이 작업이 수년간의 축적이 필요한지, 그리고 Chainalysis가 10억+ 주소 매핑을 가진 것이 어떤 의미인지 알게 됩니다. Week 6의 **CMLN·mixer·OSINT** 지식이 코드로 응축되는 순간.

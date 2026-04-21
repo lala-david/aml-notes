@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 25 — VerifyVASP, CODE (한국 양강)</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 25 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">25</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 4 / 7</div>
+        <div class="page-meta__theme">Travel Rule + IVMS101</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">VerifyVASP, CODE (한국 양강)</h1>
+      <p class="title-block__lead">한국 시장 Travel Rule 솔루션 deep.</p>
+      <span class="title-block__time">⏱ ~70분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 606.969px; background-color: transparent;" viewBox="0 0 606.96875 274.25" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M214.222,46.642L220.288,44.451C226.354,42.261,238.485,37.881,252.183,35.69C265.88,33.5,281.143,33.5,288.775,33.5L296.406,33.5" id="my-svg-L_VV_UP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_VV_UP_0" data-points="W3sieCI6MjEwLjQ1OTU0NTE3MzI2NzMyLCJ5Ijo0OH0seyJ4IjoyNTAuNjE3MTg3NSwieSI6MzMuNX0seyJ4IjozMDAuNDA2MjUsInkiOjMzLjV9XQ==" data-look="classic" marker-start="url(#my-svg_flowchart-v2-pointStart)" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M394.065,106.033L404.208,94.82C414.351,83.606,434.636,61.178,449.288,49.964C463.94,38.75,472.958,38.75,477.467,38.75L481.977,38.75" id="my-svg-L_CD_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CD_B_0" data-points="W3sieCI6MzkxLjM4MTc4MzA4ODIzNTMsInkiOjEwOX0seyJ4Ijo0NTQuOTIxODc1LCJ5IjozOC43NX0seyJ4Ijo0ODUuOTc2NTYyNSwieSI6MzguNzV9XQ==" data-look="classic" marker-start="url(#my-svg_flowchart-v2-pointStart)" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M433.916,140.898L437.417,140.706C440.918,140.515,447.92,140.133,455.93,139.941C463.94,139.75,472.958,139.75,477.467,139.75L481.977,139.75" id="my-svg-L_CD_KB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CD_KB_0" data-points="W3sieCI6NDI5LjkyMTg3NSwieSI6MTQxLjExNTc0MjYyMjU1MX0seyJ4Ijo0NTQuOTIxODc1LCJ5IjoxMzkuNzV9LHsieCI6NDg1Ljk3NjU2MjUsInkiOjEzOS43NX1d" data-look="classic" marker-start="url(#my-svg_flowchart-v2-pointStart)" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M397.786,183.823L407.309,193.311C416.831,202.799,435.877,221.774,448.899,231.262C461.922,240.75,468.922,240.75,472.422,240.75L475.922,240.75" id="my-svg-L_CD_CO_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CD_CO_0" data-points="W3sieCI6Mzk0Ljk1MjQ5MjY1NjY1Nzk3LCJ5IjoxODF9LHsieCI6NDU0LjkyMTg3NSwieSI6MjQwLjc1fSx7IngiOjQ3OS45MjE4NzUsInkiOjI0MC43NX1d" data-look="classic" marker-start="url(#my-svg_flowchart-v2-pointStart)" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M196.964,121.599L205.906,125.499C214.849,129.399,232.733,137.2,247.192,141.1C261.651,145,272.685,145,278.202,145L283.719,145" id="my-svg-L_VV_CD_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_VV_CD_0" data-points="W3sieCI6MTkzLjI5Nzc3MTUxNjM5MzQyLCJ5IjoxMjB9LHsieCI6MjUwLjYxNzE4NzUsInkiOjE0NX0seyJ4IjoyODcuNzE4NzUsInkiOjE0NX1d" data-look="classic" marker-start="url(#my-svg_flowchart-v2-pointStart)" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_VV_UP_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_CD_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_CD_KB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_CD_CO_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(250.6171875, 145)"><g class="label" data-id="L_VV_CD_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>연동</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-VV-0" data-look="classic" transform="translate(110.7578125, 84)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-102.7578125" y="-36" width="205.515625" height="72"/><g class="label" style="color:#fff !important" transform="translate(-72.7578125, -21)"><rect/><foreignObject width="145.515625" height="42"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🔐 VerifyVASP<br />(람다256 + Chainalysis)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-UP-1" data-look="classic" transform="translate(358.8203125, 33.5)"><rect class="basic label-container" style="" x="-58.4140625" y="-25.5" width="116.828125" height="51"/><g class="label" style="" transform="translate(-28.4140625, -10.5)"><rect/><foreignObject width="56.828125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🏦 Upbit</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CD-2" data-look="classic" transform="translate(358.8203125, 145)"><rect class="basic label-container" style="fill:#c9a646 !important;stroke:#c9a646 !important" x="-71.1015625" y="-36" width="142.203125" height="72"/><g class="label" style="color:#fff !important" transform="translate(-41.1015625, -21)"><rect/><foreignObject width="82.203125" height="42"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🔐 CODE<br />(3사 합작법인)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-3" data-look="classic" transform="translate(539.4453125, 38.75)"><rect class="basic label-container" style="" x="-53.46875" y="-25.5" width="106.9375" height="51"/><g class="label" style="" transform="translate(-23.46875, -10.5)"><rect/><foreignObject width="46.9375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🏦 빗썸</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-KB-5" data-look="classic" transform="translate(539.4453125, 139.75)"><rect class="basic label-container" style="" x="-53.46875" y="-25.5" width="106.9375" height="51"/><g class="label" style="" transform="translate(-23.46875, -10.5)"><rect/><foreignObject width="46.9375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🏦 코빗</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CO-7" data-look="classic" transform="translate(539.4453125, 240.75)"><rect class="basic label-container" style="" x="-59.5234375" y="-25.5" width="119.046875" height="51"/><g class="label" style="" transform="translate(-29.5234375, -10.5)"><rect/><foreignObject width="59.046875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🏦 코인원</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>VerifyVASP를 누가 운영하나?</li>
+<li>CODE를 누가 만들었나?</li>
+<li>두 솔루션이 어떻게 연동되었나?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/7-vendors/travel-rule-vendors.md</span></li>
+<li>보조 · <span class="ref">../notes/7-vendors/korea-solutions.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>VerifyVASP 공식<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.verifyvasp.com/</span></li>
+<li>CodeVASP 공식<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.codevasp.com/ko</span></li>
+<li>TokenPost — 한국 4대 거래소 트래블룰<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.tokenpost.kr/article-88025</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>한국 4대 거래소가 어느 솔루션을 쓰는지 메모</li>
+<li>"신규 한국 VASP가 한 솔루션 선택 시 결정 기준" 3가지 적기</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>VerifyVASP = 람다256(두나무) + Chainalysis 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>CODE = 빗썸+코빗+코인원 합작법인 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>양 솔루션 연동 = 4대 거래소 송금 가능 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>컨소시엄형 = 사전 검증 회원사만 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 25 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Travel Rule 벤더 — 시장 지도</h2>
+    <p class="article-divider__lead">메시징 프로토콜 + Travel Rule SaaS 시장. 이 글을 읽고 나면 "한국에서는 왜 VerifyVASP·CODE·Notabene 이 3개가 사실상 전부인지"를 시장 구조적으로 설명할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/7-vendors/travel-rule-vendors.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 25</span>
+      <span class="article-head__path">notes/7-vendors/travel-rule-vendors.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>시장 양상: <strong>컨소시엄형 (VerifyVASP, CODE, Sygna)</strong> vs <strong>SaaS Gateway (Notabene)</strong> vs <strong>분산형 (TRISA, TRP)</strong></li>
+<li>한국 양강: <strong>VerifyVASP</strong> (Upbit + 글로벌) + <strong>CODE</strong> (빗썸·코빗·코인원)</li>
+<li>글로벌 1위: <strong>Notabene</strong> (1,500+ VASP, 멀티프로토콜 게이트웨이)</li>
+<li>핵심 선택 기준: <strong>카운터파티 호환성</strong> + <strong>Sunrise 대응</strong> + <strong>IVMS101 충실도</strong></li>
+</ul>
+<hr />
+<h2>1. 시장 구조 — 3가지 모델</h2>
+<pre><code>[ 메시지 표준: IVMS101 (모두 공통 사용) ]
+                  │
+   ┌──────────────┼──────────────┬──────────────────┐
+   ▼              ▼              ▼                  ▼
+컨소시엄형        SaaS           분산형            특화형
+─────────       ─────          ─────             ─────
+VerifyVASP     Notabene       TRISA            Sumsub TR
+CODE           Sumsub TR      TRP              Sygna
+Global TR      Global TR      OpenVASP         (KYC 통합)
+
+사전 검증     멀티프로토콜    오픈 PKI          KYC 결합
+회원사만      Gateway         누구나 참여
+</code></pre>
+<h3>세 모델의 본질적 차이</h3>
+<ul>
+<li><strong>컨소시엄형</strong> — "서로 신뢰할 수 있는 회원사끼리만 주고받자". 진입 장벽 높음, 신뢰 자동화.</li>
+<li><strong>SaaS Gateway</strong> — "우리가 다양한 프로토콜을 중개해준다". 다수 프로토콜 연결의 허브.</li>
+<li><strong>분산형</strong> — "누구나 인증서로 참여할 수 있다". 오픈이지만 식별 인프라 별도 필요.</li>
+</ul>
+<hr />
+<h2>2. 주요 벤더 상세</h2>
+<h3>A. Notabene — 글로벌 1위 게이트웨이</h3>
+<ul>
+<li><strong>본사</strong>: 미국 뉴욕, 2020 설립</li>
+<li><strong>포지션</strong>: <strong>글로벌 1위 + 멀티프로토콜 Gateway</strong></li>
+<li><strong>사용자</strong>: 1,500+ VASP</li>
+<li><strong>특징</strong>:</li>
+<li><strong>Notabene Gateway</strong> — TRISA·TRP·VerifyVASP·CODE 등 다중 프로토콜 동시 연결</li>
+<li><strong>Sunrise Issue 해결책</strong>으로 부상</li>
+<li>VASP Discovery 통합</li>
+<li><strong>장점</strong>: 한 번 연결로 글로벌 호환</li>
+<li><strong>약점</strong>: 기업 가입비, 운영자 의존</li>
+</ul>
+<p><strong>왜 대세가 됐나</strong>: Sunrise Issue — 전 세계 VASP가 서로 다른 프로토콜을 쓰는 현실에서 모든 프로토콜을 직접 구현하는 건 공수·비용이 너무 큼. Notabene이 "우리가 다 연결해주겠다"는 SaaS 모델로 빈자리를 정확히 채웠습니다.</p>
+<h3>B. VerifyVASP — 한국·아시아 컨소시엄</h3>
+<ul>
+<li><strong>운영</strong>: 람다256 (두나무 자회사) + Chainalysis</li>
+<li><strong>포지션</strong>: <strong>한국 + 아시아 컨소시엄</strong></li>
+<li><strong>사용</strong>: Upbit, Bithumb Singapore, OKX 등 글로벌</li>
+<li><strong>특징</strong>:</li>
+<li>사전 검증 컨소시엄 (closed)</li>
+<li><strong>Chainalysis attribution 통합</strong> — Travel Rule 메시지 + KYT 동시 커버</li>
+<li>한국 4대 거래소 중 Upbit 채택</li>
+<li><strong>장점</strong>: 회원사 신뢰성, 한국 친화</li>
+<li><strong>약점</strong>: 비회원사와 직접 호환 X (CODE·Notabene와 연동 필요)</li>
+</ul>
+<h3>C. CODE (CodeVASP) — 한국 3사 합작</h3>
+<ul>
+<li><strong>운영</strong>: 코드 (빗썸 + 코빗 + 코인원 합작법인)</li>
+<li><strong>포지션</strong>: <strong>한국 컨소시엄</strong></li>
+<li><strong>사용</strong>: 빗썸, 코빗, 코인원 + 일부 외부</li>
+<li><strong>특징</strong>:</li>
+<li>폐쇄형 컨소시엄</li>
+<li>2022 시행 시점부터 운영</li>
+<li>VerifyVASP와 연동</li>
+<li><strong>장점</strong>: 한국 시장 깊이, 합작 거래소 자체 운영</li>
+<li><strong>약점</strong>: 글로벌 호환성 한정</li>
+</ul>
+<h3>D. Sumsub Travel Rule — KYC 통합</h3>
+<ul>
+<li><strong>본사</strong>: 영국 (Sumsub은 KYC 1위 중 하나)</li>
+<li><strong>포지션</strong>: <strong>KYC + Travel Rule 통합</strong></li>
+<li><strong>특징</strong>: KYC SDK 사용 중인 VASP에게 자연스러운 추가</li>
+<li><strong>장점</strong>: KYC와 동일 인프라</li>
+<li><strong>약점</strong>: KYC 미사용 시 매력 적음</li>
+</ul>
+<h3>E. Sygna — 아시아 강세</h3>
+<ul>
+<li><strong>운영</strong>: CoolBitX (대만)</li>
+<li><strong>포지션</strong>: <strong>아시아권 강세</strong></li>
+<li><strong>사용</strong>: 일본, 동남아 거래소 다수</li>
+<li><strong>특징</strong>: 자체 hub 구조</li>
+</ul>
+<h3>F. Global Travel Rule (GTR)</h3>
+<ul>
+<li><strong>운영</strong>: BitGo 등 컨소시엄</li>
+<li><strong>사용</strong>: 일부 미국·중남미</li>
+</ul>
+<h3>G. TRISA — 분산형 오픈소스</h3>
+<ul>
+<li><strong>운영</strong>: 비영리 (CipherTrace 시작 → Mastercard 인수)</li>
+<li><strong>포지션</strong>: <strong>분산형 오픈소스</strong></li>
+<li><strong>특징</strong>: PKI 기반, gRPC, 오픈</li>
+<li><strong>사용</strong>: 일부 LATAM, 신흥시장</li>
+</ul>
+<h3>H. TRP (Travel Rule Protocol)</h3>
+<ul>
+<li><strong>운영</strong>: 21 Analytics + ING 등</li>
+<li><strong>특징</strong>: REST API 기반, 가벼움</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 시장에서 4번째 이후 벤더(Sumsub, Sygna 등)는 <strong>특정 상황에서만 의미</strong>가 있습니다. 주력은 VerifyVASP·CODE·Notabene 3개 중 선택. 신규 VASP라면 먼저 Notabene으로 빠르게 진입하고, 시장 안정화 후 한국 컨소시엄 가입을 검토하는 단계적 전략이 가장 흔합니다.</p>
+<hr />
+<h2>3. 벤더 선택 매트릭스</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>회사 유형별 추천. "한 번에 모두 해결"하는 솔루션은 거의 없고, <strong>메인 프로토콜 + 글로벌 호환 확장</strong>의 조합이 표준. 한국 대형 거래소가 "VerifyVASP + Notabene" 처럼 양쪽을 쓰는 이유.</p>
+<table>
+<thead>
+<tr>
+<th>회사 유형</th>
+<th>추천</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>한국 거래소 (대형)</strong></td>
+<td>VerifyVASP 또는 CODE + Notabene Gateway (글로벌)</td>
+</tr>
+<tr>
+<td><strong>한국 수탁업자</strong></td>
+<td>(Travel Rule 적용 범위 검토 후) Notabene 또는 컨소시엄</td>
+</tr>
+<tr>
+<td><strong>글로벌 거래소</strong></td>
+<td>Notabene Gateway (멀티프로토콜)</td>
+</tr>
+<tr>
+<td><strong>소규모 VASP</strong></td>
+<td>Notabene SaaS 또는 Sumsub (KYC 결합)</td>
+</tr>
+<tr>
+<td><strong>EU CASP</strong></td>
+<td>Notabene + TRP (TFR 임계 없음 대응)</td>
+</tr>
+<tr>
+<td><strong>신흥시장 VASP</strong></td>
+<td>TRISA (오픈소스, 무료 가능)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. 통합 vs 분리</h2>
+<h3>Travel Rule + KYT 통합 운영</h3>
+<pre><code>KYC (Sumsub·ARGOS)
+  └─ Travel Rule (Sumsub 또는 Notabene)
+       └─ KYT (Chainalysis·TRM)
+            └─ Risk Engine (자체)
+</code></pre>
+<h3>통합형 단일 벤더</h3>
+<ul>
+<li>Sumsub: KYC + Travel Rule</li>
+<li>TRM Labs: KYT + Travel Rule (TRM Travel Rule)</li>
+<li>Chainalysis: KYT (Travel Rule 자체 모듈은 미약, VerifyVASP 합작 통해 제공)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"단일 벤더가 다 해준다"는 편리함은 있지만 <strong>벤더 종속 리스크</strong>가 큼. 시스템 장애 시 영향 범위가 넓고, 벤더 교체가 어려워집니다. 각 영역별 최적 벤더를 선택하고 내부 Risk Engine에서 통합하는 구조가 규모 있는 회사의 선택.</p>
+<hr />
+<h2>5. 한국 시장 운영 패턴 (2026 기준)</h2>
+<pre><code>Upbit (VerifyVASP 회원)
+  ├─ 빗썸·코빗·코인원 (CODE) → VerifyVASP ↔ CODE 연동으로 송수신
+  ├─ 글로벌 VASP → VerifyVASP 직접 또는 Notabene Gateway
+  └─ 미연결 VASP → 송금 거절 또는 수동 검토
+
+빗썸·코빗·코인원 (CODE 회원)
+  ├─ Upbit → CODE ↔ VerifyVASP 연동
+  ├─ 글로벌 VASP → CODE 또는 Notabene Gateway
+  └─ 미연결 → 동일
+
+Custody · 신규 VASP
+  └─ Travel Rule 적용 범위 점검 (직접 이전 행위 발생 시)
+     ├─ 컨소시엄 가입 (VerifyVASP 또는 CODE) — 비용 + 검증
+     └─ Notabene Gateway — 빠른 진입
+</code></pre>
+<h3>실무 포인트</h3>
+<p>신규 VASP에게 가장 흔한 질문: "VerifyVASP에 가입할까 CODE에 가입할까?" 답은 <strong>양쪽 다 가입</strong>(운영 가능하면)이 이상적이지만, 현실적으로는 <strong>Notabene 먼저 + 이후 컨소시엄 단계적 가입</strong>이 현실적. 컨소시엄 가입은 사전 검증 과정이 수개월 걸릴 수 있습니다.</p>
+<hr />
+<h2>6. POC 체크리스트</h2>
+<pre><code>□ 우리가 받는 카운터파티 VASP 호환 여부
+□ IVMS101 메시지 정확도 (필드 누락·오류)
+□ 응답 속도 (p99) — 사용자 UX 영향
+□ Sunrise 폴백 정책 지원
+□ 한국 100만원 임계 자동 계산
+□ 미연결 카운터파티 처리 흐름
+□ 메시지 보관 (15년) 지원
+□ PII 암호화 + 한국 PIPA 호환
+□ 한국어 + 한국 시간대 지원
+□ 가격 모델 (트랜잭션당 vs 정액)
+</code></pre>
+<hr />
+<h2>7. 가격 (참고치)</h2>
+<ul>
+<li>소규모: $20K~$50K/년 + 트랜잭션당 ~$0.10</li>
+<li>중규모: $80K~$200K/년</li>
+<li>대규모 거래소: $500K~$1M+/년</li>
+<li>컨소시엄 가입비: 별도 (VerifyVASP·CODE는 회원사 협의)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Travel Rule 비용은 <strong>트랜잭션 규모에 연동</strong>되는 경우가 많아서, 거래량이 급증할 때 비용이 예상을 넘을 수 있습니다. 계약 시 <strong>볼륨 상한과 추가 요금 구조</strong>를 명확히 해두는 게 중요.</p>
+<hr />
+<h2>8. 미래 트렌드</h2>
+<h3>표준화·단일화</h3>
+<ul>
+<li>IVMS101 v2 등 표준 발전</li>
+<li>DTI (ISO 24165) 토큰 식별자 + LEI 결합</li>
+<li>AI 기반 자동 매칭</li>
+</ul>
+<h3>호환성 강화</h3>
+<ul>
+<li>멀티프로토콜 Gateway 표준화</li>
+<li>VASP Directory 글로벌화</li>
+</ul>
+<h3>Privacy 강화</h3>
+<ul>
+<li>ZKP 기반 PII 보호</li>
+<li>Selective disclosure</li>
+</ul>
+<h3>FATF R.16 개정 반영</h3>
+<ul>
+<li>2026 후반 가이던스 → 모든 벤더 업데이트</li>
+<li>2030 발효 대비 시스템 차세대화</li>
+</ul>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="analytics-vendors.md"><code>analytics-vendors.md</code></a> — KYT 벤더 비교</li>
+<li><a href="korea-solutions.md"><code>korea-solutions.md</code></a> — 한국 시장 솔루션</li>
+<li><a href="../3-crypto-aml/travel-rule.md"><code>../3-crypto-aml/travel-rule.md</code></a> — Travel Rule 운영</li>
+<li><a href="../4-technology/travel-rule-protocols.md"><code>../4-technology/travel-rule-protocols.md</code></a> — 프로토콜 기술</li>
+<li><a href="https://notabene.id/">Notabene 공식</a></li>
+<li><a href="https://www.verifyvasp.com/">VerifyVASP 공식</a></li>
+<li><a href="https://www.codevasp.com/ko">CodeVASP 공식</a></li>
+<li><a href="https://trisa.io/">TRISA 공식</a></li>
+<li><a href="https://www.21analytics.co/">21 Analytics (TRP)</a></li>
+<li><a href="https://sumsub.com/travel-rule/">Sumsub Travel Rule</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 25 / 60 · READING</span>
+    </div>
+  </article>
+
+  <div class="article-divider">
+    <div class="article-divider__kicker">보조 읽기</div>
+    <h2 class="article-divider__title">한국 시장 솔루션 지도</h2>
+    <p class="article-divider__lead">한국 가상자산 AML **인프라를 만드는 회사들**. 이 글을 읽고 나면 신규 한국 VASP가 "처음부터 무엇을 구매하고 연동해야 하는가"의 지도가 머릿속에 생기고, 한국 특수 인프라(본인확인기관·DAXA·ISMS)를 국내 규제 문맥에서 이해할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/7-vendors/korea-solutions.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">보조 읽기 · Day 25</span>
+      <span class="article-head__path">notes/7-vendors/korea-solutions.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>KYC</strong>: ARGOS Identity, ICONLOOP MyID, NICE·KCB(본인확인기관), Sumsub(글로벌)</li>
+<li><strong>본인확인</strong>: PASS, 카카오인증, NICE, KCB, KISA 본인확인기관</li>
+<li><strong>KYT</strong>: Chainalysis, TRM Labs, Elliptic (글로벌 4사 모두 한국 진입)</li>
+<li><strong>Travel Rule</strong>: VerifyVASP (Upbit계) + CODE (빗썸·코빗·코인원 합작) + Notabene (글로벌)</li>
+<li><strong>수탁·MPC</strong>: 한국디지털자산수탁 계열(신한은행 파트너), Kodax(KB+해시드+해치랩스), Bestcoin Custody, BitGo Korea(검토 진행)</li>
+<li><strong>거래 모니터링·Case Management</strong>: 자체 구축 + Solidus Labs·NICE Actimize 일부</li>
+</ul>
+<hr />
+<h2>1. 한국 가상자산 산업 지도</h2>
+<h3>한눈에 보기</h3>
+<pre><code>[ 거래소 ]                   [ 수탁·Custody ]              [ 분석·솔루션 ]
+업비트 (두나무)             신한은행 계열 수탁사             람다256, 블록체인 R&amp;D 다수
+빗썸                        Kodax (KB+해시드+해치랩스)       Chainalysis Korea
+코빗 (NXC)                  BitGo Korea (검토)              TRM Labs Korea
+코인원                      Bestcoin Custody                Elliptic
+GOPAX                       (은행 자체 수탁 검토)           ARGOS Identity
+한빗코                                                      ICONLOOP
+프로비트                                                    오지스 등
+
+[ 본인확인 ]                 [ 위험 데이터 ]                  [ 인프라 ]
+PASS (이통3사)              World-Check                     KISA
+NICE                        Dow Jones Risk Center           한국인터넷진흥원
+KCB                         ComplyAdvantage                 (ISMS 인증)
+카카오인증                   외교부 제재명단
+</code></pre>
+<h3>실무 포인트</h3>
+<p>한국 VASP를 새로 설립할 때 <strong>이 지도의 4개 축(거래소·수탁·분석·본인확인)을 모두 고려</strong>해야 합니다. 하나라도 빠지면 FIU 신고가 안 되거나, 신고 후 검사에서 지적받습니다.</p>
+<hr />
+<h2>2. KYC · 본인확인</h2>
+<h3>한국 특수: 본인확인기관</h3>
+<p>한국 「정보통신망법」의 "본인확인기관" 지정 받은 곳:</p>
+<ul>
+<li><strong>PASS</strong> — SKT·KT·LG U+ 합작 (이통사 본인확인)</li>
+<li><strong>NICE 평가정보</strong></li>
+<li><strong>KCB (Korea Credit Bureau)</strong></li>
+<li><strong>금융결제원</strong></li>
+<li><strong>카카오인증</strong></li>
+</ul>
+<p>가상자산 거래소가 KYC 시 거의 필수로 사용 (실명 + 휴대폰 + 신분증).</p>
+<h3>왜 본인확인기관이 필수인가</h3>
+<p>글로벌 KYC 벤더(Sumsub 등)가 아무리 좋아도, <strong>한국 주민등록증의 실명·실주소·실제 본인 여부</strong>를 확인하려면 결국 한국 법에서 지정한 본인확인기관을 거쳐야 합니다. 글로벌 벤더는 신분증 OCR·얼굴 매칭은 해도 <strong>주민번호 실명 조회 권한</strong>이 없기 때문. 실무 구성은 "글로벌 벤더(OCR·Liveness) + 한국 본인확인기관(실명 조회)" 하이브리드.</p>
+<h3>KYC SDK·플랫폼</h3>
+<table>
+<thead>
+<tr>
+<th>회사</th>
+<th>강점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ARGOS Identity</strong></td>
+<td>한국 토종, 가상자산 거래소 다수 사용, 글로벌 KYC 지원</td>
+</tr>
+<tr>
+<td><strong>ICONLOOP (MyID)</strong></td>
+<td>DID 기반, 신한은행 등</td>
+</tr>
+<tr>
+<td><strong>Sumsub</strong></td>
+<td>글로벌 1위 KYC, 한국 진입 활발</td>
+</tr>
+<tr>
+<td><strong>Onfido</strong></td>
+<td>글로벌, 일부 한국 사용</td>
+</tr>
+<tr>
+<td><strong>Veriff</strong></td>
+<td>글로벌</td>
+</tr>
+<tr>
+<td><strong>Jumio</strong></td>
+<td>글로벌, 신분증 검증 강세</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 거래소들은 대부분 <strong>ARGOS Identity를 메인</strong>으로 쓰고, 글로벌 고객 대응이 필요한 경우에만 Sumsub을 보조로 씁니다. ARGOS가 한국 주민등록증·운전면허증·외국인등록증 처리를 가장 안정적으로 하고, 한국 시간대 지원도 강점.</p>
+<hr />
+<h2>3. KYT · Blockchain Analytics (한국 진입)</h2>
+<h3>글로벌 4사 모두 진입</h3>
+<ul>
+<li><strong>Chainalysis</strong> — 한국 사무소, 람다256과 합작 (VerifyVASP)</li>
+<li><strong>TRM Labs</strong> — 한국 영업 활발</li>
+<li><strong>Elliptic</strong> — 한국 진입</li>
+<li><strong>Crystal Intelligence</strong> — 한국 진입</li>
+<li><strong>Merkle Science</strong> — 한국 일부</li>
+</ul>
+<h3>한국 자체</h3>
+<p>글로벌 attribution을 따라가기 어려워 <strong>토종 KYT 회사는 적음</strong>. 일부 블록체인 R&amp;D 회사가 자체 분석 모듈 보유.</p>
+<h3>실무 포인트</h3>
+<p>한국 고유 특성상 <strong>한국 중소 거래소·불법 사이트 attribution</strong> 은 글로벌 벤더가 약한 영역. 대형 거래소들은 Chainalysis·TRM에 <strong>한국 특화 라벨 DB를 자체 구축</strong>해서 결합 사용합니다. 이 자체 DB를 만들어가는 것도 몇 년씩 걸리는 작업.</p>
+<hr />
+<h2>4. Travel Rule — 양강 구도</h2>
+<h3>시장 구조</h3>
+<table>
+<thead>
+<tr>
+<th>솔루션</th>
+<th>회원사</th>
+<th>운영자</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VerifyVASP</strong></td>
+<td>Upbit + 글로벌 다수</td>
+<td>람다256 (두나무) + Chainalysis</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td>빗썸, 코빗, 코인원</td>
+<td>코드 (3사 합작법인)</td>
+</tr>
+</tbody>
+</table>
+<h3>두 솔루션 연동</h3>
+<p>2022-03-25 시행 직후 <strong>분리 상태</strong> → 이용자 민원 폭주 → 1개월 후 연동 완료. 현재 4대 거래소 간 자유 송금 가능.</p>
+<h3>글로벌 호환</h3>
+<ul>
+<li>Notabene Gateway 사용 시 글로벌 1,500+ VASP 호환</li>
+<li>VerifyVASP 자체도 글로벌 회원사 다수</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>신규 VASP에게 가장 흔한 선택 문제는 <strong>VerifyVASP vs CODE vs Notabene</strong>. 한국 고객 중심이면 VerifyVASP·CODE 중 하나, 글로벌 고객 있으면 Notabene 추가. "셋 다 가입"은 운영 부담이 크므로 실제로는 드뭅니다.</p>
+<hr />
+<h2>5. 수탁 (Custody)</h2>
+<table>
+<thead>
+<tr>
+<th>회사</th>
+<th>모델</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>신한은행 계열 수탁사</strong></td>
+<td>거래소·블록체인사·R&amp;D 합작 모델, 시중은행 파트너</td>
+<td>상장사·재단·일반법인 등 고객 세그먼트별 라인업</td>
+</tr>
+<tr>
+<td><strong>Kodax</strong></td>
+<td>KB국민은행 + 해시드 + 해치랩스</td>
+<td>KB금융 산하</td>
+</tr>
+<tr>
+<td><strong>Bestcoin Custody</strong></td>
+<td>우리은행 등</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>BitGo Korea</strong></td>
+<td>글로벌 BitGo 한국</td>
+<td>검토 단계</td>
+</tr>
+<tr>
+<td>(자체 운영)</td>
+<td>거래소 자체 수탁</td>
+<td>Upbit, 빗썸 등</td>
+</tr>
+</tbody>
+</table>
+<h3>수탁 기술 스택</h3>
+<ul>
+<li><strong>MPC (Multi-Party Computation)</strong>: Fireblocks, Copper, Coinbase Cloud, BitGo</li>
+<li><strong>HSM (Hardware Security Module)</strong>: Thales, Ledger Enterprise</li>
+<li><strong>Cold Storage</strong>: 물리적 격리</li>
+<li><strong>Multi-sig</strong>: BTC 2-of-3, ETH Gnosis Safe</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>2024-07 가상자산이용자보호법 시행 이후 한국 수탁업 시장이 <strong>은행계열 + 블록체인 R&amp;D 합작</strong> 형태로 빠르게 재편됐습니다. 순수 테크 스타트업으로는 규제 대응 비용이 커서, <strong>시중은행이 돈을 대고 블록체인 R&amp;D가 기술을 대는</strong> 조합이 주류가 됐습니다.</p>
+<hr />
+<h2>6. 거래 모니터링·Case Management</h2>
+<h3>한국 시장 현실</h3>
+<ul>
+<li>대형 거래소는 <strong>자체 구축</strong> 위주</li>
+<li>소규모는 글로벌 솔루션 + 한국 컨설팅 결합</li>
+</ul>
+<h3>글로벌 솔루션 (한국 도입)</h3>
+<table>
+<thead>
+<tr>
+<th>회사</th>
+<th>강점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NICE Actimize</strong></td>
+<td>전통 금융 강세, 가상자산 확장</td>
+</tr>
+<tr>
+<td><strong>Solidus Labs</strong></td>
+<td>시세조종 + AML 결합</td>
+</tr>
+<tr>
+<td><strong>Hummingbird</strong></td>
+<td>Modern UX, US 인기</td>
+</tr>
+<tr>
+<td><strong>Unit21</strong></td>
+<td>API-first, fintech 인기</td>
+</tr>
+<tr>
+<td><strong>Featurespace</strong></td>
+<td>ML 기반</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>Case Management 도구는 <strong>분석가 생산성을 3배까지 바꾸는</strong> 영역. 한국 거래소들은 자체 구축을 택하는 경우가 많은데, 이는 <strong>자사 데이터 포맷·KYC 필드와 긴밀한 통합</strong>이 필요하기 때문. 다만 소규모 VASP는 글로벌 Unit21·Hummingbird를 쓰면 출발 속도가 훨씬 빠릅니다.</p>
+<hr />
+<h2>7. 컨설팅·자문</h2>
+<h3>법무법인 (가상자산 강세)</h3>
+<ul>
+<li><strong>김·장 법률사무소</strong> — 가상자산 전문 그룹</li>
+<li><strong>법무법인 광장</strong> — Tech 강세</li>
+<li><strong>율촌</strong></li>
+<li><strong>세종</strong></li>
+<li><strong>태평양</strong></li>
+<li><strong>화우</strong></li>
+</ul>
+<h3>컨설팅</h3>
+<ul>
+<li><strong>Big 4</strong> (PwC, EY, Deloitte, KPMG) 한국 — 가상자산 컴플라이언스 자문</li>
+<li><strong>법무법인 + IT 보안 + 컴플라이언스 컨설팅</strong> 결합 형태</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 가상자산 규제는 법령·시행령·감독규정·가이드라인이 4층 구조로 복잡해서 <strong>법무법인 자문이 필수</strong>입니다. 특히 FIU 신고 준비·Travel Rule 개인정보 보호·2단계 입법 대응은 내부 법무만으로 감당하기 어렵고, 외부 대형 법무법인과의 정기 자문 계약이 표준.</p>
+<hr />
+<h2>8. 정보보안·ISMS</h2>
+<p>VASP 신고 시 필수:</p>
+<ul>
+<li><strong>KISA (한국인터넷진흥원)</strong> — ISMS 인증 발급</li>
+<li><strong>ISMS-P (개인정보 포함)</strong> — 강화된 인증</li>
+<li>외부 컨설팅: 안랩, 시큐아이, 이스트시큐리티 등</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>ISMS 인증 준비는 평균 <strong>6개월~1년</strong> 걸리는 대형 프로젝트입니다. VASP 신고를 계획한다면 <strong>ISMS 인증 취득을 가장 먼저 시작</strong>해야 하고, 이 기간이 사실상 신고 시점을 결정합니다.</p>
+<hr />
+<h2>9. 협회·자율규제</h2>
+<table>
+<thead>
+<tr>
+<th>단체</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>한국블록체인협회</strong></td>
+<td>가상자산 산업 협회</td>
+</tr>
+<tr>
+<td><strong>DAXA (디지털자산거래소공동협의체)</strong></td>
+<td>4대 거래소(업비트·빗썸·코빗·코인원) 자율규제</td>
+</tr>
+<tr>
+<td><strong>한국디지털자산사업자연합회</strong></td>
+<td>일부 사업자</td>
+</tr>
+</tbody>
+</table>
+<p>DAXA는 자율적으로 <strong>상장 심사 가이드라인</strong>, <strong>공동 모니터링</strong> 등 운영.</p>
+<h3>실무 포인트</h3>
+<p>DAXA 기준은 법적 강제력은 없지만 <strong>사실상 산업 표준</strong>입니다. 신규 프로젝트가 한국 상장을 준비할 때 DAXA 기준을 맞추는 게 1차 관문이고, 이 기준 미달이면 4대 거래소 어디에도 상장이 어렵습니다.</p>
+<hr />
+<h2>10. 인접 분야 — Stablecoin</h2>
+<h3>한국 stablecoin 발행 시도</h3>
+<ul>
+<li>2026년 시점 한국 stablecoin 정식 발행은 제한적</li>
+<li>2단계 입법에서 stablecoin 규율 다룰 예정</li>
+<li><strong>글로벌 USDT·USDC</strong>가 한국 거래소에서 활발 거래</li>
+<li><strong>Tether·Circle</strong>의 OFAC 협조 시 freeze 영향</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 원화 기반 stablecoin은 규제 공백 상태로 2026년 현재까지 정식 출시가 안 됐습니다. 2단계 입법이 통과되면 <strong>은행·보험사 주도의 stablecoin 발행</strong>이 가능해질 것으로 예상되며, 이는 가상자산 업계의 판도를 크게 바꿀 수 있는 변수.</p>
+<hr />
+<h2>11. 한국 시장 진입 시 고려사항</h2>
+<pre><code>□ FIU 신고 (특금법) — 3년 갱신
+□ ISMS 인증 (KISA)
+□ 실명확인 입출금계정 (거래소만, 은행 제휴)
+□ Travel Rule 솔루션 가입 (VerifyVASP 또는 CODE)
+□ KYT 벤더 선정 (글로벌 4사 + 한국 특화)
+□ 본인확인기관 연동 (PASS 등)
+□ AML 인력 + AMLO 임명
+□ 가상자산이용자보호법 (자산 분리 보관)
+□ 거래기록 15년 보존 시스템
+□ 외부지갑 등록제 운영
+□ 한국어 + 한국 시간대 24/7 컴플라이언스 인력
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="analytics-vendors.md"><code>analytics-vendors.md</code></a> — KYT 글로벌 벤더</li>
+<li><a href="travel-rule-vendors.md"><code>travel-rule-vendors.md</code></a> — Travel Rule 벤더</li>
+<li><a href="../2-regulations/korea-fiu-act.md"><code>../2-regulations/korea-fiu-act.md</code></a> — 특금법</li>
+<li><a href="../2-regulations/korea-user-protection.md"><code>../2-regulations/korea-user-protection.md</code></a> — 가상자산이용자보호법</li>
+<li><a href="https://www.daxa.or.kr/">DAXA 공식</a></li>
+<li><a href="https://www.kblockchain.org/">한국블록체인협회</a></li>
+<li><a href="https://isms.kisa.or.kr/">KISA — ISMS 인증</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 25 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

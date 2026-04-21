@@ -6,6 +6,21 @@
 
 Week 8의 결산이자 Capstone의 마지막 조각. D42(mixer fetcher)·D49(OFAC screener)·D35(2-hop tracer)의 결과물을 하나의 **KYT 호출 wrapper**로 통합. 결과 JSON에 `risk_score`·`risk_categories`·`exposure`·`recommended_action`이 담기면, 이게 그대로 Capstone Risk Engine의 **주요 입력**이 됩니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    D42["🔨 D42 Mixer fetcher"] --> W["🛠 KYT Wrapper"]
+    D49["🔨 D49 OFAC screener"] --> W
+    D35["🔨 D35 2-hop tracer"] --> W
+    W --> API["kyt_check(address)"]
+    API --> A["ALLOW · REVIEW · BLOCK"]
+    style W fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. 8주차의 사례에서 가장 충격적이었던 것?
 2. 학술 vs 산업 격차?

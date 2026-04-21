@@ -140,6 +140,11 @@ KYT 시스템의 거의 모든 룰은 이 9개 유형 중 하나를 탐지하려
 
 ## 3. 2025~2026 새로운 트렌드
 
+![2025 불법 가상자산 거래 자산별 비중 — 스테이블코인 84%](../../charts/output/illicit_asset_share.svg)
+
+![2025 가상자산 범죄 스냅샷](../../charts/output/trend_2025_snapshot.svg)
+
+
 ### A. Cross-chain Laundering 가속화
 
 단일 체인 분석으로는 추적 불가능한 수준으로 발전. **Chainalysis Crosschain, TRM Multichain Tracing** 같은 cross-chain 도구가 KYT 벤더의 핵심 차별점으로 부상. 2025년 자금세탁의 **상당 부분이 multi-chain**.

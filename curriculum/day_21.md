@@ -6,6 +6,22 @@
 
 한국·미국·EU 규제를 각각 배웠으니 이제 **한 장에 나란히** 놓고 차이를 정리합니다. Travel Rule 임계금액·stablecoin 접근·unhosted wallet 처리 등 실무에서 바로 판단이 필요한 6~8개 축을 표로 만듭니다. 이 표가 있으면 글로벌 거래 시나리오에서 "어느 나라 룰을 기준으로 설계할지" 결정이 빨라집니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    KR["🇰🇷 100만원"] & US["🇺🇸 $3,000"] & EU["🇪🇺 임계 無"] --> TR["Travel Rule 대상"]
+    KR -.특이.-> UW["외부지갑 등록제"]
+    US -.특이.-> UM["unhosted 룰 부재"]
+    EU -.특이.-> UE["unhosted 1,000€+ 신원검증"]
+    style KR fill:#e5eaf2,stroke:#1a2e4a
+    style US fill:#fff7d6,stroke:#c9a646
+    style EU fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. 한·미·EU 중 가장 빡빡한 임계금액은?
 2. 미국과 EU의 stablecoin 접근 차이는?

@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 32 — Address Attribution + 라벨 DB</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 32 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">32</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 5 / 7</div>
+        <div class="page-meta__theme">온체인 분석 + KYT</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">Address Attribution + 라벨 DB</h1>
+      <p class="title-block__lead">클러스터 → 알려진 엔티티 매핑.</p>
+      <span class="title-block__time">⏱ ~75분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 612.234px; background-color: transparent;" viewBox="0 0 612.234375 593" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M135.5,286L139.667,286C143.833,286,152.167,286,159.833,286C167.5,286,174.5,286,178,286L181.5,286" id="my-svg-L_CL_A_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CL_A_0" data-points="W3sieCI6MTM1LjUsInkiOjI4Nn0seyJ4IjoxNjAuNSwieSI6Mjg2fSx7IngiOjE4NS41LCJ5IjoyODZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M268.028,260.5L284.308,222.667C300.589,184.833,333.15,109.167,361.63,71.333C390.109,33.5,414.508,33.5,426.707,33.5L438.906,33.5" id="my-svg-L_A_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_E_0" data-points="W3sieCI6MjY4LjAyNzg5Mjk0NTU0NDYsInkiOjI2MC41fSx7IngiOjM2NS43MTA5Mzc1LCJ5IjozMy41fSx7IngiOjQ0Mi45MDYyNSwieSI6MzMuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M275.343,260.5L290.405,239.5C305.466,218.5,335.588,176.5,365.077,155.5C394.565,134.5,423.419,134.5,437.846,134.5L452.273,134.5" id="my-svg-L_A_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_M_0" data-points="W3sieCI6Mjc1LjM0MzM2MzI0MjU3NDI0LCJ5IjoyNjAuNX0seyJ4IjozNjUuNzEwOTM3NSwieSI6MTM0LjV9LHsieCI6NDU2LjI3MzQzNzUsInkiOjEzNC41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M311.921,260.5L320.886,256.333C329.851,252.167,347.781,243.833,362.263,239.667C376.745,235.5,387.779,235.5,393.296,235.5L398.813,235.5" id="my-svg-L_A_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_S_0" data-points="W3sieCI6MzExLjkyMDcxNDcyNzcyMjgsInkiOjI2MC41fSx7IngiOjM2NS43MTA5Mzc1LCJ5IjoyMzUuNX0seyJ4Ijo0MDIuODEyNSwieSI6MjM1LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M311.921,311.5L320.886,315.667C329.851,319.833,347.781,328.167,369.922,332.333C392.063,336.5,418.414,336.5,431.59,336.5L444.766,336.5" id="my-svg-L_A_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_D_0" data-points="W3sieCI6MzExLjkyMDcxNDcyNzcyMjgsInkiOjMxMS41fSx7IngiOjM2NS43MTA5Mzc1LCJ5IjozMzYuNX0seyJ4Ijo0NDguNzY1NjI1LCJ5IjozMzYuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M275.343,311.5L290.405,332.5C305.466,353.5,335.588,395.5,361.19,416.5C386.792,437.5,407.872,437.5,418.413,437.5L428.953,437.5" id="my-svg-L_A_R_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_R_0" data-points="W3sieCI6Mjc1LjM0MzM2MzI0MjU3NDI0LCJ5IjozMTEuNX0seyJ4IjozNjUuNzEwOTM3NSwieSI6NDM3LjV9LHsieCI6NDMyLjk1MzEyNSwieSI6NDM3LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M267.59,311.5L283.943,351.083C300.297,390.667,333.004,469.833,357.459,509.417C381.914,549,398.117,549,406.219,549L414.32,549" id="my-svg-L_A_V_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_V_0" data-points="W3sieCI6MjY3LjU4OTc5OTE5MjAxNTIsInkiOjMxMS41fSx7IngiOjM2NS43MTA5Mzc1LCJ5Ijo1NDl9LHsieCI6NDE4LjMyMDMxMjUsInkiOjU0OX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_CL_A_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_S_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_R_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(365.7109375, 549)"><g class="label" data-id="L_A_V_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>벤더</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-CL-0" data-look="classic" transform="translate(71.75, 286)"><rect class="basic label-container" style="" x="-63.75" y="-25.5" width="127.5" height="51"/><g class="label" style="" transform="translate(-33.75, -10.5)"><rect/><foreignObject width="67.5" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📦 Cluster</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-A-1" data-look="classic" transform="translate(257.0546875, 286)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-71.5546875" y="-25.5" width="143.109375" height="51"/><g class="label" style="color:#fff !important" transform="translate(-41.5546875, -10.5)"><rect/><foreignObject width="83.109375" height="21"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🏷 Attribution</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-3" data-look="classic" transform="translate(503.5234375, 33.5)"><rect class="basic label-container" style="" x="-60.6171875" y="-25.5" width="121.234375" height="51"/><g class="label" style="" transform="translate(-30.6171875, -10.5)"><rect/><foreignObject width="61.234375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Exchange</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-M-5" data-look="classic" transform="translate(503.5234375, 134.5)"><rect class="basic label-container" style="" x="-47.25" y="-25.5" width="94.5" height="51"/><g class="label" style="" transform="translate(-17.25, -10.5)"><rect/><foreignObject width="34.5" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Mixer</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-S-7" data-look="classic" transform="translate(503.5234375, 235.5)"><rect class="basic label-container" style="" x="-100.7109375" y="-25.5" width="201.421875" height="51"/><g class="label" style="" transform="translate(-70.7109375, -10.5)"><rect/><foreignObject width="141.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Sanctions (OFAC SDN)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D-9" data-look="classic" transform="translate(503.5234375, 336.5)"><rect class="basic label-container" style="" x="-54.7578125" y="-25.5" width="109.515625" height="51"/><g class="label" style="" transform="translate(-24.7578125, -10.5)"><rect/><foreignObject width="49.515625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Darknet</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-R-11" data-look="classic" transform="translate(503.5234375, 437.5)"><rect class="basic label-container" style="" x="-70.5703125" y="-25.5" width="141.140625" height="51"/><g class="label" style="" transform="translate(-40.5703125, -10.5)"><rect/><foreignObject width="81.140625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Ransomware</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-V-13" data-look="classic" transform="translate(503.5234375, 549)"><rect class="basic label-container" style="" x="-85.203125" y="-36" width="170.40625" height="72"/><g class="label" style="" transform="translate(-55.203125, -21)"><rect/><foreignObject width="110.40625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Chainalysis · TRM<br />Elliptic · Crystal</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>Attribution = Clustering + 무엇?</li>
+<li>라벨 DB의 데이터 소스 5가지?</li>
+<li>4대 KYT 벤더의 라벨 DB 차별점?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/4-technology/blockchain-analytics.md</span></li>
+<li>보조 · <span class="ref">../notes/7-vendors/analytics-vendors.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>Chainalysis — Data Accuracy Flywheel<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.chainalysis.com/blog/chainalysis-data-accuracy/</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>라벨 카테고리 (Exchange / DEX / Mixer / Sanctions / Stolen / Ransomware / Darknet / Scam / ...) 다시 외우기</li>
+<li>한국 거래소 라벨링이 글로벌 벤더에서 정확한지 검증할 방법 1가지</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Clustering vs Attribution 구분</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>라벨 DB 5가지 데이터 소스 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Chainalysis (시장 표준), TRM (cross-chain), Elliptic (compliance), Crystal (러시아) 차별점 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>한국 거래소 attribution은 자체 보완 필요 인지</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 32 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Blockchain Analytics — 온체인 분석 기법</h2>
+    <p class="article-divider__lead">KYT의 **기술적 기반**. 어떻게 익명 주소를 분석하는가. 이 글을 읽고 나면 Chainalysis·Elliptic·TRM Labs가 어떤 알고리즘 위에 돈을 벌고 있는지, 그리고 자체 구축이 왜 거의 불가능한지 근본 이유를 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/4-technology/blockchain-analytics.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 32</span>
+      <span class="article-head__path">notes/4-technology/blockchain-analytics.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>블록체인 분석의 두 축: <strong>Clustering</strong> (주소 묶기) + <strong>Attribution</strong> (주소→엔티티 매핑)</li>
+<li>핵심 휴리스틱: <strong>Common Input Ownership, Change Detection, Deposit Heuristic</strong></li>
+<li>Bitcoin (UTXO 모델) 과 Ethereum (Account 모델) 분석법이 다름</li>
+<li>Cross-chain 추적은 <strong>시간·금액 매칭 + 브리지 인덱싱</strong>으로</li>
+<li>한계: privacy coin, 새 mixer, off-chain (CEX 내부) 거래</li>
+</ul>
+<hr />
+<h2>1. 두 축 — Clustering + Attribution</h2>
+<h3>블록체인 분석이 답하려는 두 질문</h3>
+<p>블록체인 분석은 결국 두 가지 질문에 답하는 것입니다.</p>
+<ol>
+<li><strong>이 주소들이 같은 사람인가?</strong> → Clustering</li>
+<li><strong>이 클러스터는 누구인가?</strong> → Attribution</li>
+</ol>
+<p>이 둘이 합쳐져야 "주소 <code>0x...</code> 가 누구"를 말할 수 있습니다. Clustering은 <strong>순수 알고리즘</strong>에 가깝고, Attribution은 <strong>데이터·OSINT·파트너십</strong>에 의존합니다. 알고리즘은 복제할 수 있어도 수년간의 누적 attribution DB는 후발주자가 따라잡기 어렵다 — 이게 Chainalysis·Elliptic·TRM의 <strong>moat</strong> 입니다.</p>
+<blockquote>
+<p>Clustering (구조 분석) + Attribution (라벨 데이터) = 전체 분석 능력</p>
+</blockquote>
+<hr />
+<h2>2. 주요 클러스터링 휴리스틱</h2>
+<h3>A. Common Input Ownership Heuristic (CIOH) — Bitcoin</h3>
+<p><strong>한 트랜잭션의 여러 input 주소 = 같은 사람이 통제.</strong></p>
+<p>UTXO 모델 비트코인에서는 한 트랜잭션이 여러 UTXO를 input으로 소비합니다. 그런데 각 input을 소비하려면 해당 UTXO의 <strong>private key로 서명</strong>해야 하므로, 같은 트랜잭션에 모인 input들은 <strong>모두 같은 개인키 소유자</strong>가 통제한다는 결론.</p>
+<p><strong>왜 강력한가</strong>: 한 사용자가 주소를 100개로 쪼개도, 언젠가 여러 UTXO를 합쳐 큰 금액을 보내는 순간 그 100개가 한 클러스터로 묶입니다. 즉 <strong>"탈익명화는 시간문제"</strong> 에 가깝고, 이게 Chainalysis 같은 회사가 탄생한 기술적 근거입니다.</p>
+<p><strong>예외·한계</strong>: CoinJoin(Wasabi, Samourai) 같은 <strong>협력 소비</strong>는 서로 다른 엔티티가 의도적으로 input을 합치는 것이라 CIOH가 <strong>오작동</strong>합니다. 그래서 믹서 탐지는 CIOH를 그대로 쓰지 않고 "CoinJoin fingerprint"(균등 금액, 특정 output count)를 먼저 검출합니다.</p>
+<h3>B. Change Detection (거스름돈 식별)</h3>
+<p>UTXO 모델에서 <strong>거스름돈(change)은 새 주소로 반환</strong>됩니다. 이 거스름돈 output을 원 주소 소유자와 같은 클러스터로 묶는 기법.</p>
+<p><strong>휴리스틱</strong>:
+- 한 input → 두 output 중 한 쪽이 거스름돈
+- 같은 클러스터 / 새 주소 / 더 작은 금액 등 패턴</p>
+<p><strong>정확도</strong>: 높지 않음 (약 60~80%). 단독으로는 오류가 많아 <strong>보조 휴리스틱</strong>으로 쓰입니다.</p>
+<h3>C. Deposit Heuristic (거래소 입금 식별)</h3>
+<p><strong>배경</strong>: 거래소는 고객별로 입금 주소를 별도 발급합니다. 고객이 입금하면 거래소는 이 자금을 주기적으로 <strong>consolidation 주소</strong>로 모아 콜드월렛·핫월렛 관리. 이 consolidation 흐름을 따라가면 거래소 주소 체계 전체가 드러납니다.</p>
+<p><strong>결과</strong>: 거래소 attribution의 핵심 방법. "이 주소에서 받는 consolidation 흐름이 Binance의 알려진 핫월렛으로 흐른다 → 이 주소는 Binance deposit 주소" 식의 추론.</p>
+<h3>D. Behavior-based Clustering (행동 기반)</h3>
+<ul>
+<li>시간대, 금액, 거래 빈도 패턴이 비슷한 주소들</li>
+<li>ML 기반</li>
+<li><strong>약한 신호지만 다른 휴리스틱과 결합 시 강함</strong></li>
+</ul>
+<h3>E. Multi-input Heuristic for Ethereum (계정 모델)</h3>
+<p>Ethereum은 UTXO가 아닌 <strong>Account 모델</strong>이라 CIOH를 <strong>직접 적용 불가</strong>. 대신 다음 패턴을 활용:</p>
+<ul>
+<li>같은 EOA(Externally Owned Account)가 여러 contract와 상호작용하는 패턴</li>
+<li>Smart contract 호출 패턴 (funding relationship)</li>
+<li>Gas 지불 주소 분석 (누가 ETH로 가스비 내는가)</li>
+<li>같은 ENS 도메인 사용</li>
+</ul>
+<p>용어:
+- <strong>EOA (Externally Owned Account)</strong> — 사용자가 private key로 통제하는 Ethereum 계정.
+- <strong>UTXO (Unspent Transaction Output)</strong> — Bitcoin의 미사용 거래 출력. 비트코인의 기본 단위.</p>
+<h3>실무 포인트</h3>
+<p>Ethereum은 Bitcoin보다 <strong>클러스터링이 구조적으로 더 어렵습니다</strong>. 이게 Ethereum에서의 KYT 정확도가 Bitcoin보다 낮고, 특히 DeFi·wallet aggregator가 섞이면 분석 신뢰도가 떨어지는 이유. 실무에서는 "Ethereum은 Attribution DB 의존도가 더 크다"고 기억하면 됩니다.</p>
+<hr />
+<h2>3. Attribution — 주소를 누구에게 매핑하나</h2>
+<h3>데이터 소스</h3>
+<p>Attribution은 "알고리즘"이 아니라 "<strong>데이터 누적</strong>" 의 문제입니다. 다음 소스들이 수년간 쌓여야 쓸 만한 DB가 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>소스</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>자체 거래</strong></td>
+<td>분석회사가 거래소에 입금해 주소 라벨 확보</td>
+</tr>
+<tr>
+<td><strong>공개 정보</strong></td>
+<td>거래소가 공개한 hot/cold wallet 주소</td>
+</tr>
+<tr>
+<td><strong>다크넷 마켓</strong></td>
+<td>운영 관찰로 주소 라벨링</td>
+</tr>
+<tr>
+<td><strong>법집행 정보</strong></td>
+<td>압수·체포로 노출된 주소</td>
+</tr>
+<tr>
+<td><strong>OFAC SDN</strong></td>
+<td>정부 발표 (정기 업데이트)</td>
+</tr>
+<tr>
+<td><strong>Smart Contract 분석</strong></td>
+<td>컨트랙트 deployer, 함수 호출 패턴</td>
+</tr>
+<tr>
+<td><strong>소셜 / OSINT</strong></td>
+<td>트위터·텔레그램에서 주소 노출</td>
+</tr>
+</tbody>
+</table>
+<h3>라벨 카테고리 (Chainalysis 기준 예시)</h3>
+<ul>
+<li>Exchange (Binance, Upbit, ...)</li>
+<li>DEX (Uniswap, Curve, ...)</li>
+<li>Mixer (Tornado Cash, Wasabi, ...)</li>
+<li>Sanctions (OFAC SDN)</li>
+<li>Stolen Funds (해킹 자금)</li>
+<li>Ransomware (LockBit, BlackCat, ...)</li>
+<li>Darknet Market</li>
+<li>Scam (Pig Butchering, Romance, ...)</li>
+<li>Gambling</li>
+<li>Mining Pool</li>
+<li>High-risk Jurisdiction Exchange</li>
+<li>ATM</li>
+<li>Merchant Service</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Attribution DB는 <strong>벤더마다 강점이 다릅니다</strong>. Chainalysis는 북미 거래소·다크넷 강세, Elliptic은 유럽 강세, TRM Labs는 DeFi·cross-chain 강세, Crystal은 러시아·동유럽 강세. 글로벌 영업 VASP는 2개 이상 벤더를 병행하는 게 실무 표준.</p>
+<hr />
+<h2>4. Exposure Score 계산</h2>
+<h3>Direct Exposure (직접 노출)</h3>
+<p>분석 대상 주소가 <strong>위험 주소와 직접 거래</strong>.</p>
+<h3>Indirect Exposure (간접 노출, N-hop)</h3>
+<p><strong>N hop 안에서</strong> 위험 주소에 도달. N=1이 direct, N=2이면 한 단계 거쳐, ... 보통 5-hop까지 분석.</p>
+<h3>가중치 적용</h3>
+<ul>
+<li><strong>거래 금액</strong> — 큰 금액일수록 가중 ↑</li>
+<li><strong>시간 거리</strong> — 오래된 거래 가중치 ↓ (예: 3년 전 노출은 현재 위험 낮게)</li>
+<li><strong>위험 카테고리</strong> — OFAC &gt; mixer &gt; high-risk exchange &gt; gambling</li>
+</ul>
+<h3>예시 점수 계산</h3>
+<pre><code>주소 0xABC...의 risk score:
+- Direct exposure to Tornado Cash (금액 $50K): 50점
+- 2-hop to OFAC SDN (금액 $10K): 30점
+- Direct exposure to Binance (low risk): 0점
+→ 총합 80점 (HIGH)
+</code></pre>
+<h3>실무 주의사항</h3>
+<p>위 예시는 <strong>산술 합산</strong>으로 표현했지만, 실제 KYT 시스템은 <strong>다요인 가중 모델</strong>을 씁니다 — 단순 합산하면 여러 작은 노출이 과장될 수 있기 때문. 실무에서는 카테고리마다 별도 점수 축을 유지하고, 의사결정 시 각 축을 별도로 검토하는 게 정확합니다.</p>
+<h3>실무 포인트</h3>
+<p>Exposure Score 공식은 벤더마다 다르고 <strong>블랙박스인 경우가 많습니다</strong>. 이게 STR 작성 시 "왜 이 점수인가" 설명이 어려운 원인. 실무 대응은 벤더에게 <strong>sub-score breakdown</strong>(Tornado 노출 X점, SDN Y점)을 API로 요청해서 사내 정책 언어로 재해석하는 것.</p>
+<hr />
+<h2>5. Cross-chain Tracing</h2>
+<h3>도전</h3>
+<p>한 체인에서 끊어진 흐름이 다른 체인에서 시작되는 구조. 중간에 <strong>wrapped 토큰화</strong>(A의 ETH가 B의 wETH로)로 같은 가치지만 다른 형태가 됨.</p>
+<h3>방법</h3>
+<ol>
+<li><strong>Bridge Indexing</strong>: 주요 브리지 컨트랙트의 deposit/withdraw를 체인별로 인덱싱.</li>
+<li><strong>Time/Amount Matching</strong>: bridge에 들어간 금액·시간을 기준으로 다른 체인에서 같은 시점·금액 출금 매칭.</li>
+<li><strong>Address Pattern</strong>: 같은 주소 형식·nonce 패턴 사용 시 (Lazarus는 특유의 주소 생성 습관 있음).</li>
+<li><strong>Atomic Swap</strong>: HTLC(Hash Time-Locked Contract) 기반 cross-chain swap 인덱싱.</li>
+</ol>
+<h3>한계</h3>
+<ul>
+<li><strong>LayerZero·Wormhole</strong> 같은 generic messaging은 메시지와 자금 이동이 분리돼 매칭 어려움.</li>
+<li><strong>Memo 없이</strong>는 정확한 매칭 안 됨.</li>
+<li><strong>익명 브리지</strong>(cBridge, Synapse) 활용 시 매칭 난이도 ↑.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Cross-chain tracing은 2025~2026년 KYT 벤더의 <strong>핵심 차별점</strong>이 된 영역. PoC 시 cross-chain 시나리오(예: ETH → Solana, BTC → Avalanche)를 여러 패턴으로 테스트하고 벤더별 복원율을 비교하는 게 필수. 광고와 실제 성능 차이가 큰 영역입니다.</p>
+<hr />
+<h2>6. UTXO 모델 vs Account 모델 분석</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>두 모델의 분석 방법론이 근본적으로 다릅니다. 이 차이를 모르면 "왜 Bitcoin 분석이 Ethereum 분석보다 정확도가 높나" 같은 질문에 답할 수 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>측면</th>
+<th>Bitcoin (UTXO)</th>
+<th>Ethereum (Account)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기본 단위</strong></td>
+<td>UTXO (unspent output)</td>
+<td>Account (EOA + Contract)</td>
+</tr>
+<tr>
+<td><strong>클러스터링</strong></td>
+<td>Common Input Ownership 강력</td>
+<td>EOA-Contract 패턴 분석</td>
+</tr>
+<tr>
+<td><strong>Smart Contract</strong></td>
+<td>제한적 (Taproot 이후 확장)</td>
+<td>풍부 (분석 더 복잡)</td>
+</tr>
+<tr>
+<td><strong>Token</strong></td>
+<td>Layer 1엔 없음 (Ordinals 등 별도)</td>
+<td>ERC-20/721/1155 풍부</td>
+</tr>
+<tr>
+<td><strong>분석 도구 성숙도</strong></td>
+<td>가장 성숙</td>
+<td>활발히 발전 중</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>같은 금액의 거래라도 Bitcoin과 Ethereum에서의 <strong>분석 신뢰도가 다릅니다</strong>. Bitcoin 기반 거래는 CIOH 덕분에 정확도가 높은 편이고, Ethereum은 Account 모델의 한계로 클러스터링 정확도가 낮습니다. Risk Score를 비교할 때 이 <strong>체인별 정확도 차이</strong>를 감안하지 않으면 Ethereum 거래의 위험이 과소평가되는 경향이 있습니다.</p>
+<hr />
+<h2>7. 분석 도구의 데이터 파이프라인</h2>
+<pre><code>1. Node Operation (자체 풀노드 운영)
+   - Bitcoin Core, Geth, Erigon, Reth
+   - Archive node (전체 history)
+
+2. Indexing
+   - 트랜잭션 → 그래프 DB (Neo4j, JanusGraph)
+   - 주소 ↔ 트랜잭션 매핑
+
+3. Heuristic Clustering
+   - CIOH·Change Detection·Deposit 휴리스틱 룰 적용
+   - 클러스터 ID 부여
+
+4. Attribution
+   - 라벨 DB (자체 + 외부)
+   - 클러스터 → 엔티티 매핑
+
+5. Risk Scoring
+   - Exposure 계산
+   - 점수 산출
+
+6. API / UI
+   - 외부 KYT API
+   - 분석가용 시각화 도구
+</code></pre>
+<h3>실무 포인트</h3>
+<p>1번 Node Operation은 <strong>인프라 비용이 가장 큰</strong> 부분. Ethereum archive node 하나 유지에 SSD 수 TB + 높은 메모리 필요. 이게 자체 구축 시 초기 투자 부담이고, 결국 대형 VASP도 <strong>자체 노드 + 벤더 API 하이브리드</strong>로 가는 경제적 이유입니다.</p>
+<hr />
+<h2>8. ML·AI의 활용</h2>
+<h3>적용 영역</h3>
+<ul>
+<li><strong>클러스터링 보조</strong>: 휴리스틱이 잡지 못하는 패턴 발견</li>
+<li><strong>이상거래 탐지</strong>: 비정상 패턴 학습</li>
+<li><strong>NFT wash trading 탐지</strong>: 그래프 Neural Network</li>
+<li><strong>새로운 mixer 식별</strong>: 행위 패턴 분류</li>
+<li><strong>Scam wallet 사전 탐지</strong>: phishing·rug pull 사전 식별</li>
+</ul>
+<h3>한계</h3>
+<ul>
+<li><strong>라벨 데이터 부족</strong> — 각 회사가 자체 보유, 공개 안 함</li>
+<li><strong>Adversarial behavior</strong> — 분석을 회피하는 패턴이 학습됨 (분할 금액, 무작위 시간)</li>
+<li><strong>모델 설명가능성</strong> — 규제 보고 시 "왜 STR 보고했나" 설명이 필요한데 블랙박스 ML은 불리</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>ML 기반 탐지는 <strong>보조 수단</strong>으로 쓰는 게 안전합니다. 감독 검사에서 "이 고객은 어떤 근거로 STR 대상이 됐나" 질문에 "ML 모델이 그렇게 판단했습니다"는 불합격. <strong>룰 기반 primary + ML 기반 hint</strong>의 조합이 현실적.</p>
+<hr />
+<h2>9. 자체 구축 vs 벤더 활용</h2>
+<h3>벤더 활용 장점</h3>
+<ul>
+<li><strong>라벨 DB가 핵심 자산</strong> → 자체 구축 거의 불가능</li>
+<li><strong>글로벌 attribution</strong> (국경 넘는 데이터 수집)</li>
+<li><strong>규제 당국이 인정하는 표준 도구</strong> (Chainalysis는 정부 기관 표준)</li>
+</ul>
+<h3>자체 구축 장점</h3>
+<ul>
+<li><strong>비용 절감</strong> (대형사에 한함)</li>
+<li><strong>한국 특화 라벨</strong> (현지 거래소·사기 wallet·한국 다크넷)</li>
+<li><strong>사내 데이터와 결합 분석</strong> (자사 고객 패턴)</li>
+</ul>
+<h3>현실</h3>
+<p>대부분 <strong>하이브리드</strong> — 외부 KYT API(Chainalysis 등) + 자체 한국 특화 분석 모듈. 한국 주요 거래소·수탁사도 Chainalysis/TRM 사용 + 자체 분석.</p>
+<h3>실무 포인트</h3>
+<p>"자체 구축 vs 벤더 활용"의 답은 <strong>비용 기반이 아니라 규제 대응 기반</strong>으로 봐야 합니다. 감독 검사에서 Chainalysis/TRM 같은 업계 표준 도구를 썼다고 하면 "충분히 주의를 기울였다"로 인정받기 쉽지만, 무명 자체 도구만 썼다면 "왜 이걸 믿을 수 있나"를 입증해야 합니다.</p>
+<hr />
+<h2>10. 한계와 미래</h2>
+<h3>한계</h3>
+<ul>
+<li><strong>Privacy coin</strong> (Monero) 거의 분석 불가</li>
+<li><strong>새 mixer·새 bridge</strong> 라벨링 lag time (수일~수주)</li>
+<li><strong>Off-chain</strong> (CEX 내부 거래) 안 보임</li>
+<li><strong>Adversarial</strong>: AI 시대에 자금세탁 자동화도 발전</li>
+</ul>
+<h3>미래 방향</h3>
+<ul>
+<li><strong>AI 기반 패턴 탐지</strong> 강화</li>
+<li><strong>Cross-chain analytics</strong> 표준화</li>
+<li><strong>ZKP 적용</strong> — 프라이버시 + 컴플라이언스 양립 시도 (개인정보 보호하면서 제재 준수)</li>
+<li><strong>공유 attribution DB</strong> 가능성 (산업 협력 — 이상론 수준)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>ZKP(Zero-Knowledge Proof) 기반 프라이버시-컴플라이언스 양립은 <strong>장기 방향</strong>이지만 아직 실용화 초기. "프라이버시 있는 KYC" 시도(예: Polygon ID, Worldcoin)가 2026년 활발하지만 규제 당국 수용은 지연 중. 단기적으로는 여전히 "모두 보여주는 KYC + 암호화된 전송"이 표준입니다.</p>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>두 축</strong>: Clustering (구조) + Attribution (데이터)
+<strong>5대 휴리스틱</strong>: CIOH · Change · Deposit · Behavior · Ethereum Multi-input
+<strong>체인별 차이</strong>: Bitcoin UTXO = 강력한 클러스터링 / Ethereum Account = Attribution 의존
+<strong>Exposure 축</strong>: Direct / Indirect (N-hop) / Risk Category 가중</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="kyc-kyt.md"><code>kyc-kyt.md</code></a> — KYT의 운영적 측면</li>
+<li><a href="travel-rule-protocols.md"><code>travel-rule-protocols.md</code></a> — VASP 식별과의 관계</li>
+<li><a href="../3-crypto-aml/onchain-typology.md"><code>../3-crypto-aml/onchain-typology.md</code></a> — 자금세탁 패턴</li>
+<li><a href="../7-vendors/analytics-vendors.md"><code>../7-vendors/analytics-vendors.md</code></a> — 벤더 비교</li>
+<li><a href="https://www.trmlabs.com/glossary/blockchain-analytics">TRM Labs — Blockchain Analytics 정의</a></li>
+<li><a href="https://www.elementus.io/blog-post/decoding-the-chain-how-data-science-based-heuristics-reveal-blockchain-networks">Elementus — Data Science Heuristics</a></li>
+<li><a href="https://blog.amlbot.com/wallet-and-entity-identification-in-blockchain-analytics/">AMLBot — Wallet Clustering</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 32 / 60 · READING</span>
+    </div>
+  </article>
+
+  <div class="article-divider">
+    <div class="article-divider__kicker">보조 읽기</div>
+    <h2 class="article-divider__title">Blockchain Analytics 벤더 — 시장 지도</h2>
+    <p class="article-divider__lead">Chainalysis · Elliptic · TRM Labs · Crystal · Merkle Science 비교. 이 글을 읽고 나면 "왜 한국 회사도 글로벌 4사 중 하나는 거의 필수로 써야 하는가", 그리고 PoC에서 무엇을 비교해야 하는지를 판단할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/7-vendors/analytics-vendors.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">보조 읽기 · Day 32</span>
+      <span class="article-head__path">notes/7-vendors/analytics-vendors.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>글로벌 4대: <strong>Chainalysis (시장 표준)</strong> / <strong>Elliptic (컴플라이언스 강세)</strong> / <strong>TRM Labs (cross-chain·실시간 강세)</strong> / <strong>Crystal Intelligence (러시아·동유럽 강세)</strong></li>
+<li>신흥: <strong>Merkle Science (예측·행동 분석), Nominis (VASP 특화), AnChain.AI</strong></li>
+<li>한국 진입: 4사 모두 한국 거래소·수탁업자에 활발히 영업</li>
+<li>자체 구축은 거의 불가능 → <strong>벤더 라이선스 + 자체 한국 특화 분석 보완</strong>이 현실</li>
+<li>가격은 비공개, 보통 <strong>수십~수백 K USD/년</strong> (규모·체인수에 따라)</li>
+</ul>
+<hr />
+<h2>1. 왜 벤더가 필요한가</h2>
+<h3>자체 구축의 3대 벽</h3>
+<p>이 시장은 <strong>"라벨 DB라는 moat"</strong> 가 지배합니다. 알고리즘은 오픈소스·논문으로 공개돼 있어 따라 만들 수 있지만, 수년간 쌓아 온 attribution 데이터(거래소·믹서·다크넷·SDN 라벨)는 따라잡을 수 없는 자산입니다. 자체 구축 시 부딪히는 3대 벽:</p>
+<ol>
+<li><strong>라벨 DB 누적 시간</strong> — 수년간의 다크웹 OSINT + 거래소 협업 + 법집행 공유가 쌓여야 의미 있는 수준</li>
+<li><strong>글로벌 커버리지</strong> — 한국 자체 구축은 국내 거래소 중심이 될 수밖에 없음</li>
+<li><strong>검사·법집행 신뢰도</strong> — 감독당국·수사기관이 "인정하는 도구" 기준에서 신생 자체 도구는 불리</li>
+</ol>
+<h3>실무 포인트</h3>
+<p>자체 구축을 고려하는 회사는 거의 대부분 결국 <strong>"글로벌 벤더 + 자체 한국 특화"</strong> 하이브리드로 돌아옵니다. 이게 한국 대형 거래소·수탁업자들의 공통 패턴. 처음부터 하이브리드를 전제로 <strong>글로벌 벤더에게 API</strong>만 받고 자체 레이어를 얹는 구조를 설계하는 게 합리적.</p>
+<hr />
+<h2>2. 4대 벤더 비교 — 각자의 강점</h2>
+<h3>A. Chainalysis — 시장 표준</h3>
+<ul>
+<li><strong>본사</strong>: 뉴욕, 2014 설립</li>
+<li><strong>포지션</strong>: <strong>시장 표준</strong> — 미 연방정부(FBI·IRS·국세청) 표준 도구</li>
+<li><strong>주력 제품</strong>:</li>
+<li><strong>Reactor</strong> — 조사·시각화 (분석가용 도구)</li>
+<li><strong>KYT</strong> — 실시간 모니터링</li>
+<li><strong>Sanctions API</strong> — 제재 스크리닝</li>
+<li><strong>Crypto Investigations</strong> — 법집행 협력</li>
+<li><strong>데이터</strong>: 누적 추적 거래량 <strong>$24T+</strong>, 매핑 주소 <strong>10억+</strong></li>
+<li><strong>임팩트</strong>: $34B+ 가치 동결·회수 기여</li>
+<li><strong>한국</strong>: VerifyVASP 합작, 4대 거래소 다수 사용</li>
+<li><strong>강점</strong>: 라벨 DB 깊이, 정부·LE 신뢰, 매년 Crypto Crime Report</li>
+<li><strong>약점</strong>: 가격 비싸다는 평, UI 복잡</li>
+</ul>
+<p><strong>왜 표준인가</strong>: 미국 정부가 <strong>주 도구로 사용</strong>한다는 사실이 전 세계 감독당국·수사기관의 표준이 되는 효과. "Chainalysis가 이 주소를 Lazarus로 라벨링했다"는 증거가 법정에서 가장 수용되기 쉬운 포지션.</p>
+<h3>B. Elliptic — 컴플라이언스·위험 스코어링 강세</h3>
+<ul>
+<li><strong>본사</strong>: 런던, 2013 설립</li>
+<li><strong>포지션</strong>: <strong>컴플라이언스 + 위험 스코어링 강세</strong></li>
+<li><strong>주력 제품</strong>:</li>
+<li><strong>Lens</strong> — 지갑 스크리닝 (거래 전 빠른 체크)</li>
+<li><strong>Navigator</strong> — 조사</li>
+<li><strong>Discovery</strong> — 위험 탐지</li>
+<li><strong>데이터</strong>: 20억+ 라벨 주소, 100+ 자산 지원</li>
+<li><strong>처리량</strong>: 200만+ 스크리닝/월</li>
+<li><strong>강점</strong>: sub-second 스크리닝, 영국·EU 강세</li>
+<li><strong>약점</strong>: cross-chain 후발</li>
+</ul>
+<h3>C. TRM Labs — 실시간·cross-chain 강세</h3>
+<ul>
+<li><strong>본사</strong>: 샌프란시스코, 2018 설립</li>
+<li><strong>포지션</strong>: <strong>실시간 + cross-chain 강세, 차세대</strong></li>
+<li><strong>주력 제품</strong>:</li>
+<li><strong>Forensics</strong> — 조사</li>
+<li><strong>Transaction Monitoring</strong> — 실시간 KYT</li>
+<li><strong>Travel Rule</strong> — 모듈 제공</li>
+<li><strong>Multichain Tracing</strong> — cross-chain 특화</li>
+<li><strong>데이터</strong>: <strong>30+ 네트워크</strong> 지원 (4사 중 가장 많음)</li>
+<li><strong>강점</strong>: cross-chain 추적, 빠른 신규 체인 통합, 모던 UX</li>
+<li><strong>약점</strong>: 라벨 DB가 Chainalysis보다 얕음 (단 빠르게 따라잡는 중)</li>
+</ul>
+<h3>D. Crystal Intelligence — 러시아·동유럽 attribution 강세</h3>
+<ul>
+<li><strong>본사</strong>: 암스테르담, 2018 설립 (Bitfury 출신)</li>
+<li><strong>포지션</strong>: <strong>러시아·동유럽 attribution 강세</strong></li>
+<li><strong>주력 제품</strong>:</li>
+<li><strong>Crystal Expert</strong> — 조사</li>
+<li><strong>Crystal Compliance</strong> — 스크리닝</li>
+<li><strong>강점</strong>: 러시아어권 거래소·다크넷 attribution, BTC 깊이</li>
+<li><strong>약점</strong>: 글로벌 대형사 도입률 낮음</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>4사 선택은 <strong>"어느 지역 attribution이 가장 중요한가"</strong> 로 나눠집니다. 한국·미국 중심이면 Chainalysis, 유럽 중심이면 Elliptic, cross-chain·DeFi 중심이면 TRM, 러시아 제재 회피 추적이 중요하면 Crystal. 글로벌 영업이 많은 대형 거래소는 <strong>2개 이상 병행 사용</strong>이 표준이 되어가고 있습니다.</p>
+<hr />
+<h2>3. 신흥·특화 벤더</h2>
+<h3>Merkle Science</h3>
+<ul>
+<li>싱가포르, <strong>예측 행동 분석</strong></li>
+<li>머신러닝 기반 위험 탐지</li>
+<li>한국·동남아 활발</li>
+</ul>
+<h3>Nominis</h3>
+<ul>
+<li>VASP 특화 SaaS, <strong>간편한 통합</strong></li>
+<li>Chainalysis·TRM 대안 포지션</li>
+</ul>
+<h3>AnChain.AI</h3>
+<ul>
+<li>AI·ML 강조, smart contract 분석</li>
+</ul>
+<h3>Coinfirm (지금은 Lukka에 인수)</h3>
+<ul>
+<li>폴란드 출신</li>
+<li>AML·KYT</li>
+</ul>
+<h3>Solidus Labs</h3>
+<ul>
+<li>시장 모니터링 + AML 결합</li>
+<li>거래소 시세조종 탐지</li>
+</ul>
+<h3>Inca Digital</h3>
+<ul>
+<li>시장 분석 + 위험 탐지</li>
+</ul>
+<hr />
+<h2>4. 도메인별 추천 — 목적에 맞춰 고르기</h2>
+<h3>거래소 KYT</h3>
+<ul>
+<li>1순위: <strong>Chainalysis KYT, TRM Labs</strong></li>
+<li>2순위: Elliptic Lens</li>
+<li>한국 특화: + 자체 한국 거래소 attribution</li>
+</ul>
+<h3>수탁업자 KYT</h3>
+<p><strong>출금 주소 스크리닝</strong>이 핵심. 고객이 외부로 보내는 주소가 위험한지 <strong>빠르고 정확하게</strong> 판단해야 수탁업의 책임을 다할 수 있습니다.</p>
+<ul>
+<li>Chainalysis Address Screening</li>
+<li>TRM Address Screening</li>
+<li>Elliptic Lens</li>
+<li>빠른 응답 속도 (real-time API)가 필수 기준</li>
+</ul>
+<h3>조사·포렌식 (LE 협조용)</h3>
+<ul>
+<li><strong>Chainalysis Reactor</strong> (시각화 강력)</li>
+<li>TRM Forensics</li>
+<li>Crystal Expert (러시아 자금)</li>
+</ul>
+<h3>Cross-chain 추적</h3>
+<ul>
+<li>TRM Multichain (1순위)</li>
+<li>Chainalysis Crosschain (2023+)</li>
+<li>Elliptic는 후발</li>
+</ul>
+<h3>시장 모니터링 (시세조종)</h3>
+<ul>
+<li>Solidus Labs</li>
+<li>Nasdaq Trade Surveillance (전통 → 가상자산 확장)</li>
+</ul>
+<h3>Travel Rule + KYT 통합</h3>
+<ul>
+<li>Notabene (Travel Rule) + Chainalysis (KYT) 조합 흔함</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"한 벤더가 모든 걸 다 하게 하지 말라"는 게 대형사 공통의 교훈. KYT는 Chainalysis, 조사는 TRM, 수탁 스크리닝은 Elliptic 식으로 <strong>도메인별 최적 벤더</strong>를 쓰는 편이 단일 벤더에 종속되지 않고 탐지율도 높습니다.</p>
+<hr />
+<h2>5. 벤더 선정 기준</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>벤더 PoC나 RFP(Request for Proposal) 작성 시 평가 기준. <strong>한국 운영 환경</strong>을 전제로 한 기준을 상단에 배치하는 게 실무적입니다 — 특히 "한국 시간대 지원"과 "현지 attribution 정확도".</p>
+<table>
+<thead>
+<tr>
+<th>기준</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>체인 커버리지</strong></td>
+<td>몇 개 네트워크 지원? L2 포함?</td>
+</tr>
+<tr>
+<td><strong>라벨 DB 깊이</strong></td>
+<td>거래소·믹서·SDN 라벨 정확도</td>
+</tr>
+<tr>
+<td><strong>API 성능</strong></td>
+<td>응답 속도, 가용성 SLA</td>
+</tr>
+<tr>
+<td><strong>가격 모델</strong></td>
+<td>정액 vs 사용량 vs 라이선스</td>
+</tr>
+<tr>
+<td><strong>UI/UX</strong></td>
+<td>분석가 효율</td>
+</tr>
+<tr>
+<td><strong>법집행 신뢰도</strong></td>
+<td>검사·소송 시 증거 인정</td>
+</tr>
+<tr>
+<td><strong>현지 attribution</strong></td>
+<td>한국 거래소 매핑 정확도</td>
+</tr>
+<tr>
+<td><strong>통합 용이성</strong></td>
+<td>SDK, Webhook, 문서 품질</td>
+</tr>
+<tr>
+<td><strong>Compliance 보고</strong></td>
+<td>내장 보고서 양식</td>
+</tr>
+<tr>
+<td><strong>고객 지원</strong></td>
+<td>한국 시간대 대응</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. 가격 (참고치, 비공개)</h2>
+<ul>
+<li>소규모 VASP: <strong>$30K~$80K/년</strong></li>
+<li>중규모: <strong>$100K~$300K/년</strong></li>
+<li>대규모 거래소: <strong>$500K~$수M/년</strong></li>
+<li>Address screening API: <strong>건당 ~$0.05~$0.50</strong> (볼륨 따라)</li>
+<li>Reactor 등 조사 도구: <strong>사용자당 $20K~$50K/년</strong></li>
+</ul>
+<p>협상 가능. 멀티 모듈 번들 할인.</p>
+<h3>실무 포인트</h3>
+<p>가격 협상에서 <strong>연간 볼륨 커밋</strong>을 걸면 단가가 크게 떨어집니다. 2년 이상 장기 계약은 30~50% 할인 여지. 다만 <strong>벤더 락인(lock-in)</strong>이 생기므로, 계약서에 <strong>데이터 export·이관 조항</strong>을 확실히 넣는 게 필수. 벤더를 바꿀 때 이전 분석 이력이 사라지면 STR 연속성이 끊어집니다.</p>
+<hr />
+<h2>7. POC (Proof of Concept) 체크리스트</h2>
+<p>벤더 선정 전 시범 사용:</p>
+<pre><code>□ 우리 거래소 입금 주소 attribution 정확도 테스트
+□ 알려진 한국 mixer·스캠 wallet 탐지 여부
+□ Lazarus 관련 주소 + 그 cluster 인식 여부
+□ Cross-chain (BTC ↔ ETH ↔ Tron) 추적 정확도
+□ API 응답 속도 (p99) 측정
+□ False positive 비율 측정
+□ Sanctions feed 갱신 주기
+□ 한국 시간대 지원 인력
+□ 데이터 export 형식 (STR 작성용)
+□ 법집행 자료 인정 사례
+</code></pre>
+<h3>실무 포인트</h3>
+<p>PoC에서 가장 중요한 건 <strong>같은 100개 주소를 여러 벤더에 넣어 결과 비교</strong>하는 것. 벤더의 공식 광고 수치가 아니라 <strong>우리 회사 실제 고객·거래</strong> 환경에서의 탐지율이 진짜 기준. 이 비교가 없으면 PPT에 속아 선택하게 됩니다.</p>
+<hr />
+<h2>8. 자체 구축 vs 벤더</h2>
+<h3>자체 구축의 한계</h3>
+<ul>
+<li>라벨 DB가 핵심 자산 — 글로벌 attribution은 자체로 불가능</li>
+<li>글로벌 거래소·믹서·다크넷 모니터링 인력 비용</li>
+<li>검사·법집행 신뢰도 (벤더 도구가 더 인정받음)</li>
+</ul>
+<h3>자체 구축의 장점</h3>
+<ul>
+<li>한국 특화 attribution (현지 거래소, 사기 wallet)</li>
+<li>사내 KYC + KYT 결합 분석</li>
+<li>비용 절감 (대형사 한정)</li>
+</ul>
+<h3>현실적 답</h3>
+<p><strong>하이브리드</strong> — 글로벌 벤더 + 자체 한국 특화. 한국 거래소들도 대부분 이 형태.</p>
+<hr />
+<h2>9. 미래 트렌드</h2>
+<ul>
+<li><strong>AI·ML 기반 행동 분석</strong> 강화</li>
+<li><strong>실시간 cross-chain</strong> 표준화</li>
+<li><strong>공유 attribution</strong> (산업 컨소시엄 가능성)</li>
+<li><strong>ZKP 시대 대응</strong> — 프라이버시 + 컴플라이언스 양립</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>2026~2028년 키워드는 <strong>cross-chain attribution</strong>과 <strong>AI 기반 이상 탐지</strong>. 지금 벤더 선정 시 이 두 영역에 투자하고 있는지를 <strong>로드맵 인터뷰</strong>로 확인하면 3~5년 후의 도구 품질 차이를 예측할 수 있습니다.</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="travel-rule-vendors.md"><code>travel-rule-vendors.md</code></a> — Travel Rule 솔루션 비교</li>
+<li><a href="korea-solutions.md"><code>korea-solutions.md</code></a> — 한국 시장 솔루션</li>
+<li><a href="../4-technology/blockchain-analytics.md"><code>../4-technology/blockchain-analytics.md</code></a> — 기술적 기반</li>
+<li><a href="https://www.chainalysis.com/">Chainalysis 공식</a></li>
+<li><a href="https://www.elliptic.co/">Elliptic 공식</a></li>
+<li><a href="https://www.trmlabs.com/">TRM Labs 공식</a></li>
+<li><a href="https://crystalintelligence.com/">Crystal Intelligence 공식</a></li>
+<li><a href="https://www.merklescience.com/">Merkle Science 공식</a></li>
+<li><a href="https://cryptotracelabs.com/blog/chainalysis-vs-elliptic-vs-trm-labs-vs-crystal-intelligence-platform-comparison-for-investigators/">Crypto Trace Labs — 4사 비교</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 32 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

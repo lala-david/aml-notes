@@ -9,6 +9,7 @@
 ![Daily Plans](https://img.shields.io/badge/daily%20plans-60-success)
 ![Mini Projects](https://img.shields.io/badge/projects-6-purple)
 ![Prose Revamp](https://img.shields.io/badge/prose%20revamp-complete-brightgreen)
+![Print Ready](https://img.shields.io/badge/print%20ready-A4-red)
 
 ---
 
@@ -19,6 +20,7 @@
 - ✅ **조문 → 실무 번역** — 특금법 §·이용자보호법 §가 실제 시스템의 어느 지점에 매핑되는지 명시
 - ✅ **팩트 정확성** — 감독당국 검사·STR 작성에 인용 가능한 정확도를 목표
 - ✅ **한국 VASP 실무 관점** — KoFIU 검사·DAXA 기준·본인확인기관·ISMS 등 한국 특수 인프라 반영
+- 🖨 **A4 프린트 준비 완료** — 60일 전체가 인쇄 최적화 HTML 패킷으로 생성돼 있어 종이 학습 가능
 
 ---
 
@@ -31,31 +33,35 @@ flowchart LR
     Q -->|📚 토픽만 빠르게| B["📖 notes/<br/>주제별 산문 교재"]
     Q -->|🛠️ 코드로 배우기| C["⚙️ projects/<br/>자동화 미니 프로젝트"]
     Q -->|🔬 깊이 파기| D["🎓 deep/<br/>논문·리포트·링크"]
+    Q -->|🖨 종이로 공부| E["🖨 print/<br/>A4 프린트 패킷"]
 
     A --> A1[curriculum/day_01.md]
     B --> B1[notes/README.md]
     C --> C1[projects/README.md]
     D --> D1[deep/README.md]
+    E --> E1[print/index.html]
 
     style Start fill:#fef3c7,stroke:#f59e0b
     style A fill:#dbeafe,stroke:#3b82f6
     style B fill:#fce7f3,stroke:#ec4899
     style C fill:#d1fae5,stroke:#10b981
     style D fill:#ede9fe,stroke:#8b5cf6
+    style E fill:#fee2e2,stroke:#ef4444
 ```
 
 > 🚀 **추천 시작점** → [`curriculum/day_01.md`](curriculum/day_01.md)
 
 ---
 
-## 📁 폴더 구조 (4개)
+## 📁 폴더 구조 (5개)
 
 ```
 aml-notes/
 ├── 📅 curriculum/   ← 60일 데일리 챌린지 + 진척 트래커
 ├── 📖 notes/        ← 토픽별 산문 교재 (7카테고리 + 용어집)
 ├── 🛠️ projects/     ← 자동화 미니 프로젝트 6개 (코드 사양)
-└── 🎓 deep/         ← 학술 논문·산업 리포트·컨퍼런스·외부 링크
+├── 🎓 deep/         ← 학술 논문·산업 리포트·컨퍼런스·외부 링크
+└── 🖨 print/        ← A4 프린트 패킷 (Task Sheet + Reading 통합)
 ```
 
 | 폴더 | 누가 봐야 | 입구 |
@@ -64,6 +70,7 @@ aml-notes/
 | 📖 **`notes/`** | "특정 주제 빨리 보고 싶음" | [`notes/README.md`](notes/README.md) |
 | 🛠️ **`projects/`** | "손으로 만들어야 이해됨" | [`projects/README.md`](projects/README.md) |
 | 🎓 **`deep/`** | "논문·리포트 더 줘" | [`deep/README.md`](deep/README.md) |
+| 🖨 **`print/`** | "종이에 프린트해서 공부하고 싶음" | [`print/index.html`](print/index.html) |
 
 ---
 
@@ -118,6 +125,42 @@ gantt
 **연결 구조**: 01~04 각자 → 05에서 통합(`kyt_check()`) → 06 Capstone 설계서로 결산
 
 → [`projects/README.md`](projects/README.md)
+
+---
+
+## 🖨 A4 프린트 패킷 — 종이로 공부하고 싶을 때
+
+> 하루 Day를 **A4 용지에 바로 프린트**해서 손으로 체크하고 정리할 수 있도록, 60일 전체를 **인쇄 최적화된 HTML 패킷**으로 만들어 뒀습니다.
+
+### 입구
+
+`print/index.html` 을 브라우저에서 열기 → 원하는 Day 카드 클릭 → 🖨 **Print A4** 버튼 (또는 `Ctrl+P` · `⌘+P`).
+
+### 각 Day 패킷 구성
+
+- **1페이지 — Task Sheet**: 큰 DAY 번호 + Week 진척 점 + 핵심 질문 + 읽기·외부 자료 목록 + 미니 챌린지 + ✅ 손으로 채우는 체크박스 + 💭 오늘의 한 줄 괘선 + 날짜 기입란
+- **N페이지 — Reading Articles**: Task Sheet의 📖 읽기·더 깊이가 가리키는 **내부 노트 전체 본문**이 A4 타이포그래피로 포매팅되어 연속 수록
+- Day 1 기준 **약 10~13 페이지**, 리뷰·프로젝트 일은 **1~3 페이지**
+
+### 디자인 특징
+
+- **정확한 A4 사이즈** (210×297 mm) · 18mm 여백
+- **Pretendard Variable** 본문 + **IBM Plex Serif** 숫자 + **IBM Plex Mono** 레이블
+- **잉크 절약형** 흑백 + 차콜 네이비(`#1a2e4a`) 단일 액센트
+- **한글 끊어읽기 방지** + **손으로 쓰는 공간** (체크박스·괘선·Date 기입란)
+
+### 재생성
+
+커리큘럼·노트를 수정한 뒤:
+
+```bash
+pip install markdown
+python print/generator.py all         # 전체
+python print/generator.py 1           # Day 1만
+python print/generator.py 1-7         # 범위
+```
+
+자세히 → [`print/README.md`](print/README.md)
 
 ---
 
@@ -192,6 +235,7 @@ curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
 | 📖 토픽 노트 | `notes/**/*.md` | **27** (전면 산문화 완료) |
 | 🛠️ 미니 프로젝트 사양 | `projects/**/README.md` | **6** |
 | 🎓 학술·리포트 큐레이션 | `deep/*.md` | **5** (README 포함) |
+| 🖨 A4 프린트 패킷 | `print/days/day_NN.html` | **60** (Task + Reading 통합) |
 | 🔗 외부 참고 링크 | 1차·2차·벤더 | **150+** |
 | 📚 글로서리 | `notes/glossary.md` | **200+** 용어 (Top 15 우선순위) |
 
@@ -226,6 +270,13 @@ curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
 - 프로젝트 02 Etherscan 2-hop tracer: **fan-out 폭발 가드** (캐싱·max_fanout·백오프)
 - 프로젝트 01 IVMS101 빌더: **중첩 스키마 상세화** (naturalPerson·nameIdentifier·LEI)
 - 링크 오류 15+ 건 수정 (underscore→hyphen)
+
+### 🖨 Print 패킷 신설 (2026-04-21)
+
+- `print/` 폴더 전체 신설 — A4 정확 사이즈의 HTML 프린트 템플릿
+- 60일 모든 Day가 **Task Sheet 1p + 링크된 읽기 노트 전체**를 하나로 묶은 학습 패킷으로 자동 생성됨
+- `python print/generator.py all` 로 언제든 재생성
+- 디자인: Pretendard · IBM Plex 타이포그래피, 흑백 + 차콜 네이비, 손글씨 공간 확보
 
 ---
 

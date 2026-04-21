@@ -6,6 +6,24 @@
 
 한국 특금법 조항을 읽다 보면 "왜 이런 구조인가" 의문이 생기는데, 답은 거의 **FATF 권고**에 있습니다. 오늘은 FATF → 각국법 → 감독기구라는 **규제의 흘러내림 구조**를 머릿속에 심는 날. 이 지도가 있으면 다음 2주간의 법령 학습이 훨씬 입체적으로 보입니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    F["🌍 FATF 권고"] --> K["🇰🇷 특금법"]
+    F --> U["🇺🇸 BSA"]
+    F --> E["🇪🇺 AMLR + MiCA"]
+    F -.평가.-> M["⚠️ Grey/Black List"]
+    K --> KFIU["FIU · FSC"]
+    U --> UFIN["FinCEN · OFAC"]
+    E --> EAMLA["AMLA · NCA"]
+    style F fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style M fill:#fff7d6,stroke:#c9a646
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. FATF는 법을 만드는가? (아니라면 무엇을 하는가?)
 2. FATF Grey/Black List에 오르면 회원국에 어떤 영향?

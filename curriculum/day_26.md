@@ -6,6 +6,22 @@
 
 Travel Rule의 구조적 난제는 **Sunrise Issue** — 전 세계 VASP가 서로 다른 프로토콜·시행 수준을 가진 상황. Notabene은 "다양한 프로토콜을 다 중개해주는 허브" 포지션으로 1,500+ VASP를 모았고, 이게 글로벌 Travel Rule의 사실상 표준이 된 사정을 오늘 이해합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    V1["🏦 VASP A<br/>(TRISA)"] --> N["🌐 Notabene<br/>Gateway"]
+    V2["🏦 VASP B<br/>(VerifyVASP)"] --> N
+    V3["🏦 VASP C<br/>(CODE)"] --> N
+    V4["🏦 VASP D<br/>(TRP)"] --> N
+    N -.1,500+ VASP.-> S["✅ 단일 연결로<br/>Sunrise 해결"]
+    style N fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style S fill:#d1fae5,stroke:#10b981
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Sunrise Issue가 뭔가? (한 줄)
 2. Notabene Gateway가 어떻게 해결?

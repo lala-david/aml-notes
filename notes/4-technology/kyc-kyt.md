@@ -192,6 +192,47 @@ KYC 팀과 KYT 팀이 조직 상 분리돼 있는 회사가 많은데, 이러면
 
 ## 6. 통합 Risk Engine 아키텍처
 
+```mermaid
+flowchart TB
+    subgraph Input["📥 Input Sources"]
+        KYC["KYC Data<br/>(KYC vendor)"]
+        KYT["Wallet Map<br/>(KYT vendor)"]
+        BHV["Behavior<br/>(자체 분석)"]
+    end
+
+    subgraph Engine["⚙️ Risk Engine"]
+        RULE["룰 기반<br/>패턴 매칭"]
+        ML["ML 기반<br/>이상 탐지"]
+        SCORE["Risk Score<br/>0~100"]
+        RULE --> SCORE
+        ML --> SCORE
+    end
+
+    subgraph Action["🎯 Actions"]
+        ALLOW["✅ ALLOW<br/>통과"]
+        EDD["🔍 EDD trigger<br/>강화실사"]
+        STR["📝 STR 큐<br/>보고 검토"]
+        BLOCK["⛔ BLOCK<br/>차단"]
+    end
+
+    KYC --> Engine
+    KYT --> Engine
+    BHV --> Engine
+
+    SCORE -->|LOW| ALLOW
+    SCORE -->|MED| EDD
+    SCORE -->|HIGH| STR
+    SCORE -->|CRITICAL| BLOCK
+
+    style Engine fill:#e5eaf2,stroke:#1a2e4a
+    style SCORE fill:#1a2e4a,stroke:#1a2e4a,color:#fff
+    style ALLOW fill:#d1fae5,stroke:#10b981
+    style EDD fill:#fff7d6,stroke:#c9a646
+    style STR fill:#fed7aa,stroke:#ea580c
+    style BLOCK fill:#fee2e2,stroke:#dc2626
+```
+
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      Customer Profile                        │

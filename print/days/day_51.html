@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 51 — 케이스: Tornado Cash + DeFi 제재의 한계</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 51 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">51</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 8 / 7</div>
+        <div class="page-meta__theme">사례 + 리서치 + AI</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">케이스: Tornado Cash + DeFi 제재의 한계</h1>
+      <p class="title-block__lead">코드를 제재할 수 있는가?  ~80분.</p>
+      <span class="title-block__time">⏱ ~80분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 1190px; background-color: transparent;" viewBox="100 -58 1190 467.6000061035156" role="graphics-document document" aria-roledescription="timeline"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .edge{stroke-width:3;}#my-svg .section--1 rect,#my-svg .section--1 path,#my-svg .section--1 circle,#my-svg .section--1 path{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section--1 text{fill:#111418;}#my-svg .node-icon--1{font-size:40px;color:#111418;}#my-svg .section-edge--1{stroke:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth--1{stroke-width:17;}#my-svg .section--1 line{stroke:rgb(110.9999999999, 89.6538461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-0 rect,#my-svg .section-0 path,#my-svg .section-0 circle,#my-svg .section-0 path{fill:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .section-0 text{fill:#111418;}#my-svg .node-icon-0{font-size:40px;color:#111418;}#my-svg .section-edge-0{stroke:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .edge-depth-0{stroke-width:14;}#my-svg .section-0 line{stroke:rgb(0, 32.8780487806, 168.5000000001);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-1 rect,#my-svg .section-1 path,#my-svg .section-1 circle,#my-svg .section-1 path{fill:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .section-1 text{fill:#111418;}#my-svg .node-icon-1{font-size:40px;color:#111418;}#my-svg .section-edge-1{stroke:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .edge-depth-1{stroke-width:11;}#my-svg .section-1 line{stroke:rgb(50.5, 63.1249999999, 100.9999999998);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-2 rect,#my-svg .section-2 path,#my-svg .section-2 circle,#my-svg .section-2 path{fill:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-2 text{fill:#111418;}#my-svg .node-icon-2{font-size:40px;color:#111418;}#my-svg .section-edge-2{stroke:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-2{stroke-width:8;}#my-svg .section-2 line{stroke:rgb(104.596153846, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-3 rect,#my-svg .section-3 path,#my-svg .section-3 circle,#my-svg .section-3 path{fill:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-3 text{fill:#111418;}#my-svg .node-icon-3{font-size:40px;color:#111418;}#my-svg .section-edge-3{stroke:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-3{stroke-width:5;}#my-svg .section-3 line{stroke:rgb(76.8461538461, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-4 rect,#my-svg .section-4 path,#my-svg .section-4 circle,#my-svg .section-4 path{fill:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-4 text{fill:#111418;}#my-svg .node-icon-4{font-size:40px;color:#111418;}#my-svg .section-edge-4{stroke:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-4{stroke-width:2;}#my-svg .section-4 line{stroke:rgb(55.5, 110.9999999999, 61.9038461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-5 rect,#my-svg .section-5 path,#my-svg .section-5 circle,#my-svg .section-5 path{fill:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-5 text{fill:#111418;}#my-svg .node-icon-5{font-size:40px;color:#111418;}#my-svg .section-edge-5{stroke:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-5{stroke-width:-1;}#my-svg .section-5 line{stroke:rgb(55.5, 110.9999999999, 89.6538461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-6 rect,#my-svg .section-6 path,#my-svg .section-6 circle,#my-svg .section-6 path{fill:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-6 text{fill:#111418;}#my-svg .node-icon-6{font-size:40px;color:#111418;}#my-svg .section-edge-6{stroke:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-6{stroke-width:-4;}#my-svg .section-6 line{stroke:rgb(55.5, 104.596153846, 110.9999999999);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-7 rect,#my-svg .section-7 path,#my-svg .section-7 circle,#my-svg .section-7 path{fill:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .section-7 text{fill:#111418;}#my-svg .node-icon-7{font-size:40px;color:#111418;}#my-svg .section-edge-7{stroke:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .edge-depth-7{stroke-width:-7;}#my-svg .section-7 line{stroke:rgb(47.4038461539, 42.5, 85);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-8 rect,#my-svg .section-8 path,#my-svg .section-8 circle,#my-svg .section-8 path{fill:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-8 text{fill:#111418;}#my-svg .node-icon-8{font-size:40px;color:#111418;}#my-svg .section-edge-8{stroke:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-8{stroke-width:-10;}#my-svg .section-8 line{stroke:rgb(110.9999999999, 55.5, 104.596153846);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-9 rect,#my-svg .section-9 path,#my-svg .section-9 circle,#my-svg .section-9 path{fill:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-9 text{fill:#111418;}#my-svg .node-icon-9{font-size:40px;color:#111418;}#my-svg .section-edge-9{stroke:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-9{stroke-width:-13;}#my-svg .section-9 line{stroke:rgb(110.9999999999, 55.5, 76.8461538461);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-10 rect,#my-svg .section-10 path,#my-svg .section-10 circle,#my-svg .section-10 path{fill:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-10 text{fill:#111418;}#my-svg .node-icon-10{font-size:40px;color:#111418;}#my-svg .section-edge-10{stroke:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-10{stroke-width:-16;}#my-svg .section-10 line{stroke:rgb(110.9999999999, 61.9038461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section--1[data-look="neo"] rect,#my-svg .section--1[data-look="neo"] path,#my-svg .section--1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section--1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] rect,#my-svg .section-0[data-look="neo"] path,#my-svg .section-0[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] rect,#my-svg .section-1[data-look="neo"] path,#my-svg .section-1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] rect,#my-svg .section-2[data-look="neo"] path,#my-svg .section-2[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] rect,#my-svg .section-3[data-look="neo"] path,#my-svg .section-3[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] rect,#my-svg .section-4[data-look="neo"] path,#my-svg .section-4[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] rect,#my-svg .section-5[data-look="neo"] path,#my-svg .section-5[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] rect,#my-svg .section-6[data-look="neo"] path,#my-svg .section-6[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] rect,#my-svg .section-7[data-look="neo"] path,#my-svg .section-7[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] rect,#my-svg .section-8[data-look="neo"] path,#my-svg .section-8[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] rect,#my-svg .section-9[data-look="neo"] path,#my-svg .section-9[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] rect,#my-svg .section-10[data-look="neo"] path,#my-svg .section-10[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-root rect,#my-svg .section-root path,#my-svg .section-root circle{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-root text{fill:#111418;}#my-svg .icon-container{height:100%;display:flex;justify-content:center;align-items:center;}#my-svg .edge{fill:none;}#my-svg .eventWrapper{filter:brightness(120%);}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><g/><defs><marker id="my-svg-arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"/></marker></defs><g class="taskWrapper" transform="translate(200, 50)"><g class="timeline-node section--1"><g><path id="my-svg-node-0" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line--1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2022-08</tspan></text></g></g></g><g class="lineWrapper"><line x1="295" y1="114.8" x2="295" y2="359.6" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(200, 250)"><g class="timeline-node section--1"><g><path id="my-svg-node-1" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line--1" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">OFAC   제재</tspan></text></g></g></g><g class="taskWrapper" transform="translate(400, 50)"><g class="timeline-node section-0"><g><path id="my-svg-node-2" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-0" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2024-11</tspan></text></g></g></g><g class="lineWrapper"><line x1="495" y1="114.8" x2="495" y2="359.6" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(400, 250)"><g class="timeline-node section-0"><g><path id="my-svg-node-3" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-0" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">5th   Cir.   Van   Loon   판결</tspan></text></g></g></g><g class="taskWrapper" transform="translate(600, 50)"><g class="timeline-node section-1"><g><path id="my-svg-node-4" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025-03-21</tspan></text></g></g></g><g class="lineWrapper"><line x1="695" y1="114.8" x2="695" y2="359.6" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(600, 250)"><g class="timeline-node section-1"><g><path id="my-svg-node-5" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-1" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">지정   해제</tspan></text></g></g></g><g class="taskWrapper" transform="translate(800, 50)"><g class="timeline-node section-2"><g><path id="my-svg-node-6" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-2" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025~</tspan></text></g></g></g><g class="lineWrapper"><line x1="895" y1="114.8" x2="895" y2="359.6" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(800, 250)"><g class="timeline-node section-2"><g><path id="my-svg-node-7" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-2" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Roman   Storm   형사재판</tspan></text></g></g></g><text x="245" font-size="4ex" font-weight="bold" y="20">Tornado Cash</text><g class="lineWrapper"><line x1="150" y1="164.8" x2="1240" y2="164.8" stroke-width="4" stroke="black" marker-end="url(#my-svg-arrowhead)"/></g></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>Tornado Cash 제재 timeline (2022-08 → 2024-11 → 2025-03)?</li>
+<li>5th Circuit 판결의 핵심 논리?</li>
+<li>Roman Storm 형사 재판이 별개인 이유?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/6-cases/tornado-cash.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>Venable — Treasury Lifts Tornado Sanctions<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.venable.com/insights/publications/2025/04/a-legal-whirlwind-settles-treasury-lifts-sanctions</span></li>
+<li>Steptoe — DeFi AML implications<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.steptoe.com/en/news-publications/blockchain-blog/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>"Tornado 노출 wallet → 회사 정책" 의사결정 트리 메모 (2025-03 해제 후에도 차단 유지)</li>
+<li>다른 mixer 운명 5개 (Blender/Sinbad/Wasabi/Samourai/JoinMarket) 정리</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Tornado Cash 전체 타임라인: 2022-08 OFAC 제재 → 2024-11 5th Cir. Van Loon 판결 → 2025-03-21 지정 해제</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>5th Circuit "코드는 property 아니다" 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>개발자 형사책임 가능성 안다 (Storm 재판)</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>회사 정책: mixer = 위험 카테고리 유지 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 51 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Tornado Cash — DeFi 첫 OFAC 제재와 그 결말</h2>
+    <p class="article-divider__lead">**코드를 제재할 수 있는가?** DeFi AML의 분기점이 된 사건. 이 글을 읽고 나면 Tornado Cash 타임라인(2022 제재 → 2024 판결 → 2025 해제 → Storm 재판)이 하나의 서사로 연결되고, 왜 이 사건이 "코드 제재"의 법적 한계를 확인한 판례가 됐는지 설명할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/6-cases/tornado-cash.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 51</span>
+      <span class="article-head__path">notes/6-cases/tornado-cash.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>2022-08-08</strong>: OFAC가 Tornado Cash 스마트컨트랙트 자체를 SDN List에 등재 (DeFi 첫 제재)</li>
+<li>7B+ 달러 자금세탁 중 <strong>Lazarus의 $455M+ 포함</strong></li>
+<li><strong>2024-11-26</strong>: 5th Circuit 연방항소법원 — "OFAC 권한 초과, 컨트랙트는 'property' 아니다"</li>
+<li><strong>2025-03-21</strong>: OFAC 공식 제재 해제</li>
+<li>그러나 <strong>개발자 Roman Storm 형사재판 별도 진행 중</strong> (2024 기소)</li>
+<li>의미: 코드 자체 제재의 법적 한계 + DeFi·스마트컨트랙트 컴플라이언스 미해결 과제</li>
+</ul>
+<hr />
+<h2>타임라인 — 한눈에</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 1590px; background-color: transparent;" viewBox="100 -58 1590 623.4000244140625" role="graphics-document document" aria-roledescription="timeline"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .edge{stroke-width:3;}#my-svg .section--1 rect,#my-svg .section--1 path,#my-svg .section--1 circle,#my-svg .section--1 path{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section--1 text{fill:#111418;}#my-svg .node-icon--1{font-size:40px;color:#111418;}#my-svg .section-edge--1{stroke:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth--1{stroke-width:17;}#my-svg .section--1 line{stroke:rgb(110.9999999999, 89.6538461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-0 rect,#my-svg .section-0 path,#my-svg .section-0 circle,#my-svg .section-0 path{fill:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .section-0 text{fill:#111418;}#my-svg .node-icon-0{font-size:40px;color:#111418;}#my-svg .section-edge-0{stroke:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .edge-depth-0{stroke-width:14;}#my-svg .section-0 line{stroke:rgb(0, 32.8780487806, 168.5000000001);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-1 rect,#my-svg .section-1 path,#my-svg .section-1 circle,#my-svg .section-1 path{fill:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .section-1 text{fill:#111418;}#my-svg .node-icon-1{font-size:40px;color:#111418;}#my-svg .section-edge-1{stroke:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .edge-depth-1{stroke-width:11;}#my-svg .section-1 line{stroke:rgb(50.5, 63.1249999999, 100.9999999998);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-2 rect,#my-svg .section-2 path,#my-svg .section-2 circle,#my-svg .section-2 path{fill:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-2 text{fill:#111418;}#my-svg .node-icon-2{font-size:40px;color:#111418;}#my-svg .section-edge-2{stroke:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-2{stroke-width:8;}#my-svg .section-2 line{stroke:rgb(104.596153846, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-3 rect,#my-svg .section-3 path,#my-svg .section-3 circle,#my-svg .section-3 path{fill:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-3 text{fill:#111418;}#my-svg .node-icon-3{font-size:40px;color:#111418;}#my-svg .section-edge-3{stroke:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-3{stroke-width:5;}#my-svg .section-3 line{stroke:rgb(76.8461538461, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-4 rect,#my-svg .section-4 path,#my-svg .section-4 circle,#my-svg .section-4 path{fill:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-4 text{fill:#111418;}#my-svg .node-icon-4{font-size:40px;color:#111418;}#my-svg .section-edge-4{stroke:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-4{stroke-width:2;}#my-svg .section-4 line{stroke:rgb(55.5, 110.9999999999, 61.9038461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-5 rect,#my-svg .section-5 path,#my-svg .section-5 circle,#my-svg .section-5 path{fill:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-5 text{fill:#111418;}#my-svg .node-icon-5{font-size:40px;color:#111418;}#my-svg .section-edge-5{stroke:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-5{stroke-width:-1;}#my-svg .section-5 line{stroke:rgb(55.5, 110.9999999999, 89.6538461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-6 rect,#my-svg .section-6 path,#my-svg .section-6 circle,#my-svg .section-6 path{fill:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-6 text{fill:#111418;}#my-svg .node-icon-6{font-size:40px;color:#111418;}#my-svg .section-edge-6{stroke:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-6{stroke-width:-4;}#my-svg .section-6 line{stroke:rgb(55.5, 104.596153846, 110.9999999999);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-7 rect,#my-svg .section-7 path,#my-svg .section-7 circle,#my-svg .section-7 path{fill:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .section-7 text{fill:#111418;}#my-svg .node-icon-7{font-size:40px;color:#111418;}#my-svg .section-edge-7{stroke:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .edge-depth-7{stroke-width:-7;}#my-svg .section-7 line{stroke:rgb(47.4038461539, 42.5, 85);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-8 rect,#my-svg .section-8 path,#my-svg .section-8 circle,#my-svg .section-8 path{fill:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-8 text{fill:#111418;}#my-svg .node-icon-8{font-size:40px;color:#111418;}#my-svg .section-edge-8{stroke:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-8{stroke-width:-10;}#my-svg .section-8 line{stroke:rgb(110.9999999999, 55.5, 104.596153846);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-9 rect,#my-svg .section-9 path,#my-svg .section-9 circle,#my-svg .section-9 path{fill:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-9 text{fill:#111418;}#my-svg .node-icon-9{font-size:40px;color:#111418;}#my-svg .section-edge-9{stroke:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-9{stroke-width:-13;}#my-svg .section-9 line{stroke:rgb(110.9999999999, 55.5, 76.8461538461);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-10 rect,#my-svg .section-10 path,#my-svg .section-10 circle,#my-svg .section-10 path{fill:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-10 text{fill:#111418;}#my-svg .node-icon-10{font-size:40px;color:#111418;}#my-svg .section-edge-10{stroke:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-10{stroke-width:-16;}#my-svg .section-10 line{stroke:rgb(110.9999999999, 61.9038461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section--1[data-look="neo"] rect,#my-svg .section--1[data-look="neo"] path,#my-svg .section--1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section--1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] rect,#my-svg .section-0[data-look="neo"] path,#my-svg .section-0[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] rect,#my-svg .section-1[data-look="neo"] path,#my-svg .section-1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] rect,#my-svg .section-2[data-look="neo"] path,#my-svg .section-2[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] rect,#my-svg .section-3[data-look="neo"] path,#my-svg .section-3[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] rect,#my-svg .section-4[data-look="neo"] path,#my-svg .section-4[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] rect,#my-svg .section-5[data-look="neo"] path,#my-svg .section-5[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] rect,#my-svg .section-6[data-look="neo"] path,#my-svg .section-6[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] rect,#my-svg .section-7[data-look="neo"] path,#my-svg .section-7[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] rect,#my-svg .section-8[data-look="neo"] path,#my-svg .section-8[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] rect,#my-svg .section-9[data-look="neo"] path,#my-svg .section-9[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] rect,#my-svg .section-10[data-look="neo"] path,#my-svg .section-10[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-root rect,#my-svg .section-root path,#my-svg .section-root circle{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-root text{fill:#111418;}#my-svg .icon-container{height:100%;display:flex;justify-content:center;align-items:center;}#my-svg .edge{fill:none;}#my-svg .eventWrapper{filter:brightness(120%);}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><g/><defs><marker id="my-svg-arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"/></marker></defs><g class="taskWrapper" transform="translate(200, 50)"><g class="timeline-node section--1"><g><path id="my-svg-node-0" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line--1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2019</tspan></text></g></g></g><g class="lineWrapper"><line x1="295" y1="114.8" x2="295" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(200, 250)"><g class="timeline-node section--1"><g><path id="my-svg-node-1" class="node-bkg node-undefined" d="M0 70.60000305175781 v-65.60000305175781 q0,-5,5,-5 h180 q5,0,5,5 v70.60000305175781 H0 Z"/><line class="node-line--1" x1="0" y1="75.60000305175781" x2="190" y2="75.60000305175781"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">컨트랙트   출시   (Roman</tspan><tspan x="0" dy="1.1em">Semenov   ·   Roman</tspan><tspan x="0" dy="1.1em">Storm)</tspan></text></g></g></g><g class="eventWrapper" transform="translate(200, 335.6000030517578)"><g class="timeline-node section--1"><g><path id="my-svg-node-2" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line--1" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">zk-SNARK   기반   mixer</tspan></text></g></g></g><g class="taskWrapper" transform="translate(400, 50)"><g class="timeline-node section-0"><g><path id="my-svg-node-3" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-0" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2022-08-08</tspan></text></g></g></g><g class="lineWrapper"><line x1="495" y1="114.8" x2="495" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(400, 250)"><g class="timeline-node section-0"><g><path id="my-svg-node-4" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-0" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">⚠️   OFAC   SDN   등재</tspan><tspan x="0" dy="1.1em">(DeFi   첫   제재)</tspan></text></g></g></g><g class="eventWrapper" transform="translate(400, 320.2000015258789)"><g class="timeline-node section-0"><g><path id="my-svg-node-5" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-0" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Lazarus   관련   $455M+</tspan><tspan x="0" dy="1.1em">포함</tspan></text></g></g></g><g class="eventWrapper" transform="translate(400, 390.40000305175784)"><g class="timeline-node section-0"><g><path id="my-svg-node-6" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-0" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Circle이   USDC   즉시</tspan><tspan x="0" dy="1.1em">freeze</tspan></text></g></g></g><g class="taskWrapper" transform="translate(600, 50)"><g class="timeline-node section-1"><g><path id="my-svg-node-7" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2023-08</tspan></text></g></g></g><g class="lineWrapper"><line x1="695" y1="114.8" x2="695" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(600, 250)"><g class="timeline-node section-1"><g><path id="my-svg-node-8" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-1" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">개발자   형사   기소   (Storm   ·</tspan><tspan x="0" dy="1.1em">Semenov)</tspan></text></g></g></g><g class="taskWrapper" transform="translate(800, 50)"><g class="timeline-node section-2"><g><path id="my-svg-node-9" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-2" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2024-11-26</tspan></text></g></g></g><g class="lineWrapper"><line x1="895" y1="114.8" x2="895" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(800, 250)"><g class="timeline-node section-2"><g><path id="my-svg-node-10" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-2" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">⚖️   5th   Circuit   판결   (Van</tspan><tspan x="0" dy="1.1em">Loon   v.   Treasury)</tspan></text></g></g></g><g class="eventWrapper" transform="translate(800, 320.2000015258789)"><g class="timeline-node section-2"><g><path id="my-svg-node-11" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-2" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">"immutable   smart</tspan><tspan x="0" dy="1.1em">contract   ≠   property"</tspan></text></g></g></g><g class="eventWrapper" transform="translate(800, 390.40000305175784)"><g class="timeline-node section-2"><g><path id="my-svg-node-12" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-2" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">OFAC   권한   초과   인정</tspan></text></g></g></g><g class="taskWrapper" transform="translate(1000, 50)"><g class="timeline-node section-3"><g><path id="my-svg-node-13" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-3" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025-03-21</tspan></text></g></g></g><g class="lineWrapper"><line x1="1095" y1="114.8" x2="1095" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(1000, 250)"><g class="timeline-node section-3"><g><path id="my-svg-node-14" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-3" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">✅   OFAC   공식   제재   해제</tspan></text></g></g></g><g class="eventWrapper" transform="translate(1000, 310)"><g class="timeline-node section-3"><g><path id="my-svg-node-15" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-3" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">단   mixer는   여전히   위험</tspan><tspan x="0" dy="1.1em">카테고리</tspan></text></g></g></g><g class="taskWrapper" transform="translate(1200, 50)"><g class="timeline-node section-4"><g><path id="my-svg-node-16" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-4" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025~</tspan></text></g></g></g><g class="lineWrapper"><line x1="1295" y1="114.8" x2="1295" y2="515.4000045776368" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(1200, 250)"><g class="timeline-node section-4"><g><path id="my-svg-node-17" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-4" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Roman   Storm   형사재판</tspan><tspan x="0" dy="1.1em">별개   진행   중</tspan></text></g></g></g><g class="eventWrapper" transform="translate(1200, 320.2000015258789)"><g class="timeline-node section-4"><g><path id="my-svg-node-18" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-4" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">DeFi   개발자   책임   범위</tspan><tspan x="0" dy="1.1em">주목</tspan></text></g></g></g><text x="445" font-size="4ex" font-weight="bold" y="20">Tornado Cash 3년 여정</text><g class="lineWrapper"><line x1="150" y1="164.8" x2="1640" y2="164.8" stroke-width="4" stroke="black" marker-end="url(#my-svg-arrowhead)"/></g></svg></div></p>
+<h2>1. Tornado Cash란 — 기술부터 이해하기</h2>
+<h3>정체성</h3>
+<p>Tornado Cash는 <strong>이더리움 기반 mixer 스마트컨트랙트</strong>로 2019년 Roman Semenov·Roman Storm이 개발했습니다. <strong>zk-SNARK</strong> 기반 영지식 증명을 사용해, 사용자가 풀에 입금한 이력을 드러내지 않고 출금할 수 있도록 설계됐습니다.</p>
+<p>용어:
+- <strong>Mixer</strong> — 여러 사용자 자금을 섞어 입출금 매핑을 끊는 서비스.
+- <strong>zk-SNARK</strong> (Zero-Knowledge Succinct Non-interactive Argument of Knowledge) — "내가 어떤 사실을 안다는 것"만 증명하고, 그 사실 자체는 숨기는 암호 기법.
+- <strong>Immutable Smart Contract</strong> — 한 번 배포되면 수정·삭제가 불가능한 스마트컨트랙트.</p>
+<h3>작동 방식</h3>
+<pre><code>1. 사용자 A가 1 ETH를 Tornado pool에 입금
+2. 입금 시 commitment 생성 (해시) — A만 알고 있음
+3. 시간 지난 후 다른 wallet B로 인출 요청 + zk-SNARK 증명
+4. 컨트랙트가 증명 검증 → B에게 1 ETH 출금
+5. 온체인상 A→B 연결고리가 없음 (zk-SNARK가 익명성 보장)
+</code></pre>
+<h3>사용 분포 — 합법 vs 불법의 논쟁</h3>
+<p>Tornado Cash의 사용은 합법(프라이버시 추구)과 불법(해킹 자금 세탁) 양쪽에 걸쳤고, 비율에 대한 논쟁이 제재 논의의 핵심이 됐습니다. OFAC 측은 <strong>Lazarus만으로 $455M+ 사용</strong>했음을 강조했고, 반대 측은 <strong>합법 사용자도 다수</strong>임을 지적. 이 양면성이 이후 법적 도전의 쟁점이 됐습니다.</p>
+<h3>실무 포인트</h3>
+<p>Tornado Cash 이해의 핵심은 <strong>"개발자가 컨트랙트를 배포한 후에는 통제할 수 없다"</strong> 는 속성. 일반 회사 서비스는 운영자가 중단·수정할 수 있지만, immutable smart contract는 배포 후 개발자가 죽어도 계속 작동. 이 기술적 속성이 법적 논쟁의 출발점입니다.</p>
+<hr />
+<h2>2. 2022-08-08 OFAC 제재</h2>
+<h3>결정</h3>
+<p>미국 재무부 OFAC가 <strong>Tornado Cash 스마트컨트랙트 주소를 SDN List에 등재</strong>. 누적 $7B+ 자금세탁, 그중 <strong>Lazarus 관련 $455M+</strong> 포함(Ronin·Harmony 등). 미국인의 Tornado Cash 사용 금지.</p>
+<h3>즉각 영향</h3>
+<ul>
+<li><strong>Circle (USDC 발행자) 즉시 Tornado 주소 USDC freeze</strong> — 스테이블코인 발행자의 검열 권한이 현실화된 상징적 순간</li>
+<li><strong>Github가 Tornado Cash 저장소 일시 삭제</strong> (이후 커뮤니티 반발로 재공개)</li>
+<li>DeFi 사용자들이 <strong>자기 주소 freeze</strong> 우려 — Vitalik Buterin이 Tornado로 기부받은 이력이 있다는 게 회자됨</li>
+<li><strong>개발자 Roman Storm + Roman Semenov 미국 형사 기소</strong> (2023-08)</li>
+<li>개발자 Alexey Pertsev 네덜란드 체포 (2022) → 2024 유죄 (이후 항소 중)</li>
+</ul>
+<h3>정당성 논쟁</h3>
+<p><strong>옹호 측</strong>:
+- Lazarus가 실제 사용했음, 효과적 제재
+- 수억 달러 규모 자금세탁이 중단될 수 있음</p>
+<p><strong>비판 측</strong>:
+- 코드·스마트컨트랙트는 "person"도 "property"도 아님
+- 합법 사용자 무차별 처벌
+- <strong>표현의 자유 침해</strong> (코드 = speech라는 전통적 논리)
+- DeFi·오픈소스 미래에 위협</p>
+<h3>실무 포인트</h3>
+<p>이 논쟁의 실질적 쟁점은 "<strong>제재 대상이 되는 것은 무엇인가</strong>"입니다. 특정 인물(Semenov·Storm)이 아니라 특정 스마트컨트랙트 자체가 SDN에 올랐다는 것이 전례 없는 조치였고, 이게 법적 도전의 핵심 근거가 됐습니다.</p>
+<hr />
+<h2>3. 법적 도전과 판결</h2>
+<h3>Coin Center 등의 소송</h3>
+<p>Coin Center(암호화폐 정책 싱크탱크)와 Tornado 사용자들이 OFAC을 제소.
+- 1심: OFAC 손
+- 항소심으로 이어짐</p>
+<h3>5th Circuit 항소법원 (2024-11-26) — Van Loon v. Treasury</h3>
+<p>판결문 핵심: <strong>"OFAC overstepped its congressionally defined authority"</strong> (OFAC이 의회가 부여한 권한을 초과했다).</p>
+<p>핵심 논리:
+- <strong>IEEPA (International Emergency Economic Powers Act)</strong> 는 "property"에 적용되는 법
+- <strong>Immutable smart contract는 property로 볼 수 없음</strong> — 소유권 개념이 성립 안 함
+- 누구도 통제하지 않는 코드는 제재 대상으로 부적합</p>
+<p>→ <strong>OFAC 패소</strong>.</p>
+<h3>OFAC 제재 해제 (2025-03-21)</h3>
+<p>5th Circuit 판결 후 OFAC가 SDN에서 Tornado Cash 제거. 다만 성명에서는:
+- "여전히 mixer는 위험하다"는 입장 유지
+- <strong>개별 거래·사용자 제재는 여전히 가능</strong></p>
+<p>즉 "코드 자체는 제재 못 하지만, 그 코드를 쓰는 사람은 별개"라는 입장.</p>
+<h3>Roman Storm 형사재판 (별도 진행)</h3>
+<p><strong>코드 제재가 무효화된 뒤에도 개발자 형사 책임은 별개</strong>입니다. 죄목:
+- 자금세탁 공모
+- 무면허 송금업
+- 제재 위반</p>
+<p>2024~2025 재판 진행 중. 이 재판의 결과는 <strong>DeFi 개발자 책임 범위</strong>를 결정하는 역사적 판례가 될 것으로 예상.</p>
+<h3>실무 포인트</h3>
+<p>"코드는 제재 못 한다"가 결론처럼 보이지만, <strong>"개발자·frontend 운영자·거버넌스 토큰 홀더는 책임 가능"</strong> 이 함께 확인된 사건입니다. DeFi 프로토콜 개발 관점에서 <strong>"내가 빌드하는 것이 범죄에 쓰이리라는 예견 가능성이 있는가"</strong> 가 형사 리스크의 기준점이 됐습니다.</p>
+<hr />
+<h2>4. 컴플라이언스 임팩트</h2>
+<h3>회사 차원</h3>
+<ul>
+<li>2022~2025 동안 Tornado 노출 wallet은 <strong>자동 차단</strong> 표준화</li>
+<li>2025-03 제재 해제 후에도 <strong>mixer는 위험 카테고리 유지</strong></li>
+<li>회사 정책: "Tornado 노출 = 위험점수 +50" 같은 룰 그대로 존속</li>
+</ul>
+<h3>산업 차원</h3>
+<ul>
+<li><strong>mixer 일반 = 고위험</strong>이라는 인식 자리잡음</li>
+<li>각 mixer마다 라벨링 + 자동 KYT 차단 표준</li>
+<li>합법 사용자 보호 vs 자금세탁 차단의 딜레마는 여전 미해결</li>
+</ul>
+<h3>DeFi 차원</h3>
+<ul>
+<li>"코드 자체는 제재 못 한다"는 일부 안정감</li>
+<li>그러나 <strong>개발자 · frontend · governance token holder 책임 가능성</strong> 확인</li>
+<li>DeFi 회사는 KYC·제재 체크를 추가하는 곳이 늘어남</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>규제 해제가 <strong>컴플라이언스 완화</strong>를 의미하지 않는다는 게 중요합니다. 거래소·VASP는 Tornado Cash 노출을 여전히 위험 시그널로 취급하며, 이유는 <strong>"법적으로 허용되어도 실제 자금은 대부분 해킹·불법 자금"</strong> 이기 때문. 규제보다 현실적 판단이 리스크 관리의 본질.</p>
+<hr />
+<h2>5. 다른 Mixer의 운명</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>Tornado Cash 사건 전후로 전 세계 mixer들이 어떻게 정리됐는지. <strong>운영자 식별이 가능한 mixer는 거의 다 폐쇄</strong>됐고, 분산형(P2P·CoinJoin)만 살아남은 구조가 명확합니다.</p>
+<table>
+<thead>
+<tr>
+<th>Mixer</th>
+<th>운명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tornado Cash</strong></td>
+<td>2022 제재 → 2025 해제, 개발자 재판 중</td>
+</tr>
+<tr>
+<td><strong>Blender.io</strong></td>
+<td>2022-05 OFAC 제재 → 운영 중단</td>
+</tr>
+<tr>
+<td><strong>Sinbad.io</strong></td>
+<td>2023-11 OFAC 제재 (Blender 후신)</td>
+</tr>
+<tr>
+<td><strong>Wasabi Wallet</strong></td>
+<td>운영 중, CoinJoin (분산형)</td>
+</tr>
+<tr>
+<td><strong>Samourai Wallet</strong></td>
+<td>2024-04 운영자 체포, 서비스 중단</td>
+</tr>
+<tr>
+<td><strong>JoinMarket</strong></td>
+<td>P2P CoinJoin, 운영 중</td>
+</tr>
+<tr>
+<td><strong>Cryptomixer</strong></td>
+<td>운영 중</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>이 표가 보여주는 패턴: <strong>중앙화 운영자가 있는 mixer = 정리 대상 / 순수 P2P CoinJoin = 법적 타깃팅 어려움</strong>. 미래의 규제 방향은 P2P CoinJoin에 대해서도 "Samourai처럼 개발자를 표적"으로 가는 쪽일 가능성이 큽니다.</p>
+<hr />
+<h2>6. 한국 시점 — 우리는 어떻게</h2>
+<ul>
+<li>한국 거래소는 Tornado 노출 wallet <strong>차단</strong> 표준</li>
+<li>가상자산이용자보호법 + 특금법으로 <strong>mixer 사용 자체가 의심거래 → STR</strong></li>
+<li>한국 사용자는 Tornado 사용 자체가 사실상 위험</li>
+<li>2025-03 제재 해제 후에도 한국 정책 변화 없음</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 VASP는 OFAC이 제재를 해제했다고 해도 <strong>자체적으로 mixer 차단을 유지</strong>합니다. 이는 한국 감독당국이 "OFAC보다 보수적인 자체 기준"을 운영해도 된다는 시그널이기도 합니다. 글로벌 규제 변화에 맞춰 <strong>자사 정책을 즉시 완화하는 것은 오히려 위험</strong>한 접근.</p>
+<hr />
+<h2>7. 학습 포인트</h2>
+<pre><code>- 코드를 제재할 수 있는가? 법적으로는 어렵다는 결론 (적어도 미국 IEEPA 한계)
+- 그러나 개발자·frontend·governance는 별개 — 책임질 수 있다
+- 회사 정책은 OFAC 제재와 별도로 mixer = 고위험 유지
+- DeFi의 미래는 &quot;탈중앙화 = AML 면책&quot;이 아님이 분명해짐
+- ZKP 기반 프라이버시 도구의 정당한 사용과 자금세탁 도구의 분리가 미해결 과제
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="lazarus-dprk.md"><code>lazarus-dprk.md</code></a> — Tornado의 주요 사용자</li>
+<li><a href="major-enforcement.md"><code>major-enforcement.md</code></a> — 관련 enforcement</li>
+<li><a href="../3-crypto-aml/defi-nft-risks.md"><code>../3-crypto-aml/defi-nft-risks.md</code></a> — DeFi AML 회색지대</li>
+<li><a href="../5-compliance/sanctions-screening.md"><code>../5-compliance/sanctions-screening.md</code></a> — OFAC 일반</li>
+<li><a href="https://home.treasury.gov/news/press-releases/jy0916">Treasury — Tornado Cash 제재 보도자료 (2022)</a></li>
+<li><a href="https://www.venable.com/insights/publications/2025/04/a-legal-whirlwind-settles-treasury-lifts-sanctions">Venable — Treasury Lifts Sanctions on Tornado (2025)</a></li>
+<li><a href="https://www.sanctionscanner.com/blog/tornado-cash-a-crypto-mixing-service-now-blacklisted-by-the-us-treasury-675">Sanction Scanner — Tornado Cash 분석</a></li>
+<li><a href="https://www.btcpolicy.org/articles/tornado-cash-where-code-privacy-and-sanctions-collide">BTC Policy Institute — Tornado 분석</a></li>
+<li><a href="https://www.steptoe.com/en/news-publications/blockchain-blog/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html">Steptoe — Tornado Cash &amp; DeFi AML 의의</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 51 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

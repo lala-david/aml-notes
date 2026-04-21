@@ -6,6 +6,22 @@
 
 한국은 **VerifyVASP(Upbit계) vs CODE(빗썸·코빗·코인원 합작)** 의 컨소시엄 양강 구조. 분산형보다 폐쇄형을 택한 이유(시장 규모가 작고 4대 거래소 신뢰 구축이 쉬움)를 이해하고, 두 솔루션 연동으로 **4대 거래소 간 자유 송금**이 가능해진 사정을 확인합니다. 신규 한국 VASP 진입 시 솔루션 선택의 판단 기준도.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    VV["🔐 VerifyVASP<br/>(람다256 + Chainalysis)"] <--> UP["🏦 Upbit"]
+    CD["🔐 CODE<br/>(3사 합작법인)"] <--> B["🏦 빗썸"]
+    CD <--> KB["🏦 코빗"]
+    CD <--> CO["🏦 코인원"]
+    VV <-.연동.-> CD
+    style VV fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style CD fill:#c9a646,color:#fff,stroke:#c9a646
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. VerifyVASP를 누가 운영하나?
 2. CODE를 누가 만들었나?

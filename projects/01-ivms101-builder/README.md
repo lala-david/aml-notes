@@ -2,6 +2,21 @@
 
 > Travel Rule 메시지 표준을 손으로 만들면서 체화. (D28 미니 프로젝트)
 
+## 🏗 아키텍처
+
+```mermaid
+flowchart LR
+    I["📥 Input<br/>송수신 정보 + VASP"] --> B["🔨 build_ivms101_message()"]
+    B --> J["📝 IVMS101 JSON"]
+    J --> V["🔍 validate_ivms101()"]
+    V --> OK["✅ 성공"]
+    V --> ERR["⚠️ 에러 리스트<br/>• 필드 누락<br/>• 타입 오류<br/>• 포맷 오류"]
+    OK --> S["💾 sample_messages/<br/>5 JSON files"]
+    style B fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style OK fill:#d1fae5,stroke:#10b981
+    style ERR fill:#fee2e2,stroke:#dc2626
+```
+
 ## 왜 이걸 만드나
 
 Travel Rule 이론을 여러 문서로 읽어도 **실제 IVMS101 메시지가 어떻게 생겼는지** 한 번도 만져보지 않으면 이해가 겉핥기로 남습니다. 이 프로젝트는 **한국 100만원 시나리오**를 중심으로 Originator·Beneficiary·VASP 정보를 JSON으로 직접 생성하고 검증합니다. 필수 필드·타입·길이 제약을 손으로 처리해보면 **D22·D23에서 배운 내용**이 정확히 어디에 쓰이는지 몸에 새겨집니다.

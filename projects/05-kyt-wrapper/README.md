@@ -2,6 +2,26 @@
 
 > 자체 또는 외부 KYT를 통합 인터페이스로. (D56 미니 프로젝트)
 
+## 🏗 아키텍처
+
+```mermaid
+flowchart TB
+    IN["🔍 kyt_check(address)"] --> D49["D49 OFAC screener<br/>Direct SDN 매칭"]
+    IN --> D42["D42 Mixer labels<br/>자체 라벨 매칭"]
+    IN --> D35["D35 2-hop tracer<br/>Exposure 분석"]
+    D49 & D42 & D35 --> CALC["🧮 calculate_risk_score()"]
+    CALC -->|SDN 50 · mixer 40 · 2hop 30| SCORE["🎯 Risk Score 0~100"]
+    SCORE --> REC["recommend_action()"]
+    REC -->|≥70| BLOCK["⛔ BLOCK"]
+    REC -->|40~69| REV["🔍 REVIEW"]
+    REC -->|<40| ALLOW["✅ ALLOW"]
+    style IN fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style SCORE fill:#c9a646,color:#fff,stroke:#c9a646
+    style BLOCK fill:#fee2e2,stroke:#dc2626
+    style REV fill:#fed7aa,stroke:#ea580c
+    style ALLOW fill:#d1fae5,stroke:#10b981
+```
+
 ## 왜 이걸 만드나
 
 앞서 만든 **D42(mixer)·D49(OFAC)·D35(tracer)** 가 각기 따로 작동하던 것을, 하나의 `kyt_check(address)` 함수로 **통합**하는 프로젝트. Risk Score를 계산하고 ALLOW·REVIEW·BLOCK 중 하나의 action을 추천하는 구조를 만들면, Capstone에서 설계할 Risk Engine의 **핵심 로직**이 이미 구현된 상태로 도착합니다. 6개 프로젝트 중 **가장 통합적이고 실무에 가까운** 산출물.

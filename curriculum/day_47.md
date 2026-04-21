@@ -6,6 +6,22 @@
 
 "AML은 시스템보다 거버넌스가 본질". 오늘은 **5 Pillars**(정책·AMLO·교육·감사·CDD)와 **3중 방어선**(영업-컴플-감사)을 정리하고, **ERA (Enterprise-wide Risk Assessment)** 가 왜 매년 수행돼야 하는지 이해합니다. 정책 매뉴얼의 12 챕터 구조는 실무 작성 시 참조 템플릿.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    B["🏢 AML Program"] --> P1["1. 정책·절차"]
+    B --> P2["2. AMLO 임명"]
+    B --> P3["3. 교육"]
+    B --> P4["4. 독립 감사"]
+    B --> P5["5. CDD + BO"]
+    B --> L["3LoD<br/>1선 영업 · 2선 컴플 · 3선 감사"]
+    style B fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. AML 5 pillars 이름?
 2. 3중 방어선 각 라인의 역할?

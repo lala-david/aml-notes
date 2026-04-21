@@ -6,6 +6,21 @@
 
 IVMS101이 "무엇을"이라면 프로토콜은 "어떻게". **TRISA**(PKI·gRPC·분산형)와 **TRP**(REST·가벼움)는 분산형의 두 기둥이며, 누구나 참여 가능한 오픈 모델의 장단점을 보여줍니다. 이 분산형과 폐쇄형(VerifyVASP·CODE)의 차이를 이해하는 게 내일 한국 양강을 보는 배경 지식입니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    S["📨 IVMS101 Payload"] --> T["TRISA<br/>gRPC + PKI"]
+    S --> P["TRP<br/>REST API"]
+    S --> O["OpenVASP<br/>Ethereum 기반"]
+    T -.분산형.-> D["누구나 참여<br/>(VASP Discovery 별도)"]
+    P -.분산형.-> D
+    style S fill:#e5eaf2,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. TRISA의 신뢰 모델 (PKI 인증서)?
 2. TRP가 가벼운 이유 (REST API)?

@@ -6,6 +6,21 @@
 
 EU는 **MiCA(시장) + AMLR·AMLD6(AML) + TFR(Travel Rule)** 3종 세트로 가장 체계적인 가상자산 규제를 완성했습니다. 특히 **TFR의 임계금액 0**이 전 세계에서 가장 엄격한 기준이라, 글로벌 VASP들이 EU 기준을 설계 baseline으로 삼는 경향도 오늘 이해합니다. 2026-07 grandfathering 종료가 EU 시장 구조 변화의 분기점.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    EU["🇪🇺 EU 가상자산<br/>3종 세트"] --> M["MiCA (2024-12-30)<br/>시장·라이선스"]
+    EU --> T["TFR (2024-12-30)<br/>Travel Rule 임계 0"]
+    EU --> A["AMLR+AMLD6 (2027-07-10)<br/>27개국 단일 규칙"]
+    M --> MG["grandfathering<br/>2026-07-01 종료"]
+    A --> AMLA["AMLA 감독기구<br/>(프랑크푸르트)"]
+    style EU fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. MiCA, AMLR, TFR 각각의 정체성 한 줄?
 2. EU TFR 임계금액은? (왜 그런가?)

@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 36 — 자금세탁 7 typology 종합</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 36 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">36</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 6 / 7</div>
+        <div class="page-meta__theme">자금세탁 유형 + DeFi·믹서</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">자금세탁 7 typology 종합</h1>
+      <p class="title-block__lead">가상자산 자금세탁의 7가지 핵심 패턴.</p>
+      <span class="title-block__time">⏱ ~80분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 354.562px; background-color: transparent;" viewBox="0 0 354.5625 875" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M81.945,412L96.477,348.917C111.01,285.833,140.075,159.667,162.935,96.583C185.794,33.5,202.448,33.5,210.775,33.5L219.102,33.5" id="my-svg-L_L_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_M_0" data-points="W3sieCI6ODEuOTQ0ODAwMDQ2NDEwODksInkiOjQxMn0seyJ4IjoxNjkuMTQwNjI1LCJ5IjozMy41fSx7IngiOjIyMy4xMDE1NjI1LCJ5IjozMy41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M83.903,412L98.109,365.75C112.316,319.5,140.728,227,158.434,180.75C176.141,134.5,183.141,134.5,186.641,134.5L190.141,134.5" id="my-svg-L_L_CH_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_CH_0" data-points="W3sieCI6ODMuOTAyOTYyNTYxODgxMTgsInkiOjQxMn0seyJ4IjoxNjkuMTQwNjI1LCJ5IjoxMzQuNX0seyJ4IjoxOTQuMTQwNjI1LCJ5IjoxMzQuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M87.819,412L101.373,382.583C114.926,353.167,142.034,294.333,163.394,264.917C184.755,235.5,200.37,235.5,208.177,235.5L215.984,235.5" id="my-svg-L_L_BR_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_BR_0" data-points="W3sieCI6ODcuODE5Mjg3NTkyODIxNzgsInkiOjQxMn0seyJ4IjoxNjkuMTQwNjI1LCJ5IjoyMzUuNX0seyJ4IjoyMTkuOTg0Mzc1LCJ5IjoyMzUuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M99.568,412L111.164,399.417C122.759,386.833,145.95,361.667,163.218,349.083C180.487,336.5,191.833,336.5,197.507,336.5L203.18,336.5" id="my-svg-L_L_PC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_PC_0" data-points="W3sieCI6OTkuNTY4MjYyNjg1NjQzNTYsInkiOjQxMn0seyJ4IjoxNjkuMTQwNjI1LCJ5IjozMzYuNX0seyJ4IjoyMDcuMTc5Njg3NSwieSI6MzM2LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M144.141,437.5L148.307,437.5C152.474,437.5,160.807,437.5,170.79,437.5C180.773,437.5,192.406,437.5,198.223,437.5L204.039,437.5" id="my-svg-L_L_DX_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_DX_0" data-points="W3sieCI6MTQ0LjE0MDYyNSwieSI6NDM3LjV9LHsieCI6MTY5LjE0MDYyNSwieSI6NDM3LjV9LHsieCI6MjA4LjAzOTA2MjUsInkiOjQzNy41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M99.568,463L111.164,475.583C122.759,488.167,145.95,513.333,163.767,525.917C181.583,538.5,194.026,538.5,200.247,538.5L206.469,538.5" id="my-svg-L_L_DF_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_DF_0" data-points="W3sieCI6OTkuNTY4MjYyNjg1NjQzNTYsInkiOjQ2M30seyJ4IjoxNjkuMTQwNjI1LCJ5Ijo1MzguNX0seyJ4IjoyMTAuNDY4NzUsInkiOjUzOC41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M87.819,463L101.373,492.417C114.926,521.833,142.034,580.667,160.297,610.083C178.56,639.5,187.979,639.5,192.689,639.5L197.398,639.5" id="my-svg-L_L_PR_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_PR_0" data-points="W3sieCI6ODcuODE5Mjg3NTkyODIxNzgsInkiOjQ2M30seyJ4IjoxNjkuMTQwNjI1LCJ5Ijo2MzkuNX0seyJ4IjoyMDEuMzk4NDM3NSwieSI6NjM5LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M83.903,463L98.109,509.25C112.316,555.5,140.728,648,160.774,694.25C180.82,740.5,192.5,740.5,198.34,740.5L204.18,740.5" id="my-svg-L_L_NFT_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_NFT_0" data-points="W3sieCI6ODMuOTAyOTYyNTYxODgxMTgsInkiOjQ2M30seyJ4IjoxNjkuMTQwNjI1LCJ5Ijo3NDAuNX0seyJ4IjoyMDguMTc5Njg3NSwieSI6NzQwLjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M81.945,463L96.477,526.083C111.01,589.167,140.075,715.333,161.198,778.417C182.32,841.5,195.5,841.5,202.09,841.5L208.68,841.5" id="my-svg-L_L_OTC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_L_OTC_0" data-points="W3sieCI6ODEuOTQ0ODAwMDQ2NDEwODksInkiOjQ2M30seyJ4IjoxNjkuMTQwNjI1LCJ5Ijo4NDEuNX0seyJ4IjoyMTIuNjc5Njg3NSwieSI6ODQxLjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_L_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_CH_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_BR_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_PC_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_DX_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_DF_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_PR_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_NFT_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_L_OTC_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-L-0" data-look="classic" transform="translate(76.0703125, 437.5)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-68.0703125" y="-25.5" width="136.140625" height="51"/><g class="label" style="color:#fff !important" transform="translate(-38.0703125, -10.5)"><rect/><foreignObject width="76.140625" height="21"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🔀 Layering</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-M-1" data-look="classic" transform="translate(270.3515625, 33.5)"><rect class="basic label-container" style="" x="-47.25" y="-25.5" width="94.5" height="51"/><g class="label" style="" transform="translate(-17.25, -10.5)"><rect/><foreignObject width="34.5" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Mixer</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CH-3" data-look="classic" transform="translate(270.3515625, 134.5)"><rect class="basic label-container" style="" x="-76.2109375" y="-25.5" width="152.421875" height="51"/><g class="label" style="" transform="translate(-46.2109375, -10.5)"><rect/><foreignObject width="92.421875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Chain Hopping</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-BR-5" data-look="classic" transform="translate(270.3515625, 235.5)"><rect class="basic label-container" style="" x="-50.3671875" y="-25.5" width="100.734375" height="51"/><g class="label" style="" transform="translate(-20.3671875, -10.5)"><rect/><foreignObject width="40.734375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Bridge</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-PC-7" data-look="classic" transform="translate(270.3515625, 336.5)"><rect class="basic label-container" style="" x="-63.171875" y="-25.5" width="126.34375" height="51"/><g class="label" style="" transform="translate(-33.171875, -10.5)"><rect/><foreignObject width="66.34375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Peel Chain</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-DX-9" data-look="classic" transform="translate(270.3515625, 437.5)"><rect class="basic label-container" style="" x="-62.3125" y="-25.5" width="124.625" height="51"/><g class="label" style="" transform="translate(-32.3125, -10.5)"><rect/><foreignObject width="64.625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>DEX Swap</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-DF-11" data-look="classic" transform="translate(270.3515625, 538.5)"><rect class="basic label-container" style="" x="-59.8828125" y="-25.5" width="119.765625" height="51"/><g class="label" style="" transform="translate(-29.8828125, -10.5)"><rect/><foreignObject width="59.765625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>DeFi L/LP</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-PR-13" data-look="classic" transform="translate(270.3515625, 639.5)"><rect class="basic label-container" style="" x="-68.953125" y="-25.5" width="137.90625" height="51"/><g class="label" style="" transform="translate(-38.953125, -10.5)"><rect/><foreignObject width="77.90625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Privacy Coin</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-NFT-15" data-look="classic" transform="translate(270.3515625, 740.5)"><rect class="basic label-container" style="" x="-62.171875" y="-25.5" width="124.34375" height="51"/><g class="label" style="" transform="translate(-32.171875, -10.5)"><rect/><foreignObject width="64.34375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>NFT Wash</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-OTC-17" data-look="classic" transform="translate(270.3515625, 841.5)"><rect class="basic label-container" style="" x="-57.671875" y="-25.5" width="115.34375" height="51"/><g class="label" style="" transform="translate(-27.671875, -10.5)"><rect/><foreignObject width="55.34375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>OTC 환전</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>7유형 (Mixer/Chain hop/Bridge/Peel/DEX/Privacy coin/OTC) 각 한 줄 정의?</li>
+<li>어떤 유형이 가장 빠른가? 가장 큰 규모?</li>
+<li>한국 시장에서 가장 빈도 높은 유형?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/3-crypto-aml/onchain-typology.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>Chainalysis 2026 Crypto Crime Report<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.chainalysis.com/reports/crypto-crime-2026/</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>7유형을 표로 정리 (정의 / 사용도 / 한국 적용)</li>
+<li>각 유형의 탐지 신호 1개씩</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>7 typology 모두 한 줄 정의 가능</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>2025 트렌드 1위 = cross-chain 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>스테이블코인 84% 비중 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>CMLN $16.1B 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 36 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">온체인 자금세탁 유형 (Typologies)</h2>
+    <p class="article-divider__lead">가상자산 자금세탁의 **실제 패턴**. 어떻게 layering 하는가. 이 글을 읽고 나면 KYT 시스템이 탐지하려는 9개 패턴이 각각 **어떤 원리로 작동**하고 **왜 탐지가 어려운지** 설명할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/3-crypto-aml/onchain-typology.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 36</span>
+      <span class="article-head__path">notes/3-crypto-aml/onchain-typology.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>자금세탁자는 온체인의 <strong>익명성 + 속도 + 자동화</strong>를 최대한 활용</li>
+<li>핵심 9가지 유형: <strong>믹서 · 체인호핑 · 브리지 · peel chain · DEX swap · DeFi lending · 프라이버시코인 · NFT wash · OTC 환전</strong></li>
+<li>2025~2026 트렌드: <strong>cross-chain laundering</strong> + <strong>CMLN(중국어 자금세탁 네트워크)</strong></li>
+<li>스테이블코인이 불법거래의 <strong>84%</strong> (Chainalysis 2026)</li>
+<li>탐지는 <strong>클러스터링 + attribution + behavior pattern</strong> 삼박자</li>
+</ul>
+<hr />
+<h2>1. 왜 9개 유형을 알아야 하나</h2>
+<h3>KYT 룰의 출발점</h3>
+<p>KYT 시스템의 거의 모든 룰은 이 9개 유형 중 하나를 탐지하려 설계됩니다. "왜 이 룰이 있는가"를 이해하려면 <strong>그 룰이 방어하려는 자금세탁 유형</strong>을 먼저 알아야 합니다. 유형의 원리를 모른 채 룰만 카피하면 임계값 조정·예외 처리에서 실패합니다.</p>
+<h3>자금세탁 3단계와의 매핑</h3>
+<table>
+<thead>
+<tr>
+<th>전통 ML</th>
+<th>가상자산 ML 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Placement</strong></td>
+<td>현금 → 거래소 입금, OTC 매수, P2P 거래</td>
+</tr>
+<tr>
+<td><strong>Layering</strong></td>
+<td>Mixer, chain hopping, bridge, DEX swap, peel chain, NFT wash</td>
+</tr>
+<tr>
+<td><strong>Integration</strong></td>
+<td>OTC 환전, gift card 구매, 부동산·명품 결제, 합법사업체 자금화</td>
+</tr>
+</tbody>
+</table>
+<p>가상자산은 <strong>24~48시간 내 3단계 완주</strong>가 가능합니다 (Bybit 사례: 48시간 내 $160M layering 완료). 이게 전통 금융 AML과의 결정적 차이.</p>
+<hr />
+<h2>2. 9가지 자금세탁 유형 — 원리·도구·탐지 포인트</h2>
+<h3>A. Mixer / Tumbler (믹서)</h3>
+<p><strong>원리</strong>: 여러 사용자의 자금을 한 풀에 섞은 뒤 무작위 금액·시간으로 출금 → 입금 주소와 출금 주소의 <strong>온체인 연결을 끊음</strong>.</p>
+<p><strong>대표 서비스</strong>:
+- <strong>Tornado Cash</strong> (Ethereum) — zk-SNARK 기반. 2022-08 OFAC 제재 → 2024-11 5th Cir. Van Loon 판결 → 2025-03-21 지정 해제. 해제 후에도 업계는 <strong>여전히 위험 카테고리</strong> 유지.
+- <strong>Wasabi Wallet</strong> (Bitcoin) — CoinJoin. 여러 사용자가 동시에 균등 금액을 섞는 방식.
+- <strong>Samourai Whirlpool</strong> (Bitcoin) — CoinJoin, 2024 운영자 체포 후 서비스 종료.
+- <strong>JoinMarket</strong> (Bitcoin) — P2P CoinJoin. 메이커/테이커 모델.</p>
+<p><strong>탐지 포인트</strong>:
+- 알려진 mixer 스마트컨트랙트 주소 노출
+- <strong>Denomination 표준화</strong> (Tornado는 0.1/1/10/100 ETH 풀)
+- Input/Output 개수 균등 (CoinJoin 지문)
+- mixer 진입 후 <strong>정확한 유지시간 분포</strong></p>
+<h3>B. Chain Hopping (체인 점프)</h3>
+<p><strong>원리</strong>: BTC → ETH → USDT(Tron) → BNB → ... 처럼 여러 체인을 점프하며 흔적을 흐림. 분석 도구가 한 체인에서 끊기는 점 노림.</p>
+<p><strong>2026 트렌드</strong>: 가장 많이 쓰이는 layering 방식. <strong>cross-chain bridge가 핵심 인프라</strong>이므로 bridge 탐지가 곧 chain hopping 탐지.</p>
+<h3>C. Cross-chain Bridge 활용</h3>
+<p><strong>원리</strong>: A 체인에서 자금을 잠그고 B 체인에서 <strong>wrapped 토큰</strong> 발행 → 추적 단절.</p>
+<p><strong>대표 브리지</strong>: Wormhole, LayerZero, Synapse, Stargate, Across, Hop, THORChain.</p>
+<p><strong>이중 리스크</strong>: 브리지 자체가 <strong>해킹 1순위 표적</strong>이기도 함.</p>
+<table>
+<thead>
+<tr>
+<th>사고</th>
+<th>연도</th>
+<th>손실</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Poly Network</td>
+<td>2021</td>
+<td>$611M (이후 반환)</td>
+</tr>
+<tr>
+<td>Wormhole</td>
+<td>2022</td>
+<td>$325M</td>
+</tr>
+<tr>
+<td>Ronin Bridge</td>
+<td>2022</td>
+<td><strong>$625M</strong> (Lazarus)</td>
+</tr>
+<tr>
+<td>Nomad</td>
+<td>2022</td>
+<td>$190M</td>
+</tr>
+<tr>
+<td>Multichain</td>
+<td>2023</td>
+<td>$231M</td>
+</tr>
+</tbody>
+</table>
+<p><strong>탐지 포인트</strong>: 브리지 컨트랙트 입출금 인덱싱 + 시간·금액 매칭으로 A→B 체인 연결 복원.</p>
+<h3>D. Peel Chain (껍질 사슬)</h3>
+<p><strong>원리</strong>: 큰 금액 주소에서 <strong>소액씩 떼어내(peel)</strong> 다른 주소로 보내고 잔액은 또 다른 주소로 → 길게 늘여진 사슬 패턴.</p>
+<p><strong>왜 쓰나</strong>: 사람이 일일이 따라가기 어렵게 만드는 의도. 전통 금융 smurfing(분할입금)의 온체인 버전.</p>
+<p><strong>탐지 포인트</strong>: 그래프 분석 — in-degree/out-degree 패턴, 분기 간격, 소액 상대적 일정성. 그래프 DB에서 시각적으로 <strong>거의 일자형 사슬</strong>로 보임.</p>
+<h3>E. DEX Swap (탈중앙거래소 활용)</h3>
+<p><strong>원리</strong>: KYC 없는 DEX(Uniswap, PancakeSwap, Curve)에서 토큰을 교환해 <strong>자산 형태를 바꿈</strong>. ETH를 USDT로 바꾸면 출처 추적 감각이 끊어짐.</p>
+<p><strong>layering 효과</strong>: 자산 형태 변환 + 대량 유동성 풀 통과로 흐름 희석.</p>
+<p><strong>탐지 포인트</strong>: DEX 컨트랙트 노출 + swap 전후 행동 패턴. DEX 자체는 합법이므로 <strong>swap 자체가 위험이 아니라 swap 전후 흐름이 위험</strong>.</p>
+<h3>F. DeFi Lending / Liquidity Pool</h3>
+<p><strong>원리</strong>: Aave·Compound에 토큰 입금 → 다른 자산으로 인출. 또는 Uniswap LP(Liquidity Pool) 토큰 발행·소각으로 출처 흐림.</p>
+<p><strong>layering 효과</strong>: 자산 형태 변환 + 다른 사용자 자금과 혼합.</p>
+<p><strong>탐지 포인트</strong>: 비정상 LP 진입/퇴출 패턴, 짧은 시간 내 다수 프로토콜 거침.</p>
+<h3>G. Privacy Coin</h3>
+<p><strong>원리</strong>: 프로토콜 설계 자체가 <strong>추적 불가능</strong>하도록 익명성 강화.</p>
+<table>
+<thead>
+<tr>
+<th>코인</th>
+<th>기술</th>
+<th>추적 가능성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monero (XMR)</strong></td>
+<td>Ring Signature + Stealth Address + RingCT</td>
+<td><strong>거의 불가</strong></td>
+</tr>
+<tr>
+<td><strong>Zcash (ZEC)</strong></td>
+<td>zk-SNARK shielded transaction</td>
+<td>shielded 사용 시 불가 (선택적)</td>
+</tr>
+<tr>
+<td><strong>Dash</strong></td>
+<td>PrivateSend (CoinJoin 변형)</td>
+<td>제한적 추적 가능</td>
+</tr>
+<tr>
+<td><strong>Grin/Beam</strong></td>
+<td>MimbleWimble</td>
+<td>어려움</td>
+</tr>
+</tbody>
+</table>
+<p><strong>운영 현실</strong>: 한국·일본 주요 거래소는 privacy coin 전량 상장폐지. 자금세탁자는 privacy coin을 OTC/P2P/비규제 거래소에서만 다루고, 입출 시점에 BTC로 환전해서 들어가고 나옴. 이 <strong>진입·탈출 순간</strong>이 탐지 기회.</p>
+<h3>H. NFT Wash Trading</h3>
+<p><strong>원리</strong>: 자기들끼리 NFT를 사고팔며 <strong>가격·거래량을 부풀려</strong> 자금 이전을 정당화.</p>
+<p><strong>유형</strong>:
+- <strong>Self-trading</strong> — 같은 사람이 양쪽 지갑 보유
+- <strong>Loop trading</strong> — 3자 이상 순환 (A→B→C→A)
+- <strong>인플레이션 펌프</strong> — 가격 띄워 외부 바이어에 매도</p>
+<p><strong>시장 통계</strong>: 2022~2023 NFT 광풍 시 wash trading 비중 추정 <strong>25~50%</strong>. 2025년 NFT 시장 위축 후 거래량 자체 감소했으나 <strong>고가 컬렉션</strong>(BAYC, CryptoPunks) 중심으로는 여전 활동.</p>
+<p><strong>탐지 포인트</strong>: 짧은 시간 내 같은 NFT의 반복 거래, 거래자 주소 간 클러스터 관계, 가격 변동 패턴 대비 유동성 부족.</p>
+<h3>I. OTC Desk (Off-Exchange Counter)</h3>
+<p><strong>원리</strong>: 익명·저KYC OTC desk에서 가상자산 ↔ 법정화폐 환전.</p>
+<p><strong>위험 OTC</strong>:
+- <strong>중국어권 텔레그램 OTC</strong> — 2025년 자금세탁의 중심축
+- <strong>폐쇄된 P2P</strong> (Paxful, LocalBitcoins)
+- 비규제국 소재 OTC</p>
+<p><strong>CMLN (Chinese Money Laundering Network)</strong> 이 이 영역에서 부상 — 2025년 <strong>$16.1B 처리, 1,800+ 활성 wallet</strong>. 북한 자금까지 세탁 파트너 역할.</p>
+<h3>실무 포인트</h3>
+<p>룰 설계 시 이 9개 유형을 <strong>별도 룰 그룹</strong>으로 관리해야 false positive 원인을 역추적할 수 있습니다. 한 룰 엔진 안에 유형을 섞어 관리하면 나중에 "왜 이 고객이 차단됐는지" 설명하기 어렵고, STR에 근거를 쓰기도 힘들어집니다.</p>
+<hr />
+<h2>3. 2025~2026 새로운 트렌드</h2>
+<p><img alt="2025 불법 가상자산 거래 자산별 비중 — 스테이블코인 84%" src="../../charts/output/illicit_asset_share.svg" /></p>
+<p><img alt="2025 가상자산 범죄 스냅샷" src="../../charts/output/trend_2025_snapshot.svg" /></p>
+<h3>A. Cross-chain Laundering 가속화</h3>
+<p>단일 체인 분석으로는 추적 불가능한 수준으로 발전. <strong>Chainalysis Crosschain, TRM Multichain Tracing</strong> 같은 cross-chain 도구가 KYT 벤더의 핵심 차별점으로 부상. 2025년 자금세탁의 <strong>상당 부분이 multi-chain</strong>.</p>
+<h3>B. CMLN (Chinese Money Laundering Networks)</h3>
+<p><strong>Laundering-as-a-Service(LaaS)</strong> 의 등장. 수수료(보통 5~15%)를 받고 세탁 서비스를 제공.</p>
+<ul>
+<li>2025년 <strong>$16.1B 처리</strong>, 1,800+ 활성 wallet</li>
+<li>북한·러시아 자금까지 이용</li>
+<li>텔레그램·위챗 기반 OTC 네트워크와 결합</li>
+<li>범죄조직이 자체 세탁 대신 <strong>"전문 업체에 아웃소싱"</strong> 하는 시대의 시작</li>
+</ul>
+<h3>C. 스테이블코인 압도적 점유</h3>
+<ul>
+<li>불법거래의 <strong>84%가 스테이블코인</strong> (USDT &gt; USDC &gt; 기타)</li>
+<li>이유: 가격 안정성 + Tron의 저수수료 + 글로벌 환금성</li>
+<li>동시에 <strong>freeze 가능</strong> (Tether/Circle이 실제로 SDN·도난자금 freeze 수행) → 양면</li>
+</ul>
+<h3>D. 국가 단위 자금세탁</h3>
+<ul>
+<li><strong>러시아 A7A5 stablecoin</strong>: 2025-02 발행 후 1년 내 $93.3B 거래 — 제재 회피 인프라</li>
+<li><strong>DPRK Lazarus</strong>: 2025년 $2.02B 탈취, 누적 $6.75B</li>
+</ul>
+<h3>E. 산업화 (Professionalization)</h3>
+<p>단일 행위자 시대 → <strong>분업 생태계</strong>: 해킹팀·세탁팀·환전팀·OTC팀이 각자 전문화. 마치 SaaS처럼 <strong>서비스로 제공</strong>됨.</p>
+<h3>실무 포인트</h3>
+<p>이 트렌드 중 <strong>"Laundering-as-a-Service"</strong> 의 부상이 가장 구조적 위협입니다. 개별 범죄자가 자체 능력으로 세탁하는 시대에는 KYT 룰이 대응 가능했지만, 전문 세탁업자가 매번 새 기법을 시도하면 <strong>탐지 rule 엔지니어링이 군비 경쟁</strong>이 됩니다. 이게 KYT 벤더가 ML 연구에 공격적으로 투자하는 이유.</p>
+<hr />
+<h2>4. 탐지 기법 (방어 측)</h2>
+<h3>A. Address Clustering (주소 클러스터링)</h3>
+<ul>
+<li><strong>Common Input Ownership Heuristic (CIOH)</strong> — UTXO 모델에서 한 트랜잭션의 input 주소들은 <strong>한 사람이 통제</strong>. 비트코인 분석의 기본 휴리스틱.</li>
+<li><strong>Change Detection</strong> — UTXO 모델에서 거스름돈 주소 식별. 정확도는 보조 휴리스틱 수준.</li>
+<li><strong>Deposit Heuristic</strong> — 거래소의 consolidation 패턴을 이용한 거래소 클러스터 식별.</li>
+</ul>
+<h3>B. Attribution (행위자 매핑)</h3>
+<p>클러스터를 <strong>알려진 엔티티</strong>(거래소, 믹서, OFAC)에 연결. Chainalysis·TRM·Elliptic의 라벨 DB가 이 영역의 <strong>moat</strong>. 라벨 DB는 자체 구축이 거의 불가능 — 수년간의 다크웹 OSINT + 거래소 협업 + 법집행 협력이 쌓여야 작동.</p>
+<h3>C. Behavior Pattern Analysis</h3>
+<ul>
+<li>Peel chain 패턴, mixer 사용 패턴, 시간대 패턴</li>
+<li>머신러닝 + 룰 베이스 결합</li>
+<li>이상거래 자동 탐지</li>
+</ul>
+<h3>D. Cross-chain Tracing</h3>
+<ul>
+<li>브리지 입출금 매칭</li>
+<li>시간·금액·메타데이터 짝짓기</li>
+<li>memo 또는 wrapped asset의 contract event 인덱싱</li>
+</ul>
+<h3>E. Exposure Score (위험노출도)</h3>
+<p>한 주소가 직접·간접으로 <strong>몇 hop 안에</strong> mixer·SDN·도난자금에 닿는가를 정량 지표로 표현. KYT 시스템의 대표 출력.</p>
+<h3>실무 포인트</h3>
+<p>탐지 기법 5개 중 어느 하나도 단독으로 완벽하지 않습니다. KYT 벤더의 경쟁력은 <strong>5개를 잘 조합한 Risk Score 공식</strong>이며, 이 공식은 벤더마다 다른 결과를 냅니다. 벤더 선정 시 같은 주소 100개를 여러 벤더에 넣어보고 <strong>출력 일치율</strong>을 비교하는 PoC가 필수.</p>
+<hr />
+<h2>5. 탐지의 한계 — 무엇이 안 되는가</h2>
+<ul>
+<li><strong>Privacy coin</strong>: 거의 추적 불가 (Monero)</li>
+<li><strong>Off-chain trade</strong>: 거래소 내부 트랜잭션은 외부에서 안 보임 (CEX 내부 이체)</li>
+<li><strong>새로운 mixer·bridge</strong>: 라벨링 안 된 시점에는 탐지 어려움 (<strong>Lag Time</strong>)</li>
+<li><strong>Adversarial behavior</strong>: 분석 도구를 회피하는 패턴 학습됨 (무작위 금액·시간)</li>
+<li><strong>법적 제한</strong>: 한 회사가 다른 회사 고객 정보 보기 어려움 (개인정보 보호법)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>탐지 실패는 기술 한계와 법적 한계가 겹쳐서 발생합니다. "왜 이 자금세탁을 못 잡았나"에 대한 사후 분석에서 <strong>기술적 개선</strong>만 추구하면 한계가 있고, <strong>업계 협력(공유 attribution DB, 법집행 협업)</strong>이 동시에 발전해야 전체 탐지율이 올라갑니다.</p>
+<hr />
+<h2>6. 거래소·수탁업자 관점 — 어떤 패턴 알람을 봐야 하나</h2>
+<pre><code>□ 입금 주소가 알려진 mixer / SDN / 도난자금에 N hop 내 노출
+□ 출금 요청 주소가 위 동일
+□ 단기간 내 다수 주소에서 분할 입금 (smurfing)
+□ 입금 직후 즉시 전액 출금 (pass-through)
+□ 비정상 시간대 거래 (UTC 기준 새벽 등)
+□ peel chain 패턴 진입
+□ DEX / bridge로의 빈번한 출금
+□ NFT wash trading 의심 패턴
+□ KYC 정보와 거래 패턴 불일치 (신고소득 대비 거액)
+□ 특정 국가 IP·VPN 패턴 + 고위험 출금 조합
+</code></pre>
+<h3>실무 포인트</h3>
+<p>위 10개 알람은 <strong>같은 강도가 아닙니다</strong>. "OFAC 1-hop 노출"은 즉시 차단 + STR, "비정상 시간대 거래"는 단독 시그널로는 약함. 룰 설계 시 <strong>단일 시그널 차단</strong>을 최소화하고 <strong>복합 시그널 조합</strong>에 의존하는 구조가 false positive를 줄입니다.</p>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>9대 유형</strong>: Mixer · Chain Hopping · Bridge · Peel Chain · DEX Swap · DeFi L/LP · Privacy Coin · NFT Wash · OTC
+<strong>탐지 5축</strong>: Clustering · Attribution · Behavior · Cross-chain · Exposure
+<strong>2025 트렌드</strong>: Cross-chain / CMLN / 스테이블코인 / 국가세탁 / LaaS 산업화</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="vasp-obligations.md"><code>vasp-obligations.md</code></a> — VASP 의무</li>
+<li><a href="defi-nft-risks.md"><code>defi-nft-risks.md</code></a> — DeFi·NFT·프라이버시 코인 상세</li>
+<li><a href="../4-technology/blockchain-analytics.md"><code>../4-technology/blockchain-analytics.md</code></a> — 블록체인 분석 기법</li>
+<li><a href="../6-cases/lazarus-dprk.md"><code>../6-cases/lazarus-dprk.md</code></a> — DPRK 실제 사례</li>
+<li><a href="https://www.chainalysis.com/reports/crypto-crime-2026/">Chainalysis 2026 Crypto Crime Report</a></li>
+<li><a href="https://www.trmlabs.com/resources/blog">TRM Labs Blog</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 36 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

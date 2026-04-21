@@ -6,6 +6,22 @@
 
 KYC·CDD·EDD·SDD는 모두 "고객을 확인한다"는 비슷한 말처럼 들리지만 **적용 대상과 강도**가 다릅니다. 동심원 구조로 한번 정리해 두면 이후 모든 실무 판단(누구에게 어느 수준의 확인을 적용할 것인가)의 기반이 됩니다. 특히 EDD 트리거 6가지는 반드시 외워둬야 하는 **운영 체크리스트**.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    KYC["🌂 KYC"] --> CDD["📋 CDD (모든 고객)"]
+    CDD --> EDD["🔒 EDD<br/>PEP · 고위험국 · 비대면+위험"]
+    CDD --> SDD["🟢 SDD<br/>정부·상장사 (한국 X)"]
+    style KYC fill:#fff,stroke:#1a2e4a,stroke-width:2px
+    style CDD fill:#f7f5ef,stroke:#c9a646
+    style EDD fill:#fed7aa,stroke:#ea580c
+    style SDD fill:#d1fae5,stroke:#10b981
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. KYC와 CDD는 어떻게 다른가?
 2. EDD가 트리거되는 6가지 상황은?

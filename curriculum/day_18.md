@@ -6,6 +6,20 @@
 
 1970년 BSA는 현금 다발 추적으로 시작했고, 2001 USA PATRIOT Act로 확장되며 오늘의 AML 표준이 됐습니다. 이 미국 원형이 FATF 권고로, 다시 한국 특금법으로 내려왔다는 구조를 오늘 체감. **MSB**(Money Services Business)로 가상자산을 포섭한 2013년 FinCEN 가이던스가 결정적 순간.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    BSA["🇺🇸 BSA (1970)"] -->|2001 강화| P["PATRIOT Act"]
+    BSA --> M["MSB 등록<br/>(가상자산 2013~)"]
+    M --> R["AML 프로그램<br/>SAR · CTR $10K"]
+    M --> TR["Travel Rule $3,000"]
+    style BSA fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. BSA는 언제 제정?
 2. 가상자산이 BSA 적용받는 메커니즘 (MSB)?

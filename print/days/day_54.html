@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 54 — 학술 논문 — Bitcoin Clustering Heuristics</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 54 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">54</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 8 / 7</div>
+        <div class="page-meta__theme">사례 + 리서치 + AI</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">학술 논문 — Bitcoin Clustering Heuristics</h1>
+      <p class="title-block__lead">AML의 학술적 뿌리.</p>
+      <span class="title-block__time">⏱ ~90분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 751.422px; background-color: transparent;" viewBox="0 0 751.421875 88" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M193,44L197.167,44C201.333,44,209.667,44,217.333,44C225,44,232,44,235.5,44L239,44" id="my-svg-L_M_W_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_W_0" data-points="W3sieCI6MTkzLCJ5Ijo0NH0seyJ4IjoyMTgsInkiOjQ0fSx7IngiOjI0MywieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M378.547,44L382.714,44C386.88,44,395.214,44,402.88,44C410.547,44,417.547,44,421.047,44L424.547,44" id="my-svg-L_W_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_W_B_0" data-points="W3sieCI6Mzc4LjU0Njg3NSwieSI6NDR9LHsieCI6NDAzLjU0Njg3NSwieSI6NDR9LHsieCI6NDI4LjU0Njg3NSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M570.719,44L574.885,44C579.052,44,587.385,44,595.052,44C602.719,44,609.719,44,613.219,44L616.719,44" id="my-svg-L_B_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_F_0" data-points="W3sieCI6NTcwLjcxODc1LCJ5Ijo0NH0seyJ4Ijo1OTUuNzE4NzUsInkiOjQ0fSx7IngiOjYyMC43MTg3NSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_M_W_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_W_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-M-0" data-look="classic" transform="translate(100.5, 44)"><rect class="basic label-container" style="fill:#e5eaf2 !important;stroke:#1a2e4a !important" x="-92.5" y="-36" width="185" height="72"/><g class="label" style="" transform="translate(-62.5, -21)"><rect/><foreignObject width="125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📄 Meiklejohn 2013<br />A Fistful of Bitcoins</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-W-1" data-look="classic" transform="translate(310.7734375, 44)"><rect class="basic label-container" style="" x="-67.7734375" y="-36" width="135.546875" height="72"/><g class="label" style="" transform="translate(-37.7734375, -21)"><rect/><foreignObject width="75.546875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Weber 2019<br />Elliptic GCN</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-3" data-look="classic" transform="translate(499.6328125, 44)"><rect class="basic label-container" style="" x="-71.0859375" y="-36" width="142.171875" height="72"/><g class="label" style="" transform="translate(-41.0859375, -21)"><rect/><foreignObject width="82.171875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Bellei 2024<br />Elliptic2 GNN</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-F-5" data-look="classic" transform="translate(682.0703125, 44)"><rect class="basic label-container" style="fill:#fff7d6 !important;stroke:#c9a646 !important" x="-61.3515625" y="-36" width="122.703125" height="72"/><g class="label" style="" transform="translate(-31.3515625, -21)"><rect/><foreignObject width="62.703125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🔮 Future<br />ZKP + AI</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>Common Input Ownership 휴리스틱 첫 제안 논문은?</li>
+<li>학계가 보고한 클러스터링 정확도/한계?</li>
+<li>최신 ML 기반 클러스터링 방향?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../deep/papers.md</span></li>
+<li>보조 · <span class="ref">https://www.researchgate.net/publication/347083664_Heuristic-Based_Address_Clustering_in_Bitcoin</span></li>
+<li>논문: Meiklejohn et al. "A Fistful of Bitcoins" (2013) — 추상 검색</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>논문 1편의 핵심 주장 1줄 + 한계 1줄로 요약</li>
+<li>"이 논문이 지금 KYT 산업에 미친 영향" 3줄</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>1편 논문 추상 + 결론 읽음</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>휴리스틱의 통계적 정확도 (대략) 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>ML 기반 보완 방향 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>학계 ↔ 산업 간격 인지</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 54 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">학술 논문 큐레이션</h2>
+    <p class="article-divider__lead">AML·온체인 분석의 **학술 기반**. 이 글은 "어떤 논문을 읽어야 하나"의 큐레이션이며, 각 논문이 왜 **산업 표준에 영향**을 미쳤는지까지 설명합니다..</p>
+    <div class="article-divider__meta">deep/papers.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 54</span>
+      <span class="article-head__path">deep/papers.md</span>
+    </header>
+    <div class="article-body">
+<h2>이 큐레이션을 읽기 전에</h2>
+<p>Chainalysis·Elliptic·TRM 같은 회사의 알고리즘은 대부분 <strong>학계에서 시작</strong>됐습니다. 2013~2019년의 Bitcoin clustering 논문들이 먼저 나왔고, 이후 산업이 이를 <strong>상용화·확장</strong>한 구조. 그래서 "왜 이 알고리즘이 이렇게 설계됐나"를 이해하려면 학술 논문을 읽는 게 지름길. 이 페이지는 그중 <strong>실무 임팩트가 컸던 논문</strong>만 추렸습니다.</p>
+<hr />
+<h2>1. Bitcoin Clustering / De-anonymization (필독)</h2>
+<h3>Meiklejohn et al. (2013) — "A Fistful of Bitcoins"</h3>
+<ul>
+<li>비트코인 클러스터링의 <strong>고전</strong></li>
+<li>Common Input Ownership 휴리스틱 + 거래소 attribution 첫 학술적 검증</li>
+<li>검색: ACM IMC 2013</li>
+</ul>
+<p><strong>왜 중요한가</strong>: 이 논문이 CIOH를 학계 차원에서 입증하면서 블록체인 분석이라는 산업의 <strong>지적 기반</strong>이 됐습니다. Chainalysis의 창업 철학이 이 논문의 연장선.</p>
+<h3>Reid &amp; Harrigan (2013) — "An Analysis of Anonymity in the Bitcoin System"</h3>
+<ul>
+<li>비트코인 익명성의 한계 첫 분석</li>
+<li>WikiLeaks·실크로드 사례 분석</li>
+</ul>
+<p><strong>왜 중요한가</strong>: "공개 원장에서의 프라이버시 한계"를 실제 사례로 처음 보여줌. 현대 KYT 산업이 "pseudonymity는 anonymity가 아니다"라는 공통 전제를 이 논문에서 얻었습니다.</p>
+<h3>Androulaki et al. (2013) — "Evaluating User Privacy in Bitcoin"</h3>
+<ul>
+<li>사용자 행동 분석으로 식별 가능성 측정</li>
+<li>ESORICS 2013</li>
+</ul>
+<h3>Heuristic-Based Address Clustering in Bitcoin (2020)</h3>
+<ul>
+<li>5가지 휴리스틱 비교 평가</li>
+<li><a href="https://www.researchgate.net/publication/347083664_Heuristic-Based_Address_Clustering_in_Bitcoin">ResearchGate</a></li>
+</ul>
+<p><strong>왜 중요한가</strong>: 2013년 이후 발전한 다양한 휴리스틱을 한 곳에서 비교 평가. 실무자가 "우리가 쓰는 휴리스틱이 얼마나 정확한가"를 판단할 때 참조 기준.</p>
+<h3>Möser et al. — "An Inquiry into Money Laundering Tools in the Bitcoin Ecosystem"</h3>
+<ul>
+<li>다크넷 + mixer 자금세탁 측정</li>
+<li>eCrime 2013 (APWG)</li>
+</ul>
+<hr />
+<h2>2. CoinJoin / Privacy Tools</h2>
+<h3>Maxwell — "CoinJoin: Bitcoin privacy for the real world" (2013)</h3>
+<ul>
+<li>CoinJoin <strong>원형 제안</strong> (Bitcointalk 글)</li>
+</ul>
+<p><strong>왜 중요한가</strong>: 학술 논문은 아니지만 Wasabi·Samourai·JoinMarket의 설계 원형. 개발자 포럼 글이 산업 표준이 된 희귀 사례.</p>
+<h3>Möser &amp; Böhme — "Anonymous Alone? Measuring Bitcoin's Second-Generation Anonymization Techniques" (2017)</h3>
+<ul>
+<li>Wasabi·JoinMarket 효과성 측정</li>
+</ul>
+<h3>Kappos et al. — "An Empirical Analysis of Anonymity in Zcash" (2018)</h3>
+<ul>
+<li>Zcash shielded transaction 사용 패턴 분석</li>
+<li>USENIX Security 2018</li>
+</ul>
+<p><strong>왜 중요한가</strong>: 프라이버시 코인의 실제 익명성을 <strong>실증 데이터</strong>로 측정. "Zcash shielded는 쓰는 사람이 적어서 오히려 식별되기 쉽다"는 반직관적 결론이 대중 담론을 바꿈.</p>
+<h3>Möser et al. — "An Empirical Analysis of Traceability in the Monero Blockchain" (2018)</h3>
+<ul>
+<li>Monero가 100% 추적 불가능하지 않음 (ring signature 패턴 누설)</li>
+</ul>
+<p><strong>왜 중요한가</strong>: Monero도 <strong>부분 추적 가능</strong>하다는 것을 학술적으로 입증. Chainalysis의 2020 Monero 분석 도구의 학술적 근거.</p>
+<hr />
+<h2>3. Travel Rule / Compliance Tech</h2>
+<h3>Notabene · 21 Analytics 화이트페이퍼</h3>
+<ul>
+<li>IVMS101 표준화 과정</li>
+<li>검색: IVMS101 white paper</li>
+</ul>
+<h3>Wolfsberg Group Crypto Statement</h3>
+<ul>
+<li>글로벌 은행 모범사례</li>
+</ul>
+<p><strong>왜 중요한가</strong>: Wolfsberg는 HSBC·Citi·JPMorgan 같은 글로벌 대형 은행이 AML 모범사례를 합의하는 그룹. 이들이 가상자산에 대해 내놓는 입장이 <strong>은행이 VASP와 어떻게 관계 맺을지</strong>를 결정합니다.</p>
+<hr />
+<h2>4. ML · AI in AML</h2>
+<h3>Weber et al. — "Anti-Money Laundering in Bitcoin: Experimenting with Graph Convolutional Networks for Financial Forensics" (2019)</h3>
+<ul>
+<li>Elliptic 데이터셋 + GCN</li>
+<li>ML 기반 자금세탁 분류 <strong>첫 영향력 논문</strong></li>
+</ul>
+<p><strong>왜 중요한가</strong>: <strong>Elliptic dataset</strong> (라벨된 20만+ 트랜잭션 그래프)을 학계에 공개하면서 ML 기반 AML 연구의 폭발적 확산을 촉발. 이후 대부분 AML ML 논문이 이 데이터셋을 벤치마크로 사용.</p>
+<h3>Lorenz et al. — "Machine learning methods to detect money laundering in the Bitcoin blockchain" (2020)</h3>
+<ul>
+<li>다양한 ML 알고리즘 비교 (Random Forest, Neural Network 등)</li>
+</ul>
+<h3>Bellei et al. — "The Shape of Money Laundering: Subgraph Representation Learning on the Blockchain with the Elliptic2 Dataset" (2024)</h3>
+<ul>
+<li>최신 GNN 접근</li>
+</ul>
+<p><strong>왜 중요한가</strong>: Elliptic2 데이터셋 (Elliptic의 후속) 공개 + Subgraph 기반 학습 기법. 2024년 이후 AML ML 연구의 state-of-the-art 기준점.</p>
+<h3>Elliptic2 Dataset (2024)</h3>
+<ul>
+<li>최신 라벨 데이터셋 (학계 공유)</li>
+<li>ML 연구의 표준 벤치마크</li>
+</ul>
+<hr />
+<h2>5. Cross-chain · DeFi</h2>
+<h3>"Cross-chain bridges: Hacks, Vulnerabilities" (다수 보고서)</h3>
+<ul>
+<li>검색: cross-chain bridge security analysis</li>
+</ul>
+<h3>"Decentralized Finance: On Blockchain- and Smart Contract-Based Financial Markets" (St. Louis Fed, 2021)</h3>
+<ul>
+<li>DeFi 전반 학술적 정리</li>
+</ul>
+<p><strong>왜 중요한가</strong>: <strong>연준(Fed)이 DeFi를 학술적으로 분석</strong>한 첫 주요 문헌. 규제당국의 DeFi 이해가 어떻게 시작됐는지 보여주는 사료.</p>
+<h3>"An Empirical Study of DeFi Liquidations" (Qin et al., 2021)</h3>
+<ul>
+<li>DeFi 청산 경제학</li>
+</ul>
+<hr />
+<h2>6. ZKP · Privacy-Preserving Identity</h2>
+<h3>Goldwasser et al. (1989) — "The Knowledge Complexity of Interactive Proof Systems"</h3>
+<ul>
+<li>ZKP <strong>원전</strong></li>
+</ul>
+<p><strong>왜 중요한가</strong>: Zero-Knowledge Proof 개념이 처음 제안된 논문. 1989년 이론이 2020년대 들어 Zcash·Tornado Cash·zk-KYC로 실용화되기까지의 긴 여정을 이해하는 출발점.</p>
+<h3>Ben-Sasson et al. — "Succinct Non-Interactive Zero Knowledge for a von Neumann Architecture"</h3>
+<ul>
+<li>zk-SNARK</li>
+</ul>
+<h3>Polygon ID, Worldcoin 등 산업 화이트페이퍼</h3>
+<p><strong>왜 중요한가</strong>: 학술적 ZKP를 <strong>identity·KYC에 응용</strong>한 최초 대규모 시도들. "프라이버시 + 컴플라이언스 양립"이라는 장기 방향의 실무적 구현.</p>
+<hr />
+<h2>7. 한국 관련 학술</h2>
+<h3>한국 가상자산 AML 관련 논문 (대학원 + 법학)</h3>
+<ul>
+<li>한국학술정보(KISS), DBpia, RISS 검색</li>
+<li>"특금법 가상자산", "Travel Rule 한국", "FATF Korea"</li>
+<li>「한국법학회」「한국금융법학회」 저널</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 학술 논문은 <strong>법학 중심</strong>(특금법 해석·개정 방향 분석)이고 <strong>기술 중심 논문은 드뭅니다</strong>. 법무법인 인사이트와 결합해 읽으면 한국 규제 방향 예측에 유용.</p>
+<hr />
+<h2>8. 주요 컨퍼런스 · 저널</h2>
+<h3>보안·시스템</h3>
+<ul>
+<li>USENIX Security</li>
+<li>ACM CCS</li>
+<li>IEEE S&amp;P (Oakland)</li>
+<li>NDSS</li>
+<li>Financial Cryptography (FC)</li>
+</ul>
+<h3>핀테크·AML 특화</h3>
+<ul>
+<li>Journal of Money Laundering Control</li>
+<li>Crime, Law and Social Change</li>
+<li>Money Laundering Compliance</li>
+</ul>
+<h3>한국</h3>
+<ul>
+<li>한국법학회</li>
+<li>한국금융법학회</li>
+<li>디지털산업정책연구원</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>보안·시스템 계열 Top 학회(USENIX·CCS·S&amp;P)에 올라간 논문이 보통 <strong>가장 임팩트 크고 산업 수용 빠름</strong>. Financial Cryptography는 가상자산 특화 학회.</p>
+<hr />
+<h2>9. 검색 사이트</h2>
+<ul>
+<li><a href="https://scholar.google.com/">Google Scholar</a></li>
+<li><a href="https://arxiv.org/list/cs.CR/recent">arXiv (cs.CR)</a></li>
+<li><a href="https://www.ssrn.com/">SSRN</a></li>
+<li><a href="https://www.researchgate.net/">ResearchGate</a></li>
+<li><a href="https://dblp.org/">DBLP</a></li>
+<li>한국: <a href="http://www.riss.kr/">RISS</a>, <a href="https://www.dbpia.co.kr/">DBpia</a>, <a href="http://kiss.kstudy.com/">KISS</a></li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Google Scholar에서 논문을 찾을 때 <strong>"Cited by"</strong> 수치가 영향력의 가늠자. 1,000회 이상이면 산업 표준으로 수용된 논문일 가능성 높음.</p>
+<hr />
+<h2>10. 추천 읽기 순서 (입문자)</h2>
+<ol>
+<li>Meiklejohn 2013 (Bitcoin clustering 고전) — Day 54</li>
+<li>Möser 2013 (mixer + 다크넷)</li>
+<li>Weber 2019 (ML + Elliptic)</li>
+<li>Bellei 2024 (최신 GNN)</li>
+<li>ZKP 입문 1편</li>
+</ol>
+<h3>실무 포인트</h3>
+<p>위 5편을 월 1편씩 정독하면 <strong>5개월</strong>에 AML 분석 기술사 흐름이 머리에 잡힙니다. 각 논문의 저자·인용 논문을 따라가면 자연스럽게 관련 연구로 확장됩니다.</p>
+<hr />
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="reports.md"><code>reports.md</code></a> — 산업 리포트</li>
+<li><a href="conferences.md"><code>conferences.md</code></a> — 컨퍼런스 영상</li>
+<li><a href="links.md"><code>links.md</code></a> — 참고 링크 모음</li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 54 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

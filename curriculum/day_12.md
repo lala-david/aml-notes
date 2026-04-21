@@ -6,6 +6,22 @@
 
 회사가 제출한 STR은 **KoFIU를 거쳐 경찰·검찰·국세청 등에 분배**되어 실제 수사로 이어집니다. 오늘은 이 사후 흐름과 **좋은 STR vs 나쁜 STR**의 차이를 정리합니다. 감독당국이 STR 건수가 적은 회사를 오히려 의심하는 이유, 그리고 Tipping-off 금지가 왜 별도 처벌인지도 다시 한번 확인.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    V["🏢 VASP"] -->|STR 전자보고| K["🏛 KoFIU"]
+    K --> P["🚓 경찰·검찰"]
+    K --> N["🏢 국세청·관세청"]
+    K --> I["🕶 국정원"]
+    K --> F["📊 금감원"]
+    style V fill:#e5eaf2,stroke:#1a2e4a
+    style K fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. STR이 KoFIU에 가면 어디로 분배되나?
 2. KoFIU와 금감원의 관계는?

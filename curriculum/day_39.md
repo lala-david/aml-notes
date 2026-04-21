@@ -6,6 +6,20 @@
 
 DeFi는 원래 AML 목적을 위해 설계된 게 아니지만, **운영자 없음 + KYC 없음 + 전역 접근**이라는 속성 때문에 자연스럽게 layering 인프라가 됐습니다. DEX swap·LP 입출금·Flash loan의 layering 메커니즘, 그리고 **frontend 운영자**에게 규제가 집중되는 이유(Uniswap Labs 사례)까지.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    F["💰 자금"] --> S["DEX Swap<br/>ETH→USDT→DAI"]
+    F --> LP["LP 입금<br/>→ 다른 자산 인출"]
+    F --> FL["Flash Loan<br/>+ 가격 조작"]
+    S & LP & FL --> C["👤 frontend 운영자<br/>책임 검토"]
+    style C fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. DEX swap이 layering에 효과적인 이유?
 2. Liquidity Pool 입출금이 출처 단절시키는 메커니즘?

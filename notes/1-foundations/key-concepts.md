@@ -19,17 +19,21 @@
 
 ### 동심원 구조
 
-```
-┌─────────────────────────────────────┐
-│ KYC (Know Your Customer)            │  ← 가장 큰 우산 개념 (신원확인 행위 일반)
-│ ┌─────────────────────────────────┐ │
-│ │ CDD (Customer Due Diligence)    │ │  ← 표준 실사 (모든 고객)
-│ │ ┌─────────────────────────────┐ │ │
-│ │ │ EDD (Enhanced Due Diligence)│ │ │  ← 고위험 고객에게만
-│ │ └─────────────────────────────┘ │ │
-│ │ SDD (Simplified Due Diligence)  │ │  ← 저위험 고객에게만 (한국 가상자산은 거의 X)
-│ └─────────────────────────────────┘ │
-└─────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph KYC["🌂 KYC (Know Your Customer) — 우산 개념, 신원확인 행위 일반"]
+        direction TB
+        subgraph CDD["📋 CDD (Customer Due Diligence) — 모든 고객"]
+            direction TB
+            EDD["🔒 EDD (Enhanced DD)<br/>고위험 고객만<br/>• PEP · 고위험국<br/>• 자금원천 증빙<br/>• 임원 승인"]
+            SDD["🟢 SDD (Simplified DD)<br/>저위험만 (한국 가상자산 X)<br/>• 정부기관 · 상장사"]
+        end
+    end
+
+    style KYC fill:#fff,stroke:#1a2e4a,stroke-width:2px
+    style CDD fill:#f7f5ef,stroke:#c9a646,stroke-width:1.5px
+    style EDD fill:#fed7aa,stroke:#ea580c,stroke-width:1.5px
+    style SDD fill:#d1fae5,stroke:#10b981,stroke-width:1.5px
 ```
 
 ### KYC (Know Your Customer)

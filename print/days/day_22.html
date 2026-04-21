@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 22 — Travel Rule 운영 흐름 (한국 100만원 시나리오)</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 22 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">22</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 4 / 7</div>
+        <div class="page-meta__theme">Travel Rule + IVMS101</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">Travel Rule 운영 흐름 (한국 100만원 시나리오)</h1>
+      <p class="title-block__lead">Travel Rule이 거래소 시스템에서 실제로 어떻게 흘러가는가.</p>
+      <span class="title-block__time">⏱ ~70분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 1020px; background-color: transparent;" viewBox="-50 -10 1020 479" role="graphics-document document" aria-roledescription="sequence"><g><rect x="770" y="393" fill="#eaeaea" stroke="#666" width="150" height="65" name="B" rx="3" ry="3" class="actor actor-bottom"/><text x="845" y="425.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="845" dy="0">🏦 VASP B</tspan></text></g><g><rect x="580" y="393" fill="#eaeaea" stroke="#666" width="150" height="65" name="V" rx="3" ry="3" class="actor actor-bottom"/><text x="655" y="425.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="655" dy="0">🌐 Travel Rule</tspan></text></g><g><rect x="390" y="393" fill="#eaeaea" stroke="#666" width="150" height="65" name="K" rx="3" ry="3" class="actor actor-bottom"/><text x="465" y="425.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="465" dy="0">🔍 KYT</tspan></text></g><g><rect x="200" y="393" fill="#eaeaea" stroke="#666" width="150" height="65" name="U" rx="3" ry="3" class="actor actor-bottom"/><text x="275" y="425.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="275" dy="0">🏦 VASP A</tspan></text></g><g><rect x="0" y="393" fill="#eaeaea" stroke="#666" width="150" height="65" name="A" rx="3" ry="3" class="actor actor-bottom"/><text x="75" y="425.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="75" dy="0">👤 고객</tspan></text></g><g><line id="actor4" x1="845" y1="65" x2="845" y2="393" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="B" data-et="life-line" data-id="B"/><g id="root-4" data-et="participant" data-type="participant" data-id="B"><rect x="770" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="B" rx="3" ry="3" class="actor actor-top"/><text x="845" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="845" dy="0">🏦 VASP B</tspan></text></g></g><g><line id="actor3" x1="655" y1="65" x2="655" y2="393" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="V" data-et="life-line" data-id="V"/><g id="root-3" data-et="participant" data-type="participant" data-id="V"><rect x="580" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="V" rx="3" ry="3" class="actor actor-top"/><text x="655" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="655" dy="0">🌐 Travel Rule</tspan></text></g></g><g><line id="actor2" x1="465" y1="65" x2="465" y2="393" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="K" data-et="life-line" data-id="K"/><g id="root-2" data-et="participant" data-type="participant" data-id="K"><rect x="390" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="K" rx="3" ry="3" class="actor actor-top"/><text x="465" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="465" dy="0">🔍 KYT</tspan></text></g></g><g><line id="actor1" x1="275" y1="65" x2="275" y2="393" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="U" data-et="life-line" data-id="U"/><g id="root-1" data-et="participant" data-type="participant" data-id="U"><rect x="200" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="U" rx="3" ry="3" class="actor actor-top"/><text x="275" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="275" dy="0">🏦 VASP A</tspan></text></g></g><g><line id="actor0" x1="75" y1="65" x2="75" y2="393" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="A" data-et="life-line" data-id="A"/><g id="root-0" data-et="participant" data-type="participant" data-id="A"><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="A" rx="3" ry="3" class="actor actor-top"/><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="75" dy="0">👤 고객</tspan></text></g></g><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .actor{stroke:#1a2e4a;fill:#e5eaf2;stroke-width:1;}#my-svg rect.actor.outer-path[data-look="neo"]{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg rect.note[data-look="neo"]{stroke:hsl(52.6829268293, 60%, 73.9215686275%);fill:#fff5ad;filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg text.actor&gt;tspan{fill:#111418;stroke:none;}#my-svg .actor-line{stroke:#1a2e4a;}#my-svg .innerArc{stroke-width:1.5;stroke-dasharray:none;}#my-svg .messageLine0{stroke-width:1.5;stroke-dasharray:none;stroke:#111418;}#my-svg .messageLine1{stroke-width:1.5;stroke-dasharray:2,2;stroke:#111418;}#my-svg [id$="-arrowhead"] path{fill:#111418;stroke:#111418;}#my-svg .sequenceNumber{fill:#c5beb5;}#my-svg [id$="-sequencenumber"]{fill:#111418;}#my-svg [id$="-crosshead"] path{fill:#111418;stroke:#111418;}#my-svg .messageText{fill:#111418;stroke:none;}#my-svg .labelBox{stroke:#1a2e4a;fill:#e5eaf2;filter:none;}#my-svg .labelText,#my-svg .labelText&gt;tspan{fill:#111418;stroke:none;}#my-svg .loopText,#my-svg .loopText&gt;tspan{fill:#111418;stroke:none;}#my-svg .loopLine{stroke-width:2px;stroke-dasharray:2,2;stroke:#1a2e4a;fill:#1a2e4a;}#my-svg .note{stroke:hsl(52.6829268293, 60%, 73.9215686275%);fill:#fff5ad;}#my-svg .noteText,#my-svg .noteText&gt;tspan{fill:#333;stroke:none;font-weight:normal;}#my-svg .activation0{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .activation1{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .activation2{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .actorPopupMenu{position:absolute;}#my-svg .actorPopupMenuPanel{position:absolute;fill:#e5eaf2;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);filter:drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));}#my-svg .actor-man circle,#my-svg line{fill:#e5eaf2;stroke-width:2px;}#my-svg g rect.rect{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));stroke:#1a2e4a;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><defs><symbol id="my-svg-computer" width="24" height="24"><path transform="scale(.5)" d="M2 2v13h20v-13h-20zm18 11h-16v-9h16v9zm-10.228 6l.466-1h3.524l.467 1h-4.457zm14.228 3h-24l2-6h2.104l-1.33 4h18.45l-1.297-4h2.073l2 6zm-5-10h-14v-7h14v7z"/></symbol></defs><defs><symbol id="my-svg-database" fill-rule="evenodd" clip-rule="evenodd"><path transform="scale(.5)" d="M12.258.001l.256.004.255.005.253.008.251.01.249.012.247.015.246.016.242.019.241.02.239.023.236.024.233.027.231.028.229.031.225.032.223.034.22.036.217.038.214.04.211.041.208.043.205.045.201.046.198.048.194.05.191.051.187.053.183.054.18.056.175.057.172.059.168.06.163.061.16.063.155.064.15.066.074.033.073.033.071.034.07.034.069.035.068.035.067.035.066.035.064.036.064.036.062.036.06.036.06.037.058.037.058.037.055.038.055.038.053.038.052.038.051.039.05.039.048.039.047.039.045.04.044.04.043.04.041.04.04.041.039.041.037.041.036.041.034.041.033.042.032.042.03.042.029.042.027.042.026.043.024.043.023.043.021.043.02.043.018.044.017.043.015.044.013.044.012.044.011.045.009.044.007.045.006.045.004.045.002.045.001.045v17l-.001.045-.002.045-.004.045-.006.045-.007.045-.009.044-.011.045-.012.044-.013.044-.015.044-.017.043-.018.044-.02.043-.021.043-.023.043-.024.043-.026.043-.027.042-.029.042-.03.042-.032.042-.033.042-.034.041-.036.041-.037.041-.039.041-.04.041-.041.04-.043.04-.044.04-.045.04-.047.039-.048.039-.05.039-.051.039-.052.038-.053.038-.055.038-.055.038-.058.037-.058.037-.06.037-.06.036-.062.036-.064.036-.064.036-.066.035-.067.035-.068.035-.069.035-.07.034-.071.034-.073.033-.074.033-.15.066-.155.064-.16.063-.163.061-.168.06-.172.059-.175.057-.18.056-.183.054-.187.053-.191.051-.194.05-.198.048-.201.046-.205.045-.208.043-.211.041-.214.04-.217.038-.22.036-.223.034-.225.032-.229.031-.231.028-.233.027-.236.024-.239.023-.241.02-.242.019-.246.016-.247.015-.249.012-.251.01-.253.008-.255.005-.256.004-.258.001-.258-.001-.256-.004-.255-.005-.253-.008-.251-.01-.249-.012-.247-.015-.245-.016-.243-.019-.241-.02-.238-.023-.236-.024-.234-.027-.231-.028-.228-.031-.226-.032-.223-.034-.22-.036-.217-.038-.214-.04-.211-.041-.208-.043-.204-.045-.201-.046-.198-.048-.195-.05-.19-.051-.187-.053-.184-.054-.179-.056-.176-.057-.172-.059-.167-.06-.164-.061-.159-.063-.155-.064-.151-.066-.074-.033-.072-.033-.072-.034-.07-.034-.069-.035-.068-.035-.067-.035-.066-.035-.064-.036-.063-.036-.062-.036-.061-.036-.06-.037-.058-.037-.057-.037-.056-.038-.055-.038-.053-.038-.052-.038-.051-.039-.049-.039-.049-.039-.046-.039-.046-.04-.044-.04-.043-.04-.041-.04-.04-.041-.039-.041-.037-.041-.036-.041-.034-.041-.033-.042-.032-.042-.03-.042-.029-.042-.027-.042-.026-.043-.024-.043-.023-.043-.021-.043-.02-.043-.018-.044-.017-.043-.015-.044-.013-.044-.012-.044-.011-.045-.009-.044-.007-.045-.006-.045-.004-.045-.002-.045-.001-.045v-17l.001-.045.002-.045.004-.045.006-.045.007-.045.009-.044.011-.045.012-.044.013-.044.015-.044.017-.043.018-.044.02-.043.021-.043.023-.043.024-.043.026-.043.027-.042.029-.042.03-.042.032-.042.033-.042.034-.041.036-.041.037-.041.039-.041.04-.041.041-.04.043-.04.044-.04.046-.04.046-.039.049-.039.049-.039.051-.039.052-.038.053-.038.055-.038.056-.038.057-.037.058-.037.06-.037.061-.036.062-.036.063-.036.064-.036.066-.035.067-.035.068-.035.069-.035.07-.034.072-.034.072-.033.074-.033.151-.066.155-.064.159-.063.164-.061.167-.06.172-.059.176-.057.179-.056.184-.054.187-.053.19-.051.195-.05.198-.048.201-.046.204-.045.208-.043.211-.041.214-.04.217-.038.22-.036.223-.034.226-.032.228-.031.231-.028.234-.027.236-.024.238-.023.241-.02.243-.019.245-.016.247-.015.249-.012.251-.01.253-.008.255-.005.256-.004.258-.001.258.001zm-9.258 20.499v.01l.001.021.003.021.004.022.005.021.006.022.007.022.009.023.01.022.011.023.012.023.013.023.015.023.016.024.017.023.018.024.019.024.021.024.022.025.023.024.024.025.052.049.056.05.061.051.066.051.07.051.075.051.079.052.084.052.088.052.092.052.097.052.102.051.105.052.11.052.114.051.119.051.123.051.127.05.131.05.135.05.139.048.144.049.147.047.152.047.155.047.16.045.163.045.167.043.171.043.176.041.178.041.183.039.187.039.19.037.194.035.197.035.202.033.204.031.209.03.212.029.216.027.219.025.222.024.226.021.23.02.233.018.236.016.24.015.243.012.246.01.249.008.253.005.256.004.259.001.26-.001.257-.004.254-.005.25-.008.247-.011.244-.012.241-.014.237-.016.233-.018.231-.021.226-.021.224-.024.22-.026.216-.027.212-.028.21-.031.205-.031.202-.034.198-.034.194-.036.191-.037.187-.039.183-.04.179-.04.175-.042.172-.043.168-.044.163-.045.16-.046.155-.046.152-.047.148-.048.143-.049.139-.049.136-.05.131-.05.126-.05.123-.051.118-.052.114-.051.11-.052.106-.052.101-.052.096-.052.092-.052.088-.053.083-.051.079-.052.074-.052.07-.051.065-.051.06-.051.056-.05.051-.05.023-.024.023-.025.021-.024.02-.024.019-.024.018-.024.017-.024.015-.023.014-.024.013-.023.012-.023.01-.023.01-.022.008-.022.006-.022.006-.022.004-.022.004-.021.001-.021.001-.021v-4.127l-.077.055-.08.053-.083.054-.085.053-.087.052-.09.052-.093.051-.095.05-.097.05-.1.049-.102.049-.105.048-.106.047-.109.047-.111.046-.114.045-.115.045-.118.044-.12.043-.122.042-.124.042-.126.041-.128.04-.13.04-.132.038-.134.038-.135.037-.138.037-.139.035-.142.035-.143.034-.144.033-.147.032-.148.031-.15.03-.151.03-.153.029-.154.027-.156.027-.158.026-.159.025-.161.024-.162.023-.163.022-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.011-.178.01-.179.008-.179.008-.181.006-.182.005-.182.004-.184.003-.184.002h-.37l-.184-.002-.184-.003-.182-.004-.182-.005-.181-.006-.179-.008-.179-.008-.178-.01-.176-.011-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.022-.162-.023-.161-.024-.159-.025-.157-.026-.156-.027-.155-.027-.153-.029-.151-.03-.15-.03-.148-.031-.146-.032-.145-.033-.143-.034-.141-.035-.14-.035-.137-.037-.136-.037-.134-.038-.132-.038-.13-.04-.128-.04-.126-.041-.124-.042-.122-.042-.12-.044-.117-.043-.116-.045-.113-.045-.112-.046-.109-.047-.106-.047-.105-.048-.102-.049-.1-.049-.097-.05-.095-.05-.093-.052-.09-.051-.087-.052-.085-.053-.083-.054-.08-.054-.077-.054v4.127zm0-5.654v.011l.001.021.003.021.004.021.005.022.006.022.007.022.009.022.01.022.011.023.012.023.013.023.015.024.016.023.017.024.018.024.019.024.021.024.022.024.023.025.024.024.052.05.056.05.061.05.066.051.07.051.075.052.079.051.084.052.088.052.092.052.097.052.102.052.105.052.11.051.114.051.119.052.123.05.127.051.131.05.135.049.139.049.144.048.147.048.152.047.155.046.16.045.163.045.167.044.171.042.176.042.178.04.183.04.187.038.19.037.194.036.197.034.202.033.204.032.209.03.212.028.216.027.219.025.222.024.226.022.23.02.233.018.236.016.24.014.243.012.246.01.249.008.253.006.256.003.259.001.26-.001.257-.003.254-.006.25-.008.247-.01.244-.012.241-.015.237-.016.233-.018.231-.02.226-.022.224-.024.22-.025.216-.027.212-.029.21-.03.205-.032.202-.033.198-.035.194-.036.191-.037.187-.039.183-.039.179-.041.175-.042.172-.043.168-.044.163-.045.16-.045.155-.047.152-.047.148-.048.143-.048.139-.05.136-.049.131-.05.126-.051.123-.051.118-.051.114-.052.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.051.07-.052.065-.051.06-.05.056-.051.051-.049.023-.025.023-.024.021-.025.02-.024.019-.024.018-.024.017-.024.015-.023.014-.023.013-.024.012-.022.01-.023.01-.023.008-.022.006-.022.006-.022.004-.021.004-.022.001-.021.001-.021v-4.139l-.077.054-.08.054-.083.054-.085.052-.087.053-.09.051-.093.051-.095.051-.097.05-.1.049-.102.049-.105.048-.106.047-.109.047-.111.046-.114.045-.115.044-.118.044-.12.044-.122.042-.124.042-.126.041-.128.04-.13.039-.132.039-.134.038-.135.037-.138.036-.139.036-.142.035-.143.033-.144.033-.147.033-.148.031-.15.03-.151.03-.153.028-.154.028-.156.027-.158.026-.159.025-.161.024-.162.023-.163.022-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.011-.178.009-.179.009-.179.007-.181.007-.182.005-.182.004-.184.003-.184.002h-.37l-.184-.002-.184-.003-.182-.004-.182-.005-.181-.007-.179-.007-.179-.009-.178-.009-.176-.011-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.022-.162-.023-.161-.024-.159-.025-.157-.026-.156-.027-.155-.028-.153-.028-.151-.03-.15-.03-.148-.031-.146-.033-.145-.033-.143-.033-.141-.035-.14-.036-.137-.036-.136-.037-.134-.038-.132-.039-.13-.039-.128-.04-.126-.041-.124-.042-.122-.043-.12-.043-.117-.044-.116-.044-.113-.046-.112-.046-.109-.046-.106-.047-.105-.048-.102-.049-.1-.049-.097-.05-.095-.051-.093-.051-.09-.051-.087-.053-.085-.052-.083-.054-.08-.054-.077-.054v4.139zm0-5.666v.011l.001.02.003.022.004.021.005.022.006.021.007.022.009.023.01.022.011.023.012.023.013.023.015.023.016.024.017.024.018.023.019.024.021.025.022.024.023.024.024.025.052.05.056.05.061.05.066.051.07.051.075.052.079.051.084.052.088.052.092.052.097.052.102.052.105.051.11.052.114.051.119.051.123.051.127.05.131.05.135.05.139.049.144.048.147.048.152.047.155.046.16.045.163.045.167.043.171.043.176.042.178.04.183.04.187.038.19.037.194.036.197.034.202.033.204.032.209.03.212.028.216.027.219.025.222.024.226.021.23.02.233.018.236.017.24.014.243.012.246.01.249.008.253.006.256.003.259.001.26-.001.257-.003.254-.006.25-.008.247-.01.244-.013.241-.014.237-.016.233-.018.231-.02.226-.022.224-.024.22-.025.216-.027.212-.029.21-.03.205-.032.202-.033.198-.035.194-.036.191-.037.187-.039.183-.039.179-.041.175-.042.172-.043.168-.044.163-.045.16-.045.155-.047.152-.047.148-.048.143-.049.139-.049.136-.049.131-.051.126-.05.123-.051.118-.052.114-.051.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.052.07-.051.065-.051.06-.051.056-.05.051-.049.023-.025.023-.025.021-.024.02-.024.019-.024.018-.024.017-.024.015-.023.014-.024.013-.023.012-.023.01-.022.01-.023.008-.022.006-.022.006-.022.004-.022.004-.021.001-.021.001-.021v-4.153l-.077.054-.08.054-.083.053-.085.053-.087.053-.09.051-.093.051-.095.051-.097.05-.1.049-.102.048-.105.048-.106.048-.109.046-.111.046-.114.046-.115.044-.118.044-.12.043-.122.043-.124.042-.126.041-.128.04-.13.039-.132.039-.134.038-.135.037-.138.036-.139.036-.142.034-.143.034-.144.033-.147.032-.148.032-.15.03-.151.03-.153.028-.154.028-.156.027-.158.026-.159.024-.161.024-.162.023-.163.023-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.01-.178.01-.179.009-.179.007-.181.006-.182.006-.182.004-.184.003-.184.001-.185.001-.185-.001-.184-.001-.184-.003-.182-.004-.182-.006-.181-.006-.179-.007-.179-.009-.178-.01-.176-.01-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.023-.162-.023-.161-.024-.159-.024-.157-.026-.156-.027-.155-.028-.153-.028-.151-.03-.15-.03-.148-.032-.146-.032-.145-.033-.143-.034-.141-.034-.14-.036-.137-.036-.136-.037-.134-.038-.132-.039-.13-.039-.128-.041-.126-.041-.124-.041-.122-.043-.12-.043-.117-.044-.116-.044-.113-.046-.112-.046-.109-.046-.106-.048-.105-.048-.102-.048-.1-.05-.097-.049-.095-.051-.093-.051-.09-.052-.087-.052-.085-.053-.083-.053-.08-.054-.077-.054v4.153zm8.74-8.179l-.257.004-.254.005-.25.008-.247.011-.244.012-.241.014-.237.016-.233.018-.231.021-.226.022-.224.023-.22.026-.216.027-.212.028-.21.031-.205.032-.202.033-.198.034-.194.036-.191.038-.187.038-.183.04-.179.041-.175.042-.172.043-.168.043-.163.045-.16.046-.155.046-.152.048-.148.048-.143.048-.139.049-.136.05-.131.05-.126.051-.123.051-.118.051-.114.052-.11.052-.106.052-.101.052-.096.052-.092.052-.088.052-.083.052-.079.052-.074.051-.07.052-.065.051-.06.05-.056.05-.051.05-.023.025-.023.024-.021.024-.02.025-.019.024-.018.024-.017.023-.015.024-.014.023-.013.023-.012.023-.01.023-.01.022-.008.022-.006.023-.006.021-.004.022-.004.021-.001.021-.001.021.001.021.001.021.004.021.004.022.006.021.006.023.008.022.01.022.01.023.012.023.013.023.014.023.015.024.017.023.018.024.019.024.02.025.021.024.023.024.023.025.051.05.056.05.06.05.065.051.07.052.074.051.079.052.083.052.088.052.092.052.096.052.101.052.106.052.11.052.114.052.118.051.123.051.126.051.131.05.136.05.139.049.143.048.148.048.152.048.155.046.16.046.163.045.168.043.172.043.175.042.179.041.183.04.187.038.191.038.194.036.198.034.202.033.205.032.21.031.212.028.216.027.22.026.224.023.226.022.231.021.233.018.237.016.241.014.244.012.247.011.25.008.254.005.257.004.26.001.26-.001.257-.004.254-.005.25-.008.247-.011.244-.012.241-.014.237-.016.233-.018.231-.021.226-.022.224-.023.22-.026.216-.027.212-.028.21-.031.205-.032.202-.033.198-.034.194-.036.191-.038.187-.038.183-.04.179-.041.175-.042.172-.043.168-.043.163-.045.16-.046.155-.046.152-.048.148-.048.143-.048.139-.049.136-.05.131-.05.126-.051.123-.051.118-.051.114-.052.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.051.07-.052.065-.051.06-.05.056-.05.051-.05.023-.025.023-.024.021-.024.02-.025.019-.024.018-.024.017-.023.015-.024.014-.023.013-.023.012-.023.01-.023.01-.022.008-.022.006-.023.006-.021.004-.022.004-.021.001-.021.001-.021-.001-.021-.001-.021-.004-.021-.004-.022-.006-.021-.006-.023-.008-.022-.01-.022-.01-.023-.012-.023-.013-.023-.014-.023-.015-.024-.017-.023-.018-.024-.019-.024-.02-.025-.021-.024-.023-.024-.023-.025-.051-.05-.056-.05-.06-.05-.065-.051-.07-.052-.074-.051-.079-.052-.083-.052-.088-.052-.092-.052-.096-.052-.101-.052-.106-.052-.11-.052-.114-.052-.118-.051-.123-.051-.126-.051-.131-.05-.136-.05-.139-.049-.143-.048-.148-.048-.152-.048-.155-.046-.16-.046-.163-.045-.168-.043-.172-.043-.175-.042-.179-.041-.183-.04-.187-.038-.191-.038-.194-.036-.198-.034-.202-.033-.205-.032-.21-.031-.212-.028-.216-.027-.22-.026-.224-.023-.226-.022-.231-.021-.233-.018-.237-.016-.241-.014-.244-.012-.247-.011-.25-.008-.254-.005-.257-.004-.26-.001-.26.001z"/></symbol></defs><defs><symbol id="my-svg-clock" width="24" height="24"><path transform="scale(.5)" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></symbol></defs><defs><marker id="my-svg-arrowhead" refX="7.9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M -1 0 L 10 5 L 0 10 z"/></marker></defs><defs><marker id="my-svg-crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="4.5"><path fill="none" stroke="#000000" stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"/></marker></defs><defs><marker id="my-svg-filled-head" refX="15.5" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg-sequencenumber" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"/></marker></defs><defs><marker id="my-svg-solidTopArrowHead" refX="7.9" refY="7.25" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 10 8 L 0 8 z"/></marker></defs><defs><marker id="my-svg-solidBottomArrowHead" refX="7.9" refY="0.75" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 10 0 L 0 8 z"/></marker></defs><defs><marker id="my-svg-stickTopArrowHead" refX="7.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 7 7" stroke="black" stroke-width="1.5" fill="none"/></marker></defs><defs><marker id="my-svg-stickBottomArrowHead" refX="7.5" refY="0" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 7 L 7 0" stroke="black" stroke-width="1.5" fill="none"/></marker></defs><text x="174" y="80" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">출금 요청 (≥100만원)</text><line x1="76" y1="109" x2="271" y2="109" class="messageLine0" data-et="message" data-id="i0" data-from="A" data-to="U" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><text x="369" y="124" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">주소 위험도 체크</text><line x1="276" y1="153" x2="461" y2="153" class="messageLine0" data-et="message" data-id="i1" data-from="U" data-to="K" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><text x="372" y="168" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">OK</text><line x1="464" y1="197" x2="279" y2="197" class="messageLine1" data-et="message" data-id="i2" data-from="K" data-to="U" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><text x="464" y="212" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">IVMS101 메시지</text><line x1="276" y1="241" x2="651" y2="241" class="messageLine0" data-et="message" data-id="i3" data-from="U" data-to="V" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><text x="749" y="256" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">라우팅</text><line x1="656" y1="285" x2="841" y2="285" class="messageLine0" data-et="message" data-id="i4" data-from="V" data-to="B" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><text x="752" y="300" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">Accept</text><line x1="844" y1="329" x2="659" y2="329" class="messageLine1" data-et="message" data-id="i5" data-from="B" data-to="V" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><text x="177" y="344" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">온체인 송금 실행</text><line x1="274" y1="373" x2="79" y2="373" class="messageLine0" data-et="message" data-id="i6" data-from="U" data-to="A" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>한국 거래소 출금 시 Travel Rule 9단계 흐름은?</li>
+<li>카운터파티 VASP가 미연결이면?</li>
+<li>Personal data 보호와 Travel Rule의 충돌 지점?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/3-crypto-aml/travel-rule.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>출금 흐름 9단계를 종이에 직접 그리기</li>
+<li>"단계별로 멈출 수 있는 지점" 표시 (KYT 차단 / TR 거절 / Sunrise 폴백)</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>한국 임계 100만원 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>VerifyVASP ↔ CODE 연동 구조 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>외부지갑(unhosted wallet) 등록제 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>PII 보호 + GDPR/PIPA 호환 이슈 인지</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 22 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Travel Rule — 가상자산 송수신인 정보 동반 의무</h2>
+    <p class="article-divider__lead">FATF Recommendation 16의 가상자산 적용. VASP 운영 난이도 **1순위** 테마. 이 글을 읽고 나면 Travel Rule이 왜 단순 규제가 아니라 **글로벌 인프라 문제**인지, 그리고 왜 한국이 두 개의 솔루션을 동시에 운영하는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/3-crypto-aml/travel-rule.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 22</span>
+      <span class="article-head__path">notes/3-crypto-aml/travel-rule.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>VASP가 다른 VASP에게 가상자산을 이전할 때 <strong>송신인 + 수신인 정보를 함께 전달</strong>해야 하는 의무</li>
+<li>임계금액: <strong>한국 100만원 / 미국 $3,000 / EU 없음 / FATF 권고 USD-EUR 1,000</strong></li>
+<li>핵심 난제 두 가지: <strong>Sunrise Issue</strong>(관할별 시행 격차) + <strong>VASP 식별</strong>(지갑주소만으로 누구 VASP인지 알기 어려움)</li>
+<li>메시지 표준: <strong>IVMS101</strong> (사실상 글로벌 표준)</li>
+<li>한국: <strong>VerifyVASP</strong> (Upbit) + <strong>CODE</strong> (빗썸·코빗·코인원) 두 솔루션 연동</li>
+</ul>
+<hr />
+<h2>1. Travel Rule이 뭐고 왜 만들어졌나</h2>
+<h3>전통 금융의 유산</h3>
+<p>전통 은행 송금에서는 SWIFT MT103 메시지에 <strong>송신인·수신인 정보</strong>가 함께 실려 갑니다. 이게 가능한 이유는 1996년 미국 BSA가 <strong>Bank Secrecy Act Travel Rule</strong>을 만들어 은행 간 송금 정보 동반을 의무화했기 때문. "돈이 움직이면 사람 정보도 같이 움직여야 한다"는 원칙은 그때부터 금융 AML의 기본값이었습니다.</p>
+<h3>FATF가 이걸 가상자산에 확장한 이유</h3>
+<p>2019년 FATF는 Recommendation 16을 개정해 <strong>가상자산 이전에도 같은 원칙</strong>을 적용. 왜였나?</p>
+<ul>
+<li>가상자산 이전에서는 "돈"(블록체인 트랜잭션)은 움직이는데 "사람 정보"가 따라가지 않음</li>
+<li>이 비대칭이 자금세탁의 <strong>layering 단계</strong>를 매우 유리하게 만듦</li>
+<li>VASP 간 책임 추적이 불가능해 수사기관이 사고 대응 어려움</li>
+<li>수신 VASP가 위험 신호(SDN, mixer) 있는 거래를 사전에 차단할 수단이 없음</li>
+</ul>
+<p><strong>목적 요약</strong>:
+- 자금세탁의 layering 단계 차단
+- VASP 간 책임 추적 가능성 확보
+- 수신 측 사전 차단 가능</p>
+<h3>실무 포인트</h3>
+<p>Travel Rule은 "기술적 구현 문제"처럼 포장되지만 본질은 <strong>"전 세계 VASP가 AML 데이터를 서로 공유하자"</strong> 는 합의입니다. 기술적 어려움보다 <strong>관할·개인정보·사업 모델 간 긴장</strong>이 더 큰 도전이고, 이게 2019년 권고 후 7년이 지난 2026년에도 완벽 이행이 안 된 이유입니다.</p>
+<hr />
+<h2>2. 핵심 정보 항목</h2>
+<h3>송신인(Originator) 정보</h3>
+<p>송신인 정보가 항상 더 많이 요구됩니다 — 수신 측 VASP는 수신인이 자기 고객인지 이미 알고 있지만, 송신인에 대해서는 원래 모르기 때문.</p>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>FATF</th>
+<th>한국</th>
+<th>EU TFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>가상자산 주소</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>신원확인번호 (또는 출생지·생년월일)</td>
+<td>✅</td>
+<td>(정보보호 이슈로 일부)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>주소</td>
+<td>✅</td>
+<td>(이름·주소 둘 중 하나)</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3>수신인(Beneficiary) 정보</h3>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>FATF</th>
+<th>한국</th>
+<th>EU TFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>가상자산 주소</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 특금법은 FATF 권고보다 <strong>필드가 적습니다</strong> — 개인정보 보호법과의 긴장 때문. 반면 EU TFR은 <strong>가장 엄격</strong>합니다. 글로벌 영업 VASP는 "가장 빡빡한 EU 기준에 맞추면 다른 관할은 자동 충족"이라는 전략으로 운영합니다.</p>
+<hr />
+<h2>3. 임계금액 비교 — 관할별 선택의 차이</h2>
+<p><img alt="관할별 Travel Rule 임계금액 — EU가 가장 엄격" src="../../charts/output/travel_rule_thresholds.svg" /></p>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>임계금액이 낮을수록 더 많은 거래가 Travel Rule 대상이 되어 운영 부담이 큽니다. 한국은 중간, EU는 극단(임계 없음), 미국은 상대적으로 완화. 관할 선택은 <strong>"우리 고객이 어느 나라 VASP와 주로 거래하나"</strong> 로 결정해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>관할</th>
+<th>임계</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FATF 권고</td>
+<td>USD/EUR 1,000</td>
+<td>회원국 자율 결정</td>
+</tr>
+<tr>
+<td><strong>한국</strong></td>
+<td><strong>100만원</strong></td>
+<td>특금법 시행령 §10의10</td>
+</tr>
+<tr>
+<td><strong>미국 (FinCEN)</strong></td>
+<td><strong>$3,000</strong></td>
+<td>BSA Travel Rule 1996</td>
+</tr>
+<tr>
+<td><strong>EU TFR</strong></td>
+<td><strong>없음 (모든 거래)</strong></td>
+<td>가장 엄격</td>
+</tr>
+<tr>
+<td>일본</td>
+<td>100,000엔</td>
+<td>2023 시행</td>
+</tr>
+<tr>
+<td>싱가포르</td>
+<td>SGD 1,500</td>
+<td>2020 시행</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 사업자가 EU 카운터파티와 거래할 때는 <strong>EU 기준(임계 없음)</strong> 으로 맞춰야 합니다. 1유로짜리 거래여도 EU 측은 모든 필드를 요구. 이게 한국 거래소가 EU 고객 온보딩에 미적거리는 구조적 이유 중 하나.</p>
+<hr />
+<h2>4. 메시지 표준: IVMS101</h2>
+<h3>정체성</h3>
+<ul>
+<li><strong>InterVASP Messaging Standard 101</strong> — Travel Rule 메시지의 글로벌 표준</li>
+<li>2020년 InterVASP Joint Working Group (JWG) 합의</li>
+<li>JSON Schema로 송수신인 정보 표준화</li>
+<li><strong>모든 주요 전송 프로토콜이 IVMS101을 페이로드로 사용</strong></li>
+</ul>
+<h3>왜 표준이 필요했나</h3>
+<p>Travel Rule 시행 초기(2019~2020)에는 각 프로토콜이 자체 메시지 형식을 썼습니다. 그러면 TRISA 쓰는 A 거래소가 Sygna 쓰는 B 거래소로 메시지를 보낼 때 <strong>형식 변환</strong>이 필요했고, 필드가 일대일 매핑 안 되는 경우가 속출. 이 문제를 풀려고 Notabene·21 Analytics·CipherTrace(TRISA)·CoolBitX(Sygna)·Securrency 등 주요 플레이어가 모여 공통 JSON 스키마를 합의한 게 IVMS101.</p>
+<h3>핵심 구조</h3>
+<pre><code class="language-json">{
+  &quot;originator&quot;: {
+    &quot;naturalPerson&quot;: {
+      &quot;name&quot;: { &quot;primaryIdentifier&quot;: &quot;...&quot;, &quot;secondaryIdentifier&quot;: &quot;...&quot; },
+      &quot;geographicAddress&quot;: { ... },
+      &quot;dateAndPlaceOfBirth&quot;: { ... },
+      &quot;nationalIdentification&quot;: { ... }
+    },
+    &quot;accountNumber&quot;: [&quot;bc1q...&quot;]
+  },
+  &quot;beneficiary&quot;: { ... },
+  &quot;originatingVASP&quot;: { &quot;legalPerson&quot;: { ... } },
+  &quot;beneficiaryVASP&quot;: { ... },
+  &quot;transferPath&quot;: { ... }
+}
+</code></pre>
+<h3>실무 포인트</h3>
+<p>IVMS101은 "표준이지만 유연성이 있어서" 관할별 필수 필드 차이를 허용합니다. 같은 메시지라도 한국 VASP가 보낸 버전과 EU VASP가 보낸 버전의 채움 정도가 다를 수 있고, 수신 측이 이를 <strong>관할 기준으로 검증</strong>해야 합니다. 이게 IVMS101 validator 구현에서 가장 복잡한 부분.</p>
+<hr />
+<h2>5. Travel Rule 프로토콜 — 전송 방식들</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>표준(IVMS101)이 "무엇을"이라면, 프로토콜은 "어떻게"입니다. 분산형은 누구나 참여할 수 있지만 식별 인프라가 별도 필요하고, 폐쇄형은 신뢰는 높지만 회원사 한정. 한국은 폐쇄형(VerifyVASP·CODE)이 주류, 글로벌은 Notabene Gateway가 멀티프로토콜 허브로 부상.</p>
+<table>
+<thead>
+<tr>
+<th>프로토콜</th>
+<th>운영</th>
+<th>모델</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TRISA</strong></td>
+<td>비영리, CipherTrace 시작 (→ Mastercard)</td>
+<td>분산형, gRPC/PKI</td>
+<td>오픈소스, 누구나 참여</td>
+</tr>
+<tr>
+<td><strong>TRP</strong></td>
+<td>21 Analytics, ING</td>
+<td>API 기반 REST</td>
+<td>가벼움, 빠른 구현</td>
+</tr>
+<tr>
+<td><strong>OpenVASP</strong></td>
+<td>OpenVASP Association</td>
+<td>분산형, Ethereum 기반</td>
+<td>2026년 활용도 낮음</td>
+</tr>
+<tr>
+<td><strong>VerifyVASP</strong></td>
+<td>람다256(Upbit 자회사) + Chainalysis</td>
+<td>폐쇄형 컨소시엄</td>
+<td>한국 + 글로벌</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td>빗썸+코빗+코인원 합작</td>
+<td>폐쇄형 컨소시엄</td>
+<td>한국 특화</td>
+</tr>
+<tr>
+<td><strong>Notabene</strong></td>
+<td>Notabene Inc. (미국)</td>
+<td>SaaS, 멀티프로토콜</td>
+<td>1,500+ VASP, Sunrise 해결책</td>
+</tr>
+<tr>
+<td><strong>Sumsub Travel Rule</strong></td>
+<td>Sumsub</td>
+<td>SaaS</td>
+<td>KYC 통합</td>
+</tr>
+<tr>
+<td><strong>Sygna</strong></td>
+<td>CoolBitX (대만)</td>
+<td>API</td>
+<td>아시아 강세</td>
+</tr>
+</tbody>
+</table>
+<h3>분산형 vs 폐쇄형 트레이드오프</h3>
+<ul>
+<li><strong>분산형(TRISA, OpenVASP)</strong>: 누구나 참여 가능, 신뢰는 <strong>PKI 인증서</strong>로. 장점은 확장성·오픈, 단점은 VASP 식별 인프라를 별도로 갖춰야 함.</li>
+<li><strong>폐쇄형(VerifyVASP, CODE)</strong>: 사전 검증된 VASP만 참여, 신뢰는 <strong>컨소시엄 운영자</strong>가 보증. 장점은 즉시 작동, 단점은 회원사 외 카운터파티 불가.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"우리는 어느 프로토콜을 써야 하나"의 답은 <strong>"고객이 어디로 주로 출금하나"</strong> 로 결정합니다. 한국 고객이 주로 국내 4대 거래소 간 이동이면 VerifyVASP+CODE, 해외 거래소가 많으면 Notabene Gateway, 글로벌 규모면 Notabene + TRISA 조합. 한 솔루션만 고집하면 반드시 Sunrise Issue에 부딪힙니다.</p>
+<hr />
+<h2>6. 한국 시장의 Travel Rule</h2>
+<h3>두 솔루션 양강 체제</h3>
+<table>
+<thead>
+<tr>
+<th>솔루션</th>
+<th>운영자</th>
+<th>사용 거래소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VerifyVASP</strong></td>
+<td>람다256 (두나무 자회사) + Chainalysis</td>
+<td><strong>Upbit</strong>, 다수 글로벌</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td>코드 (빗썸·코빗·코인원 합작법인)</td>
+<td><strong>빗썸·코빗·코인원</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>시행 초기의 혼란</h3>
+<p><strong>2022-03-25 시행 직후</strong> 한국 시장은 두 솔루션이 <strong>분리</strong> 운영되는 상황이었습니다. 즉 Upbit에서 빗썸으로 원화 100만원 상당 코인을 보낼 수 없는 기간이 있었고, 이용자들은 "내 코인을 못 보낸다"는 불만을 쏟았습니다. 시행 1개월여 후 <strong>VerifyVASP ↔ CODE 연동</strong>이 완료되며 해결. 현재는 4대 거래소 간 자유롭게 송금 가능.</p>
+<h3>외부지갑(unhosted wallet) 등록제</h3>
+<p>법령이 명시 요구한 건 아니지만, 한국 거래소는 자체 정책으로 <strong>출금 받을 외부지갑을 사전 등록</strong> 받습니다.</p>
+<ul>
+<li><strong>등록 시</strong>: 본인인증 + 지갑 소유 증명(인증 문자열 서명 제출) + 화이트리스트 등록</li>
+<li>등록 안 된 지갑으로는 <strong>출금 불가</strong></li>
+<li>개인지갑(MetaMask 등)에 대한 Travel Rule 대응책으로 발전</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 4대 거래소 간에는 이제 Travel Rule이 매끄럽지만, <strong>해외 VASP와의 거래에서는 여전히 Sunrise Issue</strong>가 자주 발생. 고객 민원의 상당수가 "왜 이 해외 거래소로 출금이 안 되나"이고, 답은 "카운터파티가 Travel Rule 시스템을 안 갖췄거나 미승인"인 경우가 대부분. 고객 안내 템플릿을 잘 만들어두는 게 CX 부담 경감에 도움.</p>
+<hr />
+<h2>7. 두 가지 핵심 난제</h2>
+<h3>A. Sunrise Issue — 관할별 시행 격차</h3>
+<p>A국은 시행, B국은 미시행 상태라면, A국 VASP가 B국 VASP에게 송금할 때 B국 측이 메시지를 받을 인프라 자체가 없습니다.</p>
+<p><strong>해결책</strong>:
+- <strong>멀티프로토콜 게이트웨이</strong> (Notabene Gateway가 부상한 이유) — 한 번 연결로 다양한 카운터파티 프로토콜 대응
+- <strong>폴백 정책</strong> — 미연결 카운터파티에게는 <strong>송금 보류 또는 자체 검토 후 결정</strong>
+- <strong>점진적 글로벌 합의</strong> — 2030년까지 완성 목표 (FATF 로드맵)</p>
+<h3>B. VASP Discovery — 지갑주소 식별</h3>
+<p>지갑 주소 <code>0xABC...</code>가 출금 대상으로 들어왔을 때, <strong>그게 어느 VASP의 주소인지</strong> 어떻게 아는가?</p>
+<p><strong>해결책</strong>:
+- <strong>Chainalysis / TRM / Elliptic attribution DB</strong> — 주소 → VASP 매핑 (가장 일반적)
+- <strong>자체 검증 컨소시엄</strong> (VerifyVASP, CODE) — 회원사 주소 사전 등록
+- <strong>API 조회</strong> (Notabene Directory 등) — 멀티 DB 통합 조회
+- <strong>DTI (Digital Token Identifier, ISO 24165)</strong> — 토큰 ID 표준화
+- <strong>GLEIF LEI (Legal Entity Identifier)</strong> — 법인 식별 글로벌 표준</p>
+<h3>C. Personal Data 보호 긴장</h3>
+<p>Travel Rule은 본질적으로 <strong>PII(Personally Identifiable Information, 개인식별정보)를 VASP 간 전송</strong>하는 것 — 이게 GDPR·한국 개인정보 보호법(PIPA)과 충돌.</p>
+<p><strong>해결</strong>:
+- 암호화 전송 (TLS + 메시지 수준 암호화)
+- 목적 한정 원칙 (Travel Rule 이외 용도 사용 금지)
+- 보존 기간 명확화 (한국 15년, EU 5년)
+- 수신 VASP의 데이터 위임 처리 계약 체결</p>
+<h3>실무 포인트</h3>
+<p>세 난제 중 개인정보 충돌이 가장 조용하지만 가장 무거운 위험입니다. Travel Rule 메시지가 제3국 VASP로 넘어가는 순간 해당국 개인정보법이 적용되고, 한국 개인정보보호위원회(PIPC)는 "국외 이전 시 적정성 확인"을 요구합니다. 글로벌 영업 VASP는 국외이전 영향평가(Privacy Impact Assessment)를 정기적으로 수행해야 합니다.</p>
+<hr />
+<h2>8. 운영 흐름 — 한국 거래소 출금 예시</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 1489px; background-color: transparent;" viewBox="-50 -10 1489 690" role="graphics-document document" aria-roledescription="sequence"><g><rect x="1239" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="C" rx="3" ry="3" class="actor actor-bottom"/><text x="1314" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1314" dy="0">⛓️ Ethereum</tspan></text></g><g><rect x="989" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="B" rx="3" ry="3" class="actor actor-bottom"/><text x="1064" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1064" dy="-8">🏦 빗썸</tspan></text><text x="1064" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1064" dy="8">(CODE)</tspan></text></g><g><rect x="799" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="V" rx="3" ry="3" class="actor actor-bottom"/><text x="874" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="874" dy="-8">🌐 VerifyVASP</tspan></text><text x="874" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="874" dy="8">↔ CODE Gateway</tspan></text></g><g><rect x="609" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="K" rx="3" ry="3" class="actor actor-bottom"/><text x="684" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="684" dy="-8">🔍 KYT</tspan></text><text x="684" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="684" dy="8">(Chainalysis)</tspan></text></g><g><rect x="323" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="U" rx="3" ry="3" class="actor actor-bottom"/><text x="398" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="398" dy="-8">🏦 Upbit</tspan></text><text x="398" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="398" dy="8">(VerifyVASP)</tspan></text></g><g><rect x="0" y="604" fill="#eaeaea" stroke="#666" width="150" height="65" name="A" rx="3" ry="3" class="actor actor-bottom"/><text x="75" y="636.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="75" dy="0">👤 사용자 A</tspan></text></g><g><line id="actor5" x1="1314" y1="65" x2="1314" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="C" data-et="life-line" data-id="C"/><g id="root-5" data-et="participant" data-type="participant" data-id="C"><rect x="1239" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="C" rx="3" ry="3" class="actor actor-top"/><text x="1314" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1314" dy="0">⛓️ Ethereum</tspan></text></g></g><g><line id="actor4" x1="1064" y1="65" x2="1064" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="B" data-et="life-line" data-id="B"/><g id="root-4" data-et="participant" data-type="participant" data-id="B"><rect x="989" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="B" rx="3" ry="3" class="actor actor-top"/><text x="1064" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1064" dy="-8">🏦 빗썸</tspan></text><text x="1064" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="1064" dy="8">(CODE)</tspan></text></g></g><g><line id="actor3" x1="874" y1="65" x2="874" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="V" data-et="life-line" data-id="V"/><g id="root-3" data-et="participant" data-type="participant" data-id="V"><rect x="799" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="V" rx="3" ry="3" class="actor actor-top"/><text x="874" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="874" dy="-8">🌐 VerifyVASP</tspan></text><text x="874" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="874" dy="8">↔ CODE Gateway</tspan></text></g></g><g><line id="actor2" x1="684" y1="65" x2="684" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="K" data-et="life-line" data-id="K"/><g id="root-2" data-et="participant" data-type="participant" data-id="K"><rect x="609" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="K" rx="3" ry="3" class="actor actor-top"/><text x="684" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="684" dy="-8">🔍 KYT</tspan></text><text x="684" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="684" dy="8">(Chainalysis)</tspan></text></g></g><g><line id="actor1" x1="398" y1="65" x2="398" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="U" data-et="life-line" data-id="U"/><g id="root-1" data-et="participant" data-type="participant" data-id="U"><rect x="323" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="U" rx="3" ry="3" class="actor actor-top"/><text x="398" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="398" dy="-8">🏦 Upbit</tspan></text><text x="398" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="398" dy="8">(VerifyVASP)</tspan></text></g></g><g><line id="actor0" x1="75" y1="65" x2="75" y2="604" class="actor-line 200" stroke-width="0.5px" stroke="#999" name="A" data-et="life-line" data-id="A"/><g id="root-0" data-et="participant" data-type="participant" data-id="A"><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" name="A" rx="3" ry="3" class="actor actor-top"/><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor actor-box" style="text-anchor: middle; font-size: 16px; font-weight: 400;"><tspan x="75" dy="0">👤 사용자 A</tspan></text></g></g><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .actor{stroke:#1a2e4a;fill:#e5eaf2;stroke-width:1;}#my-svg rect.actor.outer-path[data-look="neo"]{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg rect.note[data-look="neo"]{stroke:hsl(52.6829268293, 60%, 73.9215686275%);fill:#fff5ad;filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg text.actor&gt;tspan{fill:#111418;stroke:none;}#my-svg .actor-line{stroke:#1a2e4a;}#my-svg .innerArc{stroke-width:1.5;stroke-dasharray:none;}#my-svg .messageLine0{stroke-width:1.5;stroke-dasharray:none;stroke:#111418;}#my-svg .messageLine1{stroke-width:1.5;stroke-dasharray:2,2;stroke:#111418;}#my-svg [id$="-arrowhead"] path{fill:#111418;stroke:#111418;}#my-svg .sequenceNumber{fill:#c5beb5;}#my-svg [id$="-sequencenumber"]{fill:#111418;}#my-svg [id$="-crosshead"] path{fill:#111418;stroke:#111418;}#my-svg .messageText{fill:#111418;stroke:none;}#my-svg .labelBox{stroke:#1a2e4a;fill:#e5eaf2;filter:none;}#my-svg .labelText,#my-svg .labelText&gt;tspan{fill:#111418;stroke:none;}#my-svg .loopText,#my-svg .loopText&gt;tspan{fill:#111418;stroke:none;}#my-svg .loopLine{stroke-width:2px;stroke-dasharray:2,2;stroke:#1a2e4a;fill:#1a2e4a;}#my-svg .note{stroke:hsl(52.6829268293, 60%, 73.9215686275%);fill:#fff5ad;}#my-svg .noteText,#my-svg .noteText&gt;tspan{fill:#333;stroke:none;font-weight:normal;}#my-svg .activation0{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .activation1{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .activation2{fill:#fff7d6;stroke:hsl(48.2926829268, 100%, 81.9607843137%);}#my-svg .actorPopupMenu{position:absolute;}#my-svg .actorPopupMenuPanel{position:absolute;fill:#e5eaf2;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);filter:drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));}#my-svg .actor-man circle,#my-svg line{fill:#e5eaf2;stroke-width:2px;}#my-svg g rect.rect{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));stroke:#1a2e4a;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><defs><symbol id="my-svg-computer" width="24" height="24"><path transform="scale(.5)" d="M2 2v13h20v-13h-20zm18 11h-16v-9h16v9zm-10.228 6l.466-1h3.524l.467 1h-4.457zm14.228 3h-24l2-6h2.104l-1.33 4h18.45l-1.297-4h2.073l2 6zm-5-10h-14v-7h14v7z"/></symbol></defs><defs><symbol id="my-svg-database" fill-rule="evenodd" clip-rule="evenodd"><path transform="scale(.5)" d="M12.258.001l.256.004.255.005.253.008.251.01.249.012.247.015.246.016.242.019.241.02.239.023.236.024.233.027.231.028.229.031.225.032.223.034.22.036.217.038.214.04.211.041.208.043.205.045.201.046.198.048.194.05.191.051.187.053.183.054.18.056.175.057.172.059.168.06.163.061.16.063.155.064.15.066.074.033.073.033.071.034.07.034.069.035.068.035.067.035.066.035.064.036.064.036.062.036.06.036.06.037.058.037.058.037.055.038.055.038.053.038.052.038.051.039.05.039.048.039.047.039.045.04.044.04.043.04.041.04.04.041.039.041.037.041.036.041.034.041.033.042.032.042.03.042.029.042.027.042.026.043.024.043.023.043.021.043.02.043.018.044.017.043.015.044.013.044.012.044.011.045.009.044.007.045.006.045.004.045.002.045.001.045v17l-.001.045-.002.045-.004.045-.006.045-.007.045-.009.044-.011.045-.012.044-.013.044-.015.044-.017.043-.018.044-.02.043-.021.043-.023.043-.024.043-.026.043-.027.042-.029.042-.03.042-.032.042-.033.042-.034.041-.036.041-.037.041-.039.041-.04.041-.041.04-.043.04-.044.04-.045.04-.047.039-.048.039-.05.039-.051.039-.052.038-.053.038-.055.038-.055.038-.058.037-.058.037-.06.037-.06.036-.062.036-.064.036-.064.036-.066.035-.067.035-.068.035-.069.035-.07.034-.071.034-.073.033-.074.033-.15.066-.155.064-.16.063-.163.061-.168.06-.172.059-.175.057-.18.056-.183.054-.187.053-.191.051-.194.05-.198.048-.201.046-.205.045-.208.043-.211.041-.214.04-.217.038-.22.036-.223.034-.225.032-.229.031-.231.028-.233.027-.236.024-.239.023-.241.02-.242.019-.246.016-.247.015-.249.012-.251.01-.253.008-.255.005-.256.004-.258.001-.258-.001-.256-.004-.255-.005-.253-.008-.251-.01-.249-.012-.247-.015-.245-.016-.243-.019-.241-.02-.238-.023-.236-.024-.234-.027-.231-.028-.228-.031-.226-.032-.223-.034-.22-.036-.217-.038-.214-.04-.211-.041-.208-.043-.204-.045-.201-.046-.198-.048-.195-.05-.19-.051-.187-.053-.184-.054-.179-.056-.176-.057-.172-.059-.167-.06-.164-.061-.159-.063-.155-.064-.151-.066-.074-.033-.072-.033-.072-.034-.07-.034-.069-.035-.068-.035-.067-.035-.066-.035-.064-.036-.063-.036-.062-.036-.061-.036-.06-.037-.058-.037-.057-.037-.056-.038-.055-.038-.053-.038-.052-.038-.051-.039-.049-.039-.049-.039-.046-.039-.046-.04-.044-.04-.043-.04-.041-.04-.04-.041-.039-.041-.037-.041-.036-.041-.034-.041-.033-.042-.032-.042-.03-.042-.029-.042-.027-.042-.026-.043-.024-.043-.023-.043-.021-.043-.02-.043-.018-.044-.017-.043-.015-.044-.013-.044-.012-.044-.011-.045-.009-.044-.007-.045-.006-.045-.004-.045-.002-.045-.001-.045v-17l.001-.045.002-.045.004-.045.006-.045.007-.045.009-.044.011-.045.012-.044.013-.044.015-.044.017-.043.018-.044.02-.043.021-.043.023-.043.024-.043.026-.043.027-.042.029-.042.03-.042.032-.042.033-.042.034-.041.036-.041.037-.041.039-.041.04-.041.041-.04.043-.04.044-.04.046-.04.046-.039.049-.039.049-.039.051-.039.052-.038.053-.038.055-.038.056-.038.057-.037.058-.037.06-.037.061-.036.062-.036.063-.036.064-.036.066-.035.067-.035.068-.035.069-.035.07-.034.072-.034.072-.033.074-.033.151-.066.155-.064.159-.063.164-.061.167-.06.172-.059.176-.057.179-.056.184-.054.187-.053.19-.051.195-.05.198-.048.201-.046.204-.045.208-.043.211-.041.214-.04.217-.038.22-.036.223-.034.226-.032.228-.031.231-.028.234-.027.236-.024.238-.023.241-.02.243-.019.245-.016.247-.015.249-.012.251-.01.253-.008.255-.005.256-.004.258-.001.258.001zm-9.258 20.499v.01l.001.021.003.021.004.022.005.021.006.022.007.022.009.023.01.022.011.023.012.023.013.023.015.023.016.024.017.023.018.024.019.024.021.024.022.025.023.024.024.025.052.049.056.05.061.051.066.051.07.051.075.051.079.052.084.052.088.052.092.052.097.052.102.051.105.052.11.052.114.051.119.051.123.051.127.05.131.05.135.05.139.048.144.049.147.047.152.047.155.047.16.045.163.045.167.043.171.043.176.041.178.041.183.039.187.039.19.037.194.035.197.035.202.033.204.031.209.03.212.029.216.027.219.025.222.024.226.021.23.02.233.018.236.016.24.015.243.012.246.01.249.008.253.005.256.004.259.001.26-.001.257-.004.254-.005.25-.008.247-.011.244-.012.241-.014.237-.016.233-.018.231-.021.226-.021.224-.024.22-.026.216-.027.212-.028.21-.031.205-.031.202-.034.198-.034.194-.036.191-.037.187-.039.183-.04.179-.04.175-.042.172-.043.168-.044.163-.045.16-.046.155-.046.152-.047.148-.048.143-.049.139-.049.136-.05.131-.05.126-.05.123-.051.118-.052.114-.051.11-.052.106-.052.101-.052.096-.052.092-.052.088-.053.083-.051.079-.052.074-.052.07-.051.065-.051.06-.051.056-.05.051-.05.023-.024.023-.025.021-.024.02-.024.019-.024.018-.024.017-.024.015-.023.014-.024.013-.023.012-.023.01-.023.01-.022.008-.022.006-.022.006-.022.004-.022.004-.021.001-.021.001-.021v-4.127l-.077.055-.08.053-.083.054-.085.053-.087.052-.09.052-.093.051-.095.05-.097.05-.1.049-.102.049-.105.048-.106.047-.109.047-.111.046-.114.045-.115.045-.118.044-.12.043-.122.042-.124.042-.126.041-.128.04-.13.04-.132.038-.134.038-.135.037-.138.037-.139.035-.142.035-.143.034-.144.033-.147.032-.148.031-.15.03-.151.03-.153.029-.154.027-.156.027-.158.026-.159.025-.161.024-.162.023-.163.022-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.011-.178.01-.179.008-.179.008-.181.006-.182.005-.182.004-.184.003-.184.002h-.37l-.184-.002-.184-.003-.182-.004-.182-.005-.181-.006-.179-.008-.179-.008-.178-.01-.176-.011-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.022-.162-.023-.161-.024-.159-.025-.157-.026-.156-.027-.155-.027-.153-.029-.151-.03-.15-.03-.148-.031-.146-.032-.145-.033-.143-.034-.141-.035-.14-.035-.137-.037-.136-.037-.134-.038-.132-.038-.13-.04-.128-.04-.126-.041-.124-.042-.122-.042-.12-.044-.117-.043-.116-.045-.113-.045-.112-.046-.109-.047-.106-.047-.105-.048-.102-.049-.1-.049-.097-.05-.095-.05-.093-.052-.09-.051-.087-.052-.085-.053-.083-.054-.08-.054-.077-.054v4.127zm0-5.654v.011l.001.021.003.021.004.021.005.022.006.022.007.022.009.022.01.022.011.023.012.023.013.023.015.024.016.023.017.024.018.024.019.024.021.024.022.024.023.025.024.024.052.05.056.05.061.05.066.051.07.051.075.052.079.051.084.052.088.052.092.052.097.052.102.052.105.052.11.051.114.051.119.052.123.05.127.051.131.05.135.049.139.049.144.048.147.048.152.047.155.046.16.045.163.045.167.044.171.042.176.042.178.04.183.04.187.038.19.037.194.036.197.034.202.033.204.032.209.03.212.028.216.027.219.025.222.024.226.022.23.02.233.018.236.016.24.014.243.012.246.01.249.008.253.006.256.003.259.001.26-.001.257-.003.254-.006.25-.008.247-.01.244-.012.241-.015.237-.016.233-.018.231-.02.226-.022.224-.024.22-.025.216-.027.212-.029.21-.03.205-.032.202-.033.198-.035.194-.036.191-.037.187-.039.183-.039.179-.041.175-.042.172-.043.168-.044.163-.045.16-.045.155-.047.152-.047.148-.048.143-.048.139-.05.136-.049.131-.05.126-.051.123-.051.118-.051.114-.052.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.051.07-.052.065-.051.06-.05.056-.051.051-.049.023-.025.023-.024.021-.025.02-.024.019-.024.018-.024.017-.024.015-.023.014-.023.013-.024.012-.022.01-.023.01-.023.008-.022.006-.022.006-.022.004-.021.004-.022.001-.021.001-.021v-4.139l-.077.054-.08.054-.083.054-.085.052-.087.053-.09.051-.093.051-.095.051-.097.05-.1.049-.102.049-.105.048-.106.047-.109.047-.111.046-.114.045-.115.044-.118.044-.12.044-.122.042-.124.042-.126.041-.128.04-.13.039-.132.039-.134.038-.135.037-.138.036-.139.036-.142.035-.143.033-.144.033-.147.033-.148.031-.15.03-.151.03-.153.028-.154.028-.156.027-.158.026-.159.025-.161.024-.162.023-.163.022-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.011-.178.009-.179.009-.179.007-.181.007-.182.005-.182.004-.184.003-.184.002h-.37l-.184-.002-.184-.003-.182-.004-.182-.005-.181-.007-.179-.007-.179-.009-.178-.009-.176-.011-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.022-.162-.023-.161-.024-.159-.025-.157-.026-.156-.027-.155-.028-.153-.028-.151-.03-.15-.03-.148-.031-.146-.033-.145-.033-.143-.033-.141-.035-.14-.036-.137-.036-.136-.037-.134-.038-.132-.039-.13-.039-.128-.04-.126-.041-.124-.042-.122-.043-.12-.043-.117-.044-.116-.044-.113-.046-.112-.046-.109-.046-.106-.047-.105-.048-.102-.049-.1-.049-.097-.05-.095-.051-.093-.051-.09-.051-.087-.053-.085-.052-.083-.054-.08-.054-.077-.054v4.139zm0-5.666v.011l.001.02.003.022.004.021.005.022.006.021.007.022.009.023.01.022.011.023.012.023.013.023.015.023.016.024.017.024.018.023.019.024.021.025.022.024.023.024.024.025.052.05.056.05.061.05.066.051.07.051.075.052.079.051.084.052.088.052.092.052.097.052.102.052.105.051.11.052.114.051.119.051.123.051.127.05.131.05.135.05.139.049.144.048.147.048.152.047.155.046.16.045.163.045.167.043.171.043.176.042.178.04.183.04.187.038.19.037.194.036.197.034.202.033.204.032.209.03.212.028.216.027.219.025.222.024.226.021.23.02.233.018.236.017.24.014.243.012.246.01.249.008.253.006.256.003.259.001.26-.001.257-.003.254-.006.25-.008.247-.01.244-.013.241-.014.237-.016.233-.018.231-.02.226-.022.224-.024.22-.025.216-.027.212-.029.21-.03.205-.032.202-.033.198-.035.194-.036.191-.037.187-.039.183-.039.179-.041.175-.042.172-.043.168-.044.163-.045.16-.045.155-.047.152-.047.148-.048.143-.049.139-.049.136-.049.131-.051.126-.05.123-.051.118-.052.114-.051.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.052.07-.051.065-.051.06-.051.056-.05.051-.049.023-.025.023-.025.021-.024.02-.024.019-.024.018-.024.017-.024.015-.023.014-.024.013-.023.012-.023.01-.022.01-.023.008-.022.006-.022.006-.022.004-.022.004-.021.001-.021.001-.021v-4.153l-.077.054-.08.054-.083.053-.085.053-.087.053-.09.051-.093.051-.095.051-.097.05-.1.049-.102.048-.105.048-.106.048-.109.046-.111.046-.114.046-.115.044-.118.044-.12.043-.122.043-.124.042-.126.041-.128.04-.13.039-.132.039-.134.038-.135.037-.138.036-.139.036-.142.034-.143.034-.144.033-.147.032-.148.032-.15.03-.151.03-.153.028-.154.028-.156.027-.158.026-.159.024-.161.024-.162.023-.163.023-.165.021-.166.02-.167.019-.169.018-.169.017-.171.016-.173.015-.173.014-.175.013-.175.012-.177.01-.178.01-.179.009-.179.007-.181.006-.182.006-.182.004-.184.003-.184.001-.185.001-.185-.001-.184-.001-.184-.003-.182-.004-.182-.006-.181-.006-.179-.007-.179-.009-.178-.01-.176-.01-.176-.012-.175-.013-.173-.014-.172-.015-.171-.016-.17-.017-.169-.018-.167-.019-.166-.02-.165-.021-.163-.023-.162-.023-.161-.024-.159-.024-.157-.026-.156-.027-.155-.028-.153-.028-.151-.03-.15-.03-.148-.032-.146-.032-.145-.033-.143-.034-.141-.034-.14-.036-.137-.036-.136-.037-.134-.038-.132-.039-.13-.039-.128-.041-.126-.041-.124-.041-.122-.043-.12-.043-.117-.044-.116-.044-.113-.046-.112-.046-.109-.046-.106-.048-.105-.048-.102-.048-.1-.05-.097-.049-.095-.051-.093-.051-.09-.052-.087-.052-.085-.053-.083-.053-.08-.054-.077-.054v4.153zm8.74-8.179l-.257.004-.254.005-.25.008-.247.011-.244.012-.241.014-.237.016-.233.018-.231.021-.226.022-.224.023-.22.026-.216.027-.212.028-.21.031-.205.032-.202.033-.198.034-.194.036-.191.038-.187.038-.183.04-.179.041-.175.042-.172.043-.168.043-.163.045-.16.046-.155.046-.152.048-.148.048-.143.048-.139.049-.136.05-.131.05-.126.051-.123.051-.118.051-.114.052-.11.052-.106.052-.101.052-.096.052-.092.052-.088.052-.083.052-.079.052-.074.051-.07.052-.065.051-.06.05-.056.05-.051.05-.023.025-.023.024-.021.024-.02.025-.019.024-.018.024-.017.023-.015.024-.014.023-.013.023-.012.023-.01.023-.01.022-.008.022-.006.023-.006.021-.004.022-.004.021-.001.021-.001.021.001.021.001.021.004.021.004.022.006.021.006.023.008.022.01.022.01.023.012.023.013.023.014.023.015.024.017.023.018.024.019.024.02.025.021.024.023.024.023.025.051.05.056.05.06.05.065.051.07.052.074.051.079.052.083.052.088.052.092.052.096.052.101.052.106.052.11.052.114.052.118.051.123.051.126.051.131.05.136.05.139.049.143.048.148.048.152.048.155.046.16.046.163.045.168.043.172.043.175.042.179.041.183.04.187.038.191.038.194.036.198.034.202.033.205.032.21.031.212.028.216.027.22.026.224.023.226.022.231.021.233.018.237.016.241.014.244.012.247.011.25.008.254.005.257.004.26.001.26-.001.257-.004.254-.005.25-.008.247-.011.244-.012.241-.014.237-.016.233-.018.231-.021.226-.022.224-.023.22-.026.216-.027.212-.028.21-.031.205-.032.202-.033.198-.034.194-.036.191-.038.187-.038.183-.04.179-.041.175-.042.172-.043.168-.043.163-.045.16-.046.155-.046.152-.048.148-.048.143-.048.139-.049.136-.05.131-.05.126-.051.123-.051.118-.051.114-.052.11-.052.106-.052.101-.052.096-.052.092-.052.088-.052.083-.052.079-.052.074-.051.07-.052.065-.051.06-.05.056-.05.051-.05.023-.025.023-.024.021-.024.02-.025.019-.024.018-.024.017-.023.015-.024.014-.023.013-.023.012-.023.01-.023.01-.022.008-.022.006-.023.006-.021.004-.022.004-.021.001-.021.001-.021-.001-.021-.001-.021-.004-.021-.004-.022-.006-.021-.006-.023-.008-.022-.01-.022-.01-.023-.012-.023-.013-.023-.014-.023-.015-.024-.017-.023-.018-.024-.019-.024-.02-.025-.021-.024-.023-.024-.023-.025-.051-.05-.056-.05-.06-.05-.065-.051-.07-.052-.074-.051-.079-.052-.083-.052-.088-.052-.092-.052-.096-.052-.101-.052-.106-.052-.11-.052-.114-.052-.118-.051-.123-.051-.126-.051-.131-.05-.136-.05-.139-.049-.143-.048-.148-.048-.152-.048-.155-.046-.16-.046-.163-.045-.168-.043-.172-.043-.175-.042-.179-.041-.183-.04-.187-.038-.191-.038-.194-.036-.198-.034-.202-.033-.205-.032-.21-.031-.212-.028-.216-.027-.22-.026-.224-.023-.226-.022-.231-.021-.233-.018-.237-.016-.241-.014-.244-.012-.247-.011-.25-.008-.254-.005-.257-.004-.26-.001-.26.001z"/></symbol></defs><defs><symbol id="my-svg-clock" width="24" height="24"><path transform="scale(.5)" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></symbol></defs><defs><marker id="my-svg-arrowhead" refX="7.9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M -1 0 L 10 5 L 0 10 z"/></marker></defs><defs><marker id="my-svg-crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="4.5"><path fill="none" stroke="#000000" stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"/></marker></defs><defs><marker id="my-svg-filled-head" refX="15.5" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg-sequencenumber" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"/></marker></defs><defs><marker id="my-svg-solidTopArrowHead" refX="7.9" refY="7.25" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 10 8 L 0 8 z"/></marker></defs><defs><marker id="my-svg-solidBottomArrowHead" refX="7.9" refY="0.75" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 10 0 L 0 8 z"/></marker></defs><defs><marker id="my-svg-stickTopArrowHead" refX="7.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 0 L 7 7" stroke="black" stroke-width="1.5" fill="none"/></marker></defs><defs><marker id="my-svg-stickBottomArrowHead" refX="7.5" refY="0" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M 0 7 L 7 0" stroke="black" stroke-width="1.5" fill="none"/></marker></defs><g data-et="note" data-id="i11"><rect x="378" y="545" fill="#EDF2AE" stroke="#666" width="706" height="39" class="note"/><text x="731" y="550" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-size: 16px; font-weight: 400;"><tspan x="731">🔐 메시지 15년 보관 (양사)</tspan></text></g><text x="235" y="80" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">1️⃣ 1억원 ETH → 빗썸 B에게 출금 요청</text><line x1="82" y1="109" x2="394" y2="109" class="messageLine0" data-et="message" data-id="i1" data-from="A" data-to="U" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="75" y1="109" x2="75" y2="109" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="75" y="113" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">1</text><text x="540" y="124" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">2️⃣ 수신 주소 위험도 체크</text><line x1="405" y1="153" x2="680" y2="153" class="messageLine0" data-et="message" data-id="i2" data-from="U" data-to="K" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="398" y1="153" x2="398" y2="153" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="398" y="157" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">2</text><text x="543" y="168" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">3️⃣ mixer·SDN·mixer 노출 없음 ✓</text><line x1="689" y1="197" x2="402" y2="197" class="messageLine1" data-et="message" data-id="i3" data-from="K" data-to="U" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><line x1="684" y1="197" x2="684" y2="197" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="684" y="201" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">3</text><text x="635" y="212" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">4️⃣ IVMS101 메시지 생성·전송</text><line x1="405" y1="241" x2="870" y2="241" class="messageLine0" data-et="message" data-id="i4" data-from="U" data-to="V" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="398" y1="241" x2="398" y2="241" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="398" y="245" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">4</text><text x="968" y="256" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">5️⃣ 메시지 라우팅</text><line x1="881" y1="285" x2="1060" y2="285" class="messageLine0" data-et="message" data-id="i5" data-from="V" data-to="B" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="874" y1="285" x2="874" y2="285" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="874" y="289" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">5</text><text x="1065" y="300" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">6️⃣ 수신인 B 확인</text><path d="M 1065,329 C 1125,319 1125,359 1065,349" class="messageLine0" data-et="message" data-id="i6" data-from="B" data-to="B" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" x1="1071" style="fill: none;"/><line x1="1064" y1="329" x2="1064" y2="329" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="1064" y="333" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">6</text><text x="971" y="374" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">7️⃣ Accept 응답</text><line x1="1069" y1="403" x2="878" y2="403" class="messageLine1" data-et="message" data-id="i7" data-from="B" data-to="V" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><line x1="1064" y1="403" x2="1064" y2="403" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="1064" y="407" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">7</text><text x="638" y="418" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">Accept</text><line x1="879" y1="447" x2="402" y2="447" class="messageLine1" data-et="message" data-id="i8" data-from="V" data-to="U" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><line x1="874" y1="447" x2="874" y2="447" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="874" y="451" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">8</text><text x="855" y="462" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">8️⃣ 온체인 브로드캐스트</text><line x1="405" y1="491" x2="1310" y2="491" class="messageLine0" data-et="message" data-id="i9" data-from="U" data-to="C" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="398" y1="491" x2="398" y2="491" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="398" y="495" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">9</text><text x="1191" y="506" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-size: 16px; font-weight: 400;">9️⃣ 입금 감지 → B 잔고 반영</text><line x1="1319" y1="535" x2="1068" y2="535" class="messageLine0" data-et="message" data-id="i10" data-from="C" data-to="B" stroke-width="2" stroke="none" marker-end="url(#my-svg-arrowhead)" style="fill: none;"/><line x1="1314" y1="535" x2="1314" y2="535" stroke-width="0" marker-start="url(#my-svg-sequencenumber)"/><text x="1314" y="539" font-family="sans-serif" font-size="12px" text-anchor="middle" class="sequenceNumber">10</text></svg></div></p>
+<h3>실무 포인트</h3>
+<p><strong>5번 메시지 교환이 안 되거나 timeout 시 송금 자체가 멈춥니다</strong> = 사용자 UX 충격. 그래서 카운터파티 호환성(interoperability)이 운영의 핵심 KPI. "카운터파티 에러율"을 월별로 추적하며, 특정 카운터파티에서 반복 실패가 나면 회사 차원의 에스컬레이션이 필요합니다.</p>
+<hr />
+<h2>9. 2025-06-18 FATF R.16 개정의 영향</h2>
+<ul>
+<li>결제 산업 변화 반영, 메시징 표준 명확화</li>
+<li>VASP는 <strong>별도 tailored framework</strong>로 적용 (기존 전통 금융 Travel Rule과 구별)</li>
+<li><strong>2026 후반 가이던스 발표 예정</strong> — 한국 FIU도 이를 반영한 시행령 개정 가능성</li>
+<li><strong>2030년 말 발효</strong> — 회사들은 그전에 시스템 업그레이드 준비</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>2026-04 현재 대부분 VASP는 2022년 R.16 기반 시스템에서 운영 중입니다. 2030년 새 기준 발효까지 <strong>3~4년 리드타임</strong>이 있으므로, 차기 시스템 선택 시 "지금 쓸 것"보다는 "2030년 기준에 맞게 진화 가능한 것"을 기준으로 보는 게 현명합니다.</p>
+<hr />
+<h2>10. 회사 체크리스트</h2>
+<pre><code>□ Travel Rule 솔루션 도입 (VerifyVASP / CODE / Notabene 등)
+□ IVMS101 메시지 정확성 검증 (JSON Schema 기반)
+□ 카운터파티 VASP 호환성 점검 (Sunrise Issue)
+□ 미연결 카운터파티 처리 정책 (송금 거절·보류·수동 검토)
+□ unhosted wallet 등록제 운영
+□ Travel Rule 메시지 15년 보관
+□ PII 암호화 + 접근 통제
+□ 개인정보보호법·GDPR 호환성 점검 (국외이전 영향평가)
+□ 2026 후반 FATF 가이던스 모니터링
+□ 2030 발효 대비 로드맵 수립
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="vasp-obligations.md"><code>vasp-obligations.md</code></a> — VASP 의무 종합</li>
+<li><a href="../4-technology/travel-rule-protocols.md"><code>../4-technology/travel-rule-protocols.md</code></a> — 프로토콜 기술 상세</li>
+<li><a href="../7-vendors/travel-rule-vendors.md"><code>../7-vendors/travel-rule-vendors.md</code></a> — 벤더 비교</li>
+<li><a href="../7-vendors/korea-solutions.md"><code>../7-vendors/korea-solutions.md</code></a> — 한국 솔루션 상세</li>
+<li><a href="https://notabene.id/travel-rule-messaging-protocols">Notabene — Travel Rule Messaging Protocols</a></li>
+<li><a href="https://www.21analytics.co/blog/fatf-crypto-travel-rule-status-2026/">21 Analytics — FATF Travel Rule Status 2026</a></li>
+<li><a href="https://sumsub.com/blog/what-is-the-fatf-travel-rule/">Sumsub — FATF Travel Rule 2026</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 22 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

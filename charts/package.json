@@ -1,0 +1,9 @@
+{
+  "name": "aml-notes-charts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mermaid pre-rendering for AML Notes print packets",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.2"
+  }
+}

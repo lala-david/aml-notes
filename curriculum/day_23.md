@@ -6,6 +6,25 @@
 
 Travel Rule의 **"무엇을"** 을 담당하는 IVMS101. JSON 스키마로 Originator·Beneficiary·VASP 정보를 표준화하며, TRISA·TRP·VerifyVASP·CODE 등 **모든 프로토콜이 페이로드로 사용**합니다. 오늘 NaturalPerson 필수 vs 선택 필드를 보고 나면 D28의 IVMS101 빌더 프로젝트를 훨씬 수월하게 작성할 수 있습니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    I["📝 IVMS101 Message"] --> O["Originator"]
+    I --> B["Beneficiary"]
+    I --> OV["OriginatingVASP"]
+    I --> BV["BeneficiaryVASP"]
+    O --> NP["NaturalPerson / LegalPerson"]
+    NP --> N["name.nameIdentifier"]
+    NP --> G["geographicAddress"]
+    NP --> NID["nationalIdentification"]
+    NP --> DOB["dateAndPlaceOfBirth"]
+    style I fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. IVMS101의 풀이는?
 2. 메시지 핵심 5개 객체는? (Originator/Beneficiary/OriginatingVASP/BeneficiaryVASP/TransferPath)

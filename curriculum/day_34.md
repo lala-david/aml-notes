@@ -6,6 +6,22 @@
 
 단일 체인 분석만으로는 2025~2026 자금세탁의 대부분을 놓칩니다. **Cross-chain tracing**은 bridge 입출금을 양쪽 체인에서 동시에 추적하고 시간·금액으로 매칭하는 작업이며, TRM이 이 영역에서 앞선 이유가 여기 있습니다. Lazarus가 이 영역을 가장 활발히 활용하는 현실도 오늘 확인.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+sequenceDiagram
+    participant A as ⛓️ Chain A (ETH)
+    participant B as 🌉 Bridge
+    participant C as ⛓️ Chain B (Tron)
+    A->>B: deposit (lock)
+    B->>C: mint wrapped
+    Note over A,C: 추적 단절 위험
+    A-->>C: time·amount 매칭<br/>(Chainalysis Crosschain · TRM Multichain)
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Cross-chain laundering이 왜 어려운가?
 2. Bridge tracing 방법 4가지?

@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 46 — 제재 스크리닝 (이름 + Wallet)</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 46 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">46</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 7 / 7</div>
+        <div class="page-meta__theme">컴플라이언스 운영 + 거버넌스</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">제재 스크리닝 (이름 + Wallet)</h1>
+      <p class="title-block__lead">OFAC/UN/EU/외교부 + 가상자산 SDN.</p>
+      <span class="title-block__time">⏱ ~80분</span>
+    </section>
+
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1188.23px; background-color: transparent;" viewBox="0 0 1188.234375 311" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M442.594,44.664L380.717,51.22C318.841,57.776,195.089,70.888,133.212,82.694C71.336,94.5,71.336,105,71.336,110.25L71.336,115.5" id="my-svg-L_S_O_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_O_0" data-points="W3sieCI6NDQyLjU5Mzc1LCJ5Ijo0NC42NjQwMDMwODE1NjMwNzR9LHsieCI6NzEuMzM1OTM3NSwieSI6ODR9LHsieCI6NzEuMzM1OTM3NSwieSI6MTE5LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M442.594,52.496L413.47,57.747C384.346,62.998,326.099,73.499,296.975,83.999C267.852,94.5,267.852,105,267.852,110.25L267.852,115.5" id="my-svg-L_S_U_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_U_0" data-points="W3sieCI6NDQyLjU5Mzc1LCJ5Ijo1Mi40OTYzMDQ0NTY5NjQzNX0seyJ4IjoyNjcuODUxNTYyNSwieSI6ODR9LHsieCI6MjY3Ljg1MTU2MjUsInkiOjExOS41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M503.012,59L495.668,63.167C488.323,67.333,473.634,75.667,466.29,85.083C458.945,94.5,458.945,105,458.945,110.25L458.945,115.5" id="my-svg-L_S_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_E_0" data-points="W3sieCI6NTAzLjAxMjQ1MzU4OTEwODkzLCJ5Ijo1OX0seyJ4Ijo0NTguOTQ1MzEyNSwieSI6ODR9LHsieCI6NDU4Ljk0NTMxMjUsInkiOjExOS41fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M592.909,59L600.254,63.167C607.598,67.333,622.288,75.667,629.632,85.083C636.977,94.5,636.977,105,636.977,110.25L636.977,115.5" id="my-svg-L_S_H_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_H_0" data-points="W3sieCI6NTkyLjkwOTQyMTQxMDg5MTEsInkiOjU5fSx7IngiOjYzNi45NzY1NjI1LCJ5Ijo4NH0seyJ4Ijo2MzYuOTc2NTYyNSwieSI6MTE5LjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M653.328,53.526L680.051,58.605C706.773,63.684,760.219,73.842,786.941,84.171C813.664,94.5,813.664,105,813.664,110.25L813.664,115.5" id="my-svg-L_S_K_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_K_0" data-points="W3sieCI6NjUzLjMyODEyNSwieSI6NTMuNTI2MjcxNjg0Nzk4NTl9LHsieCI6ODEzLjY2NDA2MjUsInkiOjg0fSx7IngiOjgxMy42NjQwNjI1LCJ5IjoxMTkuNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M653.328,44.094L719.479,50.745C785.63,57.396,917.932,70.698,984.083,80.849C1050.234,91,1050.234,98,1050.234,101.5L1050.234,105" id="my-svg-L_S_W_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_W_0" data-points="W3sieCI6NjUzLjMyODEyNSwieSI6NDQuMDkzOTE2NzIyNDAyODI0fSx7IngiOjEwNTAuMjM0Mzc1LCJ5Ijo4NH0seyJ4IjoxMDUwLjIzNDM3NSwieSI6MTA5fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1050.234,181L1050.234,186.917C1050.234,192.833,1050.234,204.667,1050.234,215.833C1050.234,227,1050.234,237.5,1050.234,242.75L1050.234,248" id="my-svg-L_W_G_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_W_G_0" data-points="W3sieCI6MTA1MC4yMzQzNzUsInkiOjE4MX0seyJ4IjoxMDUwLjIzNDM3NSwieSI6MjE2LjV9LHsieCI6MTA1MC4yMzQzNzUsInkiOjI1Mn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_S_O_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_U_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_H_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_K_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_W_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1050.234375, 216.5)"><g class="label" data-id="L_W_G_0" transform="translate(-24.015625, -10.5)"><foreignObject width="48.03125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>2차 제재</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-S-0" data-look="classic" transform="translate(547.9609375, 33.5)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-105.3671875" y="-25.5" width="210.734375" height="51"/><g class="label" style="color:#fff !important" transform="translate(-75.3671875, -10.5)"><rect/><foreignObject width="150.734375" height="21"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🔍 Sanctions Screening</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-O-1" data-look="classic" transform="translate(71.3359375, 145)"><rect class="basic label-container" style="" x="-63.3359375" y="-25.5" width="126.671875" height="51"/><g class="label" style="" transform="translate(-33.3359375, -10.5)"><rect/><foreignObject width="66.671875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>OFAC SDN</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-U-3" data-look="classic" transform="translate(267.8515625, 145)"><rect class="basic label-container" style="" x="-83.1796875" y="-25.5" width="166.359375" height="51"/><g class="label" style="" transform="translate(-53.1796875, -10.5)"><rect/><foreignObject width="106.359375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>UN Consolidated</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-5" data-look="classic" transform="translate(458.9453125, 145)"><rect class="basic label-container" style="" x="-57.9140625" y="-25.5" width="115.828125" height="51"/><g class="label" style="" transform="translate(-27.9140625, -10.5)"><rect/><foreignObject width="55.828125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>EU CFSP</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-H-7" data-look="classic" transform="translate(636.9765625, 145)"><rect class="basic label-container" style="" x="-70.1171875" y="-25.5" width="140.234375" height="51"/><g class="label" style="" transform="translate(-40.1171875, -10.5)"><rect/><foreignObject width="80.234375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>HM Treasury</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-K-9" data-look="classic" transform="translate(813.6640625, 145)"><rect class="basic label-container" style="" x="-56.5703125" y="-25.5" width="113.140625" height="51"/><g class="label" style="" transform="translate(-26.5703125, -10.5)"><rect/><foreignObject width="53.140625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇰🇷 외교부</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-W-11" data-look="classic" transform="translate(1050.234375, 145)"><rect class="basic label-container" style="" x="-130" y="-36" width="260" height="72"/><g class="label" style="" transform="translate(-100, -21)"><rect/><foreignObject width="200" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>🪪 Wallet (Direct·Cluster·N-hop)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-G-13" data-look="classic" transform="translate(1050.234375, 277.5)"><rect class="basic label-container" style="fill:#fee2e2 !important;stroke:#dc2626 !important" x="-76.5234375" y="-25.5" width="153.046875" height="51"/><g class="label" style="" transform="translate(-46.5234375, -10.5)"><rect/><foreignObject width="93.046875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🇺🇸 글로벌 강제력</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>핵심 제재 리스트 5개?</li>
+<li>이름 fuzzy 매칭의 함정?</li>
+<li>Wallet 주소 매칭 3가지 (Direct/Cluster/Hop)?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/5-compliance/sanctions-screening.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>OFAC SDN 검색<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">sanctionssearch.ofac.treas.gov/</span></li>
+<li>UN Consolidated List<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.un.org/securitycouncil/content/un-sc-consolidated-list</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>"Kim Min-soo" 같은 흔한 이름 → false positive 처리 흐름 메모</li>
+<li>Disposition 코드 3개 정의 (TP-Confirmed / FP-Different DOB / Pending)</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>OFAC SDN + UN + EU + 외교부 5대 리스트 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Wallet 매칭 3종 (Direct/Cluster/Hop) 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>False Positive disposition 흐름 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>OFAC 2차 제재의 글로벌 영향 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 46 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Sanctions Screening — 제재 스크리닝</h2>
+    <p class="article-divider__lead">거래 **전·중·후** 모든 단계에서 제재 대상자 차단. 이 글을 읽고 나면 OFAC 2차 제재가 왜 한국 거래소에도 실질적 강제력을 가지는지, 그리고 Binance $4.3B 사례가 왜 제재 위반 처벌의 상징이 됐는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/5-compliance/sanctions-screening.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 46</span>
+      <span class="article-head__path">notes/5-compliance/sanctions-screening.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>핵심 리스트: <strong>OFAC SDN (미국) · UN Consolidated · EU CFSP · HM Treasury (영국) · 한국 외교부</strong></li>
+<li>가상자산 추가: <strong>OFAC SDN의 가상자산 지갑주소</strong> — 거래 전 실시간 차단 필수</li>
+<li>매칭 방식: <strong>이름(fuzzy) + 생년월일 + 국적 + 지갑주소(정확매칭)</strong></li>
+<li>사전·실시간·사후 모니터링 3중 체크</li>
+<li>위반 시 형사처벌 + 거대 벌금 (Binance $4.3B 사례)</li>
+</ul>
+<hr />
+<h2>1. 제재의 종류</h2>
+<h3>왜 제재가 AML의 별도 축인가</h3>
+<p>제재(Sanctions)는 AML과 자주 묶이지만 <strong>방향이 다릅니다</strong>. AML은 범죄수익의 세탁을 막는 <strong>사후</strong> 통제라면, 제재는 특정 대상과의 거래 자체를 막는 <strong>사전</strong> 차단. 그래서 제재 스크리닝은 거래 발생 <strong>이전</strong>에 작동해야 의미가 있고, 이게 VASP가 <strong>Pre-transaction screening</strong> 인프라를 무겁게 구축해야 하는 이유입니다.</p>
+<h3>카테고리별</h3>
+<table>
+<thead>
+<tr>
+<th>카테고리</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>국가 제재</strong></td>
+<td>북한, 이란, 시리아, 쿠바, 베네수엘라, 미얀마</td>
+</tr>
+<tr>
+<td><strong>러시아 분리 제재</strong></td>
+<td>푸틴 측근, 올리가르히, 러시아 은행 (2022~)</td>
+</tr>
+<tr>
+<td><strong>테러조직</strong></td>
+<td>알카에다, ISIS, Hamas, Hezbollah</td>
+</tr>
+<tr>
+<td><strong>마약 카르텔</strong></td>
+<td>멕시코·콜롬비아 카르텔</td>
+</tr>
+<tr>
+<td><strong>사이버 범죄</strong></td>
+<td>Lazarus, Evil Corp</td>
+</tr>
+<tr>
+<td><strong>확산금융</strong></td>
+<td>핵·미사일 관련</td>
+</tr>
+<tr>
+<td><strong>부패</strong></td>
+<td>Magnitsky Act 관련 (글로벌 인권 침해)</td>
+</tr>
+</tbody>
+</table>
+<h3>제재 형태</h3>
+<ul>
+<li><strong>자산 동결 (Asset Freeze)</strong> — 미국 관할 내 자산 동결</li>
+<li><strong>거래 금지 (Transaction Ban)</strong> — 미국인·기업 거래 금지</li>
+<li><strong>2차 제재 (Secondary Sanctions)</strong> — 외국인이라도 미국 시장 접근 차단</li>
+<li><strong>무역 금지 (Trade Embargo)</strong> — 특정 품목·서비스 금지</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>위 4개 형태 중 <strong>2차 제재</strong>가 한국 VASP에게 가장 실질적 위협입니다. 한국 거래소가 OFAC 제재 대상과 거래하면, OFAC는 "한국 회사를 직접 제재"할 권한이 있고, 제재되면 미국 은행·결제망 접근이 끊어집니다. 가상자산 사업은 달러 페그 스테이블코인·미국 소재 KYT 벤더·미국 클라우드에 의존하므로, 2차 제재는 사실상 <strong>사업 종료 수준</strong>의 리스크.</p>
+<hr />
+<h2>2. 핵심 리스트</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>5개 리스트가 지역별로 독립적으로 발행되지만, 실무에서는 이 모두를 <strong>통합 스크리닝 DB</strong>로 관리합니다. 상용 벤더(World-Check 등)가 5개를 합쳐 일일 업데이트해주며, 회사는 이 통합본을 구독해 쓰는 구조.</p>
+<table>
+<thead>
+<tr>
+<th>리스트</th>
+<th>발행</th>
+<th>가상자산 포함?</th>
+<th>갱신</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OFAC SDN List</strong></td>
+<td>미국 재무부</td>
+<td>✅ (지갑주소 등재)</td>
+<td>수시</td>
+</tr>
+<tr>
+<td><strong>OFAC Consolidated</strong></td>
+<td>미국 재무부 (SDN 외 추가)</td>
+<td>일부</td>
+<td>수시</td>
+</tr>
+<tr>
+<td><strong>UN Consolidated</strong></td>
+<td>UN 안보리</td>
+<td>명시 X (이름 위주)</td>
+<td>수시</td>
+</tr>
+<tr>
+<td><strong>EU Consolidated Financial Sanctions</strong></td>
+<td>EU</td>
+<td>일부</td>
+<td>수시</td>
+</tr>
+<tr>
+<td><strong>HM Treasury Sanctions List</strong></td>
+<td>영국</td>
+<td>일부</td>
+<td>수시</td>
+</tr>
+<tr>
+<td><strong>한국 외교부 제재대상자</strong></td>
+<td>한국</td>
+<td>(종속적, UN·OFAC 반영)</td>
+<td>수시</td>
+</tr>
+</tbody>
+</table>
+<h3>OFAC이 중심인 이유</h3>
+<p>OFAC SDN은 <strong>유일하게 가상자산 지갑주소를 명시</strong>합니다. UN·EU·외교부는 전통적 신원 정보(이름·생년월일) 중심으로 지갑주소 등재는 제한적. 그래서 가상자산 산업의 제재 스크리닝은 <strong>OFAC SDN을 축</strong>으로 설계하고, 나머지는 이름 매칭으로 보완하는 구조.</p>
+<hr />
+<h2>3. OFAC의 가상자산 지갑주소 등재 역사</h2>
+<h3>타임라인</h3>
+<table>
+<thead>
+<tr>
+<th>연도</th>
+<th>대상</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2018</td>
+<td>이란 BTC 주소 (Marinov, Khorashadizadeh)</td>
+<td>첫 가상자산 SDN</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>DPRK 라자루스 관련 ETH·BTC</td>
+<td></td>
+</tr>
+<tr>
+<td>2022-08</td>
+<td><strong>Tornado Cash 컨트랙트</strong></td>
+<td>DeFi 첫 제재</td>
+</tr>
+<tr>
+<td>2022-11</td>
+<td>Hydra Market (다크넷)</td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Garantex 추가 제재 (러시아)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>2025-03-21</strong></td>
+<td><strong>Tornado Cash 제재 해제</strong></td>
+<td>5th Cir. Van Loon 판결 후</td>
+</tr>
+</tbody>
+</table>
+<h3>OFAC SDN 가상자산 검색</h3>
+<ul>
+<li>공식: https://sanctionssearch.ofac.treas.gov/</li>
+<li>가상자산 영역도 같은 검색</li>
+<li>API: 일부 벤더가 라이센스 (Chainalysis, TRM)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>OFAC는 <strong>SDN 업데이트를 예고 없이</strong> 수행합니다. 새 주소가 오전에 발표되면 그 시점부터 거래 차단 의무가 생기는 구조. 그래서 회사 시스템은 <strong>OFAC 변경 알림을 실시간 구독</strong>하고 <strong>자동 반영</strong>해야 하며, 수작업 업데이트 주기를 길게 두면 그 사이 새 SDN 주소와 거래가 발생할 위험이 있습니다.</p>
+<hr />
+<h2>4. 스크리닝 매칭 방식</h2>
+<h3>A. 이름 매칭 (Fuzzy Matching)</h3>
+<p>동음이의·음역 다양성을 처리해야 하는 복잡한 문제입니다. "Mohammed"와 "Mohammad"는 같은 사람일 수도, 다른 사람일 수도 있습니다.</p>
+<p>용어:
+- <strong>Fuzzy Matching</strong> — 완전 일치가 아닌 유사도 기반 매칭.
+- <strong>Levenshtein Distance</strong> — 한 문자열을 다른 문자열로 바꾸는 데 필요한 최소 편집 횟수.
+- <strong>Jaro-Winkler</strong> — 문자열 유사도 알고리즘. 짧은 공통 접두사에 가중.
+- <strong>Soundex</strong> — 음가 기반 매칭. 영어에 주로 사용.</p>
+<p><strong>트레이드오프</strong>:
+- <strong>너무 느슨</strong>: False Positive 폭발 → 업무 마비
+- <strong>너무 빡빡</strong>: False Negative → 진짜 제재 대상 통과</p>
+<h3>B. 보조 식별자</h3>
+<p>이름 매칭의 False Positive를 줄이는 핵심:</p>
+<ul>
+<li>생년월일</li>
+<li>국적·거주지</li>
+<li>신원확인번호 (passport 등)</li>
+<li>회사명·직책</li>
+</ul>
+<h3>C. 가상자산 지갑주소 매칭</h3>
+<ul>
+<li><strong>정확 매칭 (Exact Match)</strong> — 동일 주소</li>
+<li><strong>클러스터 매칭 (Extended)</strong> — 같은 클러스터 내 주소</li>
+<li><strong>Hop 노출 (Indirect)</strong> — N hop 내 도달 주소</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>이름 매칭의 Fuzzy 수준은 벤더마다 기본 설정이 다릅니다. 최초 도입 시 <strong>기본값 그대로 쓰면</strong> 한국에서는 "Kim"·"Lee" 같은 흔한 성씨에서 False Positive가 폭발합니다. 한국 운영 환경에 맞춘 <strong>튜닝</strong>(생년월일·국적 필수 매칭)이 도입 첫 1~2달의 핵심 과제.</p>
+<hr />
+<h2>5. 스크리닝 시점 — 3단 체크</h2>
+<h3>A. 사전 (Onboarding) 스크리닝</h3>
+<ul>
+<li>신규 가입 시 KYC 정보로 매칭</li>
+<li>매칭되면 가입 거절 또는 보류</li>
+<li>가입 후 정보 변경 시 재스크리닝</li>
+</ul>
+<h3>B. 실시간 (Transaction) 스크리닝</h3>
+<p>거래 발생 직전:
+- 송신·수신 wallet의 OFAC SDN 매칭
+- 카운터파티 VASP의 제재국 여부
+- 거래 메타데이터 (memo, tag) 매칭</p>
+<p>매칭되면 <strong>거래 차단 + 자동 알람</strong>.</p>
+<h3>C. 사후 (Periodic) 스크리닝</h3>
+<ul>
+<li>모든 고객·wallet을 주기적으로 (일·주·월) 전체 스크리닝</li>
+<li>새로 SDN 추가된 항목과 기존 데이터 매칭</li>
+<li>"잠재 노출" 발견 시 STR 검토</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>3단 체크 중 가장 자주 소홀해지는 게 <strong>C 사후 스크리닝</strong>입니다. 회사가 관리하는 기존 고객 수만 명을 매일 전체 재스크리닝하는 건 컴퓨팅 부담이 크지만, OFAC이 새 주소를 추가한 순간 <strong>기존 고객 중 그 주소를 쓰는 사람이 노출</strong>될 수 있습니다. 일 1회 배치 스크리닝은 필수 운영 항목.</p>
+<hr />
+<h2>6. 운영 흐름</h2>
+<pre><code>[ 신규 가입 ] → KYC + Sanctions Screening (이름·DOB·국적)
+                  ├─ Hit → 가입 거절
+                  └─ No Hit → 가입 승인
+
+[ 거래 요청 ] → Sanctions Screening (이름 + wallet 주소)
+                  ├─ Hit (high confidence) → 차단 + STR 보고
+                  ├─ Hit (low confidence) → 수동 검토
+                  └─ No Hit → 거래 진행
+
+[ 일일 배치 ] → 전체 고객 + wallet vs SDN 갱신본
+                  ├─ 신규 매칭 → 즉시 동결 + 분석 + STR
+                  └─ 기존 통과 → 다음 사이클
+</code></pre>
+<hr />
+<h2>7. False Positive 처리 (Disposition)</h2>
+<h3>일반 시나리오</h3>
+<p>"Kim Min-soo"를 SDN에 매칭 → 다수 동명이인. 생년월일·국적이 다르면 → 명백한 False Positive → 통과. 모호하면 → 추가 자료 요청 → 분석가 판단.</p>
+<h3>Disposition 코드 예시</h3>
+<table>
+<thead>
+<tr>
+<th>코드</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TP-Confirmed</td>
+<td>진짜 매칭 → 차단 + STR</td>
+</tr>
+<tr>
+<td>FP-Different DOB</td>
+<td>DOB 다름, 통과</td>
+</tr>
+<tr>
+<td>FP-Different Nationality</td>
+<td>국적 다름, 통과</td>
+</tr>
+<tr>
+<td>FP-Different Address</td>
+<td>주소 다름, 통과</td>
+</tr>
+<tr>
+<td>Pending</td>
+<td>추가 정보 필요</td>
+</tr>
+</tbody>
+</table>
+<p>모든 disposition은 <strong>로그 기록 + 검사 시 증빙</strong>.</p>
+<h3>실무 포인트</h3>
+<p>Disposition 이력은 <strong>규제 검사의 핵심 증빙</strong>입니다. "왜 이 고객을 통과시켰나"에 대한 답이 없으면 검사에서 크게 지적받습니다. 시스템이 disposition 코드를 강제 입력받고 <strong>영구 보관</strong>하는 구조를 초기에 만들어두는 게 나중에 훨씬 편합니다.</p>
+<hr />
+<h2>8. 고난이도 케이스</h2>
+<h3>A. 동명이인 (Common Name)</h3>
+<p>"Kim", "Mohammed", "Wang" 같은 흔한 이름 — 보조 식별자가 핵심.</p>
+<h3>B. 음역 (Transliteration)</h3>
+<p>한자·아랍어·러시아어 → 영문 음역 다양. "Kim" vs "Gim" vs "Kym".</p>
+<h3>C. 회사명 변형</h3>
+<p>"ABC Corp" vs "ABC Corporation" vs "ABC Co., Ltd." — 약어·띄어쓰기·콤마 차이.</p>
+<h3>D. Wallet 주소 — 클러스터 노출</h3>
+<p><strong>직접 매칭은 없지만 같은 클러스터에 SDN 주소가 있는</strong> 경우. 위험 노출 인정 → 강화 모니터링.</p>
+<h3>E. Privacy Coin 거래</h3>
+<p>추적 불가 → 사실상 모든 거래가 잠재 위험. 한국에선 거래소 상장 폐지로 우회.</p>
+<h3>실무 포인트</h3>
+<p>E번 Privacy Coin 대응은 "제재 스크리닝 자체를 포기"하는 게 아니라 <strong>상품 자체를 취급하지 않음</strong>으로 리스크를 제거하는 접근입니다. 이게 한국·일본 거래소가 privacy coin을 상장 폐지한 진짜 이유 — 기술적 어려움이 아니라 <strong>규제 리스크의 경제성</strong>.</p>
+<hr />
+<h2>9. 한국 특수 — 어디서 정보를 받나</h2>
+<table>
+<thead>
+<tr>
+<th>출처</th>
+<th>무엇</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>외교부</td>
+<td>UN·EU·OFAC 반영 + 한국 자체</td>
+</tr>
+<tr>
+<td>FIU</td>
+<td>가상자산 위험 wallet 정보 (협조 시)</td>
+</tr>
+<tr>
+<td>KISA</td>
+<td>사이버 위협 정보 (랜섬웨어 wallet 등)</td>
+</tr>
+<tr>
+<td>글로벌 벤더</td>
+<td>World-Check, Dow Jones, ComplyAdvantage</td>
+</tr>
+<tr>
+<td>KYT 벤더</td>
+<td>Chainalysis, TRM, Elliptic SDN wallet feed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10. 위반 시 처벌</h2>
+<h3>미국 OFAC (가장 강력)</h3>
+<ul>
+<li><strong>민사벌금</strong>: 거래당 최대 $300K+</li>
+<li><strong>형사</strong>: 최대 30년 징역, $1M+ 벌금</li>
+<li><strong>2차 제재</strong>: 외국인이라도 미국 시장 접근 차단</li>
+</ul>
+<h3>사례</h3>
+<ul>
+<li><strong>Binance $4.3B (2023)</strong> — OFAC + FinCEN 결합. 가상자산 AML 사상 최대 단일 벌금.</li>
+<li><strong>Bittrex $29M (2022)</strong> — 이란·수단 고객 서비스.</li>
+<li><strong>BitGo $98K (2021)</strong> — 소규모지만 OFAC 제재 위반의 첫 가상자산 사례.</li>
+</ul>
+<h3>한국</h3>
+<ul>
+<li>외환거래법, 특정범죄가중처벌법 등</li>
+<li>외교부 제재 위반 시 형사처벌</li>
+<li>
+<ul>
+<li>특금법 위반 결합</li>
+</ul>
+</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Binance 사례가 업계에 남긴 교훈은 "2차 제재는 실존한다"는 것. 미국 이외 회사도 OFAC 제재 위반 시 단독으로 처벌받을 수 있다는 걸 거대 사례로 보여줬고, 그 이후 글로벌 VASP들의 제재 컴플라이언스 투자가 수직 상승했습니다. 한국 VASP도 2024~2025년 사이 OFAC 전담팀을 별도 운영하는 방향으로 조직이 재편되는 추세.</p>
+<hr />
+<h2>11. 체크리스트</h2>
+<pre><code>□ OFAC + UN + EU + 외교부 명단 일일 갱신
+□ 사전 스크리닝 (onboarding)
+□ 실시간 스크리닝 (모든 거래)
+□ 사후 배치 스크리닝 (전체 고객)
+□ Wallet 주소 OFAC SDN 매칭
+□ KYT 벤더 SDN feed 통합
+□ False Positive disposition 로그
+□ 매칭 시 차단 + STR + 보고 SOP
+□ Adverse Media 모니터링
+□ 외환거래법 호환성 점검
+□ 임직원 교육 (OFAC 2차 제재 인식)
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="cdd-edd.md"><code>cdd-edd.md</code></a> — Onboarding 스크리닝 통합</li>
+<li><a href="str-ctr.md"><code>str-ctr.md</code></a> — 매칭 시 STR</li>
+<li><a href="../2-regulations/us-bsa-fincen.md"><code>../2-regulations/us-bsa-fincen.md</code></a> — OFAC 제도 상세</li>
+<li><a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a> — DeFi 제재 사례</li>
+<li><a href="https://ofac.treasury.gov/">OFAC 공식</a></li>
+<li><a href="https://sanctionssearch.ofac.treas.gov/">OFAC SDN List 검색</a></li>
+<li><a href="https://www.un.org/securitycouncil/content/un-sc-consolidated-list">UN Consolidated List</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 46 / 60 · READING</span>
+    </div>
+  </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>
