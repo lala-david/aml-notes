@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 29 — KYC vs KYT 운영</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 29 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">29</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 5 / 7</div>
+        <div class="page-meta__theme">온체인 분석 + KYT</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">KYC vs KYT 운영</h1>
+      <p class="title-block__lead">사람을 안다 vs 거래/지갑을 안다.</p>
+      <span class="title-block__time">⏱ ~70분</span>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>KYC와 KYT 차이 핵심 5가지?</li>
+<li>KYC 5단계 + KYT 5단계 흐름은?</li>
+<li>통합 Risk Engine 아키텍처는?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/4-technology/kyc-kyt.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>"온보딩 → 거래 → 알람 → STR" 전체 흐름을 한 그림에 (KYC + KYT 통합)</li>
+<li>자기 회사 입장에서 KYC와 KYT 중 어디부터 강화할지 선택 + 이유</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>KYC vs KYT 즉답 가능</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>KYC 5단계 (식별/검증/스크리닝/위험평가/모니터링) 외운다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>KYT 5단계 (Address Discovery/Attribution/Exposure/Behavior/Decision) 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Alert Fatigue 개념 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 29 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">KYC / KYT — 가상자산 AML 기술의 두 축</h2>
+    <p class="article-divider__lead">KYC(사람을 안다) + KYT(거래·지갑을 안다). 가상자산만의 조합. 이 글을 읽고 나면 두 시스템이 왜 **한 Risk Engine 안에 통합**돼야 하는지, 그리고 벤더 선정에서 무엇을 봐야 하는지 판단할 수 있게 됩니다..</p>
+    <div class="article-divider__meta">notes/4-technology/kyc-kyt.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 29</span>
+      <span class="article-head__path">notes/4-technology/kyc-kyt.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>KYC</strong>: 사람·법인의 신원확인 (공통)</li>
+<li><strong>KYT</strong>: 거래·지갑주소의 위험 분석 (가상자산 특화)</li>
+<li>두 개가 결합되어 <strong>고객 단위 risk score</strong>가 형성됨</li>
+<li>KYC 기술 스택: <strong>OCR + Liveness + Face matching + PEP/제재 DB + AML watchlist</strong></li>
+<li>KYT 기술 스택: <strong>Address attribution + Cluster analysis + Exposure scoring + Behavior detection</strong></li>
+</ul>
+<hr />
+<h2>1. KYC 프로세스 — 5단계 파이프라인</h2>
+<h3>왜 파이프라인 구조인가</h3>
+<p>KYC는 "신분증 한 번 찍고 끝"이 아니라 <strong>onboarding → verification → screening → assessment → ongoing monitoring</strong>로 이어지는 연속 공정입니다. 각 단계가 막히면 이후 단계 전체가 실패하므로, 실무에서는 단계마다 <strong>실패 지점과 fallback</strong>을 명확히 설계해야 합니다.</p>
+<h3>파이프라인 구조</h3>
+<pre><code>1. Onboarding (가입)
+   ├─ 개인정보 수집 (이름·생년월일·주소·연락처)
+   ├─ 신분증 OCR + 진위확인
+   ├─ Liveness check (얼굴 영상 + 신분증 사진 매칭)
+   └─ 휴대폰·이메일 인증
+
+2. Verification (검증)
+   ├─ 본인인증 (한국: PASS, 카카오 인증)
+   ├─ 주소 증빙 (공과금·은행거래내역)
+   └─ 직업·소득 (선택, EDD 시 필수)
+
+3. Screening (스크리닝)
+   ├─ PEP 데이터베이스 매칭
+   ├─ Sanctions list (OFAC·UN·EU·외교부)
+   ├─ Adverse media (부정적 보도)
+   └─ 가상자산 지갑주소 OFAC SDN
+
+4. Risk Assessment (위험평가)
+   ├─ 국가 위험 (FATF Grey/Black, 외교부 분류)
+   ├─ 직업 위험 (현금집약 업종, 정부·외교)
+   ├─ 거래 의도 (예상 금액·빈도·상대국)
+   └─ 종합 risk score → 등급 (LOW/MED/HIGH)
+
+5. Ongoing Monitoring (지속 모니터링)
+   ├─ 거래 패턴 vs 신고 의도 비교
+   ├─ 위험요소 변경 시 재실사
+   └─ EDD 트리거 발동 시 추가 절차
+</code></pre>
+<p>용어:
+- <strong>OCR (Optical Character Recognition)</strong> — 이미지에서 텍스트를 자동 추출.
+- <strong>Liveness Check</strong> — 실제 살아있는 사람인지 검증. 사진·영상·3D mask 스푸핑 방어.
+- <strong>Adverse Media</strong> — 부정적 뉴스·소송·제재. PEP·Sanctions를 넘어서는 <strong>평판 리스크</strong> 확인.</p>
+<h3>실무 포인트</h3>
+<p>5단계 중 가장 자주 실패하는 건 <strong>5번 Ongoing Monitoring</strong>입니다. 신규 고객에게는 엄격하지만 기존 고객은 "이미 승인된 사람"이라고 방치하는 게 전형적 실수. 고위험 고객은 분기 1회, 저위험도 연 1회는 재실사(refresh)를 자동 큐에 올리는 시스템이 필요합니다.</p>
+<hr />
+<h2>2. KYC 기술 컴포넌트</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>각 컴포넌트는 <strong>대체 가능한 벤더</strong>가 여러 개 있습니다. 선정 시 고려할 축은 (1) 한국 신분증 포맷 지원 정확도, (2) Liveness 스푸핑 방어 수준, (3) 국외 PEP DB 커버리지, (4) SDK 연동 용이성. 대형사일수록 <strong>컴포넌트별로 다른 벤더</strong>를 쓰는 모듈형 구조.</p>
+<table>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>기술</th>
+<th>벤더 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OCR</strong></td>
+<td>신분증 텍스트 추출</td>
+<td>Sumsub, Onfido, ARGOS, IDology</td>
+</tr>
+<tr>
+<td><strong>Document Authentication</strong></td>
+<td>위변조 검증 (홀로그램·MRZ·배경)</td>
+<td>Sumsub, Jumio</td>
+</tr>
+<tr>
+<td><strong>Liveness Check</strong></td>
+<td>실제 사람 vs 사진·영상 (3D depth)</td>
+<td>Sumsub, FaceTec, iProov</td>
+</tr>
+<tr>
+<td><strong>Face Matching</strong></td>
+<td>신분증 사진 vs 실시간 셀카</td>
+<td>위와 동일</td>
+</tr>
+<tr>
+<td><strong>PEP / Sanctions DB</strong></td>
+<td>글로벌 watchlist 매칭</td>
+<td>LSEG World-Check, Dow Jones, ComplyAdvantage</td>
+</tr>
+<tr>
+<td><strong>Adverse Media</strong></td>
+<td>뉴스·제재·소송 검색</td>
+<td>ComplyAdvantage, RDC</td>
+</tr>
+<tr>
+<td><strong>Korean ID Verification</strong></td>
+<td>본인확인기관 (PASS, 카카오인증)</td>
+<td>한국 본인확인기관</td>
+</tr>
+<tr>
+<td><strong>Risk Scoring</strong></td>
+<td>RBA 점수 계산</td>
+<td>자체 또는 ComplyAdvantage, Featurespace</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 특화의 핵심은 <strong>PASS·카카오·NICE 본인확인기관 연동</strong>. 글로벌 벤더(Sumsub 등)는 한국 주민등록증 OCR 정확도는 높아도 <strong>본인확인기관 연동을 대신할 수 없습니다</strong>. 실무 구성은 "글로벌 벤더 + 한국 본인확인기관" 하이브리드.</p>
+<hr />
+<h2>3. KYT 프로세스 — 5단계 분석 파이프라인</h2>
+<h3>KYT의 고유한 어려움</h3>
+<p>KYC는 onboarding 시점에 한 번 크게 수행하고 간헐적 재실사지만, <strong>KYT는 매 거래마다 실시간으로 작동</strong>해야 합니다. 고객이 1천만원 출금 요청을 누르면 수 초 안에 "이 거래 해도 되는가" 답이 나와야 UX가 유지됩니다. 이 실시간 제약이 KYT 아키텍처 설계의 최대 난제.</p>
+<h3>파이프라인 구조</h3>
+<pre><code>1. Address Discovery (주소 등록)
+   ├─ 입금 주소 = 자체 발급 → 자동 매핑
+   ├─ 출금 주소 = 사용자 입력 → 외부지갑 등록
+   └─ Travel Rule 카운터파티 주소
+
+2. Address Attribution (행위자 매핑)
+   ├─ Chainalysis·TRM·Elliptic 라벨 DB 조회
+   ├─ 자체 클러스터링 결과
+   └─ 카운터파티 VASP 식별
+
+3. Exposure Analysis (노출 분석)
+   ├─ Direct exposure (1-hop): 바로 mixer·SDN인가
+   ├─ Indirect exposure (N-hop): N단계 안에 위험 주소
+   ├─ Source vs Destination 분리
+   └─ exposure score 계산
+
+4. Behavior Detection (행위 탐지)
+   ├─ Peel chain 진입 패턴
+   ├─ 분할 입출금 (smurfing)
+   ├─ 즉시 pass-through
+   └─ 비정상 시간·금액
+
+5. Decision (의사결정)
+   ├─ Score ≥ threshold → 거래 보류
+   ├─ Manual review queue
+   └─ STR 후보 큐
+</code></pre>
+<h3>실무 포인트</h3>
+<p>KYT 파이프라인에서 가장 느린 단계는 <strong>2번 Attribution</strong> (외부 API 호출). 실시간 성능을 위해 <strong>자주 조회되는 주소는 캐싱</strong>하고, 캐시 miss 시 비동기로 API 조회하는 설계가 표준. 동기 API만 의존하면 벤더 장애 시 거래 처리 전체가 멈춥니다.</p>
+<hr />
+<h2>4. KYT 핵심 개념</h2>
+<h3>Cluster (클러스터)</h3>
+<p><strong>정의</strong>: 같은 사람·엔티티가 통제하는 주소 집합.</p>
+<ul>
+<li>휴리스틱 + 머신러닝 + 라벨링으로 구성</li>
+<li>한 거래소가 수백만 개 deposit 주소를 운영해도 분석 도구에는 <strong>한 클러스터</strong>로 묶임</li>
+<li>클러스터 식별은 <strong>UTXO 모델(Bitcoin)</strong> 이 강력, <strong>Account 모델(Ethereum)</strong> 은 약함</li>
+</ul>
+<h3>Attribution (귀속)</h3>
+<p><strong>정의</strong>: 클러스터를 알려진 엔티티에 매핑. 예: 클러스터 <code>c12345</code> → "Binance", <code>c67890</code> → "Tornado Cash".</p>
+<ul>
+<li>Attribution DB가 <strong>KYT 벤더의 핵심 IP</strong></li>
+<li>Chainalysis: 누적 추적 거래량 <strong>$24T+</strong>, 매핑 주소 <strong>10억+</strong> (DB 가치가 아닌 추적된 거래 볼륨)</li>
+<li>신규 엔티티 라벨링은 수동 + 자동 혼합, 보통 수일~수주 lag time</li>
+</ul>
+<h3>Exposure (노출도)</h3>
+<p><strong>정의</strong>: 한 주소가 위험 주소와 어떤 관계에 있는가를 정량화.</p>
+<ul>
+<li><strong>Direct (1-hop)</strong>: 바로 거래</li>
+<li><strong>Indirect (N-hop)</strong>: N단계 안에서 도달</li>
+<li><strong>Risk Category 별 점수</strong>: mixer, SDN, ransomware, scam 등 카테고리마다 가중치</li>
+</ul>
+<h3>Risk Score</h3>
+<p><strong>정의</strong>: KYC 정보 + KYT 노출도 + 거래 패턴을 종합한 0~100 점수.</p>
+<ul>
+<li>Threshold(예: 70점) 넘으면 자동 액션 (보류·거절·STR 후보 큐)</li>
+<li>벤더마다 산정 공식이 다름 — <strong>같은 주소에 대해 Chainalysis와 TRM이 다른 점수를 낼 수 있음</strong></li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Risk Score를 내부 의사결정에 쓸 때 <strong>벤더 점수 그대로</strong>가 아니라 <strong>회사 정책으로 재가공</strong>하는 게 좋습니다. 예: Chainalysis 80점이지만 우리 고객 중에서 정말 위험한 패턴을 많이 본 프로필이라면 +10 가중, 일반 거래소 이체라면 -5 할인. 벤더 점수는 <strong>원료</strong>이고 <strong>완성된 의사결정</strong>은 회사 책임.</p>
+<hr />
+<h2>5. KYC vs KYT — 한눈에</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>두 시스템이 <strong>대체재가 아니라 보완재</strong>라는 게 핵심. 한쪽만 있으면 가상자산 AML이 작동하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>KYC</th>
+<th>KYT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대상</td>
+<td>사람</td>
+<td>거래·지갑</td>
+</tr>
+<tr>
+<td>시점</td>
+<td>Onboarding 위주 + 주기적</td>
+<td><strong>상시 (real-time)</strong></td>
+</tr>
+<tr>
+<td>데이터 소스</td>
+<td>신분증·PEP DB·신용평가</td>
+<td><strong>공개 블록체인</strong> + 라벨 DB</td>
+</tr>
+<tr>
+<td>가상자산 특화?</td>
+<td>일부 (지갑 등록 등)</td>
+<td><strong>완전 특화</strong></td>
+</tr>
+<tr>
+<td>정적 vs 동적</td>
+<td>정적 (변경 적음)</td>
+<td><strong>동적 (매 거래마다)</strong></td>
+</tr>
+<tr>
+<td>핵심 도전</td>
+<td>위변조, deepfake, 합성신분</td>
+<td>익명성, 클러스터링, cross-chain</td>
+</tr>
+</tbody>
+</table>
+<h3>두 시스템이 통합돼야 하는 이유</h3>
+<p>KYT만 있고 KYC가 부실하면 "주소는 위험한데 그 뒤 사람은 누군지 모름" → STR 작성 불가. KYC만 있고 KYT가 부실하면 "사람은 알지만 그 사람의 지갑이 OFAC에 연결됐는지 몰라 차단 불가." 이 두 상황은 둘 다 규제 위반입니다.</p>
+<h3>실무 포인트</h3>
+<p>KYC 팀과 KYT 팀이 조직 상 분리돼 있는 회사가 많은데, 이러면 <strong>Risk Score 통합</strong>이 잘 안 됩니다. 이상적 구성은 두 팀이 공통 <strong>Case Management 도구</strong>를 쓰고, 분석가가 한 화면에서 고객의 KYC 정보와 KYT 노출을 함께 보는 것. 실제로 Unit21·Hummingbird 같은 도구가 이 통합 UX를 제공합니다.</p>
+<hr />
+<h2>6. 통합 Risk Engine 아키텍처</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                      Customer Profile                        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │ KYC Data     │  │ Wallet Map   │  │ Behavior     │       │
+│  │ (KYC vendor) │  │ (KYT vendor) │  │ (자체 분석)  │       │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘       │
+│         └─────────────────┼──────────────────┘              │
+│                           ▼                                  │
+│                  ┌─────────────────┐                         │
+│                  │  Risk Engine    │                         │
+│                  │  (룰 + ML)      │                         │
+│                  └────────┬────────┘                         │
+│                           ▼                                  │
+│   ┌──────────────────────┴─────────────────────────┐        │
+│   │  Actions: 차단 / EDD trigger / STR 큐 / 통과   │        │
+│   └────────────────────────────────────────────────┘        │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>실무 포인트</h3>
+<p>이 아키텍처의 핵심은 <strong>Risk Engine이 중심</strong>이라는 점. KYC·KYT·Behavior가 각자 독립적으로 작동하다가 <strong>Risk Engine에서 통합</strong>되어 하나의 Decision이 나가는 구조여야, STR 작성 시 "이 결정에 왜 이 데이터가 쓰였나" 추적성이 확보됩니다.</p>
+<hr />
+<h2>7. 한국 거래소·수탁업자 기술 스택 예시</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>한국 시장에서 실제 쓰이는 벤더들. 대형 거래소는 <strong>모든 영역을 커버</strong>하고, 중소 사업자는 <strong>핵심(KYT+Travel Rule)만 외부 벤더</strong>, <strong>나머지는 자체 구축</strong>하는 경우가 많습니다.</p>
+<table>
+<thead>
+<tr>
+<th>영역</th>
+<th>한국 시장 선택지</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KYC SDK</strong></td>
+<td>ARGOS Identity, ICONLOOP MyID, Sumsub (글로벌)</td>
+</tr>
+<tr>
+<td><strong>본인확인</strong></td>
+<td>PASS, 카카오인증, NICE, KCB</td>
+</tr>
+<tr>
+<td><strong>PEP / 제재 DB</strong></td>
+<td>LSEG World-Check, Dow Jones, ComplyAdvantage, 자체 DB</td>
+</tr>
+<tr>
+<td><strong>KYT</strong></td>
+<td>Chainalysis KYT, TRM Labs, Elliptic Lens, Crystal, 자체</td>
+</tr>
+<tr>
+<td><strong>Travel Rule</strong></td>
+<td>VerifyVASP, CODE, Notabene</td>
+</tr>
+<tr>
+<td><strong>Risk Engine</strong></td>
+<td>자체 (대형사) 또는 ComplyAdvantage, Quantexa</td>
+</tr>
+<tr>
+<td><strong>Case Management</strong></td>
+<td>NICE Actimize, Hummingbird, Unit21</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. 실무 운영 포인트</h2>
+<h3>알람 폭주 (Alert Fatigue)</h3>
+<p>룰이 너무 느슨하면 알람 폭주 → 1선 분석가가 처리 못 함 → STR 누락. 반대로 너무 빡빡하면 false positive 다수 → 고객 불만. <strong>룰 튜닝이 KYT 운영의 90%</strong> 를 차지합니다.</p>
+<h3>False Positive vs False Negative</h3>
+<ul>
+<li><strong>FP (False Positive, 오탐)</strong>: 정상 고객 차단 → 고객 손실</li>
+<li><strong>FN (False Negative, 미탐)</strong>: 실제 자금세탁 통과 → 규제 위반</li>
+</ul>
+<p>가상자산 영역은 <strong>FN 비용이 더 큽니다</strong> (벌금 수천만 달러 + 평판 파괴). 그래서 "의심되면 차단 먼저, 해제는 사후"가 기본 운영 철학. 단 고객 경험 악화와의 균형이 필요.</p>
+<h3>사람 + 기계</h3>
+<p>100% 자동화는 불가능. 모호한 알람은 결국 <strong>사람 분석가의 판단</strong>이 필요. AMLO + 1선 analyst 팀의 역량이 KYT 성과의 절반. 좋은 Case Management 도구를 쓰면 분석가 1인 생산성이 <strong>3배</strong>까지 차이납니다.</p>
+<h3>실무 포인트</h3>
+<p>알람 처리 SLA(Service Level Agreement, 처리 시간 약속)를 내부에 명문화하는 게 중요. 예: "HIGH 알람은 1시간 내 1차 리뷰, MED는 24시간 내, LOW는 72시간 내." 이 SLA가 없으면 알람이 쌓이고, 결국 규제 검사 시 "처리 안 된 알람"이 무더기로 나옵니다.</p>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>KYC 5단계</strong>: Onboarding · Verification · Screening · Assessment · Monitoring
+<strong>KYT 5단계</strong>: Discovery · Attribution · Exposure · Behavior · Decision
+<strong>통합 원칙</strong>: KYC·KYT가 공통 Risk Engine에서 단일 Risk Score로 합쳐짐
+<strong>운영 KPI</strong>: Alert Volume · FP/FN Ratio · Alert SLA · STR Quality</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="blockchain-analytics.md"><code>blockchain-analytics.md</code></a> — KYT의 기술적 기반 (CIOH, attribution)</li>
+<li><a href="travel-rule-protocols.md"><code>travel-rule-protocols.md</code></a> — Travel Rule 기술</li>
+<li><a href="../5-compliance/cdd-edd.md"><code>../5-compliance/cdd-edd.md</code></a> — CDD·EDD 운영</li>
+<li><a href="../7-vendors/analytics-vendors.md"><code>../7-vendors/analytics-vendors.md</code></a> — 벤더 비교</li>
+<li><a href="https://www.merklescience.com/enhancing-anti-money-laundering-efforts-with-advanced-blockchain-analytics">Merkle Science — Enhancing AML with Blockchain Analytics</a></li>
+<li><a href="https://www.coincover.com/blog/how-aml-and-kyt-overlap-with-wallet-protection-coincover">CoinCover — KYT and AML overlap</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 29 / 60 · READING</span>
+    </div>
+  </article>
+</body>
+</html>

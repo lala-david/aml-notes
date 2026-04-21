@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 40 — NFT Wash Trading</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 40 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">40</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 6 / 7</div>
+        <div class="page-meta__theme">자금세탁 유형 + DeFi·믹서</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">NFT Wash Trading</h1>
+      <p class="title-block__lead">가격을 임의로 만드는 자금세탁.</p>
+      <span class="title-block__time">⏱ ~70분</span>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>NFT가 자금세탁에 매력적인 이유?</li>
+<li>Wash trading 패턴 3가지?</li>
+<li>FATF의 NFT 분류 기준?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/3-crypto-aml/defi-nft-risks.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>Chainalysis — NFT 관련 Crypto Crime<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.chainalysis.com/</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--rich">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<ul>
+<li>Self-trading 시나리오 직접 그리기 (A→B→A 같은 NFT)</li>
+<li>Loop trading 시나리오 (3자 순환)</li>
+<li>탐지 룰 의사코드:
+  <code>IF (same_NFT_traded ≥3 times in 7d 
+      AND price_change &gt; 5x
+      AND addresses share cluster)
+    THEN flag as wash trade</code></li>
+</ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>NFT 자금세탁 매력 (가격 자율 + 글로벌 즉시) 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Wash trading 3패턴 (Self/Loop/Pump) 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>한국 2024-06 FSC NFT 가이드라인 인지</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>FATF NFT VA 분류 기준 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 40 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">DeFi / NFT / Privacy Coin — 특수 영역 AML 리스크</h2>
+    <p class="article-divider__lead">중앙화 VASP **외부의 회색지대**. 이 글을 읽고 나면 왜 DeFi·NFT·Privacy Coin이 "사업자 없는 자금세탁 인프라"가 됐는지, 그리고 규제가 왜 이 영역에서 계속 지연되는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/3-crypto-aml/defi-nft-risks.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 40</span>
+      <span class="article-head__path">notes/3-crypto-aml/defi-nft-risks.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>DeFi</strong>: 운영자 식별 어려움 → AML 의무 적용 모호. OFAC의 Tornado Cash 제재(2022) → 2025-03 해제는 "코드를 제재할 수 있는가" 판례의 전환점</li>
+<li><strong>NFT</strong>: wash trading + 자금이전 정당화 도구. FATF는 NFT를 사례별로 VA로 분류</li>
+<li><strong>Privacy Coin</strong>: Monero·Zcash. 한국·일본 거래소는 사실상 상장 폐지</li>
+<li><strong>Cross-chain Bridge</strong>: layering 핵심 인프라이자 해킹 1순위 표적</li>
+<li><strong>MEV bot · flash loan</strong>: 가격 조작 + 자금세탁 결합 가능</li>
+</ul>
+<hr />
+<h2>1. DeFi (Decentralized Finance)</h2>
+<h3>정체성</h3>
+<p><strong>DeFi</strong>는 중개자 없이 스마트컨트랙트가 직접 lending·swap·derivatives를 처리하는 금융 인프라. 대표 프로토콜로 Uniswap(DEX), Aave(lending), Compound(lending), Curve(stablecoin AMM), MakerDAO(stablecoin 발행), GMX(derivatives) 등이 있으며 TVL(Total Value Locked, 예치 자산 가치)은 수백억 달러 규모.</p>
+<p>용어:
+- <strong>TVL (Total Value Locked)</strong> — 프로토콜에 예치된 자산의 총 USD 환산 가치. DeFi 지표로 가장 흔히 사용.
+- <strong>AMM (Automated Market Maker)</strong> — 사람 중개인 없이 알고리즘이 자동 가격 결정하는 DEX 구조.
+- <strong>DAO (Decentralized Autonomous Organization)</strong> — 거버넌스 토큰 홀더의 투표로 운영되는 조직.</p>
+<h3>왜 AML에서 문제인가</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>이슈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>운영자 식별</strong></td>
+<td>DAO·익명 개발자 → <strong>누가 VASP인가</strong>?</td>
+</tr>
+<tr>
+<td><strong>KYC 부재</strong></td>
+<td>사용자가 wallet만 연결, 신원 확인 없음</td>
+</tr>
+<tr>
+<td><strong>글로벌 즉시 접근</strong></td>
+<td>제재국 사용자도 제한 없이 사용 가능</td>
+</tr>
+<tr>
+<td><strong>자금세탁 도구화</strong></td>
+<td>DEX swap이 layering 인프라</td>
+</tr>
+<tr>
+<td><strong>Fork 가능성</strong></td>
+<td>한 코드베이스가 무한 복제. 프런트엔드 차단해도 포크로 우회</td>
+</tr>
+</tbody>
+</table>
+<h3>규제 현황 (2026 시점)</h3>
+<ul>
+<li><strong>FATF</strong>: DeFi에 사실상 운영 통제권을 가진 자(developer, governance token holder)는 VASP 의무 부담 가능 (2021 가이던스).</li>
+<li><strong>미국</strong>: 인프라법 broker 정의 확장, FIT21 등 입법 추진. 2024년 Uniswap Labs에 SEC Wells Notice 발부.</li>
+<li><strong>EU MiCA</strong>: "fully decentralized" DeFi는 적용 제외, 단 <strong>frontend 운영자는 적용 가능</strong>.</li>
+<li><strong>한국</strong>: 2단계 입법에서 다룰 예정, 현재 명확한 룰 없음.</li>
+</ul>
+<h3>회색지대 맵</h3>
+<pre><code>완전 탈중앙 (코드만 존재) ──────────────── 중앙화 (회사 운영)
+  ↑                                          ↑
+  AML 규제 거의 불가                      VASP로 직접 적용
+
+중간 영역 — 점점 규제 타겟이 되는 층:
+- DAO 거버넌스 토큰 보유자 (비례 통제력)
+- Frontend 운영자 (uniswap.org)
+- Routing infrastructure
+- 1inch 같은 aggregator
+</code></pre>
+<h3>주요 DeFi 자금세탁 패턴</h3>
+<ol>
+<li><strong>Swap layering</strong>: ETH → USDT → DAI → ETH → USDT (출처 단절).</li>
+<li><strong>Liquidity Pool 세탁</strong>: LP 입금 → 다른 자산으로 인출.</li>
+<li><strong>Flash Loan Attack 결합</strong>: 가격 조작 → 차익 인출 → 즉시 mixer.</li>
+<li><strong>MEV bot 활용</strong>: sandwich/arbitrage으로 자금 흐름 위장.</li>
+</ol>
+<h3>실무 포인트</h3>
+<p>"frontend 운영자가 규제 타겟이 된다"가 현재 글로벌 흐름의 핵심입니다. 프런트엔드(uniswap.org, aave.com 같은 웹페이지)를 운영하는 회사는 KYC 구현·제재 스크리닝·지역 차단이 가능하므로, 규제 압력이 여기로 몰립니다. "코드는 규제 불가"이지만 "그 코드를 사용하기 쉽게 만드는 회사는 규제 가능"이라는 논리.</p>
+<hr />
+<h2>2. NFT (Non-Fungible Token)</h2>
+<h3>AML 관점에서 NFT의 본질</h3>
+<p>NFT는 <strong>고유 자산 + 가격 자율 책정 + 즉시 글로벌 거래</strong>라는 조합을 갖습니다. 이게 의미하는 바: <strong>거래 가격을 임의로 조작 가능</strong> → 자금세탁자에게 매력적인 도구. 주식시장의 시세조종과 구조적으로 같은 리스크.</p>
+<h3>주요 패턴</h3>
+<table>
+<thead>
+<tr>
+<th>패턴</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wash trading</strong></td>
+<td>자기들끼리 NFT를 사고팔아 가격·거래량 부풀림</td>
+</tr>
+<tr>
+<td><strong>Self-laundering</strong></td>
+<td>A 주소에서 B 주소로 NFT 매수 (사실상 같은 사람)</td>
+</tr>
+<tr>
+<td><strong>Trading mule</strong></td>
+<td>더러운 자금으로 정당한 NFT 매수 → 합법자산화</td>
+</tr>
+<tr>
+<td><strong>Phishing 결합</strong></td>
+<td>가짜 NFT 민팅으로 피해자 wallet drain</td>
+</tr>
+<tr>
+<td><strong>Royalty manipulation</strong></td>
+<td>로열티를 자기 주소로 받게 설정</td>
+</tr>
+</tbody>
+</table>
+<h3>시장 통계</h3>
+<ul>
+<li>2022~2023 NFT 광풍 시 wash trading 비중 추정 <strong>25~50%</strong> (Chainalysis)</li>
+<li>2025년 NFT 시장 위축 → 거래량 자체 감소</li>
+<li>그래도 high-value collection (BAYC, CryptoPunks) 중심으로는 여전 활동</li>
+</ul>
+<h3>FATF·한국 입장</h3>
+<ul>
+<li><strong>FATF (2021 가이던스)</strong>: NFT가 <strong>fungible해질 수 있고 결제·투자 수단으로 쓰이면</strong> VA로 분류. 단순 collectible은 VA 아님 — 사례별 판단.</li>
+<li><strong>한국 (2024-06 FSC 가이드라인)</strong>: 결제수단 사용, 대량발행, 펀더멘털 분할(예: 부동산 NFT 조각화) → VA로 간주. 단순 디지털 아트 NFT → 비-VA.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>NFT 마켓플레이스 운영 시 <strong>wash trading 모니터링</strong>은 자율 통제 수준이 아니라 <strong>감독당국이 사실상 기대</strong>하는 영역입니다. OpenSea·Blur·Magic Eden 같은 글로벌 대형사는 이미 자체 탐지 팀을 운영. 한국 NFT 사업자도 동일 수준을 갖추는 게 규제 부담 경감의 지름길.</p>
+<hr />
+<h2>3. Privacy Coin</h2>
+<h3>대표 코인과 기술</h3>
+<table>
+<thead>
+<tr>
+<th>코인</th>
+<th>기술</th>
+<th>추적 가능성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monero (XMR)</strong></td>
+<td>Ring Signature + Stealth Address + RingCT</td>
+<td><strong>거의 불가</strong></td>
+</tr>
+<tr>
+<td><strong>Zcash (ZEC)</strong></td>
+<td>zk-SNARK shielded transaction</td>
+<td>shielded 사용 시 불가 (선택적)</td>
+</tr>
+<tr>
+<td><strong>Dash</strong></td>
+<td>PrivateSend (CoinJoin 변형)</td>
+<td>제한적 추적 가능</td>
+</tr>
+<tr>
+<td><strong>Grin / Beam</strong></td>
+<td>MimbleWimble</td>
+<td>어려움</td>
+</tr>
+</tbody>
+</table>
+<h3>각 기술의 원리 한 줄 요약</h3>
+<ul>
+<li><strong>Ring Signature (Monero)</strong> — 여러 명의 서명자 중 누가 실제 서명자인지 모르게. 기본적으로 "용의자가 여러 명"으로 수사를 난해하게 함.</li>
+<li><strong>Stealth Address (Monero)</strong> — 받는 주소가 매 거래마다 새로 생성. 같은 사람이 받아도 다른 주소로 보임.</li>
+<li><strong>RingCT (Monero)</strong> — 거래 금액 자체도 암호화. 발신·수신·금액 3요소가 모두 숨겨짐.</li>
+<li><strong>zk-SNARK (Zcash)</strong> — 영지식 증명으로 "거래가 유효함"만 증명, 내용은 완전 숨김.</li>
+</ul>
+<h3>거래소 상장 회피 추세</h3>
+<ul>
+<li><strong>FATF 권고</strong>: 거래소가 privacy coin 취급 시 추가 위험관리 필요.</li>
+<li><strong>한국</strong>: 2021년 특금법 시행과 함께 4대 거래소가 privacy coin 전량 상장폐지 (Monero, Zcash, Dash 등).</li>
+<li><strong>일본</strong>: 2018년부터 privacy coin 상장 금지.</li>
+<li><strong>미국·EU</strong>: 일부 거래소 상장 유지, 단 강화감시.</li>
+<li>결과: privacy coin은 <strong>OTC·P2P·비규제 거래소</strong>로 밀려남.</li>
+</ul>
+<h3>추적 시도</h3>
+<ul>
+<li><strong>Monero</strong>: Chainalysis가 부분적 분석 도구 발표 (2020) — 효과는 제한적, 완전 분석은 여전 불가.</li>
+<li><strong>Zcash</strong>: shielded 사용 비율이 낮아(대부분 transparent 사용) 분석 가능한 비중이 큼. <strong>"선택적 프라이버시"</strong> 는 실무상 프라이버시가 아님.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 거래소에서는 privacy coin 입금을 <strong>자동 차단</strong>하는 게 표준. 입금 시 "알 수 없는 자산"이 도착하면 반려. 출금 시점에는 수신 주소가 privacy coin 관련 지갑(알려진 Monero exchange 주소 등)인지 KYT가 확인. 운영 부담이 크지 않은 편이지만, privacy coin을 자체 수용하려는 시도는 규제 리스크가 너무 커서 거의 없습니다.</p>
+<hr />
+<h2>4. Cross-chain Bridge</h2>
+<h3>정체성</h3>
+<p>A 체인 자산을 <strong>잠그고(lock)</strong> B 체인에서 <strong>wrapped 토큰</strong>을 발행. 예: ETH를 Ethereum 컨트랙트에 잠그고 BSC에서 wETH 발행. 반대로 환원하려면 B에서 소각(burn) → A에서 해제.</p>
+<h3>AML 관점</h3>
+<ul>
+<li><strong>Layering 핵심 인프라</strong> — chain 간 끊김 발생.</li>
+<li>2025~2026 자금세탁 트렌드 1위가 cross-chain.</li>
+<li>분석 도구가 cross-chain tracing 기능을 공격적으로 강화 중 (Chainalysis Crosschain, TRM Multichain).</li>
+</ul>
+<h3>해킹 표적 역사</h3>
+<p>브리지는 AML 관점과 무관하게 <strong>해킹 1순위 표적</strong>이기도. 자금이 한 곳에 집중되는 honeypot 구조.</p>
+<table>
+<thead>
+<tr>
+<th>사고</th>
+<th>연도</th>
+<th>손실</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Poly Network</td>
+<td>2021</td>
+<td>$611M (이후 반환)</td>
+</tr>
+<tr>
+<td>Wormhole</td>
+<td>2022</td>
+<td>$325M</td>
+</tr>
+<tr>
+<td><strong>Ronin Bridge</strong></td>
+<td>2022</td>
+<td><strong>$625M</strong> (Lazarus)</td>
+</tr>
+<tr>
+<td>Nomad</td>
+<td>2022</td>
+<td>$190M</td>
+</tr>
+<tr>
+<td>Harmony Horizon</td>
+<td>2022</td>
+<td>$100M (Lazarus)</td>
+</tr>
+<tr>
+<td>Multichain</td>
+<td>2023</td>
+<td>$231M</td>
+</tr>
+</tbody>
+</table>
+<p>→ 브리지가 해킹 → 자금이 다시 다른 브리지로 → 세탁. <strong>해킹과 세탁이 같은 인프라를 순환</strong>하는 구조.</p>
+<h3>실무 포인트</h3>
+<p>출금 주소가 브리지 컨트랙트이면 <strong>고위험 카테고리</strong>로 다뤄야 합니다. 브리지 자체가 범죄적이지는 않지만, 브리지로 나간 자금의 <strong>다음 홉</strong>을 추적할 수 없다면 그 시점 exposure는 사실상 unknown. 공격적 회사는 모든 브리지 출금에 자동 STR 후보 큐잉을 적용하고, 안전한 회사는 이 리스크를 감수하고 빠른 UX를 택합니다.</p>
+<hr />
+<h2>5. MEV · Flash Loan · 기타 DeFi 도구</h2>
+<h3>MEV (Maximal Extractable Value)</h3>
+<p>블록 생성 시 <strong>트랜잭션 순서 조작</strong>으로 얻는 이득. 블록 생성자(validator)나 MEV 봇이 활용.</p>
+<p><strong>AML 관점</strong>: <strong>Sandwich attack</strong>(피해 거래 앞뒤로 거래 끼워 넣어 가격 올리고 되돌림)으로 가격 조작 → 자금세탁·시세조종과 결합 가능.</p>
+<h3>Flash Loan</h3>
+<p><strong>담보 없이</strong> 한 트랜잭션 안에서 빌리고 갚는 대출. 한 블록 내에서 완결되어야 하며, 안 되면 트랜잭션 자체가 revert.</p>
+<p><strong>AML 관점</strong>: 가격 조작 → 차익 추출 → 즉시 mixer로. 사례: bZx, Cream Finance, Beanstalk Farms 등 플래시론 공격.</p>
+<h3>Re-staking · LST · LRT</h3>
+<p>Lido(LST, Liquid Staking Token), EigenLayer(LRT, Liquid Restaking Token) 같은 새로운 layer. 자산이 staking 토큰으로 감싸지고 또 감싸지면 <strong>자산 형태 변환이 가능</strong>해 layering 도구화될 수 있음. 분석 도구가 아직 완전히 따라가지 못하는 영역.</p>
+<p>용어:
+- <strong>LST (Liquid Staking Token)</strong> — ETH를 staking하고 그 증표로 받는 토큰 (예: stETH).
+- <strong>LRT (Liquid Restaking Token)</strong> — LST를 다시 restaking하고 받는 토큰.
+- <strong>Flash Loan</strong> — 담보 없이 한 트랜잭션 내 빌리고 갚는 대출.</p>
+<h3>실무 포인트</h3>
+<p>LST·LRT 세탁은 2025~2026년 부상 중인 신종 유형입니다. ETH → stETH → eETH(EigenLayer) → PT(Pendle) 같은 형태로 자산을 여러 번 감싸면 원래 출처가 불투명해집니다. 이 영역에 대한 attribution DB는 아직 빈약하고, KYT 벤더도 명시적 지원을 시작한 지 얼마 안 됐습니다.</p>
+<hr />
+<h2>6. 회사 관점 — 어떻게 대응하나</h2>
+<h3>거래소</h3>
+<ul>
+<li>DeFi 입출금 차단·제한 정책</li>
+<li>DEX 컨트랙트 주소 라벨링</li>
+<li>Bridge 출금 시 추가 KYT</li>
+<li>Privacy coin 상장 금지</li>
+</ul>
+<h3>수탁업자</h3>
+<ul>
+<li>고객의 DeFi 사용 위탁 시 별도 정책</li>
+<li>Staking·restaking 위탁 시 출금 흐름 분석</li>
+<li>NFT 수탁 시 attribution 강화</li>
+</ul>
+<h3>분석·솔루션 회사</h3>
+<ul>
+<li>DeFi·NFT 분석 모듈 개발 가치</li>
+<li>Cross-chain tracing 기능</li>
+<li>새로운 프로토콜 라벨링 자동화</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>사업자가 DeFi 리스크를 대응하는 방법은 크게 두 접근: <strong>차단 우선</strong>(보수적)과 <strong>탐지 강화</strong>(공격적). 한국 거래소는 대체로 차단 우선으로 가고 있는데, 이게 편하지만 <strong>경쟁 상품</strong>(해외 거래소·탈중앙 앱)으로 고객 이탈 위험을 키웁니다. 장기적으로는 <strong>탐지 강화 쪽으로 진화</strong>가 필수이며, 그러려면 KYT 벤더와의 전략적 파트너십이 중요해집니다.</p>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>DeFi 4대 패턴</strong>: Swap layering · LP 세탁 · Flash Loan 결합 · MEV 활용
+<strong>NFT 5대 패턴</strong>: Wash trading · Self-laundering · Trading mule · Phishing · Royalty manipulation
+<strong>Privacy Coin 운영 표준</strong>: 상장 폐지 + 입금 차단 + 출금 KYT
+<strong>신종 영역</strong>: LST·LRT, MEV, Flash Loan</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="onchain-typology.md"><code>onchain-typology.md</code></a> — 자금세탁 9대 유형</li>
+<li><a href="travel-rule.md"><code>travel-rule.md</code></a> — Travel Rule (DeFi 적용 한계)</li>
+<li><a href="../4-technology/blockchain-analytics.md"><code>../4-technology/blockchain-analytics.md</code></a> — cross-chain tracing 기법</li>
+<li><a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a> — DeFi 첫 제재 사례</li>
+<li><a href="https://transnetinc.com/navigating-compliance-challenges-in-defi-a-2026-guide">Transnet — DeFi Compliance 2026 Guide</a></li>
+<li><a href="https://www.steptoe.com/en/news-publications/blockchain-blog/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html">Steptoe — Tornado Cash &amp; DeFi AML implications</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 40 / 60 · READING</span>
+    </div>
+  </article>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 08 — 한국 특금법 1: VASP 신고제</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 08 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">08</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 2 / 7</div>
+        <div class="page-meta__theme">한국 규제 (특금법 + 이용자보호법)</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">한국 특금법 1: VASP 신고제</h1>
+      <p class="title-block__lead">한국 가상자산 AML의 헌법, 신고제 메커니즘.</p>
+      <span class="title-block__time">⏱ ~75분</span>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>특금법 정식 명칭과 약칭은?</li>
+<li>VASP 신고에 필요한 5가지 요건은?</li>
+<li>미신고 영업 시 처벌은?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/2-regulations/korea-fiu-act.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>국가법령정보센터 — 특금법<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787</span></li>
+<li>FSC — 신고매뉴얼 PDF<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">www.fsc.go.kr/comm/getFile?srvcId=BBSTY1&amp;upperNo=75409&amp;fileTy=ATTACH&amp;fileNo=6</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>VASP 신고 5요건을 메모로 정리 (ISMS / 실명계정 / AML 통제 / 보고책임자 / 결격사유)</li>
+<li>각 요건의 "왜 필요한가" 한 줄 설명</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>특금법 정식명 외운다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>VASP 정의 5+1 행위 외운다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>신고 5 요건 외운다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>3년 갱신 + 2026-01 대주주 자격심사 강화 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 08 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">한국 — 특정금융정보법 (특금법)</h2>
+    <p class="article-divider__lead">한국 가상자산 AML의 **헌법**. VASP 신고제·KYC·Travel Rule의 법적 근거. 이 글을 읽고 나면 특금법이 왜 AML 법이면서도 가상자산 산업 전반의 **진입 규제**가 됐는지, 그리고 조문별로 실무가 어떻게 연결되는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/2-regulations/korea-fiu-act.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 08</span>
+      <span class="article-head__path">notes/2-regulations/korea-fiu-act.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>정식명칭</strong>: 「특정 금융거래정보의 보고 및 이용 등에 관한 법률」 (특금법 또는 FIU법)</li>
+<li><strong>2021-03-25 개정</strong>으로 가상자산사업자(VASP) 신고제 도입 → <strong>2021-09-25 시행</strong></li>
+<li>VASP 의무: <strong>신고, KYC, AML/CFT, Travel Rule, STR/CTR, 기록보관</strong></li>
+<li><strong>2026-01-29 개정안 국회 통과</strong>: VASP 진입규제 강화, <strong>대주주까지 자격심사 확대</strong></li>
+<li>감독기구: <strong>금융정보분석원(FIU)</strong> — 금융위원회 산하</li>
+<li>위반 시: <strong>5년 이하 징역 또는 5천만원 이하 벌금</strong> (미신고 영업)</li>
+</ul>
+<hr />
+<h2>1. 법의 정체성과 변천사</h2>
+<h3>특금법은 원래 가상자산 법이 아니었다</h3>
+<p>특금법의 정식 명칭은 「특정 금융거래정보의 보고 및 이용 등에 관한 법률」입니다. 이름만 보면 가상자산과 관계없어 보이고, 실제로 2001년 제정 당시에는 <strong>일반 금융기관의 AML/CFT 보고 의무</strong>를 규정하는 법이었습니다. 테러자금조달방지(CFT)가 9·11 이후 국제적 화두가 되면서 FATF 권고를 국내법으로 이식하기 위해 만들어진 법입니다.</p>
+<p>이게 가상자산의 헌법이 된 건 <strong>2020년 개정</strong>부터. FATF가 2019년에 Recommendation 15를 개정해 "VASP도 금융기관 수준 AML 의무 대상"으로 편입시키자, 한국은 가상자산만을 위한 새 법을 만들지 않고 <strong>기존 특금법에 VASP 조항을 끼워 넣는 방식</strong>을 선택했습니다. 그래서 특금법은 "AML 법이 가상자산 진입 규제를 겸하는" 특이 구조가 되었고, 이게 한국 가상자산 산업의 많은 실무 혼란의 근원이기도 합니다.</p>
+<h3>연혁 — 왜 지금 이 모습이 됐나</h3>
+<table>
+<thead>
+<tr>
+<th>시점</th>
+<th>사건</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2001-09-27</strong></td>
+<td>제정</td>
+<td>테러자금조달방지 + AML 통합법. 가상자산 무관.</td>
+</tr>
+<tr>
+<td><strong>2020-03-24 개정</strong></td>
+<td>가상자산사업자(VASP) 정의 신설</td>
+<td>FATF R.15 이행 선언. 시행령·감독규정 준비기 시작.</td>
+</tr>
+<tr>
+<td><strong>2021-03-25 개정 시행</strong></td>
+<td>VASP 신고제 본격 도입</td>
+<td>한국 VASP 시장의 <strong>시작점</strong>. 100여개 사업자 중 소수만 신고 통과.</td>
+</tr>
+<tr>
+<td><strong>2022-03-25</strong></td>
+<td>Travel Rule 시행</td>
+<td>FATF R.16 이행. 4대 거래소가 VerifyVASP·CODE 솔루션으로 연동.</td>
+</tr>
+<tr>
+<td><strong>2024-07-19</strong></td>
+<td>가상자산이용자보호법 시행</td>
+<td>특금법과 분리된 이용자 보호 별도법 등장.</td>
+</tr>
+<tr>
+<td><strong>2026-01-29</strong></td>
+<td>진입규제 강화 개정안 국회 통과</td>
+<td>대주주까지 자격심사 확대. 2026년 하반기 시행 예정.</td>
+</tr>
+</tbody>
+</table>
+<h3>소관·감독 기관</h3>
+<ul>
+<li><strong>금융위원회(FSC)</strong> — 소관 부처. 법령 개정·시행령 제정 주체.</li>
+<li><strong>금융정보분석원(FIU, Korea Financial Intelligence Unit)</strong> — 집행 기관. 신고 접수·수리, STR 수신·분석, 검사 수행.</li>
+<li><strong>금융감독원(FSS)</strong> — 위탁 검사 권한. FIU로부터 위탁받아 현장검사 수행.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>특금법 한 조만 보고 실무를 판단하면 안 됩니다. 법 위에 <strong>시행령(대통령령) → 감독규정(FIU 고시) → 업무규정·가이드라인(FIU 발간)</strong> 이 4층으로 쌓여 있고, 실무는 사실상 맨 아래 <strong>신고 매뉴얼과 RBA 가이드라인</strong>을 봐야 합니다. 법만 읽으면 "신고하라"만 있지 "어떻게" 신고하는지 안 나옵니다.</p>
+<hr />
+<h2>2. VASP의 정의 — 누가 이 법을 적용받는가</h2>
+<h3>특금법 §2.1.하의 5가지 행위</h3>
+<p>특금법 §2.1.하는 가상자산사업자를 <strong>"가상자산과 관련하여 다음 행위를 영업으로 하는 자"</strong> 로 정의합니다.</p>
+<ol>
+<li><strong>매도·매수</strong></li>
+<li><strong>다른 가상자산과의 교환</strong></li>
+<li><strong>이전</strong> (외부 지갑 또는 타 사업자로의 이동)</li>
+<li><strong>보관·관리</strong> (수탁, custody)</li>
+<li><strong>위 1~4 행위의 중개·알선·대행</strong></li>
+<li>그 밖에 <strong>시행령으로 정하는</strong> 행위</li>
+</ol>
+<h3>실무 번역 — 누가 포함되나</h3>
+<table>
+<thead>
+<tr>
+<th>사업 유형</th>
+<th>포함 여부</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>거래소 (업비트, 빗썸)</td>
+<td>✅</td>
+<td>매수도 + 교환 + 이전 + 중개 모두 해당</td>
+</tr>
+<tr>
+<td>수탁업자 (custody)</td>
+<td>✅</td>
+<td>보관·관리</td>
+</tr>
+<tr>
+<td>OTC desk</td>
+<td>✅</td>
+<td>중개</td>
+</tr>
+<tr>
+<td>P2P 플랫폼</td>
+<td>✅</td>
+<td>중개·알선</td>
+</tr>
+<tr>
+<td>단순 발행자(ICO)</td>
+<td>❌ (이론상)</td>
+<td>영업으로 매수도·교환·이전 안 하면 제외</td>
+</tr>
+<tr>
+<td>자기계산 거래만 하는 자</td>
+<td>❌</td>
+<td>VASP 정의 미충족</td>
+</tr>
+<tr>
+<td>DApp / DEX 자체</td>
+<td>회색지대</td>
+<td>운영자 식별 가능 시 포함 검토</td>
+</tr>
+</tbody>
+</table>
+<h3>용어</h3>
+<ul>
+<li><strong>VASP (Virtual Asset Service Provider)</strong> — 가상자산사업자. FATF 용어.</li>
+<li><strong>Custody (수탁)</strong> — 고객 가상자산을 보관·관리. 거래 자체를 많이 하지 않아도 VASP로 포섭.</li>
+<li><strong>DApp (Decentralized Application)</strong> — 블록체인 위에서 돌아가는 탈중앙 앱. 운영 주체가 불명확하면 규제 포섭 어려움.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"우리 회사가 VASP인가?"는 단순해 보여도 실제 판단은 변호사 의견서를 받는 게 안전합니다. 특히 <strong>중개·알선</strong> 문언이 넓어서, 가상자산 결제를 중개하는 PG사·블록체인 게임의 코인 매매 기능·NFT 마켓플레이스까지 해석상 포함될 수 있습니다. 법무법인 김·장·광장·율촌이 발간하는 VASP 해당성 판단 인사이트를 참고하는 게 업계 표준.</p>
+<hr />
+<h2>3. VASP 신고 의무 (§7) — 진입 관문</h2>
+<h3>조문 요지</h3>
+<p>§7은 "가상자산사업자로 영업하려는 자는 <strong>상호·대표자·소재지·연락처</strong> 등을 기재한 신고서를 금융정보분석원장에게 제출해야 한다"고 규정.</p>
+<h3>실무 번역</h3>
+<p>VASP 신고는 형식적으로는 "신고"지만 실질은 <strong>인허가</strong>입니다. 단순 접수가 아니라 <strong>수리(受理) 절차</strong>를 거치며, 요건 미충족 시 수리 거부 가능. 미신고 영업은 §17에 따라 <strong>5년 이하 징역 또는 5천만원 이하 벌금</strong>.</p>
+<h3>신고 시 갖춰야 할 것</h3>
+<ol>
+<li><strong>정보보호관리체계(ISMS) 인증</strong> — 한국인터넷진흥원(KISA) 발급. 기술적 보안 체계 증명.</li>
+<li><strong>실명확인 입출금계정</strong> — 은행 실명계좌. <strong>거래소만 해당</strong>, 수탁·OTC는 제외.</li>
+<li><strong>AML/CFT 내부통제기준</strong> — 정책·절차 문서화.</li>
+<li><strong>자금세탁방지 보고책임자(임원급)</strong> 임명 — §5의4 요구사항과 연결.</li>
+<li><strong>대표·임원 결격사유 부재</strong> — 범죄 경력 등.</li>
+</ol>
+<h3>2026-01-29 개정의 핵심: 대주주까지 자격심사</h3>
+<ul>
+<li><strong>종전</strong>: 대표·임원만 결격사유 심사. 대주주는 검사 대상 아니었음.</li>
+<li><strong>개정</strong>: <strong>대주주까지 확대</strong>. 사회적 신용·재무상태·내부통제 심사.</li>
+<li><strong>부적격 시</strong>: 신고 거부 또는 수리 후 취소 가능.</li>
+</ul>
+<p><strong>왜 이 개정이 나왔나</strong>: 2022~2024년 국내외 거래소 사고(FTX, 일부 국내 중소 거래소)에서 대주주의 내부자 거래·자금 유용이 반복 적발됐기 때문. 은행·증권업 인허가에서는 이미 대주주 자격심사가 표준이었고, VASP도 같은 수준으로 맞추려는 조치.</p>
+<h3>신고 갱신</h3>
+<p><strong>3년 주기 갱신</strong>. 갱신 시 당시 ISMS 인증·대주주 요건·내부통제 현황을 재검토. 업계에서는 첫 신고보다 <strong>갱신이 더 까다로워지는 추세</strong>로 받아들여지고 있음.</p>
+<h3>실무 포인트</h3>
+<p>VASP 신고 준비는 실무상 <strong>6개월~1년 프로젝트</strong>. 법무팀만이 아니라 IT 보안(ISMS), 은행 제휴(실명계좌), 컴플라이언스(AML 문서), HR(AMLO 임명) 등 전사 팀이 관여. 2026년 개정 이후 대주주 변경 건마다 재심사 부담이 생기므로, <strong>투자 유치·M&amp;A 계약에 FIU 승인 조건 조항</strong> 을 반드시 넣어야 합니다.</p>
+<hr />
+<h2>4. AML/CFT 의무 (§5의2~§5의4) — 운영 관문</h2>
+<h3>조문별 실무 매핑</h3>
+<h4>특금법 §5의2 — 고객확인의무</h4>
+<p><strong>법 문언 요지</strong>: VASP는 거래 상대방의 실명·실존을 확인하고, 의심거래 징후가 있으면 강화된 실사를 수행.</p>
+<p><strong>실무 번역</strong>: 이 조항이 있어서 한국 거래소는 (1) 신분증 스캔 + 얼굴 대조(OCR + liveness check), (2) 실명확인 입출금 계좌(1 VASP-1 은행) 연동, (3) 거래 중 고위험 신호(고액 외부 출금, PEP 매칭, OFAC 노출 등) 발생 시 EDD로 즉시 전환하는 시스템을 필수로 갖춰야 함.</p>
+<p><strong>왜 중요한가</strong>: FATF R.10(고객실사)을 국내법으로 이식한 것. 다른 R.10 요구사항(실소유자 확인 25%)은 §5의2가 아닌 시행령과 감독규정에 분산돼 있어, 실무자는 법 + 시행령 + 감독규정을 <strong>함께</strong> 읽어야 합니다.</p>
+<h4>특금법 §5의3 — 의심거래보고(STR)</h4>
+<p><strong>법 문언 요지</strong>: VASP는 고객의 거래가 <strong>자금세탁 의심이 있다고 판단되는 경우 지체 없이</strong> FIU에 보고해야 한다.</p>
+<p><strong>실무 번역</strong>: 금액 기준 없음. 1,000원 거래여도 의심이 있으면 보고. "지체 없이"의 실무 해석은 <strong>의심 판단 시점으로부터 30일 이내</strong>(감독규정)가 통상. 보고 후에는 <strong>Tipping-off 금지</strong> — 고객에게 "너 STR 신고됐어" 알리면 별도 처벌.</p>
+<p><strong>왜 중요한가</strong>: STR은 AML 시스템의 출구. STR 없으면 수사기관이 범죄수익 추적을 시작할 수 없음. 감독당국은 STR <strong>수가 적은 회사를 오히려 의심</strong>하며, 업계 평균 대비 낮으면 검사 우선순위에 오름.</p>
+<h4>특금법 §4의2 — 고액현금거래보고(CTR)</h4>
+<p><strong>법 문언 요지</strong>: 금융회사 등은 <strong>1천만원 이상 현금거래</strong>를 FIU에 자동 보고해야 한다.</p>
+<p><strong>실무 번역</strong>: VASP도 포함되나 <strong>현금 취급 자체가 드물어 실제 트리거는 거의 없음</strong>. OTC desk가 현금을 받는 극소수 사례가 이론상 해당. 가상자산 자체 거래는 현금이 아니므로 CTR 대상 아님.</p>
+<h4>특금법 §5의4 — 기록 보관</h4>
+<p><strong>법 문언 요지</strong>: VASP는 거래 기록·고객확인 자료를 <strong>5년간</strong> 보존해야 한다.</p>
+<p><strong>실무 번역</strong>: 특금법만 보면 5년이지만, 가상자산이용자보호법 §11은 <strong>거래정보 15년</strong> 보존을 요구하며, <strong>같은 자료가 둘 다에 해당하면 긴 쪽</strong>이 적용. 실무에서는 DB 설계 단계부터 <strong>15년 보존</strong>을 기본값으로 가져가는 게 안전.</p>
+<h4>Travel Rule (§5의2 + 시행령 §10의10)</h4>
+<p>아래 5번 섹션 참조.</p>
+<h3>실무 포인트</h3>
+<p>AML 내부 정책서를 쓸 때 각 절차 옆에 <strong>"근거: 특금법 §5의3, 감독규정 §X"</strong> 를 명시하면 감독 검사에서 추적성(traceability)을 인정받기 쉬워집니다. 또한 임직원 교육 자료에서도 "이 룰이 왜 있는가"를 거슬러 올라가 설명할 수 있게 됩니다.</p>
+<hr />
+<h2>5. Travel Rule — §5의2 + 시행령 §10의10</h2>
+<h3>조문 요지</h3>
+<p>VASP가 <strong>다른 VASP에게</strong> 가상자산을 이전할 때, <strong>이전 금액이 100만원 이상</strong>이면 송신인·수신인 정보를 제공해야 합니다.</p>
+<h3>제공해야 할 정보</h3>
+<ul>
+<li><strong>송신인</strong>: 성명, 가상자산주소</li>
+<li><strong>수신인</strong>: 성명, 가상자산주소</li>
+</ul>
+<p>FATF R.16 원안은 주소·계좌번호·생년월일·국적 등 더 많은 필드를 요구하지만, 한국 시행령은 간소화된 세트만 요구합니다.</p>
+<h3>시행 시점과 한국 시장의 특수 구조</h3>
+<ul>
+<li><strong>2022-03-25 시행</strong></li>
+<li>한국 4대 거래소(업비트·빗썸·코빗·코인원)는 <strong>VerifyVASP</strong> 또는 <strong>CODE</strong> 두 솔루션으로 연동</li>
+<li><strong>VerifyVASP</strong>: 업비트 + Chainalysis 합작 지분. 글로벌 지향.</li>
+<li><strong>CODE</strong>: 빗썸·코빗·코인원 3사 합작. 국내 특화.</li>
+<li>한 거래소가 두 솔루션을 <strong>동시 가입</strong>해 상대 거래소가 어느 쪽이든 통신 가능하도록 운영.</li>
+</ul>
+<h3>미연결 VASP 문제 (Sunrise Issue)</h3>
+<p><strong>Sunrise Issue</strong> = 전 세계 VASP가 Travel Rule을 동시에 이행하지 못해 <strong>연결되지 않은 관할이 다수</strong> 있는 문제. 2026-04 현재 여전히 큰 비중.</p>
+<p><strong>실무 대응</strong>:
+- 연결 안 된 외국 VASP에게 송금: 정보 교환 불가 → <strong>송금 거절</strong> 또는 <strong>자체 KYC·KYT 리뷰 후 보류</strong>
+- <strong>개인지갑(unhosted wallet)</strong>: 본인 정보 수집 어려움 → 업비트·빗썸 등은 <strong>외부지갑 등록제</strong> 운영 (출금 전 등록 필수)</p>
+<h3>용어</h3>
+<ul>
+<li><strong>IVMS101 (InterVASP Messaging Standard 101)</strong> — Travel Rule 메시지 국제 표준. JSON 스키마.</li>
+<li><strong>Unhosted Wallet (개인지갑)</strong> — VASP가 아닌 개인이 직접 관리하는 지갑. MetaMask, Ledger 등.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>Travel Rule은 규제 위반 시 기술적 문제처럼 포장되는 경향이 있지만, 본질은 <strong>"AML 데이터의 VASP 간 공유"</strong> 입니다. 자사 고객의 KYC 정보가 상대 VASP로 넘어가므로 개인정보 보호법(PIPA)과의 교차 이슈도 큽니다. 실무에서 이 두 법을 동시에 만족시키는 게 도전이며, 업계는 개인정보처리위탁 계약 + 암호화 전송으로 대응하고 있습니다.</p>
+<hr />
+<h2>6. 감독·처벌</h2>
+<h3>감독 구조</h3>
+<ul>
+<li><strong>FIU</strong> — 검사·자료 제출 요구 권한.</li>
+<li><strong>금융감독원(FSS)</strong> — 위탁 검사. 현장 실사 수행.</li>
+<li><strong>금융위원회(FSC)</strong> — 시정명령·행정제재 권한.</li>
+</ul>
+<h3>행정처분 단계</h3>
+<ol>
+<li><strong>시정명령</strong> — 가벼운 위반. 일정 기한 내 개선 요구.</li>
+<li><strong>영업 일부 또는 전부 정지</strong> — 중대 위반. 예: Travel Rule 시스템 장기 미작동.</li>
+<li><strong>신고 수리 취소</strong> — 심각한 위반. 실질적으로 사업 종료.</li>
+</ol>
+<h3>형사처벌 (§17)</h3>
+<table>
+<thead>
+<tr>
+<th>위반</th>
+<th>처벌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>미신고 영업</strong></td>
+<td><strong>5년 이하 징역 또는 5천만원 이하 벌금</strong></td>
+</tr>
+<tr>
+<td>KYC 위반</td>
+<td>1년 이하 징역 또는 1천만원 이하 과태료</td>
+</tr>
+<tr>
+<td>STR 미보고</td>
+<td>1년 이하 징역 또는 1천만원 이하 과태료</td>
+</tr>
+<tr>
+<td>Tipping-off (누설)</td>
+<td>더 무거운 처벌</td>
+</tr>
+</tbody>
+</table>
+<h3>양벌규정</h3>
+<p>법인도 처벌, 임직원도 처벌. 실무에서는 <strong>CCO·CEO의 개인 형사 책임</strong> 가능성이 늘 있음. 이게 임원이 AMLO 겸직을 꺼리는 이유 중 하나.</p>
+<h3>실무 포인트</h3>
+<p>감독 검사는 보통 <strong>3~5일 현장 검사</strong>로 시작됩니다. 사전 요구 자료 리스트(수백 건)를 받고 준비하는 시점부터 진짜 검사가 시작된다고 봐야 합니다. 2023~2025년 사이 FIU 검사 빈도가 높아졌고, 개별 사항 적발보다 <strong>전사 AML 프로그램 성숙도</strong>를 평가하는 방향으로 기조가 바뀌었습니다.</p>
+<hr />
+<h2>7. 시행령·규정·가이드라인 — 4층 구조</h2>
+<p>법만 읽어선 실무가 안 되는 이유:</p>
+<table>
+<thead>
+<tr>
+<th>층위</th>
+<th>문서</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1층</td>
+<td><strong>특금법</strong> (국회 법률)</td>
+<td>기본 틀·의무 조항·처벌</td>
+</tr>
+<tr>
+<td>2층</td>
+<td><strong>특금법 시행령</strong> (대통령령)</td>
+<td>세부 요건·임계값·절차</td>
+</tr>
+<tr>
+<td>3층</td>
+<td><strong>특정 금융거래정보 보고 및 감독규정</strong> (FIU 고시)</td>
+<td>검사·제재 운영 세부</td>
+</tr>
+<tr>
+<td>3층</td>
+<td><strong>자금세탁방지 업무규정</strong> (FIU 고시)</td>
+<td>일반 AML 업무 기준</td>
+</tr>
+<tr>
+<td>4층</td>
+<td><strong>가상자산사업자 신고 매뉴얼</strong> (FIU 발간)</td>
+<td>실무 체크리스트·양식</td>
+</tr>
+<tr>
+<td>4층</td>
+<td><strong>위험기반접근법(RBA) 처리기준 가이드라인</strong></td>
+<td>위험 등급 산정 방법</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>신고 준비 시 <strong>신고 매뉴얼</strong>이 사실상 바이블. 감독 검사 시에는 <strong>업무규정 + RBA 가이드라인</strong>을 대조해 점검. 법 조문만 외우는 건 시험용, 실무는 4층 전체의 번호를 상호 참조하며 움직입니다.</p>
+<hr />
+<h2>8. 미신고 사업자 단속 동향</h2>
+<h3>2025-12-02 FIU 보도자료</h3>
+<ul>
+<li>FIU가 2025년 말 <strong>불법 가상자산 취급업자 단속</strong> 강화 발표</li>
+<li>신고 없이 운영하는 <strong>외국 VASP의 한국 고객 영업 차단</strong></li>
+<li>국내 거래소에 <strong>미신고 VASP 주소 차단</strong> 협조 요청</li>
+</ul>
+<h3>실무 임팩트</h3>
+<p>미신고 외국 VASP로의 출금을 거래소가 <strong>자체 차단</strong>해야 하는 의무가 사실상 생김. 4대 거래소는 미신고 VASP 주소 블랙리스트를 공유하고 있으며, 리스트에 오른 지갑으로의 출금은 자동 거절. 고객 입장에서는 "내가 쓰던 외국 거래소로 더 이상 보낼 수 없다"는 불편이 발생.</p>
+<hr />
+<h2>9. 2단계 입법 — 향후 방향</h2>
+<p>특금법과 가상자산이용자보호법이 1단계였다면, 2단계로 추진 중인 것들:</p>
+<ul>
+<li><strong>가상자산 발행·유통 분리</strong> — 이해상충 해소. 거래소의 자기 토큰 상장 제한 등.</li>
+<li><strong>스테이블코인 규율</strong> — 별도 법 또는 통합법. 미국 GENIUS Act 참조.</li>
+<li><strong>가상자산 평가업·자문업·공시업</strong> 규제.</li>
+<li><strong>시장 인프라</strong>(보관·청산·결제) 정비.</li>
+<li><strong>외국 VASP 역외 적용</strong> — 한국 고객 영업 시 사전 신고 의무화.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>2단계 입법이 확정되기 전에도, 업계는 "어차피 오는 방향"을 예측해 미리 대응하고 있습니다. 예: 4대 거래소의 자기 토큰 상장 자율규제, 주요 수탁업자의 상장사 대상 B2B 영업 확대.</p>
+<hr />
+<h2>10. 회사 컴플라이언스 체크리스트</h2>
+<pre><code>□ FIU 신고 완료 + 3년 주기 갱신 일정 관리
+□ ISMS 인증 유지
+□ 자금세탁방지 보고책임자 임명 (임원)
+□ 내부통제기준 + AML 정책 문서화
+□ KYC/CDD/EDD 절차 운영
+□ 거래 모니터링 시스템 (자체 또는 외부 위탁)
+□ Travel Rule 솔루션 연동 (VerifyVASP/CODE 중 최소 1개)
+□ STR/CTR 보고 프로세스
+□ 제재 스크리닝 (OFAC/UN/EU + 외교부)
+□ 임직원 AML 교육 (연 1회 이상)
+□ 거래기록 15년 보존 (이용자보호법 §11)
+□ AML 기록 5년 보존 (특금법 §5의4)
+□ 2026-01 개정 대주주 자격심사 대비 (주주 변동 시)
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="korea-user-protection.md"><code>korea-user-protection.md</code></a> — 가상자산이용자보호법 (이용자 자산 보호)</li>
+<li><a href="../3-crypto-aml/travel-rule.md"><code>../3-crypto-aml/travel-rule.md</code></a> — Travel Rule 운영 상세</li>
+<li><a href="../7-vendors/korea-solutions.md"><code>../7-vendors/korea-solutions.md</code></a> — VerifyVASP·CODE 등 한국 솔루션 시장</li>
+<li><a href="https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787">국가법령정보센터 — 특금법 원문</a></li>
+<li><a href="https://www.fsc.go.kr/comm/getFile?srvcId=BBSTY1&amp;upperNo=75409&amp;fileTy=ATTACH&amp;fileNo=6">금융위 — 가상자산사업자 신고 매뉴얼</a></li>
+<li><a href="https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&amp;idx=22820">김·장 — 특금법 입법예고 분석</a></li>
+<li><a href="https://www.blockmedia.co.kr/archives/1038007">블록미디어 — 특금법 개정안 통과 (2026-01)</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 08 / 60 · READING</span>
+    </div>
+  </article>
+</body>
+</html>

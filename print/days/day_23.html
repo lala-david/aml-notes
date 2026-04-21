@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 23 — IVMS101 표준 deep</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 23 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">23</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 4 / 7</div>
+        <div class="page-meta__theme">Travel Rule + IVMS101</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--active"></span>
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">IVMS101 표준 deep</h1>
+      <p class="title-block__lead">Travel Rule 메시지의 글로벌 공통 언어.</p>
+      <span class="title-block__time">⏱ ~80분</span>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>IVMS101의 풀이는?</li>
+<li>메시지 핵심 5개 객체는? (Originator/Beneficiary/OriginatingVASP/BeneficiaryVASP/TransferPath)</li>
+<li>NaturalPerson 필수 필드 vs 선택 필드?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/4-technology/travel-rule-protocols.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🌐</span>
+        <h2 class="section__title">외부 자료 <em style="font-weight:400;color:var(--ink-mute);font-style:normal;font-size:8.5pt;">(선택)</em></h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>Notabene — IVMS101 분석<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">notabene.id/travel-rule-messaging-protocols/ivms-101</span></li>
+<li>VerifyVASP IVMS101 문서<br><span style="font-family:var(--font-mono);font-size:8pt;color:var(--ink-mute);">docs.verifyvasp.com/reference/ivms101/ivms101</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>IVMS101 JSON 스키마 의사코드 작성 (Originator → name + address + accountNumber 만)</li>
+<li>한국 사용자 송금 시 채워야 할 필드 체크리스트</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>IVMS101 = InterVASP Messaging Standard 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>JSON 기반, 모든 프로토콜의 페이로드 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>NaturalPerson 핵심 객체 구조 이해</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>관할별 필수 필드 차이 안다</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 23 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Travel Rule Protocols — 기술 표준 / 메시징 프로토콜</h2>
+    <p class="article-divider__lead">Travel Rule을 **실제로 어떻게** 메시지로 주고받는가. 이 글을 읽고 나면 "IVMS101은 표준이고 TRISA는 프로토콜이다"라는 흔한 혼동을 정리하고, 왜 2026년에도 Notabene Gateway가 가장 실용적 선택이 되는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/4-technology/travel-rule-protocols.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 23</span>
+      <span class="article-head__path">notes/4-technology/travel-rule-protocols.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li><strong>메시지 표준 = IVMS101</strong> (사실상 글로벌 표준, 모든 프로토콜이 페이로드로 사용)</li>
+<li><strong>전송 프로토콜</strong>은 다양: TRP, TRISA, OpenVASP, VerifyVASP, CODE, Notabene Gateway</li>
+<li>두 가지 모델: <strong>분산형 (TRISA, OpenVASP)</strong> vs <strong>폐쇄형 (VerifyVASP, CODE)</strong></li>
+<li><strong>상호운용성(interoperability)</strong> 이 가장 큰 기술 과제 — Notabene Gateway가 부상한 이유</li>
+<li><strong>VASP Discovery</strong> (지갑 → VASP 매핑)는 별도 인프라 (DTI, GLEIF LEI, attribution DB)</li>
+</ul>
+<hr />
+<h2>1. 표준 vs 프로토콜 vs Discovery — 3개를 분리해서 이해하라</h2>
+<h3>왜 혼동이 자주 일어나나</h3>
+<p>Travel Rule 구현에서 용어 혼동의 대부분은 <strong>"메시지에 뭘 넣을지"(표준)</strong> 와 <strong>"어떻게 주고받을지"(프로토콜)</strong> 와 <strong>"누구에게 보낼지"(Discovery)</strong> 가 서로 다른 층위라는 걸 몰라서 생깁니다. 이 3개는 독립적으로 선택할 수 있으며, 같은 IVMS101 메시지를 다른 프로토콜로 주고받을 수 있습니다.</p>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>3개 층을 세로로 잡고 각각의 역할·예시를 병렬 비교. 회사가 Travel Rule 시스템을 설계할 때 <strong>각 층마다 별도 결정</strong>이 필요합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>역할</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>메시지 표준</strong></td>
+<td>무엇을 담는가 (필드 구조)</td>
+<td>IVMS101</td>
+</tr>
+<tr>
+<td><strong>전송 프로토콜</strong></td>
+<td>어떻게 주고받는가 (네트워크)</td>
+<td>TRISA, TRP, OpenVASP, VerifyVASP, CODE</td>
+</tr>
+<tr>
+<td><strong>VASP Discovery</strong></td>
+<td>누가 누구인가 (라우팅)</td>
+<td>Attribution DB, DTI, GLEIF LEI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. IVMS101 — 메시지 표준 상세</h2>
+<h3>정체성</h3>
+<ul>
+<li><strong>InterVASP Messaging Standard 101</strong></li>
+<li>2020년 InterVASP Joint Working Group (JWG) 합의</li>
+<li>참여사: Sygna(CoolBitX), TRISA(CipherTrace), Notabene, Securrency 등</li>
+<li>JSON Schema 기반</li>
+</ul>
+<h3>왜 표준이 필요했나</h3>
+<p>2019~2020년 초기에는 각 프로토콜이 자체 메시지 형식을 썼습니다. TRISA는 TRISA대로, Sygna는 Sygna대로. 결과: A 거래소가 TRISA로 보낸 메시지를 B 거래소가 Sygna로 받으면 <strong>필드 변환 과정에서 정보 손실</strong>이 발생. 이 문제를 풀려고 주요 플레이어들이 모여 합의한 공통 JSON 스키마가 IVMS101.</p>
+<h3>핵심 데이터 모델</h3>
+<pre><code>IVMS101 Message
+├── Originator (송신인)
+│   ├── OriginatorPersons: [NaturalPerson | LegalPerson]
+│   └── AccountNumbers: [지갑주소]
+├── Beneficiary (수신인)
+│   ├── BeneficiaryPersons: [...]
+│   └── AccountNumbers: [...]
+├── OriginatingVASP
+├── BeneficiaryVASP
+├── TransferPath
+└── PayloadMetadata
+</code></pre>
+<h3>NaturalPerson 필드 — 필수 vs 선택</h3>
+<ul>
+<li><strong>Name</strong> (필수): primary + secondary identifier</li>
+<li><strong>GeographicAddress</strong> (선택)</li>
+<li><strong>NationalIdentification</strong> (선택): passport, ID 등</li>
+<li><strong>DateAndPlaceOfBirth</strong> (선택)</li>
+<li><strong>CountryOfResidence</strong> (선택)</li>
+<li><strong>CustomerIdentification</strong> (선택)</li>
+</ul>
+<h3>관할별 차이 처리</h3>
+<ul>
+<li><strong>한국</strong>: 신원확인번호 대신 이름·주소 조합 가능</li>
+<li><strong>EU TFR</strong>: 모든 필드 필수 (강제력 ↑)</li>
+<li><strong>미국 BSA</strong>: 이름·주소·계좌 + (1만 USD 초과 시 ID#)</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>IVMS101 validator 구현에서 가장 어려운 부분은 <strong>관할별 필수 필드 차이</strong> 처리입니다. 한국 송신 → EU 수신일 경우 수신 측은 EU 기준으로 검증하므로 한국이 채워준 필드가 EU 기준에 부족할 수 있습니다. 이 mismatch를 <strong>거절</strong>할지 <strong>보완 요청</strong>할지의 정책을 회사 차원에서 명문화해야 합니다.</p>
+<hr />
+<h2>3. 주요 전송 프로토콜</h2>
+<h3>A. TRISA (Travel Rule Information Sharing Architecture)</h3>
+<ul>
+<li><strong>운영</strong>: TRISA 비영리 (CipherTrace 시작 → Mastercard 인수)</li>
+<li><strong>모델</strong>: 분산형, 인증서 기반 (PKI)</li>
+<li><strong>특징</strong>: VASP가 X.509 인증서로 신원 확인, peer-to-peer gRPC 통신, 오픈소스</li>
+<li><strong>장점</strong>: 누구나 참여 가능, 중앙 의존 적음</li>
+<li><strong>단점</strong>: 운영 복잡, VASP 식별이 별도 필요</li>
+</ul>
+<h3>B. TRP (Travel Rule Protocol)</h3>
+<ul>
+<li><strong>운영</strong>: 21 Analytics, ING 등 주도</li>
+<li><strong>모델</strong>: REST API 기반</li>
+<li><strong>특징</strong>: 가벼움, 표준 HTTP/HTTPS, JWT 또는 인증서 인증, 빠른 구현</li>
+<li><strong>장점</strong>: 단순함, 구현 공수 낮음</li>
+<li><strong>단점</strong>: 분산형이지만 식별 메커니즘 별도 필요</li>
+</ul>
+<h3>C. OpenVASP</h3>
+<ul>
+<li><strong>운영</strong>: OpenVASP Association (Bitcoin Suisse, Sygnum 등)</li>
+<li><strong>모델</strong>: 분산형, Ethereum 기반</li>
+<li><strong>특징</strong>: ENS, Whisper messaging 활용</li>
+<li><strong>현황</strong>: 2026년 시점 <strong>활용도 낮음</strong> (TRISA·TRP 우세)</li>
+</ul>
+<h3>D. VerifyVASP</h3>
+<ul>
+<li><strong>운영</strong>: 람다256 (Upbit 자회사) + Chainalysis 합작</li>
+<li><strong>모델</strong>: 폐쇄형 컨소시엄 (사전 검증된 VASP만 참여)</li>
+<li><strong>사용</strong>: Upbit 외 다수 글로벌 거래소</li>
+<li><strong>특징</strong>: 카운터파티 신뢰성 보장, 한국 4대 거래소 중 Upbit 채택, CODE와 연동 완료</li>
+</ul>
+<h3>E. CODE</h3>
+<ul>
+<li><strong>운영</strong>: 코드 (빗썸 + 코빗 + 코인원 합작법인)</li>
+<li><strong>모델</strong>: 폐쇄형 컨소시엄</li>
+<li><strong>사용</strong>: 빗썸·코빗·코인원 + 일부 외부</li>
+<li><strong>특징</strong>: 한국 컨소시엄, 2022 시행 시점부터 운영, VerifyVASP와 연동</li>
+</ul>
+<h3>F. Notabene Gateway</h3>
+<ul>
+<li><strong>운영</strong>: Notabene Inc. (미국)</li>
+<li><strong>모델</strong>: SaaS 게이트웨이 + 멀티프로토콜</li>
+<li><strong>특징</strong>: TRISA·TRP·OpenVASP·VerifyVASP·CODE 등 <strong>다중 프로토콜 동시 지원</strong>, 한 번 연결로 다 처리, VASP Discovery 통합</li>
+<li><strong>사용</strong>: 1,500+ VASP</li>
+<li><strong>왜 부상했나</strong>: <strong>Sunrise Issue 해결책</strong>. 다양한 프로토콜을 운영하는 전 세계 VASP들과 일일이 연결하지 않고, Notabene을 허브로 두는 구조.</li>
+</ul>
+<h3>G. Sygna (CoolBitX)</h3>
+<ul>
+<li><strong>운영</strong>: 대만 CoolBitX</li>
+<li><strong>사용</strong>: 아시아권 거래소 다수</li>
+<li><strong>특징</strong>: 자체 hub 구조</li>
+</ul>
+<h3>H. 기타</h3>
+<ul>
+<li><strong>Sumsub Travel Rule</strong>: KYC와 통합</li>
+<li><strong>Global Travel Rule (GTR)</strong>: BitGo 등 일부 사용</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>프로토콜 선택은 <strong>고객 지리적 분포</strong>로 결정합니다. 한국 로컬 집중이면 VerifyVASP 또는 CODE, 아시아권 중심이면 Sygna + 이상 하나, 글로벌이면 Notabene + TRISA 조합이 일반적. "한 프로토콜만 쓰겠다"는 전략은 Sunrise Issue로 빠르게 한계에 부딪힙니다.</p>
+<hr />
+<h2>4. 분산형 vs 폐쇄형 — 트레이드오프</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>두 모델은 <strong>철학이 다릅니다</strong>. 분산형은 "누구나 참여할 수 있어야 공정하다", 폐쇄형은 "서로 신뢰할 수 있는 회원사끼리만 주고받자". 어느 쪽이 맞다는 답은 없고, <strong>관할과 시장 구조</strong>에 따라 선택됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>분산형 (TRISA, OpenVASP)</th>
+<th>폐쇄형 (VerifyVASP, CODE)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>참여 진입장벽</strong></td>
+<td>낮음 (오픈)</td>
+<td>높음 (검증 필요)</td>
+</tr>
+<tr>
+<td><strong>신뢰 모델</strong></td>
+<td>인증서 + 검증</td>
+<td>컨소시엄 사전 검증</td>
+</tr>
+<tr>
+<td><strong>확장성</strong></td>
+<td>높음 (이론)</td>
+<td>낮음 (회원사 한정)</td>
+</tr>
+<tr>
+<td><strong>라우팅</strong></td>
+<td>별도 식별 필요</td>
+<td>컨소시엄 내 자동</td>
+</tr>
+<tr>
+<td><strong>운영 책임</strong></td>
+<td>각자</td>
+<td>컨소시엄 운영자</td>
+</tr>
+<tr>
+<td><strong>한국 적합성</strong></td>
+<td>낮음</td>
+<td>높음 (실제 채택)</td>
+</tr>
+</tbody>
+</table>
+<h3>한국이 폐쇄형을 택한 이유</h3>
+<p>한국 4대 거래소는 <strong>사업자 수가 적고 상호 신뢰 구축이 상대적으로 쉬운</strong> 시장 구조. 분산형 인증서 관리보다 <strong>합작법인 거버넌스</strong>가 더 간단하게 문제를 해결. 반면 미국·EU는 VASP가 수백 개로 많아 폐쇄형 컨소시엄이 사실상 불가능하고, 분산형 + 게이트웨이 모델이 현실적.</p>
+<h3>실무 포인트</h3>
+<p>한국 시장에 진입하는 외국 VASP는 <strong>VerifyVASP 또는 CODE 회원 가입을 먼저 준비</strong>하는 게 실무입니다. 자체 TRISA·TRP만 운영하고 한국 거래소로 출금이 오기를 기다리면 한국 측이 메시지를 받지 못해 거래가 막힙니다. Notabene Gateway를 쓰면 자동 연결되지만 별도 비용.</p>
+<hr />
+<h2>5. VASP Discovery — 지갑 주소가 어느 VASP인가</h2>
+<h3>문제</h3>
+<p>출금 주소 <code>0xABC...</code>가 들어오면, <strong>어느 VASP의 것인지</strong> 알아야 그 VASP에게 메시지를 보낼 수 있습니다. 지갑 주소만 봐서는 식별 불가.</p>
+<h3>해결책 5가지</h3>
+<h4>A. Attribution DB 활용</h4>
+<ul>
+<li>Chainalysis·TRM·Elliptic의 라벨 DB</li>
+<li>알려진 거래소 deposit 주소 → 해당 거래소 식별</li>
+<li><strong>자체 deposit 주소 ≠ 거래소 식별 정보 누락 가능성</strong> — 라벨링이 최신이 아닐 수 있음</li>
+</ul>
+<h4>B. VASP Directory 서비스</h4>
+<ul>
+<li>OpenVASP Directory, TRISA Directory, Notabene Directory</li>
+<li>각 VASP의 메시징 endpoint + 인증서 등록</li>
+<li>카운터파티 직접 조회</li>
+</ul>
+<h4>C. DTI (Digital Token Identifier, ISO 24165)</h4>
+<ul>
+<li>ISO 표준 토큰 식별자 + VASP LEI 연결</li>
+<li>2024년부터 EU 등 채택 시작</li>
+</ul>
+<h4>D. GLEIF LEI (Legal Entity Identifier)</h4>
+<ul>
+<li>법인 식별 글로벌 표준</li>
+<li>VASP가 LEI 보유 시 메시지에 포함</li>
+</ul>
+<h4>E. 카운터파티 직접 등록</h4>
+<ul>
+<li>VASP끼리 사전에 주소 화이트리스트 교환</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>현실적으로는 A + B 조합이 대부분입니다. Attribution DB로 1차 식별하고, 식별 안 되거나 모호하면 Directory 조회. 그래도 안 되면 <strong>수동 검토 큐</strong>로 넘기는 게 실무 흐름. 완벽한 자동화는 불가능하며, 매달 수백~수천 건의 수동 처리가 남습니다.</p>
+<hr />
+<h2>6. 호환성 / Interoperability 문제</h2>
+<h3>Sunrise Issue (미시행 관할 카운터파티)</h3>
+<p>일부 국가는 Travel Rule 시행 안 함 → 메시지 수신할 인프라 없음. <strong>해결</strong>: 폴백 정책 (송금 보류, 수동 확인, 거절).</p>
+<h3>Protocol Mismatch</h3>
+<p>A 거래소는 TRISA 사용, B는 VerifyVASP 사용 → 직접 호환 안 됨.
+- <strong>해결 1</strong>: Notabene Gateway 같은 멀티프로토콜 hub
+- <strong>해결 2</strong>: 양 프로토콜 동시 지원 (한국: VerifyVASP + CODE 양쪽 가입)</p>
+<h3>Schema Version Mismatch</h3>
+<p>IVMS101에도 마이너 버전 차이 존재 → 필드 매핑 mismatch 가능성.
+- <strong>해결</strong>: 표준 컨버터 / fallback 매핑</p>
+<h3>실무 포인트</h3>
+<p>세 mismatch 중 <strong>Protocol Mismatch</strong>가 운영상 가장 빈번한 실패 원인. 이를 방어하려면 회사 Travel Rule 시스템이 <strong>멀티 프로토콜 어댑터</strong>를 갖는 게 이상적이지만 공수 부담이 큽니다. 대안은 Notabene Gateway 같은 SaaS에 위임하는 것.</p>
+<hr />
+<h2>7. 한국 시장 운영 패턴</h2>
+<pre><code>Upbit (VerifyVASP)
+  ├─ 해외 VASP에게 송금: VerifyVASP 직접 또는 Notabene Gateway 경유
+  └─ 빗썸·코빗·코인원에게 송금: VerifyVASP ↔ CODE 연동
+
+빗썸·코빗·코인원 (CODE)
+  ├─ 해외 VASP에게 송금: CODE 또는 Notabene Gateway
+  └─ Upbit에게 송금: CODE ↔ VerifyVASP 연동
+
+수탁업자 — Travel Rule 적용 범위 검토 필요
+  ├─ 고객 출금 시 외부 VASP로 가면 적용
+  └─ 내부 wallet 간 이동은 적용 X
+</code></pre>
+<h3>실무 포인트</h3>
+<p>수탁업자는 "내부 wallet 간 이동" 이 <strong>Travel Rule 적용 대상이 아니라는 점</strong>이 실무 포인트. 고객 자산을 한 콜드월렛에서 다른 콜드월렛으로 옮기는 것은 "VASP 간 이전"이 아닌 "내부 운영". 이 구분을 정책에 명문화하지 않으면 불필요한 Travel Rule 메시지를 발송하게 됩니다.</p>
+<hr />
+<h2>8. 기술 스택 통합 예시</h2>
+<pre><code>[ User Request: 출금 ]
+        ▼
+[ KYC / KYT 1차 체크 ]
+        ▼
+[ Sanctions Screening ]
+        ▼
+[ Travel Rule SDK ]
+   ├─ Counterparty Discovery (Attribution DB)
+   ├─ IVMS101 Message Build
+   ├─ Protocol Selection (TRISA / VerifyVASP / CODE / ...)
+   ├─ Send via Notabene Gateway or Direct
+   ▼
+[ Counterparty VASP Response ]
+   ├─ Accept → 계속
+   ├─ Reject → 송금 거절, 사용자 통지
+   ├─ Hold → 수동 검토
+   └─ Timeout → 폴백 정책
+        ▼
+[ On-chain Broadcast ]
+        ▼
+[ Travel Rule Message 보관 (15년) ]
+</code></pre>
+<h3>실무 포인트</h3>
+<p>이 흐름에서 가장 자주 고장 나는 지점은 <strong>Counterparty Response의 Timeout</strong> 처리. 카운터파티가 응답하지 않을 때 얼마나 기다리고 어떻게 처리할지에 대한 정책이 명확해야 합니다. 너무 짧으면 Timeout 폴백이 남발되고, 너무 길면 사용자 UX가 망가집니다. 실무 표준은 <strong>15초~60초 대기 + 폴백</strong>.</p>
+<hr />
+<h2>9. 회사 도입 체크리스트</h2>
+<pre><code>□ 메인 프로토콜 선택 (한국이면 VerifyVASP 또는 CODE)
+□ 글로벌 호환성 (Notabene Gateway 등 검토)
+□ IVMS101 메시지 검증 로직
+□ Counterparty Discovery 인프라
+□ 미연결 카운터파티 폴백 정책 명문화
+□ 메시지 보관 (한국 15년, EU 5년 등)
+□ PII 암호화 + 접근 통제
+□ Audit Log
+□ 시간 동기화 (NTP) — 메시지 timestamp 일치
+□ 인증서 갱신 자동화 (TRISA의 경우)
+</code></pre>
+<hr />
+<h2>요약 부록 — 빠른 참조용</h2>
+<p><strong>3층 구조</strong>: 메시지(IVMS101) / 프로토콜(TRISA·VerifyVASP·CODE·Notabene…) / Discovery(Attribution DB·DTI·LEI)
+<strong>모델 2분법</strong>: 분산형(TRISA, OpenVASP) vs 폐쇄형(VerifyVASP, CODE)
+<strong>한국 현실</strong>: Upbit = VerifyVASP / 빗썸·코빗·코인원 = CODE / 두 솔루션 상호 연동
+<strong>글로벌 실무</strong>: Notabene Gateway가 멀티프로토콜 허브로 사실상 표준</p>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="../3-crypto-aml/travel-rule.md"><code>../3-crypto-aml/travel-rule.md</code></a> — Travel Rule 운영 전반</li>
+<li><a href="../7-vendors/travel-rule-vendors.md"><code>../7-vendors/travel-rule-vendors.md</code></a> — 벤더 비교</li>
+<li><a href="../7-vendors/korea-solutions.md"><code>../7-vendors/korea-solutions.md</code></a> — 한국 시장</li>
+<li><a href="https://notabene.id/travel-rule-messaging-protocols/ivms-101">Notabene — IVMS101 분석</a></li>
+<li><a href="https://notabene.id/travel-rule-messaging-protocols/verifyvasp">Notabene — VerifyVASP 분석</a></li>
+<li><a href="https://www.21analytics.co/blog/21-analytics-open-sources-its-intervasp-ivms-101-implementation/">21 Analytics — Open-Source IVMS101</a></li>
+<li><a href="https://www.sygna.io/blog/joint-working-group-adopts-ivms101-crypto-messaging-standard-for-fatf-travel-rule/">Sygna — IVMS101 합의 발표</a></li>
+<li><a href="https://docs.verifyvasp.com/reference/ivms101/ivms101">VerifyVASP IVMS101 문서</a></li>
+<li><a href="https://www.codevasp.com/ko">CodeVASP 공식 사이트</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 23 / 60 · READING</span>
+    </div>
+  </article>
+</body>
+</html>

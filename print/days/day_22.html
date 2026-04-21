@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Day 22 — Travel Rule 운영 흐름 (한국 100만원 시나리오)</title>
+<meta name="viewport" content="width=210mm">
+<link rel="stylesheet" href="../assets/print.css">
+</head>
+<body>
+
+<div class="screen-bar no-print">
+  <span class="screen-bar__title">AML Notes · Day 22 · Study Packet</span>
+  <div class="screen-bar__actions">
+    <a class="screen-bar__btn screen-bar__btn--ghost" href="../index.html">← Index</a>
+    <button class="screen-bar__btn" onclick="window.print()">🖨 Print A4</button>
+  </div>
+</div>
+
+  <article class="page">
+
+    <header class="page-header">
+      <div class="day-mark">
+        <span class="day-mark__label">Day</span>
+        <span class="day-mark__num">22</span>
+      </div>
+      <div class="page-meta">
+        <div class="page-meta__week">Week 4 / 7</div>
+        <div class="page-meta__theme">Travel Rule + IVMS101</div>
+        <div class="page-meta__progress">
+          <span class="page-meta__dot page-meta__dot--today"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+          <span class="page-meta__dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="title-block">
+      <h1 class="title-block__heading">Travel Rule 운영 흐름 (한국 100만원 시나리오)</h1>
+      <p class="title-block__lead">Travel Rule이 거래소 시스템에서 실제로 어떻게 흘러가는가.</p>
+      <span class="title-block__time">⏱ ~70분</span>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🎯</span>
+        <h2 class="section__title">핵심 질문</h2>
+      </div>
+      <div class="section__body">
+        <ol>
+<li>한국 거래소 출금 시 Travel Rule 9단계 흐름은?</li>
+<li>카운터파티 VASP가 미연결이면?</li>
+<li>Personal data 보호와 Travel Rule의 충돌 지점?</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">📖</span>
+        <h2 class="section__title">읽기</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>메인 · <span class="ref">../notes/3-crypto-aml/travel-rule.md</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body">
+        <ul>
+<li>출금 흐름 9단계를 종이에 직접 그리기</li>
+<li>"단계별로 멈출 수 있는 지점" 표시 (KYT 차단 / TR 거절 / Sunrise 폴백)</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">✅</span>
+        <h2 class="section__title">체크포인트</h2>
+      </div>
+      <div class="checkpoints">
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>한국 임계 100만원 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>VerifyVASP ↔ CODE 연동 구조 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>외부지갑(unhosted wallet) 등록제 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>PII 보호 + GDPR/PIPA 호환 이슈 인지</span></div>
+    </div>
+    </section>
+    <section class="section">
+      <div class="section__head">
+        <span class="section__icon">💭</span>
+        <h2 class="section__title">오늘의 한 줄</h2>
+      </div>
+      <div class="oneliner">
+        <p class="oneliner__prompt">오늘 가장 의외였던 것 한 줄을 직접 작성하세요.</p>
+        <div class="oneliner__lines">
+          <div class="oneliner__line"></div>
+          <div class="oneliner__line"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="deeper">
+      <div class="deeper__left">
+        <div class="deeper__label">더 깊이 (선택)</div>
+        —
+      </div>
+      <div class="deeper__date">
+        Date&nbsp;&nbsp;<span class="deeper__date-input"></span>
+      </div>
+    </footer>
+
+    <div class="footer-mark">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 22 / 60 · TASK</span>
+    </div>
+
+  </article>
+  <div class="article-divider">
+    <div class="article-divider__kicker">메인 읽기</div>
+    <h2 class="article-divider__title">Travel Rule — 가상자산 송수신인 정보 동반 의무</h2>
+    <p class="article-divider__lead">FATF Recommendation 16의 가상자산 적용. VASP 운영 난이도 **1순위** 테마. 이 글을 읽고 나면 Travel Rule이 왜 단순 규제가 아니라 **글로벌 인프라 문제**인지, 그리고 왜 한국이 두 개의 솔루션을 동시에 운영하는지 이해하게 됩니다..</p>
+    <div class="article-divider__meta">notes/3-crypto-aml/travel-rule.md</div>
+  </div>
+
+  <article class="article-page">
+    <header class="article-head">
+      <span class="article-head__kind">메인 읽기 · Day 22</span>
+      <span class="article-head__path">notes/3-crypto-aml/travel-rule.md</span>
+    </header>
+    <div class="article-body">
+<h2>TL;DR</h2>
+<ul>
+<li>VASP가 다른 VASP에게 가상자산을 이전할 때 <strong>송신인 + 수신인 정보를 함께 전달</strong>해야 하는 의무</li>
+<li>임계금액: <strong>한국 100만원 / 미국 $3,000 / EU 없음 / FATF 권고 USD-EUR 1,000</strong></li>
+<li>핵심 난제 두 가지: <strong>Sunrise Issue</strong>(관할별 시행 격차) + <strong>VASP 식별</strong>(지갑주소만으로 누구 VASP인지 알기 어려움)</li>
+<li>메시지 표준: <strong>IVMS101</strong> (사실상 글로벌 표준)</li>
+<li>한국: <strong>VerifyVASP</strong> (Upbit) + <strong>CODE</strong> (빗썸·코빗·코인원) 두 솔루션 연동</li>
+</ul>
+<hr />
+<h2>1. Travel Rule이 뭐고 왜 만들어졌나</h2>
+<h3>전통 금융의 유산</h3>
+<p>전통 은행 송금에서는 SWIFT MT103 메시지에 <strong>송신인·수신인 정보</strong>가 함께 실려 갑니다. 이게 가능한 이유는 1996년 미국 BSA가 <strong>Bank Secrecy Act Travel Rule</strong>을 만들어 은행 간 송금 정보 동반을 의무화했기 때문. "돈이 움직이면 사람 정보도 같이 움직여야 한다"는 원칙은 그때부터 금융 AML의 기본값이었습니다.</p>
+<h3>FATF가 이걸 가상자산에 확장한 이유</h3>
+<p>2019년 FATF는 Recommendation 16을 개정해 <strong>가상자산 이전에도 같은 원칙</strong>을 적용. 왜였나?</p>
+<ul>
+<li>가상자산 이전에서는 "돈"(블록체인 트랜잭션)은 움직이는데 "사람 정보"가 따라가지 않음</li>
+<li>이 비대칭이 자금세탁의 <strong>layering 단계</strong>를 매우 유리하게 만듦</li>
+<li>VASP 간 책임 추적이 불가능해 수사기관이 사고 대응 어려움</li>
+<li>수신 VASP가 위험 신호(SDN, mixer) 있는 거래를 사전에 차단할 수단이 없음</li>
+</ul>
+<p><strong>목적 요약</strong>:
+- 자금세탁의 layering 단계 차단
+- VASP 간 책임 추적 가능성 확보
+- 수신 측 사전 차단 가능</p>
+<h3>실무 포인트</h3>
+<p>Travel Rule은 "기술적 구현 문제"처럼 포장되지만 본질은 <strong>"전 세계 VASP가 AML 데이터를 서로 공유하자"</strong> 는 합의입니다. 기술적 어려움보다 <strong>관할·개인정보·사업 모델 간 긴장</strong>이 더 큰 도전이고, 이게 2019년 권고 후 7년이 지난 2026년에도 완벽 이행이 안 된 이유입니다.</p>
+<hr />
+<h2>2. 핵심 정보 항목</h2>
+<h3>송신인(Originator) 정보</h3>
+<p>송신인 정보가 항상 더 많이 요구됩니다 — 수신 측 VASP는 수신인이 자기 고객인지 이미 알고 있지만, 송신인에 대해서는 원래 모르기 때문.</p>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>FATF</th>
+<th>한국</th>
+<th>EU TFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>가상자산 주소</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>신원확인번호 (또는 출생지·생년월일)</td>
+<td>✅</td>
+<td>(정보보호 이슈로 일부)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>주소</td>
+<td>✅</td>
+<td>(이름·주소 둘 중 하나)</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3>수신인(Beneficiary) 정보</h3>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>FATF</th>
+<th>한국</th>
+<th>EU TFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>가상자산 주소</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 특금법은 FATF 권고보다 <strong>필드가 적습니다</strong> — 개인정보 보호법과의 긴장 때문. 반면 EU TFR은 <strong>가장 엄격</strong>합니다. 글로벌 영업 VASP는 "가장 빡빡한 EU 기준에 맞추면 다른 관할은 자동 충족"이라는 전략으로 운영합니다.</p>
+<hr />
+<h2>3. 임계금액 비교 — 관할별 선택의 차이</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>임계금액이 낮을수록 더 많은 거래가 Travel Rule 대상이 되어 운영 부담이 큽니다. 한국은 중간, EU는 극단(임계 없음), 미국은 상대적으로 완화. 관할 선택은 <strong>"우리 고객이 어느 나라 VASP와 주로 거래하나"</strong> 로 결정해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>관할</th>
+<th>임계</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FATF 권고</td>
+<td>USD/EUR 1,000</td>
+<td>회원국 자율 결정</td>
+</tr>
+<tr>
+<td><strong>한국</strong></td>
+<td><strong>100만원</strong></td>
+<td>특금법 시행령 §10의10</td>
+</tr>
+<tr>
+<td><strong>미국 (FinCEN)</strong></td>
+<td><strong>$3,000</strong></td>
+<td>BSA Travel Rule 1996</td>
+</tr>
+<tr>
+<td><strong>EU TFR</strong></td>
+<td><strong>없음 (모든 거래)</strong></td>
+<td>가장 엄격</td>
+</tr>
+<tr>
+<td>일본</td>
+<td>100,000엔</td>
+<td>2023 시행</td>
+</tr>
+<tr>
+<td>싱가포르</td>
+<td>SGD 1,500</td>
+<td>2020 시행</td>
+</tr>
+</tbody>
+</table>
+<h3>실무 포인트</h3>
+<p>한국 사업자가 EU 카운터파티와 거래할 때는 <strong>EU 기준(임계 없음)</strong> 으로 맞춰야 합니다. 1유로짜리 거래여도 EU 측은 모든 필드를 요구. 이게 한국 거래소가 EU 고객 온보딩에 미적거리는 구조적 이유 중 하나.</p>
+<hr />
+<h2>4. 메시지 표준: IVMS101</h2>
+<h3>정체성</h3>
+<ul>
+<li><strong>InterVASP Messaging Standard 101</strong> — Travel Rule 메시지의 글로벌 표준</li>
+<li>2020년 InterVASP Joint Working Group (JWG) 합의</li>
+<li>JSON Schema로 송수신인 정보 표준화</li>
+<li><strong>모든 주요 전송 프로토콜이 IVMS101을 페이로드로 사용</strong></li>
+</ul>
+<h3>왜 표준이 필요했나</h3>
+<p>Travel Rule 시행 초기(2019~2020)에는 각 프로토콜이 자체 메시지 형식을 썼습니다. 그러면 TRISA 쓰는 A 거래소가 Sygna 쓰는 B 거래소로 메시지를 보낼 때 <strong>형식 변환</strong>이 필요했고, 필드가 일대일 매핑 안 되는 경우가 속출. 이 문제를 풀려고 Notabene·21 Analytics·CipherTrace(TRISA)·CoolBitX(Sygna)·Securrency 등 주요 플레이어가 모여 공통 JSON 스키마를 합의한 게 IVMS101.</p>
+<h3>핵심 구조</h3>
+<pre><code class="language-json">{
+  &quot;originator&quot;: {
+    &quot;naturalPerson&quot;: {
+      &quot;name&quot;: { &quot;primaryIdentifier&quot;: &quot;...&quot;, &quot;secondaryIdentifier&quot;: &quot;...&quot; },
+      &quot;geographicAddress&quot;: { ... },
+      &quot;dateAndPlaceOfBirth&quot;: { ... },
+      &quot;nationalIdentification&quot;: { ... }
+    },
+    &quot;accountNumber&quot;: [&quot;bc1q...&quot;]
+  },
+  &quot;beneficiary&quot;: { ... },
+  &quot;originatingVASP&quot;: { &quot;legalPerson&quot;: { ... } },
+  &quot;beneficiaryVASP&quot;: { ... },
+  &quot;transferPath&quot;: { ... }
+}
+</code></pre>
+<h3>실무 포인트</h3>
+<p>IVMS101은 "표준이지만 유연성이 있어서" 관할별 필수 필드 차이를 허용합니다. 같은 메시지라도 한국 VASP가 보낸 버전과 EU VASP가 보낸 버전의 채움 정도가 다를 수 있고, 수신 측이 이를 <strong>관할 기준으로 검증</strong>해야 합니다. 이게 IVMS101 validator 구현에서 가장 복잡한 부분.</p>
+<hr />
+<h2>5. Travel Rule 프로토콜 — 전송 방식들</h2>
+<h3>이 표를 어떻게 읽어야 하나</h3>
+<p>표준(IVMS101)이 "무엇을"이라면, 프로토콜은 "어떻게"입니다. 분산형은 누구나 참여할 수 있지만 식별 인프라가 별도 필요하고, 폐쇄형은 신뢰는 높지만 회원사 한정. 한국은 폐쇄형(VerifyVASP·CODE)이 주류, 글로벌은 Notabene Gateway가 멀티프로토콜 허브로 부상.</p>
+<table>
+<thead>
+<tr>
+<th>프로토콜</th>
+<th>운영</th>
+<th>모델</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TRISA</strong></td>
+<td>비영리, CipherTrace 시작 (→ Mastercard)</td>
+<td>분산형, gRPC/PKI</td>
+<td>오픈소스, 누구나 참여</td>
+</tr>
+<tr>
+<td><strong>TRP</strong></td>
+<td>21 Analytics, ING</td>
+<td>API 기반 REST</td>
+<td>가벼움, 빠른 구현</td>
+</tr>
+<tr>
+<td><strong>OpenVASP</strong></td>
+<td>OpenVASP Association</td>
+<td>분산형, Ethereum 기반</td>
+<td>2026년 활용도 낮음</td>
+</tr>
+<tr>
+<td><strong>VerifyVASP</strong></td>
+<td>람다256(Upbit 자회사) + Chainalysis</td>
+<td>폐쇄형 컨소시엄</td>
+<td>한국 + 글로벌</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td>빗썸+코빗+코인원 합작</td>
+<td>폐쇄형 컨소시엄</td>
+<td>한국 특화</td>
+</tr>
+<tr>
+<td><strong>Notabene</strong></td>
+<td>Notabene Inc. (미국)</td>
+<td>SaaS, 멀티프로토콜</td>
+<td>1,500+ VASP, Sunrise 해결책</td>
+</tr>
+<tr>
+<td><strong>Sumsub Travel Rule</strong></td>
+<td>Sumsub</td>
+<td>SaaS</td>
+<td>KYC 통합</td>
+</tr>
+<tr>
+<td><strong>Sygna</strong></td>
+<td>CoolBitX (대만)</td>
+<td>API</td>
+<td>아시아 강세</td>
+</tr>
+</tbody>
+</table>
+<h3>분산형 vs 폐쇄형 트레이드오프</h3>
+<ul>
+<li><strong>분산형(TRISA, OpenVASP)</strong>: 누구나 참여 가능, 신뢰는 <strong>PKI 인증서</strong>로. 장점은 확장성·오픈, 단점은 VASP 식별 인프라를 별도로 갖춰야 함.</li>
+<li><strong>폐쇄형(VerifyVASP, CODE)</strong>: 사전 검증된 VASP만 참여, 신뢰는 <strong>컨소시엄 운영자</strong>가 보증. 장점은 즉시 작동, 단점은 회원사 외 카운터파티 불가.</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>"우리는 어느 프로토콜을 써야 하나"의 답은 <strong>"고객이 어디로 주로 출금하나"</strong> 로 결정합니다. 한국 고객이 주로 국내 4대 거래소 간 이동이면 VerifyVASP+CODE, 해외 거래소가 많으면 Notabene Gateway, 글로벌 규모면 Notabene + TRISA 조합. 한 솔루션만 고집하면 반드시 Sunrise Issue에 부딪힙니다.</p>
+<hr />
+<h2>6. 한국 시장의 Travel Rule</h2>
+<h3>두 솔루션 양강 체제</h3>
+<table>
+<thead>
+<tr>
+<th>솔루션</th>
+<th>운영자</th>
+<th>사용 거래소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VerifyVASP</strong></td>
+<td>람다256 (두나무 자회사) + Chainalysis</td>
+<td><strong>Upbit</strong>, 다수 글로벌</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td>코드 (빗썸·코빗·코인원 합작법인)</td>
+<td><strong>빗썸·코빗·코인원</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>시행 초기의 혼란</h3>
+<p><strong>2022-03-25 시행 직후</strong> 한국 시장은 두 솔루션이 <strong>분리</strong> 운영되는 상황이었습니다. 즉 Upbit에서 빗썸으로 원화 100만원 상당 코인을 보낼 수 없는 기간이 있었고, 이용자들은 "내 코인을 못 보낸다"는 불만을 쏟았습니다. 시행 1개월여 후 <strong>VerifyVASP ↔ CODE 연동</strong>이 완료되며 해결. 현재는 4대 거래소 간 자유롭게 송금 가능.</p>
+<h3>외부지갑(unhosted wallet) 등록제</h3>
+<p>법령이 명시 요구한 건 아니지만, 한국 거래소는 자체 정책으로 <strong>출금 받을 외부지갑을 사전 등록</strong> 받습니다.</p>
+<ul>
+<li><strong>등록 시</strong>: 본인인증 + 지갑 소유 증명(인증 문자열 서명 제출) + 화이트리스트 등록</li>
+<li>등록 안 된 지갑으로는 <strong>출금 불가</strong></li>
+<li>개인지갑(MetaMask 등)에 대한 Travel Rule 대응책으로 발전</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>한국 4대 거래소 간에는 이제 Travel Rule이 매끄럽지만, <strong>해외 VASP와의 거래에서는 여전히 Sunrise Issue</strong>가 자주 발생. 고객 민원의 상당수가 "왜 이 해외 거래소로 출금이 안 되나"이고, 답은 "카운터파티가 Travel Rule 시스템을 안 갖췄거나 미승인"인 경우가 대부분. 고객 안내 템플릿을 잘 만들어두는 게 CX 부담 경감에 도움.</p>
+<hr />
+<h2>7. 두 가지 핵심 난제</h2>
+<h3>A. Sunrise Issue — 관할별 시행 격차</h3>
+<p>A국은 시행, B국은 미시행 상태라면, A국 VASP가 B국 VASP에게 송금할 때 B국 측이 메시지를 받을 인프라 자체가 없습니다.</p>
+<p><strong>해결책</strong>:
+- <strong>멀티프로토콜 게이트웨이</strong> (Notabene Gateway가 부상한 이유) — 한 번 연결로 다양한 카운터파티 프로토콜 대응
+- <strong>폴백 정책</strong> — 미연결 카운터파티에게는 <strong>송금 보류 또는 자체 검토 후 결정</strong>
+- <strong>점진적 글로벌 합의</strong> — 2030년까지 완성 목표 (FATF 로드맵)</p>
+<h3>B. VASP Discovery — 지갑주소 식별</h3>
+<p>지갑 주소 <code>0xABC...</code>가 출금 대상으로 들어왔을 때, <strong>그게 어느 VASP의 주소인지</strong> 어떻게 아는가?</p>
+<p><strong>해결책</strong>:
+- <strong>Chainalysis / TRM / Elliptic attribution DB</strong> — 주소 → VASP 매핑 (가장 일반적)
+- <strong>자체 검증 컨소시엄</strong> (VerifyVASP, CODE) — 회원사 주소 사전 등록
+- <strong>API 조회</strong> (Notabene Directory 등) — 멀티 DB 통합 조회
+- <strong>DTI (Digital Token Identifier, ISO 24165)</strong> — 토큰 ID 표준화
+- <strong>GLEIF LEI (Legal Entity Identifier)</strong> — 법인 식별 글로벌 표준</p>
+<h3>C. Personal Data 보호 긴장</h3>
+<p>Travel Rule은 본질적으로 <strong>PII(Personally Identifiable Information, 개인식별정보)를 VASP 간 전송</strong>하는 것 — 이게 GDPR·한국 개인정보 보호법(PIPA)과 충돌.</p>
+<p><strong>해결</strong>:
+- 암호화 전송 (TLS + 메시지 수준 암호화)
+- 목적 한정 원칙 (Travel Rule 이외 용도 사용 금지)
+- 보존 기간 명확화 (한국 15년, EU 5년)
+- 수신 VASP의 데이터 위임 처리 계약 체결</p>
+<h3>실무 포인트</h3>
+<p>세 난제 중 개인정보 충돌이 가장 조용하지만 가장 무거운 위험입니다. Travel Rule 메시지가 제3국 VASP로 넘어가는 순간 해당국 개인정보법이 적용되고, 한국 개인정보보호위원회(PIPC)는 "국외 이전 시 적정성 확인"을 요구합니다. 글로벌 영업 VASP는 국외이전 영향평가(Privacy Impact Assessment)를 정기적으로 수행해야 합니다.</p>
+<hr />
+<h2>8. 운영 흐름 — 한국 거래소 출금 예시</h2>
+<pre><code>1. 사용자 A → Upbit에서 1억원 ETH를 빗썸 사용자 B에게 출금 요청
+2. Upbit 시스템 → 출금 요청을 KYT 시스템에 통과
+3. KYT → 수신 주소 위험도 체크 (mixer? SDN? 화이트리스트?)
+4. Upbit 시스템 → VerifyVASP Travel Rule 메시지 생성 (IVMS101)
+5. VerifyVASP ↔ CODE 게이트웨이를 통해 빗썸으로 메시지 전송
+6. 빗썸 → 메시지 수신, 수신인 B 정보 확인 (자기 고객인지)
+7. 빗썸 → 수락 응답 → Upbit
+8. Upbit → 온체인 송금 실행 (트랜잭션 broadcast)
+9. 빗썸 → 입금 확인, B의 잔고에 반영
+10. 양사 → Travel Rule 메시지 보관 (15년)
+</code></pre>
+<h3>실무 포인트</h3>
+<p><strong>5번 메시지 교환이 안 되거나 timeout 시 송금 자체가 멈춥니다</strong> = 사용자 UX 충격. 그래서 카운터파티 호환성(interoperability)이 운영의 핵심 KPI. "카운터파티 에러율"을 월별로 추적하며, 특정 카운터파티에서 반복 실패가 나면 회사 차원의 에스컬레이션이 필요합니다.</p>
+<hr />
+<h2>9. 2025-06-18 FATF R.16 개정의 영향</h2>
+<ul>
+<li>결제 산업 변화 반영, 메시징 표준 명확화</li>
+<li>VASP는 <strong>별도 tailored framework</strong>로 적용 (기존 전통 금융 Travel Rule과 구별)</li>
+<li><strong>2026 후반 가이던스 발표 예정</strong> — 한국 FIU도 이를 반영한 시행령 개정 가능성</li>
+<li><strong>2030년 말 발효</strong> — 회사들은 그전에 시스템 업그레이드 준비</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>2026-04 현재 대부분 VASP는 2022년 R.16 기반 시스템에서 운영 중입니다. 2030년 새 기준 발효까지 <strong>3~4년 리드타임</strong>이 있으므로, 차기 시스템 선택 시 "지금 쓸 것"보다는 "2030년 기준에 맞게 진화 가능한 것"을 기준으로 보는 게 현명합니다.</p>
+<hr />
+<h2>10. 회사 체크리스트</h2>
+<pre><code>□ Travel Rule 솔루션 도입 (VerifyVASP / CODE / Notabene 등)
+□ IVMS101 메시지 정확성 검증 (JSON Schema 기반)
+□ 카운터파티 VASP 호환성 점검 (Sunrise Issue)
+□ 미연결 카운터파티 처리 정책 (송금 거절·보류·수동 검토)
+□ unhosted wallet 등록제 운영
+□ Travel Rule 메시지 15년 보관
+□ PII 암호화 + 접근 통제
+□ 개인정보보호법·GDPR 호환성 점검 (국외이전 영향평가)
+□ 2026 후반 FATF 가이던스 모니터링
+□ 2030 발효 대비 로드맵 수립
+</code></pre>
+<h2>더 읽을거리</h2>
+<ul>
+<li><a href="vasp-obligations.md"><code>vasp-obligations.md</code></a> — VASP 의무 종합</li>
+<li><a href="../4-technology/travel-rule-protocols.md"><code>../4-technology/travel-rule-protocols.md</code></a> — 프로토콜 기술 상세</li>
+<li><a href="../7-vendors/travel-rule-vendors.md"><code>../7-vendors/travel-rule-vendors.md</code></a> — 벤더 비교</li>
+<li><a href="../7-vendors/korea-solutions.md"><code>../7-vendors/korea-solutions.md</code></a> — 한국 솔루션 상세</li>
+<li><a href="https://notabene.id/travel-rule-messaging-protocols">Notabene — Travel Rule Messaging Protocols</a></li>
+<li><a href="https://www.21analytics.co/blog/fatf-crypto-travel-rule-status-2026/">21 Analytics — FATF Travel Rule Status 2026</a></li>
+<li><a href="https://sumsub.com/blog/what-is-the-fatf-travel-rule/">Sumsub — FATF Travel Rule 2026</a></li>
+</ul>
+    </div>
+    <div class="article-foot">
+      <span>AML NOTES · 60-DAY CHALLENGE</span>
+      <span>DAY 22 / 60 · READING</span>
+    </div>
+  </article>
+</body>
+</html>

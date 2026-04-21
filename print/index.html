@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>AML Notes — Print Hub</title>
+<link rel="stylesheet" href="assets/print.css">
+<style>
+  body {
+    background: #f4f5f7;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    padding: 48px 24px 120px 24px;
+  }
+  .hub {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .hub__head {
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hub__kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hub__title {
+    font-size: 32pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+  }
+  .hub__lead {
+    font-size: 13pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0;
+  }
+  .hub__section {
+    margin-top: 36px;
+  }
+  .hub__week-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
+  .hub__week-theme {
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--accent);
+    margin-left: 10px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .hub__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .hub__card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 14px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all .16s ease;
+    min-height: 90px;
+  }
+  .hub__card:hover {
+    border-color: var(--ink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  }
+  .hub__card__num {
+    font-family: var(--font-serif);
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .hub__card__label {
+    font-size: 10pt;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    word-break: keep-all;
+  }
+  .hub__card--special {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .hub__card--special .hub__card__num,
+  .hub__card--special .hub__card__label { color: white; }
+  .hub__help {
+    margin-top: 60px;
+    padding: 24px 28px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    font-size: 10pt;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .hub__help h3 {
+    font-size: 11pt;
+    margin: 0 0 10px 0;
+    color: var(--ink);
+  }
+  .hub__help code {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    background: var(--rule-soft);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .hub__help kbd {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    background: white;
+    border: 1px solid var(--ink-mute);
+    padding: 1px 5px;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 var(--ink-mute);
+  }
+</style>
+</head>
+<body>
+
+<div class="hub">
+  <header class="hub__head">
+    <div class="hub__kicker">AML Notes · Print Hub</div>
+    <h1 class="hub__title">60-Day Challenge, A4 프린트 패킷</h1>
+    <p class="hub__lead">
+      오늘 공부할 Day를 클릭해 열고 <kbd>Ctrl</kbd>+<kbd>P</kbd> (또는 <kbd>⌘</kbd>+<kbd>P</kbd>)로 A4 인쇄하세요.
+      각 Day는 <strong>Task Sheet 1장 + 해당 day에 필요한 모든 읽기 본문</strong>을 하나로 묶은 학습 패킷입니다.
+    </p>
+  </header>
+
+  <section class="hub__section">
+    <div class="hub__week-title">Week 1 <span class="hub__week-theme">AML 기초 + 가상자산 특수성</span></div>
+    <div class="hub__grid" id="grid-w1"></div>
+
+    <div class="hub__week-title">Week 2 <span class="hub__week-theme">한국 규제 (특금법 + 이용자보호법)</span></div>
+    <div class="hub__grid" id="grid-w2"></div>
+
+    <div class="hub__week-title">Week 3 <span class="hub__week-theme">FATF + 글로벌 (미국·EU)</span></div>
+    <div class="hub__grid" id="grid-w3"></div>
+
+    <div class="hub__week-title">Week 4 <span class="hub__week-theme">🛠 Travel Rule + IVMS101</span></div>
+    <div class="hub__grid" id="grid-w4"></div>
+
+    <div class="hub__week-title">Week 5 <span class="hub__week-theme">🛠 온체인 분석 + KYT</span></div>
+    <div class="hub__grid" id="grid-w5"></div>
+
+    <div class="hub__week-title">Week 6 <span class="hub__week-theme">🛠 자금세탁 유형</span></div>
+    <div class="hub__grid" id="grid-w6"></div>
+
+    <div class="hub__week-title">Week 7 <span class="hub__week-theme">🛠 컴플라이언스 운영</span></div>
+    <div class="hub__grid" id="grid-w7"></div>
+
+    <div class="hub__week-title">Week 8 <span class="hub__week-theme">🛠 사례 + 리서치 + AI</span></div>
+    <div class="hub__grid" id="grid-w8"></div>
+
+    <div class="hub__week-title">Capstone <span class="hub__week-theme">🎓 통합 설계 + 다음 90일</span></div>
+    <div class="hub__grid" id="grid-cap"></div>
+  </section>
+
+  <aside class="hub__help">
+    <h3>프린트 팁</h3>
+    <ul>
+      <li>브라우저 인쇄 대화상자에서 <strong>배경 그래픽(Background graphics) 체크</strong> — 헤더 구분선·강조색이 인쇄됩니다.</li>
+      <li>여백은 <strong>None</strong> 또는 <strong>Minimum</strong> 선택 (페이지 내부에 이미 18mm 여백 적용).</li>
+      <li>한 Day 패킷은 보통 <strong>8~14 페이지</strong>, 리뷰·프로젝트 일은 <strong>1~3 페이지</strong>.</li>
+      <li>체크포인트 상자·오늘의 한 줄 줄은 <strong>직접 손으로 채우는 공간</strong>입니다.</li>
+    </ul>
+  </aside>
+</div>
+
+<script>
+  // Day titles (short) — keep in sync with curriculum
+  const DAYS = {
+    1:  ['Week 1','AML이 뭔가 + 3단계'],
+    2:  ['Week 1','왜 가상자산 AML은 다른가'],
+    3:  ['Week 1','용어 1 — KYC·CDD·EDD·SDD'],
+    4:  ['Week 1','용어 2 — KYT·STR·CTR·PEP·BO'],
+    5:  ['Week 1','AML 글로벌 거버넌스'],
+    6:  ['Week 1','VASP 정의 + 9 의무'],
+    7:  ['Week 1','🔁 Week 1 리뷰'],
+    8:  ['Week 2','특금법 1 — VASP 신고제'],
+    9:  ['Week 2','특금법 2 — AML 의무 + 2026 개정'],
+    10: ['Week 2','이용자보호법 1 — 자산 분리'],
+    11: ['Week 2','이용자보호법 2 — 시세조종'],
+    12: ['Week 2','KoFIU 시스템 + 보고'],
+    13: ['Week 2','한국 가이드라인 정독'],
+    14: ['Week 2','🛠 한국법 §단위 정리표'],
+    15: ['Week 3','FATF 구조 + 40 권고'],
+    16: ['Week 3','R.15 — VASP AML/CFT'],
+    17: ['Week 3','R.16 Travel Rule + 2025-06 개정'],
+    18: ['Week 3','미국 BSA + FinCEN'],
+    19: ['Week 3','OFAC + GENIUS Act'],
+    20: ['Week 3','EU MiCA + AMLR + TFR'],
+    21: ['Week 3','🛠 한·미·EU 비교표'],
+    22: ['Week 4','Travel Rule 운영 흐름'],
+    23: ['Week 4','IVMS101 표준 deep'],
+    24: ['Week 4','TRP, TRISA 프로토콜'],
+    25: ['Week 4','VerifyVASP, CODE'],
+    26: ['Week 4','Notabene + Sunrise'],
+    27: ['Week 4','VASP Discovery + DTI/LEI'],
+    28: ['Week 4','🛠 IVMS101 빌더'],
+    29: ['Week 5','KYC vs KYT 운영'],
+    30: ['Week 5','UTXO + CIOH'],
+    31: ['Week 5','Change + Deposit 휴리스틱'],
+    32: ['Week 5','Attribution + 라벨 DB'],
+    33: ['Week 5','Exposure Score'],
+    34: ['Week 5','Cross-chain + Bridge'],
+    35: ['Week 5','🛠 Etherscan 2-hop tracer'],
+    36: ['Week 6','자금세탁 7 typology'],
+    37: ['Week 6','Mixer + Privacy Coin'],
+    38: ['Week 6','Peel Chain + Smurfing'],
+    39: ['Week 6','DeFi 자금세탁'],
+    40: ['Week 6','NFT Wash Trading'],
+    41: ['Week 6','CMLN'],
+    42: ['Week 6','🛠 Mixer fetcher'],
+    43: ['Week 7','CDD 4단계 운영'],
+    44: ['Week 7','EDD 트리거 + 자금원천'],
+    45: ['Week 7','STR 작성 SOP'],
+    46: ['Week 7','제재 스크리닝'],
+    47: ['Week 7','5 pillars + 3LoD'],
+    48: ['Week 7','AMLO 역할'],
+    49: ['Week 7','🛠 OFAC 스크리너'],
+    50: ['Week 8','케이스 — Lazarus + Bybit'],
+    51: ['Week 8','케이스 — Tornado Cash'],
+    52: ['Week 8','케이스 — Binance·OKX·Paxful'],
+    53: ['Week 8','케이스 — 한국 enforcement'],
+    54: ['Week 8','학술 — Bitcoin clustering'],
+    55: ['Week 8','산업 리포트 — Chainalysis 2026'],
+    56: ['Week 8','🛠 KYT wrapper'],
+    57: ['Cap','AI/ML in AML'],
+    58: ['Cap','ZKP + 프라이버시 미래'],
+    59: ['Cap','🎓 Risk Engine 설계서'],
+    60: ['Cap','🎓 90일 로드맵'],
+  };
+
+  const ranges = {
+    'grid-w1':  [1, 7],
+    'grid-w2':  [8, 14],
+    'grid-w3':  [15, 21],
+    'grid-w4':  [22, 28],
+    'grid-w5':  [29, 35],
+    'grid-w6':  [36, 42],
+    'grid-w7':  [43, 49],
+    'grid-w8':  [50, 56],
+    'grid-cap': [57, 60],
+  };
+
+  for (const [gridId, [start, end]] of Object.entries(ranges)) {
+    const grid = document.getElementById(gridId);
+    for (let d = start; d <= end; d++) {
+      const [_, title] = DAYS[d] || ['', ''];
+      const pad = String(d).padStart(2, '0');
+      const isSpecial = /^🛠|^🎓|^🔁/.test(title);
+      const a = document.createElement('a');
+      a.className = 'hub__card' + (isSpecial ? ' hub__card--special' : '');
+      a.href = `days/day_${pad}.html`;
+      a.innerHTML = `
+        <div class="hub__card__num">${pad}</div>
+        <div class="hub__card__label">${title}</div>
+      `;
+      grid.appendChild(a);
+    }
+  }
+</script>
+
+</body>
+</html>
