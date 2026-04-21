@@ -5,6 +5,15 @@
 <title>Day 29 — KYC vs KYT 운영</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,25 @@
       <span class="title-block__time">⏱ ~70분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    subgraph KYC["👤 KYC"]
+        K1["신분증·PEP&lt;br/&gt;onboarding"]
+    end
+    subgraph KYT["⛓️ KYT"]
+        T1["주소·클러스터&lt;br/&gt;실시간"]
+    end
+    KYC &amp; KYT --&gt; RE["Risk Engine"]
+    RE --&gt; A["Allow · Review · Block"]
+    style KYC fill:#e5eaf2,stroke:#1a2e4a
+    style KYT fill:#fff7d6,stroke:#c9a646</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -354,6 +382,43 @@
 <p>KYC 팀과 KYT 팀이 조직 상 분리돼 있는 회사가 많은데, 이러면 <strong>Risk Score 통합</strong>이 잘 안 됩니다. 이상적 구성은 두 팀이 공통 <strong>Case Management 도구</strong>를 쓰고, 분석가가 한 화면에서 고객의 KYC 정보와 KYT 노출을 함께 보는 것. 실제로 Unit21·Hummingbird 같은 도구가 이 통합 UX를 제공합니다.</p>
 <hr />
 <h2>6. 통합 Risk Engine 아키텍처</h2>
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    subgraph Input["📥 Input Sources"]
+        KYC["KYC Data&lt;br/&gt;(KYC vendor)"]
+        KYT["Wallet Map&lt;br/&gt;(KYT vendor)"]
+        BHV["Behavior&lt;br/&gt;(자체 분석)"]
+    end
+
+    subgraph Engine["⚙️ Risk Engine"]
+        RULE["룰 기반&lt;br/&gt;패턴 매칭"]
+        ML["ML 기반&lt;br/&gt;이상 탐지"]
+        SCORE["Risk Score&lt;br/&gt;0~100"]
+        RULE --&gt; SCORE
+        ML --&gt; SCORE
+    end
+
+    subgraph Action["🎯 Actions"]
+        ALLOW["✅ ALLOW&lt;br/&gt;통과"]
+        EDD["🔍 EDD trigger&lt;br/&gt;강화실사"]
+        STR["📝 STR 큐&lt;br/&gt;보고 검토"]
+        BLOCK["⛔ BLOCK&lt;br/&gt;차단"]
+    end
+
+    KYC --&gt; Engine
+    KYT --&gt; Engine
+    BHV --&gt; Engine
+
+    SCORE --&gt;|LOW| ALLOW
+    SCORE --&gt;|MED| EDD
+    SCORE --&gt;|HIGH| STR
+    SCORE --&gt;|CRITICAL| BLOCK
+
+    style Engine fill:#e5eaf2,stroke:#1a2e4a
+    style SCORE fill:#1a2e4a,stroke:#1a2e4a,color:#fff
+    style ALLOW fill:#d1fae5,stroke:#10b981
+    style EDD fill:#fff7d6,stroke:#c9a646
+    style STR fill:#fed7aa,stroke:#ea580c
+    style BLOCK fill:#fee2e2,stroke:#dc2626</pre></div></p>
 <pre><code>┌─────────────────────────────────────────────────────────────┐
 │                      Customer Profile                        │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
@@ -451,5 +516,25 @@
       <span>DAY 29 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

@@ -6,6 +6,21 @@
 
 블록체인은 **공개 원장**이라 이론상 추적이 쉽지만, 실제 AML 실무는 훨씬 어렵습니다. 왜 그런가라는 역설이 오늘의 핵심 주제. 주소와 사람의 분리, Mixer·Bridge·DEX 같은 **가상자산 고유 layering 도구**, 그리고 이를 다루는 KYT 산업의 존재 이유까지 연결해서 봅니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    T["🏦 전통 금융"] -->|비공개·T+1·국경 有·동결 가능| V1["AML 표준"]
+    C["⛓️ 가상자산"] -->|공개·24/7·국경 X·가명| V2["KYT + KYC 결합"]
+    V2 --> P["🎯 실시간 Pre-tx<br/>차단 필수"]
+    style T fill:#e5eaf2,stroke:#1a2e4a
+    style C fill:#fff7d6,stroke:#c9a646
+    style P fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 가상자산 원장이 공개인데 왜 추적이 어려운가?
 2. 2025년 불법거래의 84%를 차지한 자산은?

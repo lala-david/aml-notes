@@ -2,6 +2,22 @@
 
 > 60일 학습을 통합해서 시스템 설계. ⏱️ ~150분 (사전 회고 30분 + 캡스톤 작성 120분).
 
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    D["📘 Design Doc"] --> P["문제 정의"]
+    D --> R["규제 매핑 (특금법 §·이용자보호법 §)"]
+    D --> A["아키텍처"]
+    D --> RS["Risk Score 모델"]
+    D --> RC["룰 카탈로그 10+"]
+    D --> G["거버넌스 (5 Pillars · 3LoD)"]
+    D --> L["단계적 도입 로드맵"]
+    style D fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 캡스톤 목표
 
 **Mini AML Risk Engine 설계서 작성** — 가상자산 거래소/수탁용 통합 위험엔진의 1차 설계 문서.

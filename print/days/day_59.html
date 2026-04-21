@@ -5,6 +5,15 @@
 <title>Day 59 — 🎓 캡스톤: Mini AML Risk Engine 설계서</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -41,6 +50,36 @@
       <span class="title-block__time">⏱ ~150분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    D["📘 Design Doc"] --&gt; P["문제 정의"]
+    D --&gt; R["규제 매핑 (특금법 §·이용자보호법 §)"]
+    D --&gt; A["아키텍처"]
+    D --&gt; RS["Risk Score 모델"]
+    D --&gt; RC["룰 카탈로그 10+"]
+    D --&gt; G["거버넌스 (5 Pillars · 3LoD)"]
+    D --&gt; L["단계적 도입 로드맵"]
+    style D fill:#1a2e4a,color:#fff,stroke:#1a2e4a</pre></div></p>
+      </div>
+    </section>
+    <section class="section section--rich">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<h3>산출물</h3>
+<p>프로젝트: <code>aml/projects/06-capstone-risk-engine/DESIGN.md</code></p>
+<h3>설계서 목차 (필수)</h3>
+<p>```markdown</p>
+<h1>Mini AML Risk Engine — Design Document</h1>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">✅</span>
@@ -82,5 +121,25 @@
     </div>
 
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

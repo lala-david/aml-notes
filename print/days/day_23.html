@@ -5,6 +5,15 @@
 <title>Day 23 — IVMS101 표준 deep</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,25 @@
       <span class="title-block__time">⏱ ~80분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    I["📝 IVMS101 Message"] --&gt; O["Originator"]
+    I --&gt; B["Beneficiary"]
+    I --&gt; OV["OriginatingVASP"]
+    I --&gt; BV["BeneficiaryVASP"]
+    O --&gt; NP["NaturalPerson / LegalPerson"]
+    NP --&gt; N["name.nameIdentifier"]
+    NP --&gt; G["geographicAddress"]
+    NP --&gt; NID["nationalIdentification"]
+    NP --&gt; DOB["dateAndPlaceOfBirth"]
+    style I fill:#1a2e4a,color:#fff,stroke:#1a2e4a</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -461,5 +489,25 @@
       <span>DAY 23 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

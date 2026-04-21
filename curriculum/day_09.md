@@ -6,6 +6,24 @@
 
 특금법은 진입 규제(§7 신고)만이 아니라 **운영 규제**도 함께 담고 있습니다 — §5의2(KYC), §4(STR), §5의2 + 시행령 §10의10(Travel Rule 100만원), §5의4(기록 5년). 각 조항이 실무의 어느 프로세스에 매핑되는지 연결 짓는 것이 오늘의 핵심. 2026-01 개정의 대주주 확대도 다시 정리.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    S["특금법"] --> K["§5의2 KYC"]
+    S --> STR["§4 STR (금액無)"]
+    S --> CTR["§4의2 CTR 1천만원"]
+    S --> TR["§5의2+시행령<br/>Travel Rule 100만원"]
+    S --> R["§5의4 기록 5년"]
+    S --> T["§9 Tipping-off 금지"]
+    S --> P["§17 처벌"]
+    style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style T fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 특금법상 KYC + EDD 트리거는?
 2. Travel Rule 한국 임계금액은?

@@ -6,6 +6,21 @@
 
 Travel Rule의 숨은 난제 — **지갑주소만으로는 카운터파티 VASP를 식별할 수 없다**. 이를 해결하기 위한 5가지 접근(Attribution DB·Directory·DTI·LEI·직접 등록)을 오늘 정리. **DTI**(ISO 24165 토큰 식별자)와 **GLEIF LEI**(법인 식별 글로벌 표준)가 어떻게 Travel Rule 라우팅의 기반이 되는지 알아둡니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    Q["❓ 지갑주소 0xABC...<br/>어느 VASP?"] --> A["Attribution DB<br/>Chainalysis · TRM"]
+    Q --> D["VASP Directory<br/>Notabene · TRISA"]
+    Q --> T["DTI (ISO 24165)"]
+    Q --> L["GLEIF LEI"]
+    Q --> R["직접 등록<br/>(화이트리스트)"]
+    style Q fill:#fff7d6,stroke:#c9a646
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 지갑주소만 보고 카운터파티 VASP를 어떻게 식별?
 2. DTI = 무엇? (ISO 24165)

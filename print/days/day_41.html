@@ -5,6 +5,15 @@
 <title>Day 41 — CMLN (Chinese Money Laundering Networks)</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,21 @@
       <span class="title-block__time">⏱ ~70분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    C["💼 CMLN&lt;br/&gt;(중국어 자금세탁 네트워크)"] -.Laundering-as-a-Service.-&gt; F["💰 Lazarus · 범죄조직"]
+    C --&gt; T["📱 텔레그램·위챗 OTC"]
+    C --&gt; U["USDT(Tron) 기반&lt;br/&gt;5~15% 수수료"]
+    C -.2025.-&gt; N["$16.1B · 1,800+ wallet"]
+    style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style N fill:#fed7aa,stroke:#ea580c</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -305,6 +329,8 @@
 <p>룰 설계 시 이 9개 유형을 <strong>별도 룰 그룹</strong>으로 관리해야 false positive 원인을 역추적할 수 있습니다. 한 룰 엔진 안에 유형을 섞어 관리하면 나중에 "왜 이 고객이 차단됐는지" 설명하기 어렵고, STR에 근거를 쓰기도 힘들어집니다.</p>
 <hr />
 <h2>3. 2025~2026 새로운 트렌드</h2>
+<p><img alt="2025 불법 가상자산 거래 자산별 비중 — 스테이블코인 84%" src="../../charts/output/illicit_asset_share.svg" /></p>
+<p><img alt="2025 가상자산 범죄 스냅샷" src="../../charts/output/trend_2025_snapshot.svg" /></p>
 <h3>A. Cross-chain Laundering 가속화</h3>
 <p>단일 체인 분석으로는 추적 불가능한 수준으로 발전. <strong>Chainalysis Crosschain, TRM Multichain Tracing</strong> 같은 cross-chain 도구가 KYT 벤더의 핵심 차별점으로 부상. 2025년 자금세탁의 <strong>상당 부분이 multi-chain</strong>.</p>
 <h3>B. CMLN (Chinese Money Laundering Networks)</h3>
@@ -496,6 +522,23 @@
 <p>Lazarus는 <strong>한 인물이나 한 팀이 아니라 여러 sub-cluster의 합</strong>입니다. 방어 시 "Lazarus 차단"을 단일 조치로 끝낼 수 없고, sub-cluster별 패턴을 별도 추적해야 합니다. KYT 벤더(Chainalysis·TRM·Elliptic)의 Lazarus 라벨 품질은 <strong>sub-cluster별 구분 정확도</strong>로 평가됩니다.</p>
 <hr />
 <h2>2. 2025-02-21 Bybit Hack — 사상 최대 사건</h2>
+<p><div class="mermaid-wrap"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant P as 🕵️ Lazarus&lt;br/&gt;(공급망 공격자)
+    participant S as 📦 Safe/Wallet&lt;br/&gt;Provider
+    participant B as 🏦 Bybit&lt;br/&gt;Cold Wallet Ops
+    participant C as ⛓️ Ethereum&lt;br/&gt;Blockchain
+    participant M as 🔀 Mixer·Bridge·&lt;br/&gt;CMLN OTC
+
+    P-&gt;&gt;S: 1️⃣ 제3자 wallet UI 침투
+    S--&gt;&gt;B: 2️⃣ 변조된 signing 인터페이스 제공
+    B-&gt;&gt;B: 3️⃣ "정상 거래"로 인식&lt;br/&gt;서명 승인
+    B-&gt;&gt;C: 4️⃣ 트랜잭션 브로드캐스트&lt;br/&gt;≈$1.46B 이체
+    C-&gt;&gt;P: 5️⃣ Lazarus 지갑 수신
+    Note over P,M: 🕒 48시간 내 layering 시작
+    P-&gt;&gt;M: 6️⃣ peel chain · THORChain bridge&lt;br/&gt;DEX swap · CMLN OTC
+    M--&gt;&gt;P: 7️⃣ 스테이블코인·현금 환전
+    Note right of M: 2026-03 시점&lt;br/&gt;$400M 추적·$1.1B 미추적</pre></div></p>
 <h3>공격 서사</h3>
 <p>2025년 2월 21일, Bybit의 콜드월렛 운영팀이 평소처럼 정기 이체 트랜잭션을 서명했습니다. 서명자들은 UI에 표시된 트랜잭션이 정상이라고 확신했지만, 실제 블록체인에 기록된 건 <strong>Lazarus의 지갑으로 약 $1.46B 규모 자산을 전송</strong>하는 트랜잭션이었습니다.</p>
 <p>무엇이 일어났나: <strong>공급망 공격(Supply Chain Attack)</strong>. Bybit 자체 시스템이 해킹당한 게 아니라, 서명 워크플로우에서 사용된 <strong>제3자 wallet provider(Safe 등)의 프론트엔드 인터페이스</strong>가 사전에 침투·변조됐습니다. 서명자 눈에는 정상 트랜잭션이 표시됐지만, 실제 서명된 데이터는 Lazarus의 컨트랙트를 호출하는 내용. 운영자가 <strong>"내가 본 것"과 "내가 서명한 것"이 달랐던</strong> 결정적 실패 지점.</p>
@@ -526,6 +569,7 @@
 <p>Bybit 사건의 핵심 교훈은 <strong>"서명자가 본 것과 서명한 것이 같은가"</strong> 를 검증하는 메커니즘이 필요하다는 것. 이게 <strong>Blind Signing 금지</strong> 운동으로 이어졌고, 주요 하드웨어 지갑(Ledger 등)이 2025년 내 <strong>트랜잭션 내용을 하드웨어에서 직접 파싱·표시</strong>하는 기능을 강화했습니다. 수탁업자나 거래소 운영팀은 이 검증 레이어를 필수 통제로 두는 게 업계 표준.</p>
 <hr />
 <h2>3. DPRK 가상자산 활동 통계 (2025)</h2>
+<p><img alt="DPRK · Lazarus 연도별 가상자산 탈취" src="../../charts/output/lazarus_yearly.svg" /></p>
 <h3>탈취 금액</h3>
 <ul>
 <li><strong>2025</strong>: $2.02B (전년 +51%)</li>
@@ -729,5 +773,25 @@
       <span>DAY 41 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

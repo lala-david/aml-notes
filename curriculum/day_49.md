@@ -6,6 +6,22 @@
 
 Week 7의 결산. OFAC SDN의 **가상자산 주소를 실시간 파싱**해 입력 주소를 스크리닝하는 함수를 직접 만듭니다. 일 1회 자동 갱신·캐시·bulk screening까지 실무에 가까운 구조로 짜보면 "OFAC 제재는 시스템 없이는 불가능하다"는 현실이 체감됩니다. Capstone의 Sanctions 모듈의 기반.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    A["🔍 주소 입력"] --> S["OFAC SDN<br/>캐시 (일 1회 갱신)"]
+    S --> M{"매칭?"}
+    M -->|YES| B["⛔ 차단 + STR"]
+    M -->|NO| P["✅ 통과"]
+    M -->|모호| R["👀 수동 검토<br/>(FP disposition)"]
+    style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style B fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. CDD/EDD/STR 중 가장 까다로운 운영은?
 2. 한국 컴플 운영의 특수성 1가지?

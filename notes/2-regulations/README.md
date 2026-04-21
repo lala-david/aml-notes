@@ -55,6 +55,40 @@
 
 ---
 
+## 핵심 일정 — 2024~2030 규제 로드맵
+
+```mermaid
+gantt
+    title 가상자산 AML 규제 타임라인 (2024~2030)
+    dateFormat YYYY-MM-DD
+    axisFormat %Y
+    todayMarker off
+
+    section 🇰🇷 한국
+    가상자산이용자보호법 시행           :done, k1, 2024-07-19, 30d
+    특금법 개정 (대주주 심사)           :done, k2, 2026-01-29, 30d
+    2단계 입법 논의                    :active, k3, 2026-06-01, 730d
+
+    section 🇺🇸 미국
+    GENIUS Act 통과                    :done, u1, 2025-07-01, 30d
+    시행규정 마감                      :u2, 2026-07-18, 1d
+    GENIUS Act 전면 시행               :crit, u3, 2027-01-18, 30d
+
+    section 🇪🇺 EU
+    MiCA + TFR 전면 시행                :done, e1, 2024-12-30, 30d
+    MiCA grandfathering 종료           :crit, e2, 2026-07-01, 30d
+    AMLR + AMLD6 적용                  :crit, e3, 2027-07-10, 30d
+    AMLA 직접 감독 개시                 :e4, 2028-01-01, 365d
+
+    section 🌍 FATF
+    R.16 개정                          :done, f1, 2025-06-18, 30d
+    Travel Rule 가이던스                :f2, 2026-10-01, 90d
+    R.16 발효                          :crit, f3, 2030-12-01, 30d
+
+    section 🔔 사건
+    OFAC Tornado 해제                  :done, s1, 2025-03-21, 7d
+```
+
 ## 핵심 일정 (2026~2027) — 당장 주시해야 할 이벤트
 
 | 시점 | 사건 |

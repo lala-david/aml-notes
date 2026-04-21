@@ -6,6 +6,20 @@
 
 전통 금융 AML의 **smurfing**(분할 입금)이 온체인에서는 **peel chain**(소액을 한 번씩 떼어내는 긴 사슬)으로 진화했습니다. 두 패턴 모두 "사람의 눈에 띄지 않게 여러 개로 쪼개기"라는 같은 원리지만, 온체인에서는 그래프 분석(in-degree/out-degree)으로 시각적 탐지가 가능합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    B["💰 큰 금액"] -->|peel| A1["소액"] -->|peel| A2["소액"] -->|peel| A3["소액 ···"]
+    B --> R["나머지"]
+    R -->|peel| R2["소액"]
+    R2 --> R3["···"]
+    style B fill:#fff7d6,stroke:#c9a646
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Peel chain의 시각적 패턴?
 2. Smurfing(structuring)과 peel chain의 차이?

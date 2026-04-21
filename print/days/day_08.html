@@ -5,6 +5,15 @@
 <title>Day 08 — 한국 특금법 1: VASP 신고제</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,24 @@
       <span class="title-block__time">⏱ ~75분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    A["🏢 신규 VASP"] --&gt; B["ISMS 인증"]
+    A --&gt; C["실명확인 계좌&lt;br/&gt;(거래소)"]
+    A --&gt; D["AML 내부통제"]
+    A --&gt; E["AMLO 임명 (임원)"]
+    A --&gt; F["대주주 자격심사&lt;br/&gt;(2026-01)"]
+    B &amp; C &amp; D &amp; E &amp; F --&gt; G["📋 FIU 신고 → 수리"]
+    G -.3년.-&gt; H["갱신"]
+    style A fill:#fff7d6,stroke:#c9a646
+    style G fill:#1a2e4a,color:#fff,stroke:#1a2e4a</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -498,5 +525,25 @@
       <span>DAY 08 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

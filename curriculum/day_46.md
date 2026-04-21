@@ -6,6 +6,24 @@
 
 제재 스크리닝은 거래 **전·중·후** 3단 체크로 작동합니다. 오늘은 **5대 리스트**(OFAC SDN·UN·EU·HM Treasury·한국 외교부)와 **이름 fuzzy 매칭의 함정**, 그리고 **Wallet 주소 매칭 3종**(Direct·Cluster·Hop)을 정리. False Positive 처리(Disposition)가 왜 감독 검사의 핵심 증빙이 되는지도 이해.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    S["🔍 Sanctions Screening"] --> O["OFAC SDN"]
+    S --> U["UN Consolidated"]
+    S --> E["EU CFSP"]
+    S --> H["HM Treasury"]
+    S --> K["🇰🇷 외교부"]
+    S --> W["🪪 Wallet (Direct·Cluster·N-hop)"]
+    W -.2차 제재.-> G["🇺🇸 글로벌 강제력"]
+    style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style G fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 핵심 제재 리스트 5개?
 2. 이름 fuzzy 매칭의 함정?

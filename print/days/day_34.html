@@ -5,6 +5,15 @@
 <title>Day 34 — Cross-chain Tracing + Bridge</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,22 @@
       <span class="title-block__time">⏱ ~75분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">sequenceDiagram
+    participant A as ⛓️ Chain A (ETH)
+    participant B as 🌉 Bridge
+    participant C as ⛓️ Chain B (Tron)
+    A-&gt;&gt;B: deposit (lock)
+    B-&gt;&gt;C: mint wrapped
+    Note over A,C: 추적 단절 위험
+    A--&gt;&gt;C: time·amount 매칭&lt;br/&gt;(Chainalysis Crosschain · TRM Multichain)</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -623,6 +648,8 @@
 <p>룰 설계 시 이 9개 유형을 <strong>별도 룰 그룹</strong>으로 관리해야 false positive 원인을 역추적할 수 있습니다. 한 룰 엔진 안에 유형을 섞어 관리하면 나중에 "왜 이 고객이 차단됐는지" 설명하기 어렵고, STR에 근거를 쓰기도 힘들어집니다.</p>
 <hr />
 <h2>3. 2025~2026 새로운 트렌드</h2>
+<p><img alt="2025 불법 가상자산 거래 자산별 비중 — 스테이블코인 84%" src="../../charts/output/illicit_asset_share.svg" /></p>
+<p><img alt="2025 가상자산 범죄 스냅샷" src="../../charts/output/trend_2025_snapshot.svg" /></p>
 <h3>A. Cross-chain Laundering 가속화</h3>
 <p>단일 체인 분석으로는 추적 불가능한 수준으로 발전. <strong>Chainalysis Crosschain, TRM Multichain Tracing</strong> 같은 cross-chain 도구가 KYT 벤더의 핵심 차별점으로 부상. 2025년 자금세탁의 <strong>상당 부분이 multi-chain</strong>.</p>
 <h3>B. CMLN (Chinese Money Laundering Networks)</h3>
@@ -1028,5 +1055,25 @@
       <span>DAY 34 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

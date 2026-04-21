@@ -5,6 +5,15 @@
 <title>Day 16 — FATF Recommendation 15 (VASP에 AML/CFT)</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,20 @@
       <span class="title-block__time">⏱ ~70분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    R15["🌍 FATF R.15&lt;br/&gt;(2018 개정)"] --&gt; KR["🇰🇷 특금법 §2"]
+    R15 --&gt; US["🇺🇸 MSB"]
+    R15 --&gt; EU["🇪🇺 MiCA CASP"]
+    R15 -.정의.-&gt; D["매수도 · 교환 · 이전&lt;br/&gt;보관 · 금융서비스"]
+    style R15 fill:#1a2e4a,color:#fff,stroke:#1a2e4a</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -543,6 +566,7 @@
 <p>이 9개가 모두 "있어야" 한다는 것은 명확하지만, 실제 검사에서 지적받는 건 "있지만 작동하지 않는" 경우가 압도적으로 많습니다. 예: STR 프로세스는 문서화돼 있지만 실제 제출 건수 0건, AMLO는 임명됐지만 실권 없음, 교육은 있지만 이수율 확인 안 됨. 형식과 실질 모두 증빙해야 합니다.</p>
 <hr />
 <h2>3. 사업 유형별 의무 강도 차이 (RBA)</h2>
+<p><img alt="사업 유형별 VASP 의무 강도 (RBA)" src="../../charts/output/vasp_obligations_radar.svg" /></p>
 <h3>이 표를 어떻게 읽어야 하나</h3>
 <p>같은 VASP 카테고리지만 사업 유형에 따라 <strong>무엇이 최우선인지</strong>가 다릅니다. 신규 진입 시 "우리는 어느 칸인가"를 먼저 확정하고, 그 칸에서 '강'으로 표시된 영역에 자원을 먼저 투입하는 게 RBA의 실질적 의미입니다.</p>
 <table>
@@ -697,5 +721,25 @@
       <span>DAY 16 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

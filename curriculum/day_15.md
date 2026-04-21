@@ -6,6 +6,23 @@
 
 한국 규제 2주를 마쳤으니 이제 그 **원형**인 FATF로 올라갑니다. FATF는 법을 만들지 않지만 **Mutual Evaluation과 Grey·Black List**라는 소프트파워로 각국을 움직입니다. 이 메커니즘을 이해하면 한국이 왜 FATF 권고에 민감한지, 앞으로 2027~2028년 다음 ME에서 가상자산이 주요 평가 영역이 되는 이유가 명확해집니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    F["🌍 FATF (1989)<br/>39+2 회원국"] --> R["40 권고"]
+    R --> R15["R.15 — VASP AML/CFT"]
+    R --> R16["R.16 — Travel Rule"]
+    R --> RO["R.1 RBA · R.10 CDD · R.20 STR"]
+    F -->|평가| ME["상호평가<br/>C/LC/PC/NC"]
+    ME -->|미흡| BL["⚠️ Grey · Black List"]
+    style F fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style BL fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. FATF 회원국 수 + 한국 가입연도?
 2. Mutual Evaluation의 두 평가축은?

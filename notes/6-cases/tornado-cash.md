@@ -12,6 +12,26 @@
 
 ---
 
+## 타임라인 — 한눈에
+
+```mermaid
+timeline
+    title Tornado Cash 3년 여정
+    2019 : 컨트랙트 출시 (Roman Semenov · Roman Storm)
+         : zk-SNARK 기반 mixer
+    2022-08-08 : ⚠️ OFAC SDN 등재 (DeFi 첫 제재)
+              : Lazarus 관련 $455M+ 포함
+              : Circle이 USDC 즉시 freeze
+    2023-08 : 개발자 형사 기소 (Storm · Semenov)
+    2024-11-26 : ⚖️ 5th Circuit 판결 (Van Loon v. Treasury)
+              : "immutable smart contract ≠ property"
+              : OFAC 권한 초과 인정
+    2025-03-21 : ✅ OFAC 공식 제재 해제
+              : 단 mixer는 여전히 위험 카테고리
+    2025~ : Roman Storm 형사재판 별개 진행 중
+         : DeFi 개발자 책임 범위 주목
+```
+
 ## 1. Tornado Cash란 — 기술부터 이해하기
 
 ### 정체성

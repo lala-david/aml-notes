@@ -87,6 +87,7 @@ def parse_day_md(text: str) -> dict:
         "one_liner_prompt": "",
         "deeper": [],     # [(text, ref)]
         "challenge_raw_md": "",   # full markdown for the 미니 챌린지/프로젝트 section
+        "daymap_raw_md": "",      # 🗺 오늘의 지도 Mermaid block
     }
 
     # Title
@@ -124,6 +125,8 @@ def parse_day_md(text: str) -> dict:
         text = "\n".join(buffer).strip()
         if current == "today":
             out["today"] = text
+        elif current == "daymap":
+            out["daymap_raw_md"] = text
         elif current in ("questions",):
             items = []
             for bl in buffer:
@@ -215,13 +218,15 @@ def parse_day_md(text: str) -> dict:
             # Route
             if "오늘 뭘 배우나" in heading_plain:
                 current = "today"
-            elif "핵심 질문" in heading_plain or "회고 질문" in heading_plain:
+            elif "오늘의 지도" in heading_plain:
+                current = "daymap"
+            elif "핵심 질문" in heading_plain or "회고 질문" in heading_plain or "캡스톤 목표" in heading_plain:
                 current = "questions"
             elif heading_plain.startswith("읽기") or "빠른 복습" in heading_plain:
                 current = "reading"
             elif "외부 자료" in heading_plain:
                 current = "external"
-            elif "미니 챌린지" in heading_plain or "미니 프로젝트" in heading_plain:
+            elif "미니 챌린지" in heading_plain or "미니 프로젝트" in heading_plain or "캡스톤" in heading_plain or "90일 로드맵" in heading_plain or "한국법" in heading_plain:
                 current = "challenge"
             elif "체크포인트" in heading_plain:
                 current = "checkpoints"
@@ -335,6 +340,20 @@ def render_task_sheet(day: int, day_data: dict) -> str:
 
     # Sections
     sections_html: list[str] = []
+
+    # 🗺 오늘의 지도 (Mermaid)
+    if day_data.get("daymap_raw_md", "").strip():
+        body_html = split_article_blocks(day_data["daymap_raw_md"])
+        sections_html.append(f'''
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+{body_html}
+      </div>
+    </section>''')
 
     # 🎯 핵심 질문
     if day_data["questions"]:
@@ -523,10 +542,60 @@ def render_task_sheet(day: int, day_data: dict) -> str:
 
 # ----- Article rendering (markdown → HTML for long-form notes) ---------------
 
+MERMAID_BLOCK_RE = re.compile(
+    r"```mermaid\s*\n(.*?)\n```",
+    re.DOTALL,
+)
+
+
+def _extract_mermaid_blocks(md_text: str) -> tuple[str, list[str]]:
+    """Pull ``` ```mermaid ... ``` ``` blocks out of markdown, replace with
+    placeholders. Returns (new_md, [block_contents])."""
+    blocks: list[str] = []
+
+    def _sub(m):
+        blocks.append(m.group(1))
+        return f"\n\n<MERMAID_SLOT_{len(blocks)-1}>\n\n"
+
+    new_md = MERMAID_BLOCK_RE.sub(_sub, md_text)
+    return new_md, blocks
+
+
+def _inject_mermaid_blocks(html: str, blocks: list[str]) -> str:
+    for i, block in enumerate(blocks):
+        wrapped = (
+            f'<div class="mermaid-wrap">'
+            f'<pre class="mermaid">{html_lib_escape(block)}</pre>'
+            f'</div>'
+        )
+        html = html.replace(
+            f"<p>&lt;MERMAID_SLOT_{i}&gt;</p>", wrapped
+        ).replace(
+            f"<MERMAID_SLOT_{i}>", wrapped
+        )
+    return html
+
+
+def html_lib_escape(s: str) -> str:
+    """Escape for HTML text content."""
+    return (
+        s.replace("&", "&amp;")
+         .replace("<", "&lt;")
+         .replace(">", "&gt;")
+    )
+
+
 def split_article_blocks(md_text: str) -> str:
-    """Convert a markdown note file to HTML via python-markdown."""
+    """Convert a markdown note file to HTML via python-markdown.
+    Pulls mermaid fences out first so they can be rendered client-side."""
+    # Remove HTML comment markers that we inject (<!-- MAP-START/END -->)
+    md_text = re.sub(r"<!--\s*MAP-(?:START|END)\s*-->", "", md_text)
+
+    md_text, mermaid_blocks = _extract_mermaid_blocks(md_text)
     md = md_lib.Markdown(extensions=["extra", "sane_lists", "tables"])
-    return md.convert(md_text)
+    html_out = md.convert(md_text)
+    html_out = _inject_mermaid_blocks(html_out, mermaid_blocks)
+    return html_out
 
 
 def render_article_divider(kicker: str, title: str, lead: str, path_rel: str) -> str:
@@ -603,6 +672,15 @@ PAGE_HEAD = '''<!doctype html>
 <title>{title}</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap {{ text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }}
+  .mermaid-wrap svg {{ max-width: 100%; height: auto; }}
+  .article-body img,
+  .section__body--rich img {{ max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }}
+  .section__body--rich img {{ max-height: 80mm; }}
+  .article-body img {{ max-height: 110mm; }}
+</style>
 </head>
 <body>
 
@@ -616,6 +694,26 @@ PAGE_HEAD = '''<!doctype html>
 '''
 
 PAGE_FOOT = '''
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>
 '''

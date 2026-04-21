@@ -6,6 +6,22 @@
 
 **Chainalysis Crypto Crime Report**는 업계 연간 최대 참조 문서. 감독당국·언론·VASP가 모두 이를 인용하며, 여기 실린 통계($154B illicit·84% stablecoin·$2B DPRK·CMLN $16.1B 등)가 1년간 담론의 출발점이 됩니다. 오늘은 이 리포트를 직접 탐독해 **어느 챕터가 우리 회사에 영향을 주는지** 판단합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    R["📊 Chainalysis 2026"] --> N1["$154B 불법거래"]
+    R --> N2["84% 스테이블코인"]
+    R --> N3["$2B DPRK"]
+    R --> N4["$16.1B CMLN"]
+    R --> N5["$17B Scams"]
+    R --> N6["+162% YoY"]
+    style R fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 2025 illicit address 수령 총액?
 2. 가장 빠르게 성장한 범죄 유형?

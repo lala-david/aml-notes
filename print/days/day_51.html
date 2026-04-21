@@ -5,6 +5,15 @@
 <title>Day 51 — 케이스: Tornado Cash + DeFi 제재의 한계</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,20 @@
       <span class="title-block__time">⏱ ~80분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">timeline
+    title Tornado Cash
+    2022-08 : OFAC 제재
+    2024-11 : 5th Cir. Van Loon 판결
+    2025-03-21 : 지정 해제
+    2025~ : Roman Storm 형사재판</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -156,6 +179,22 @@
 <li>의미: 코드 자체 제재의 법적 한계 + DeFi·스마트컨트랙트 컴플라이언스 미해결 과제</li>
 </ul>
 <hr />
+<h2>타임라인 — 한눈에</h2>
+<p><div class="mermaid-wrap"><pre class="mermaid">timeline
+    title Tornado Cash 3년 여정
+    2019 : 컨트랙트 출시 (Roman Semenov · Roman Storm)
+         : zk-SNARK 기반 mixer
+    2022-08-08 : ⚠️ OFAC SDN 등재 (DeFi 첫 제재)
+              : Lazarus 관련 $455M+ 포함
+              : Circle이 USDC 즉시 freeze
+    2023-08 : 개발자 형사 기소 (Storm · Semenov)
+    2024-11-26 : ⚖️ 5th Circuit 판결 (Van Loon v. Treasury)
+              : "immutable smart contract ≠ property"
+              : OFAC 권한 초과 인정
+    2025-03-21 : ✅ OFAC 공식 제재 해제
+              : 단 mixer는 여전히 위험 카테고리
+    2025~ : Roman Storm 형사재판 별개 진행 중
+         : DeFi 개발자 책임 범위 주목</pre></div></p>
 <h2>1. Tornado Cash란 — 기술부터 이해하기</h2>
 <h3>정체성</h3>
 <p>Tornado Cash는 <strong>이더리움 기반 mixer 스마트컨트랙트</strong>로 2019년 Roman Semenov·Roman Storm이 개발했습니다. <strong>zk-SNARK</strong> 기반 영지식 증명을 사용해, 사용자가 풀에 입금한 이력을 드러내지 않고 출금할 수 있도록 설계됐습니다.</p>
@@ -325,5 +364,25 @@
       <span>DAY 51 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

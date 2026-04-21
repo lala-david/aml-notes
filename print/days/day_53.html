@@ -5,6 +5,15 @@
 <title>Day 53 — 케이스: 한국 Enforcement</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,20 @@
       <span class="title-block__time">⏱ ~70분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    F["🇰🇷 FIU"] --&gt; U["미신고 VASP&lt;br/&gt;단속 강화 (2025-12)"]
+    F --&gt; V["VASP 정기 검사"]
+    L["🏛 법원"] --&gt; E["시세조종 1호 사건"]
+    L --&gt; M["무신고 영업 기소&lt;br/&gt;(특금법 §17)"]
+    style F fill:#1a2e4a,color:#fff,stroke:#1a2e4a</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -158,6 +181,7 @@
 </ul>
 <hr />
 <h2>1. 글로벌 Top Cases — 서사로 읽기</h2>
+<p><img alt="가상자산 AML 벌금 궤적 — 5년 만에 $98K → $4.3B" src="../../charts/output/enforcement_fines.svg" /></p>
 <h3>Binance — $4.3B (2023-11)</h3>
 <p><strong>왜 이 사건이 상징적인가</strong>: 가상자산 업계 <strong>사상 최대 AML 벌금</strong>이자 <strong>CEO가 실제 실형</strong>을 받은 첫 사건. 미국 DOJ + FinCEN + OFAC + CFTC의 <strong>4개 기관 공동 합의</strong>라는 점도 전례 없었습니다.</p>
 <p>위반 내용:
@@ -650,5 +674,25 @@
       <span>DAY 53 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

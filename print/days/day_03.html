@@ -5,6 +5,15 @@
 <title>Day 03 — 핵심 용어 1 (KYC / CDD / EDD / SDD)</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,22 @@
       <span class="title-block__time">⏱ ~60분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    KYC["🌂 KYC"] --&gt; CDD["📋 CDD (모든 고객)"]
+    CDD --&gt; EDD["🔒 EDD&lt;br/&gt;PEP · 고위험국 · 비대면+위험"]
+    CDD --&gt; SDD["🟢 SDD&lt;br/&gt;정부·상장사 (한국 X)"]
+    style KYC fill:#fff,stroke:#1a2e4a,stroke-width:2px
+    style CDD fill:#f7f5ef,stroke:#c9a646
+    style EDD fill:#fed7aa,stroke:#ea580c
+    style SDD fill:#d1fae5,stroke:#10b981</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -148,17 +173,20 @@
 <h3>왜 이 네 용어가 헷갈리나</h3>
 <p>네 용어 모두 "고객을 확인한다"는 같은 의미처럼 들리지만, 실무에서는 <strong>적용 대상 고객군</strong>과 <strong>확인 강도</strong>가 다릅니다. 내부 정책서에 이 넷을 명확히 구분하지 않고 섞어 쓰면 운영팀이 "이 고객에게 뭘 적용해야 하나"에서 혼선을 겪고, 규제 검사에서도 지적을 받기 쉽습니다. 동심원 그림 하나로 기억하면 잘 안 흔들립니다.</p>
 <h3>동심원 구조</h3>
-<pre><code>┌─────────────────────────────────────┐
-│ KYC (Know Your Customer)            │  ← 가장 큰 우산 개념 (신원확인 행위 일반)
-│ ┌─────────────────────────────────┐ │
-│ │ CDD (Customer Due Diligence)    │ │  ← 표준 실사 (모든 고객)
-│ │ ┌─────────────────────────────┐ │ │
-│ │ │ EDD (Enhanced Due Diligence)│ │ │  ← 고위험 고객에게만
-│ │ └─────────────────────────────┘ │ │
-│ │ SDD (Simplified Due Diligence)  │ │  ← 저위험 고객에게만 (한국 가상자산은 거의 X)
-│ └─────────────────────────────────┘ │
-└─────────────────────────────────────┘
-</code></pre>
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    subgraph KYC["🌂 KYC (Know Your Customer) — 우산 개념, 신원확인 행위 일반"]
+        direction TB
+        subgraph CDD["📋 CDD (Customer Due Diligence) — 모든 고객"]
+            direction TB
+            EDD["🔒 EDD (Enhanced DD)&lt;br/&gt;고위험 고객만&lt;br/&gt;• PEP · 고위험국&lt;br/&gt;• 자금원천 증빙&lt;br/&gt;• 임원 승인"]
+            SDD["🟢 SDD (Simplified DD)&lt;br/&gt;저위험만 (한국 가상자산 X)&lt;br/&gt;• 정부기관 · 상장사"]
+        end
+    end
+
+    style KYC fill:#fff,stroke:#1a2e4a,stroke-width:2px
+    style CDD fill:#f7f5ef,stroke:#c9a646,stroke-width:1.5px
+    style EDD fill:#fed7aa,stroke:#ea580c,stroke-width:1.5px
+    style SDD fill:#d1fae5,stroke:#10b981,stroke-width:1.5px</pre></div></p>
 <h3>KYC (Know Your Customer)</h3>
 <p><strong>정의</strong>: "이 사람이 정말 본인이 맞는가"를 확인하는 <strong>광범위 개념</strong>. 흔히 "KYC 심사"라고 하면 신분증 제출, 셀카, 주소증빙 등 전체 과정을 통칭.</p>
 <p><strong>실무 예시</strong>:
@@ -848,5 +876,25 @@
       <span>DAY 03 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

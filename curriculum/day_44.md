@@ -6,6 +6,27 @@
 
 EDD의 본질은 **자금원천 증빙**. 일반 CDD 위에 **SoF(Source of Funds)·SoW(Source of Wealth) 서류 요구 + 고위경영진 승인**을 얹는 강화 절차이며, PEP·고위험국·비대면+위험 같은 6가지 트리거가 자동 발동됩니다. 가상자산 특화의 **Wallet Ownership Verification**(지갑 소유 증명)까지 연결.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    T["⚠️ EDD 트리거"] --> P["PEP"]
+    T --> H["고위험국"]
+    T --> NF["비대면+위험"]
+    T --> LG["거액거래"]
+    T --> CX["복잡한 구조"]
+    T --> CI["현금집약업"]
+    T --> Action
+    Action["🔒 EDD 절차"] --> SoF["자금출처(SoF) 증빙"]
+    Action --> SoW["자산출처(SoW)"]
+    Action --> App["임원 승인"]
+    style T fill:#fed7aa,stroke:#ea580c
+    style Action fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. EDD 트리거 6가지?
 2. Source of Funds vs Source of Wealth 차이?

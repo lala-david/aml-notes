@@ -6,6 +6,27 @@
 
 어제 배운 KYC·CDD·EDD 위에 **가상자산 고유의 한 층**을 얹습니다 — **KYT(거래·지갑을 안다)**. 여기에 AML 시스템의 최종 출구인 STR·CTR, 자동 고위험인 PEP, 법인고객의 핵심인 Beneficial Owner 25% 원칙까지. 이 5개 용어는 내일부터의 모든 규제·운영 문서에 반복 등장합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    subgraph KYC["👤 KYC — 사람"]
+        KID["신분증·실명·PEP"]
+    end
+    subgraph KYT["⛓️ KYT — 거래·지갑"]
+        KEX["exposure·cluster·SDN"]
+    end
+    KYC & KYT --> RE["🎯 Risk Score"]
+    RE -->|threshold 초과| STR["📝 STR (금액 무관)"]
+    STR -.Tipping-off 금지.-> FIU["🏛 KoFIU"]
+    style KYC fill:#e5eaf2,stroke:#1a2e4a
+    style KYT fill:#fff7d6,stroke:#c9a646
+    style STR fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. KYC와 KYT는 무엇이 다른가? (한 문장)
 2. STR과 CTR이 둘 다 트리거되면 어떻게 하나?

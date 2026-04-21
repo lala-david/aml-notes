@@ -6,6 +6,26 @@
 
 어제 본 거버넌스 구조가 각 VASP에 구체적으로 **어떤 9가지 의무**로 내려오는지 정리합니다. 신고/라이선스부터 KYC·EDD·KYT·제재·STR·Travel Rule·기록보관·내부통제까지 — 이 9개가 Week 1의 종합 정리이자, Week 2~8 전체의 목차 역할을 합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    V["🏢 VASP"] --> R["1. 신고/라이선스"]
+    V --> K["2~3. KYC/CDD · EDD"]
+    V --> T["4~5. KYT · 제재"]
+    V --> S["6~7. STR/CTR · Travel Rule"]
+    V --> G["8~9. 기록·내부통제"]
+    style V fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style R fill:#e5eaf2,stroke:#1a2e4a
+    style K fill:#e5eaf2,stroke:#1a2e4a
+    style T fill:#e5eaf2,stroke:#1a2e4a
+    style S fill:#e5eaf2,stroke:#1a2e4a
+    style G fill:#e5eaf2,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. FATF VASP 정의의 5가지 행위는?
 2. 한국·미국·EU의 VASP 용어가 다른가?

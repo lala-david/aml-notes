@@ -5,6 +5,15 @@
 <title>Day 60 — 🎓 다음 90일 로드맵</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -41,6 +50,23 @@
       <span class="title-block__time">⏱ ~120분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    C["🎓 60일 완주"] --&gt; TA["Track A&lt;br/&gt;기술·KYT"]
+    C --&gt; TB["Track B&lt;br/&gt;법·규제"]
+    C --&gt; TC["Track C&lt;br/&gt;컴플 운영"]
+    C --&gt; TD["Track D&lt;br/&gt;솔루션·제품"]
+    TA &amp; TB &amp; TC &amp; TD --&gt; M["🗓 M1·M2·M3 마일스톤"]
+    M --&gt; G["🎯 90일 후 도달"]
+    style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style G fill:#d1fae5,stroke:#10b981</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -53,6 +79,48 @@
 <li>가장 약한 영역 (보강 필요):</li>
 <li>가장 흥미 있는 전공 영역:</li>
         </ol>
+      </div>
+    </section>
+    <section class="section section--rich">
+      <div class="section__head">
+        <span class="section__icon">🛠️</span>
+        <h2 class="section__title">미니 챌린지</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<h3>산출물</h3>
+<p>파일: <code>aml/curriculum/_artifacts/d60_90_day_roadmap.md</code></p>
+<h3>4개 전공 트랙 중 선택</h3>
+<h4>트랙 A — 기술 (KYT/Analytics)</h4>
+<ul>
+<li>자체 attribution DB 구축</li>
+<li>ML 기반 클러스터링 실험</li>
+<li>Cross-chain tracing 깊이</li>
+<li>산출물: 작동하는 KYT 프로토타입</li>
+</ul>
+<h4>트랙 B — 법/규제</h4>
+<ul>
+<li>특금법 + 이용자보호법 § 단위 마스터</li>
+<li>FATF/EU/US 깊이 비교</li>
+<li>한국 가상자산 변호사 자료 + 컨퍼런스 참석</li>
+<li>산출물: 한국 VASP 컴플라이언스 핸드북</li>
+</ul>
+<h4>트랙 C — 컴플라이언스 운영</h4>
+<ul>
+<li>AMLO 실무 (정책/룰/감사 사이클)</li>
+<li>STR 분석가 트레이닝 자료</li>
+<li>ERA 작성</li>
+<li>산출물: AMLO 운영 매뉴얼 + 룰 카탈로그</li>
+</ul>
+<h4>트랙 D — 솔루션/제품</h4>
+<ul>
+<li>KYT/Travel Rule 솔루션 시장 깊이</li>
+<li>신규 제품 아이디어 (한국 특화 + 글로벌)</li>
+<li>비즈니스 모델</li>
+<li>산출물: 신규 솔루션 1-pager + MVP 사양</li>
+</ul>
+<h3>90일 플랜 템플릿</h3>
+<p>```markdown</p>
+<h1>90-day Roadmap — Track [A/B/C/D]</h1>
       </div>
     </section>
     <section class="section">
@@ -97,5 +165,25 @@
     </div>
 
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

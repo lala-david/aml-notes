@@ -6,6 +6,24 @@
 
 Week 8은 사례·리서치·AI 주간. 첫날은 가상자산 업계의 **1순위 위협**인 DPRK Lazarus와 **사상 최대 사건** Bybit hack($1.46B). 공급망 공격이라는 새 패턴, 48시간 내 layering 완료라는 속도, 그리고 **가짜 채용·Insider threat**이라는 HR·보안의 새 영역까지 실무 대응책을 정리합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    A["⚔️ 공급망 공격"] --> B["🏦 Bybit cold wallet"]
+    B -->|$1.46B 탈취| L["🕵️ Lazarus"]
+    L -->|48h playbook| P1["peel chain"]
+    P1 --> P2["bridge (THORChain)"]
+    P2 --> P3["DEX swap"]
+    P3 --> P4["CMLN OTC 환전"]
+    P4 --> K["💰 북한 자금화"]
+    style L fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style K fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. 2025-02 Bybit hack 규모 + 공격 방식?
 2. Lazarus 자금세탁 5단계?

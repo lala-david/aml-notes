@@ -6,6 +6,30 @@
 
 6일 동안 AML 기초·가상자산 특수성·핵심 용어·글로벌 거버넌스·VASP 9의무를 배웠습니다. 오늘은 **마인드맵**으로 이 전부를 시각화하고, 헷갈리는 용어 짝을 솔직히 체크합니다. 이 과정에서 남은 구멍을 발견하는 게 Week 2(한국 규제 deep) 진입 전의 마지막 정비.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+mindmap
+  root((Week 1<br/>가상자산 AML))
+    AML 기초
+      3단계 Placement·Layering·Integration
+      AML vs CFT
+    가상자산 특수성
+      투명성의 역설
+      Layering 도구 6종
+    핵심 용어
+      KYC CDD EDD SDD
+      KYT STR CTR PEP BO
+    거버넌스
+      FATF 권고
+      한국·미국·EU
+    VASP 의무
+      9 의무 + Travel Rule
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문
 1. Week 1에서 가장 중요한 개념 3개?
 2. 가장 헷갈렸던 짝 (예: KYC vs KYT)?

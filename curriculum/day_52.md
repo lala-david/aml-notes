@@ -6,6 +6,20 @@
 
 5년 만에 가상자산 벌금이 $98K(BitGo 2021) → $4.3B(Binance 2023)로 **1만배 성장**. 이 궤적이 보여주는 건 규제당국이 "학습기"에서 "집행기"로 전환했다는 것. CEO 개인 형사 책임(CZ 4개월)·모니터십(5년 감시)·소형도 표적(Paxful)이 3대 트렌드.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    BM["BitMEX<br/>2020 $100M"] --> BT["Bittrex<br/>2022 $29M"]
+    BT --> BN["Binance<br/>2023 $4.3B<br/>CZ 4개월 징역"]
+    BN --> OK["OKX<br/>2025 $500M+"]
+    OK --> PX["Paxful<br/>2025 $3.5M"]
+    style BN fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Binance $4.3B 합의의 4가지 위반?
 2. CZ 개인 처벌은?

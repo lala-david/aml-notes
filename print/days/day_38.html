@@ -5,6 +5,15 @@
 <title>Day 38 — Peel Chain + Smurfing</title>
 <meta name="viewport" content="width=210mm">
 <link rel="stylesheet" href="../assets/print.css">
+<style>
+  /* Mermaid wrapper sizing inside A4 */
+  .mermaid-wrap { text-align: center; margin: 4mm 0 6mm 0; break-inside: avoid; }
+  .mermaid-wrap svg { max-width: 100%; height: auto; }
+  .article-body img,
+  .section__body--rich img { max-width: 100%; height: auto; display: block; margin: 3mm auto 4mm; }
+  .section__body--rich img { max-height: 80mm; }
+  .article-body img { max-height: 110mm; }
+</style>
 </head>
 <body>
 
@@ -44,6 +53,20 @@
       <span class="title-block__time">⏱ ~70분</span>
     </section>
 
+    <section class="section section--map">
+      <div class="section__head">
+        <span class="section__icon">🗺</span>
+        <h2 class="section__title">오늘의 지도</h2>
+      </div>
+      <div class="section__body section__body--rich">
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    B["💰 큰 금액"] --&gt;|peel| A1["소액"] --&gt;|peel| A2["소액"] --&gt;|peel| A3["소액 ···"]
+    B --&gt; R["나머지"]
+    R --&gt;|peel| R2["소액"]
+    R2 --&gt; R3["···"]
+    style B fill:#fff7d6,stroke:#c9a646</pre></div></p>
+      </div>
+    </section>
     <section class="section">
       <div class="section__head">
         <span class="section__icon">🎯</span>
@@ -297,6 +320,8 @@
 <p>룰 설계 시 이 9개 유형을 <strong>별도 룰 그룹</strong>으로 관리해야 false positive 원인을 역추적할 수 있습니다. 한 룰 엔진 안에 유형을 섞어 관리하면 나중에 "왜 이 고객이 차단됐는지" 설명하기 어렵고, STR에 근거를 쓰기도 힘들어집니다.</p>
 <hr />
 <h2>3. 2025~2026 새로운 트렌드</h2>
+<p><img alt="2025 불법 가상자산 거래 자산별 비중 — 스테이블코인 84%" src="../../charts/output/illicit_asset_share.svg" /></p>
+<p><img alt="2025 가상자산 범죄 스냅샷" src="../../charts/output/trend_2025_snapshot.svg" /></p>
 <h3>A. Cross-chain Laundering 가속화</h3>
 <p>단일 체인 분석으로는 추적 불가능한 수준으로 발전. <strong>Chainalysis Crosschain, TRM Multichain Tracing</strong> 같은 cross-chain 도구가 KYT 벤더의 핵심 차별점으로 부상. 2025년 자금세탁의 <strong>상당 부분이 multi-chain</strong>.</p>
 <h3>B. CMLN (Chinese Money Laundering Networks)</h3>
@@ -436,6 +461,22 @@
 <p>AML 부서에서 일한다는 건 결국 "범죄수익이 우리 회사를 통과하지 못하게 막는 일"입니다. 그래서 AML 실무자는 금융지식 + 규제지식 + 수사적 감(조금 낯선 패턴을 놓치지 않는 본능)을 동시에 요구받습니다. 이 감각이 <strong>거래 모니터링 룰을 설계</strong>하는 출발점이 됩니다.</p>
 <hr />
 <h2>2. 고전적 3단계 모델 (Placement → Layering → Integration)</h2>
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    Dirty["💰 범죄수익&lt;br/&gt;(현금·가상자산)"] --&gt;|Stage 1| P["📥 Placement&lt;br/&gt;금융시스템 진입"]
+    P --&gt;|Stage 2| L["🔀 Layering&lt;br/&gt;흐름 복잡화"]
+    L --&gt;|Stage 3| I["🏢 Integration&lt;br/&gt;합법 자산화"]
+
+    P -.예시.-&gt; PEX["smurfing · 카지노 · 거래소 입금"]
+    L -.예시.-&gt; LEX["mixer · bridge · peel chain · DEX"]
+    I -.예시.-&gt; IEX["부동산 · 사업체 · OTC 환전"]
+
+    style Dirty fill:#f7f5ef,stroke:#c9a646
+    style P fill:#e5eaf2,stroke:#1a2e4a
+    style L fill:#e5eaf2,stroke:#1a2e4a
+    style I fill:#e5eaf2,stroke:#1a2e4a
+    style PEX fill:none,stroke:none
+    style LEX fill:none,stroke:none
+    style IEX fill:none,stroke:none</pre></div></p>
 <h3>왜 3단계인가</h3>
 <p>1984년 미국 관세청 산하 조직이 처음 제안하고 FATF·UNODC가 표준으로 채택한 모델. 실제 자금세탁은 단계가 뚜렷이 구분되지 않고 섞여 돌아가지만, 이 모델은 <strong>"어디에 방어선을 칠지"</strong> 설계하는 데 유용해서 40년째 기본 프레임으로 쓰입니다.</p>
 <p>용어:
@@ -554,13 +595,25 @@
 <hr />
 <h2>5. 누가 만든 룰을 따르는가 — 글로벌 거버넌스 지도</h2>
 <h3>FATF → 국내법의 구조</h3>
-<pre><code>FATF (국제 표준 제정, 권고안 발표, 회원국 상호평가)
-  └── 각국이 국내법으로 도입
-        ├── 한국: 특금법, 가상자산이용자보호법 (감독: FIU, FSC/FSS)
-        ├── 미국: BSA, USA PATRIOT Act (감독: FinCEN, OFAC)
-        ├── EU: AMLD 시리즈 → AMLR + MiCA + TFR (감독: AMLA, ESMA, NCA)
-        └── 일본/싱가포르/홍콩 등 각자 도입
-</code></pre>
+<p><div class="mermaid-wrap"><pre class="mermaid">flowchart TB
+    F["🌍 FATF&lt;br/&gt;40 Recommendations&lt;br/&gt;(국제 표준)"]
+    F --&gt;|권고 → 국내법화| KR["🇰🇷 한국&lt;br/&gt;특금법 · 이용자보호법"]
+    F --&gt;|권고 → 국내법화| US["🇺🇸 미국&lt;br/&gt;BSA · PATRIOT Act"]
+    F --&gt;|권고 → 국내법화| EU["🇪🇺 EU&lt;br/&gt;MiCA · AMLR · TFR"]
+    F --&gt;|권고 → 국내법화| JP["🇯🇵 일본 · 싱가포르 · 홍콩"]
+
+    KR --&gt; KRS["감독: FIU · FSC · FSS"]
+    US --&gt; USS["감독: FinCEN · OFAC · SEC · CFTC"]
+    EU --&gt; EUS["감독: AMLA · ESMA · NCA"]
+
+    F -.평가.-&gt; ME["Mutual Evaluation&lt;br/&gt;Grey/Black List"]
+
+    style F fill:#1a2e4a,stroke:#1a2e4a,color:#fff
+    style ME fill:#fff7d6,stroke:#c9a646
+    style KR fill:#e5eaf2,stroke:#1a2e4a
+    style US fill:#e5eaf2,stroke:#1a2e4a
+    style EU fill:#e5eaf2,stroke:#1a2e4a
+    style JP fill:#e5eaf2,stroke:#1a2e4a</pre></div></p>
 <h3>FATF는 법을 만들지 않는다</h3>
 <p>중요한 오해 하나를 먼저 풀면, <strong>FATF는 국제법을 만드는 기구가 아닙니다</strong>. FATF가 하는 일은 권고안(Recommendation, 40개)을 발표하고, 회원국이 이를 국내법으로 얼마나 잘 이행했는지 주기적으로 <strong>상호평가(Mutual Evaluation, ME)</strong> 하는 것입니다.</p>
 <p>그러면 왜 각국이 FATF 권고를 열심히 따르는가? <strong>제재보다 무서운 게 평판이기 때문</strong>입니다. 상호평가에서 낮은 점수를 받으면 FATF는 그 나라를 <strong>Grey List</strong>(강화 모니터링) 또는 <strong>Black List</strong>(Call for Action)에 올릴 수 있고, 그러면:</p>
@@ -598,5 +651,25 @@
       <span>DAY 38 / 60 · READING</span>
     </div>
   </article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: '"Pretendard Variable", Pretendard, system-ui, sans-serif',
+      fontSize: '13px',
+      primaryColor: '#e5eaf2',
+      primaryTextColor: '#111418',
+      primaryBorderColor: '#1a2e4a',
+      lineColor: '#3a414a',
+      secondaryColor: '#fff7d6',
+      tertiaryColor: '#f7f5ef'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true }
+  });
+</script>
 </body>
 </html>

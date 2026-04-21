@@ -6,6 +6,20 @@
 
 NFT는 **가격이 시장에 의해 강제되지 않는다**는 특성이 자금세탁자에게 매력적입니다. 자기들끼리 고가에 사고팔아 가격을 부풀린 뒤 외부 바이어에게 넘기는 패턴. 오늘은 Self-trading·Loop trading·Pump 3가지 패턴과 FATF·한국 FSC의 NFT VA 분류 기준을 정리합니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    W["👥 자금세탁자들"] --> S["Self-trading<br/>A ↔ B (same owner)"]
+    W --> L["Loop trading<br/>A → B → C → A"]
+    W --> P["Pump<br/>고가 만들어 외부 매도"]
+    S & L & P --> G["📈 가짜 가격/거래량"]
+    style G fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. NFT가 자금세탁에 매력적인 이유?
 2. Wash trading 패턴 3가지?

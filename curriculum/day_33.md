@@ -6,6 +6,23 @@
 
 Attribution이 끝나면 **"이 주소가 얼마나 위험한가"** 를 숫자로 표현해야 합니다. Direct(1-hop) vs Indirect(N-hop) 노출, 금액·시간·카테고리 가중치를 조합해 Risk Score를 만드는 로직을 오늘 이해합니다. 이 점수가 threshold를 넘으면 자동 차단이 발동하는 KYT의 핵심 의사결정 로직.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    W["🪪 주소"] --> D["Direct (1-hop)"]
+    W --> I["Indirect (N-hop)"]
+    D --> W1["× 금액 가중"]
+    I --> W2["× 시간 거리"]
+    W1 & W2 --> C["× 카테고리<br/>(SDN > Mixer > HR Exchange)"]
+    C --> S["🎯 Risk Score 0~100"]
+    S --> A["Threshold<br/>차단 · 검토 · 통과"]
+    style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. Direct vs Indirect (N-hop) exposure 차이?
 2. 가중치 적용 3요소?

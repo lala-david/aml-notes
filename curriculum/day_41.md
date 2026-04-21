@@ -6,6 +6,21 @@
 
 2025년 자금세탁의 중심축이 된 **CMLN (Chinese Money Laundering Networks)**. 텔레그램·위챗 OTC 네트워크가 5~15% 수수료로 **Laundering-as-a-Service**를 제공하며, Lazarus도 이 네트워크를 통해 OTC 환전합니다. 단일 범죄자가 아닌 **분업 생태계**의 등장이 왜 방어를 어렵게 만드는지 이해.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    C["💼 CMLN<br/>(중국어 자금세탁 네트워크)"] -.Laundering-as-a-Service.-> F["💰 Lazarus · 범죄조직"]
+    C --> T["📱 텔레그램·위챗 OTC"]
+    C --> U["USDT(Tron) 기반<br/>5~15% 수수료"]
+    C -.2025.-> N["$16.1B · 1,800+ wallet"]
+    style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style N fill:#fed7aa,stroke:#ea580c
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. CMLN의 2025 처리 규모?
 2. Laundering-as-a-Service 모델?

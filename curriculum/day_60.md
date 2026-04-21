@@ -6,6 +6,23 @@
 
 60일의 마지막 날. 오늘은 **"앞으로 90일"** 의 구체 로드맵을 작성합니다. 4개 전공 트랙(기술·법·컴플라이언스·솔루션) 중 자신의 관심과 경력에 맞는 1개를 선택해 월별 마일스톤을 세우면, 60일 챌린지가 **지속 성장 궤도**로 이어집니다.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart LR
+    C["🎓 60일 완주"] --> TA["Track A<br/>기술·KYT"]
+    C --> TB["Track B<br/>법·규제"]
+    C --> TC["Track C<br/>컴플 운영"]
+    C --> TD["Track D<br/>솔루션·제품"]
+    TA & TB & TC & TD --> M["🗓 M1·M2·M3 마일스톤"]
+    M --> G["🎯 90일 후 도달"]
+    style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style G fill:#d1fae5,stroke:#10b981
+```
+<!-- MAP-END -->
+
 ## 🎯 회고 질문 (60일 통합)
 
 1. 가장 큰 변화 (Day 1과 Day 60의 나):

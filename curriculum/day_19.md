@@ -6,6 +6,22 @@
 
 OFAC 2차 제재가 **한국 VASP에도 실질적 강제력**을 가지는 이유(USD 결제망·SDN·클라우드 의존·스테이블코인)를 정리하고, 2025-07 통과된 **GENIUS Act**가 스테이블코인을 BSA에 편입시킨 의미를 확인합니다. 한국에서만 영업해도 OFAC은 "항시 의식"해야 한다는 원칙이 왜 나왔는지 체감.
 
+
+<!-- MAP-START -->
+## 🗺 오늘의 지도
+
+```mermaid
+flowchart TB
+    O["🇺🇸 OFAC"] --> S["SDN List"]
+    S --> SC["🪙 가상자산 지갑주소 등재"]
+    O --> SEC["2차 제재<br/>외국인도 미국 시장 차단"]
+    SEC -.한국 VASP.-> K["USD·스테이블코인·클라우드 의존"]
+    O --> G["GENIUS Act (2025-07)<br/>스테이블코인 BSA"]
+    style O fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style SEC fill:#fee2e2,stroke:#dc2626
+```
+<!-- MAP-END -->
+
 ## 🎯 핵심 질문
 1. OFAC 2차 제재가 외국인에게도 적용되는 이유?
 2. SDN에 가상자산 지갑주소가 등재된 첫 사례?
