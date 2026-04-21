@@ -4,6 +4,63 @@
 
 > ⚠️ 이 파일은 **템플릿** 입니다. D59 캡스톤 작업 시 본인이 직접 채워서 완성하세요.
 
+## 🏗 Capstone 통합 아키텍처
+
+```mermaid
+flowchart TB
+    subgraph Input["📥 Input Layer"]
+        KYC_IN["KYC SDK<br/>(ARGOS · Sumsub · PASS)"]
+        KYT_IN["KYT API<br/>(Chainalysis · TRM · 자체)"]
+        TR_IN["Travel Rule<br/>(VerifyVASP · CODE · Notabene)"]
+    end
+
+    subgraph Modules["⚙️ Modules — D28 ~ D56"]
+        P1["D28 IVMS101 Builder"]
+        P2["D35 Onchain Tracer"]
+        P3["D42 Mixer Fetcher"]
+        P4["D49 OFAC Screener"]
+        P5["D56 KYT Wrapper<br/>(kyt_check)"]
+    end
+
+    subgraph Engine["🎯 Risk Engine"]
+        RBA["RBA Score<br/>고객·상품·거래·지역"]
+        RULES["Rule Catalog 10+"]
+        ML["ML 이상 탐지"]
+        SCORE["📊 Risk Score 0~100"]
+    end
+
+    subgraph Actions["🚦 Actions"]
+        ALLOW["✅ ALLOW"]
+        EDD["🔒 EDD Trigger"]
+        STR["📝 STR Queue<br/>→ KoFIU"]
+        BLOCK["⛔ BLOCK"]
+    end
+
+    KYC_IN --> Modules
+    KYT_IN --> Modules
+    TR_IN --> P1
+
+    P2 --> P5
+    P3 --> P5
+    P4 --> P5
+    P5 --> Engine
+    KYC_IN --> Engine
+
+    RBA & RULES & ML --> SCORE
+    SCORE --> Actions
+    SCORE -->|LOW| ALLOW
+    SCORE -->|MED| EDD
+    SCORE -->|HIGH| STR
+    SCORE -->|CRITICAL| BLOCK
+
+    style Engine fill:#e5eaf2,stroke:#1a2e4a
+    style SCORE fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style ALLOW fill:#d1fae5,stroke:#10b981
+    style EDD fill:#fff7d6,stroke:#c9a646
+    style STR fill:#fed7aa,stroke:#ea580c
+    style BLOCK fill:#fee2e2,stroke:#dc2626
+```
+
 ## 캡스톤의 목적
 
 60일 동안 배운 **9 의무·RBA·KYT·Travel Rule·제재·STR·거버넌스** 를 하나의 시스템 설계서로 묶는 작업. 단순히 기능을 나열하는 게 아니라, **한국 규제(특금법 §·이용자보호법 §) → 시스템 모듈 → 운영 절차**가 추적 가능하도록 연결합니다. 이 문서가 완성되면 실제 VASP 설립 시점에 **법무팀·컴플팀·엔지니어팀이 공통 참조할 수 있는 1차 설계서**가 됩니다.

@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-04-21T10:12:54.181759</dc:date>
+    <dc:date>2026-04-21T10:28:34.622764</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -72,7 +72,7 @@ z
      <g id="line2d_1">
       <path d="M 223.658 231.599562 
 L 401.066 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_1">
       <!-- KYC -->
@@ -143,7 +143,7 @@ z
      <g id="line2d_2">
       <path d="M 223.658 231.599562 
 L 312.362 77.959728 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_2">
       <!-- KYT -->
@@ -171,7 +171,7 @@ z
      <g id="line2d_3">
       <path d="M 223.658 231.599562 
 L 134.954 77.959728 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_3">
       <!-- Travel -->
@@ -356,7 +356,7 @@ z
      <g id="line2d_4">
       <path d="M 223.658 231.599562 
 L 46.25 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_4">
       <!-- 제재 -->
@@ -459,7 +459,7 @@ z
      <g id="line2d_5">
       <path d="M 223.658 231.599562 
 L 134.954 385.239397 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_5">
       <!-- 자산 -->
@@ -549,7 +549,7 @@ z
      <g id="line2d_6">
       <path d="M 223.658 231.599562 
 L 312.362 385.239397 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_6">
       <!-- STR -->
@@ -621,7 +621,7 @@ C 230.938314 287.039562 238.147836 285.605499 244.873969 282.819444
 C 251.600103 280.033388 257.71204 275.949522 262.86 270.801562 
 C 268.007959 265.653603 272.091826 259.541665 274.877881 252.815532 
 C 277.663937 246.089399 279.098 238.879877 279.098 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_7">
       <!-- 약 -->
@@ -664,7 +664,7 @@ C 238.218628 342.479562 252.637673 339.611436 266.089939 334.039325
 C 279.542205 328.467214 291.766081 320.299481 302.062 310.003562 
 C 312.357919 299.707643 320.525651 287.483768 326.097763 274.031501 
 C 331.669874 260.579235 334.538 246.160191 334.538 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_8">
       <!-- 중 -->
@@ -707,7 +707,7 @@ C 245.498942 397.919562 267.127509 393.617373 287.305908 385.259206
 C 307.484308 376.90104 325.820121 364.649441 341.264 349.205562 
 C 356.707878 333.761684 368.959477 315.425871 377.317644 295.247471 
 C 385.675811 275.069071 389.978 253.440505 389.978 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #d8dbe0; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="text_9">
       <!-- 강 -->
@@ -740,7 +740,7 @@ L 57.338 231.599562
 L 140.498 375.636908 
 L 306.818 375.636908 
 z
-" clip-path="url(#pe63b14198d)" style="fill: #1a2e4a; opacity: 0.12; stroke: #1a2e4a; stroke-linejoin: miter"/>
+" clip-path="url(#p4476b3561b)" style="fill: #1a2e4a; opacity: 0.12; stroke: #1a2e4a; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 389.978 231.599562 
@@ -750,7 +750,7 @@ L 112.778 231.599562
 L 140.498 375.636908 
 L 279.098 327.624459 
 z
-" clip-path="url(#pe63b14198d)" style="fill: #c9a646; opacity: 0.12; stroke: #c9a646; stroke-linejoin: miter"/>
+" clip-path="url(#p4476b3561b)" style="fill: #c9a646; opacity: 0.12; stroke: #c9a646; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 389.978 231.599562 
@@ -760,7 +760,7 @@ L 112.778 231.599562
 L 195.938 279.612011 
 L 306.818 375.636908 
 z
-" clip-path="url(#pe63b14198d)" style="fill: #4a5f7e; opacity: 0.12; stroke: #4a5f7e; stroke-linejoin: miter"/>
+" clip-path="url(#p4476b3561b)" style="fill: #4a5f7e; opacity: 0.12; stroke: #4a5f7e; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
     <path d="M 334.538 231.599562 
@@ -770,7 +770,7 @@ L 112.778 231.599562
 L 195.938 279.612011 
 L 279.098 327.624459 
 z
-" clip-path="url(#pe63b14198d)" style="fill: #7e8ba4; opacity: 0.12; stroke: #7e8ba4; stroke-linejoin: miter"/>
+" clip-path="url(#p4476b3561b)" style="fill: #7e8ba4; opacity: 0.12; stroke: #7e8ba4; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_10">
     <path d="M 389.978 231.599562 
@@ -780,7 +780,7 @@ L 57.338 231.599562
 L 140.498 375.636908 
 L 306.818 375.636908 
 L 389.978 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #1a2e4a; stroke-width: 1.8; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #1a2e4a; stroke-width: 1.8; stroke-linecap: round"/>
    </g>
    <g id="line2d_11">
     <path d="M 389.978 231.599562 
@@ -790,7 +790,7 @@ L 112.778 231.599562
 L 140.498 375.636908 
 L 279.098 327.624459 
 L 389.978 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #c9a646; stroke-width: 1.8; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #c9a646; stroke-width: 1.8; stroke-linecap: round"/>
    </g>
    <g id="line2d_12">
     <path d="M 389.978 231.599562 
@@ -800,7 +800,7 @@ L 112.778 231.599562
 L 195.938 279.612011 
 L 306.818 375.636908 
 L 389.978 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #4a5f7e; stroke-width: 1.8; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #4a5f7e; stroke-width: 1.8; stroke-linecap: round"/>
    </g>
    <g id="line2d_13">
     <path d="M 334.538 231.599562 
@@ -810,7 +810,7 @@ L 112.778 231.599562
 L 195.938 279.612011 
 L 279.098 327.624459 
 L 334.538 231.599562 
-" clip-path="url(#pe63b14198d)" style="fill: none; stroke: #7e8ba4; stroke-width: 1.8; stroke-linecap: round"/>
+" clip-path="url(#p4476b3561b)" style="fill: none; stroke: #7e8ba4; stroke-width: 1.8; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
     <path d="M 401.066 231.599562 
@@ -1900,7 +1900,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pe63b14198d">
+  <clipPath id="p4476b3561b">
    <path d="M 401.066 231.599562 
 C 401.066 208.302557 396.476998 185.232086 387.56162 163.70846 
 C 378.646242 142.184834 365.57787 122.626633 349.1044 106.153163 

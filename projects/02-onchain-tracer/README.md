@@ -2,6 +2,23 @@
 
 > 직접 온체인 데이터로 자금 흐름 분석. (D35 미니 프로젝트)
 
+## 🏗 아키텍처
+
+```mermaid
+flowchart LR
+    A["🎯 주소 입력"] --> C{"cache hit?"}
+    C -->|YES| H1["1-hop (cached)"]
+    C -->|NO| E["🌐 Etherscan API<br/>(rate limit 5/s)"]
+    E --> H1
+    H1 -->|max_fanout=20| H2["2-hop 카운터파티<br/>(최대 10,000 호출)"]
+    H2 --> L["🏷 label_db.json 매칭"]
+    L --> G["📊 Mermaid·ASCII 그래프"]
+    G --> S["💾 sample_outputs/"]
+    style A fill:#fff7d6,stroke:#c9a646
+    style E fill:#fed7aa,stroke:#ea580c
+    style G fill:#e5eaf2,stroke:#1a2e4a
+```
+
 ## 왜 이걸 만드나
 
 Chainalysis·TRM 같은 벤더의 UI로 이미 분석된 결과만 보다가 **직접 Etherscan API를 쳐서 트랜잭션을 긁어오는 경험**을 하면, KYT 벤더들이 해결하는 문제(속도·fan-out 폭발·rate limit·라벨링)를 몸으로 느낍니다. 1-hop은 간단하지만 2-hop부터 **요청 수가 10,000회까지 폭발**하는 현실이 벤더 가치를 체감시키는 순간. Week 5에서 배운 **Clustering·Attribution·Exposure**가 실무에서 어떻게 제약되는지의 교훈.

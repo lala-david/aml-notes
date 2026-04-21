@@ -2,6 +2,26 @@
 
 > 입력 주소가 OFAC SDN에 매칭되는지 자동 체크. (D49 미니 프로젝트)
 
+## 🏗 아키텍처
+
+```mermaid
+flowchart LR
+    CRON["⏰ 일 1회 cron"] --> F["🔨 fetch_ofac_crypto_addresses()"]
+    F --> X["OFAC SDN.xml 파싱"]
+    X --> CACHE["💾 cache/sdn_crypto.json<br/>(메모리 dict)"]
+
+    I["🔍 screen(address)"] -->|O(1) lookup| CACHE
+    CACHE --> M{"매칭?"}
+    M -->|YES| B["⛔ matched: true<br/>entity · sdn_id · program"]
+    M -->|NO| OK["✅ matched: false"]
+
+    BULK["📋 bulk_screen([addr])"] -->|for each| I
+
+    style CACHE fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style B fill:#fee2e2,stroke:#dc2626
+    style OK fill:#d1fae5,stroke:#10b981
+```
+
 ## 왜 이걸 만드나
 
 제재 스크리닝이 **왜 시스템 없이는 불가능한지** 체감하는 프로젝트. OFAC SDN은 수시 업데이트되고, SDN.xml 파싱·정규화·O(1) lookup·False Positive 처리 흐름까지 모두 자동화해야 실시간 거래 차단이 가능합니다. Week 7의 **5대 리스트·2차 제재·Binance $4.3B 교훈**이 왜 시스템 투자를 강제하는지 코드로 확인.

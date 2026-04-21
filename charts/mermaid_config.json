@@ -1,0 +1,17 @@
+{
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "'Pretendard Variable', Pretendard, 'Malgun Gothic', sans-serif",
+    "fontSize": "14px",
+    "primaryColor": "#e5eaf2",
+    "primaryTextColor": "#111418",
+    "primaryBorderColor": "#1a2e4a",
+    "lineColor": "#3a414a",
+    "secondaryColor": "#fff7d6",
+    "tertiaryColor": "#f7f5ef",
+    "edgeLabelBackground": "#ffffff"
+  },
+  "flowchart": { "htmlLabels": true, "curve": "basis", "useMaxWidth": true },
+  "sequence": { "useMaxWidth": true, "actorMargin": 40 },
+  "gantt": { "useMaxWidth": true }
+}

@@ -13,8 +13,10 @@ A4 Task Sheet 1장 + (링크된 notes 모두의 Reading Article 여러 장) HTML
 
 from __future__ import annotations
 
+import hashlib
 import os
 import re
+import subprocess
 import sys
 import html
 from pathlib import Path
@@ -29,6 +31,15 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent  # aml/
 PRINT_ROOT = ROOT / "print"
 DAYS_OUT = PRINT_ROOT / "days"
+CHARTS_DIR = ROOT / "charts"
+MERMAID_CACHE = CHARTS_DIR / "mermaid-cache"
+MERMAID_CACHE.mkdir(parents=True, exist_ok=True)
+
+MMDC_BIN = CHARTS_DIR / "node_modules" / ".bin" / (
+    "mmdc.cmd" if os.name == "nt" else "mmdc"
+)
+MERMAID_CONFIG = CHARTS_DIR / "mermaid_config.json"
+USE_MMDC = MMDC_BIN.exists() and MERMAID_CONFIG.exists()
 
 WEEK_THEMES = [
     (1, 7, "Week 1", "AML 기초 + 가상자산 특수성"),
@@ -561,13 +572,65 @@ def _extract_mermaid_blocks(md_text: str) -> tuple[str, list[str]]:
     return new_md, blocks
 
 
+def _mermaid_to_svg(source: str) -> str | None:
+    """Pre-render Mermaid source to SVG via mmdc. Returns SVG content or None.
+    Results are cached in charts/mermaid-cache/<hash>.svg for stable rebuilds."""
+    if not USE_MMDC:
+        return None
+
+    key = hashlib.sha1(source.encode("utf-8")).hexdigest()[:16]
+    cache_file = MERMAID_CACHE / f"{key}.svg"
+
+    if cache_file.exists():
+        try:
+            return cache_file.read_text(encoding="utf-8")
+        except Exception:
+            pass
+
+    # Write source to temp, call mmdc, read output
+    tmp_src = MERMAID_CACHE / f"{key}.mmd"
+    tmp_src.write_text(source, encoding="utf-8")
+
+    try:
+        subprocess.run(
+            [str(MMDC_BIN),
+             "-i", str(tmp_src),
+             "-o", str(cache_file),
+             "-c", str(MERMAID_CONFIG),
+             "-b", "transparent"],
+            check=True,
+            capture_output=True,
+            timeout=60,
+        )
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+        print(f"  mmdc failed for {key}: {e}", file=sys.stderr)
+        tmp_src.unlink(missing_ok=True)
+        return None
+    finally:
+        tmp_src.unlink(missing_ok=True)
+
+    if not cache_file.exists():
+        return None
+
+    svg = cache_file.read_text(encoding="utf-8")
+    # Strip XML declaration so it inlines cleanly
+    svg = re.sub(r"<\?xml[^>]*\?>\s*", "", svg)
+    svg = re.sub(r"<!DOCTYPE[^>]*>\s*", "", svg)
+    return svg
+
+
 def _inject_mermaid_blocks(html: str, blocks: list[str]) -> str:
     for i, block in enumerate(blocks):
-        wrapped = (
-            f'<div class="mermaid-wrap">'
-            f'<pre class="mermaid">{html_lib_escape(block)}</pre>'
-            f'</div>'
-        )
+        svg = _mermaid_to_svg(block)
+        if svg:
+            wrapped = f'<div class="mermaid-wrap mermaid-wrap--svg">{svg}</div>'
+        else:
+            # Fallback: client-side mermaid.js rendering
+            wrapped = (
+                f'<div class="mermaid-wrap">'
+                f'<pre class="mermaid">{html_lib_escape(block)}</pre>'
+                f'</div>'
+            )
         html = html.replace(
             f"<p>&lt;MERMAID_SLOT_{i}&gt;</p>", wrapped
         ).replace(

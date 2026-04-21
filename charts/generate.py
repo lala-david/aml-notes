@@ -310,6 +310,167 @@ def chart_trend_2025():
     savefig(fig, "trend_2025_snapshot")
 
 
+# ========================= Chart 6: Travel Rule Thresholds =========================
+
+def chart_travel_rule_thresholds():
+    """관할별 Travel Rule 임계금액 비교 (USD 환산)"""
+    data = pd.DataFrame({
+        "juris":  ["EU (TFR)",  "싱가포르",   "일본",      "🌍 FATF 권고", "한국",       "미국 (BSA)"],
+        "usd":    [0,           1130,         780,         1000,           770,          3000],
+        "native": ["€0 (모든 거래)", "SGD 1,500",  "¥100,000",  "USD/EUR 1,000", "₩1,000,000", "$3,000"],
+    })
+    data = data.sort_values("usd", ascending=True).reset_index(drop=True)
+    colors = ["#c9a646" if j == "🌍 FATF 권고" else ACCENT for j in data["juris"]]
+
+    fig, ax = plt.subplots(figsize=(9.2, 4.8))
+    y = range(len(data))
+    bars = ax.barh(y, data["usd"], color=colors, edgecolor=INK, linewidth=0.6, height=0.62)
+
+    for bar, juris, native in zip(bars, data["juris"], data["native"]):
+        ax.text(
+            bar.get_width() + 80, bar.get_y() + bar.get_height() / 2,
+            native, va="center", ha="left",
+            fontsize=9.5, color=INK, fontweight="bold",
+        )
+
+    ax.set_yticks(y)
+    ax.set_yticklabels(data["juris"], fontsize=10)
+    ax.set_xlabel("USD 환산 임계금액")
+    ax.xaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f"${int(x):,}"))
+    ax.set_xlim(0, 4000)
+    ax.set_title("관할별 Travel Rule 임계금액 — EU가 가장 엄격 (임계 0)", loc="left", pad=14)
+    ax.tick_params(axis="y", length=0)
+    ax.grid(axis="x", linewidth=0.5, color=RULE)
+    ax.set_axisbelow(True)
+
+    fig.text(0.01, -0.02, "Source: FATF R.16 · 한국 특금법 시행령 §10의10 · BSA 1996 · EU TFR 2023/1113",
+             fontsize=7.5, color=INK_MUTE, ha="left")
+    savefig(fig, "travel_rule_thresholds")
+
+
+# ========================= Chart 7: FATF Grey/Black Heatmap =========================
+
+def chart_fatf_watchlist():
+    """FATF 2026 Grey/Black 국가 목록 시각화 (categorical strip)"""
+    black = ["북한", "이란", "미얀마"]
+    grey = ["케냐", "나미비아", "필리핀", "콩고민주공화국", "라이베리아", "시리아",
+            "남수단", "예멘", "말리", "베네수엘라", "나이지리아", "크로아티아"]
+
+    fig, ax = plt.subplots(figsize=(10, 5.2))
+
+    # Y positions
+    y_black = 1.0
+    y_grey = 0.0
+
+    # Black list
+    for i, country in enumerate(black):
+        x = i * 2.4
+        ax.add_patch(plt.Rectangle(
+            (x - 0.9, y_black - 0.32), 1.8, 0.64,
+            facecolor="#fee2e2", edgecolor="#dc2626", linewidth=1.2,
+        ))
+        ax.text(x, y_black, country, ha="center", va="center",
+                fontsize=11, fontweight="bold", color="#991b1b")
+
+    # Grey list (two rows)
+    for i, country in enumerate(grey):
+        col = i % 6
+        row = i // 6
+        x = col * 1.8 + 0.5
+        y = y_grey - row * 0.7
+        ax.add_patch(plt.Rectangle(
+            (x - 0.75, y - 0.28), 1.5, 0.56,
+            facecolor="#fff7d6", edgecolor="#c9a646", linewidth=1.0,
+        ))
+        ax.text(x, y, country, ha="center", va="center",
+                fontsize=9, color="#78572d")
+
+    # Labels
+    ax.text(-1.5, y_black, "Black\n(High-Risk)",
+            ha="right", va="center",
+            fontsize=10, fontweight="bold", color="#991b1b",
+            bbox=dict(facecolor="white", edgecolor="#dc2626", boxstyle="round,pad=0.4"))
+    ax.text(-1.5, y_grey - 0.35, "Grey\n(Increased\nMonitoring)",
+            ha="right", va="center",
+            fontsize=10, fontweight="bold", color="#78572d",
+            bbox=dict(facecolor="white", edgecolor="#c9a646", boxstyle="round,pad=0.4"))
+
+    ax.set_xlim(-3.6, 11.5)
+    ax.set_ylim(-1.5, 1.8)
+    ax.axis("off")
+    ax.set_title("FATF 2026 High-Risk · Grey List", loc="left", pad=14,
+                 fontsize=14, fontweight="bold", color=INK)
+
+    fig.text(0.01, 0.02, "Source: FATF Plenary (수시 갱신) — 본 자료는 2026-04 기준",
+             fontsize=7.5, color=INK_MUTE, ha="left")
+    savefig(fig, "fatf_watchlist")
+
+
+# ========================= Chart 8: Vertical Regulation Timeline =========================
+
+def chart_regulation_timeline():
+    """2020~2030 주요 가상자산 AML 규제 타임라인 (세로형)"""
+    events = [
+        (2020.2, "한국 특금법 개정 공포",        "🇰🇷", ACCENT),
+        (2021.3, "한국 VASP 신고제 시행",       "🇰🇷", ACCENT),
+        (2022.3, "한국 Travel Rule 시행",       "🇰🇷", ACCENT),
+        (2022.8, "OFAC Tornado Cash 제재",     "🇺🇸", "#8c6b2f"),
+        (2024.7, "한국 이용자보호법 시행",       "🇰🇷", ACCENT),
+        (2024.12, "EU MiCA + TFR 전면 시행",    "🇪🇺", "#4a5f7e"),
+        (2025.3, "OFAC Tornado 제재 해제",     "🇺🇸", "#8c6b2f"),
+        (2025.6, "FATF R.16 개정",              "🌍", "#c9a646"),
+        (2025.7, "미국 GENIUS Act 통과",        "🇺🇸", "#8c6b2f"),
+        (2026.1, "한국 특금법 개정 (대주주)",    "🇰🇷", ACCENT),
+        (2026.7, "EU MiCA grandfathering 종료",  "🇪🇺", "#4a5f7e"),
+        (2027.1, "GENIUS Act 전면 시행",        "🇺🇸", "#8c6b2f"),
+        (2027.7, "EU AMLR + AMLD6 적용",       "🇪🇺", "#4a5f7e"),
+        (2028.1, "EU AMLA 직접 감독 개시",      "🇪🇺", "#4a5f7e"),
+        (2030.12, "FATF R.16 발효",             "🌍", "#c9a646"),
+    ]
+    today = 2026.31  # ~ 2026-04
+
+    fig, ax = plt.subplots(figsize=(8.4, 11))
+    # Vertical timeline spine
+    ax.plot([0.5, 0.5], [2020, 2031], color=INK, linewidth=1.4, zorder=1)
+
+    for y, label, flag, color in events:
+        is_past = y <= today
+        marker_color = color if not is_past else color
+        marker_face = "white" if not is_past else color
+        # Circle marker
+        ax.scatter(0.5, y, s=130, zorder=3,
+                   facecolor=marker_face, edgecolor=color, linewidth=1.8)
+        # Year label
+        ax.text(0.35, y, f"{int(y)}-{int(round((y-int(y))*12)):02d}",
+                ha="right", va="center",
+                fontsize=9, color=INK_MUTE, fontfamily="monospace")
+        # Event card
+        text = f"{flag}  {label}"
+        ax.text(0.62, y, text,
+                ha="left", va="center",
+                fontsize=10, color=INK,
+                fontweight="bold" if not is_past else "normal",
+                alpha=1.0 if not is_past else 0.78)
+
+    # Today marker
+    ax.axhline(today, xmin=0.05, xmax=0.95, color="#c9a646",
+               linestyle="--", linewidth=1.1, alpha=0.7, zorder=2)
+    ax.text(0.98, today, "  ← 오늘 (2026-04)",
+            ha="left", va="center",
+            fontsize=9, color="#8c6b2f", fontweight="bold")
+
+    ax.set_ylim(2031, 2019.5)  # inverted: 2020 top, 2030 bottom
+    ax.set_xlim(-0.5, 1.7)
+    ax.axis("off")
+    ax.set_title("가상자산 AML 규제 타임라인 (2020~2030)",
+                 loc="left", pad=20, x=-0.06,
+                 fontsize=14, fontweight="bold", color=INK)
+
+    fig.text(0.5, 0.01, "🇰🇷 한국 · 🇺🇸 미국 · 🇪🇺 EU · 🌍 FATF",
+             fontsize=9, color=INK_MUTE, ha="center")
+    savefig(fig, "regulation_timeline")
+
+
 # ========================= Main =========================
 
 CHARTS = [
@@ -318,6 +479,9 @@ CHARTS = [
     ("Illicit Asset Share", chart_illicit_asset_share),
     ("VASP Obligations Radar", chart_vasp_obligations_radar),
     ("2025 Trend Snapshot", chart_trend_2025),
+    ("Travel Rule Thresholds", chart_travel_rule_thresholds),
+    ("FATF Grey/Black Watchlist", chart_fatf_watchlist),
+    ("Regulation Timeline 2020-2030", chart_regulation_timeline),
 ]
 
 

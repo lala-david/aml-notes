@@ -57,6 +57,9 @@
 
 ## 핵심 일정 — 2024~2030 규제 로드맵
 
+![가상자산 AML 규제 타임라인](../../charts/output/regulation_timeline.svg)
+
+
 ```mermaid
 gantt
     title 가상자산 AML 규제 타임라인 (2024~2030)

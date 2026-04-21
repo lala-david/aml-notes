@@ -684,6 +684,29 @@ html, body {
 }
 
 /* ============================================================
+   MERMAID (pre-rendered SVG + client-side fallback)
+   ============================================================ */
+.mermaid-wrap {
+  text-align: center;
+  margin: 4mm 0 6mm 0;
+  break-inside: avoid;
+}
+.mermaid-wrap svg {
+  max-width: 100%;
+  height: auto;
+  max-height: 110mm;
+  display: inline-block;
+}
+.section__body--rich .mermaid-wrap svg {
+  max-height: 80mm;
+}
+.mermaid-wrap pre.mermaid {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============================================================
    PRINT
    ============================================================ */
 @media print {
