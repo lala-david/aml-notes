@@ -13,6 +13,22 @@
 
 ## 1. CDD (Customer Due Diligence) — 표준 4단계
 
+```mermaid
+flowchart LR
+    O["📥 Onboarding"] --> S1["1. 신원확인"]
+    S1 --> S2["2. 실소유자 BO<br/>(법인 25%+)"]
+    S2 --> S3["3. 거래목적·자금원천"]
+    S3 --> S4["4. 지속 모니터링"]
+    S4 -.재실사 주기.-> R["저5 · 중3 · 고1년"]
+    S4 -.트리거.-> EDD["🔒 EDD 발동<br/>PEP · 고위험국 · 거액 ..."]
+    style EDD fill:#fed7aa,stroke:#ea580c
+    style S1 fill:#e5eaf2,stroke:#1a2e4a
+    style S2 fill:#e5eaf2,stroke:#1a2e4a
+    style S3 fill:#e5eaf2,stroke:#1a2e4a
+    style S4 fill:#e5eaf2,stroke:#1a2e4a
+```
+
+
 ### 왜 4단계 구조인가
 
 CDD는 "한 번 신분증 찍고 끝"이 아니라 **고객과의 관계 전체에 걸친 지속 공정**입니다. 4단계로 나눈 것은 FATF R.10이 요구한 4가지 요소를 각자 독립 작업으로 관리하기 위해서. 이 중 어느 하나만 빠져도 규제 위반으로 간주됩니다.

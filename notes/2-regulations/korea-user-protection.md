@@ -263,7 +263,7 @@ VASP는 **가상자산 거래의 내용을 추적·검색하거나 오류 확인
 ## 더 읽을거리
 - [`korea-fiu-act.md`](korea-fiu-act.md) — 특금법 (AML 측면)
 - [`../3-crypto-aml/vasp-obligations.md`](../3-crypto-aml/vasp-obligations.md) — VASP 9대 의무 통합
-- [국가법령정보센터 — 가상자산이용자보호법 원문](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099)
+- [국가법령정보센터 — 가상자산이용자보호법 원문](https://www.law.go.kr/법령/가상자산이용자보호등에관한법률)
 - [FSC — 가상자산이용자보호법 시행 보도자료 (2024-07-18)](https://www.fsc.go.kr/po010101/82682)
 - [김·장 — 가상자산 이용자 보호법안의 주요 내용](https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=27420)
 - [KISO 저널 — 주요 내용과 쟁점](https://journal.kiso.or.kr/?p=12709)

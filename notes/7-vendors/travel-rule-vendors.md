@@ -12,6 +12,20 @@
 
 ## 1. 시장 구조 — 3가지 모델
 
+```mermaid
+flowchart TB
+    M["📨 IVMS101<br/>(공통 페이로드)"] --> CON["컨소시엄형<br/>VerifyVASP · CODE · Sygna"]
+    M --> SAAS["SaaS Gateway<br/>Notabene (1,500+ VASP)"]
+    M --> DIST["분산형<br/>TRISA · TRP · OpenVASP"]
+    CON -.한국 친화.-> KR["🇰🇷 4대 거래소"]
+    SAAS -.멀티프로토콜 허브.-> ALL["✅ Sunrise 해결책"]
+    DIST -.오픈 PKI.-> OPEN["누구나 참여"]
+    style M fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style SAAS fill:#fff7d6,stroke:#c9a646
+    style ALL fill:#d1fae5,stroke:#10b981
+```
+
+
 ```
 [ 메시지 표준: IVMS101 (모두 공통 사용) ]
                   │

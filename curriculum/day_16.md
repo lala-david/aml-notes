@@ -30,7 +30,7 @@ flowchart LR
 - 보조: [`../notes/3-crypto-aml/vasp-obligations.md`](../notes/3-crypto-aml/vasp-obligations.md) — 1절
 
 ## 🌐 외부 자료 (선택, ~15분)
-- [FATF — Updated Guidance for RBA on VAs and VASPs (2021)](https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Updated-Guidance-RBA-VA-VASP.html)
+- [FATF — Updated Guidance for RBA on VAs and VASPs (2021)](https://www.fatf-gafi.org/en/publications/Virtualassets/Updated-guidance-rba-virtual-assets.html)
 - [FATF Virtual Assets 페이지](https://www.fatf-gafi.org/en/topics/virtual-assets.html)
 
 ## 🛠️ 미니 챌린지 (~10분)

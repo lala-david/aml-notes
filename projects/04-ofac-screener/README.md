@@ -10,12 +10,12 @@ flowchart LR
     F --> X["OFAC SDN.xml 파싱"]
     X --> CACHE["💾 cache/sdn_crypto.json<br/>(메모리 dict)"]
 
-    I["🔍 screen(address)"] -->|O(1) lookup| CACHE
+    I["🔍 screen(address)"] -->|in-memory lookup| CACHE
     CACHE --> M{"매칭?"}
     M -->|YES| B["⛔ matched: true<br/>entity · sdn_id · program"]
     M -->|NO| OK["✅ matched: false"]
 
-    BULK["📋 bulk_screen([addr])"] -->|for each| I
+    BULK["📋 bulk_screen"] -->|for each| I
 
     style CACHE fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style B fill:#fee2e2,stroke:#dc2626

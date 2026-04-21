@@ -13,6 +13,21 @@
 
 ## 1. 두 축 — Clustering + Attribution
 
+```mermaid
+flowchart LR
+    TX["⛓️ 온체인 거래"] --> CL["🧩 Clustering<br/>(구조 분석)"]
+    CL --> CIOH["CIOH · Change · Deposit"]
+    CIOH --> C["📦 Cluster ID"]
+    C --> A["🏷 Attribution<br/>(라벨 데이터)"]
+    A --> E["Exchange · Mixer · SDN<br/>Darknet · Ransomware"]
+    A --> SCORE["🎯 Risk Score · Exposure"]
+    A -.벤더.-> V["Chainalysis · TRM · Elliptic · Crystal"]
+    style C fill:#e5eaf2,stroke:#1a2e4a
+    style A fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style SCORE fill:#fff7d6,stroke:#c9a646
+```
+
+
 ### 블록체인 분석이 답하려는 두 질문
 
 블록체인 분석은 결국 두 가지 질문에 답하는 것입니다.

@@ -29,7 +29,7 @@ flowchart LR
 - 메인: [`../notes/1-foundations/what-is-aml.md`](../notes/1-foundations/what-is-aml.md)
 
 ## 🌐 외부 자료 (선택, ~15분)
-- [FATF — Money Laundering 페이지](https://www.fatf-gafi.org/en/topics/money-laundering.html)
+- [FATF — Money Laundering 페이지](https://www.fatf-gafi.org/en/topics/money-laundering)
 - [UNODC — Money Laundering Overview](https://www.unodc.org/unodc/en/money-laundering/overview.html)
 
 ## 🛠️ 미니 챌린지 (~15분)

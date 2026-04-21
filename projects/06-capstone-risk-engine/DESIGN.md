@@ -249,11 +249,11 @@ flowchart TB
 - [`../../notes/7-vendors/`](../../notes/7-vendors/) — 솔루션 벤더
 - [`../../notes/6-cases/`](../../notes/6-cases/) — 사례
 - [`../../deep/`](../../deep/) — 학술/리서치
-- [`../01_ivms101_builder/`](../01_ivms101_builder/) — Travel Rule 빌더
-- [`../02_onchain_tracer/`](../02_onchain_tracer/) — Onchain trace
-- [`../03_mixer_fetcher/`](../03_mixer_fetcher/) — Mixer DB
-- [`../04_ofac_screener/`](../04_ofac_screener/) — OFAC 스크리너
-- [`../05_kyt_wrapper/`](../05_kyt_wrapper/) — KYT wrapper
+- [`../01-ivms101-builder/`](../01-ivms101-builder/) — Travel Rule 빌더
+- [`../02-onchain-tracer/`](../02-onchain-tracer/) — Onchain trace
+- [`../03-mixer-fetcher/`](../03-mixer-fetcher/) — Mixer DB
+- [`../04-ofac-screener/`](../04-ofac-screener/) — OFAC 스크리너
+- [`../05-kyt-wrapper/`](../05-kyt-wrapper/) — KYT wrapper
 
 ---
 

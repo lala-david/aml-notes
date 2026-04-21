@@ -32,7 +32,7 @@ flowchart TB
 - 메인: [`../notes/2-regulations/korea-user-protection.md`](../notes/2-regulations/korea-user-protection.md) — 1~4절
 
 ## 🌐 외부 자료 (선택, ~15분)
-- [국가법령정보센터 — 가상자산이용자보호법](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099)
+- [국가법령정보센터 — 가상자산이용자보호법](https://www.law.go.kr/법령/가상자산이용자보호등에관한법률)
 - [FSC — 시행 보도자료](https://www.fsc.go.kr/po010101/82682)
 
 ## 🛠️ 미니 챌린지 (~10분)

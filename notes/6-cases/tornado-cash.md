@@ -217,4 +217,4 @@ Tornado Cash 사건 전후로 전 세계 mixer들이 어떻게 정리됐는지. 
 - [Venable — Treasury Lifts Sanctions on Tornado (2025)](https://www.venable.com/insights/publications/2025/04/a-legal-whirlwind-settles-treasury-lifts-sanctions)
 - [Sanction Scanner — Tornado Cash 분석](https://www.sanctionscanner.com/blog/tornado-cash-a-crypto-mixing-service-now-blacklisted-by-the-us-treasury-675)
 - [BTC Policy Institute — Tornado 분석](https://www.btcpolicy.org/articles/tornado-cash-where-code-privacy-and-sanctions-collide)
-- [Steptoe — Tornado Cash & DeFi AML 의의](https://www.steptoe.com/en/news-publications/blockchain-blog/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html)
+- [Steptoe — Tornado Cash & DeFi AML 의의](https://www.steptoe.com/en/news-publications/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html)

@@ -32,7 +32,7 @@ flowchart TB
 
 ## 🌐 외부 자료 (~20분)
 - [DTI Foundation](https://dtif.org/)
-- [GLEIF LEI 공식](https://www.gleif.org/en/about-lei/introducing-the-legal-entity-identifier-lei)
+- [GLEIF LEI 공식](https://www.gleif.org/en/about-lei/this-is-lei)
 
 ## 🛠️ 미니 챌린지 (~5분)
 - VASP Discovery 5가지 방법 (Attribution DB / VASP Directory / DTI / LEI / 직접 등록) 각 한 줄 정리

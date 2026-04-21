@@ -35,7 +35,7 @@ flowchart TB
 
 ## 🌐 외부 자료 (~25분)
 - [Notabene — IVMS101 분석](https://notabene.id/travel-rule-messaging-protocols/ivms-101)
-- [VerifyVASP IVMS101 문서](https://docs.verifyvasp.com/reference/ivms101/ivms101)
+- [VerifyVASP IVMS101 문서](https://www.verifyvasp.com/)
 
 ## 🛠️ 미니 챌린지 (~10분)
 - IVMS101 JSON 스키마 의사코드 작성 (Originator → name + address + accountNumber 만)

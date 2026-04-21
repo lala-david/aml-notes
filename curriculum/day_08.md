@@ -33,7 +33,7 @@ flowchart LR
 - 메인: [`../notes/2-regulations/korea-fiu-act.md`](../notes/2-regulations/korea-fiu-act.md) — 1~5절
 
 ## 🌐 외부 자료 (선택, ~15분)
-- [국가법령정보센터 — 특금법](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787) — §2(정의), §7(신고)만
+- [국가법령정보센터 — 특금법](https://www.law.go.kr/법령/특정금융거래정보의보고및이용등에관한법률) — §2(정의), §7(신고)만
 - [FSC — 신고매뉴얼 PDF](https://www.fsc.go.kr/comm/getFile?srvcId=BBSTY1&upperNo=75409&fileTy=ATTACH&fileNo=6) — 표지 + 목차만
 
 ## 🛠️ 미니 챌린지 (~10분)

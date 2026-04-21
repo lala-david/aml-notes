@@ -13,6 +13,24 @@
 
 ## 1. 5 Pillars of AML Program
 
+```mermaid
+flowchart TB
+    Board["🏛 이사회<br/>(감사위원회)"] --> Audit["3선<br/>Internal Audit"]
+    Board --> CEO["👔 CEO"]
+    CEO --> CCO["CCO / Risk"]
+    CCO --> AMLO["🎖 AMLO (임원급)<br/>STR 결정권"]
+    CEO --> COO["COO 영업"]
+    COO --> Front["1선<br/>Business · CS · KYC 1차"]
+    AMLO --> Comp["2선<br/>Compliance · KYT · STR"]
+    Audit -.독립 검증.-> Front
+    Audit -.독립 검증.-> Comp
+    style AMLO fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style Audit fill:#fff7d6,stroke:#c9a646
+    style Front fill:#e5eaf2,stroke:#1a2e4a
+    style Comp fill:#e5eaf2,stroke:#1a2e4a
+```
+
+
 ### 왜 "5 Pillars"인가
 
 미국 BSA가 명시화한 AML 프로그램의 5대 기둥. 한국·EU도 사실상 동일한 요소를 요구합니다. 이 5개를 모두 갖추지 않으면 "AML 프로그램이 있다"고 말할 수 없으며, 감독 검사에서도 이 5개 항목을 개별 평가합니다.

@@ -254,5 +254,5 @@ R.15와 R.16은 한국 특금법 개정(2020-03, 2021-03)과 EU MiCA·TFR 제정
 - [`why-crypto-different.md`](why-crypto-different.md) — 왜 가상자산 AML은 다른가
 - [`key-concepts.md`](key-concepts.md) — KYC/KYT/CDD/EDD/STR/CTR 정의 상세
 - [`../2-regulations/fatf.md`](../2-regulations/fatf.md) — FATF 권고안 R.15/R.16 deep
-- [FATF — Money Laundering](https://www.fatf-gafi.org/en/topics/money-laundering.html)
+- [FATF — Money Laundering](https://www.fatf-gafi.org/en/topics/money-laundering)
 - [UNODC — Money Laundering Overview](https://www.unodc.org/unodc/en/money-laundering/overview.html)

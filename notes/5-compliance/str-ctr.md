@@ -13,6 +13,22 @@
 
 ## 1. STR — AML 시스템의 출구
 
+```mermaid
+flowchart LR
+    A["🚨 1선 알람<br/>(KYT·CS)"] --> B["🔍 2선 분석<br/>(컴플라이언스)"]
+    B --> C["📝 STR 작성<br/>사실·사유·증빙·유관"]
+    C --> D["✍️ AMLO 결재"]
+    D --> K["🏛 KoFIU<br/>(전자보고)"]
+    K --> P["🚓 경찰·검찰"]
+    K --> N["🏢 국세청·관세청·국정원"]
+    K --> F["📊 금감원"]
+    C -.Tipping-off 금지.-> X["❌ 고객 누설 시 별도 처벌"]
+    style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style K fill:#fff7d6,stroke:#c9a646
+    style X fill:#fee2e2,stroke:#dc2626
+```
+
+
 ### 왜 STR이 그렇게 중요한가
 
 STR은 AML 시스템이 만드는 **최종 산출물**입니다. KYC로 고객을 확인하고, KYT로 거래를 분석하고, 제재 스크리닝으로 차단을 하는 이 모든 과정이 결국 **"의심되는 거래를 FIU에게 알리기 위한"** 것입니다. STR이 없으면 수사기관은 범죄수익을 추적할 수 없고, AML 전체가 무용지물.

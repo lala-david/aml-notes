@@ -13,6 +13,22 @@
 
 ## 1. 제재의 종류
 
+```mermaid
+flowchart TB
+    S["🔍 Sanctions Screening"] --> Pre["A. 사전 (Onboarding)<br/>이름·DOB·국적"]
+    S --> Live["B. 실시간 (Transaction)<br/>이름 + 지갑주소"]
+    S --> Batch["C. 사후 (Daily Batch)<br/>전체 고객 재대조"]
+    Pre & Live & Batch --> M{"매칭?"}
+    M -->|YES + 확실| BLOCK["⛔ 차단 + STR"]
+    M -->|YES + 모호| REV["👀 분석가 검토 (FP disposition)"]
+    M -->|NO| OK["✅ 통과"]
+    style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style BLOCK fill:#fee2e2,stroke:#dc2626
+    style REV fill:#fed7aa,stroke:#ea580c
+    style OK fill:#d1fae5,stroke:#10b981
+```
+
+
 ### 왜 제재가 AML의 별도 축인가
 
 제재(Sanctions)는 AML과 자주 묶이지만 **방향이 다릅니다**. AML은 범죄수익의 세탁을 막는 **사후** 통제라면, 제재는 특정 대상과의 거래 자체를 막는 **사전** 차단. 그래서 제재 스크리닝은 거래 발생 **이전**에 작동해야 의미가 있고, 이게 VASP가 **Pre-transaction screening** 인프라를 무겁게 구축해야 하는 이유입니다.

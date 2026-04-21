@@ -30,7 +30,7 @@ flowchart LR
 - 보조: [`../notes/2-regulations/korea-user-protection.md`](../notes/2-regulations/korea-user-protection.md) — 7절 (시세조종 처벌)
 
 ## 🌐 외부 자료 (~15분)
-- [법률신문 — 미신고 VASP FIU 단속 (2025-12)](https://www.lawtimes.co.kr/LawFirm-NewsLetter/214374)
+- [법률신문 — 미신고 VASP FIU 단속 (2025-12)](https://m.lawtimes.co.kr)
 - [CaseNote — 서울남부지법 2024고단89](https://casenote.kr/%EC%84%9C%EC%9A%B8%EB%82%A8%EB%B6%80%EC%A7%80%EB%B0%A9%EB%B2%95%EC%9B%90/2024%EA%B3%A0%EB%8B%A889)
 
 ## 🛠️ 미니 챌린지 (~5분)

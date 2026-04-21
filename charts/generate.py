@@ -37,28 +37,45 @@ PALETTE = ["#1a2e4a", "#4a5f7e", "#7e8ba4", "#c9a646", "#8c6b2f", "#6b7280"]
 
 # Register all Korean fonts found on system
 from matplotlib import font_manager as fm
-_ko_keywords = ("pretendard", "malgun", "applesd", "notosans", "gothic", "batang")
+
+_ko_keywords = ("pretendard", "malgun", "applesd", "notosans", "notosanskr", "notosanscjkkr")
 for _f in fm.findSystemFonts():
-    _name = Path(_f).stem.lower()
-    if any(k in _name for k in _ko_keywords):
+    _stem = Path(_f).stem.lower()
+    if any(k in _stem for k in _ko_keywords):
         try:
             fm.fontManager.addfont(_f)
         except Exception:
             pass
 
-# Pick first available from preference list
+# Pick first available from preference list (prefer Malgun Gothic on Windows — always works)
 _available = {f.name for f in fm.fontManager.ttflist}
 _ko_font = None
-for _candidate in ["Pretendard", "Pretendard Variable", "Malgun Gothic",
-                    "Apple SD Gothic Neo", "Noto Sans KR", "AppleSDGothicNeoR00"]:
+for _candidate in ["Malgun Gothic",
+                    "Pretendard", "Pretendard Variable",
+                    "Apple SD Gothic Neo", "Noto Sans KR",
+                    "NanumGothic", "AppleGothic"]:
     if _candidate in _available:
         _ko_font = _candidate
         break
 if _ko_font is None:
     _ko_font = "DejaVu Sans"
+    print(f"[WARN] No Korean font found; Korean text may render as tofu.",
+          file=sys.stderr)
+else:
+    print(f"[INFO] Using Korean font: {_ko_font}", file=sys.stderr)
 
-plt.rcParams["font.family"] = "sans-serif"
-plt.rcParams["font.sans-serif"] = [_ko_font, "DejaVu Sans", "Arial"]
+# Force the Korean font as the primary family — also on sans-serif AND serif
+# lists so weighted/italic variants don't fall back to a glyph-less font.
+plt.rcParams["font.family"] = _ko_font
+plt.rcParams["font.sans-serif"] = [_ko_font, "DejaVu Sans"]
+plt.rcParams["font.serif"] = [_ko_font, "DejaVu Serif"]
+plt.rcParams["font.monospace"] = [_ko_font, "Consolas", "DejaVu Sans Mono"]
+# Disable auto-fallback to glyph-less Latin fonts
+plt.rcParams["axes.unicode_minus"] = False
+
+# Apply seaborn style FIRST, then override with our fonts — seaborn.set_style
+# resets font params otherwise.
+sns.set_style("ticks")
 
 plt.rcParams.update({
     "axes.edgecolor": INK,
@@ -82,9 +99,10 @@ plt.rcParams.update({
     "savefig.dpi": 300,
     "savefig.bbox": "tight",
     "savefig.pad_inches": 0.25,
+    # Re-apply Korean font after sns.set_style may have reset it
+    "font.family": _ko_font,
+    "font.sans-serif": [_ko_font, "DejaVu Sans"],
 })
-
-sns.set_style("ticks")
 
 
 def savefig(fig, name: str):
@@ -295,8 +313,7 @@ def chart_trend_2025():
         ax.add_patch(plt.Rectangle((0.03, 0.03), 0.94, 0.15, fill=True,
                                     color=color, edgecolor=color))
         ax.text(0.5, 0.62, big, ha="center", va="center",
-                fontsize=28, fontweight="bold", color=INK,
-                fontfamily=["IBM Plex Serif", "serif"])
+                fontsize=28, fontweight="bold", color=INK)
         ax.text(0.5, 0.38, small, ha="center", va="center",
                 fontsize=10, color=INK_SOFT)
         ax.text(0.5, 0.105, sub, ha="center", va="center",
@@ -315,12 +332,12 @@ def chart_trend_2025():
 def chart_travel_rule_thresholds():
     """관할별 Travel Rule 임계금액 비교 (USD 환산)"""
     data = pd.DataFrame({
-        "juris":  ["EU (TFR)",  "싱가포르",   "일본",      "🌍 FATF 권고", "한국",       "미국 (BSA)"],
+        "juris":  ["EU (TFR)",  "싱가포르",   "일본",      "FATF 권고", "한국",       "미국 (BSA)"],
         "usd":    [0,           1130,         780,         1000,           770,          3000],
         "native": ["€0 (모든 거래)", "SGD 1,500",  "¥100,000",  "USD/EUR 1,000", "₩1,000,000", "$3,000"],
     })
     data = data.sort_values("usd", ascending=True).reset_index(drop=True)
-    colors = ["#c9a646" if j == "🌍 FATF 권고" else ACCENT for j in data["juris"]]
+    colors = ["#c9a646" if j == "FATF 권고" else ACCENT for j in data["juris"]]
 
     fig, ax = plt.subplots(figsize=(9.2, 4.8))
     y = range(len(data))
@@ -411,21 +428,21 @@ def chart_fatf_watchlist():
 def chart_regulation_timeline():
     """2020~2030 주요 가상자산 AML 규제 타임라인 (세로형)"""
     events = [
-        (2020.2, "한국 특금법 개정 공포",        "🇰🇷", ACCENT),
-        (2021.3, "한국 VASP 신고제 시행",       "🇰🇷", ACCENT),
-        (2022.3, "한국 Travel Rule 시행",       "🇰🇷", ACCENT),
-        (2022.8, "OFAC Tornado Cash 제재",     "🇺🇸", "#8c6b2f"),
-        (2024.7, "한국 이용자보호법 시행",       "🇰🇷", ACCENT),
-        (2024.12, "EU MiCA + TFR 전면 시행",    "🇪🇺", "#4a5f7e"),
-        (2025.3, "OFAC Tornado 제재 해제",     "🇺🇸", "#8c6b2f"),
-        (2025.6, "FATF R.16 개정",              "🌍", "#c9a646"),
-        (2025.7, "미국 GENIUS Act 통과",        "🇺🇸", "#8c6b2f"),
-        (2026.1, "한국 특금법 개정 (대주주)",    "🇰🇷", ACCENT),
-        (2026.7, "EU MiCA grandfathering 종료",  "🇪🇺", "#4a5f7e"),
-        (2027.1, "GENIUS Act 전면 시행",        "🇺🇸", "#8c6b2f"),
-        (2027.7, "EU AMLR + AMLD6 적용",       "🇪🇺", "#4a5f7e"),
-        (2028.1, "EU AMLA 직접 감독 개시",      "🇪🇺", "#4a5f7e"),
-        (2030.12, "FATF R.16 발효",             "🌍", "#c9a646"),
+        (2020.2, "한국 특금법 개정 공포",        "KR", ACCENT),
+        (2021.3, "한국 VASP 신고제 시행",       "KR", ACCENT),
+        (2022.3, "한국 Travel Rule 시행",       "KR", ACCENT),
+        (2022.8, "OFAC Tornado Cash 제재",     "US", "#8c6b2f"),
+        (2024.7, "한국 이용자보호법 시행",       "KR", ACCENT),
+        (2024.12, "EU MiCA + TFR 전면 시행",    "EU", "#4a5f7e"),
+        (2025.3, "OFAC Tornado 제재 해제",     "US", "#8c6b2f"),
+        (2025.6, "FATF R.16 개정",              "FATF", "#c9a646"),
+        (2025.7, "미국 GENIUS Act 통과",        "US", "#8c6b2f"),
+        (2026.1, "한국 특금법 개정 (대주주)",    "KR", ACCENT),
+        (2026.7, "EU MiCA grandfathering 종료",  "EU", "#4a5f7e"),
+        (2027.1, "GENIUS Act 전면 시행",        "US", "#8c6b2f"),
+        (2027.7, "EU AMLR + AMLD6 적용",       "EU", "#4a5f7e"),
+        (2028.1, "EU AMLA 직접 감독 개시",      "EU", "#4a5f7e"),
+        (2030.12, "FATF R.16 발효",             "FATF", "#c9a646"),
     ]
     today = 2026.31  # ~ 2026-04
 
@@ -444,9 +461,15 @@ def chart_regulation_timeline():
         ax.text(0.35, y, f"{int(y)}-{int(round((y-int(y))*12)):02d}",
                 ha="right", va="center",
                 fontsize=9, color=INK_MUTE, fontfamily="monospace")
-        # Event card
-        text = f"{flag}  {label}"
-        ax.text(0.62, y, text,
+        # Flag tag (colored pill)
+        ax.text(0.62, y, flag,
+                ha="left", va="center",
+                fontsize=8, color="white",
+                fontweight="bold",
+                bbox=dict(facecolor=color, edgecolor=color,
+                          boxstyle="round,pad=0.25"))
+        # Event text
+        ax.text(0.82, y, label,
                 ha="left", va="center",
                 fontsize=10, color=INK,
                 fontweight="bold" if not is_past else "normal",
@@ -466,7 +489,7 @@ def chart_regulation_timeline():
                  loc="left", pad=20, x=-0.06,
                  fontsize=14, fontweight="bold", color=INK)
 
-    fig.text(0.5, 0.01, "🇰🇷 한국 · 🇺🇸 미국 · 🇪🇺 EU · 🌍 FATF",
+    fig.text(0.5, 0.01, "KR 한국 · US 미국 · EU · FATF",
              fontsize=9, color=INK_MUTE, ha="center")
     savefig(fig, "regulation_timeline")
 

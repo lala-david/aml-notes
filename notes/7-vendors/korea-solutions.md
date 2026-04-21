@@ -14,6 +14,21 @@
 
 ## 1. 한국 가상자산 산업 지도
 
+```mermaid
+flowchart TB
+    KR["🇰🇷 한국 VASP"] --> EX["거래소<br/>업비트·빗썸·코빗·코인원"]
+    KR --> CUS["수탁<br/>한국디지털자산수탁·Kodax<br/>Bestcoin·BitGo Korea"]
+    KR --> AN["분석·솔루션<br/>람다256·ARGOS·ICONLOOP"]
+    EX & CUS --> KYC["본인확인 (PASS·NICE·KCB)"]
+    EX & CUS --> KYT["KYT (Chainalysis·TRM·Elliptic)"]
+    EX --> TR["Travel Rule<br/>VerifyVASP / CODE"]
+    EX & CUS --> ISMS["KISA ISMS"]
+    EX --> DAXA["DAXA (자율규제·상장 심사)"]
+    style KR fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style DAXA fill:#fff7d6,stroke:#c9a646
+```
+
+
 ### 한눈에 보기
 
 ```

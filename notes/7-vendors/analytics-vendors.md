@@ -13,6 +13,20 @@
 
 ## 1. 왜 벤더가 필요한가
 
+```mermaid
+flowchart LR
+    Need["⚙️ KYT 벤더<br/>핵심 가치"] --> A["📊 Attribution DB<br/>수년 누적 라벨"]
+    Need --> B["🌍 Global Coverage<br/>전 체인·전 거래소"]
+    Need --> C["⚖️ 규제 신뢰도<br/>검사·법집행 인정"]
+    A --> Top["Chainalysis (북미·정부 표준)"]
+    A --> T2["Elliptic (영국·EU)"]
+    A --> T3["TRM Labs (cross-chain·실시간)"]
+    A --> T4["Crystal (러시아·동유럽)"]
+    style Need fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style A fill:#fff7d6,stroke:#c9a646
+```
+
+
 ### 자체 구축의 3대 벽
 
 이 시장은 **"라벨 DB라는 moat"** 가 지배합니다. 알고리즘은 오픈소스·논문으로 공개돼 있어 따라 만들 수 있지만, 수년간 쌓아 온 attribution 데이터(거래소·믹서·다크넷·SDN 라벨)는 따라잡을 수 없는 자산입니다. 자체 구축 시 부딪히는 3대 벽:

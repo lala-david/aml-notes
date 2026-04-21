@@ -242,4 +242,4 @@ Paxful 같은 P2P, BitGo 같은 기술 인프라도 표적. **모든 VASP가 컴
 - [`../5-compliance/internal-controls.md`](../5-compliance/internal-controls.md) — 내부통제
 - [Akin — Paxful FinCEN action](https://www.akingump.com/en/insights/alerts/fincen-publishes-first-set-of-compliance-considerations-in-parallel-civil-and-doj-enforcement-actions-against-crypto-company-paxful)
 - [Corporate Compliance Insights — DOJ·FinCEN VA platform AML](https://www.corporatecomplianceinsights.com/doj-fincen-resolution-virtual-asset-platform-aml-violations/)
-- [법률신문 — 미신고 VASP FIU 단속 (2025-12)](https://www.lawtimes.co.kr/LawFirm-NewsLetter/214374)
+- [법률신문 — 미신고 VASP FIU 단속 (2025-12)](https://m.lawtimes.co.kr)

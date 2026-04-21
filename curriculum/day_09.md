@@ -34,7 +34,7 @@ flowchart LR
 
 ## 🌐 외부 자료 (선택, ~15분)
 - [블록미디어 — 2026-01 특금법 개정안 통과](https://www.blockmedia.co.kr/archives/1038007)
-- [법률신문 — 자금세탁·트래블룰 칼럼](https://www.lawtimes.co.kr/news/articleView.html?idxno=214789)
+- [법률신문 — 자금세탁·트래블룰 칼럼](https://m.lawtimes.co.kr)
 
 ## 🛠️ 미니 챌린지 (~10분)
 - 특금법 9 의무 (Day 6 9의무) → 특금법 § 매핑 시도 (틀려도 OK, 다음 시간 D14에 보완)

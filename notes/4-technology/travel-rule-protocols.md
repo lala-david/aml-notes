@@ -13,6 +13,21 @@
 
 ## 1. 표준 vs 프로토콜 vs Discovery — 3개를 분리해서 이해하라
 
+```mermaid
+flowchart TB
+    L1["📦 메시지 표준<br/>무엇을 담는가"] --> M["IVMS101<br/>(JSON Schema)"]
+    L2["📡 전송 프로토콜<br/>어떻게 주고받는가"] --> P1["TRISA · TRP · OpenVASP"]
+    L2 --> P2["VerifyVASP · CODE<br/>Notabene · Sygna"]
+    L3["🔎 VASP Discovery<br/>누가 누구인가"] --> D1["Attribution DB"]
+    L3 --> D2["Directory · DTI · LEI"]
+    L1 -.같은 IVMS101 메시지.-> L2
+    L2 -.라우팅 시 별도 식별.-> L3
+    style L1 fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style L2 fill:#c9a646,color:#fff,stroke:#c9a646
+    style L3 fill:#4a5f7e,color:#fff,stroke:#4a5f7e
+```
+
+
 ### 왜 혼동이 자주 일어나나
 
 Travel Rule 구현에서 용어 혼동의 대부분은 **"메시지에 뭘 넣을지"(표준)** 와 **"어떻게 주고받을지"(프로토콜)** 와 **"누구에게 보낼지"(Discovery)** 가 서로 다른 층위라는 걸 몰라서 생깁니다. 이 3개는 독립적으로 선택할 수 있으며, 같은 IVMS101 메시지를 다른 프로토콜로 주고받을 수 있습니다.
@@ -317,5 +332,5 @@ Upbit (VerifyVASP)
 - [Notabene — VerifyVASP 분석](https://notabene.id/travel-rule-messaging-protocols/verifyvasp)
 - [21 Analytics — Open-Source IVMS101](https://www.21analytics.co/blog/21-analytics-open-sources-its-intervasp-ivms-101-implementation/)
 - [Sygna — IVMS101 합의 발표](https://www.sygna.io/blog/joint-working-group-adopts-ivms101-crypto-messaging-standard-for-fatf-travel-rule/)
-- [VerifyVASP IVMS101 문서](https://docs.verifyvasp.com/reference/ivms101/ivms101)
+- [VerifyVASP IVMS101 문서](https://www.verifyvasp.com/)
 - [CodeVASP 공식 사이트](https://www.codevasp.com/ko)

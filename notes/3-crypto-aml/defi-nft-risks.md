@@ -238,4 +238,4 @@ LST·LRT 세탁은 2025~2026년 부상 중인 신종 유형입니다. ETH → st
 - [`../4-technology/blockchain-analytics.md`](../4-technology/blockchain-analytics.md) — cross-chain tracing 기법
 - [`../6-cases/tornado-cash.md`](../6-cases/tornado-cash.md) — DeFi 첫 제재 사례
 - [Transnet — DeFi Compliance 2026 Guide](https://transnetinc.com/navigating-compliance-challenges-in-defi-a-2026-guide)
-- [Steptoe — Tornado Cash & DeFi AML implications](https://www.steptoe.com/en/news-publications/blockchain-blog/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html)
+- [Steptoe — Tornado Cash & DeFi AML implications](https://www.steptoe.com/en/news-publications/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html)
