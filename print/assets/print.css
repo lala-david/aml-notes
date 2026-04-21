@@ -25,7 +25,10 @@
   --font-serif: 'IBM Plex Serif', 'Noto Serif KR', Georgia, serif;
 }
 
-@page { size: A4 portrait; margin: 0; }
+/* Real @page margin so the browser's print dialog default margins
+   do not squeeze or scale our 210mm content. Inner .page padding is
+   stripped in @media print below (see bottom of file). */
+@page { size: A4 portrait; margin: 16mm 14mm 14mm 14mm; }
 
 html, body {
   margin: 0; padding: 0;
@@ -37,7 +40,10 @@ html, body {
   text-rendering: geometricPrecision;
 }
 
-/* ----- Page container ----- */
+/* ----- Page container -----
+   Screen: fixed 210×297mm preview card.
+   Print: overridden to fluid (see @media print below) so content fills
+          the physical printable area without double-margin clipping. */
 .page, .article-page {
   width: 210mm;
   min-height: 297mm;
@@ -707,12 +713,50 @@ html, body {
 }
 
 /* ============================================================
-   PRINT
+   PRINT — let @page own the margins, flatten container sizing.
+   Chrome/Edge/Firefox all respect @page { margin } reliably, but they
+   do NOT reliably honor a 210mm-wide element + 0 @page margin when the
+   user's print dialog adds default margins. Keeping the element fluid
+   during print avoids overflow/scaling.
    ============================================================ */
 @media print {
-  html, body { background: white; }
+  html, body {
+    background: white;
+    margin: 0; padding: 0;
+    width: auto; height: auto;
+  }
   .page, .article-page, .article-divider {
-    margin: 0; box-shadow: none; page-break-after: always;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child, .article-page:last-child, .article-divider:last-child {
+    page-break-after: auto; break-after: auto;
+  }
+  /* Footer marks: drop absolute positioning in print (container is now
+     fluid, so "bottom: 8mm" no longer aligns to paper bottom). Let them
+     flow at the end of each page's content. */
+  .footer-mark, .article-foot {
+    position: static;
+    margin-top: 10mm;
+    padding-top: 3mm;
+    border-top: 0.4px solid var(--rule);
+  }
+  /* Cover/divider pages: keep some breathing room even when fluid. */
+  .article-divider {
+    padding: 30mm 4mm 20mm 4mm !important;
+  }
+  .mermaid-wrap svg {
+    max-width: 100% !important;
+    max-height: 90mm !important;
+  }
+  .article-body table, .article-body pre, .section__body--rich table, .section__body--rich pre {
+    break-inside: avoid;
   }
   .no-print { display: none !important; }
   a { color: inherit; text-decoration: none; }
