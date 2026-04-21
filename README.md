@@ -10,6 +10,9 @@
 ![Mini Projects](https://img.shields.io/badge/projects-6-purple)
 ![Prose Revamp](https://img.shields.io/badge/prose%20revamp-complete-brightgreen)
 ![Print Ready](https://img.shields.io/badge/print%20ready-A4-red)
+![Mermaid](https://img.shields.io/badge/mermaid-114%20diagrams-1f425f)
+![Charts](https://img.shields.io/badge/seaborn%20charts-8-blueviolet)
+![Links](https://img.shields.io/badge/links-validated-brightgreen)
 
 ---
 
@@ -21,6 +24,8 @@
 - ✅ **팩트 정확성** — 감독당국 검사·STR 작성에 인용 가능한 정확도를 목표
 - ✅ **한국 VASP 실무 관점** — KoFIU 검사·DAXA 기준·본인확인기관·ISMS 등 한국 특수 인프라 반영
 - 🖨 **A4 프린트 준비 완료** — 60일 전체가 인쇄 최적화 HTML 패킷으로 생성돼 있어 종이 학습 가능
+- 📊 **Mermaid 114개 + seaborn 차트 8개** — 모든 핵심 개념이 시각 자료와 함께
+- 🔍 **자동 검증 인프라** — Mermaid 컴파일·내부 링크·외부 URL을 스크립트로 상시 점검
 
 ---
 
@@ -231,12 +236,14 @@ curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
 
 | 영역 | 항목 | 수량 |
 |---|---|---|
-| 📅 일일 학습 플랜 | `curriculum/day_NN.md` | **60** (모두 prose intro 포함) |
+| 📅 일일 학습 플랜 | `curriculum/day_NN.md` | **60** (모두 prose intro + 🗺 오늘의 지도 Mermaid) |
 | 📖 토픽 노트 | `notes/**/*.md` | **27** (전면 산문화 완료) |
-| 🛠️ 미니 프로젝트 사양 | `projects/**/README.md` | **6** |
+| 🛠️ 미니 프로젝트 사양 | `projects/**/README.md` | **6** (모두 아키텍처 Mermaid 포함) |
 | 🎓 학술·리포트 큐레이션 | `deep/*.md` | **5** (README 포함) |
-| 🖨 A4 프린트 패킷 | `print/days/day_NN.html` | **60** (Task + Reading 통합) |
-| 🔗 외부 참고 링크 | 1차·2차·벤더 | **150+** |
+| 🖨 A4 프린트 패킷 | `print/days/day_NN.html` | **60** (Task + Reading 통합, SVG 사전 렌더) |
+| 📊 Mermaid 다이어그램 | 노트·day·프로젝트 전체 | **114개** (mmdc 컴파일 100% 통과) |
+| 📈 seaborn 차트 | `charts/output/*.svg·png` | **8** (Lazarus·벌금·자산비중·VASP 의무 등) |
+| 🔗 외부 참고 링크 | 1차·2차·벤더 | **150+** (모두 검증) |
 | 📚 글로서리 | `notes/glossary.md` | **200+** 용어 (Top 15 우선순위) |
 
 **총 분량**: 약 **12,000+ 줄**의 한국어 AML 학습 자료
@@ -277,6 +284,27 @@ curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
 - 60일 모든 Day가 **Task Sheet 1p + 링크된 읽기 노트 전체**를 하나로 묶은 학습 패킷으로 자동 생성됨
 - `python print/generator.py all` 로 언제든 재생성
 - 디자인: Pretendard · IBM Plex 타이포그래피, 흑백 + 차콜 네이비, 손글씨 공간 확보
+
+### 📊 시각 자료 풀패키지 (2026-04-21)
+
+- **`charts/`** 신설 — seaborn 8종 차트 + Mermaid 사전 렌더 인프라
+- 차트 8종: Lazarus 연도별 탈취 · 벌금 궤적 · 자산 비중 도넛 · VASP 의무 레이더 · 2025 스냅샷 · Travel Rule 임계 비교 · FATF 워치리스트 · 규제 타임라인
+- **Mermaid 114개** — 60 day 각각의 🗺 오늘의 지도 + 노트 핵심 다이어그램 + 6 프로젝트 아키텍처
+- **mmdc(@mermaid-js/mermaid-cli)** 로 모든 Mermaid를 SVG 사전 렌더 → 프린트 신뢰성 보장
+- 한글 폰트(Malgun Gothic) 명시 적용 → PNG/SVG 모두 한글 정상
+
+### 🛠 자동 검증 (2026-04-21)
+
+내부 정합성을 상시 점검하는 4개 도구를 `charts/`에 추가:
+
+```bash
+python charts/validate_mermaid.py     # 모든 ```mermaid 블록 mmdc 컴파일 검증
+python charts/validate_links.py       # 내부 .md/.svg/.png 상대 링크 점검
+python charts/check_external_urls.py  # 외부 URL HEAD 체크 (404 탐지)
+python charts/fix_urls.py             # 알려진 깨진 외부 URL 일괄 교체
+```
+
+**현 상태**: Mermaid 114/114 OK · 내부 링크 0 broken · 한글 PNG 글리프 0 누락.
 
 ---
 
