@@ -12,8 +12,8 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 
 ### 한국 법령
 
-- [국가법령정보센터 — 특금법](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787)
-- [국가법령정보센터 — 가상자산이용자보호법](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099)
+- [국가법령정보센터 — 특금법](https://www.law.go.kr/법령/특정금융거래정보의보고및이용등에관한법률)
+- [국가법령정보센터 — 가상자산이용자보호법](https://www.law.go.kr/법령/가상자산이용자보호등에관한법률)
 - [금융위원회 (FSC)](https://www.fsc.go.kr/)
 - [금융정보분석원 (KoFIU)](https://www.kofiu.go.kr/)
 - [금융감독원 (FSS)](https://www.fss.or.kr/)
@@ -39,7 +39,7 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [FinCEN 공식](https://www.fincen.gov/)
 - [OFAC 공식](https://ofac.treasury.gov/)
 - [OFAC SDN List 검색](https://sanctionssearch.ofac.treas.gov/)
-- [DOJ Cryptocurrency 페이지](https://www.justice.gov/criminal/criminal-vns/cryptocurrency)
+- [DOJ Cryptocurrency 페이지](https://www.justice.gov/criminal)
 
 ### EU
 
@@ -77,7 +77,7 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [블록미디어](https://www.blockmedia.co.kr/)
 - [토큰포스트](https://www.tokenpost.kr/)
 - [디센터 (서울경제)](https://decenter.kr/)
-- [법률신문 (가상자산 칼럼)](https://www.lawtimes.co.kr/)
+- [법률신문 (가상자산 칼럼)](https://www.lawtimes.co.kr)
 
 **실무 포인트**: 한국 미디어는 **실시간 빠르지만 때로는 부정확**. FIU 보도자료·법률신문 칼럼이 상대적으로 정확도 높은 편. 중요 사안은 반드시 1차 자료(FSC·FIU 공식)로 cross-check.
 
@@ -93,7 +93,7 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [김·장 — Insights](https://www.kimchang.com/ko/insights/)
 - [Skadden — FinTech](https://www.skadden.com/insights/practices/financial-institutions)
 - [Latham & Watkins — Crypto Tracker](https://www.lw.com/en/us-crypto-policy-tracker/regulatory-developments)
-- [Steptoe — Blockchain Blog](https://www.steptoe.com/en/news-publications/blockchain-blog.html)
+- [Steptoe — Blockchain Blog](https://www.steptoe.com/en/news-publications)
 - [Akin Gump — FinTech](https://www.akingump.com/en/services/practices/financial-services-fintech)
 - [Mayer Brown — FinTech](https://www.mayerbrown.com/en/capabilities/practices/financial-services-regulatory-and-enforcement)
 
@@ -102,9 +102,9 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 ### 컨설팅·Big4 인사이트
 
 - [PwC — Financial Crimes](https://www.pwc.com/us/en/industries/financial-services.html)
-- [Deloitte — AML](https://www2.deloitte.com/us/en/services/risk-financial-advisory.html)
-- [EY — Financial Crime](https://www.ey.com/en_us/financial-services/regulatory-and-public-policy)
-- [KPMG — AML](https://kpmg.com/xx/en/our-insights/financial-services.html)
+- [Deloitte — AML](https://www2.deloitte.com/us/en.html)
+- [EY — Financial Crime](https://www.ey.com/en_us)
+- [KPMG — AML](https://kpmg.com/xx/en/home.html)
 
 ---
 

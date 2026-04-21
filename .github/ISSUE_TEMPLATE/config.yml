@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 기여 가이드 먼저 보기
+    url: https://github.com/lala-david/aml-notes/blob/main/CONTRIBUTING.md
+    about: PR·Issue 작성 절차와 스타일 가이드가 정리돼 있습니다.
+  - name: 💬 자유 토론 (Discussion)
+    url: https://github.com/lala-david/aml-notes/discussions
+    about: 질문·아이디어·커리큘럼 피드백은 Discussion에서.

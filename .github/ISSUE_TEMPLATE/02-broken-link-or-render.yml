@@ -1,0 +1,50 @@
+name: 🔗 링크 깨짐 · 렌더 오류 (Broken link / render)
+description: 외부 URL 404, 내부 상대 링크 오류, Mermaid 렌더 실패, 한국어 폰트 깨짐 등.
+title: "[Render] "
+labels: ["bug", "render"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 오류 종류
+      options:
+        - 외부 URL 404 / 리다이렉트
+        - 내부 상대 링크 깨짐 (.md 간)
+        - Mermaid 파싱 실패
+        - 한국어 폰트 깨짐 (PNG / SVG)
+        - 프린트 HTML 레이아웃 이상 (A4)
+        - 기타
+    validations:
+      required: true
+
+  - type: input
+    id: file
+    attributes:
+      label: 📄 파일 경로
+      placeholder: "projects/04-ofac-screener/README.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: 세부 내용
+      description: 가능하면 스크린샷 또는 에러 메시지를 붙여주세요.
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: 환경 (브라우저·OS 등)
+      placeholder: "Chrome 138 / Windows 11 · GitHub 렌더 / 로컬 Pandoc 등"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 확인 체크리스트
+      options:
+        - label: 최신 main 브랜치에서 재현했습니다
+          required: true
+        - label: (Mermaid) `charts/validate_mermaid.py` 를 돌려봤습니다 — 결과 첨부 가능
+        - label: (링크) `charts/validate_links.py` 또는 `charts/check_external_urls.py` 를 돌려봤습니다

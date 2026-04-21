@@ -1,0 +1,58 @@
+name: 💡 토픽 제안 (Topic suggestion)
+description: 새 주제·새 사례·새 벤더·커리큘럼 day 제안.
+title: "[Topic] "
+labels: ["enhancement", "topic"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        새 토픽을 제안해주셔서 감사합니다. 가장 큰 기여는 **왜 이 주제가 중요한지**
+        1~2문장으로 설명해주시는 것입니다.
+
+  - type: textarea
+    id: topic
+    attributes:
+      label: 제안 토픽
+      description: 무엇에 관한 글인가
+      placeholder: "예) EU AMLA 감독 프로토콜 — 2028-01 직접 감독 개시 대비"
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: 왜 필요한가
+      description: 이 토픽이 없으면 어떤 질문에 답할 수 없는가
+    validations:
+      required: true
+
+  - type: dropdown
+    id: placement
+    attributes:
+      label: 어디에 넣을 것인가
+      options:
+        - notes/1-foundations
+        - notes/2-regulations
+        - notes/3-crypto-aml
+        - notes/4-technology
+        - notes/5-compliance
+        - notes/6-cases
+        - notes/7-vendors
+        - curriculum (day 추가/교체)
+        - projects (새 자동화)
+        - deep (심화 리서치)
+        - 논의 필요
+
+  - type: textarea
+    id: outline
+    attributes:
+      label: 개요 (선택)
+      description: TL;DR 수준의 목차나 핵심 포인트
+      render: markdown
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: 참조 1차 자료
+      description: 감독당국 공고·논문·공식 가이던스 링크
+      placeholder: "https://..."

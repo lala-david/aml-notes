@@ -1,0 +1,65 @@
+name: 🚨 사실 오류 보고 (Factual error)
+description: 조문 번호·시행일·금액 한도·통계·사건 타임라인 등 **사실 관계**에 오류가 있을 때.
+title: "[Fact] "
+labels: ["bug", "factual-error"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AML 학습 노트는 "감독당국 검사·STR 작성에 인용 가능한 정확도"를 목표로 합니다.
+        작은 숫자 하나도 소중합니다. 가능하면 **1차 출처**(감독당국·법제처·법원·표준화 기구) 링크를 같이 올려주세요.
+
+  - type: input
+    id: file
+    attributes:
+      label: 📄 파일 경로
+      description: 오류가 있는 파일의 상대 경로
+      placeholder: "notes/3-crypto-aml/travel-rule.md"
+    validations:
+      required: true
+
+  - type: input
+    id: section
+    attributes:
+      label: 📍 섹션·줄 번호
+      description: 가능하면 Heading 이름 또는 줄 번호
+      placeholder: "## 한국 임계 / 42번째 줄"
+
+  - type: textarea
+    id: current
+    attributes:
+      label: 🔎 현재 기재된 내용
+      description: 현재 파일에 있는 문장을 그대로 붙여주세요
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: ✅ 올바른 내용
+      description: 어떻게 고쳐져야 하는가
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 🔗 출처 (1차 자료 링크)
+      description: 감독당국 공고·법제처·판결문·공식 가이던스. 2차 블로그는 보조로만.
+      placeholder: "https://www.law.go.kr/..., https://www.fatf-gafi.org/..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 확인 체크리스트
+      options:
+        - label: 최신 main 브랜치에서 확인했습니다
+          required: true
+        - label: 1차 출처 링크를 포함했습니다
+          required: true
+        - label: 단순 오탈자가 아닌 사실 관계 오류입니다
+          required: true
