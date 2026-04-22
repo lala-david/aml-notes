@@ -122,6 +122,51 @@ def recommend_action(score: int) -> str:
 └── .env.example
 ```
 
+## 💼 실무 현장 (Industry Reality)
+
+### 실제 회사에서는 이 기능을 어떻게 쓰나
+
+KYT wrapper는 한국 VASP의 **AML 파이프라인 핵심 레이어**입니다. 거래 하나가 발생하면 Kafka 이벤트로 흘러 들어와 wrapper가 Chainalysis KYT · 자체 라벨 DB · OFAC 스크리너 결과를 **한 번에 합쳐** Risk Score · Action을 내려주고, 이 응답이 거래 엔진(trading engine)·출금 엔진·Case Management 세 곳에 동시 배포됩니다. 한국 Upbit·Bithumb이 **Chainalysis KYT를 직접 사용하지 않고 wrapper layer를 중간에 두는 이유**는 (1) 벤더 응답을 사내 스키마로 정규화 (2) 한국 특수 라벨·룰을 overlay (3) 벤더 장애 시 fallback 경로 — 이 세 가지.
+
+### 프로덕션 아키텍처 비교
+
+| 항목 | 이 프로젝트(학습용) | 한국 VASP 프로덕션 |
+|---|---|---|
+| 호출 방식 | 동기 함수 | Kafka → Flink → Chainalysis API → 결과 이벤트 → Kafka topic |
+| 처리량 | 단건 동기 | 초당 수백~수천 건 streaming |
+| Risk Score | 고정 가중치 룰 | ML(XGBoost) + 룰 앙상블 + 벤더 score 혼합 |
+| 출력 소비처 | 결과 JSON 단일 | trading · 출금 · STR 후보 · Case Mgmt · BI 5개 downstream |
+| 장애 대응 | 없음 | 벤더 장애 시 자체 라벨 DB로 degraded mode + alert |
+| 성능 요구 | 없음 | p95 200ms 이하 (거래 블로킹 SLA) |
+
+### 벤더 대체재
+
+- **Chainalysis KYT** — 업계 표준. REST API + webhook alert. 한국 Upbit·Bithumb 실사용. 연 $50K~$수백만
+- **Elliptic Navigator / Lens** — UI 우수, EU 법집행 강세
+- **TRM Labs KYT** — 미국 정부 계약 급성장, API 응답 빠름
+- **Merkle Science Compass** — 동남아 강세, 상대적 저렴
+- **Crystal Intelligence KYT** — 러시아·CIS 특화
+- **Nominis · AnChain.AI** — 신규 진입, 특정 영역 특화
+
+보통 **1 primary(Chainalysis) + 1 backup(TRM 또는 Elliptic)** 이중 구축이 대형 VASP 표준.
+
+### 운영 KPI·SLA
+
+- **응답 지연**: p95 < 200ms (거래 블로킹 한도)
+- **가용성(uptime)**: 99.95% 이상 (벤더 SLA + wrapper fallback)
+- **FP rate**: 70~90% (KYT Alert 중 실제 STR로 이어지는 비율 1~5%)
+- **FN(미탐) rate**: 측정 어려움. 사후 STR·사건 피드백으로 역추적
+- **일일 Alert 볼륨**: 소형 VASP 수십 건 / 중형 수백 건 / 대형(Coinbase 급) 수만 건
+- **비용 per 1M screenings**: Chainalysis 기준 약 $5K~$20K (계약 규모별)
+
+### 배포·운영 팁
+
+- **웹훅 vs 폴링**: Chainalysis KYT는 webhook(push) 권장. 폴링은 rate limit·지연 문제로 실무 지양. webhook 수신 endpoint는 **멱등성(idempotent)** 보장 필수 — 동일 alert id 중복 수신 대비.
+- **Risk Score 가중치 튜닝**: 초기에는 벤더 default 그대로 사용 → 3개월 FP/TP 분석 후 **룰 위원회(월 1회)**에서 가중치 조정. 한 번에 다 바꾸지 않고 1~2개 룰씩 A/B 테스트.
+- **Exposure 정의 합의**: "direct" vs "indirect(2-hop)" vs "far(3-6 hop)" 경계가 벤더마다 다름. Chainalysis는 `direct/indirect`, TRM은 `exposure category`. 사내 스키마 정규화 안 하면 분석가 혼란.
+- **벤더 장애 대응**: Chainalysis API 다운 시 **거래를 전부 BLOCK할지, 자체 라벨만으로 ALLOW할지** 사전 정책 결정. 업계 관행은 "고위험 거래(>$10K)만 BLOCK, 소액은 제한적 ALLOW + 사후 재검증".
+- **STR 연계**: wrapper가 Risk Score ≥ 70 판정 시 **자동으로 Case Management에 티켓 생성 + STR 후보 큐 등록**. 분석가가 승인 → AMLO 서명 → FIU-TIS 제출. 이 체인이 wrapper 설계의 최종 목적.
+
 ## 학습 자료
 
 - [`../../notes/4-technology/kyc-kyt.md`](../../notes/4-technology/kyc-kyt.md) — KYT

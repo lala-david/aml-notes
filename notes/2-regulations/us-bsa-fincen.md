@@ -224,6 +224,80 @@ GENIUS Act는 Tether·Circle 같은 발행자에게 큰 영향. 한국에 진출
 
 ---
 
+## 💼 실무 현장 (Industry Reality)
+
+### SAR 제출 실무 — FinCEN BSA E-Filing
+
+한국 FIU-TIS 수기 업로드와 달리 **FinCEN은 완전 API 자동화** 제공:
+
+- **BSA E-Filing System** — 대형 VASP는 자체 시스템에서 직접 SAR 자동 생성·제출
+- **제출 기한**: 의심 판단일로부터 **30일 내** (예외 시 60일)
+- **확장 기한**: 추가 조사 필요 시 연장 가능
+- **Supplemental SAR**: 추가 정보 발견 시 보완 제출
+
+**Coinbase·Kraken·Gemini 실무**: 자체 케이스 관리 시스템(예: Coinbase의 내부 툴)에서 분석가가 SAR 초안 작성 → 시니어 리뷰 → 자동 XML 생성 → FinCEN API 전송 → 제출 번호 수신까지 **1일 내 처리 가능**.
+
+### FinCEN 현장 인터뷰(Enforcement Interview) 경험담
+
+FinCEN 검사는 한국 FIU보다 **공격적**:
+
+- 2~3일 현장 방문 + 분석가 개별 인터뷰
+- "최근 3개월 dispositioned alert 10건을 무작위로 보여달라"
+- "SAR 결정 당시 AMLO와 어떤 대화가 있었나" — Slack·이메일 로그 요구
+- 불이행 시 **civil money penalty**(민사벌금) 즉시 부과 가능
+
+### MSB 등록 + 주별 Money Transmitter License (MTL)
+
+미국 진출의 가장 큰 허들은 **주별 라이선스**:
+
+| 주 | 라이선스 | 특징 |
+|---|---|---|
+| New York | **BitLicense** (NYDFS) | 가장 까다로움, 연 수십만 달러 비용 |
+| California | Money Transmission License | 2024년 가상자산 명시 개정 |
+| Texas | MTL | 상대적으로 순함 |
+| Wyoming | Special Purpose Depository Institution | 가상자산 친화 |
+
+**50개 주 모두 라이선스 획득 = 수백만 달러 + 2~3년** 소요. Coinbase·Kraken·Gemini는 보유, Binance.US는 대폭 축소, 다수 외국 거래소는 뉴욕 철수.
+
+### GENIUS Act 시행 실무 영향
+
+```mermaid
+flowchart LR
+    ISSUER[Tether · Circle] -->|OFAC 요청| FREEZE[주소 freeze]
+    FREEZE -->|동결 신호| CEX[한국 VASP]
+    CEX -->|고객 통지 불가| USER[사용자 잔고 동결]
+    CEX -->|STR| FIU[KoFIU 보고]
+    style FREEZE fill:#fee2e2
+    style USER fill:#fed7aa
+```
+
+한국 VASP 입장에서 GENIUS Act 대응:
+
+1. USDC·USDT 상장 토큰의 **freeze 이벤트 모니터링 자동화**(Circle API, Tether blockchain log)
+2. Freeze 발생 시 **15분 내 사용자 출금 정지 + AMLO 브리핑** SOP
+3. 사용자 민원 대응 스크립트 사전 준비 (Tipping-off 리스크 고려)
+
+### 자주 나오는 오해
+
+- **"한국만 영업하면 미국 법 무관"** — USD·USDT·AWS 중 하나라도 쓰면 **OFAC 준수 필수**. 사실상 모든 한국 VASP에 적용.
+- **"FinCEN이 특정 거래소를 제재하면 끝"** — 실제론 **Section 311 Special Measure**(환거래은행 차단)가 더 무서움. 2021년 FATF Non-Cooperating Jurisdiction 전례.
+- **"BitLicense만 있으면 미국 전역 영업"** — NY만 커버. 50개 주 개별 라이선스 필요.
+
+### 연봉·조직 숫자 (2026 기준)
+
+- **Coinbase**: 컴플 ~500명 (전사 ~14%), 3분할(FCI·Sanctions Ops·AML Advisory), 주니어 $90~120K + equity
+- **Kraken**: 컴플 ~200명 (전사 ~10%)
+- **Gemini**: NY BitLicense 대응 특화 조직
+- **Binance.US**: DOJ 합의 후 5개 hub AMLO + 외부 모니터 2024-2029 상주
+
+### 한국 VASP가 미국 룰에서 가장 자주 놓치는 것
+
+- **Tether freeze 대응 시간**: 글로벌 평균 30분, 한국은 주말·야간에 1~2시간 지연 사례
+- **OFAC SDN.XML 일일 diff**: 주소 필드(`<feature><type>Digital Currency Address</type>`) 파싱 자동화 필요
+- **2차 제재(Secondary Sanctions)**: 러시아·이란 관련 고객의 직접 제재 대상이 아니어도 **간접 지원 행위**로 적용 가능
+
+---
+
 ## 더 읽을거리
 - [`korea-fiu-act.md`](korea-fiu-act.md) — 한국 특금법과 비교
 - [`fatf.md`](fatf.md) — FATF가 미국에 어떻게 평가받는지

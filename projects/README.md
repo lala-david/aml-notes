@@ -81,6 +81,48 @@ OFAC_API_BASE=https://www.treasury.gov/ofac/downloads
 - 트랙 A (기술): 프로젝트 묶어서 통합 시스템
 - 트랙 D (솔루션): MVP 기반 비즈니스 모델
 
+## 💼 실무 현장 (Industry Reality)
+
+### 6개 프로젝트가 실제 회사에서 맡는 역할
+
+각 미니 프로젝트는 VASP 컴플 조직의 **한 기능 유닛**에 대응합니다. "이 기능만 떼어내 스타트업 만들 수도 있는" 단위.
+
+| 프로젝트 | 담당 실무 팀 | 실제 벤더 대체재 |
+|---|---|---|
+| 01 IVMS101 Builder | Travel Rule 엔지니어링 | Notabene · VerifyVASP · CODE · TRISA |
+| 02 Onchain Tracer | Investigation(수사) · FCI | Chainalysis Reactor · TRM Forensics · Elliptic Investigator |
+| 03 Mixer Fetcher | Threat Intel · Label Ops | Chainalysis Labels · Elliptic · 자체 OSINT팀 |
+| 04 OFAC Screener | Sanctions Operations | NICE Actimize · Verafin · ComplyAdvantage |
+| 05 KYT Wrapper | KYT 엔지니어링 · AML Monitoring | Chainalysis KYT · Elliptic Navigator · TRM API |
+| 06 Capstone Risk Engine | Chief Compliance Office 전체 | Hummingbird · Unit21 (Case Management) 조합 |
+
+### 한국 VASP는 6개 중 몇 개를 자체 구축하나
+
+**Upbit 기준 실제 구성** (2026 추정):
+
+- **자체 구축**: Risk Engine 중 룰 엔진 · KYT wrapper · 자체 라벨 DB (한국 거래소 hot wallet 등)
+- **벤더 의존**: IVMS101(람다256 VerifyVASP) · KYT(Chainalysis) · KYC(ARGOS+PASS) · Sanctions(Chainalysis 내장+자체 외교부 매핑)
+- **하이브리드**: OFAC SDN crypto 스크리닝은 Chainalysis + 자체 일일 diff 동시 운영
+
+즉 **6개 중 4개는 "자체 구축 + 벤더 보완"**, **나머지 2개(IVMS101·KYT 원천 데이터)는 벤더 의존**이 한국 업계 표준. 완전 자체 구축은 현실적으로 Chainalysis 10년·수백 명·수억 달러 R&D를 혼자 따라잡는 일이라 **ROI가 맞지 않음**.
+
+### 프로덕션과 이 프로젝트의 결정적 차이
+
+| 항목 | 이 프로젝트 | 실제 프로덕션 |
+|---|---|---|
+| 데이터 규모 | 수천 건 JSON | Kafka 초당 수천 건 · 연 수십억 건 |
+| 지연시간(latency) | 응답 수 초 OK | p95 200ms 이하 (거래 블로킹 SLA) |
+| 라벨 DB | OFAC + 자체 수집 수백 개 | Chainalysis 10억+ 주소 매핑 |
+| 감사(Audit) | 없음 | 모든 판단 결과 5~15년 보관 + 근거 추적 |
+| 다중 체인 | ETH 단독 | BTC·ETH·Tron·Solana·BSC 등 20+ |
+| 장애대응 | 로컬 재실행 | PagerDuty · SRE on-call |
+
+이 갭을 인지하고 Capstone 설계 시 **"어디까지 자체, 어디부터 벤더"**를 명확히 경계 짓는 연습이 핵심.
+
+### 이 프로젝트 6개를 포트폴리오로 쓸 때
+
+채용 관점에서 6개 모두 실행해 GitHub에 공개하면 **주니어 AML Analyst·KYT 엔지니어 지원 시 실무감각 어필**이 가능합니다. 단, README에 "학습용이며 실제 컴플 도구 아님"을 명시하고, **OFAC SDN 데이터 사용은 학습 목적 공개**임을 분명히 할 것. 한국 VASP AML 조직은 **"법·금융 + 데이터/엔지니어링"** 하이브리드 인재를 선호해 이 조합이 강점이 됩니다.
+
 ## 참고
 
 - 60일 커리큘럼: [`../curriculum/README.md`](../curriculum/README.md)

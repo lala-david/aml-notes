@@ -208,6 +208,83 @@ Tornado Cash 사건 전후로 전 세계 mixer들이 어떻게 정리됐는지. 
 - ZKP 기반 프라이버시 도구의 정당한 사용과 자금세탁 도구의 분리가 미해결 과제
 ```
 
+## 💼 실무 현장 (Industry Reality)
+
+### 사건 이후 VASP들이 Tornado 주소를 어떻게 처리하는가
+
+**OFAC 제재 기간 (2022-08 ~ 2025-03)**:
+- 전 세계 주요 거래소 **자동 차단** 100% 표준
+- Chainalysis KYT: `SANCTIONS_TORNADO` 태그 자동 배포
+- Circle USDC **즉시 freeze** — 스테이블코인 검열 권한 첫 사례
+- Github 저장소 일시 삭제 → 커뮤니티 반발로 재공개
+
+**제재 해제 후 (2025-03~)**:
+
+| VASP | 정책 변화 |
+|---|---|
+| Coinbase | 기존 차단 정책 유지 — "위험 카테고리" 분류 |
+| Kraken | 기존 차단 정책 유지 |
+| Binance | 노출 시 **수동 심사** (완화 but 미허용) |
+| Upbit·Bithumb·Coinone·Korbit | 모두 **차단 정책 유지** — DAXA 공동 |
+| Circle USDC | 개별 freeze 해제했으나 **선제적 모니터링 지속** |
+
+### Tornado 노출 탐지 실제 룰 (2026-Q1 한국 VASP)
+
+```python
+def tornado_exposure(wallet):
+    exp = chainalysis.exposure(wallet, hops=5)
+    # 제재 해제되었어도 위험 카테고리 유지
+    tornado_direct = exp.get("TORNADO_CASH_DIRECT", 0)
+    tornado_1hop = exp.get("TORNADO_CASH_1HOP", 0)
+    tornado_2hop = exp.get("TORNADO_CASH_2HOP", 0)
+    
+    if tornado_direct > 0:
+        return "CRITICAL", "자동 차단 + STR 검토"
+    if tornado_1hop > 0.1 * wallet.balance:
+        return "HIGH", "EDD + 자금원천 요청"
+    if tornado_2hop > 0:
+        return "MEDIUM", "분석가 리뷰"
+    return None
+```
+
+### 2025-03 해제에 대한 업계 반응 조사
+
+**컴플라이언스 책임자 다수 입장**:
+- "법적 제재는 풀렸지만 **실제 자금의 대부분이 해킹·불법 자금**이라는 본질이 바뀌지 않음"
+- "우리 고객이 합법 프라이버시 이유로 Tornado를 써야 한다면 **증빙 요구** 가능"
+- "규제가 완화됐다고 회사 정책을 자동 완화하면 **FN 리스크가 회사 책임**으로 돌아옴"
+
+### DeFi 개발자 형사 책임 — Roman Storm 재판 주목
+
+- **2023-08 기소**: 자금세탁 공모·무면허 송금업·제재 위반
+- **2024~2025 재판**: 배심원 평결, 최대 45년 가능
+- **함의**: DeFi 프로토콜 개발자가 "예견 가능한 범죄 사용"을 방치하면 형사 책임 가능
+- **Alexey Pertsev**: 네덜란드에서 이미 5년 4개월 유죄(2024-05, 항소 중)
+
+**한국 개발자들의 학습**: 오픈소스 기여·DeFi 프론트엔드 운영 시 KYC·제재 스크리닝 구현 필요성 부상. 일부 한국 DeFi 프로젝트는 2025년 이후 frontend에 **IP 기반 지역 차단** 추가.
+
+### 한국 VASP의 실제 Tornado 케이스 처리 경험
+
+- **직접 노출**: 거의 드묾 (즉시 차단)
+- **2-3 hop 노출**: 월 수십 건, 대부분 합법적 DeFi 사용에서 연결
+- **신규 가입자 프로필 리스크**: Tornado 사용 이력 있는 지갑으로 가입 시도 시 **자동 거부** 정책 (4대 거래소 공통)
+
+### 자주 나오는 오해
+
+- **"제재 해제됐으니 Tornado 써도 됨"** — 한국 VASP는 **자체 정책으로 차단 유지**. 고객이 써도 자사가 거부.
+- **"Mixer 사용은 프라이버시 권리"** — 합법 사용자도 있지만 실제 자금의 대부분은 해킹·랜섬웨어. KYT는 통계 기반 판단.
+- **"코드 제재는 끝났음"** — Tornado 해제됐지만 **Blender·Sinbad는 여전 SDN**. 개별 mixer별 판단 필요.
+- **"개발자만 조심하면 됨"** — Frontend 운영자·거버넌스 토큰 대량 보유자도 책임 가능. DAO 참여 신중.
+
+### 한국 특수 현실
+
+- **DAXA 공동 정책**: 4대 거래소 모두 Tornado 차단 유지. 한 곳만 완화 불가.
+- **특금법 의심거래**: 한국에서 Tornado 사용 자체가 **STR 후보 사유**로 해석. 이는 OFAC과 별개.
+- **국내 DeFi 프로젝트**: 한국 내 DeFi 프로젝트가 Tornado 유사 서비스 빌드 시 **사전 법률 자문 필수**. Roman Storm 재판 결과가 가이드.
+- **Vitalik 기부 일화**: Tornado에서 기부받은 우크라이나 관련 자금이 Vitalik 주소로 간 사례 — 한국 커뮤니티도 "무차별 차단 vs 선별"의 딜레마 인식 확산.
+
+---
+
 ## 더 읽을거리
 - [`lazarus-dprk.md`](lazarus-dprk.md) — Tornado의 주요 사용자
 - [`major-enforcement.md`](major-enforcement.md) — 관련 enforcement

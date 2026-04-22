@@ -322,6 +322,73 @@ ZKP(Zero-Knowledge Proof) 기반 프라이버시-컴플라이언스 양립은 **
 **체인별 차이**: Bitcoin UTXO = 강력한 클러스터링 / Ethereum Account = Attribution 의존
 **Exposure 축**: Direct / Indirect (N-hop) / Risk Category 가중
 
+## 💼 실무 현장 (Industry Reality)
+
+### Attribution을 만드는 비용 구조 — Chainalysis 기준
+
+Chainalysis는 2014년 창업, 2026년 현재 **누적 attribution 거래량 ~$24T+, 라벨링 주소 ~10억개**. 이 DB가 Moat이 되기까지의 투자:
+
+- **초기 자본금**: $500M+ 누적 조달 (Accel·Benchmark·Coatue 등)
+- **Node 인프라**: Bitcoin·Ethereum·30+ 체인 archive node → 서버 비용만 월 수백만 달러
+- **데이터 엔지니어·리서처**: 300~400명 (전사 ~1,200명 중 30%+)
+- **OSINT + 다크넷 관찰**: 전담 팀, 사법당국 협업
+
+### Chainalysis 수익 구조 (추정)
+
+| 라인 | 고객 | 연매출 비중 |
+|---|---|---|
+| **KYT** (거래소·VASP용 실시간 API) | 거래소, 은행, 결제사 | ~35% |
+| **Reactor** (수사용 시각화 도구) | 정부·수사기관·로펌 | ~35% |
+| **Data** (원본 데이터 라이선스) | 규제당국, 학술연구 | ~15% |
+| **Crypto Investigations** (컨설팅) | 민간·공공 | ~15% |
+
+2026년 전체 매출 ~$300~500M 추정, ARR 기준 연 성장 20~30%.
+
+### KYT 벤더별 강점 (2026-Q1 PoC 비교)
+
+| 벤더 | 강점 | 약점 | 한국 주 사용처 |
+|---|---|---|---|
+| **Chainalysis** | 북미·다크넷·정부 관계 압도적 | Asia OTC 커버리지 약간 부족 | Upbit·Bithumb·Coinone·Korbit (표준) |
+| **TRM Labs** | Cross-chain·Asia OTC·AI 탐지 | 일부 레거시 체인 부족 | 보조 도구로 병행 채택 증가 |
+| **Elliptic** | 유럽·NFT·DeFi 그래프 분석 | 북미 점유율 상대적 약함 | 유럽 진출 한국 기업 검토 |
+| **Crystal (Bitfury)** | 러시아·동유럽·Lazarus 심층 | UI 상대적 구형 | 특수 리서치용 |
+| **Merkle Science** | 실시간 DeFi·LST 탐지 | 소규모 | 신규 진입 중 |
+
+### 자체 구축 시도의 실패 이유
+
+한국·일본 몇몇 대형 거래소가 2020~2022년 자체 KYT 구축 시도했으나 대부분 **Chainalysis로 회귀**:
+
+- **Attribution 라벨**: 자체 팀 10명이 1년 해도 Chainalysis 1주 수집량 못 따라감
+- **노드 인프라 비용**: Ethereum archive 하나에 월 $50K+
+- **신규 프로토콜 대응**: 매월 새 브리지·DeFi 출시 → 전담팀 없이 불가
+- **감독 인정**: FIU가 "Chainalysis 썼다"면 **de facto 면책**, 무명 자체 툴은 입증 부담
+
+### 자주 나오는 오해
+
+- **"Chainalysis 하나만 믿으면 OK"** — 벤더 한 곳에 과의존은 사각지대·가격 협상력 상실. 글로벌 대형은 **2~3 벤더 병행**.
+- **"UTXO와 Account 모델 분석 비용이 같다"** — Ethereum archive + 토큰 인덱싱이 Bitcoin 대비 5~10배 비쌈.
+- **"Monero도 곧 분석 가능"** — Chainalysis가 2020년 부분 분석 도구 발표했지만 실무 적용 여전 제한. 완전 추적 불가는 지속.
+
+### 주니어 분석가가 Chainalysis Reactor로 하는 일
+
+Reactor는 Chainalysis의 **시각화 수사 도구** — 주니어 Analyst의 메인 UI:
+
+- **주소 클릭** → 소스·목적지 그래프 시각화
+- **Category 필터**: Mixer·SDN·Darknet 등으로 좁히기
+- **Timeline 뷰**: 시간순 자금 흐름 재생
+- **클러스터 확장**: "이 주소와 같은 사람이 통제하는 다른 주소들"
+- **Export**: STR 첨부용 PDF 리포트 자동 생성
+
+Chainalysis Academy(무료 교육)가 주니어 교육의 사실상 표준. **Chainalysis Investigations Certification(CCI)** 가 AML 분석가 이력서 단골 스펙.
+
+### 한국 특수 현실
+
+- **한국 거래소 Attribution**: Chainalysis도 한국 4대 거래소는 잘 커버하지만 중소 거래소(코인마켓 포함)는 커버리지 부족. 국내 경찰·검찰 협력 필수.
+- **원화 OTC 추적**: Chainalysis는 원화 Off-chain 플로우는 못 봄. 은행 실명계좌 조회는 FIU·경찰의 영역.
+- **Lazarus 분석**: 국가정보원·KoFIU가 Chainalysis Reactor 라이선스 다수 보유. 민간 VASP와 별도 수사 라인.
+
+---
+
 ## 더 읽을거리
 - [`kyc-kyt.md`](kyc-kyt.md) — KYT의 운영적 측면
 - [`travel-rule-protocols.md`](travel-rule-protocols.md) — VASP 식별과의 관계

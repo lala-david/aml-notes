@@ -307,6 +307,76 @@ flowchart TB
 **통합 원칙**: KYC·KYT가 공통 Risk Engine에서 단일 Risk Score로 합쳐짐
 **운영 KPI**: Alert Volume · FP/FN Ratio · Alert SLA · STR Quality
 
+## 💼 실무 현장 (Industry Reality)
+
+### KYC/KYT 벤더 선정 PoC 체크리스트
+
+한국 VASP가 신규 도입 시 실제 사용하는 PoC 기준:
+
+**KYT (Chainalysis vs TRM vs Elliptic)**:
+1. **Attribution 정확도**: 같은 주소 샘플 100개에 대한 라벨 일치율
+2. **Risk Score 안정성**: 일주일 간격 재조회 시 score 변동 폭
+3. **한국 거래소 커버리지**: Upbit·Bithumb·Coinone·Korbit 자체 주소 매핑 완성도
+4. **Cross-chain tracing**: BTC→ETH→Tron→BNB 4-hop 추적 성공률
+5. **API 응답 속도**: p95 latency (실무 기준 500ms 이하)
+6. **가격**: 연 라이선스 (소형 $100K, 대형 $1M+), 조회 건당 추가 요금 구조
+7. **SLA / 지원**: 한국 영업시간 지원 여부
+
+**KYC (Sumsub vs ARGOS vs Jumio)**:
+1. **한국 주민등록증 OCR 정확도**: 실제 샘플 1,000장 테스트 → 95%+ 목표
+2. **Liveness 스푸핑 방어**: 3D mask·deepfake·동영상 재생 방어 테스트
+3. **본인확인기관 연동**: PASS/NICE/KCB와 seamless 통합
+4. **처리 속도**: 온보딩 평균 완료 시간 (3분 이하 목표)
+5. **승인율 / 재시도율**: 정상 고객의 1회 통과율 80%+ 목표
+
+### 벤더 가격 협상 팁 (실제 한국 VASP 경험)
+
+- **Chainalysis KYT**: 연간 Tier 기반 (소형 $150K ~ 대형 $1M+). 거래량 등 성장 가정 포함 협상.
+- **TRM Labs**: Chainalysis 대비 20~30% 낮게 나오는 경우 많음. 경쟁 제안서로 교차 협상 효과적.
+- **Sumsub**: 월 사용자 수 기반. 신규 VASP는 초기 6개월 할인 요청 일반적.
+- **ARGOS**: 국내 벤더 이점으로 한국어 지원·주민등록증 정확도 강점. Sumsub보다 저렴.
+- **LSEG World-Check**: PEP DB — 연 1~3억원. Dow Jones·ComplyAdvantage 비교 견적 필수.
+
+### 실제 한국 VASP 기술 스택 스냅샷 (2026-Q1)
+
+| 거래소 | KYC | KYT | Travel Rule | Case Mgmt |
+|---|---|---|---|---|
+| Upbit | ARGOS + PASS/NICE | Chainalysis KYT | VerifyVASP | 자체 구축 |
+| Bithumb | 자체 + KCB | Chainalysis KYT | CODE | 자체 |
+| Coinone | 자체 + NICE | Chainalysis KYT | CODE | 자체 |
+| Korbit | Sumsub + 신한 | Chainalysis KYT | CODE | Jira 기반 |
+
+### 주니어 KYC/KYT 운영자 실제 하루
+
+- **09:00** — 전일 야간 거부된 KYC 케이스 리뷰 (수동 승인 요청 5~15건)
+- **10:00** — KYT Alert 큐 (30~80건) 처리 — 대부분 FP
+- **13:00** — 신규 외부지갑 등록 신청 검토 (보안 사유·지갑 소유증명)
+- **15:00** — 주간 FP 원인 분석 + 룰 튜닝 제안
+- **17:00** — 월간 보고서 초안 (STR 건수·Alert 통계·SLA 준수율)
+
+### Alert SLA — 실제 한국 VASP 운영 기준
+
+| 등급 | 1차 리뷰 | 최종 결정 | 월간 건수 (대형 거래소) |
+|---|---|---|---|
+| CRITICAL | 15분 | 1시간 | 10~30 |
+| HIGH | 1시간 | 4시간 | 100~300 |
+| MEDIUM | 24시간 | 72시간 | 1,000~3,000 |
+| LOW | 72시간 | 1주 | 5,000~10,000 |
+
+### 자주 나오는 오해
+
+- **"Chainalysis 하나만 쓰면 충분"** — 경쟁사 PoC 비교 없이는 커버리지 사각지대를 못 본다. TRM이 Asia OTC·CMLN에 강점, Elliptic이 NFT·DeFi에 강점.
+- **"KYC 한 번 하면 자동 승인"** — FIU는 **재실사(refresh) 로그**를 중요하게 봄. 고위험 고객은 분기 1회.
+- **"AI·ML로 해결 가능"** — 설명 가능성 없으면 STR에 인용 불가. 실무는 여전히 **룰 80% + ML 20%** 하이브리드.
+
+### 한국 특수 현실
+
+- **본인확인기관 독점**: PASS·NICE·KCB 외 경쟁자 없음. 글로벌 KYC 벤더(Sumsub 등)도 결국 이 3곳을 **re-seller** 방식으로 연결.
+- **주민등록번호 취급**: 특금법 고객확인의무 + 개인정보보호법 긴장. 뒤 7자리 마스킹·암호화 저장 필수.
+- **외부지갑 등록 화이트리스트**: 법령이 명시 안 함, **DAXA 공동 자율규제**. 출금 전 24h 대기 표준.
+
+---
+
 ## 더 읽을거리
 - [`blockchain-analytics.md`](blockchain-analytics.md) — KYT의 기술적 기반 (CIOH, attribution)
 - [`travel-rule-protocols.md`](travel-rule-protocols.md) — Travel Rule 기술

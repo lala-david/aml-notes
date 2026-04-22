@@ -232,6 +232,77 @@ LST·LRT 세탁은 2025~2026년 부상 중인 신종 유형입니다. ETH → st
 **Privacy Coin 운영 표준**: 상장 폐지 + 입금 차단 + 출금 KYT
 **신종 영역**: LST·LRT, MEV, Flash Loan
 
+## 💼 실무 현장 (Industry Reality)
+
+### 회색지대에서 VASP가 실제로 어떻게 선을 긋는가
+
+**한국 4대 거래소 정책 (2026-Q1)**:
+
+| 영역 | Upbit | Bithumb | Coinone | Korbit |
+|---|---|---|---|---|
+| Privacy coin 상장 | ❌ 2021 상폐 | ❌ 2021 상폐 | ❌ 2021 상폐 | ❌ 2021 상폐 |
+| DeFi 상호작용 주소 입금 | KYT 리뷰 후 허용 | 동일 | 동일 | 동일 |
+| Bridge 출금 | 자동 EDD 트리거 | 금액별 차등 | 동일 | 동일 |
+| LST(stETH 등) 상장 | 일부 상장 | 일부 상장 | 제한적 | 제한적 |
+| NFT 거래 기능 | 미운영 | 별도 법인(NFT마켓) | 미운영 | 미운영 |
+| Tornado Cash 관련 주소 | 자동 차단 (해제 후에도) | 동일 | 동일 | 동일 |
+
+### 글로벌 대형 거래소의 DeFi 대응
+
+- **Coinbase**: WalletConnect 경유 DeFi 접속 허용 + 자사 Base L2 운영 + KYT(TRM Labs·Chainalysis 병행)
+- **Kraken**: DeFi 입금 상대적으로 제한적, 보수적 접근
+- **Binance**: BNB Chain·opBNB 자체 L2 운영, DeFi 상호작용 주소 자동 Risk Score
+- **Gemini**: 기관 고객에만 제한된 DeFi yield 상품 제공
+
+### DeFi 입금 판정 플로 (한국 VASP 실제)
+
+```mermaid
+flowchart TB
+    IN[입금 감지] --> ADDR[소스 주소 attribution]
+    ADDR -->|알려진 DEX 컨트랙트| DEX[DEX_SOURCE 태그]
+    ADDR -->|알려진 Lending 컨트랙트| LEND[LENDING_SOURCE 태그]
+    ADDR -->|Unknown DeFi| UNK[Graph 분석]
+    DEX --> RISK[Risk Score]
+    LEND --> RISK
+    UNK --> RISK
+    RISK -->|> 80| HOLD[자동 홀드 + EDD]
+    RISK -->|50~80| REV[Analyst 리뷰]
+    RISK -->|< 50| OK[입금 허용]
+    style HOLD fill:#fee2e2
+    style OK fill:#d1fae5
+```
+
+### NFT Wash Trading 탐지 — 실제 운영
+
+- **OpenSea·Blur·Magic Eden**: 자체 탐지 모델 운영, 사용자에게 "suspicious trading" 경고 표시
+- **한국 NFT 마켓(업비트 NFT 등)**: 금감원·FSC 가이드라인(2024-06)에 따라 탐지 의무. 대부분 Chainalysis NFT 모듈 사용
+- **탐지 지표**: 지갑 클러스터 간 순환 매매, 가격 급등 후 하락, 동일 IP·기기 지문
+
+### LST/LRT 세탁 대응의 어려움
+
+```python
+# 2025년 부상한 세탁 경로 예시
+ETH -> Lido(stETH) -> EigenLayer(eETH) -> Pendle(PT-eETH) -> ... 
+# 각 단계마다 자산이 새 토큰으로 감싸져 Attribution DB가 못 따라감
+```
+
+- Chainalysis·TRM은 2025년부터 LST/LRT 전용 모듈 출시했으나 커버리지 아직 부분적
+- 한국 거래소는 **LST 상장 자체를 제한적**으로 운영 (예: stETH·rETH만, 나머지 거부)
+
+### 자주 나오는 오해
+
+- **"DeFi는 규제 불가니 우리 책임 아님"** — 프론트엔드·라우팅·프로토콜 DAO 보유자는 **규제 타겟**이 되고 있음(SEC Wells Notice Uniswap). CEX도 DeFi 상호작용 주소를 받는 순간 책임.
+- **"NFT는 예술품이라 AML 무관"** — FATF·FSC 모두 결제·투자 용도 NFT를 VA로 간주. 글로벌 마켓플레이스는 KYT 필수 운영.
+- **"Monero는 한국에서 안 다루니 리스크 없음"** — 한국 고객이 해외 거래소·P2P에서 XMR 사용 후 한국 거래소로 **BTC로 환전해 입금**하는 패턴이 주 리스크.
+
+### 한국 특수 현실
+
+- **2단계 입법 공백**: DeFi·DAO·스테이블코인 구체 규율 미정. 업계는 **"올 방향"을 미리 맞추는 자율규제**.
+- **DAXA 공동 정책**: NFT·DeFi 관련 입출금 기준을 공동 협의. Tornado Cash 차단도 DAXA 합의.
+- **FSC 2024-06 NFT 가이드라인**: 결제·분할·대량발행 → VA 취급. 단순 아트 NFT → 비-VA. 회색지대 많음.
+
+---
+
 ## 더 읽을거리
 - [`onchain-typology.md`](onchain-typology.md) — 자금세탁 9대 유형
 - [`travel-rule.md`](travel-rule.md) — Travel Rule (DeFi 적용 한계)

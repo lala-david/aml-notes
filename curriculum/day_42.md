@@ -95,3 +95,52 @@ def save(records: list[dict]):
 가장 의외였던 자금세탁 패턴:
 직접 만들어보니 라벨 DB의 어려움:
 다음주 컴플 운영 기대:
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+자체 라벨 DB는 **벤더 KYT의 보완재**로 운영. 한국 거래소의 "자체 블랙리스트"는 보통 **3~5만 건 규모**이며 다음으로 구성:
+- **OFAC SDN 가상자산 주소** (~500~1,000건, 벤더와 중복 많음)
+- **UN·EU·한국 외교부 제재 리스트** 매핑 주소
+- **DAXA 공유 블랙리스트** (회원사 간 실시간 공유, 수천~만 건)
+- **자체 STR 이력 주소** (3년 누적, 수천~만 건)
+- **피해자 신고 연관 지갑** (일별 갱신, 월 수백~수천건)
+
+OFAC SDN.xml은 **일 1~2회 자동 폴링 + diff**. 업데이트 지연 시 감독당국 지적 사유.
+
+### 글로벌에서는
+
+**Chainalysis Data Accuracy Flywheel** — 고객사가 벤더에 feedback(오라벨 제보) → 벤더가 라벨 개선 → 전 고객 품질 개선. 이게 **벤더의 경쟁 우위 본질**. 대형 거래소(Coinbase·Binance·Kraken)는 자체 **"투명성 센터"** 를 운영하며 신고받은 주소를 공개 리스트로 발표(사용자 보호용).
+
+**OFAC SDN Crypto Address List** — 2018년 첫 등재(이란 관련 2건). 현재 수백 건 수준, 주로 이란·북한·러시아·Hamas·Lazarus. 매 분기 수십 건 추가.
+
+OSINT 데이터 소스:
+- **OFAC SDN** — https://www.treasury.gov/ofac/downloads/sdn.xml (공식, 일일 갱신)
+- **Etherscan labels** — 비공식이지만 라벨 다양성 1위
+- **Chainabuse** (Chainalysis 운영) — 피해자 신고 집계 사이트
+- **ScamSniffer·CryptoScamDB** — 오픈소스 사기 지갑 DB
+- **Tornado Cash contract list** — GitHub OSINT에서 fork 가능
+
+### 자체 라벨 DB 운영 체크리스트
+
+```
+DAILY:
+  - OFAC SDN diff 확인, 신규 주소 sync
+  - DAXA 공유 채널 신규 블랙리스트 흡수
+  - STR 작성 건의 수취인 주소 자체 DB 등록
+
+WEEKLY:
+  - 벤더 라벨과 자체 라벨 불일치 리포트
+  - 오라벨 이의제기 수거 (False Positive 보고)
+
+MONTHLY:
+  - 3개월 이상 미갱신 라벨 재검증 (라벨 drift 방지)
+  - 신규 OSINT 소스 평가 + 통합
+```
+
+### 자주 나오는 오해
+
+- **"벤더 라벨이면 충분"** — 한국 특수 범죄(보이스피싱 편취 지갑 등)는 벤더 DB에 반영이 느림(수주~수개월). 자체 DB 없이는 신속 대응 불가.
+- **"크롤링만으로 라벨을 얻을 수 있다"** — Etherscan은 **대량 크롤링 금지** + Cloudflare 차단 강화. 공식 API 또는 partner 계약 필요. 많은 거래소가 OSINT와 파트너십 혼합으로 운영.
+- **"라벨 DB는 운영팀 업무"** — 라벨 품질은 곧 **FP rate → STR 수 → 감독당국 평가**로 연결. 실제로는 CISO·AMLO 레벨 KPI.

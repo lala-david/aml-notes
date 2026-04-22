@@ -104,3 +104,55 @@ flowchart TB
 - [ ] 60일 학습 자료 인용 5개+
 
 ## 💭 오늘의 한 줄
+
+## 💼 실무 현장 (Industry Reality)
+
+### 실제 AML Risk Engine 설계는 이렇게 시작한다
+
+**한국 VASP 신규 Risk Engine 프로젝트 관찰 패턴**:
+
+1. **Business Case 작성** (1~2주): AMLO + CTO 공동 서명, 이사회 승인
+2. **Gap Analysis** (2~4주): 현 시스템 vs 특금법·이용자보호법·FATF R.15/16 매핑 표
+3. **벤더 RFP** (4~8주): Chainalysis·Elliptic·TRM 등 3~5개사 벤치마크
+4. **MVP 구축** (3~6개월): KYT + Sanctions + STR 워크플로 우선
+5. **v1 배포** (6~12개월): Travel Rule + EDD 자동화 + BI 대시보드
+6. **감사·FIU 검사 대응 문서화** (상시)
+
+### 참조 아키텍처 (실무 표준)
+
+```mermaid
+flowchart LR
+    K[KYC<br/>Sumsub·Jumio·ARGOS] --> RE[Risk Engine<br/>Core]
+    KYT[KYT<br/>Chainalysis·TRM] --> RE
+    S[Sanctions<br/>OFAC·UN·EU] --> RE
+    TR[Travel Rule<br/>VerifyVASP·Notabene] --> RE
+    RE --> BI[Tableau·Superset]
+    RE --> AL[Alert 큐<br/>Jira·Slack]
+    AL --> STR[STR<br/>FIU-TIS]
+    style RE fill:#1a2e4a,color:#fff
+    style STR fill:#d1fae5
+```
+
+### Mini Risk Engine 설계 시 꼭 들어갈 "현실 요소"
+
+- **벤더 fallback**: Primary vendor 장애 시 Secondary로 전환 로직
+- **휴먼 최종결정**: ML·룰 결과는 recommendation, 최종 block/freeze는 Analyst 서명
+- **증거 체인(Audit Trail)**: 모든 결정에 "입력·룰 ID·결정자·시각" 불변 기록 (감사 요구)
+- **SLA 명시**: Alert 생성→Analyst 1차 리뷰 4h / STR 제출 48h 등 구체
+- **개인정보 파이프라인 분리**: PII는 별도 vault(Hashicorp·AWS KMS), 분석 파이프라인은 pseudonymized
+
+### 설계서에 반드시 포함해야 할 것 (실무 기준)
+
+```
+1. 벤더 선정 이유 (1개 이상 비교 매트릭스)
+2. 룰 카탈로그: 각 룰의 근거 규제 § 표기
+3. 데이터 보관: 15년(이용자보호법) / 5년(특금법) 이원화
+4. AMLO 결재 경로 (RACI)
+5. 예산·인력: 연간 OpEx + CapEx 추정 (최소 5억~수십억)
+6. 감사 대응 매뉴얼 (FIU 검사 Q&A 스크립트)
+```
+
+### 자주 나오는 오해
+
+- **"설계서는 문서일 뿐"** — FIU 검사 1순위 요청 자료. "실제 운영 = 설계서 일치" 여부가 검사 기준.
+- **"MVP는 룰 3~5개만 있으면 충분"** — MVP라도 **필수 8룰**(SDN 직접·mixer·DPRK·PEP·smurfing·pass-through·structuring·high-velocity)은 있어야 FIU 검사 통과.

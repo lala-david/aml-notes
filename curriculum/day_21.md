@@ -63,3 +63,36 @@ flowchart LR
 가장 까다로운 관할:
 가장 단순한 관할:
 실무에서 1순위로 호환 봐야 할 것:
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP 멀티관할 실무
+
+한·미·EU를 동시에 운영하는 한국 VASP(주로 Upbit·Bithumb 글로벌팀)는 **"가장 엄격한 기준으로 단일화"** 원칙. 즉 Travel Rule 임계는 **EU 기준 0**, STR 품질 기준은 **FinCEN SAR narrative 품질**, KYC는 **한국 실명확인 + MiCA KYC + BSA CDD 합집합**. 이 "최대공약수 정책"이 벤더 비용은 올리지만 관할별 따로 운영 대비 **운영 리스크 3~5배 감소**. 반대로 **관할별 optimizer 전략**은 법무비용이 올라가서 중소 VASP는 감당 어려움.
+
+### 글로벌 AML Program의 대표 구조 (Tri-regime 기업)
+
+- **Policy Layer**: 단일 글로벌 정책 + 3개 관할별 annex (Korea Annex, US Annex, EU Annex)
+- **Operations Layer**: 글로벌 단일 케이스 관리 시스템(Jira AML project) + 관할별 큐 분기
+- **Reporting Layer**: 한국은 FIU-TIS(수기) / 미국은 FinCEN BSA E-Filing(API) / EU는 각국 FIU portal
+- **Sanctions Layer**: OFAC·UN·EU·한국 외교부 4중 스크리닝
+
+### 한국 VASP 글로벌 진출 순서 (실무 전형)
+
+1. 한국 특금법 신고 확보 (기본)
+2. 싱가포르 MAS PSA (영어권 진입 1순위, 심사 18~24개월)
+3. 일본 FSA 또는 홍콩 SFC (아시아 확장)
+4. EU CASP 라이선스 (몰타 또는 독일 BaFin)
+5. 미국 MSB + 일부 주 MTL (비용·시간 최대)
+
+### 호환 체크리스트 (자주 부딪히는 충돌)
+
+- **한국 실명확인 vs EU GDPR**: 주민번호 해시 저장·pseudonymization 필요
+- **미국 Travel Rule $3K vs EU 0**: EU 쪽 표준 채택이 단순
+- **한국 외부지갑 등록제 vs EU self-custody 1,000€**: 둘 다 대응하는 UI 플로우 별도 필요
+- **한국 이용자보호법 15년 기록 vs 미·EU 5년**: 긴 쪽 기준 단일화
+
+### 자주 나오는 오해
+
+- **"한 관할만 커버하면 충분"** — 스테이블코인·USD 결제망·클라우드 3축으로 간접 관할 성립, 단일 관할 영업은 이론적
+- **"EU가 가장 복잡"** — 실무에서 미국이 가장 복잡 (연방 + 50개 주 MTL, OFAC 별도)

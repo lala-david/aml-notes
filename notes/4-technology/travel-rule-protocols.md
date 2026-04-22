@@ -324,6 +324,95 @@ Upbit (VerifyVASP)
 **한국 현실**: Upbit = VerifyVASP / 빗썸·코빗·코인원 = CODE / 두 솔루션 상호 연동
 **글로벌 실무**: Notabene Gateway가 멀티프로토콜 허브로 사실상 표준
 
+## 💼 실무 현장 (Industry Reality)
+
+### Notabene Gateway 실사용 — 멀티프로토콜 허브
+
+Notabene은 2020년 뉴욕 창업, 2026년 기준 **1,500+ VASP 연결**. 한 VASP가 Notabene 1곳에 연결하면 전 세계 다른 VASP와 자동 라우팅:
+
+```mermaid
+flowchart LR
+    VASP_A[한국 VASP A] --> NOTA[Notabene Gateway]
+    NOTA --> TRISA[TRISA 네트워크]
+    NOTA --> TRP[TRP 네트워크]
+    NOTA --> VV[VerifyVASP]
+    NOTA --> CODE[CODE]
+    NOTA --> SYGNA[Sygna]
+    TRISA --> VASP_B[미국 VASP B]
+    VV --> VASP_C[한국 Upbit]
+    style NOTA fill:#1a2e4a,color:#fff
+```
+
+**가격**: 월 구독제, 소형 $5K~$20K/월, 대형 $50K+/월. 글로벌 영업 VASP에 사실상 필수.
+
+### Notabene Gateway vs 한국 컨소시엄 선택 기준
+
+| 기준 | Notabene | VerifyVASP | CODE |
+|---|---|---|---|
+| 글로벌 커버리지 | ★★★★★ | ★★★★ | ★★★ |
+| 한국 4사 연결 | △ (VV/CODE 경유) | ◎ | ◎ |
+| 초기 연동 공수 | 2~4주 | 4~8주 | 4~8주 |
+| 월 비용 | 중~고 | 포함 (회원사 구조) | 포함 |
+| 한국어 지원 | ❌ | ✅ | ✅ |
+| 적합 사업자 | 글로벌 지향 | Upbit·Chainalysis 기반 | 빗썸·코빗·코인원 |
+
+### 실제 메시지 교환 로그 샘플 (의사 데이터)
+
+```json
+{
+  "msg_id": "tr-2026-04-15-001",
+  "timestamp": "2026-04-15T14:32:11Z",
+  "status": "ACCEPTED",
+  "protocol": "VerifyVASP",
+  "originator_vasp": "Upbit (Dunamu)",
+  "beneficiary_vasp": "Bithumb",
+  "originator": {
+    "name": "김**수",  // 마스킹된 표현
+    "wallet": "bc1q...abc",
+    "country": "KR"
+  },
+  "beneficiary": {
+    "name": "이**영",
+    "wallet": "bc1q...xyz"
+  },
+  "amount_krw": 5000000,
+  "routing_latency_ms": 847
+}
+```
+
+### Sunrise Issue — 한국 VASP 실제 Timeout 통계
+
+대형 한국 거래소 월간 Travel Rule 통계 (추정):
+
+- 전체 송금 시도: **50,000~100,000건/월**
+- Travel Rule 필요: 약 **30~40%** (100만원 이상)
+- **자동 성공**: ~85%
+- **카운터파티 Timeout**: ~8% → 폴백 처리
+- **거절/취소**: ~5% → 미신고 VASP·blacklist
+- **수동 리뷰**: ~2%
+
+### 자주 나오는 오해
+
+- **"IVMS101만 지원하면 Travel Rule 완성"** — 메시지 형식만 맞추는 건 기본. 실제론 **프로토콜 선택 + VASP Discovery + 폴백 정책**이 3대 축.
+- **"Notabene Gateway = 특정 프로토콜"** — Notabene은 메시지 라우터. 실제 전송은 여전히 TRISA·TRP·VerifyVASP 등 하부 프로토콜이 담당.
+- **"VerifyVASP ↔ CODE 연동 = 완전 투명"** — 실제 운영에선 월 1~2회 API 타임아웃 장애. 담당 엔지니어 on-call 필요.
+
+### 주니어 KYT 엔지니어 하루 — Travel Rule 관련
+
+- 전날 Travel Rule 실패 로그 (보통 5~20건) 분석: timeout, schema mismatch, counterparty unknown
+- 신규 글로벌 VASP 연결 요청 (Notabene Directory에서 추가) 처리
+- IVMS101 schema validator 업데이트 (EU TFR 필드 변경 등)
+- 월간 AMLO 브리핑: "어느 카운터파티로 반복 실패, 차단 제안"
+
+### 한국 특수 현실
+
+- **VerifyVASP ↔ CODE 연동이 2022-05 완성**: 3개월간 Upbit ↔ 빗썸 송금 불가 경험이 업계 트라우마. 이후 **이중 가입**이 표준.
+- **Notabene은 한국 공식 진출 안 함**: 대형 거래소는 Notabene 직접 계약 or 글로벌 거래소 경유. 중소는 거의 미사용.
+- **메시지 15년 보관**: 이용자보호법 §11 적용 해석. WORM 스토리지 필수, 무결성 해시 체크 정기 감사.
+- **개인정보 국외이전**: 한국 고객 정보가 해외 VASP에 넘어가는 순간 PIPA 국외이전 동의 필요. 대부분 이용약관에 포괄 동의 받지만, 개인정보보호위원회(PIPC) 가이드 점차 엄격화 중.
+
+---
+
 ## 더 읽을거리
 - [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) — Travel Rule 운영 전반
 - [`../7-vendors/travel-rule-vendors.md`](../7-vendors/travel-rule-vendors.md) — 벤더 비교

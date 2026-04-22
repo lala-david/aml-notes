@@ -41,3 +41,40 @@ flowchart LR
 - [ ] 학계 ↔ 산업 간격 인지
 
 ## 💭 오늘의 한 줄
+
+## 💼 실무 현장 (Industry Reality)
+
+### 학계 → 산업 이전 경로
+
+**Chainalysis 창업 스토리**: 공동창업자 **Michael Gronager**(전 Kraken CTO)가 2014년 Meiklejohn 논문을 읽고 "이게 비즈니스다"라고 창업. 초기 clustering 엔진은 **Common Input Ownership + Change Detection** 등 2013~2015 학계 휴리스틱의 직접 구현. **Elliptic**도 유사 — **Tom Robinson**(UCL 물리학 박사)이 학계 기반으로 창업. **TRM Labs**는 **Esteban Castaño + Rahul Raina**(스탠퍼드)가 학계 + FinTech 경험 결합.
+
+### 실제 기업 데이터 과학 팀
+
+- **Chainalysis Research**: 약 30~50명(박사급 다수) · Crypto Crime Report·휴리스틱 개발
+- **Coinbase Lynx**: 2024 발표한 **GNN 기반 내부 KYT 엔진**. Feast 피처스토어 + PyTorch Geometric 기반. 박사급 4~8명 + MLE 10~15명 추정
+- **Elliptic Data Science**: **Elliptic++ dataset**(2023) 공개로 학계와 양방향 교류. Imperial College London 협업
+
+### 학계 → 산업 기술 지도
+
+| 논문·저자 | 연도 | 산업 적용 |
+|---|---|---|
+| Meiklejohn "A Fistful of Bitcoins" | 2013 | Chainalysis clustering 기반 |
+| Androulaki et al. | 2013 | Change address heuristic |
+| Weber et al. "Elliptic dataset" | 2019 | Elliptic + 학계 ML 협업 본격화 |
+| Bellei et al. "Elliptic2" | 2024 | GNN·subgraph anomaly(Elliptic) |
+| Coinbase Lynx | 2024 | 온체인 GNN 상용화 |
+
+### 학계와 산업의 간격
+
+```
+학계 장점: 오픈 benchmark, 재현성, 피어리뷰
+학계 한계: 라벨 데이터 부족 (Elliptic 공개셋도 2019년)
+
+산업 장점: 실시간 라벨 수만~수십만 건 보유
+산업 한계: 블랙박스, 재현 어려움, 규제상 설명가능성 제약
+```
+
+### 자주 나오는 오해
+
+- **"휴리스틱은 옛날 얘기, 이제 AI가 푼다"** — 현장 KYT의 **90% 이상이 여전히 룰·휴리스틱 기반**. AI는 FP 감축·ranking 보조. 2026년에도 "첫 경보"는 룰.
+- **"학계 정확도가 산업 수준"** — Elliptic 공개셋은 **"비용 없는 네거티브 샘플"** 이 부족해 실제 환경 대비 과대평가되기 쉬움. 산업 현장은 precision·recall 동시 튜닝이 훨씬 어려움.

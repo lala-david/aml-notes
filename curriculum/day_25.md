@@ -47,3 +47,62 @@ flowchart LR
 - [ ] 컨소시엄형 = 사전 검증 회원사만 안다
 
 ## 💭 오늘의 한 줄
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP 양강 연결 매트릭스
+
+| 거래소 | Travel Rule 솔루션 | KYT | 은행 |
+|---|---|---|---|
+| Upbit (두나무) | **VerifyVASP** (람다256 자회사) | Chainalysis + VerifyVASP | K뱅크 |
+| Bithumb | **CODE** | CODE + Chainalysis | NH농협 |
+| Coinone | **CODE** | CODE + Chainalysis | 카카오뱅크 |
+| Korbit | **CODE** | CODE (+ 일부 Chainalysis) | 신한은행 |
+| Gopax | **CODE** 또는 Notabene | Chainalysis | 전북은행 |
+
+2022-04 VerifyVASP ↔ CODE **상호 연동 합의** 이후 한국 4대 거래소 간 Travel Rule 송금 자유화 — 이게 한국 시장의 **사실상 표준**이 된 배경.
+
+### VerifyVASP(람다256) 내부 구조
+
+- 운영사: **람다256** (두나무 100% 자회사, 독립 법인)
+- 기술: **Chainalysis KYT 내장** + VerifyVASP IVMS101 페이로드 교환
+- 프로토콜: 자체 폐쇄형 API + Notabene Gateway 연동으로 글로벌 확장
+- 회원사: Upbit 중심 + 일부 해외 VASP
+
+### CODE 내부 구조
+
+- 운영사: **코드(CODE)** 합작법인 (빗썸·코빗·코인원 공동 출자)
+- 기술: 자체 폐쇄형 메시징 + Chainalysis·CertiK 등 KYT 파트너
+- 프로토콜: REST 기반, 회원사 간 직접 연결
+- 회원사: 한국 3대 + 중소 VASP 다수
+
+### 신규 한국 VASP 진입 시 솔루션 선택 기준
+
+1. **주요 고객 출금 경로**: 고객이 어느 거래소로 많이 보내는가? (Upbit 중심 → VerifyVASP, 3사 중심 → CODE)
+2. **비용 구조**: CODE가 공통적으로 저렴한 편, VerifyVASP는 람다256 의존성
+3. **글로벌 연결**: 둘 다 Notabene Gateway 연결 가능하지만 우선순위 차이
+4. **기존 KYT 벤더**: 이미 Chainalysis 쓰면 VerifyVASP가 통합 쉬움
+
+### VerifyVASP·CODE 연동 아키텍처
+
+```mermaid
+flowchart LR
+    U[Upbit] --> V[VerifyVASP]
+    B[Bithumb] --> C[CODE]
+    K[Korbit] --> C
+    O[Coinone] --> C
+    V <-->|상호 연동 2022-04| C
+    V -.글로벌.-> N[Notabene Gateway]
+    C -.글로벌.-> N
+```
+
+### 실무 팁
+
+- 한국 카운터파티 미연결 시 → 거의 없음 (4사 완결)
+- 해외 카운터파티 미연결 시 → VerifyVASP/CODE 모두 Gateway 라우팅으로 처리, 실패율 ~10~20%
+- **DAXA 공동 제재 주소 리스트**: 4사가 공유하는 블랙리스트, VerifyVASP/CODE 모두 반영
+
+### 자주 나오는 오해
+
+- **"VerifyVASP가 글로벌 솔루션"** — 한국 특화, 글로벌 확장은 Notabene Gateway 경유가 현실
+- **"CODE는 3사 연합체"** — 법적으로 독립 합작법인. 3사 의사결정 구조 있지만 운영은 별도 회사

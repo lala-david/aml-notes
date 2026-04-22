@@ -257,6 +257,74 @@ flowchart TB
 
 ---
 
+## 💼 실무 현장 (Industry Reality)
+
+### 실제 회사의 Risk Engine은 어떻게 생겼나
+
+Capstone에서 스케치하는 Risk Engine은 한국 **Upbit·Bithumb**, 글로벌 **Coinbase·Kraken**에서 실제로 운영되는 아키텍처의 축소판입니다. 실제 프로덕션은 다음 세 레이어로 구성:
+
+- **Layer 1 Real-time Decision** — 거래·출금·온보딩 시점의 sub-second 판정. Kafka + Flink + Redis.
+- **Layer 2 Near-real-time Monitoring** — 최근 24~72시간 패턴 분석(smurfing·pass-through). Spark Streaming 또는 ksqlDB.
+- **Layer 3 Batch Analytics** — 일/주/월 단위 집계(고객 위험등급 재산정·FP 분석). Snowflake·Databricks.
+
+Capstone은 Layer 1·2를 하나의 설계서로 통합한 형태이며, 실제 분리는 고도화 단계에서.
+
+### 프로덕션 아키텍처 비교
+
+| 항목 | 이 Capstone 설계 | Upbit·Coinbase 실제 |
+|---|---|---|
+| 룰 개수 | 10개 시작 | 50~200개 운영(Coinbase ~150개 추정) |
+| 룰 관리 | 코드 하드코딩 | 룰 엔진(Drools·자체 DSL)로 분리, 비엔지니어(분석가)도 룰 추가 |
+| ML 보조 | 선택 | XGBoost(FP 감축) · GNN(Coinbase Lynx 2024) · 이상탐지(Isolation Forest) |
+| Case Management | STR 큐만 | Hummingbird · Unit21 · 자체 ticketing 통합 |
+| 감사 로그 | 미명시 | 모든 판단 5~15년 WORM 저장, 판단 근거 rule id·feature value 기록 |
+| 다중 체인 | 추상화됨 | BTC·ETH·Tron·Solana·BSC·Polygon 개별 파이프라인 |
+
+### 벤더 대체재 — "자체 Risk Engine vs SaaS"
+
+- **자체 구축**: Upbit·Coinbase·Binance 등 대형은 대부분 자체 구축(규모의 경제 + 벤더 락인 회피)
+- **SaaS 통합**: 중소 VASP는 **Hummingbird(Case Mgmt) + Unit21(룰 엔진) + Chainalysis(KYT) + Sumsub(KYC)** 조합 통합이 흔함
+- **한국 신규 VASP**: 초기 비용 때문에 **람다256·CODE 패키지**에 의존하다가 규모 키우며 자체 구축으로 이전하는 패턴
+
+"자체 구축 vs SaaS" 결정 기준은 대략 **연 거래액 5조원**. 그 이하는 SaaS가 TCO 유리, 이상은 자체 구축이 유리하다는 업계 rule of thumb.
+
+### 운영 KPI·SLA (감독 검사 단골 지표)
+
+- **STR 제출 건수·품질**: KoFIU 연차보고서와 비교. 너무 적으면 "미탐지 의심", 너무 많으면 "형식적 남발"로 양쪽 다 지적.
+- **FP rate**: 알림 대비 실제 STR 전환율. 1~5%가 업계 레인지, 10% 이상이면 "룰 품질 우수"로 평가.
+- **조사 완료 시간(Time-to-close)**: Alert 발생 → 분석가 dispose까지 평균. 24~72시간이 KPI.
+- **룰 커버리지**: 최근 3년 STR로 이어진 사건 중 기존 룰에 적어도 한 번 걸린 비율 ≥ 80% 목표.
+- **외부 감사 지적 건수**: 연 1회 외부감사·FIU 검사에서 지적사항 수. 0건이 목표지만 통상 3~10건.
+
+### 운영 인력·조직 가이드
+
+Capstone의 "AMLO 1명 + 분석가 ___명" 슬롯을 채울 때 참조할 업계 기준(2026 한국):
+
+| 회사 규모 | AMLO | 분석가 | KYT 엔지니어 | 정책·감사 |
+|---|---|---|---|---|
+| 소형 VASP (거래 < 1조/연) | 1 | 2~4 | 1~2 | 1 |
+| 중형 (1~10조) | 1 | 5~10 | 2~4 | 2~3 |
+| 대형 (Upbit급 > 50조) | 1~2 | 10~15 | 4~6 | 3~5 |
+
+연봉 기준: 주니어 분석가 4,500~6,500만원, 시니어 7,000~9,500만원, AMLO 1.5~3억원. Coinbase·Kraken US는 주니어 약 $90~120K, AMLO $300~500K(+equity).
+
+### 배포·운영 팁
+
+- **규제 추적성(traceability)**: 각 룰이 어떤 법령·FATF 권고에 대응하는지 메타데이터로 태깅. 감독 검사 시 "R002는 특금법 §5의4·FATF R.10 이행" 식으로 답변 가능해야 함.
+- **Shadow mode**: 신규 룰은 production action(BLOCK) 없이 "로그만 남기는" shadow mode로 2~4주 운영 → FP 분석 → 확정. 대부분 벤더·회사 공통 패턴.
+- **카나리(canary) 배포**: 룰 변경은 전체 트래픽의 1~5%에 먼저 적용 → KPI 이상 없음 확인 후 전면 배포. trading system과 유사한 원칙.
+- **룰 위원회**: 월 1회 AMLO·분석가·엔지니어·법무 모여 룰 추가·삭제·튜닝 승인. 회의록은 감사 증거.
+- **외부감사 대비**: 룰 목록·FP 통계·STR 통계·학습 자료 ISMS 항목으로 번들링. ISMS-P 인증이 있으면 감독 검사 부담 상당히 경감.
+- **계약·라이선스**: 벤더 API 의존하면 계약 갱신 시점에 사업 영속성 리스크. 2~3년 장기계약 + escrow 조항 권장.
+
+### 자주 나오는 오해
+
+- **"Risk Engine = AML 전부"** — Risk Engine은 자동화 도구. **STR 작성·FIU 대응·검사 대응은 여전히 사람 업무**. 분석가가 줄지 않음.
+- **"룰 100개 이상 쌓으면 안전"** — 룰 간 충돌·FP 폭증이 오히려 탐지 품질 저하. Coinbase·Upbit도 **상시 룰은 50~150개** 수준으로 유지.
+- **"ML이 룰을 대체한다"** — 아직 아님. ML은 **FP 감축 보조**로 쓰이고, 최종 판정과 STR 근거는 **룰 기반**. 감독당국이 "해석 가능한 근거"를 요구해서.
+
+---
+
 ## 작성자 메모
 
 캡스톤 후 [`../../curriculum/day_60.md`](../../curriculum/day_60.md) 의 90일 트랙 선택 → 이 설계서를 실제 프로토타입으로 발전.

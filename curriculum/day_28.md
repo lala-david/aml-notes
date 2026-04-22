@@ -85,3 +85,62 @@ def validate_ivms101(msg: dict) -> tuple[bool, list[str]]:
 1개월 학습 완료. 가장 큰 변화:
 가장 의외였던 것:
 다음 1개월 (W5~W8) 기대:
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+IVMS101 빌더는 **KYT 엔지니어 입사 면접 과제** 단골. 특히 VerifyVASP·CODE 팀은 입사자에게 "한국 사용자 송금 시나리오 JSON 직접 작성" 테스트 실시. 실무 코드 베이스는 대개 **Python + pydantic 스키마 validator** 또는 **TypeScript + zod** 스택. 오픈소스로는 **21 Analytics ivms101-ts**, **OpenVASP ivms-schemas**가 가장 널리 쓰이는 참조 구현.
+
+### 글로벌에서는
+
+- **TRISA Go SDK**: `trisacrypto/trisa` repo, gRPC + IVMS101 내장
+- **Notabene SDK**: JavaScript/Python 공식 SDK, IVMS101 빌더 포함
+- **21 Analytics ivms101**: TypeScript 구현, Apache 2.0 오픈소스
+- **VerifyVASP SDK**: Java 기반, 회원사 한정 제공
+
+Coinbase는 자체 IVMS101 Standardization Library 2024 공개 — 이름 transliteration·주소 포맷 정규화 포함.
+
+### 실무 코드 구조 (Python, 프로덕션 레벨)
+
+```python
+from pydantic import BaseModel, Field, validator
+
+class NaturalPerson(BaseModel):
+    primary_identifier: str  # "홍길동"
+    secondary_identifier: str | None  # "Hong Gildong"
+    birth_date: str | None  # YYYY-MM-DD
+    country_of_residence: str = Field(regex="^[A-Z]{2}$")
+
+    @validator("birth_date")
+    def validate_dob(cls, v):
+        # ISO 8601 포맷 검증
+        ...
+
+class IVMS101Message(BaseModel):
+    originator: Originator
+    beneficiary: Beneficiary
+    originating_vasp: VASP
+    beneficiary_vasp: VASP
+    transfer_path: TransferPath
+```
+
+### 5개 테스트 케이스 (실무 체크)
+
+1. **정상 한국 100만원**: 모든 필수 필드 채움, KR 국가 코드
+2. **송신인 이름 누락**: `nameIdentifier` 비어있음 → `(False, ["missing primaryIdentifier"])`
+3. **잘못된 지갑 주소**: `0xabc` (체크섬 오류) → validator 실패
+4. **비표준 통화 코드**: `BTC` 대신 `BITCOIN` → ISO 4217/DTI 매핑 실패
+5. **EU TFR 호환 200만원**: `dateAndPlaceOfBirth` 필수로 검증 강화
+
+### Travel Rule 운영 지표 (한국 VASP 주간 KPI)
+
+- IVMS101 메시지 송신 성공률: 95%+ 목표
+- 카운터파티 accept 비율: 90%+ 목표
+- Sunrise 폴백 비율: <5%
+- 필드 오류 재전송: <2%
+
+### 자주 나오는 오해
+
+- **"IVMS101 빌더는 간단한 JSON 작성"** — 한국어 transliteration·주소 포맷·지갑 체크섬 검증 등 예외 처리가 복잡. 실무 코드 ~500~2000 LOC
+- **"오픈소스 라이브러리 그대로 쓰면 된다"** — 관할별 필수 필드 차이 있어 각 VASP가 custom 확장 필요

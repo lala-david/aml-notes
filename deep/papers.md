@@ -219,6 +219,46 @@ Google Scholar에서 논문을 찾을 때 **"Cited by"** 수치가 영향력의 
 
 ---
 
+## 💼 실무 현장 (Industry Reality)
+
+### 이 논문들을 실무에서 어떻게 쓰나
+
+학술 논문이 **실제 프로덕션 코드로 이식되는 경로**는 세 가지입니다.
+
+- **Meiklejohn 2013 → Chainalysis·TRM 클러스터링 엔진**: CIOH(Common Input Ownership Heuristic)는 현재 모든 KYT 벤더의 기본 휴리스틱. 자체 클러스터링을 시도하는 엔지니어는 이 논문 + Heuristic-Based Clustering(2020)을 반드시 읽고 시작.
+- **Weber 2019 → Elliptic 데이터셋 기반 ML 모델**: Coinbase "Lynx"(2024) · TRM Labs 내부 ML · 한국 Upbit 자체 XGBoost 모델이 모두 이 논문 계보. Elliptic 데이터셋으로 벤치마크하는 게 **면접 실무 과제** 단골 주제.
+- **Möser 2013 → mixer 탐지 룰**: CMLN(Crypto Money Laundering Network) 개념의 학술 원전. Chainalysis Reactor의 mixer 카테고리 설계가 이 연장선.
+
+### 한국 VASP AMLO는 무엇을 보나
+
+한국 AMLO는 학술 논문을 **일상적으로는 읽지 않습니다**. 다만 다음 시점에 특정 논문이 필요:
+
+- **벤더 평가·RFP 작성**: Chainalysis·TRM·Elliptic 기술 검증 시 "CIOH·change address heuristic 구현 수준"을 질문해야 함. Meiklejohn 원전을 읽어본 AMLO가 유리.
+- **금융위·FIU 질의 대응**: 감독당국이 "귀사는 mixer 노출을 어떻게 측정하는가"라고 물을 때, 학술 근거(Möser 2013 · Elliptic 2024 dataset)를 인용하면 설득력 급상승.
+- **STR 이의제기 대응**: 고객이 "내 거래는 mixer와 무관"이라고 주장할 때, 학술 방법론(휴리스틱 신뢰도·통계적 유의성) 설명 가능 여부가 법적 방어력 차이를 만듦.
+
+### 글로벌 컴플팀은 어떻게 소화하나
+
+- **Coinbase Research**: 전담 리서치팀(~10명) 보유. Elliptic2 dataset · Bellei 2024 GNN 논문을 곧바로 자체 "Lynx" 엔진에 반영해 2024 블로그 발표
+- **Chainalysis·TRM·Elliptic**: 주요 논문 저자가 자사 Chief Scientist·Research Head로 영입되는 경우 다수. Meiklejohn 본인이 UCL 교수지만 Chainalysis 고문 역할
+- **ACAMS 커뮤니티**: 학술 논문을 **실무 언어로 번역**한 white paper·블로그 다수. 원전 읽기 어려우면 ACAMS Today Magazine 요약으로 대체 가능
+
+### 자주 나오는 오해
+
+- **"논문 = 학계 일"** — Chainalysis·TRM·Elliptic의 R&D 상당 부분이 학술 논문 출판 병행. 특히 USENIX Security·CCS 논문은 **벤더 영업 자료로 사용**됨.
+- **"Monero는 완전 추적 불가"** — Möser 2018 논문이 **부분 추적 가능**을 실증. Chainalysis 2020부터 Monero 추적 도구 상용화. 프라이버시 코인 관련 "절대"라는 표현은 학술적으로 틀림.
+- **"ML이 있으면 룰이 필요 없다"** — Weber 2019 이후 10년간 ML 기반 AML 연구가 활발했지만, 감독당국이 요구하는 **"해석 가능한 근거"** 때문에 여전히 **룰이 주, ML은 보조**. 학술 연구와 실무 배포 사이의 구조적 격차.
+
+### 실무자가 이 영역을 따라잡는 루틴
+
+- **월 1편 정독** — 위 추천 읽기 순서(10장) 5편을 5개월에 소화
+- **Google Scholar Alert 등록** — "Bitcoin clustering", "cryptocurrency money laundering", "blockchain anti-money laundering" 키워드. 신규 논문 자동 이메일
+- **컨퍼런스 논문집 훑기** — 매년 USENIX Security·CCS·Financial Cryptography proceedings의 abstract만 읽기(반일)
+- **저자 Twitter 팔로우** — Meiklejohn(@sarahjamielewis 별개 인물 주의) · Narayanan · Böhme · Elliptic Research 계정
+- **Notion·Zotero에 한줄 요약** — 읽은 논문 5단계 속독 결과(추상·결론·방법·관련연구·메모)를 축적. 2~3년 후 자체 지식 그래프가 됨
+
+---
+
 ## 더 읽을거리
 
 - [`reports.md`](reports.md) — 산업 리포트

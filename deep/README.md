@@ -45,3 +45,43 @@
 - **AMLO·CCO**: 학술 논문보다 **산업 리포트와 규제 가이드라인**이 실무에 더 직접적. `reports.md`와 `links.md`의 FATF 문서가 1순위.
 - **기술·엔지니어**: `papers.md`의 Bitcoin clustering·ML·ZKP 섹션이 핵심. 벤더 면접에서도 자주 언급되는 논문들.
 - **리서처·정책**: 학술 + 리포트 + 법무법인 인사이트(`links.md`) 3박자. 특히 김·장·광장·Latham 발간 자료가 실무와 학계의 번역 역할.
+
+## 💼 실무 현장 (Industry Reality)
+
+### 이 자료를 실무에서 어떻게 쓰나
+
+한국 VASP AML 조직에서 deep 자료는 **세 경로**로 소비됩니다. (1) **AMLO·정책팀**: FATF 공식 문서·KoFIU 연차보고서를 정책 개정 근거로 인용. (2) **분석·수사팀**: Chainalysis·TRM 사건 분석 리포트를 STR 작성·수사 서사 구성의 레퍼런스. (3) **엔지니어팀**: Meiklejohn·Weber 같은 학술 논문을 자체 휴리스틱 설계·ML 피처 엔지니어링에 참고. 리서치가 추상 지식으로 머물지 않고 **문서·코드·룰**에 녹아 들어가는 구조.
+
+### 한국 VASP AMLO는 무엇을 보나
+
+한 주 기준 AMLO의 리서치 소비 루틴(추정):
+
+- **매일 아침 15분** — Chainalysis Insights · TRM Newsletter · Notabene Newsletter · Latham Crypto Update 메일 훑기
+- **주 1~2회** — 법률신문·김·장·광장 가상자산 칼럼. 국내 규제 동향 실시간 체크
+- **월 1회** — 심층 리포트 1편 정독(Chainalysis 연간 또는 FATF Targeted Update)
+- **분기 1회** — FIU 공청회·DAXA 자율규제 개정안 리뷰
+- **연 1~2회** — ACAMS 컨퍼런스 또는 Chainalysis Links 참가(또는 YouTube 녹화)
+
+### 글로벌 컴플팀은 어떻게 소화하나
+
+- **Coinbase·Kraken·Binance**는 **내부 research desk**(컴플라이언스 소속 전담 리서처 2~5명)를 둠. 외부 논문·리포트를 주간 요약해 전사 공유
+- **Chainalysis·TRM 벤더 영업팀**이 분기 리뷰 미팅에서 최신 trend deck 제공. 고객사 AMLO가 이를 이사회 보고 자료로 재사용
+- 주요 사건(Bybit·Ronin 등) 발생 시 **24시간 내 TRM Blog + Chainalysis Insights**가 1차 분석 발행 → 모든 VASP가 이를 내부 위험평가 업데이트 근거로 씀
+
+### 자주 나오는 오해
+
+- **"학술 논문은 실무와 무관"** — 반은 맞고 반은 틀림. AMLO 일상 업무엔 무관하지만, **알고리즘 설계·벤더 선택·규제 당국 질의 대응**에서 학술 근거가 결정적.
+- **"벤더 리포트는 마케팅"** — Chainalysis·TRM 리포트는 자사 영업 포인트가 있지만, **수치 원천은 자체 데이터**이므로 업계에서 사실상 표준 통계로 받아들여짐. 단 "최대값 강조" 편향을 의식하고 읽을 것.
+- **"한국어 자료만 보면 됨"** — 한국어 자료는 주로 법학·규제 해설. **기술·온체인 분석은 영어 자료가 압도적**이며, 주니어부터 영어 리포트 읽는 근력을 기르는 게 커리어 효율.
+
+### 실무자가 이 영역을 따라잡는 루틴
+
+주 3~5시간만 투입하면 1년 내 업계 상위권 정보량 확보 가능:
+
+- **월~금 출퇴근 15분** — 뉴스레터 읽기(Chainalysis·TRM·Latham 중 2개)
+- **토요일 1시간** — Chainalysis 또는 TRM 블로그 심층 글 1편
+- **월 2회 주말 1~2시간** — 학술 논문 1편 속독(`papers.md` 5단계법 적용)
+- **분기 1회 반일** — 연간 리포트(Chainalysis Crypto Crime · FATF Targeted Update) 정독
+- **연 1~2회** — Chainalysis Links · Consensus Compliance 트랙 YouTube 시청
+
+이 루틴을 12개월 유지하면 **업계 평균 이상의 리서치 베이스**가 됩니다. 그 이상은 CAMS·CCAS 자격 취득 또는 컨퍼런스 대면 참가로 확장.

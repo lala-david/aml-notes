@@ -77,6 +77,63 @@ def kyt_check(address: str) -> dict:
 - [ ] [`progress.md`](progress.md) Week 8 + W8 미니 프로젝트 체크
 - [ ] git commit + push
 
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+**KYT 벤더 도입은 한국 4대 거래소 전원 Chainalysis**. 계약 구조는 보통 **연간 시트 라이선스 + API 호출량 tier**로 협상되며 대형 VASP 기준 **연 수억~수십억 규모**로 알려짐. 벤더 선정 요인 상위 3가지는 **(1) 한국 거래소·한국어 entity 라벨 깊이 (2) FIU·금감원 검사관 친숙도 (3) 람다256/VerifyVASP 연동성**. Upbit는 2023부터 **Chainalysis Reactor + KYT + Kryptos 풀 스택** 사용.
+
+### 글로벌에서는
+
+**Coinbase**는 자체 Lynx(GNN) + Chainalysis 병행. **Binance는 2023 합의 이후 Chainalysis + Elliptic 이중화 강제**. **Kraken**은 TRM 메인 + Chainalysis 보조. **OKX $504M 합의 후** TRM을 주 벤더로 전환한 것으로 관찰됨. **가격은 Enterprise tier 기준 연 $500K~$5M 범위**(호출량·좌석수·지역 구독에 따라).
+
+### KYT wrapper 설계 패턴 (실제)
+
+```python
+# 실제 프로덕션 패턴: 벤더 fallback + 내부 룰 결합
+def kyt_check(address, chain="ethereum"):
+    # 1. 내부 캐시 (1시간 TTL)
+    if cached := cache.get(address):
+        return cached
+    
+    # 2. Primary vendor (Chainalysis)
+    try:
+        result = chainalysis.screen(address, chain)
+    except VendorTimeout:
+        # 3. Fallback (TRM or Elliptic)
+        result = trm.screen(address, chain)
+    
+    # 4. 내부 룰 가중 (OFAC·mixer·DPRK 자체 라벨)
+    result = apply_internal_rules(result)
+    
+    # 5. 최종 액션 결정
+    result["action"] = decide_action(result["risk_score"])
+    return result
+```
+
+### 벤더 API 응답 JSON 실제 필드 (Chainalysis 기준)
+
+```json
+{
+  "address": "0x...",
+  "risk": "Severe|High|Medium|Low",
+  "riskReason": "Direct exposure to Sanctioned Entity",
+  "cluster": {
+    "name": "Lazarus Group",
+    "category": "sanctions"
+  },
+  "exposures": [
+    {"category": "mixing", "direction": "sent", "percentage": 7.3},
+    {"category": "sanctions", "direction": "received", "percentage": 1.1}
+  ]
+}
+```
+
+### 자주 나오는 오해
+
+- **"벤더 결과가 곧 진실"** — 벤더 라벨은 **확률적** 판단. 반드시 **내부 룰·자체 라벨**로 보완. 대형사 모두 "벤더 score + 자체 adjustment" 2단 구조.
+- **"무료 API로 충분"** — 학습·PoC는 가능하나 프로덕션은 **attribution 깊이·coverage·SLA** 때문에 유료 필수. 벤더 attribution DB는 약 **수억~수십억 주소** 수준.
+
 ## 💭 8주차 회고 (캡스톤 직전)
 
 전체 8주에서 가장 큰 변화:

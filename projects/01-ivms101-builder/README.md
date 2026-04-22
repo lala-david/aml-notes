@@ -125,6 +125,48 @@ originatingVASP  / beneficiaryVASP
 
 JSON Schema로 검증하려면 `jsonschema` 라이브러리 + [공식 IVMS101 스키마 JSON 파일](https://intervasp.org) 또는 Notabene 샘플 스키마를 내려받아 사용.
 
+## 💼 실무 현장 (Industry Reality)
+
+### 실제 회사에서는 이 기능을 어떻게 쓰나
+
+한국 VASP에서 Travel Rule 메시지 발신은 **출금 워크플로의 일부**입니다. 사용자가 100만원 이상 외부 지갑으로 출금 요청 → 해당 지갑이 **카운터파티 VASP**인지 판정(지갑 라벨 DB 조회) → 맞으면 IVMS101 메시지 생성·송신 → 카운터파티 응답 수신(수취인 이름 일치 여부 확인) → 응답 OK면 온체인 전송, NG면 **"Travel Rule 미이행 출금 거절"**. 이 플로우 전체가 **수 초 내** 끝나야 UX가 유지되므로, 실제로는 IVMS101 메시지를 **pre-built 템플릿 + 필드 채우기**로 운영합니다.
+
+### 프로덕션 아키텍처 비교
+
+| 항목 | 학습용(이 프로젝트) | 실제 프로덕션 |
+|---|---|---|
+| 메시지 생성 | Python dict → JSON | IVMS101 공식 스키마 + JSON Schema validator |
+| 전송 | 파일 생성에서 끝 | TLS 1.3 + 상호 인증서(mTLS) + 서명 |
+| 카운터파티 식별 | 수동 입력 | VASP Directory(Notabene·TRISA 디렉터리) 조회 |
+| PII 보호 | 평문 JSON | 엔드투엔드 암호화(AES-GCM) + 키 회전 |
+| 감사 로그 | 없음 | 모든 메시지 송수신 5~15년 보관 |
+| 프로토콜 | JSON 파일 | TRP(21 Analytics) · TRISA(gRPC) · IVMS101+ 벤더 자체 |
+
+### 벤더 대체재
+
+- **Notabene** — 글로벌 점유율 1위 추정, REST API + SDK, 라이선스 약 연 $50K~$200K 구간(VASP 규모별)
+- **VerifyVASP (람다256)** — 한국 Upbit·두나무 계열. 국내 VASP 간 상호접속 가장 넓음. Chainalysis KYT와 bundled 제공
+- **CODE** — Bithumb·Coinone·Korbit 중심 한국 표준 지향. 한국 VASP 연합이 주주
+- **TRISA** — 오픈소스·중립. 인증서 기반 상호 검증, 회비만 있으면 사용
+- **21 Analytics (TRP)** — 스위스 기반 유럽 은행권 영향. Travel Rule Protocol 표준 주도
+
+2026년 기준 한국 VASP 대부분은 **VerifyVASP 또는 CODE** 중 하나 + 해외 카운터파티용 Notabene 병행이 흔함.
+
+### 운영 KPI·SLA
+
+- **송신 성공률**: ≥ 99% (네트워크·카운터파티 응답 실패 제외)
+- **메시지 round-trip 지연**: p95 < 5초 (UX 블로킹 한계)
+- **수취인 이름 일치율**: 70~85% (한국어 로마자 표기 차이로 FP 다발)
+- **필드 누락 거절율**: 외교부·FIU 권고상 1~2% 이하
+- **카운터파티 커버리지**: 글로벌 상위 50 VASP 중 몇 개와 연결되어 있는가 (영업 협상 지표)
+
+### 배포·운영 팁
+
+- **본인확인기관 데이터 재사용**: PASS·NICE 실명확인 결과에서 IVMS101의 `naturalPerson` 필드를 자동 채우면 FP 감소. 단 **동의 범위**에 Travel Rule 사용이 포함됐는지 법무 검토 필수.
+- **한국어 이름 로마자 표기**: 성 "이"를 Lee·Yi·Rhee 중 어떤 것으로 송신하는가로 수취인 일치율이 10~20%p 요동. 사내 표기 규칙(여권 MRZ 기준 권장) 고정이 필요.
+- **비수취 VASP(sunrise issue)**: 카운터파티가 Travel Rule 미도입 국가이면 규제상 "선량한 조치" 로그 남기고 결정. 2024년부터 FATF가 "비수취 VASP로의 송금 금지"까지는 요구 안 함.
+- **private wallet(셀프 커스터디)**: EU TFR은 1,000유로 초과 시 수신 지갑 주소에 대한 **자체 검증** 의무. 한국은 2026 현재 요구 없음이나 향후 도입 가능성.
+
 ## 학습 자료
 
 - [`../../notes/4-technology/travel-rule-protocols.md`](../../notes/4-technology/travel-rule-protocols.md) — IVMS101 deep

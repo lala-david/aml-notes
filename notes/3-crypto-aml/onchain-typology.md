@@ -254,6 +254,95 @@ KYT 시스템의 거의 모든 룰은 이 9개 유형 중 하나를 탐지하려
 **탐지 5축**: Clustering · Attribution · Behavior · Cross-chain · Exposure
 **2025 트렌드**: Cross-chain / CMLN / 스테이블코인 / 국가세탁 / LaaS 산업화
 
+## 💼 실무 현장 (Industry Reality)
+
+### 각 Typology별 KYT 탐지 룰 (pseudocode)
+
+**Mixer 노출 탐지**:
+```python
+def mixer_rule(wallet):
+    exp = chainalysis.exposure(wallet, hops=3)
+    if exp["TORNADO_CASH_DIRECT"] > 0: return "CRITICAL"
+    if exp["TORNADO_CASH_3HOP"] / wallet.balance > 0.05: return "HIGH"
+    if exp["WASABI_SAMOURAI"] > 0: return "MEDIUM"
+    return None
+```
+
+**Peel Chain 탐지**:
+```python
+def peel_chain(addr, depth=20):
+    chain = []
+    curr = addr
+    for _ in range(depth):
+        outs = get_outputs(curr)
+        if len(outs) != 2: break  # peel 특징: 2개 output
+        small, large = sorted(outs, key=lambda o: o.value)
+        if small.value / large.value > 0.3: break  # 균등 분할 아님
+        chain.append(curr)
+        curr = large.to_addr
+    return len(chain) >= 5  # 5단 이상이면 peel 의심
+```
+
+**Bridge 체인호핑 탐지**:
+```python
+def bridge_hop(tx):
+    KNOWN_BRIDGES = ["0x3ee18b2214aff97000d974cf647e7c347e8fa585", ...]  # Wormhole 등
+    if tx.to in KNOWN_BRIDGES:
+        return "BRIDGE_ENTRY", tx.amount, tx.token
+    return None
+```
+
+**NFT Wash Trading**:
+```python
+def nft_wash(nft_id, window="7d"):
+    trades = get_trades(nft_id, window)
+    addresses = set()
+    for t in trades:
+        addresses.add(t.buyer); addresses.add(t.seller)
+    # 순환 매매 여부
+    if len(trades) >= 3 and len(addresses) <= 3:
+        return "WASH_LOOP_SUSPECT"
+    return None
+```
+
+### 실무에서 발생 빈도 (한국 VASP 주니어 Analyst 기준)
+
+| Typology | 월간 Alert 발생 빈도 | FP 비율 | 실제 STR 이어지는 비율 |
+|---|---|---|---|
+| Mixer 직접 노출 | 5~10건 | ~20% | ~50% |
+| Mixer 간접(2~3 hop) | 50~100건 | ~85% | ~5% |
+| Peel chain | 10~30건 | ~70% | ~10% |
+| Bridge/체인호핑 | 100+건 | ~90% | ~3% (대부분 정상 이용) |
+| DEX swap | 수백 건 | ~95% | ~1% |
+| NFT wash | 5~20건 | ~60% | ~15% |
+| Privacy coin 터치 | 매우 드묾 (국내 상폐) | 높음 | 상폐 후 거의 無 |
+| OTC(CMLN 패턴) | 3~10건 | ~40% | ~30% |
+
+### 벤더별 Typology 커버리지 차이 (PoC 비교 결과 예시)
+
+| Typology | Chainalysis | Elliptic | TRM | Crystal |
+|---|---|---|---|---|
+| Mixer (Tornado·Wasabi) | 매우 강함 | 강함 | 강함 | 강함 |
+| Cross-chain Bridge | 매우 강함 (Crosschain) | 중~강 (Holistic) | 매우 강함 (Universal) | 중 |
+| DeFi 상호작용 | 강함 | 매우 강함 | 강함 | 중 |
+| CMLN / 중국어권 OTC | 강함 | 중 | 강함 (Asia 특화) | 중 |
+| NFT wash | 중 | 강함 | 중 | 약 |
+| 한국 거래소 Attribution | 중 | 중 | 중~강 | 약 |
+
+### 자주 나오는 오해
+
+- **"Tornado 제재 해제됐으니 이제 괜찮다"** — 2025-03 SDN 해제됐지만 **업계는 여전히 위험 카테고리 유지**. Coinbase·Kraken 모두 Tornado 관련 주소 거부 정책 지속.
+- **"DEX는 규제 대상 아니니 KYT 필요 없음"** — CEX가 DEX 상호작용 주소를 **입금 받는 순간** KYT 대상. DEX는 탐지 대상이 아니라 **경로**.
+- **"Privacy coin은 탐지 불가능"** — 완전 불가는 아님. **shielded → transparent 전환 순간**, 거래소 입금 순간이 탐지 기회.
+
+### 한국 특수 현실
+
+- **Privacy coin 전량 상폐**: XMR·ZEC·DASH 등 2021년 4대 거래소 공동 상폐. 이후 한국 고객의 privacy coin 노출은 **OTC/해외 P2P** 경유만 남음.
+- **CMLN 위챗·텔레그램 OTC**: 한국 고객이 USDT를 위안화로 환전하려 CMLN에 의뢰하는 케이스가 증가. Chainalysis Korea는 이 영역 특화 분석 보고서 정기 발간.
+- **Lazarus 공급망 공격**: 2019 Upbit 해킹, 2022 GDAC, 2023 BonqDAO 공격 모두 한국 연관. **DAXA 4사는 Lazarus 노출 주소 공유 리스트** 운영.
+
+---
+
 ## 더 읽을거리
 - [`vasp-obligations.md`](vasp-obligations.md) — VASP 의무
 - [`defi-nft-risks.md`](defi-nft-risks.md) — DeFi·NFT·프라이버시 코인 상세

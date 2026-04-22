@@ -84,6 +84,49 @@ def render_mermaid(graph: dict) -> str:
 ETHERSCAN_API_KEY=your_free_key  # https://etherscan.io/apis
 ```
 
+## 💼 실무 현장 (Industry Reality)
+
+### 실제 회사에서는 이 기능을 어떻게 쓰나
+
+Onchain Tracer는 AML 조직에서 **Investigation(수사)팀·FCI(Financial Crimes Investigations)팀**의 일상 도구입니다. STR 초안 작성 전 "이 지갑의 자금이 어디서 왔나·어디로 갔나"를 **2~6 hop 추적**해 서사로 구성하는 작업이 기본. 또한 **제휴 거래소 동결 요청**(예: 카운터파티 거래소에 "귀사 주소 0xABC로 입금된 X ETH를 동결해달라")을 보낼 때 추적 결과를 증거로 첨부합니다.
+
+### 프로덕션 아키텍처 비교
+
+| 항목 | 이 프로젝트(학습용) | Chainalysis Reactor · TRM Forensics |
+|---|---|---|
+| 데이터 소스 | Etherscan API 실시간 조회 | 자체 인덱싱 노드 + 블록 재처리 파이프라인 |
+| 라벨 DB | 자체 수백 개 | Chainalysis 10억+ 주소, 국가별 거래소·OTC·mixer 매핑 |
+| 휴리스틱 | CIOH 없음 | CIOH · change address · peel chain · CoinJoin 역추적 |
+| 시각화 | Mermaid · ASCII | 인터랙티브 그래프 UI + 시간축 애니메이션 |
+| 다중 체인 | ETH만 | BTC · ETH · Tron · Solana · BSC · Polygon 등 20+ 크로스체인 추적 |
+| Rate limit | 5 req/s | 사실상 무제한 (자체 노드) |
+| 가격 | 무료 (Etherscan free) | 연 $10K~$250K 시트당 · 기업 라이선스 $500K~$수백만 |
+
+**핵심 갭**: 이 프로젝트는 "데이터 접근"을 한다면, 벤더는 "**데이터 + 라벨 + 휴리스틱 + UI**"를 판매. 한국 VASP·수사기관이 Chainalysis에 돈을 쓰는 이유는 대부분 **라벨 DB와 휴리스틱** 때문이며, API 자체는 큰 차이가 없음.
+
+### 벤더 대체재
+
+- **Chainalysis Reactor** — 수사·attribution 업계 표준. FBI·DOJ 사실상 공식 도구. 시트당 연 약 $25K~
+- **TRM Forensics** — 속도·UX 우수. 미국 정부 계약 2022~2024 대거 수주하며 점유율 확대
+- **Elliptic Investigator** — 영국·EU 강세. HSBC 등 은행권 시장
+- **Crystal Intelligence** — 러시아·CIS 강세. 비용 상대적 저렴
+- **Merkle Science Tracker** — 동남아·인도 강세, KYT·수사 통합
+- **Arkham Intelligence** — 무료 + 크라우드 소싱 라벨. 수사 품질은 위 4사 대비 약함이나 리서처 입문용
+
+### 운영 KPI·SLA
+
+- **hop depth**: 6 hop까지 추적 가능해야 실전 수사 품질
+- **라벨 커버리지**: 1 hop 카운터파티 중 알려진 엔티티 매핑률 70~90%
+- **응답 시간**: UI 상 6 hop 그래프 렌더 < 10초 (벤더 KPI)
+- **크로스체인 연결**: bridge 추적 시 송수신 양쪽 **시간 오차 ≤ 수 분**으로 자동 매칭
+
+### 배포·운영 팁
+
+- **Fan-out 폭발 방지**: 1-hop fan-out을 `MAX_FANOUT = 20`으로 제한하지 않으면 1 hop = 100, 2 hop = 10,000으로 터짐. 실무에서도 **인기 허브 주소(Binance hot wallet 등)는 강제 컷**.
+- **Hot wallet false lead**: 추적 중 거래소 hot wallet(Binance·Coinbase 등)에 닿으면 그 너머는 **오프체인(거래소 내부 장부)**. 벤더는 hot wallet 인식해 "dead end" 표시. 학습용 코드도 라벨 DB에 넣어 hop 확장 중단 처리 권장.
+- **증거 보존**: 수사 근거로 쓰려면 **조회 시점 블록 높이 + 원시 응답 JSON을 함께 저장**. 시간 경과 후 블록 재조직(reorg)·라벨 변경으로 같은 쿼리가 다른 결과를 낼 수 있음.
+- **Chainalysis 졸업 시점**: 자체 tracer로 대체 가능한 영역은 **"대량 일괄 스크리닝"**일 뿐, **수사 품질의 핵심인 라벨 DB**는 벤더를 끊기 어렵다는 게 업계 공통 결론.
+
 ## 학습 자료
 
 - [`../../notes/4-technology/blockchain-analytics.md`](../../notes/4-technology/blockchain-analytics.md) — Clustering + Attribution

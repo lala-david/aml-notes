@@ -29,6 +29,9 @@ EXCLUDE = {"node_modules", ".git", "print/days", "mermaid-cache"}
 def iter_md(root: Path):
     for p in root.rglob("*.md"):
         rel = p.relative_to(root).as_posix()
+        parts = set(rel.split("/"))
+        if parts & EXCLUDE:
+            continue
         if any(rel.startswith(x) for x in EXCLUDE):
             continue
         yield p

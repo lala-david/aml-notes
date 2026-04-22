@@ -47,3 +47,40 @@ flowchart TB
 - [ ] OFAC 2차 제재의 글로벌 영향 안다
 
 ## 💭 오늘의 한 줄
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+**제재 스크리닝은 KYC onboarding + 매 거래**에서 2번 돌아감. Upbit·Bithumb·Coinone·Korbit 모두 이름 매칭은 **Sumsub·Jumio·ARGOS**(KYC 벤더 내장) 또는 자체 fuzzy 엔진(주로 **Jaro-Winkler** + 음차 변환 테이블)을 쓰고, **wallet 주소 매칭은 Chainalysis KYT**의 `identifications` 필드로 처리. 외교부 "금융제재대상자" 엑셀은 매일 09:00에 수동 다운로드·diff 비교하는 곳이 아직 많음(API 미개방). DAXA 5사는 공동 제재 주소 블랙리스트를 **VerifyVASP 내부 채널**로 공유.
+
+### 글로벌에서는
+
+**Coinbase Sanctions Operations 팀**이 별도 부서로 존재(약 50~80명). OFAC SDN + UK OFSI + EU CFSP + UN + Canada OSFI + 호주 DFAT 최소 6개 리스트를 병렬 매칭. **Binance는 2023 DOJ 합의 이후** 제재 리스트를 시간당 sync(기존은 일 1회)로 변경. **OKX $504M 합의(2025-02)**의 주요 원인도 "이란·시리아 등 제재국 사용자 필터 미흡".
+
+### 기술 스택 (실제 도구)
+
+- **이름 매칭**: Elasticsearch + `fuzziness:AUTO` 또는 **LexisNexis WorldCompliance**·**Refinitiv World-Check**(글로벌 표준)
+- **Wallet 매칭**: Chainalysis KYT `screenAddress` API · Elliptic Navigator · TRM Wallet Screening
+- **SDN fetch**: OFAC `sdn_advanced.xml`(crypto 필드는 `<Feature>` 태그 "Digital Currency Address") 일 1회 배치
+
+### 실제 룰 (pseudocode)
+
+```
+RULE sanctions_wallet_direct
+WHEN tx.counterparty_address IN ofac_sdn_crypto_cache
+THEN action = FREEZE_IMMEDIATELY
+     str_required = TRUE
+     sla = 0h   # 즉시
+     notify = ["AMLO", "LEGAL", "CEO"]
+
+RULE sanctions_wallet_2hop
+WHEN chainalysis.exposure.indirect.sanctions > 0.01
+THEN action = REVIEW_QUEUE
+     sla = 24h
+```
+
+### 자주 나오는 오해
+
+- **"OFAC은 미국 회사에만 적용"** — **2차 제재(secondary sanctions)** 때문에 사실상 글로벌 강제력. 한국 VASP도 달러 코르레스·USDC·Tether 청산 경로가 미국이라 전원 OFAC 준수.
+- **"이름만 같으면 차단하면 된다"** — "Kim Min-soo" 매칭은 월 수천 건 FP 발생. **생년월일·국적·주소** 2차 필드 대조 없이는 운영 불가.

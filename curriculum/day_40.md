@@ -49,3 +49,41 @@ flowchart LR
 - [ ] FATF NFT VA 분류 기준 안다
 
 ## 💭 오늘의 한 줄
+
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+한국 4대 원화거래소는 **NFT 직접 취급을 하지 않습니다** — 특금법상 NFT는 VA(가상자산)에 포함되지 않는다는 2022 FSC 유권해석이 있지만, 2024-06 FSC가 **"결제·지불 기능, 증권 유사 특성이 있으면 VA로 판단 가능"** 으로 가이드라인 업데이트. 이후 Upbit NFT는 2024년 중단, Korbit NFT는 2023년 중단. 현재 거래소의 NFT 노출은 **OpenSea·Blur·Magic Eden에서 ETH·SOL 유입** 형태로만 들어옴.
+
+탐지는 **출금 주소가 NFT 마켓플레이스 컨트랙트인지** 체크하는 정도. Wash trading 자체 탐지는 글로벌 벤더(Chainalysis Storyline)에 의존.
+
+### 글로벌에서는
+
+**Chainalysis 2022 보고서** — NFT wash trading 추정 규모 **$8.9M/일** 수준이었고, 상위 262개 주소가 관련. OpenSea는 2022-09 **creator royalty 정책** + **제재 주소 차단**을 도입. 2023-02 **LooksRare·X2Y2**가 wash trading 방조 이슈로 거래량 급감.
+
+**미국 IRS·DOJ**: 2022-05 NFT wash trading 관련 첫 형사 기소(Nathaniel Chastain, OpenSea insider trading). 2024년 **Bored Ape 관련 rug pull** 여러 건에서 자금세탁 혐의 추가.
+
+**FATF 2023 업데이트**: "**collectible NFT**는 VA 아님, 하지만 **fungible 성격 또는 결제수단 유사 성격**이면 VA로 취급." 한국 FSC 가이드라인도 이 기준을 수용.
+
+### Wash trade 탐지 룰 (실제 운영 패턴)
+
+```
+RULE: nft_wash_trade
+WHEN same_nft_token_id traded 3+ times in 7d
+  AND price_change_ratio > 5.0
+  AND distinct_buyer_seller_cluster_count < 3      -- 같은 클러스터 순환
+  AND counterparty_funding_same_source = true       -- 종잣돈 출처 동일
+THEN flag = "wash_trade_suspect"
+     action = EXCLUDE_FROM_VOLUME_REPORT
+     investigate = true
+```
+
+Chainalysis Storyline은 이걸 **"Self-financed trading"**이라는 태그로 자동 라벨링.
+
+### 자주 나오는 오해
+
+- **"NFT는 그림이라 자금세탁 불가"** — 한 작품을 본인들끼리 고가에 매매하면 **시장가 창출 → 외부 매도 → 합법 수익화** 완성. FATF가 2022년부터 경고.
+- **"거래소가 NFT 안 하니 무관"** — NFT 판매대금이 ETH/USDC로 거래소에 재입금되는 경로가 남아 있음. 거래소 KYT는 **counterparty가 OpenSea Seaport 같은 계약인지** 체크.
+- **"Wash trading은 NFT만의 문제"** — 토큰 DEX에서도 LP·bot을 쓴 wash 거래가 다수(특히 소형 ERC-20). Chainalysis 2025 보고서가 확대 다룸.
+

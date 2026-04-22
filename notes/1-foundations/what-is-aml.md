@@ -250,6 +250,83 @@ R.15와 R.16은 한국 특금법 개정(2020-03, 2021-03)과 EU MiCA·TFR 제정
 **AML 9대 의무**: 신고 · KYC/CDD · RBA · EDD · TM/KYT · 제재 스크리닝 · STR · 기록보관 · 내부통제 (+ 가상자산 Travel Rule)
 **글로벌 구조**: FATF 권고 → 각국 국내법 → 감독기관 집행 → Mutual Evaluation 피드백 루프
 
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP 조직도
+
+**Upbit·Bithumb·Coinone·Korbit 공통 패턴**:
+
+- **AMLO (자금세탁방지책임자)**: 임원급(보통 부사장·이사급). 특금법상 **지정 의무**이며 FIU에 이름·경력 신고.
+- **AML 분석팀 (Analysts)**: 6~15명. KYT Alert 큐 처리, STR 초안 작성, EDD 심사.
+- **KYT/KYC 엔지니어링**: 2~5명. 거래 모니터링 파이프라인 운영, 벤더 API 연동, 룰 배포.
+- **정책·감사 대응팀**: 2~4명. FIU 정기 검사·ISMS·외부감사 대응, 정책서 개정.
+- **법무·준법감시인(Compliance Officer)**: 별도 보직. AMLO와 협업하지만 직무 분리.
+
+**헤드카운트 현실**: 2026-Q1 기준 Upbit 전사 인원 ~650명 중 컴플라이언스(AML+CO) 라인은 ~45명(7% 수준). 이는 **DAXA 원화거래소 4사 중 최대 비율**. 글로벌과 비교하면 Coinbase는 전사 3,500명 중 컴플라이언스 ~500명(14%) — 한국 거래소가 상대적으로 얇은 편.
+
+### 글로벌 대형 거래소 조직
+
+- **Coinbase**: 컴플라이언스를 3개 독립팀으로 분리 — **FCI(Financial Crimes Investigations)**, **Sanctions Operations**, **AML Advisory**. 각 팀이 독립 예산·KPI·리포팅 라인.
+- **Binance**: 2023 DOJ 합의($4.3B) 이후 **5개 지역 hub**(두바이·런던·싱가포르·아부다비·바하마)에 독립 AMLO 배치. **DOJ·FinCEN 모니터(외부 감시관) 5년 상주**(2024-2029).
+- **Kraken**: 상대적으로 슬림 — 전사 ~2,000명 중 컴플라이언스 ~200명. "한 명이 여러 모자를 쓰는" 구조.
+- **OKX**: 2025-02 $504M 합의 후 **US CCO(Chief Compliance Officer) 신규 신설** + 뉴욕 본사 법인 분리.
+
+### AML 실무에서 매일 다루는 실제 워크플로
+
+```mermaid
+flowchart LR
+    U[사용자 거래] --> K[KYT 엔진<br/>Chainalysis API]
+    K -->|Alert| Q[Alert 큐<br/>Slack · Jira]
+    Q --> A[Analyst 1차 리뷰]
+    A -->|FP| C[종결]
+    A -->|의심| I[조사 티켓]
+    I --> E[EDD 요청]
+    E -->|증빙 부족| S[STR 초안]
+    S --> L[AMLO 승인]
+    L --> F[FIU-TIS 제출]
+    style K fill:#dbeafe
+    style S fill:#fee2e2
+    style F fill:#d1fae5
+```
+
+"Alert → FP 분류 → 조사 → STR → 제출"이 하루 업무 순서. **80%는 FP(False Positive, 오탐)**이고, 실제 STR로 이어지는 건 **1~5%**.
+
+### 기술 스택 — 실제 회사에서 쓰는 도구
+
+| 레이어 | 한국 VASP | 글로벌 |
+|---|---|---|
+| 스트리밍 | Kafka + Flink 또는 Spark Streaming | 동일 (Coinbase는 자체 "Sombrero") |
+| 그래프 DB | Neo4j (소규모), 자체 Postgres+recursive CTE | Neo4j · TigerGraph · Coinbase "Lynx" GNN |
+| KYT 벤더 | Chainalysis KYT + VerifyVASP(Chainalysis 내장) | Chainalysis · Elliptic · TRM Labs 병행 |
+| 알림 | Slack + Jira + PagerDuty | 동일 + 자체 case management tool |
+| BI·리포팅 | Tableau + Snowflake | Databricks · Snowflake · Looker |
+| STR 제출 | FIU-TIS 포털 (수기 업로드) | FinCEN BSA E-Filing (API) |
+
+### 주니어 AML Analyst 하루 (09:00~18:00)
+
+- **09:00~10:00** — 전날 야간 KYT Alert 큐 리뷰. 보통 30~80건. 80%는 즉시 FP로 종결.
+- **10:00~11:30** — EDD 케이스 — 자금원천 증빙 서류(급여명세서·거래내역·사업자등록증) 심사. 평균 5~10건/일.
+- **11:30~12:00** — OFAC SDN 일일 diff 확인 + 신규 제재 대상 주소 리스트 내부 블랙리스트 sync.
+- **13:00~15:00** — STR 초안 작성 (AMLO 승인 후 KoFIU FIU-TIS 포털 제출). 분석가 1인당 월 3~10건.
+- **15:00~16:30** — 주간 FP 분석 + 룰 튜닝 제안 (월 1회 **룰 위원회**에서 확정).
+- **16:30~18:00** — 고위험 거래 수동 모니터링 + 시니어 브리핑.
+
+**1~3년차 연봉(2026 한국 기준)**: 주니어 Analyst 4,500~6,500만원, 시니어 7,000~9,500만원, AMLO(임원급) 1.5~3억원. 글로벌은 Coinbase·Kraken US 기준 주니어 $90~120K, AMLO $300~500K(+equity).
+
+### 자주 나오는 오해
+
+- **"AML은 법무 업무"** — 한국은 준법(Compliance)으로 묶지만 **미국·EU는 Financial Crimes가 별도 C-level**. 법적 지식 + 데이터 엔지니어링 역량이 동시에 필요.
+- **"룰만 많이 쌓으면 된다"** — 룰 충돌·FP 폭증이 오히려 탐지 품질을 떨어뜨림. "튜닝된 룰 10개 > 기계 생성 룰 100개"가 실무 원칙.
+- **"STR 많이 내면 잘하는 것"** — KoFIU도 FIU도 **품질 > 수량**. 형식적 STR 남발은 검사에서 감점.
+
+### 한국 특수 현실
+
+- **금융위 TF 참여**: 한국 AMLO는 금융위·FIU 정책 TF에 실무자로 참여하는 일이 잦음. 공공·민간 경계가 미국보다 가까움.
+- **DAXA(Digital Asset eXchange Association)**: 원화거래소 5사 자율협의기구. 공동 제재 주소 리스트·공동 상장 심사 기준 운영.
+- **본인확인기관 독점**: PASS·NICE·KCB 3개사가 실명확인 API 독점 → 신규 VASP 진입 장벽의 하나.
+
+---
+
 ## 더 읽을거리
 - [`why-crypto-different.md`](why-crypto-different.md) — 왜 가상자산 AML은 다른가
 - [`key-concepts.md`](key-concepts.md) — KYC/KYT/CDD/EDD/STR/CTR 정의 상세

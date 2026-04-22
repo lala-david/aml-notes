@@ -208,6 +208,81 @@ AML 부서가 실시간으로 방어해야 할 주요 위협 행위자 목록입
 **6대 layering 도구**: Mixer · Cross-chain Bridge · Chain Hopping · Peel Chain · DeFi · Privacy Coin
 **스테이블코인 역설**: 불법 거래 84%를 차지하지만 **유일하게 발행자가 freeze 가능**한 가상자산
 
+## 💼 실무 현장 (Industry Reality)
+
+### 가상자산 특수성이 실제 방어선에 어떻게 박혔나
+
+전통 금융 AML 팀은 **T+1 배치(batch)** 를 전제로 설계됐지만, 가상자산 VASP는 **실시간 스트림**을 전제로 설계합니다. 이 차이가 조직·시스템·KPI 전반을 뒤바꿉니다.
+
+```mermaid
+flowchart LR
+    DEP[입금 브로드캐스트] -->|확정 전| PRE[Pre-confirm<br/>Sanctions 주소 체크]
+    PRE -->|통과| CONF[블록 확정]
+    CONF --> KYT[KYT 스코어링<br/>Chainalysis API]
+    KYT -->|Risk >= 80| HOLD[자동 홀드]
+    KYT -->|Risk 50~79| REV[Analyst 큐]
+    KYT -->|Risk < 50| OK[통과]
+    HOLD --> AMLO[AMLO 승인]
+    style PRE fill:#fee2e2
+    style HOLD fill:#fed7aa
+    style KYT fill:#dbeafe
+```
+
+### 기술 스택 — 전통 금융 vs 가상자산 VASP
+
+| 레이어 | 전통 은행 | 가상자산 VASP |
+|---|---|---|
+| 데이터 파이프라인 | Batch (T+1) + 사내 DW | **Kafka + Flink 실시간 스트림** |
+| 모니터링 시스템 | NICE Actimize · SAS | Chainalysis KYT + 자체 룰 엔진 |
+| 제재 스크리닝 주기 | 일 1회 배치 | **실시간 pre-transaction** (주소 단위) |
+| 분석 DB | 관계형(Oracle·MSSQL) | Graph DB(Neo4j·TigerGraph) + 온체인 인덱서 |
+| Alert 처리 | 영업일 내 | **24/7, SLA 통상 15분~1시간** |
+
+### 주니어 Analyst가 매일 마주치는 가상자산 특유 케이스
+
+- **Tornado Cash 간접 노출** — 고객 지갑 4-hop 전에 Tornado Cash 터치. FP 판단의 단골 주제.
+- **브리지 송금 흐름 단절** — Base → Ethereum → Arbitrum으로 넘긴 후 흐름이 끊어진 것처럼 보이지만 사실은 연결됨. Chainalysis Crosschain Tracing으로 재구성.
+- **Pig Butchering 피해자 출금** — 고객 스스로가 피해자라 STR이 아닌 **이상신고**로 분류. 경찰 수사 요청 연동.
+- **Lazarus 간접 노출** — OFAC SDN 주소에서 3~5 hop 떨어진 고객 입금. 자동 홀드 + EDD 트리거.
+
+### 룰 예시 — Mixer 노출 탐지
+
+```python
+def mixer_exposure_rule(wallet):
+    exposure = chainalysis.get_exposure(wallet)
+    direct = exposure.get("TORNADO_CASH_DIRECT", 0)
+    indirect_1hop = exposure.get("TORNADO_CASH_1HOP", 0)
+    if direct > 0:
+        return "CRITICAL", "자산 동결 + AMLO 즉시 브리프"
+    if indirect_1hop >= 0.05 * wallet.balance:  # 5% 이상
+        return "HIGH", "EDD + 자금원천 요청"
+    return "CLEAR", None
+```
+
+### 자주 나오는 오해
+
+- **"블록체인은 공개니까 추적이 쉽다"** — 주소와 사람 연결은 별개. Attribution DB 없으면 추적은 벽에 부딪힘. Chainalysis 매출의 상당 부분이 정부·수사기관(Reactor 라이선스).
+- **"Privacy coin 상장 폐지하면 해결"** — 한국 4대 거래소는 2021년 XMR·ZEC 상폐했지만, 지금은 **USDT·USDC 스테이블코인이 더 큰 ML 경로**. 새 문제로 이동했을 뿐.
+- **"DeFi는 우리 책임 아니다"** — CEX가 DeFi 프로토콜과 상호작용하는 주소를 받아주는 이상, CEX의 KYT가 1차 방어선. FATF는 "통제 가능한 주체"를 폭넓게 해석.
+
+### 한국 특수 현실
+
+- **원화 마켓 = 실명계좌 독점**: 특금법 §7로 **은행 실명확인 입출금계정**이 필수. K뱅크(Upbit)·NH(Bithumb)·신한(Korbit)·카카오뱅크(Coinone). 이 구조 때문에 한국 거래소의 **법정화폐 단계 KYC는 글로벌 평균보다 엄격**.
+- **DAXA 공동 대응**: 원화거래소 5사가 2022-06 설립. 공동 상장 심사·공동 블랙리스트·공동 정책 제안.
+- **Travel Rule 100만원 기준**: FATF R.16 권고가 $1,000인데 한국은 **100만원(특금법 시행령 §10의10)**. 이는 글로벌 평균보다 낮은 트리거 — 더 많은 거래가 Travel Rule 대상.
+
+### Exposure Score 실전 읽는 법
+
+Chainalysis KYT가 주는 **Risk Score**(0~100)는 주소 직접 속성 + **indirect exposure**(N-hop 상류/하류 관계)의 가중합. 실무에서는:
+
+- **Direct 노출**(1-hop): 제재·mixer·다크넷 마켓과 직접 거래 → 자동 홀드
+- **Indirect 1~3 hop**: 여러 번 세탁을 거쳐도 탐지 — 분석가 리뷰
+- **4+ hop**: 보통 FP 가능성 높음 — 낮은 우선순위
+
+이 hop 단위 판단은 한국 VASP 주니어 교육 과정의 핵심 주제.
+
+---
+
 ## 더 읽을거리
 - [`what-is-aml.md`](what-is-aml.md) — AML 3단계 모델 기초
 - [`key-concepts.md`](key-concepts.md) — KYC·KYT·CDD·EDD 용어 체계

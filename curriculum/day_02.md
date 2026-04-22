@@ -44,5 +44,42 @@ flowchart LR
 
 ## 💭 오늘의 한 줄
 
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 VASP에서는
+
+공개 원장이 "이론상 투명"해도 실제 한국 거래소에서는 **지갑 주소 → 사람** 매핑이 사업의 승패를 가릅니다. Upbit·Bithumb·Coinone·Korbit 모두 **Chainalysis KYT** 기반 **입금 주소 사전 스크리닝(pre-deposit screening)**을 운영 — 입금 전 주소를 먼저 API로 조회해 mixer·Lazarus·제재 익스포저가 임계 초과면 입금 자체를 차단. 한국 거래소의 **트래블룰 허브**는 Upbit=**람다256 VerifyVASP**, 나머지(Bithumb·Coinone·Korbit)=**CODE(코드)** 로 분리되어 있어 서로 다른 허브 간 상호운용은 여전히 실무 과제.
+
+### 글로벌에서는
+
+**Chainalysis 2025 Crypto Crime Report** 기준 불법거래의 약 60% 이상이 **스테이블코인**(USDT·USDC)으로 이동 — 이 때문에 Coinbase·Kraken은 USDT 입출금에 **별도 룰 세트**를 두고 일반 자산보다 강한 임계로 모니터링. **Coinbase "Lynx"**(Graph Neural Network) 2024 발표 논문에서 "cross-chain laundering 탐지 FP 40% 감축" 주장 — 2026년 현재 업계는 **룰 + GNN 이중 구조**로 이동 중.
+
+### 기술 스택 또는 도구
+
+| 역할 | 한국 주류 | 글로벌 |
+|---|---|---|
+| 온체인 분석 | Chainalysis Reactor | Chainalysis · Elliptic · TRM Labs 3중 |
+| KYT API | Chainalysis KYT | 동일 + 자체 인하우스 |
+| Cross-chain 추적 | Chainalysis Storyline | Elliptic Lens · TRM Phoenix |
+| 주소 클러스터링 | 벤더 휴리스틱 의존 | 자체 GNN(Coinbase Lynx) |
+
+Chainalysis API 응답 실제 필드:
+```json
+{
+  "address": "bc1q...",
+  "cluster": "Lazarus Group",
+  "riskScore": 95,
+  "exposure": {
+    "direct": {"mixer": 0.31, "sanctioned": 0.12},
+    "indirect": {"hack": 0.08}
+  }
+}
+```
+
+### 자주 나오는 오해
+
+- **"블록체인이 공개라 추적이 쉽다"** — 주소와 사람이 분리돼 있고, mixer·bridge·DEX는 휴리스틱을 깨뜨리도록 설계됨. "공개 원장 = 자동 추적"이 아니라 **"공개 원장 + 분석 회사의 수십억 달러 데이터셋"**이 있어야 가능
+- **"한국은 트래블룰이 통일돼 있다"** — Upbit(VerifyVASP) vs 4사(CODE)로 **실질 2분화**. 허브 간 상호운용은 2026년에도 완전 해결 안 됨
+
 ## 더 깊이 (선택)
 - [`../notes/3-crypto-aml/onchain-typology.md`](../notes/3-crypto-aml/onchain-typology.md) — 7유형 미리보기

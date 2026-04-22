@@ -278,6 +278,83 @@ sequenceDiagram
 □ 2030 발효 대비 로드맵 수립
 ```
 
+## 💼 실무 현장 (Industry Reality)
+
+### 한국 양대 컨소시엄 — VerifyVASP vs CODE 실제 운영
+
+**VerifyVASP (람다256)**:
+- 지분: 두나무 자회사 람다256 + Chainalysis 공동 출자
+- 사용: **Upbit 메인** + 글로벌 200+ VASP (Bybit·OKX·Crypto.com 일부)
+- 기술: REST API + IVMS101 + Chainalysis KYT 자동 통합
+- 특징: 글로벌 지향, 영어 문서 완비
+
+**CODE**:
+- 지분: 빗썸·코빗·코인원 3사 균등 출자 (합작법인 2022-03)
+- 사용: **빗썸·코빗·코인원 메인** + 국내 중소 VASP
+- 기술: REST API + IVMS101 + 한국 실명계좌 은행 연동 최적화
+- 특징: 한국 특금법 100만원 임계 최적화, 국내 고객 지원 한국어
+
+**연동 구조**: 2022-05부터 VerifyVASP ↔ CODE **상호 라우팅** 완성. Upbit → 빗썸 송금 시 VerifyVASP가 CODE로 메시지 라우팅.
+
+### 실제 출금 플로 (사용자 관점)
+
+```mermaid
+flowchart TB
+    U[사용자 출금 요청] --> W[외부지갑 등록?]
+    W -->|미등록| REG[소유증명 + 화이트리스트 등록<br/>평균 1~3일]
+    W -->|등록완료| AMOUNT[금액 100만원 이상?]
+    AMOUNT -->|미만| SEND[즉시 온체인 송금]
+    AMOUNT -->|이상| CP[카운터파티 식별]
+    CP -->|국내 4사| AUTO[VerifyVASP/CODE<br/>자동 IVMS101 전송]
+    CP -->|글로벌 연결| GW[Notabene Gateway]
+    CP -->|미연결 VASP| MANUAL[수동 심사 또는 거절]
+    CP -->|개인지갑| PAO[지갑 소유 증명<br/>Satoshi Test]
+    style MANUAL fill:#fee2e2
+    style AUTO fill:#d1fae5
+```
+
+### Sunrise Issue 실제 대응 — 한국 거래소 민원 상위 케이스
+
+- **"Binance로 출금이 안 된다"** → Binance가 한국 미신고 상태, 2024-07 이후 차단 리스트
+- **"Crypto.com으로 보냈는데 Travel Rule 실패"** → Crypto.com이 VerifyVASP 연동했지만 API 타임아웃 빈번
+- **"메타마스크로 출금하려는데 외부지갑 등록 요구"** → 한국 자체 정책, 24h 대기 필요
+
+### IVMS101 메시지 실제 예시 (필드 검증 실패 케이스)
+
+```json
+{
+  "originator": {
+    "naturalPerson": {
+      "name": {"primaryIdentifier": "김민수"},
+      "dateAndPlaceOfBirth": {}  // ← 한국은 optional이지만 EU는 필수
+    },
+    "accountNumber": ["bc1q..."]
+  }
+}
+```
+
+**한국 → EU 전송 시**: EU 측 validator가 `dateAndPlaceOfBirth` 누락으로 **거절** → 재전송 필요 → 사용자 UX 악화.
+
+### 자주 나오는 오해
+
+- **"Travel Rule = Chainalysis"** — Chainalysis는 **KYT(노출)** 담당, Travel Rule은 **VerifyVASP/CODE**가 담당. 두 시스템은 연동되지만 별개.
+- **"100만원 미만은 신경 안 써도 됨"** — 분할송금 회피 감지해야 함. Upbit도 90만원대 반복 송금 분석가 리뷰 대상.
+- **"외부지갑 등록은 규제 요구사항"** — 특금법은 **명시 안 함**. 거래소 **자체 정책** (DAXA 공동 가이드). 법적 근거는 KYC의 일환으로 해석.
+
+### 주니어 KYT 엔지니어 하루 — Travel Rule 관련
+
+- **오전**: 전날 VerifyVASP/CODE 실패 로그 분석 (보통 5~20건) — 대부분 카운터파티 API 타임아웃
+- **오후**: Sunrise 사례 보고서 작성 — AMLO에게 "어느 VASP로 반복 실패" 통계 제공
+- **주간**: Notabene Directory에서 신규 연결 카운터파티 업데이트 반영
+
+### 한국 특수 현실
+
+- **"외부지갑 등록 24h 대기"**: DAXA 공동 정책으로 **출금 전 24시간 홀드**. 고객 불만 상위 민원.
+- **2022-03 시행 초기 분리**: VerifyVASP ↔ CODE 비호환으로 **Upbit ↔ 빗썸 송금 불가 3개월**. 사용자들은 "왜 내 코인을 못 보내나" 민원 폭증. 이게 양사 협력을 강제한 배경.
+- **미신고 해외 VASP 주소 차단**: FIU 주도 블랙리스트. Binance·Bybit 등 한국에 미신고한 주요 거래소는 일부 주소가 차단 상태.
+
+---
+
 ## 더 읽을거리
 - [`vasp-obligations.md`](vasp-obligations.md) — VASP 의무 종합
 - [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) — 프로토콜 기술 상세
