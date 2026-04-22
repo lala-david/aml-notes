@@ -27,6 +27,65 @@ sequenceDiagram
 2. Bridge tracing 방법 4가지?
 3. LayerZero/Wormhole 같은 generic messaging이 까다로운 이유?
 
+## 🧮 Bridge Matching 알고리즘
+
+### 이벤트 매칭 pseudocode
+
+```python
+def match_bridge(
+    locks: list[LockEvent],
+    mints: list[MintEvent],
+    time_window=300,  # 5분
+    amount_tol=0.005  # 0.5%
+) -> list[tuple]:
+    matches = []
+    for lock in locks:
+        cands = [m for m in mints
+                 if m.token_canonical == lock.token_canonical
+                 and abs(m.ts - lock.ts) <= time_window
+                 and abs(m.amount - lock.amount)/lock.amount <= amount_tol]
+        # Nonce 우선 매칭 (결정적)
+        if hasattr(lock, 'nonce'):
+            exact = [m for m in cands if getattr(m, 'nonce', None) == lock.nonce]
+            if exact: cands = exact[:1]
+        if len(cands) == 1:
+            matches.append((lock, cands[0]))
+        elif cands:
+            # 차선: 금액 차이 최소
+            matches.append((lock, min(cands, key=lambda m: abs(m.amount - lock.amount))))
+    return matches
+```
+
+### Bridge별 Nonce 가용성
+
+| Bridge | Nonce | 매칭 정확도 |
+|---|---|---|
+| Polygon PoS | ✓ | 97~99% |
+| Arbitrum | ✓ | 96~99% |
+| Optimism | ✓ | 96~99% |
+| Wormhole | ✓ (VAA) | 94~98% |
+| Hop | transferId | 92~96% |
+| LayerZero OFT | generic | 85~92% |
+| LayerZero Generic | payload 해독 | 40~60% |
+
+### 실패 케이스
+
+- **LayerZero Generic**: payload 임의 bytes → DApp별 decoder 필요
+- **Fee-on-transfer 토큰**: burn시 수수료 차감 → amount mismatch → tolerance 1%로 상향
+- **Batched bridge**: 한 tx 여러 sender → 개별 사용자 추적 불가
+- **Failed relay**: destination 수일 지연 → time_window 24시간 확장
+
+**3-hop 연속 체인(ETH→Poly→Arb→BSC)**: 정확도 곱셈 감소 → 0.90^3 ≈ 0.73
+
+### 🛠️ 오늘의 미니 챌린지 (업그레이드)
+
+Etherscan API 2-hop tracer에 **bridge event 인덱서 추가**:
+1. Polygon PoS DepositManager 이벤트 fetch
+2. Ethereum side matching
+3. 매칭 실패 케이스 로깅
+
+**심화**: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) §5 참조.
+
 ## 📖 읽기 (~50분)
 - 메인: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) — 5절
 - 보조: [`../notes/3-crypto-aml/onchain-typology.md`](../notes/3-crypto-aml/onchain-typology.md) — 1절 C (Bridge)

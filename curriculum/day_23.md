@@ -25,6 +25,40 @@ flowchart TB
 ```
 <!-- MAP-END -->
 
+## 🧮 IVMS101 Validator 핵심 (오늘의 핵심)
+
+### 관할별 필수 필드 차이
+
+| 필드 | KR | EU (TFR) | US (FinCEN) |
+|---|---|---|---|
+| originator.name | ✓ | ✓ | ✓ |
+| geographicAddress | ✓ (100만원↑) | ✓ (1 EUR↑) | ✓ ($3,000↑) |
+| dateOfBirth | 선택 | **필수** | 선택 |
+| placeOfBirth | — | **필수** | — |
+| nationalIdentification | HASHED (PIPA) | 선택 | — |
+
+### Validator pseudocode (간략)
+
+```python
+def validate(msg, jur):
+    for field, req in RULES[jur].items():
+        if req == REQUIRED and not get(msg, field):
+            return FAIL(f"Missing {field}")
+        if req == HASHED and not looks_like_hash(get(msg, field)):
+            return FAIL(f"{field} must be hashed (PIPA)")
+    if jur == "KR" and not has_hangul_and_latin(msg.name):
+        return FAIL("한글+영문 병기 필수")
+    return OK
+```
+
+### 🛠️ 오늘의 미니 챌린지 업그레이드
+
+1. 위 관할별 rules를 Python dict로 구현
+2. 잘못된 샘플 5개(EU에 DoB 누락, 한국에 평문 주민번호 등) 준비
+3. validator로 검증, 에러 메시지 수집
+
+**상세**: [`../notes/4-technology/travel-rule-protocols.md`](../notes/4-technology/travel-rule-protocols.md) §N 참조.
+
 ## 🎯 핵심 질문
 1. IVMS101의 풀이는?
 2. 메시지 핵심 5개 객체는? (Originator/Beneficiary/OriginatingVASP/BeneficiaryVASP/TransferPath)

@@ -259,6 +259,61 @@ Google Scholar에서 논문을 찾을 때 **"Cited by"** 수치가 영향력의 
 
 ---
 
+## 🔬 AML·온체인 분석 핵심 논문
+
+### Bitcoin Clustering & Privacy
+
+- **Meiklejohn et al. (2013)** — *A Fistful of Bitcoins: Characterizing Payments Among Men with No Names* (IMC)
+  - CIOH + Change Detection 휴리스틱 공식화. 모든 온체인 분석의 원조.
+  - 인용: 2,500+ · Elliptic·Chainalysis 초기 알고리즘의 학술적 기반
+- **Androulaki et al. (2013)** — *Evaluating User Privacy in Bitcoin* (FC)
+  - 클러스터링 실증, 거래소 entity 추적 실험
+- **Möser & Böhme (2017)** — *Anonymous Alone? Measuring Bitcoin's Second-Generation Anonymization Techniques* (ESORICS)
+  - CoinJoin·Wasabi·Samourai 분석. Fingerprint 탐지 기법.
+- **Nick (2015)** — *Data-Driven De-Anonymization in Bitcoin* (ETH Zurich thesis)
+  - Stash·peeling 패턴 정량 분석
+- **Harlev et al. (2018)** — *Breaking Bad: De-Anonymising Entity Types on the Bitcoin Blockchain Using Supervised ML*
+  - 엔티티 타입(거래소·mixer·도박 등) 자동 분류. Random Forest 기반.
+
+### Graph Neural Networks for AML
+
+- **Weber et al. (2019)** — *Anti-Money Laundering in Bitcoin: Experimenting with GCN* (KDD workshop)
+  - **Elliptic dataset 공개**. 203K node, 23% labeled.
+- **Alarab et al. (2020)** — *Competence of Graph Convolutional Networks for AML in Bitcoin* (ICDM)
+  - GCN·GAT 비교. F1 0.84→0.90 향상.
+- **Bellei et al. (2024)** — *Shape vs. Structure: Topology-Aware Self-Supervised Learning for AML on Elliptic2*
+  - Elliptic2 공개. Subgraph-level label + self-supervised.
+
+### Ethereum & Account-based
+
+- **Farrugia et al. (2020)** — *Detection of Illicit Accounts over the Ethereum Blockchain* (Expert Systems)
+  - Account 모델에서 CIOH 불가능한 대신 behavior feature 활용
+- **Wu et al. (2021)** — *Who Are the Phishers? Phishing Scam Detection on Ethereum via Network Embedding*
+  - Phishing 탐지 GNN
+
+### Cross-chain & Bridge Analytics
+
+- **Sun et al. (2023)** — *Analysis of Cross-Chain Bridges: Security and Efficiency*
+  - Bridge 종류별 보안 분석 (Wormhole·Ronin hack 포함)
+
+### 데이터셋
+
+- **Elliptic** (2019) — 203K nodes, 23% labeled — Weber et al.
+- **Elliptic++** (2022) — 840K tx, 1.6M addresses
+- **Elliptic2** (2024) — 122M txs, subgraph labels — Bellei
+- **BABD-13** (Xiang 2022) — 13 behavior classes
+
+### 실무 적용 매핑
+
+| 논문 | 실무에서 어떻게 쓰이나 |
+|---|---|
+| Meiklejohn 2013 | Chainalysis·TRM CIOH 구현 기반 |
+| Möser 2017 | Fingerprint 탐지 룰 |
+| Weber 2019 | Elliptic dataset은 한국 VASP AML 모델 training에도 활용 |
+| Bellei 2024 | Shape-aware SSL은 신규 mixer 탐지에 적용 가능 |
+
+---
+
 ## 더 읽을거리
 
 - [`reports.md`](reports.md) — 산업 리포트

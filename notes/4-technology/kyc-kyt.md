@@ -152,6 +152,9 @@ KYT 파이프라인에서 가장 느린 단계는 **2번 Attribution** (외부 A
 - **Indirect (N-hop)**: N단계 안에서 도달
 - **Risk Category 별 점수**: mixer, SDN, ransomware, scam 등 카테고리마다 가중치
 
+**심화**: Exposure Score 수식·가중치·decay function·벤치마크는 [`blockchain-analytics.md#exposure-score`](blockchain-analytics.md) §4 참조. 핵심 공식:
+  score = clip(Σ direct + Σ indirect × decay × f_amount, 0, 100)
+
 ### Risk Score
 
 **정의**: KYC 정보 + KYT 노출도 + 거래 패턴을 종합한 0~100 점수.

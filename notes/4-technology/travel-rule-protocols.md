@@ -94,6 +94,229 @@ IVMS101 validator 구현에서 가장 어려운 부분은 **관할별 필수 필
 
 ---
 
+## N. IVMS101 Validator — 관할별 엄밀 구현
+
+### N.1 관할별 필수·선택 필드
+
+실제 현장에서 TR 메시지 검증 실패의 90%는 **관할별 요구 필드 차이**. 한국/EU/미국 주요 차이:
+
+```python
+JURISDICTION_RULES = {
+    "KR": {  # 특금법 §5의3 + FIU 고시
+        "originator.name.nameIdentifier": REQUIRED,     # 한글 + 영문 병기
+        "originator.geographicAddress": REQUIRED,       # 임계 100만원 이상
+        "originator.nationalIdentification": HASHED,    # PIPA 대응, 원문 전송 금지
+        "originator.dateOfBirth": OPTIONAL,
+        "beneficiary.name.nameIdentifier": REQUIRED,
+        "beneficiary.accountNumber": REQUIRED,          # 지갑 주소
+    },
+    "EU": {  # TFR (2024-12-30 시행) - 1 EUR부터 전체
+        "originator.name.nameIdentifier": REQUIRED,
+        "originator.geographicAddress": REQUIRED,
+        "originator.dateOfBirth": REQUIRED,             # EU 추가 필수
+        "originator.placeOfBirth": REQUIRED,            # EU 추가 필수
+        "originator.customerNumber": REQUIRED,
+        "beneficiary.name.nameIdentifier": REQUIRED,
+        "beneficiary.accountNumber": REQUIRED,
+    },
+    "US": {  # FinCEN Travel Rule 31 CFR 1010.410(f)
+        "originator.name.nameIdentifier": REQUIRED,
+        "originator.geographicAddress": REQUIRED,       # $3,000 이상 (2025 개정 제안 $1,000)
+        "originator.accountNumber": REQUIRED,
+        "originator.dateOfBirth": OPTIONAL,
+        "beneficiary.name.nameIdentifier": REQUIRED,
+    },
+}
+```
+
+### N.2 Validator 구현 (Python pseudocode)
+
+```python
+def validate_ivms101(msg: dict, jurisdiction: str) -> ValidationResult:
+    errors = []
+    rules = JURISDICTION_RULES[jurisdiction]
+
+    for field_path, requirement in rules.items():
+        value = get_nested(msg, field_path)
+        if requirement == REQUIRED and not value:
+            errors.append(f"Missing required: {field_path}")
+        elif requirement == HASHED and value:
+            if not looks_like_hash(value):  # SHA-256 hex 64자
+                errors.append(f"{field_path} must be hashed (PIPA)")
+
+    # Cross-field 검증
+    if jurisdiction == "KR":
+        name = get_nested(msg, "originator.name.nameIdentifier")
+        if not (has_hangul(name) and has_latin(name)):
+            errors.append("한국: 이름은 한글+영문 병기 필수")
+
+    # ISO 3166 country code 검증
+    for path in ["originator.geographicAddress.countryCode",
+                 "beneficiary.geographicAddress.countryCode"]:
+        cc = get_nested(msg, path)
+        if cc and cc not in ISO_3166_ALPHA2:
+            errors.append(f"Invalid country code: {path}={cc}")
+
+    return ValidationResult(passed=len(errors) == 0, errors=errors)
+```
+
+### N.3 카운터파티 이름 일치 검증 (Fuzzy Matching)
+
+IVMS101 메시지의 originator·beneficiary 이름이 **카운터파티 KYC DB와 일치하는지** 검증. 한국은 로마자 표기 다양성 때문에 특히 까다로움.
+
+```python
+from jellyfish import jaro_winkler_similarity
+
+def verify_name_match(
+    submitted: str,      # IVMS101로 받은 이름
+    kyc_db: str,         # 우리 KYC DB의 이름
+    jurisdiction: str
+) -> bool:
+    threshold = 0.92 if jurisdiction == "KR" else 0.88
+    score = jaro_winkler_similarity(normalize(submitted), normalize(kyc_db))
+    return score >= threshold
+
+def normalize(name: str) -> str:
+    # 케이스·공백·하이픈·쉼표 정규화
+    name = name.lower().strip()
+    REPLACEMENTS = [("gil-dong", "gildong"), ("kim, ", "kim "), ("-", ""), (",", "")]
+    for old, new in REPLACEMENTS:
+        name = name.replace(old, new)
+    return " ".join(name.split())  # 다중 공백 1개로
+```
+
+### N.4 오류 분포 (실제 현장)
+
+Travel Rule 메시지 실패 Top 5 (Notabene·VerifyVASP 종합 추정):
+
+| 오류 | 비율 | 원인 |
+|---|---|---|
+| 관할 필드 불일치 | 35% | EU DoB 누락 등 |
+| 이름 로마자 불일치 | 22% | Hong Gildong vs Hong Gil-dong |
+| 주소 format 오류 | 18% | 국가별 주소 구조 다름 |
+| PIPA 원문 전송 | 12% | 한국 주민번호 평문 전송 |
+| Country code 오류 | 8% | ISO 3166 alpha-2 아닌 값 |
+| 기타 | 5% | |
+
+---
+
+## M. Protocol Interoperability — 라우팅·재시도·Fallback
+
+### M.1 한국 4대 거래소 기준 라우팅 (현실)
+
+| From | To | Protocol 경로 | p50 latency |
+|---|---|---|---|
+| Upbit | Bithumb | VerifyVASP ↔ CODE (bilateral) | ~2~3초 |
+| Upbit | Coinbase (US) | VerifyVASP → Notabene Gateway → TRISA | ~5~10초 |
+| Bithumb | Binance | CODE → Notabene Gateway → Binance internal | ~3~7초 |
+| Any KR | 미연결 VASP | Gateway discovery → VASP Directory lookup | ~20~60초 or Sunrise |
+
+### M.2 실패 모드 + 재시도 전략
+
+```python
+class TravelRuleRouter:
+    MAX_RETRIES = 3
+    BACKOFF_BASE = 2  # 지수 백오프 초
+    TIMEOUTS = {  # 각 프로토콜별 SLA
+        "TRISA": 15, "CODE": 10, "VerifyVASP": 10,
+        "TRP": 20, "Notabene": 30
+    }
+
+    async def send(self, msg: IVMS101, target_vasp: str):
+        protocol, endpoint = await self.discover_route(target_vasp)
+
+        for attempt in range(self.MAX_RETRIES):
+            try:
+                return await self._send(msg, protocol, endpoint,
+                                        timeout=self.TIMEOUTS[protocol])
+            except TimeoutError:
+                await asyncio.sleep(self.BACKOFF_BASE ** attempt)
+                continue
+            except AuthError as e:
+                if e.code == "cert_expired":
+                    await self.refresh_cert()
+                    continue
+                raise
+            except IVMS101ValidationError as e:
+                # 관할별 필드 fallback mapping
+                msg = self.mapper.fallback(msg, target_jurisdiction=e.jurisdiction)
+                continue
+            except UnreachableError:
+                if protocol != "Notabene":
+                    # Gateway fallback
+                    return await self.send_via_gateway(msg, target_vasp)
+                raise
+        raise UndeliverableError(target_vasp)
+```
+
+### M.3 Sunrise Issue (미연결 카운터파티) 처리
+
+```python
+def handle_sunrise(msg: IVMS101, target_vasp: str, policy: SunrisePolicy):
+    # 1. VASP Directory (Notabene·TRISA GDS) 검색
+    discovered = await discover_vasp(target_vasp)
+    if discovered:
+        return await send_tr(msg, discovered)
+
+    # 2. 24시간 hold + 재시도
+    if policy == "HOLD_24H":
+        await queue.delay(msg, target_vasp, delay_hours=24)
+        return Status.PENDING
+
+    # 3. 정책에 따라 자체 결정
+    elif policy == "ALLOW_WITH_RECORD":
+        # 거래 진행 + 내부 기록 (FIU 검사 시 제시 가능)
+        await audit_log.record(msg, reason="sunrise_allowed")
+        return Status.SENT_WITHOUT_TR
+    elif policy == "REJECT":
+        # 거래 거절 + 사용자 안내
+        return Status.REJECTED
+```
+
+### M.4 Discovery 메커니즘
+
+| 방식 | 장점 | 단점 |
+|---|---|---|
+| Notabene VASP Directory | 최대 커버리지 (1,500+ VASP) | 중앙화 (Notabene 의존) |
+| TRISA GDS (Global Directory Service) | 분산·오픈 | 커버리지 제한 |
+| VerifyVASP 폐쇄 회원사 | 한국 4대 보장 | 비회원 접근 불가 |
+| DNS-based (TRP) | 간단 | 엔진 구축 필요 |
+| 하드코딩 peering (CODE) | 확실 | 신규 추가 느림 |
+
+### M.5 상태 전이 다이어그램
+
+```mermaid
+stateDiagram-v2
+    [*] --> Discovering
+    Discovering --> Routing: VASP 발견
+    Discovering --> Sunrise: 미발견
+    Routing --> Sending
+    Sending --> Delivered: 성공
+    Sending --> Retry: Timeout / Auth 실패
+    Sending --> Mapping: IVMS101 검증 실패
+    Retry --> Sending: attempt<3
+    Retry --> Failed: attempt≥3
+    Mapping --> Sending: fallback 적용
+    Sunrise --> Held: 24h hold 정책
+    Sunrise --> Sent: 기록만 남기고 진행
+    Sunrise --> Rejected: 거절 정책
+    Held --> Discovering: 재시도
+    Delivered --> [*]
+    Failed --> [*]
+```
+
+### M.6 SLA 목표 (한국 VASP 프로덕션)
+
+| 지표 | 목표 | 현실 |
+|---|---|---|
+| 정상 TR 메시지 p50 | < 5초 | 2~3초 (같은 컨소시엄) |
+| 정상 TR 메시지 p99 | < 30초 | 15~25초 |
+| Sunrise 처리율 | < 10% | 한국 5~15% |
+| 24h 내 delivery 성공률 | > 95% | 실제 90~97% |
+| IVMS101 validation 1차 pass | > 80% | 실제 60~75% |
+
+---
+
 ## 3. 주요 전송 프로토콜
 
 ### A. TRISA (Travel Rule Information Sharing Architecture)

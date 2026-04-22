@@ -248,6 +248,17 @@ sequenceDiagram
 
 **5번 메시지 교환이 안 되거나 timeout 시 송금 자체가 멈춥니다** = 사용자 UX 충격. 그래서 카운터파티 호환성(interoperability)이 운영의 핵심 KPI. "카운터파티 에러율"을 월별로 추적하며, 특정 카운터파티에서 반복 실패가 나면 회사 차원의 에스컬레이션이 필요합니다.
 
+### 📡 Protocol Interop 요약 (심화는 `travel-rule-protocols.md` §M 참조)
+
+**한국 경로 현실**: 국내는 VerifyVASP↔CODE bilateral ~2~3초, 글로벌은 Notabene Gateway 경유 ~5~10초. 미연결 카운터파티(Sunrise)는 전체 5~15%.
+
+**Sunrise 3가지 정책**:
+- HOLD_24H: 24시간 지연 후 재시도
+- ALLOW_WITH_RECORD: 내부 기록만 남기고 거래 진행 (FIU 검사 대비)
+- REJECT: 거래 거절
+
+**상세 pseudocode·상태 전이 다이어그램**: [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) §M 참조.
+
 ---
 
 ## 9. 2025-06-18 FATF R.16 개정의 영향

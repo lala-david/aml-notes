@@ -24,6 +24,39 @@ flowchart TB
 ```
 <!-- MAP-END -->
 
+## 🧮 Fuzzy Matching 한국 튜닝 (오늘의 핵심)
+
+### 문제: 한국 상위 5대 성씨 = 인구 50%
+
+기본 Jaro-Winkler 0.85 threshold → "Kim Min-soo" vs OFAC "Kim Min-su"도 0.97 매칭 → 일 alert 200+건 폭증.
+
+### 한국 튜닝 규칙
+
+1. **성씨 로마자 variants 매칭** (Kim/Gim/Ghim) - score ≥ 0.95
+2. **상위 성씨면 threshold 상향**: 0.88 → **0.92**
+3. **보조 식별자 필수**: (Name + DOB) OR (Name + Nationality)
+4. **Whitelist 5년 운영**: disposition 받은 pair 재-alert 차단
+
+### 튜닝 효과 (실제 한국 VASP 추정)
+
+| Config | FP | FN | 일 alert |
+|---|---|---|---|
+| JW 0.85 단독 | 90% | 0.5% | 200+ |
+| JW 0.92 + DOB | 45% | 1.5% | 80 |
+| JW 0.92 + DOB + 성씨필터 | 25% | 2% | 30 |
+| Full pipeline | 12% | 3% | 10~15 |
+
+### 🛠️ 오늘의 미니 챌린지 업그레이드
+
+Python으로 구현:
+1. `jellyfish` 라이브러리로 Jaro-Winkler 계산
+2. OFAC SDN xml에서 이름·DOB·nationality 파싱
+3. 한국 성씨 list + normalize 함수 구현
+4. 10명 샘플 고객에 대해 3가지 config(기본/중간/Full) 비교
+5. FP rate·FN rate 측정
+
+**상세 pipeline**: [`../notes/5-compliance/sanctions-screening.md`](../notes/5-compliance/sanctions-screening.md) §12 참조.
+
 ## 🎯 핵심 질문
 1. 핵심 제재 리스트 5개?
 2. 이름 fuzzy 매칭의 함정?

@@ -23,6 +23,38 @@ flowchart LR
 ```
 <!-- MAP-END -->
 
+## 🧮 STR 실무 템플릿 (오늘의 핵심)
+
+### 7개 필수 섹션 (FIU-TIS 기준)
+
+1. 보고기관 정보  2. 의심거래 개요 (5W1H)  3. 고객 정보 (KYC snapshot)
+4. 거래 상세  5. 의심 근거  6. 첨부자료  7. 보고자 의견
+
+### Good vs Bad STR 차이
+
+- **❌ Bad**: "큰 금액 출금" (사유 빈약, 근거 없음)
+- **✅ Good**: "KYT score 72 + 7일 structuring 패턴 + Tornado 5% exposure + 자금원천 증빙 무응답"
+
+### 품질 체크리스트 (8개)
+
+- [ ] 5W1H 완성
+- [ ] 금액·일시·주소 정확 (ms 정밀도)
+- [ ] KYT 점수 + 데이터 첨부
+- [ ] OFAC 조회 캡처
+- [ ] 관련 거래 7일 윈도우
+- [ ] 자금원천 증빙 시도 기록
+- [ ] Tipping-off 통제 ✓
+- [ ] 의심 수준 명시
+
+### 🛠️ 오늘의 미니 챌린지 업그레이드
+
+샘플 케이스로 Good STR 작성:
+- 고객 A, 5억원 출금, Tornado 5% + OFAC 2-hop 8%
+- 위 7개 섹션 + 8개 체크리스트 모두 충족하여 작성
+- 실제로 FIU에 제출 가능한 수준인지 동료 리뷰
+
+**상세 템플릿**: [`../notes/5-compliance/str-ctr.md`](../notes/5-compliance/str-ctr.md) §9 참조.
+
 ## 🎯 핵심 질문
 1. 좋은 STR 4요소?
 2. Tipping-off 위반의 처벌?

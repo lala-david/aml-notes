@@ -331,6 +331,110 @@ flowchart LR
 
 ---
 
+## 9. STR 실무 템플릿 — KoFIU FIU-TIS 기준
+
+### 9.1 FIU-TIS 필수 섹션
+
+한국 KoFIU가 요구하는 STR은 다음 7개 섹션:
+
+1. **보고기관 정보** — 기관명, FIU 신고번호, AMLO 성명·연락처
+2. **의심거래 개요** — 5W1H (Who/What/When/Where/Why/How)
+3. **고객 정보** — KYC snapshot (실명확인 방법, KYC 등급, EDD 여부, 직업·자산·거래목적)
+4. **거래 상세** — 거래번호, 금액, 통화, 송수신자, 관련 거래 7일 윈도우
+5. **의심 근거** — KYT alert 점수, 제재 스크리닝 결과, Pattern 분석, Exposure 경로
+6. **첨부자료** — KYT dashboard 캡처, OFAC 조회 결과, 증빙, 과거 기록
+7. **보고자 의견** — 의심 수준, 추가 조사 권장, Tipping-off 통제 확인
+
+### 9.2 Good STR vs Bad STR
+
+**❌ Bad STR (FIU 반송 확률 ↑)**:
+
+```
+거래번호: T12345
+의심 근거: 큰 금액 출금
+```
+
+---
+
+**✅ Good STR (FIU가 원하는 수준)**:
+
+```
+거래번호: T12345
+거래일시: 2026-04-19 14:23:17.432 KST
+송금: 고객 A (CI: CI_HASH_abc123) → 외부 지갑 0xABC...def
+금액: 5억원 (~$370K)
+```
+
+### 의심 근거
+
+1. **KYT Exposure Score = 72 (HIGH)**
+   - Direct: Tornado Cash 5% ($20K)
+   - 2-hop: OFAC SDN (Ren Fiery, 2023-09-06 지정) 8%
+
+2. **Pattern: Structuring 의심**
+   - 최근 7일간 5회 출금, 각 9,500만원 (1억원 KoFIU 보고 임계 직전)
+   - 시간 간격 4~7시간, 규칙적
+
+3. **KYC 상태 Yellow (비대면 확인)**
+   - 자금원천 "사업소득" 신고하나 사업자등록증 미제출 요청 후 무응답
+
+4. **과거 유사 행위**
+   - 2025-11 동일 패턴 1회 (당시 EDD로 통제 후 정상 판정)
+   - 본 사안은 패턴 반복 + OFAC 노출 추가
+
+### 첨부
+
+- [첨부1] Chainalysis Reactor 스크린샷 (exposure 경로 3-hop)
+- [첨부2] OFAC SDN 조회 결과 (Ren Fiery, ren_fiery_sdn.pdf)
+- [첨부3] 7일 거래 상세 (transactions_2026_04_12_19.csv)
+- [첨부4] CS 문의 로그 (자금원천 요청 → 고객 미응답 3회)
+- [첨부5] KYC 등급 이력 (Yellow 유지 사유)
+
+### 보고자 의견
+
+- **의심 수준**: HIGH
+- **추가 조사 권장**:
+  - 거래 상대방 카운터파티 (0xABC...) exposure 재분석
+  - 고객 연관 계정 탐색 (동일 KYC email/phone)
+- **Tipping-off 통제**:
+  - [✓] 고객에게 미통지
+  - [✓] 내부 Alert 시스템에만 기록
+  - [✓] 본 STR 사실 외부 노출 금지 (특금법 §5의2 ⑤ 교육 완료)
+
+### 9.3 품질 체크리스트 (반송 방지)
+
+STR 제출 전 AMLO 승인 체크:
+
+- [ ] 5W1H 모두 채워짐
+- [ ] 금액·일시·주소 기록 정확
+- [ ] KYT 점수 + 근거 데이터 첨부
+- [ ] OFAC/제재 조회 결과 캡처
+- [ ] 관련 거래 윈도우 포함
+- [ ] 자금원천 증빙 시도 기록
+- [ ] Tipping-off 통제 확인 (고객 미통지)
+- [ ] 의심 수준 High/Medium/Low 명시
+- [ ] 과거 유사 케이스 cross-reference
+- [ ] 첨부자료 순번·파일명 규칙 준수
+
+### 9.4 흔한 반송 사유
+
+| 사유 | 조치 |
+|---|---|
+| 근거 빈약 ("큰 금액") | KYT 점수·pattern·exposure 정량 추가 |
+| 금액·일시 오기 | ms 정밀도 기록, timezone 명시 |
+| 첨부 누락 | 스크린샷·로그·증빙 체크리스트 적용 |
+| Tipping-off 의심 | 내부 기록만 유지, 고객 연락 금지 |
+| 중복 보고 | 거래번호 기반 dedup, 동일 pattern 요약 보고 |
+
+### 9.5 처리 기간 (2026 기준)
+
+- STR 작성 → AMLO 승인: **3~5영업일** (평균)
+- AMLO 승인 → FIU-TIS 제출: **당일**
+- 특금법상 의무: **지체 없이 보고** (보통 3일 이내 제출이 안전)
+- FIU 피드백 루프: 수개월~수년 (케이스별)
+
+---
+
 ## 더 읽을거리
 - [`cdd-edd.md`](cdd-edd.md) — CDD·EDD가 STR 트리거의 시작
 - [`sanctions-screening.md`](sanctions-screening.md) — 제재 매칭 → STR

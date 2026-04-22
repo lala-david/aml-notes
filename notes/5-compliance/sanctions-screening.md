@@ -380,6 +380,153 @@ Binance $4.3B (2023-11) DOJ 합의의 충격:
 
 ---
 
+## 12. Fuzzy Matching — 한국 특화 임계값 튜닝
+
+### 12.1 문제 정의
+
+한국 성씨 Kim/Lee/Park/Choi/Jung이 **상위 5개만으로 인구 50%**. 글로벌 기본 Jaro-Winkler 0.85 threshold 적용 시 False Positive 폭증 (일 alert 수백 건).
+
+**예**: 고객 "Kim Min-soo 1990-01-01 KR" screen 시
+- OFAC SDN "Kim Min-su 1985-03-15 KP" (북한)과 Jaro-Winkler = 0.97
+- 기본 threshold 0.85로는 HIT → 분석가 수동 disposition 필요
+- 하루 수백 건 이런 식 → 주니어 분석가 시간의 30%가 FP 처리로 소진
+
+### 12.2 한국 특화 스크리닝 파이프라인
+
+```python
+from jellyfish import jaro_winkler_similarity
+
+COMMON_KR_SURNAMES = {
+    "Kim", "Lee", "Park", "Choi", "Jung", "Jang",
+    "Yoon", "Cho", "Kang", "Lim", "Han", "Shin"
+}
+
+def screen_korean_customer(customer: Customer, sdn_list: list[SDN]) -> list[Hit]:
+    hits = []
+    for sdn in sdn_list:
+        # 1. 성씨 로마자 variant 매칭 (Kim/Gim/Ghim 등)
+        surname_match = any(
+            jaro_winkler_similarity(
+                normalize_kr(customer.surname),
+                normalize_kr(variant)
+            ) >= 0.95
+            for variant in sdn.surname_variants
+        )
+        if not surname_match:
+            continue
+
+        # 2. 한국 상위 성씨면 full name threshold 상향 (0.92)
+        threshold = 0.92 if customer.surname in COMMON_KR_SURNAMES else 0.88
+        name_score = jaro_winkler_similarity(
+            normalize(customer.full_name),
+            normalize(sdn.name)
+        )
+        if name_score < threshold:
+            continue
+
+        # 3. 보조 식별자 필수 (DOB OR Nationality)
+        dob_match = customer.dob and customer.dob == sdn.dob
+        nat_match = sdn.nationalities and customer.nationality in sdn.nationalities
+        if not (dob_match or nat_match):
+            continue
+
+        # 4. Whitelist 체크 (5년 유효)
+        if (customer.id, sdn.id) in WHITELIST_5Y:
+            continue
+
+        hits.append(Hit(
+            sdn=sdn,
+            name_score=name_score,
+            dob_match=dob_match,
+            nat_match=nat_match,
+        ))
+    return hits
+```
+
+### 12.3 이름 정규화
+
+```python
+def normalize_kr(name: str) -> str:
+    # 다양한 로마자 표기 통일
+    NORMALIZATIONS = [
+        # 하이픈·쉼표 제거
+        (r"-", ""), (r",\s*", " "),
+        # 이름 로마자 variants
+        ("gil-dong", "gildong"),
+        ("min-soo", "minsoo"), ("minsu", "minsoo"),
+        # McCune-Reischauer vs Revised Romanization
+        ("hoon", "hun"), ("seung", "sung"),
+    ]
+    name = name.lower().strip()
+    for pat, rep in NORMALIZATIONS:
+        import re
+        name = re.sub(pat, rep, name)
+    return " ".join(name.split())
+```
+
+### 12.4 Threshold 성능 비교 (실제 한국 VASP 추정)
+
+고객 DB 1M건 × OFAC SDN 1.5K 전수 스크리닝 결과 (샘플링 기반):
+
+| Config | FP rate | FN rate | 일 평균 alert |
+|---|---|---|---|
+| JW 0.85 단독 | ~90% | ~0.5% | 200+ |
+| JW 0.92 + DOB 필수 | ~45% | ~1.5% | 80 |
+| JW 0.92 + DOB + 성씨필터 | ~25% | ~2% | 30 |
+| Full pipeline (위 12.2) | ~12% | ~3% | 10~15 |
+
+**Trade-off**: FN 증가 (놓치는 진짜 hit). 감독당국 기대 수준은 FN < 3%이지만, 전략적으로 FN을 0.5%까지 낮추려면 FP 90% 감수해야 함.
+
+### 12.5 SQL 구현 (Snowflake·Postgres)
+
+```sql
+-- Jaro-Winkler + DOB/국적 필터 + 성씨 roll-up
+WITH candidates AS (
+  SELECT c.id AS cust_id, s.id AS sdn_id,
+         JARO_WINKLER(c.full_name, s.name) AS score,
+         (c.dob = s.dob) AS dob_match,
+         (c.nationality = ANY(s.nationalities)) AS nat_match
+  FROM customers c
+  CROSS JOIN ofac_sdn s
+  WHERE SOUNDEX(c.surname) = SOUNDEX(s.surname)  -- 1차 필터
+)
+SELECT * FROM candidates
+WHERE score >= CASE
+    WHEN cust_id IN (SELECT id FROM customers WHERE surname IN
+        ('Kim','Lee','Park','Choi','Jung','Jang','Yoon','Cho','Kang'))
+    THEN 0.92 ELSE 0.88 END
+  AND (dob_match OR nat_match)
+  AND NOT EXISTS (
+      SELECT 1 FROM fp_whitelist w
+      WHERE w.cust_id = candidates.cust_id
+        AND w.sdn_id = candidates.sdn_id
+        AND w.expires_at > CURRENT_DATE
+  );
+```
+
+### 12.6 Whitelist 운영 (FP disposition 재활용)
+
+한 번 "FP 확인" disposition 받은 hit은 **5년 whitelist**에 올려서 동일 pair 재-alert 방지.
+
+```sql
+CREATE TABLE fp_whitelist (
+    cust_id BIGINT,
+    sdn_id BIGINT,
+    disposition_reason TEXT,
+    created_at TIMESTAMP,
+    expires_at TIMESTAMP,
+    created_by UUID,
+    PRIMARY KEY (cust_id, sdn_id)
+);
+
+-- AMLO가 승인한 경우만 whitelist에 추가
+-- 5년 뒤 자동 만료 → 재검증 필요 (SDN list 업데이트 반영)
+```
+
+**주의**: Whitelist 자체가 감독 검사 대상. AMLO 승인 로그·만료 정책·재검증 주기 문서화 필수.
+
+---
+
 ## 더 읽을거리
 - [`cdd-edd.md`](cdd-edd.md) — Onboarding 스크리닝 통합
 - [`str-ctr.md`](str-ctr.md) — 매칭 시 STR

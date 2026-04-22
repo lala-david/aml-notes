@@ -27,6 +27,58 @@ flowchart LR
 2. Common Input Ownership 휴리스틱의 논리?
 3. CoinJoin이 이 휴리스틱을 무력화하는 방식?
 
+## 🧮 핵심 알고리즘 (구현 가능 수준)
+
+### Common Input Ownership Heuristic (CIOH)
+
+```python
+def common_input_ownership(tx: Transaction) -> set[Address] | None:
+    if len(tx.inputs) < 2:
+        return None
+    if is_coinjoin(tx):
+        return None
+    return {inp.address for inp in tx.inputs}
+```
+
+**전제**: Bitcoin UTXO 모델에서 여러 input을 한 tx에 소비하려면 각 key 소유 → 통계적 "동일 소유자" 가정.
+
+**한계**:
+- Ethereum Account 모델에 적용 불가 (from 주소 1개)
+- CoinJoin 의도적 합치기 시 가정 위반
+- Custodial 거래소 hot wallet은 거래소=entity로 맞지만 고객까지는 아님
+
+### CoinJoin Fingerprint Detection (필수 전처리)
+
+```python
+def is_coinjoin(tx: Transaction) -> bool:
+    if len(tx.inputs) < 2:
+        return False
+    amounts = [o.value for o in tx.outputs]
+    uniform = [a for a in amounts if amounts.count(a) >= 3]
+    if not uniform:
+        return False
+    # Wasabi 0.1 BTC, Samourai Whirlpool 0.001/0.01/0.1 BTC 고정 denomination
+    KNOWN_DENOMS = {0.1e8, 0.01e8, 0.001e8}
+    if any(a in KNOWN_DENOMS for a in uniform):
+        return True
+    # Whirlpool 5:5 같은 대칭 구조
+    if len(tx.inputs) >= 5 and abs(len(tx.inputs) - len(tx.outputs)) <= 1:
+        return True
+    return False
+```
+
+### 정확도 비교표
+
+| 방법 | Precision | Recall | F1 | 데이터셋 |
+|---|---|---|---|---|
+| CIOH 단독 (CoinJoin 포함) | 0.75 | 0.98 | 0.85 | Möser 2017 |
+| CIOH + Fingerprint | 0.95 | 0.92 | 0.93 | Elliptic2 (Bellei 2024) |
+| GCN/GAT (Weber/Alarab) | 0.92~0.94 | 0.83~0.86 | 0.87~0.90 | Elliptic |
+
+**핵심 참고**: Meiklejohn 2013 "A Fistful of Bitcoins" · Möser & Böhme 2017 · Bellei 2024 "Shape vs. Structure"
+
+**심화**: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) §2 참조.
+
 ## 📖 읽기 (~50분)
 - 메인: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) — 1~2절
 

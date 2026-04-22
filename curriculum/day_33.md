@@ -28,6 +28,57 @@ flowchart LR
 2. 가중치 적용 3요소?
 3. Exposure Score → 의사결정 흐름?
 
+## 🧮 Exposure Score 공식 (오늘의 핵심)
+
+### 일반화 공식
+
+```
+score = clip(
+    Σ (e_direct_i × w_cat_i × f_amount × f_behavior)
+    + Σ (e_indirect_j × w_cat_j × decay(age_j) × f_amount),
+    0, 100
+)
+```
+
+- e: 노출 비율(%) 또는 금액 비중
+- w_cat: OFAC=10, Sanctions=8, Ransomware=6, Mixer=5, Darknet=4, Stolen=3, HR-Exchange=1.5, Gambling=0.5
+- decay(age_days) = exp(-λ × age_days/365), λ=0.5 기본
+- f_amount = min(1 + ln(tx_krw / 100M), 1.3), floor 0
+- f_behavior = 1.0 정상, 1.2~1.5 이상 패턴
+
+### 시간 감쇠 테이블
+
+| 경과 | decay(λ=0.5) |
+|---|---|
+| 0일 | 1.00 |
+| 90일 | 0.88 |
+| 1년 | 0.61 |
+| 2년 | 0.37 |
+| 5년 | 0.08 |
+
+### 벤더 λ 추정
+
+| Chainalysis | TRM | Elliptic |
+|---|---|---|
+| 0.5 | 0.3 | 0.6 |
+
+### 🛠️ 오늘의 미니 챌린지 (업그레이드)
+
+**시나리오**: 고객 A, 5억원 출금 요청, 수신 0xABC...
+- Direct Tornado 5% ($20K), 180일 전
+- 2-hop OFAC SDN 8%, 365일 전
+- KYC Tier 3 (override × 0.7)
+
+1. 위 공식으로 raw score 계산
+2. Override 적용 후 최종 score
+3. Threshold 70 기준 action 결정
+
+**정답**:
+raw = 5×5.0×1.3×1.0 + 8×5.0×exp(-0.5)×1.3 = 32.5 + 31.72 = 64.22
+final = 64.22 × 0.7 = 44.95 → MEDIUM → EDD queue (not auto-block)
+
+**심화**: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) §4 참조.
+
 ## 📖 읽기 (~50분)
 - 메인: [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) — 4절
 - 보조: [`../notes/4-technology/kyc-kyt.md`](../notes/4-technology/kyc-kyt.md) — 4절 (Exposure)

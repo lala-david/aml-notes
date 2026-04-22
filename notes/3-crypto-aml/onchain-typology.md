@@ -207,6 +207,29 @@ KYT 시스템의 거의 모든 룰은 이 9개 유형 중 하나를 탐지하려
 
 한 주소가 직접·간접으로 **몇 hop 안에** mixer·SDN·도난자금에 닿는가를 정량 지표로 표현. KYT 시스템의 대표 출력.
 
+### 기술적 정밀화
+
+**Peel Chain 탐지 쿼리** (SQL, UTXO 기준):
+
+```sql
+WITH chain AS (
+  SELECT tx_hash, FROM_address, TO_address, amount,
+         LAG(amount) OVER (PARTITION BY FROM_address ORDER BY block) as prev_amount
+  FROM utxo_transactions
+  WHERE block_time > NOW() - INTERVAL '30 days'
+)
+SELECT * FROM chain
+WHERE amount < prev_amount * 0.05  -- 5% 미만만 떼어냄
+  AND prev_amount > 10000000  -- 1억 이상에서만 출발
+ORDER BY tx_hash;
+```
+
+**Mixer·CoinJoin 구분**:
+- Mixer (custodial): Tornado·Wasabi Coordinator → entity 명시 가능
+- CoinJoin (peer-to-peer): Wasabi·Samourai → fingerprint로 탐지 (동일 금액 output, 고정 denomination, 5:5 대칭)
+
+**정확도**: CIOH 단독 75% → Fingerprint 결합 95% (Möser 2017, Bellei 2024)
+
 ### 실무 포인트
 
 탐지 기법 5개 중 어느 하나도 단독으로 완벽하지 않습니다. KYT 벤더의 경쟁력은 **5개를 잘 조합한 Risk Score 공식**이며, 이 공식은 벤더마다 다른 결과를 냅니다. 벤더 선정 시 같은 주소 100개를 여러 벤더에 넣어보고 **출력 일치율**을 비교하는 PoC가 필수.
