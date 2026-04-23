@@ -76,7 +76,7 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`internal-controls.md`](5-compliance/internal-controls.md) — 5 pillars + 3LoD + AMLO
 - [`inspection-response.md`](5-compliance/inspection-response.md) — FIU·FSS 검사 대응 워크북 (40 체크리스트·서류 40종)
 
-### 6️⃣ [`6-cases/`](6-cases/) — 사례 (4 파일 + README)
+### 6️⃣ [`6-cases/`](6-cases/) — 사례 (5 파일 + README)
 실제 사건에서 배우기.
 
 - [`README.md`](6-cases/README.md) — 폴더 가이드
@@ -84,6 +84,7 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`tornado-cash.md`](6-cases/tornado-cash.md) — DeFi 첫 OFAC 제재 → 해제 + Roman Storm 재판
 - [`major-enforcement.md`](6-cases/major-enforcement.md) — Binance $4.3B + OKX $500M+ 등
 - [`circle-stablecoin-freeze.md`](6-cases/circle-stablecoin-freeze.md) — Circle USDC freeze + 스테이블코인 발행자의 AML 권한
+- [`korea-enforcement.md`](6-cases/korea-enforcement.md) — 🇰🇷 한국 실제 사건 (Terra·Wemix·특금법 신고 대란·DAXA 공동조치)
 
 ### 7️⃣ [`7-vendors/`](7-vendors/) — 벤더 (3 파일 + README)
 시장에 있는 솔루션 지도.

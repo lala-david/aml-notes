@@ -2,6 +2,16 @@
 
 > AML·가상자산 규제는 분기별로 바뀐다. 이 저장소는 **자동·반자동 추적 체계**로 stale 콘텐츠를 방지한다. 마지막 갱신: 2026-04-23.
 
+## 배포 상태 (2026-04-23 기준)
+
+- [x] **`scripts/regulatory_rss.py`** — 13개 피드 수집, 키워드 필터, JSON+Markdown 출력
+- [x] **GitHub Actions 자동화** — `.github/workflows/regulatory-watch.yml`, 매주 월요일 UTC 00:00 (KST 09:00) 실행
+- [x] **자동 Issue 생성** — 변화 감지 시 `regulatory-update` · `automated` 라벨로 Issue
+- [x] **수동 실행 지원** — `workflow_dispatch` 트리거로 on-demand 실행
+- [x] **산출물 보관** — GitHub Actions artifacts 90 일 (`regulatory-changes.json`, `.md`)
+- [x] **검증 CI** — `.github/workflows/validate.yml` 로 링크·Mermaid PR 자동 검증
+- [ ] **한국 기관 RSS** — FSC/KoFIU/FSS 공식 RSS 미제공 → 웹 스크레이핑 별도 이슈
+
 ## TL;DR
 
 - **추적 대상**: FATF · 한국 (FSC·KoFIU·FSS·DAXA) · 미국 (FinCEN·OFAC·SEC) · EU (AMLA·ESMA) · 아시아 (MAS·VARA·FSA·SFC)
@@ -57,73 +67,55 @@
 
 ---
 
-## 2. 자동 모니터링 인프라 (제안)
+## 2. 자동 모니터링 인프라 (배포됨)
 
-### 2.1 RSS aggregator 설정
+### 2.1 RSS aggregator — `scripts/regulatory_rss.py`
 
-`scripts/regulatory_rss.py` (예시):
+배포 상태: **운영 중** · 13 개 피드 수집 · 키워드 필터 · 에러 격리 (피드 하나 다운 ≠ 전체 실패).
 
-```python
-import feedparser
-import json
-from datetime import datetime, timedelta
+수집 대상:
 
-FEEDS = {
-    "FATF": "https://www.fatf-gafi.org/en/publications.rss",
-    "FinCEN": "https://www.fincen.gov/news/news-releases/feed",
-    # ... 등
-}
+| 권역 | 피드 |
+|---|---|
+| 국제 | FATF, BIS |
+| 미국 | SEC Press, FinCEN News, OFAC Recent Actions, DOJ News, CFTC Press |
+| EU | ESMA News |
+| 아시아 | MAS News, HK SFC News |
+| 업계 | Chainalysis Blog, Elliptic Blog, TRM Labs Blog |
 
-def fetch_recent(feeds, days=7):
-    cutoff = datetime.utcnow() - timedelta(days=days)
-    new_items = []
-    for source, url in feeds.items():
-        feed = feedparser.parse(url)
-        for entry in feed.entries:
-            pub = datetime(*entry.published_parsed[:6])
-            if pub > cutoff:
-                new_items.append({
-                    "source": source,
-                    "title": entry.title,
-                    "url": entry.link,
-                    "date": pub.isoformat(),
-                })
-    return new_items
+> 한국 기관 (FSC/KoFIU/FSS) 은 공식 RSS 미제공 → 추후 HTML 스크레이핑 추가 예정.
 
-if __name__ == "__main__":
-    items = fetch_recent(FEEDS)
-    with open("regulatory-changes.json", "w") as f:
-        json.dump(items, f, indent=2)
+실행:
+
+```bash
+pip install -r scripts/requirements.txt
+python scripts/regulatory_rss.py --days 7 --verbose
+# → regulatory-changes.json + regulatory-changes.md 생성
+# → exit code 1 이면 신규 항목 있음 (CI 에서 Issue 생성)
 ```
 
-CRON으로 일별 실행 → JSON 저장 → 분기 리뷰 시 참조.
+자세한 사용법은 [`scripts/README.md`](../scripts/README.md) 참조.
 
-### 2.2 GitHub Actions로 자동화 (선택)
+### 2.2 GitHub Actions — `.github/workflows/regulatory-watch.yml`
 
-`.github/workflows/regulatory-watch.yml`:
+배포 상태: **운영 중** · 매주 월요일 UTC 00:00 (KST 09:00) 자동 실행.
 
-```yaml
-name: Regulatory Watch
-on:
-  schedule:
-    - cron: "0 0 * * MON"  # 매주 월요일
-  workflow_dispatch:
+잡 흐름:
 
-jobs:
-  watch:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: pip install feedparser
-      - run: python scripts/regulatory_rss.py
-      - run: |
-          if [ -s regulatory-changes.json ]; then
-            gh issue create \
-              --title "Regulatory changes detected $(date +%Y-%m-%d)" \
-              --body-file regulatory-changes.json \
-              --label regulatory-update
-          fi
-```
+1. `actions/checkout@v4` · `actions/setup-python@v5` (3.11, pip 캐시)
+2. `pip install -r scripts/requirements.txt`
+3. `python scripts/regulatory_rss.py --days 7 --verbose` → 산출물 2 개 생성
+4. **신규 항목 있으면** `peter-evans/create-issue-from-file@v5` 로 Issue 자동 생성 (`regulatory-update` · `automated` 라벨)
+5. `actions/upload-artifact@v4` 로 JSON+MD 90 일 보관
+
+수동 실행: GitHub UI → Actions → Regulatory Watch → `Run workflow`.
+
+### 2.3 검증 CI — `.github/workflows/validate.yml`
+
+배포 상태: **운영 중** · PR 마다 자동 검증.
+
+- **PR / push → main**: `validate_links.py` · `validate_mermaid.py` 실행 (빠른 피드백)
+- **분기 스케줄 · 수동**: `check_external_urls.py` 도 추가 실행 (rate-limit · flaky 대응 `continue-on-error: true`)
 
 ---
 

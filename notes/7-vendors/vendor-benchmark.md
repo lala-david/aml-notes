@@ -228,6 +228,138 @@
 - [DAXA 공동 가이드 (비공개)]
 - ACAMS Today 벤더 비교 (회원 한정)
 
+## 8. PoC 자체 검증 방법론 — NDA 데이터를 실측으로 대체
+
+이 페이지의 수치는 **공개 추정치**. 실제 벤더 선정 시 **자체 PoC**로 검증 필수. 아래는 NDA 계약 없이 수행 가능한 **4주 PoC 실측 가이드**.
+
+### 8.1 PoC Phase 0 — 준비 (1주)
+
+- [ ] 우리 거래의 **대표 샘플 1주일분** 추출 (~10K~100K txs)
+- [ ] **테스트 주소 50개** 선정 (위험 레벨 다양: 10 Tornado·10 OFAC·10 mixer·10 normal·10 edge)
+- [ ] **ground truth 구축** — 각 주소의 실제 위험 레벨 수작업 라벨링
+- [ ] **측정 지표 정의**:
+  - Precision: TP/(TP+FP)
+  - Recall: TP/(TP+FN)
+  - F1: 2·P·R/(P+R)
+  - Latency p50/p99
+  - API 에러율
+  - 라벨 커버리지 (조회 200 주소 중 "Unknown" 비율)
+
+### 8.2 PoC Phase 1 — 벤더 2~3 trial 신청 (1주)
+
+- [ ] **Free trial 30일** 신청 (Chainalysis·Elliptic·TRM 모두 제공)
+- [ ] API key·sandbox 환경·rate limit 확인
+- [ ] Slack 또는 전용 채널 벤더 지원 확보
+
+### 8.3 PoC Phase 2 — 정량 측정 (2주)
+
+#### 각 벤더에 대해 동일 테스트:
+
+**Test A: 라벨 커버리지**
+```python
+def test_coverage(vendor_api, test_addresses):
+    unknown = 0
+    for addr in test_addresses:
+        r = vendor_api.query(addr)
+        if r.category == "Unknown":
+            unknown += 1
+    return 1 - (unknown / len(test_addresses))
+```
+
+**Test B: Accuracy (Precision·Recall·F1)**
+```python
+def test_accuracy(vendor_api, labeled_set):
+    tp, fp, fn = 0, 0, 0
+    for addr, truth in labeled_set:
+        pred = vendor_api.query(addr).risk_level
+        if truth == "risky" and pred == "risky": tp += 1
+        elif truth == "safe" and pred == "risky": fp += 1
+        elif truth == "risky" and pred == "safe": fn += 1
+    p = tp / (tp + fp) if tp + fp else 0
+    r = tp / (tp + fn) if tp + fn else 0
+    f1 = 2 * p * r / (p + r) if p + r else 0
+    return {"precision": p, "recall": r, "f1": f1}
+```
+
+**Test C: Latency**
+```python
+import time, statistics
+def test_latency(vendor_api, n=1000):
+    times = []
+    for _ in range(n):
+        start = time.perf_counter()
+        vendor_api.query(random_addr())
+        times.append((time.perf_counter() - start) * 1000)
+    return {
+        "p50": statistics.median(times),
+        "p95": statistics.quantiles(times, n=20)[18],
+        "p99": statistics.quantiles(times, n=100)[98],
+    }
+```
+
+**Test D: 우리 실데이터 1주치 run**
+- 실제 production-like 트래픽
+- Alert 수 + 벤더별 차이 (같은 주소·다른 점수)
+- 분석가 수동 disposition 시간 측정
+
+### 8.4 PoC Phase 3 — 정성 평가 + 협상 (1주)
+
+- [ ] **한국 지원 체감** — 질문 응답 시간·한국어 지원·시차
+- [ ] **문서·교육 자료** — 온보딩 난이도
+- [ ] **플랫폼 사용성** — 분석가 1~3명 실제 사용 후 의견
+- [ ] **최종 견적** — 볼륨·다년계약 기준
+- [ ] **Exit 조건** — migration 비용·데이터 export
+
+### 8.5 최종 비교 템플릿
+
+| 지표 | 벤더 A 실측 | 벤더 B 실측 | 벤더 C 실측 |
+|---|---|---|---|
+| 라벨 커버리지 | ~X% | ~X% | ~X% |
+| Precision | ~X | ~X | ~X |
+| Recall | ~X | ~X | ~X |
+| F1 | ~X | ~X | ~X |
+| Latency p50 | ~Xms | | |
+| Latency p99 | ~Xms | | |
+| API 에러율 | ~X% | | |
+| 분석가 처리 시간 | ~X분/alert | | |
+| 한국 지원 점수 | 1~10 | | |
+| 연간 비용 (견적) | $X | | |
+| 계약 유연성 | 1~10 | | |
+| **최종 점수 (가중)** | X/100 | X/100 | X/100 |
+
+## 9. 공개 벤더 사례 자료 — NDA 외 참고
+
+실제 VASP가 공개한 벤더 선정·사용 사례 (원문 확인 가능):
+
+### Chainalysis
+- [Coinbase 사용 사례 (공식)](https://www.chainalysis.com/case-studies/)
+- [Circle USDC Compliance](https://www.circle.com/en/transparency) — Chainalysis KYT 연동 언급
+- [미국 법원 증거 채택] — Chainalysis Reactor가 다수 DOJ 소송에 법정 증거로 사용됨
+
+### Elliptic
+- [UK FCA 협력](https://www.elliptic.co/resources) — 영국 금융당국 교육 자료
+- [Revolut Compliance](https://www.revolut.com/en-US/legal/) — Elliptic Navigator 명시
+
+### TRM Labs
+- [TRM Insights Blog](https://www.trmlabs.com/insights) — 사건별 분석 공개
+- [미국 Secret Service·DEA 협력](https://www.trmlabs.com/gov) — 정부 기관 사례
+
+### 한국 사례
+- **Upbit** — 람다256 VerifyVASP + Chainalysis (두나무 공개 자료)
+- **Bithumb·Coinone·Korbit** — CODE + Chainalysis (DAXA 공동 발표)
+
+### 실제 RFP·PoC 후기 (ACAMS·Reddit·LinkedIn)
+- r/Compliance·r/AML 커뮤니티에서 종종 "Chainalysis vs Elliptic experience" 공유
+- ACAMS Today·Today in Compliance 매거진 종종 케이스 스터디 게재
+- LinkedIn "AML Community" 그룹에서 실무자 의견 교환
+
+## 10. 주의 — 이 페이지의 한계
+
+- 모든 수치는 **공개 정보·산업 보고서·비공식 청취 기반 추정**
+- 벤더 실제 제품은 **지속 개선** → 이 페이지 수치는 6~12개월 후 stale 가능
+- **최종 의사결정은 반드시 자체 PoC + NDA 하 협상**으로
+- 본 페이지 인용 시 "2026-04 기준 공개 추정치"임을 명시 필수
+
 ## 더 읽을거리
 
 - [`analytics-vendors.md`](analytics-vendors.md) — KYT 벤더 시장 지도

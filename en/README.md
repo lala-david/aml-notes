@@ -1,10 +1,10 @@
 # AML Notes — English Edition
 
-> Korean Anti-Money Laundering (AML) study notes for the virtual asset industry. Originally written in Korean (~22,000 lines), this English edition provides 5 gateway documents for international readers — global VASPs evaluating Korean market entry, consultants, researchers, and regulators.
+> Korean Anti-Money Laundering (AML) study notes for the virtual asset industry. Originally written in Korean (~22,000 lines), this English edition provides 5 gateway documents plus 5 additional topical translations (~25% coverage) for international readers — global VASPs evaluating Korean market entry, consultants, researchers, and regulators.
 
-![English Gateway](https://img.shields.io/badge/English-Gateway_Edition-blue)
+![English Gateway](https://img.shields.io/badge/English-25%25_Coverage-blue)
 ![Original](https://img.shields.io/badge/Original-Korean-red)
-![Last updated](https://img.shields.io/badge/updated-2026--04--23-blue)
+![Last updated](https://img.shields.io/badge/updated-2026--04--21-blue)
 
 ---
 
@@ -60,6 +60,20 @@ Learning paths for international readers:
 - "I want academic understanding" → curated path
 
 ### 5. This README — Entry point
+
+---
+
+## Additional Translations
+
+Five additional topical translations expand coverage from ~5% to ~25%. These go deeper than the gateway docs and each focuses on a single operational or technical area.
+
+- [`glossary.md`](glossary.md) — Bilingual AML term dictionary (~200 entries, A-Z)
+- [`inspection-response-full.md`](inspection-response-full.md) — Full English translation of the Korean inspection workbook (900-line original). Complements the shorter [`inspection-response-summary.md`](inspection-response-summary.md).
+- [`travel-rule-handbook.md`](travel-rule-handbook.md) — Korean VASP implementation of FATF R.16: IVMS101 with Korea-specific fields, VerifyVASP / CODE consortia, Notabene routing, Sunrise Issue handling
+- [`blockchain-analytics-summary.md`](blockchain-analytics-summary.md) — Technical summary: CIOH with CoinJoin fingerprint, Exposure Score formula, cross-chain bridge matching, Korean fuzzy matching for sanctions
+- [`cdd-edd-rba.md`](cdd-edd-rba.md) — Risk-based customer due diligence: CDD 4 steps, EDD triggers and documents, 5-factor RBA scoring with calibration override
+
+**Coverage**: approximately 25% of the Korean corpus (up from ~5%). The remaining ~75% stays in Korean — see [`../notes/`](../notes/).
 
 ---
 

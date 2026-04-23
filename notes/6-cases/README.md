@@ -1,6 +1,6 @@
 # 6️⃣ Cases — 실제 사건에서 배우기
 
-> 이론은 배운 뒤, **실제로 무엇이 터졌는지**. 이 폴더는 업계 분기점이 된 3개 사건 계열을 서사로 정리합니다. 마지막 업데이트: 2026-04-20.
+> 이론은 배운 뒤, **실제로 무엇이 터졌는지**. 이 폴더는 업계 분기점이 된 사건 계열(글로벌 3개 + 한국 1개)을 서사로 정리합니다. 마지막 업데이트: 2026-04-23.
 
 ## 누가 먼저 읽어야 하나
 
@@ -28,6 +28,7 @@ flowchart LR
 | 2 | [`tornado-cash.md`](tornado-cash.md) | 2022 제재 → 2024 판결 → 2025 해제 → Storm 재판 | **코드를 제재할 수 있는가** — DeFi 규제의 법적 한계 확인 |
 | 3 | [`major-enforcement.md`](major-enforcement.md) | Binance $4.3B + CZ 복역 + OKX $500M+ | **CEO 개인 형사 책임**이 AML 위반의 신규 표준 |
 | 4 | [`circle-stablecoin-freeze.md`](circle-stablecoin-freeze.md) | Circle USDC freeze (~$500M+·100+ 사례) | 스테이블코인 발행자의 AML 권한·한계·중앙화 논란 |
+| 5 | [`korea-enforcement.md`](korea-enforcement.md) | Terra-Luna·Wemix·Bithumb·특금법 2021 신고 대란 | 한국형 자율규제·DAXA 공동조치의 실효성·한계 |
 
 ## 핵심 출구
 
