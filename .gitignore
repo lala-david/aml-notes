@@ -13,3 +13,15 @@ desktop.ini
 # Local notes (개인 메모용 — 커밋 제외)
 _local/
 *.draft.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude Code
+.claude/
+
+# Runtime outputs
+regulatory-changes.json
+regulatory-changes.md
