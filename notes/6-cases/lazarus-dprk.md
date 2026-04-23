@@ -121,6 +121,174 @@ Bybit 사건의 핵심 교훈은 **"서명자가 본 것과 서명한 것이 같
 
 ---
 
+## 2-B. 2022-03-23 Ronin Bridge Hack — $625M, Bybit 이전의 분기점
+
+```mermaid
+flowchart LR
+    A[Ronin Bridge<br/>$625M] -->|즉시 ETH 분산| B[수십 개 wallet]
+    B -->|Tornado Cash| C[익명화]
+    C -->|북한 네트워크| D[OTC]
+    D --> E[북한 자금조달]
+    style A fill:#fee2e2
+    style E fill:#fee2e2
+```
+
+Bybit 이전, 가상자산 업계 **단일 사건 사상 최대**였던 사건. 2022-03 시점에 일어났고, 이후 업계 multisig 거버넌스·bridge 보안 표준을 근본적으로 재편한 분기점입니다. "Bybit가 거래소 cold wallet 시대를 갈랐다면, Ronin은 DeFi·bridge 시대를 갈랐다"는 평가.
+
+### 핵심 사실 (스펙)
+
+- **사건일**: 2022-03-23 (실제 해킹 발생), **2022-03-29** (Sky Mavis 공식 발견·발표)
+- **발견 지연**: **6일** — 사용자가 5,000 ETH 인출 실패를 신고한 뒤에야 운영팀이 탈취 감지
+- **피해**: **$625M** — 173,600 ETH + 25.5M USDC
+- **공격 유형**: Validator private key 탈취 (multisig 9개 중 5개 통제 → 인출 승인 권한 확보)
+- **공격자**: **Lazarus Group** (FBI 2022-04-14 공식 귀속)
+- **자금 회수**: ~$30M (Binance가 ChainAlysis 협조로 차단) — 전체의 5% 미만
+
+### 피해 구조 상세
+
+Ronin은 Axie Infinity(Sky Mavis 개발) 게임 전용 **사이드체인 + Ethereum bridge**였습니다. 사용자가 Ethereum에서 Ronin 사이드체인으로 자산을 이동할 때 이 bridge를 거쳐야 했고, bridge의 인출(withdraw) 승인은 **9명의 validator 중 5명의 서명**이 필요했습니다. 공격자는 이 중 5개 key를 탈취해 **자체 서명으로 인출** 트랜잭션 2건을 생성:
+
+- **트랜잭션 1**: 173,600 ETH 인출
+- **트랜잭션 2**: 25.5M USDC 인출
+- 두 건 모두 정상 multisig 서명으로 검증 → 컨트랙트가 승인
+- Sky Mavis 내부 모니터링은 해당 인출을 **정상 운영 서명**으로 인식
+
+### 공격 메커니즘 상세 — "Discord 가짜 채용"
+
+FBI·Chainalysis·Sky Mavis 사후 조사에 따르면:
+
+1. **표적 선정**: Sky Mavis Discord 채널에서 활발한 **시니어 엔지니어**
+2. **LinkedIn 접근**: 다른 블록체인 게임 회사로부터의 **가짜 채용 오퍼** (높은 연봉)
+3. **다단계 면접**: 몇 차례 기술 면접 후 신뢰 구축
+4. **최종 오퍼 PDF**: Word 문서(`.docx`) 첨부파일 — **macro-enabled malware** 내장
+5. **엔지니어 노트북 감염**: 문서 열람 시 매크로 실행 → spyware 설치
+6. **내부 네트워크 침투**: VPN credential 탈취 → Sky Mavis 인프라 진입
+7. **Validator key 탈취 (4개)**: 직접 관리 중이던 validator 4개의 private key 추출
+8. **Axie DAO validator 1개 추가 확보**: 이전 해에 **Sky Mavis가 Axie DAO validator에 대한 서명 권한을 위임받았다가, 회수 처리를 잊음** — 권한이 만료됐어야 했으나 여전히 활성
+9. **5/9 달성 → 인출 실행**
+
+### 치명적 실패 지점 — "잊은 권한"
+
+Ronin 사건의 가장 충격적인 부분은 **Axie DAO validator 서명 위임 회수 실패**. 2021년 말 사용자 급증으로 Axie DAO가 Sky Mavis에 일시적 서명 권한을 위임했는데, 이를 **기한 후 회수하지 않음**. 공격자는 이 "유령 권한" 하나로 4/9에서 5/9로 올려 multisig 통과. 단 1개 validator의 권한 관리 부주의가 $625M 피해의 문턱이 됐습니다.
+
+### 자금세탁 흐름
+
+| Phase | 시점 | 행동 | 도구 |
+|---|---|---|---|
+| 1 | 2022-03-23 | 탈취 즉시 수십 개 wallet으로 분산 | peel chain |
+| 2 | 2022-03-23~04 | Tornado Cash 대량 입금 | Tornado (당시 제재 전) |
+| 3 | 2022-04~05 | 중국·러시아 OTC desk 환전 | CMLN 초기 |
+| 4 | 2022-04-14 | FBI 공식 Lazarus 귀속 → 이후 추적 본격화 | — |
+| 5 | 2022-04~08 | Binance ~$30M 차단 (Chainalysis 협조) | exchange freeze |
+| 6 | 2022-08-08 | **OFAC Tornado Cash 제재** — Ronin 자금이 제재의 직접 근거 중 하나 | — |
+
+### 업계에 남긴 임팩트 — "3가지 표준 변화"
+
+Ronin 사건은 **multisig 거버넌스 · Discord 보안 · bridge 보안** 3개 영역 표준을 재정의했습니다:
+
+**1. Multisig 거버넌스 표준**
+- **권한 자동 회수**: 위임 기간 만료 시 스마트컨트랙트 레벨에서 자동 해제 (Sky Mavis 사건의 직접 교훈)
+- **외부 validator 분리**: Axie DAO 같은 외부 entity validator는 Sky Mavis와 물리적으로 분리된 key 관리
+- **임계값 상향**: 5/9 → 8/13 등으로 multisig 강화, 재구성 cost 증대
+
+**2. Discord 보안**
+- 모든 DAO·DeFi 프로젝트가 Discord 권한 격리 도입
+- **Engineer access ≠ Discord admin**: 역할 분리
+- 사내 보안 교육에 "LinkedIn 가짜 채용" 시나리오 필수 포함
+
+**3. Bridge 보안**
+- Cross-chain bridge가 가상자산 해킹의 **1순위 표적**이라는 인식 확립
+- 후속 사건: **Wormhole $325M (2022-02)**, **Nomad $190M (2022-08)**, **BNB Bridge $586M (2022-10)**
+- 2022 한 해 bridge 해킹만 **누적 $2B+**
+
+### 한국 VASP 영향
+
+- **빗썸·코인원·코빗·업비트 모두 외부 multisig 외부 감사 분기 1회 강제** (DAXA 2022-06 합의)
+- **Cross-chain bridge 추적 룰** 강화 — Chainalysis Reactor에 bridge matching 활성화
+- 한국 자체 DeFi·bridge 프로젝트(Orbit Bridge 등) 보안 감사 권고 상향
+- Axie Infinity가 한국 유저 비중 높았기에 **한국 투자자 직접 피해 규모 ~수천억 원** 추정
+
+### Bybit 사건과의 비교
+
+Ronin(2022-03)과 Bybit(2025-02)은 **Lazarus 수법의 진화**를 보여줍니다:
+
+| 항목 | Ronin (2022-03) | Bybit (2025-02) |
+|---|---|---|
+| 피해 | $625M | $1.46B (2.3배) |
+| 공격 표적 | Validator private key | Cold wallet operator 서명 UI |
+| 공격 수법 | Discord 가짜 채용 (malware 문서) | 공급망 공격 (Safe wallet UI 변조) |
+| 발견 시점 | 6일 후 (사용자 신고) | 수시간 내 (자체 탐지) |
+| 회수 | ~$30M (5%) | ~$50M 초기 (3%) |
+| Lazarus 자금세탁 도구 | Tornado Cash | THORChain·OTC (Tornado 제재 시기라 회피) |
+| 업계 표준 변화 | Multisig 거버넌스 | Hardware wallet 검증·Blind signing 금지 |
+| 후속 사건 영향 | Wormhole·Nomad·BNB Bridge 연쇄 인식 | MPC·TSS 채택 가속, 공급망 감사 의무화 |
+
+### 실무 포인트
+
+Ronin 사건에서 거래소·DeFi 실무자가 꼭 기억해야 할 2가지:
+
+1. **"잊은 권한"이 가장 치명적**: 보안 사고의 대부분은 **새로운 취약점**이 아니라 **운영 중 발생한 예외·임시 권한의 방치**에서 나옵니다. Sky Mavis의 Axie DAO validator 권한 회수 실패가 대표 사례. 정기적 권한 감사가 실질적 방어.
+2. **발견 지연의 비용**: 6일 동안 Lazarus는 이미 자금을 Tornado에 넣고 분산 완료. **실시간 모니터링**(대규모 인출 알람)이 있었다면 최소 분산 전 단계에서 차단 가능. Bybit가 수시간 내 탐지한 것과 극명 대비.
+
+### 사후 조사에서 밝혀진 추가 정보
+
+**Chainalysis 2022 분석 보고서**에 따르면, 공격자는 탈취 직후 다음 행동을 순차 수행:
+
+1. **첫 1시간**: 173,600 ETH + 25.5M USDC를 **약 5개의 1차 wallet**으로 분할
+2. **첫 24시간**: 각 1차 wallet에서 **10~20개의 2차 wallet**으로 재분할 (peel chain 초기)
+3. **첫 48시간**: 25.5M USDC → 대부분 Uniswap·Curve 경유해 ETH로 환전 (stablecoin freeze 회피)
+4. **첫 1주**: Tornado Cash 대량 입금 시작 — 당시 미제재였으므로 가장 효과적 익명화 수단
+5. **첫 1개월**: 일부 자금이 Huobi·FTX 등 거래소로 유입 → 거래소 freeze 협조로 **~$5.7M 환수**
+
+**Elliptic 2022-04 분석**: Ronin 자금 중 **약 18%가 Tornado Cash로 유입** 확인. 이 데이터가 이후 **OFAC의 2022-08 Tornado 제재 결정의 핵심 근거** 중 하나가 됐다는 점에서 Ronin 사건은 Tornado 제재 역사의 간접적 트리거.
+
+### Axie Infinity 게임 생태계 붕괴 연쇄 영향
+
+Ronin 해킹의 숨은 피해는 **Axie 게임 생태계 자체의 붕괴**:
+
+- Axie 토큰(AXS·SLP) 가격 **-80% 이상 급락** (2022-03~2022-12)
+- Play-to-Earn(P2E) 게이머 이탈 — 특히 **필리핀·베트남** 생계형 플레이어 수십만 명
+- Sky Mavis 기업가치 **$3B → $300M 수준** 급락
+- P2E 모델 전반의 신뢰 상실 → 2022~2023 P2E 게임 생태계 침체
+
+**한국 투자자 직접 피해**: Axie·AXS가 한국 4대 거래소 상장 주요 종목이었기에 한국 투자자 직접 손실 추정치 **수천억 원**. 가상자산 해킹이 **개별 프로젝트를 넘어 생태계·투자자에 미치는 파급 효과**의 대표 사례.
+
+### Sky Mavis 대응과 복구
+
+- **2022-04-06**: Binance 주도 **$150M 라운드 조달** — 피해 일부 보전
+- **2022-06**: Ronin Bridge **복구 재개 전 보안 감사** (Verichains, Certik 등)
+- **2022-06-28**: 재개장, validator **9 → 11명으로 확대**, 임계값 상향
+- **단계적 환수**: Sky Mavis가 자체 자금 + 조달금으로 피해자 보전, 2022 말까지 대부분 완료
+- **Axie DAO validator 권한**: 재설계 — 자동 만료 + 별도 key 관리 인프라
+
+### 2022년 다른 Bridge 해킹과의 비교 — "Bridge 해킹의 해"
+
+2022년은 가상자산 업계에서 **"Bridge 해킹의 해"**로 기록됩니다. Ronin을 필두로 다음 사건 연쇄 발생:
+
+| 사건 | 날짜 | 피해액 | 공격 유형 | 공격자 |
+|---|---|---|---|---|
+| **Wormhole** | 2022-02-02 | $325M | Signature verification 취약점 | 미상 (Jump Crypto가 보전) |
+| **Ronin** | 2022-03-23 | **$625M** | Validator key 탈취 | **Lazarus** |
+| **Harmony Horizon** | 2022-06-24 | $100M | Multisig 2/5 탈취 | Lazarus |
+| **Nomad** | 2022-08-01 | $190M | Contract 초기화 버그 | 다수 (오픈 약탈) |
+| **BNB Chain Bridge** | 2022-10-06 | $586M | Merkle proof 위조 | 미상 |
+
+**공통 교훈**:
+- Bridge는 **대규모 자산 집중 + 복잡한 cross-chain 로직** → 공격 표면이 단일 체인 대비 수 배
+- Validator·multisig 수가 적을수록 취약 (Ronin 5/9, Harmony 2/5는 너무 낮았음)
+- Sky Mavis의 사례가 **Axie DAO validator 권한 회수 실패**였다면, Harmony는 **단 2개 key 탈취**로 $100M 탈취 — **임계값의 중요성**
+
+### 1차 자료
+
+- [FBI 보도자료 2022-04-14 — Lazarus 공식 귀속](https://www.fbi.gov/news/press-releases/fbi-statement-on-attribution-of-malicious-cyber-activity-posed-by-the-democratic-peoples-republic-of-korea)
+- [Sky Mavis 사건 공식 보고서 — "Back to Building"](https://blog.roninchain.com/p/back-to-building-roninnetwork)
+- [Chainalysis — Ronin·Axie Infinity 해킹 분석 (2022)](https://www.chainalysis.com/blog/ronin-axie-infinity-hack-2022/)
+- [Elliptic — Ronin Bridge Post-mortem](https://www.elliptic.co/blog/the-ronin-network-hack-how-did-the-hackers-get-away-with-nearly-625-million)
+- [U.S. Treasury OFAC — Lazarus 주소 추가 제재 2022-04](https://home.treasury.gov/news/press-releases/jy0731)
+- [CertiK — Ronin 보안 감사 보고서 (2022-06)](https://www.certik.com/resources/blog/ronin-bridge-post-mortem)
+
+---
+
 ## 3. DPRK 가상자산 활동 통계 (2025)
 
 ![DPRK · Lazarus 연도별 가상자산 탈취](../../charts/output/lazarus_yearly.svg)

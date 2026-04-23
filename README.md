@@ -138,6 +138,7 @@ python print/generator.py all
 
 상세 이력 → [`CHANGELOG.md`](CHANGELOG.md)
 기여 → [`CONTRIBUTING.md`](CONTRIBUTING.md)
+거버넌스 → [`GOVERNANCE.md`](GOVERNANCE.md) · 규제 추적 → [`meta/regulatory-watch.md`](meta/regulatory-watch.md) · 공식 검수 요청 → [`meta/official-review-request.md`](meta/official-review-request.md)
 라이선스 → 문서 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · 코드 [MIT](LICENSE)
 
 ---

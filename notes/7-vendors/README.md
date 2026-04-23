@@ -27,6 +27,7 @@ flowchart LR
 | 1 | [`analytics-vendors.md`](analytics-vendors.md) | Chainalysis · Elliptic · TRM · Crystal · Merkle Science | 글로벌 4사 중 하나는 사실상 필수. PoC 비교 기준 |
 | 2 | [`travel-rule-vendors.md`](travel-rule-vendors.md) | 컨소시엄(VerifyVASP·CODE·Sygna) vs SaaS(Notabene) vs 분산형(TRISA·TRP) | 한국은 VerifyVASP·CODE·Notabene 3개가 사실상 전부 |
 | 3 | [`korea-solutions.md`](korea-solutions.md) | 한국 특수 인프라 — 본인확인기관·ARGOS·코인플러그·람다256·DAXA | 신규 한국 VASP가 처음부터 연동해야 하는 업체 지도 |
+| 4 | [`vendor-benchmark.md`](vendor-benchmark.md) | KYT·TR·KYC 12개 벤더의 FP rate·Latency·비용·한국 지원 정량 비교 + PoC 12주 체크리스트 | 벤더 선정·계약·예산 |
 
 ## 핵심 출구
 

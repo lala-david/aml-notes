@@ -27,6 +27,7 @@ flowchart LR
 | 1 | [`lazarus-dprk.md`](lazarus-dprk.md) | Bybit $1.46B (2025-02) + DMM·Ronin·Axie | 거래소 **핫월렛 보안 표준**이 바뀐 분기점 |
 | 2 | [`tornado-cash.md`](tornado-cash.md) | 2022 제재 → 2024 판결 → 2025 해제 → Storm 재판 | **코드를 제재할 수 있는가** — DeFi 규제의 법적 한계 확인 |
 | 3 | [`major-enforcement.md`](major-enforcement.md) | Binance $4.3B + CZ 복역 + OKX $500M+ | **CEO 개인 형사 책임**이 AML 위반의 신규 표준 |
+| 4 | [`circle-stablecoin-freeze.md`](circle-stablecoin-freeze.md) | Circle USDC freeze (~$500M+·100+ 사례) | 스테이블코인 발행자의 AML 권한·한계·중앙화 논란 |
 
 ## 핵심 출구
 

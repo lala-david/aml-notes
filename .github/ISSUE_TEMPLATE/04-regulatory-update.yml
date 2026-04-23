@@ -1,0 +1,80 @@
+name: 📋 규제 변화 신고 (Regulatory Update)
+description: 새 규제·법령 개정·감독 가이드라인·enforcement 사건이 교재에 반영되지 않은 경우
+title: "[Reg-Update] "
+labels: ["regulatory-update", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AML·가상자산 규제는 분기별로 바뀝니다. 새 변화를 발견하셨다면 신고해주세요.
+        Critical 변화는 1주 내, Major는 1개월 내 반영합니다.
+
+  - type: dropdown
+    id: jurisdiction
+    attributes:
+      label: 관할
+      options:
+        - 한국 (FSC·KoFIU·FSS·DAXA)
+        - 미국 (FinCEN·OFAC·SEC·CFTC)
+        - EU (AMLA·ESMA)
+        - FATF
+        - 싱가포르 (MAS)
+        - UAE (VARA·ADGM)
+        - 일본 (FSA·JVCEA)
+        - 홍콩 (SFC)
+        - 기타
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 영향 정도
+      options:
+        - Critical (한국 특금법·FATF·OFAC 직접) — 1주 내 반영
+        - Major (US·EU·Asia 주요·대형 enforcement) — 1개월 내
+        - Minor (가이드라인·FAQ·통계) — 분기별
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: 변화 제목
+      description: "예: '특금법 시행령 §10조 2026-05-01 시행 예정'"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: 변화 내용
+      description: 무엇이 어떻게 바뀌는가 (날짜·조항·금액·기관 등)
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 1차 자료 URL
+      description: 감독 당국 보도자료·법령 원문·공식 가이드 등
+      placeholder: "https://www.fsc.go.kr/..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected
+    attributes:
+      label: 영향 받는 파일 (선택)
+      description: 이 변화로 업데이트 필요한 교재 파일 (알고 있다면)
+      placeholder: "notes/2-regulations/korea-fiu-act.md, curriculum/day_08.md"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 확인
+      options:
+        - label: 1차 자료(감독 당국 공식)를 확인했습니다
+          required: true
+        - label: 기존 교재에 이미 반영됐는지 검색했습니다
+          required: true

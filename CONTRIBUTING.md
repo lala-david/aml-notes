@@ -95,6 +95,42 @@ python print/generator.py
 - **정치 중립** — 제재·규제 해석에 이념적 색깔 넣지 않기
 - **한국어·영어 모두 OK** — 본문은 한국어지만 Issue/PR 토론은 영어도 환영
 
+## 🏆 Recognition
+
+기여하신 분들께 감사드립니다. 다음 경로로 인정합니다:
+
+### Contributor Hall of Fame
+
+5+ accepted PR → README의 "Trusted Contributor" 명단에 등재.
+
+### Reviewer Acknowledgment
+
+분야별 reviewer로 참여하신 분들 (동의 시):
+- 법무 Reviewer
+- 기술 Reviewer
+- 실무 Reviewer
+- 번역 Reviewer
+
+### 분기 회고
+
+매 분기 (Q1·Q2·Q3·Q4) GitHub Discussions에 회고 게시. Top contributor 언급.
+
+## 🌱 Good First Issues
+
+처음 기여하실 때 추천:
+
+- [ ] 외부 URL 깨짐 수정 (`charts/check_external_urls.py` 결과 처리)
+- [ ] 한국어 → 영어 용어 번역 추가 (`notes/glossary.md`)
+- [ ] 새 일자·금액 fact-check (`grep` 후 1차 자료 검증)
+- [ ] Mermaid 다이어그램 가독성 개선 (color·layout)
+- [ ] 영문 에디션 (`en/`) 자연스러운 영어로 다듬기
+
+각 카테고리에 GitHub Issue `good-first-issue` 라벨로 등록되어 있습니다.
+
+## 📋 규제 변화 신고
+
+새 규제·법령·사건 발견 시 → [Regulatory Update Issue Template](https://github.com/lala-david/aml-notes/issues/new?template=04-regulatory-update.yml)
+
 ## 라이선스
 
 기여하는 콘텐츠는 저장소의 [CC BY 4.0](LICENSE) (코드 샘플은 MIT) 라이선스로 공개됩니다. PR 제출은 이 라이선스에 동의하는 것으로 간주합니다.

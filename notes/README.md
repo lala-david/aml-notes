@@ -76,13 +76,14 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`internal-controls.md`](5-compliance/internal-controls.md) — 5 pillars + 3LoD + AMLO
 - [`inspection-response.md`](5-compliance/inspection-response.md) — FIU·FSS 검사 대응 워크북 (40 체크리스트·서류 40종)
 
-### 6️⃣ [`6-cases/`](6-cases/) — 사례 (3 파일 + README)
+### 6️⃣ [`6-cases/`](6-cases/) — 사례 (4 파일 + README)
 실제 사건에서 배우기.
 
 - [`README.md`](6-cases/README.md) — 폴더 가이드
-- [`lazarus-dprk.md`](6-cases/lazarus-dprk.md) — DPRK Lazarus + Bybit $1.46B
-- [`tornado-cash.md`](6-cases/tornado-cash.md) — DeFi 첫 OFAC 제재 → 해제
+- [`lazarus-dprk.md`](6-cases/lazarus-dprk.md) — DPRK Lazarus + Bybit $1.46B + Ronin Bridge $625M
+- [`tornado-cash.md`](6-cases/tornado-cash.md) — DeFi 첫 OFAC 제재 → 해제 + Roman Storm 재판
 - [`major-enforcement.md`](6-cases/major-enforcement.md) — Binance $4.3B + OKX $500M+ 등
+- [`circle-stablecoin-freeze.md`](6-cases/circle-stablecoin-freeze.md) — Circle USDC freeze + 스테이블코인 발행자의 AML 권한
 
 ### 7️⃣ [`7-vendors/`](7-vendors/) — 벤더 (3 파일 + README)
 시장에 있는 솔루션 지도.
@@ -91,6 +92,7 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`analytics-vendors.md`](7-vendors/analytics-vendors.md) — Chainalysis / Elliptic / TRM / Crystal
 - [`travel-rule-vendors.md`](7-vendors/travel-rule-vendors.md) — Notabene / VerifyVASP / CODE / TRISA
 - [`korea-solutions.md`](7-vendors/korea-solutions.md) — 한국 시장 솔루션 지도
+- [`vendor-benchmark.md`](7-vendors/vendor-benchmark.md) — 12 벤더 정량 비교 + PoC 12주 체크리스트
 
 ### 📖 [`glossary.md`](glossary.md) — 용어 사전
 ABC 순 약어 + 한국어→영어 매핑.
