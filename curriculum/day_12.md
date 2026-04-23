@@ -30,6 +30,17 @@ flowchart LR
 ## 📖 읽기 (~45분)
 - 메인: [`../notes/5-compliance/str-ctr.md`](../notes/5-compliance/str-ctr.md) — 1~5절
 
+### ⚠️ 2025-06 FATF R.16 개정
+
+2025년 6월 FATF R.16 Interpretive Note 개정으로 다음 변화가 발생:
+- Self-hosted wallet 처리 강화 (KYC 확장)
+- Protocol Interop 명시 요구 (Sunrise Issue 관리)
+- PII 암호화 전송·GDPR·PIPA 준수 명시
+
+한국은 100만원 임계 유지(R.16 허용 범위 내)이나, **self-hosted wallet 처리**는 2026년 FIU 가이드라인 개정 예정.
+
+**상세**: [`day_17.md`](day_17.md) "FATF R.16 2025-06 개정" 참조.
+
 ## 🌐 외부 자료 (선택, ~15분)
 - [KoFIU 공식](https://www.kofiu.go.kr/) — 연차보고서 검색
 - [한국 FIU 연차보고서 검색](https://www.kofiu.go.kr/) (사이트 내 자료실)

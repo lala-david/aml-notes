@@ -248,6 +248,73 @@
 
 ---
 
+## 용어 짝 비교 — 자주 혼동되는 짝
+
+한국 AML 실무에서 영문·국문·법령 용어가 뒤섞여 쓰입니다. 다음 짝은 **엄밀히는 의미가 다르거나, 같은 뜻이지만 출처 맥락이 다른 경우**.
+
+### 고객확인 vs 실명확인 vs KYC
+
+| 용어 | 출처·맥락 | 정의 |
+|---|---|---|
+| **고객확인(顧客確認)** | 특금법 §5의2 | 법정 용어. 법령상 VASP가 해야 할 "고객 실명 + 목적 + 자금원천" 확인 전체. 포괄 개념. |
+| **실명확인(實名確認)** | 금융실명법·특금법 §5의2 ① | **고객확인의 한 부분** — 신분증·본인확인기관(PASS/NICE) 통한 본인 일치 검증만. 더 좁음. |
+| **KYC (Know Your Customer)** | FATF·글로벌 | 국제 표준 용어. **한국 "고객확인"과 대체로 등가**이나, 각국 법 상세 조항 차이. |
+| **CDD (Customer Due Diligence)** | FATF R.10 | KYC의 공식 법적 표현. "고객실사" 번역. |
+
+**실무 사용**:
+- 한국 법 문서 → "고객확인" 또는 "실명확인"
+- 영문 회사 자료·FATF → "KYC" 또는 "CDD"
+- **두 표기 혼용 허용**, 단 한 문서 내 일관성 유지
+
+### STR vs SAR
+
+| 용어 | 관할 | 의미 |
+|---|---|---|
+| **STR (Suspicious Transaction Report)** | FATF·한국·EU·싱가포르 | 의심거래 보고. 한국 특금법 §5의3. |
+| **SAR (Suspicious Activity Report)** | 미국 FinCEN | 의심활동 보고. BSA 31 CFR 1020.320. 거래가 없어도 활동 의심 시 보고 가능 (더 넓음). |
+
+### Travel Rule vs Wire Transfer Rule
+
+| 용어 | 맥락 |
+|---|---|
+| **Travel Rule** | 가상자산 송수신 정보 동반. FATF R.16. 2019~. |
+| **Wire Transfer Rule** | 전통 금융 전신환. BSA 1996~. Travel Rule의 기원. |
+
+### AMLO vs MLRO vs Compliance Officer
+
+| 용어 | 관할 |
+|---|---|
+| **AMLO (Anti-Money Laundering Officer)** | 한국·글로벌 일반 |
+| **MLRO (Money Laundering Reporting Officer)** | 영국·EU 전통 |
+| **Compliance Officer (CO)** | 더 넓은 준법 (AML 포함하거나 독립) |
+| **CCO (Chief Compliance Officer)** | C-level, 임원급 |
+
+### Tipping-off vs Disclosure
+
+| 용어 | 의미 |
+|---|---|
+| **Tipping-off** | 의심거래 보고 사실을 **고객에게 누설** — 한국 특금법 §5의2 ⑤ 금지, 5년 이하 징역 |
+| **Disclosure** | 일반적 "공개" — Tipping-off는 Disclosure의 한 형태 (특정 사실에 대한 금지) |
+
+### PEP vs BO
+
+| 용어 | 의미 |
+|---|---|
+| **PEP (Politically Exposed Person)** | 정치적 주요인물. 고위 공직자·가족·측근. 부패 위험 ↑ |
+| **BO (Beneficial Owner)** | 실소유자. 법인 소유권의 실제 최종 수익자 (보통 25%+). |
+
+### 동일 용어·다른 표기 (한 문서 내 일관성 필요)
+
+- FATF R.15 / FATF Recommendation 15 — 같은 의미. **긴 형태가 공식**.
+- 특금법 / 특정금융정보법 / 특정 금융거래정보의 보고 및 이용 등에 관한 법률 — 법정 풀네임은 마지막, **첫 등장 시 풀네임 + 약칭 병기**.
+- 가상자산이용자보호법 / 이용자보호법 — 같음. 공식은 "가상자산 이용자 보호 등에 관한 법률".
+
+### 실무 포인트
+
+회사 AML 정책 문서는 **영문판·국문판**을 따로 작성하는 경우가 많고, 용어 짝을 서로 매핑하는 **용어 대조표**를 첨부하는 게 표준. 감독 검사 시 용어 혼용으로 오해가 생기는 경우를 줄임.
+
+---
+
 ## 한국어 → 영어 빠른 매핑
 
 | 한국어 | 영어 |

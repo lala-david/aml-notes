@@ -4,6 +4,14 @@
 
 > ⚠️ 이 파일은 **템플릿** 입니다. D59 캡스톤 작업 시 본인이 직접 채워서 완성하세요.
 
+![Status](https://img.shields.io/badge/상태-스펙_완료-blue)
+![Difficulty](https://img.shields.io/badge/난이도-⭐⭐⭐⭐⭐-red)
+![Language](https://img.shields.io/badge/언어-Python-3776AB)
+
+> **상태**: 스펙(설계서 템플릿) 작성 완료. 구현 코드 없음 — D59 캡스톤에서 학습자가 01~05 프로젝트를 통합해 작성.
+> **위치**: `projects/06-capstone-risk-engine/` (DESIGN.md만 존재)
+> **예상 구현 시간**: 2주
+
 ## 🏗 Capstone 통합 아키텍처
 
 ```mermaid

@@ -82,3 +82,60 @@ IF wallet has Tornado Cash direct exposure:
 
 - **"제재 해제됐으니 지워도 된다"** — 한국·EU VASP 대다수는 **"mixer = 위험 카테고리"**로 별도 유지. 제재 해제 ≠ AML 위험 해제.
 - **"코드는 법적 책임 없다"** — Van Loon은 **정부의 제재 권한**을 제한했을 뿐, **개발자의 형사 책임**은 별개(Storm 재판). "익명성 도구 제공 = 무등록 MSB"라는 해석이 살아있음.
+
+## 🧭 Tornado 해제 후 — VASP 의사결정 프레임 (2025-03-21 이후)
+
+### 핵심 원칙
+
+**OFAC 제재 해제 ≠ 회사 정책 자동 완화**. 각 VASP는 자체 위험 기반 접근(RBA)에 따라 독립적으로 정책을 결정할 법적 권한·의무가 있다 (한국 특금법 §5의2, 미국 BSA §1020.210, EU AMLR Article 8).
+
+### 해제 이후 4개 상황과 의사결정
+
+| 시나리오 | OFAC 변화 | 한국 VASP 표준 대응 | 근거 |
+|---|---|---|---|
+| 과거 Tornado 이용 직접 주소 | SDN 제거 | **여전히 High-Risk 라벨 유지** | 2022~2025 기간 익명화 이용 이력은 자체 RBA로 판단 |
+| 새로운 Tornado 지갑 | 제재 대상 아님 | **Chainalysis·TRM 라벨 유지 시 High-Risk** | 벤더 분류는 독립적 |
+| Lazarus·Ransomware가 Tornado 경유 | 제재 대상(Lazarus 지정됨) | **출처 제재 대상이면 여전히 차단** | OFAC 50% Rule 여전 적용 |
+| 일반 프라이버시 목적 이용 | 제재 대상 아님 | **거래 진행 + EDD 실시** | 자금원천 증빙 요구 |
+
+### 실제 주요 VASP의 정책 (추정)
+
+- **Coinbase**: 해제 후 Tornado "관찰" 라벨로 하향, 하지만 **2-hop 이내 접촉 주소는 여전히 EDD 필수**
+- **Binance**: 지역별 차등 — EU/US는 여전히 rejected list, 기타 지역은 enhanced review
+- **한국 4대 (Upbit·Bithumb·Coinone·Korbit)**: DAXA 공동 가이드 2025-04 발표 — **당분간 High-Risk 유지**
+- **Kraken**: 2025-Q2 내부 정책으로 "제재 해제는 OFAC 판단일 뿐, KYT 점수는 독립적"
+
+### 의사결정 플로차트
+
+```mermaid
+flowchart TD
+    A[Tornado 접촉 감지] --> B{접촉 시점}
+    B -->|2025-03-21 이전| C[과거 불법 은닉 가능성]
+    B -->|이후| D{현재 출처 확인}
+    C --> E[여전히 High-Risk]
+    D -->|OFAC 제재 대상 출처| F[차단]
+    D -->|일반 출처| G[EDD + 자금원천]
+    E --> H{자금원천 증빙}
+    G --> H
+    H -->|증빙 충분| I[거래 진행 + 기록 유지]
+    H -->|증빙 불충분| J[차단 + STR]
+    F --> J
+    style F fill:#fee2e2,stroke:#ef4444
+    style J fill:#fee2e2,stroke:#ef4444
+    style I fill:#d1fae5,stroke:#10b981
+```
+
+### 법적 근거
+
+- **특금법 §5의2** — 자체 위험 평가·통제 권한
+- **특금법 §5의3** — STR 보고 의무 (자금원천 의심 시)
+- **OFAC 50% Rule** — 제재 대상자가 50%+ 소유·지배하는 자산은 자동 블록 (Lazarus가 Tornado 사용 시 여전 적용)
+- **EU AMLR Article 8** — VASP 자체 RBA 강제
+
+### 규제 당국 질의 대응
+
+FIU 검사 시 "Tornado 해제됐는데 왜 계속 차단?"라는 질의에 답변:
+- "특금법 §5의2에 따라 **자체 위험 평가**에 기반한 독립적 판단"
+- "과거 이용 이력의 자금세탁 위험 여전 존재"
+- "DAXA 공동 가이드에 따른 표준 대응"
+- 문서화: 정책 결정 근거·AMLO 서명·이사회 승인

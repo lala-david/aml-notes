@@ -30,6 +30,51 @@ timeline
 - 메인: [`../notes/2-regulations/fatf.md`](../notes/2-regulations/fatf.md) — 4~5절
 - 보조: [`../notes/3-crypto-aml/travel-rule.md`](../notes/3-crypto-aml/travel-rule.md) — 1~3절
 
+## 🧭 FATF R.16 2025-06 개정 — 핵심 변화 5개
+
+2025년 6월 FATF는 R.16 Interpretive Note를 개정, Travel Rule 이행 권고를 세분화했다. 주요 변화:
+
+### 1. Self-hosted Wallet 처리 강화
+
+기존: "카운터파티가 self-hosted wallet이면 Travel Rule 적용 의무 없음" (불명확)
+개정: **VASP가 송수신 상대가 self-hosted wallet임을 인지한 경우, 여전히 고객 정보 수집·기록하고 의심 시 STR 보고** (메시지 전송 의무는 없지만 KYC 확장)
+
+### 2. 임계값 권고 명확화
+
+기존: "$/€1,000 이상 권고"
+개정: **임계값 결정은 각 관할 재량이나, €1 ~ $3,000 내 선택. EU TFR은 임계 0 (1 EUR부터), 한국은 100만원, 미국 FinCEN 제안 $1,000**
+
+### 3. Protocol Interop 명시 요구
+
+개정: **VASP는 카운터파티의 TR 프로토콜이 다를 경우에도 메시지 교환 의무. Sunrise Issue(미연결)는 "최대한 연결 시도" 후 자체 정책 결정**
+
+### 4. PII 보호 표준 강화
+
+개정: **IVMS101 메시지는 암호화 전송 + 수신 후 필요 기간만 보관. 국가 간 개인정보 이동 규제(GDPR·PIPA·CCPA) 준수 명시**
+
+### 5. 지속적 Supervision 강화
+
+개정: **각국 FIU는 VASP의 Travel Rule 이행 현황을 분기별 보고 + 미흡 VASP는 FATF Mutual Evaluation에서 Non-Compliant 등급**
+
+### 한국 영향
+
+- 한국 특금법·FIU 고시는 **100만원 임계 유지** (R.16 허용 범위 내)
+- **Self-hosted wallet 처리 강화** — 2026년 FIU 가이드라인 개정 예정
+- DAXA가 Protocol Interop 공동 표준 개발 중
+
+### 실무 대응 체크리스트
+
+- [ ] Self-hosted wallet 감지 룰 구현 여부
+- [ ] 카운터파티 TR 프로토콜 식별·자동 라우팅 여부
+- [ ] Sunrise Issue 정책 문서화 여부
+- [ ] IVMS101 암호화 전송·보관 기간 정책
+- [ ] 분기별 FIU 보고 체계
+
+### 1차 자료
+
+- [FATF R.16 Interpretive Note (2025-06 개정)](https://www.fatf-gafi.org/en/publications/Fatfrecommendations/R16-virtual-assets-update-2025.html)
+- [FATF VASP Sector Update June 2025](https://www.fatf-gafi.org/en/publications/)
+
 ## 🌐 외부 자료 (~20분)
 - [FATF — Updated R.16 Explanatory Note (PDF)](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/Explanatory%20note%20for%20revised%20R.16.pdf.coredownload.pdf)
 - [Mayer Brown — FATF revises AML standards](https://www.mayerbrown.com/en/insights/publications/2025/08/fatf-revises-aml-standards-for-certain-funds-transfers)

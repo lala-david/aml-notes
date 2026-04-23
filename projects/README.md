@@ -17,6 +17,23 @@
 | 05 | [`05-kyt-wrapper/`](05-kyt-wrapper/README.md) | W8 (D56) | KYT API 호출 wrapper |
 | 06 | [`06-capstone-risk-engine/`](06-capstone-risk-engine/DESIGN.md) | Capstone (D59) | Mini AML Risk Engine 설계서 |
 
+## 프로젝트 상태 (2026-04 기준)
+
+| # | 프로젝트 | 상태 | 난이도 | 예상 시간 |
+|---|---|---|---|---|
+| 01 | IVMS101 Builder | 스펙 | ⭐⭐ | 주말 1일 |
+| 02 | Etherscan 2-hop Tracer | 스펙 | ⭐⭐⭐ | 주말 2일 |
+| 03 | Mixer 주소 라벨 Fetcher | 스펙 | ⭐⭐ | 주말 1일 |
+| 04 | OFAC SDN Crypto Screener | 스펙 | ⭐⭐ | 주말 1일 |
+| 05 | KYT API Wrapper | 스펙 | ⭐⭐⭐ | 주말 2일 |
+| 06 | Capstone — Mini Risk Engine | 스펙 | ⭐⭐⭐⭐⭐ | 2주 |
+
+- **스펙**: README.md(또는 DESIGN.md)에 설계 완료, 실제 코드는 학습자가 직접 작성. 2026-04 현재 6개 모두 이 상태.
+- **진행 중**: 일부 코드 구현, 미완성.
+- **완료**: 동작 코드 + 테스트 + 예시 출력.
+
+각 프로젝트는 학습 목적의 **참조 스펙**이며, 학습자가 직접 구현하는 과정에서 AML 기술을 체득합니다.
+
 ## 연결 구조 — 6개가 어떻게 합쳐지나
 
 ```

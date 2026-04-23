@@ -39,6 +39,12 @@ mindmap
 - [`../README.md`](../README.md) — 우선순위 Top 5 다시 보기
 - [`../notes/glossary.md`](../notes/glossary.md) — 11~Z 빠른 스캔
 
+### 💡 기억해둘 것: 2026년 특금법 개정
+
+2026-01-29 시행 개정으로 **대주주 자격심사 강화**. 5대 요건(재정·신용·인력·지배·AML). M&A·투자 유치 시 ~3~6개월 심사 필요.
+
+상세는 [`day_08.md`](day_08.md) / [`../notes/2-regulations/korea-fiu-act.md`](../notes/2-regulations/korea-fiu-act.md) 참조.
+
 ## 🛠️ 미니 챌린지 (~50분)
 **1. AML 마인드맵 그리기** (40분, 종이 권장)
 - 중심: "가상자산 AML"

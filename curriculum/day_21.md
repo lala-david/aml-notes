@@ -53,6 +53,19 @@ flowchart LR
 
 → 결과물 저장: `aml/curriculum/_artifacts/d21_global_travel_rule_compare.md`
 
+### 🌏 아시아 주요 관할 확장
+
+한국 VASP 글로벌 진출 시 **아시아 4개 관할**도 함께 비교해야 함:
+
+| 관할 | Travel Rule 임계 | 감독 |
+|---|---|---|
+| 🇸🇬 싱가포르 | S$1,500 | MAS |
+| 🇦🇪 UAE | **0 (1 AED)** | VARA |
+| 🇯🇵 일본 | 10만엔 | FSA + JVCEA |
+| 🇭🇰 홍콩 | HK$8,000 | SFC |
+
+**상세**: [`../notes/2-regulations/asia-regs.md`](../notes/2-regulations/asia-regs.md)
+
 ## ✅ 체크포인트
 - [ ] 비교표 산출
 - [ ] [`progress.md`](progress.md) Week 3 7개 모두 체크

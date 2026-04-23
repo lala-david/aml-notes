@@ -44,6 +44,15 @@ flowchart LR
 
 ## 💭 오늘의 한 줄
 
+## 🧭 Staking·LST 관점 확장
+
+DeFi와 경계에 있는 **Staking·Liquid Staking Token(LST)**은 한국 VASP가 현재 미출시이나 2026년 중 FIU 가이드라인 예정. 핵심 논점:
+- LST(stETH·mETH 등)가 별도 가상자산이면 **KYT·Travel Rule 적용**
+- Unstaking 대기 기간(~27h)의 **자금세탁 지연 창구** 악용 가능
+- Kraken은 2023-02 미국 SEC 소송 후 중단 사례
+
+**상세**: [`../notes/3-crypto-aml/defi-nft-risks.md`](../notes/3-crypto-aml/defi-nft-risks.md) §7 참조.
+
 ## 💼 실무 현장 (Industry Reality)
 
 ### 한국 VASP에서는

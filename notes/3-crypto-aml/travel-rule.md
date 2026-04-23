@@ -2,6 +2,8 @@
 
 > FATF Recommendation 16의 가상자산 적용. VASP 운영 난이도 **1순위** 테마. 이 글을 읽고 나면 Travel Rule이 왜 단순 규제가 아니라 **글로벌 인프라 문제**인지, 그리고 왜 한국이 두 개의 솔루션을 동시에 운영하는지 이해하게 됩니다. 마지막 업데이트: 2026-04-17.
 
+> **이 파일의 역할**: Travel Rule의 **개념·역사·운영 흐름**. 법적 근거는 [`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) §5 참조, 기술 상세(IVMS101 스키마·프로토콜·Protocol Interop Matrix)는 [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) 참조.
+
 ## TL;DR
 - VASP가 다른 VASP에게 가상자산을 이전할 때 **송신인 + 수신인 정보를 함께 전달**해야 하는 의무
 - 임계금액: **한국 100만원 / 미국 $3,000 / EU 없음 / FATF 권고 USD-EUR 1,000**
@@ -100,53 +102,28 @@ Travel Rule은 "기술적 구현 문제"처럼 포장되지만 본질은 **"전 
 
 Travel Rule 시행 초기(2019~2020)에는 각 프로토콜이 자체 메시지 형식을 썼습니다. 그러면 TRISA 쓰는 A 거래소가 Sygna 쓰는 B 거래소로 메시지를 보낼 때 **형식 변환**이 필요했고, 필드가 일대일 매핑 안 되는 경우가 속출. 이 문제를 풀려고 Notabene·21 Analytics·CipherTrace(TRISA)·CoolBitX(Sygna)·Securrency 등 주요 플레이어가 모여 공통 JSON 스키마를 합의한 게 IVMS101.
 
-### 핵심 구조
+### 핵심 구조 (요약)
 
-```json
-{
-  "originator": {
-    "naturalPerson": {
-      "name": { "primaryIdentifier": "...", "secondaryIdentifier": "..." },
-      "geographicAddress": { ... },
-      "dateAndPlaceOfBirth": { ... },
-      "nationalIdentification": { ... }
-    },
-    "accountNumber": ["bc1q..."]
-  },
-  "beneficiary": { ... },
-  "originatingVASP": { "legalPerson": { ... } },
-  "beneficiaryVASP": { ... },
-  "transferPath": { ... }
-}
-```
+IVMS101 JSON은 **originator / beneficiary / originatingVASP / beneficiaryVASP / transferPath** 5개 최상위 필드로 구성. 각 person은 naturalPerson/legalPerson discriminator, 이름·주소·DOB·국가 식별 필드를 가짐.
+
+**상세 JSON 스키마·경로 트리·필수/선택 필드 구분**: [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) §2 참조.
 
 ### 실무 포인트
 
-IVMS101은 "표준이지만 유연성이 있어서" 관할별 필수 필드 차이를 허용합니다. 같은 메시지라도 한국 VASP가 보낸 버전과 EU VASP가 보낸 버전의 채움 정도가 다를 수 있고, 수신 측이 이를 **관할 기준으로 검증**해야 합니다. 이게 IVMS101 validator 구현에서 가장 복잡한 부분.
+IVMS101은 "표준이지만 유연성이 있어서" 관할별 필수 필드 차이를 허용합니다. 같은 메시지라도 한국 VASP가 보낸 버전과 EU VASP가 보낸 버전의 채움 정도가 다를 수 있고, 수신 측이 이를 **관할 기준으로 검증**해야 합니다. 이게 IVMS101 validator 구현에서 가장 복잡한 부분 — **관할별 Validator 구현 pseudocode**는 [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) §N 참조.
 
 ---
 
-## 5. Travel Rule 프로토콜 — 전송 방식들
+## 5. Travel Rule 프로토콜 — 개요
 
-### 이 표를 어떻게 읽어야 하나
+표준(IVMS101)이 "무엇을"이라면, 프로토콜은 "어떻게"입니다. 크게 두 모델:
 
-표준(IVMS101)이 "무엇을"이라면, 프로토콜은 "어떻게"입니다. 분산형은 누구나 참여할 수 있지만 식별 인프라가 별도 필요하고, 폐쇄형은 신뢰는 높지만 회원사 한정. 한국은 폐쇄형(VerifyVASP·CODE)이 주류, 글로벌은 Notabene Gateway가 멀티프로토콜 허브로 부상.
+- **분산형(TRISA, OpenVASP)**: 누구나 참여 가능, 신뢰는 **PKI 인증서**. 확장성·오픈.
+- **폐쇄형(VerifyVASP, CODE)**: 사전 검증된 VASP만 참여, 신뢰는 **컨소시엄 운영자**가 보증. 즉시 작동.
 
-| 프로토콜 | 운영 | 모델 | 비고 |
-|---|---|---|---|
-| **TRISA** | 비영리, CipherTrace 시작 (→ Mastercard) | 분산형, gRPC/PKI | 오픈소스, 누구나 참여 |
-| **TRP** | 21 Analytics, ING | API 기반 REST | 가벼움, 빠른 구현 |
-| **OpenVASP** | OpenVASP Association | 분산형, Ethereum 기반 | 2026년 활용도 낮음 |
-| **VerifyVASP** | 람다256(Upbit 자회사) + Chainalysis | 폐쇄형 컨소시엄 | 한국 + 글로벌 |
-| **CODE** | 빗썸+코빗+코인원 합작 | 폐쇄형 컨소시엄 | 한국 특화 |
-| **Notabene** | Notabene Inc. (미국) | SaaS, 멀티프로토콜 | 1,500+ VASP, Sunrise 해결책 |
-| **Sumsub Travel Rule** | Sumsub | SaaS | KYC 통합 |
-| **Sygna** | CoolBitX (대만) | API | 아시아 강세 |
+한국은 폐쇄형(VerifyVASP·CODE)이 주류, 글로벌은 Notabene Gateway가 멀티프로토콜 허브로 부상.
 
-### 분산형 vs 폐쇄형 트레이드오프
-
-- **분산형(TRISA, OpenVASP)**: 누구나 참여 가능, 신뢰는 **PKI 인증서**로. 장점은 확장성·오픈, 단점은 VASP 식별 인프라를 별도로 갖춰야 함.
-- **폐쇄형(VerifyVASP, CODE)**: 사전 검증된 VASP만 참여, 신뢰는 **컨소시엄 운영자**가 보증. 장점은 즉시 작동, 단점은 회원사 외 카운터파티 불가.
+**프로토콜별 상세 기술 비교(TRISA·TRP·OpenVASP·VerifyVASP·CODE·Notabene·Sygna)**: [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) §3·§4 참조.
 
 ### 실무 포인트
 

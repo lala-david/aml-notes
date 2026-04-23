@@ -32,6 +32,7 @@ flowchart LR
 | 2 | [`str-ctr.md`](str-ctr.md) | 좋은 STR과 나쁜 STR의 차이? Tipping-off란? | "AML 시스템의 출구" 의미 이해 + SOP 작성 가능 |
 | 3 | [`sanctions-screening.md`](sanctions-screening.md) | OFAC 2차 제재가 왜 한국 거래소에도 강제력이 있나? | 거래 전·중·후 3지점 스크리닝 설계 |
 | 4 | [`internal-controls.md`](internal-controls.md) | AMLO가 왜 단순 직책이 아니라 의사결정권자인가? | 5 pillars + 3LoD + AMLO 구조 그릴 수 있음 |
+| 5 | [`inspection-response.md`](inspection-response.md) | FIU·FSS 검사 통지 → 4주 타임라인 → 40 체크리스트 → 사후 시정 | 감독당국 현장 검사를 실제로 준비 |
 
 ## 핵심 출구
 

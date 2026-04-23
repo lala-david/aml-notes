@@ -47,6 +47,7 @@ flowchart LR
 - [`fatf.md`](2-regulations/fatf.md) — 🌐 FATF 권고안 (R.15, R.16)
 - [`us-bsa-fincen.md`](2-regulations/us-bsa-fincen.md) — 🇺🇸 BSA / FinCEN / OFAC / GENIUS Act
 - [`eu-mica-amlr.md`](2-regulations/eu-mica-amlr.md) — 🇪🇺 MiCA / AMLR / TFR
+- [`asia-regs.md`](2-regulations/asia-regs.md) — 🇸🇬🇦🇪🇯🇵🇭🇰 싱가포르·UAE·일본·홍콩 VASP 규제
 
 ### 3️⃣ [`3-crypto-aml/`](3-crypto-aml/) — 가상자산 특화 (4 파일 + README)
 VASP가 떠안는 의무 + Travel Rule + 자금세탁 패턴.
@@ -65,20 +66,21 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`blockchain-analytics.md`](4-technology/blockchain-analytics.md) — 클러스터링 + Attribution + Exposure
 - [`travel-rule-protocols.md`](4-technology/travel-rule-protocols.md) — IVMS101 + TRP/TRISA/VerifyVASP/CODE/Notabene
 
-### 5️⃣ [`5-compliance/`](5-compliance/) — 컴플라이언스 운영 (4 파일 + README)
-실제 운영. CDD/EDD 절차, STR 작성, 제재 스크리닝, 내부통제.
+### 5️⃣ [`5-compliance/`](5-compliance/) — 컴플라이언스 운영 (5 파일 + README)
+실제 운영. CDD/EDD 절차, STR 작성, 제재 스크리닝, 내부통제, 검사 대응.
 
 - [`README.md`](5-compliance/README.md) — 폴더 가이드
 - [`cdd-edd.md`](5-compliance/cdd-edd.md) — 고객실사 + 강화실사
 - [`str-ctr.md`](5-compliance/str-ctr.md) — 의심거래/현금거래 보고
 - [`sanctions-screening.md`](5-compliance/sanctions-screening.md) — OFAC/UN/EU 제재 매칭
 - [`internal-controls.md`](5-compliance/internal-controls.md) — 5 pillars + 3LoD + AMLO
+- [`inspection-response.md`](5-compliance/inspection-response.md) — FIU·FSS 검사 대응 워크북 (40 체크리스트·서류 40종)
 
 ### 6️⃣ [`6-cases/`](6-cases/) — 사례 (3 파일 + README)
 실제 사건에서 배우기.
 
 - [`README.md`](6-cases/README.md) — 폴더 가이드
-- [`lazarus-dprk.md`](6-cases/lazarus-dprk.md) — DPRK Lazarus + Bybit $1.5B
+- [`lazarus-dprk.md`](6-cases/lazarus-dprk.md) — DPRK Lazarus + Bybit $1.46B
 - [`tornado-cash.md`](6-cases/tornado-cash.md) — DeFi 첫 OFAC 제재 → 해제
 - [`major-enforcement.md`](6-cases/major-enforcement.md) — Binance $4.3B + OKX $500M+ 등
 

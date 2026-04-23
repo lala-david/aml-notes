@@ -2,6 +2,14 @@
 
 > Travel Rule 메시지 표준을 손으로 만들면서 체화. (D28 미니 프로젝트)
 
+![Status](https://img.shields.io/badge/상태-스펙_완료-blue)
+![Difficulty](https://img.shields.io/badge/난이도-⭐⭐-orange)
+![Language](https://img.shields.io/badge/언어-Python-3776AB)
+
+> **상태**: 스펙 작성 완료 (README.md만 존재, `main.py` 미작성 — 학습자 구현 대상)
+> **위치**: `projects/01-ivms101-builder/` (예정: README.md + main.py + test.py + sample_messages/)
+> **예상 구현 시간**: 주말 1일
+
 ## 🏗 아키텍처
 
 ```mermaid

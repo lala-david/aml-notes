@@ -32,6 +32,35 @@ timeline
          : DeFi 개발자 책임 범위 주목
 ```
 
+## 제재 해제 후 업계 대응 (2025-03-21 이후)
+
+### 해제가 의미하는 것 / 의미하지 않는 것
+
+**의미하는 것**:
+- OFAC SDN 목록에서 Tornado Cash 7개 smart contract 주소 제거
+- 미국 legal 관점에서 "Tornado 상호작용 자체"는 더 이상 제재 위반 아님
+- 소프트웨어 개발·배포는 "1st Amendment로 보호받는 speech"라는 Van Loon 판결(2024-11) 추종
+
+**의미하지 않는 것**:
+- Tornado가 "안전한" 도구가 됐다는 것
+- VASP가 Tornado 접촉 주소를 차단 해제해야 한다는 것
+- Lazarus 등 제재 대상이 Tornado 경유 시 면책된다는 것 (OFAC 50% Rule 여전 적용)
+
+### 주요 VASP 반응 조사 (2025-Q2~Q3)
+
+| VASP | 대응 |
+|---|---|
+| Coinbase | "관찰" 라벨 하향, 2-hop 접촉 주소 EDD |
+| Binance | 지역별 차등 — EU/US는 rejected list 유지 |
+| 한국 4대 | DAXA 공동 가이드 2025-04: High-Risk 유지 |
+| Kraken | "OFAC ≠ 내부 정책" 원칙 공식 선언 |
+| Chainalysis | Tornado 라벨 "Mixing — Uncensored" 유지 |
+| TRM Labs | "Privacy Enhancing Technology" 재분류 |
+
+### Storm 재판 (2024~ 진행 중)
+
+Alexey Pertsev (Tornado 공동 개발자) 네덜란드 2024 유죄 판결 이후, Roman Storm (미국 공동 개발자) 재판이 2025년 중 진행 중. 이 판결이 DeFi 개발자 책임의 국제 표준을 형성할 것으로 예상.
+
 ## 1. Tornado Cash란 — 기술부터 이해하기
 
 ### 정체성

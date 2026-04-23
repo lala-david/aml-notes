@@ -45,6 +45,45 @@ flowchart LR
 
 ## 💭 오늘의 한 줄
 
+## 🧮 RBA 점수 산정 (오늘의 핵심)
+
+### 표준 공식
+
+```
+risk_score = w_customer × customer_factor + w_geography × country + w_product × product + w_channel × channel + w_behavior × behavior
+```
+
+가중치 합 = 1.0, 각 factor 0~100 점수.
+
+### Factor 핵심 점수
+
+| 항목 | 고위험 예시 (점수) |
+|---|---|
+| Customer | PEP(30) / 고위험 직업(15) |
+| Geography | FATF Black(40) / Grey(25) |
+| Product | Privacy coin(30) / Mixer(25) |
+| Channel | Video KYC(15) |
+| Behavior | Smurfing(40) / Pass-through(30) |
+
+### 등급 매핑
+
+| Score | 등급 | CDD 강도 |
+|---|---|---|
+| 0~29 | Low | 간소 |
+| 30~59 | Medium | 표준 |
+| 60~79 | High | EDD |
+| 80+ | Critical | EDD + 수동 + AMLO |
+
+### 🛠️ 오늘의 미니 챌린지 업그레이드
+
+Python으로 RBA 점수 엔진 구현:
+1. Factor 정의 (5개 dict)
+2. 가중치 설정 (합 1.0)
+3. 10개 샘플 고객에 대해 점수 산출
+4. 등급 분포 플로팅 (Low/Medium/High/Critical %)
+
+**상세**: [`../notes/5-compliance/cdd-edd.md`](../notes/5-compliance/cdd-edd.md) §8 참조.
+
 ## 💼 실무 현장 (Industry Reality)
 
 ### 한국 VASP에서는

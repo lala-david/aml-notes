@@ -41,7 +41,7 @@ flowchart LR
 - 가짜 채용(Fake Recruitment) 위협을 회사가 막는 방법 3가지
 
 ## ✅ 체크포인트
-- [ ] Bybit 2025-02-21 $1.5B 탈취 안다
+- [ ] Bybit 2025-02-21 $1.46B 탈취 안다 (ETH + stETH/mETH/cmETH 혼합)
 - [ ] TraderTraitor (FBI) 명칭 안다
 - [ ] 라자루스 누적 $6.75B 안다
 - [ ] DPRK 76% of 2025 service compromises 안다

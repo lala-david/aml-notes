@@ -811,3 +811,95 @@ html, body {
     margin-top: 0;
   }
 }
+
+/* ============================================================
+   MOBILE / TABLET — screen responsive (< 768px)
+   A4-shaped cards don't fit phone screens; on small screens we flatten
+   the card metaphor and let content flow naturally.
+   ============================================================ */
+@media screen and (max-width: 768px) {
+  html, body {
+    background: white;
+    font-size: 15px;
+  }
+  .page, .article-page, .article-divider {
+    width: 100%;
+    min-height: auto;
+    padding: 16px 14px;
+    margin: 0;
+    box-shadow: none;
+    background: white;
+  }
+  /* Hero day number shrinks dramatically on phone */
+  .day-mark__num { font-size: 48pt; }
+  .page-header {
+    flex-direction: column;
+    gap: 6mm;
+    padding-bottom: 6mm;
+    margin-bottom: 6mm;
+  }
+  .page-meta { text-align: left; padding-top: 0; }
+  .page-meta__progress { justify-content: flex-start; }
+  /* Titles */
+  .title-block__heading { font-size: 17pt; }
+  .article-body h1 { font-size: 20pt; line-height: 1.25; }
+  .article-body h2 {
+    font-size: 15pt;
+    margin-top: 8mm;
+    padding-top: 3mm;
+  }
+  .article-body h3 { font-size: 12pt; }
+  /* Sections */
+  .section__body, .section__body--rich, .checkpoints,
+  .oneliner, .deeper__left {
+    padding-left: 0;
+  }
+  /* Tables: allow horizontal scroll on narrow viewports */
+  .article-body table, .section__body--rich table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 9pt;
+  }
+  /* Code blocks: wrap rather than break layout */
+  .article-body pre, .section__body--rich pre {
+    font-size: 8pt;
+    padding: 2mm 3mm;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  /* Mermaid SVG: fit viewport width */
+  .mermaid-wrap svg {
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+  }
+  /* Footer marks: keep compact */
+  .footer-mark, .article-foot {
+    position: static;
+    left: auto; right: auto;
+    margin-top: 8mm;
+    padding-top: 2mm;
+    border-top: 0.4px solid var(--rule);
+    font-size: 6.5pt;
+  }
+  /* Divider covers shrink */
+  .article-divider {
+    padding: 30mm 4mm 20mm 4mm;
+    min-height: auto;
+  }
+  .article-divider__title { font-size: 24pt; }
+  .article-divider__lead { font-size: 11pt; }
+  /* Screen bar: compact on phone */
+  .screen-bar { padding: 6px 10px; font-size: 10px; }
+  .screen-bar__btn { padding: 4px 8px; font-size: 10px; }
+}
+
+/* Tablet fine-tuning (769~1024px) — keep A4 card but allow shrinking */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .page, .article-page, .article-divider {
+    width: 100%;
+    max-width: 210mm;
+    padding: 14mm;
+  }
+}

@@ -303,6 +303,95 @@ ETH -> Lido(stETH) -> EigenLayer(eETH) -> Pendle(PT-eETH) -> ...
 
 ---
 
+## 7. 스테이킹 서비스의 AML 함의
+
+### 7.1 Staking이 뭐길래 AML 문제가 되나
+
+**Staking**: PoS(Proof-of-Stake) 블록체인에서 코인을 묶어(stake) 네트워크 검증에 참여, 대가로 **보상(reward)** 수취. 대표: Ethereum·Solana·Cardano 등.
+
+VASP가 제공하는 Staking 서비스 유형:
+- **Native Staking**: 고객 자산을 직접 validator에 위임. 보상 그대로 전달.
+- **Liquid Staking**: 스테이킹 증서(stETH·mETH 등) 발행. DeFi 호환.
+- **Pooled Staking**: 소액 보유자 대상 풀 서비스. 수수료 차감.
+
+### 7.2 AML 판단 논점
+
+**논점 A: Staking Rewards가 "새로운 자금"인가?**
+- 일부 관할: 기존 자산의 수익 → 별도 AML 의무 없음
+- FATF R.15 해석: **보상이 "돈세탁 경로"가 될 수 있으면** 모니터링 대상
+
+**논점 B: Liquid Staking Token(LST)은 별도 가상자산인가?**
+- 실질은 원본 자산의 증서이나, **별도 가격·유동성** 보유
+- 한국 특금법 해석: LST도 가상자산 → KYT·Travel Rule 대상
+
+**논점 C: Unstaking Timeline 악용?**
+- Ethereum unstake 대기 ~27시간 + Exit queue
+- **자금세탁 지연 창구**로 악용 가능 (자금 묶은 상태 → 조사 회피)
+
+### 7.3 주요 VASP의 Staking AML 대응
+
+| VASP | Staking 서비스 | AML 대응 |
+|---|---|---|
+| Coinbase | Native + Liquid (cbETH) | 보상 내역 STR 대상 포함 |
+| Kraken | Native | 미국 SEC 소송 후 중단 (2023-02) |
+| Binance | Staked ETH (BETH) | 지역별 제공 여부 다름 |
+| 한국 4대 | 없음 | 특금법·이용자보호법 해석 불명 → 미출시 |
+
+### 7.4 한국 정책 현황 (2026-04)
+
+한국 금융위·FIU는 Staking 서비스를 **"신종 금융서비스"로 분류 검토 중**. 2026년 중 가이드라인 예정. 현재:
+- 4대 거래소는 Staking 서비스 **미출시**
+- 기관 대상 개별 서비스는 일부 제공 (법적 불확실성 risk)
+
+---
+
+## 8. NFT 로열티 세탁 — 숨은 typology
+
+### 8.1 로열티가 뭐길래
+
+**NFT Royalty**: 2차 시장 거래 시 원작자가 일정 비율(보통 5~10%) 수수료 수취. OpenSea·Blur 등 마켓이 스마트 컨트랙트 수준에서 집행.
+
+### 8.2 세탁 메커니즘
+
+1. **가짜 아티스트가 NFT 컬렉션 발행** + 고비율 로열티 설정 (예: 10%)
+2. **가짜 구매자(공모자) 간 반복 거래** (wash trading)
+3. 마켓 수수료 차감 후 **아티스트 지갑에 로열티 누적**
+4. 거래 표면상 "예술품 2차 거래" → **자금세탁 탐지 어려움**
+
+### 8.3 사례·규모
+
+- **Blur 마켓 2023-Q2 조사**: 상위 NFT 거래의 45~60%가 wash trading (Chainalysis 2023 Crypto Crime Report)
+- **한국 거래소 NFT 플랫폼 2024 철수**: Upbit·Bithumb NFT 섹션 축소 — AML 리스크·수익성 악화
+
+### 8.4 탐지 룰 예시
+
+```python
+def detect_nft_wash_trading(trades: list[NFTTrade]) -> list[Alert]:
+    alerts = []
+    for collection in group_by_collection(trades):
+        # 1. 상위 10% 거래자의 거래 비율
+        top_10_ratio = top_n_traders_volume(collection, n=10) / total_volume(collection)
+        if top_10_ratio > 0.8:  # 상위 10명이 80%+
+            alerts.append("Concentrated trading")
+        # 2. 동일 주소 간 반복 거래
+        for pair in address_pairs(collection):
+            if pair.trade_count >= 5 and pair.value_cycle_ratio < 0.1:
+                alerts.append(f"Wash trading pair: {pair}")
+        # 3. 로열티 수취자 자금 흐름
+        royalty_receiver = collection.royalty_wallet
+        if suspicious_outflow(royalty_receiver):
+            alerts.append(f"Royalty laundering suspect: {royalty_receiver}")
+    return alerts
+```
+
+### 8.5 Marketplace 대응
+
+- **OpenSea 2023-02**: Optional Royalty 도입 (creator 보호 ↓)
+- **Blur 2023**: 0% 로열티 default (wash trading 억제)
+- **한국**: NFT 마켓 진입 감소, 국내 거래소 NFT 사업 축소
+
+---
+
 ## 더 읽을거리
 - [`onchain-typology.md`](onchain-typology.md) — 자금세탁 9대 유형
 - [`travel-rule.md`](travel-rule.md) — Travel Rule (DeFi 적용 한계)

@@ -2,6 +2,8 @@
 
 > Travel Rule을 **실제로 어떻게** 메시지로 주고받는가. 이 글을 읽고 나면 "IVMS101은 표준이고 TRISA는 프로토콜이다"라는 흔한 혼동을 정리하고, 왜 2026년에도 Notabene Gateway가 가장 실용적 선택이 되는지 이해하게 됩니다. 마지막 업데이트: 2026-04-17.
 
+> **이 파일의 역할**: Travel Rule의 **기술 상세** — IVMS101 스키마·검증 Validator·TRISA/TRP/VerifyVASP/CODE/Notabene 프로토콜 비교·Protocol Interop Matrix. 법적 근거는 [`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) §5 참조, 개념·역사·운영 흐름은 [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) 참조.
+
 ## TL;DR
 - **메시지 표준 = IVMS101** (사실상 글로벌 표준, 모든 프로토콜이 페이로드로 사용)
 - **전송 프로토콜**은 다양: TRP, TRISA, OpenVASP, VerifyVASP, CODE, Notabene Gateway

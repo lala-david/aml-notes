@@ -1,4 +1,4 @@
-# Day 40 — NFT Wash Trading
+# Day 40 — NFT·스테이킹 AML 함의
 
 > 가격을 임의로 만드는 자금세탁. ⏱️ ~70분.
 
@@ -49,6 +49,17 @@ flowchart LR
 - [ ] FATF NFT VA 분류 기준 안다
 
 ## 💭 오늘의 한 줄
+
+## 🧭 NFT 로열티 세탁 — 숨은 typology
+
+NFT wash trading 중 **로열티 자동 집행 메커니즘**을 악용한 새로운 자금세탁 패턴:
+1. 가짜 아티스트가 10% 로열티로 컬렉션 발행
+2. 공모자 간 wash trading → 로열티 누적
+3. 표면은 "2차 거래 수수료" → 탐지 어려움
+
+**실제 규모 (Chainalysis 2023)**: Blur 마켓 상위 NFT의 45~60%가 wash trading. 한국 거래소 NFT 사업이 2024년 대거 축소된 이유 중 하나.
+
+**상세 + 탐지 룰 pseudocode**: [`../notes/3-crypto-aml/defi-nft-risks.md`](../notes/3-crypto-aml/defi-nft-risks.md) §8 참조.
 
 ## 💼 실무 현장 (Industry Reality)
 

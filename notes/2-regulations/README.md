@@ -39,6 +39,7 @@
 | [`korea-user-protection.md`](korea-user-protection.md) | 가상자산이용자보호법 (2024-07-19 시행) | 한국 VASP (자산보호·시세조종 담당) |
 | [`us-bsa-fincen.md`](us-bsa-fincen.md) | 미국 BSA, FinCEN, OFAC, GENIUS Act (스테이블코인) | 미국 진출 검토자·OFAC 담당자 |
 | [`eu-mica-amlr.md`](eu-mica-amlr.md) | EU MiCA, AMLR·AMLD6, TFR (Travel Rule) | EU 진출 검토자·글로벌 Travel Rule 담당자 |
+| [`asia-regs.md`](asia-regs.md) | 싱가포르·UAE·일본·홍콩 VASP 규제 비교 | 한국 VASP 글로벌 진출 검토자 |
 
 ---
 
