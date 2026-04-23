@@ -87,6 +87,17 @@ flowchart TB
 
 상세: [`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md)
 
+### ⚖️ 이의제기 프로세스 — 검사 결과에 불복할 때
+
+대형 조치(과태료 1억+·영업정지·신고말소) 시:
+1. **1차 행정심판** — 90일 내, 금융위 행정심판위원회
+2. **2차 행정소송** — 서울행정법원 (통상 1~2년)
+3. **3차 대법원 상고** — 법률심, 기각률 70%+
+
+**실무**: 이의제기 승소율 낮으나 **조치 수준 감경 협상** 수단. 자발적 시정보고·DAXA 공동 의견도 유효.
+
+**상세 체크리스트**: [`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md) §8 참조.
+
 ### 🛠️ 오늘의 미니 챌린지 업그레이드
 
 워크북의 **40개 체크리스트**를 인쇄해서 가상의 회사(자체 설정)에 적용. 어느 항목이 아직 미흡한지 마킹 + 3개월 이행 계획 스케치.

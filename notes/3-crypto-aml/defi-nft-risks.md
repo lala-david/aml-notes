@@ -343,6 +343,57 @@ VASP가 제공하는 Staking 서비스 유형:
 - 4대 거래소는 Staking 서비스 **미출시**
 - 기관 대상 개별 서비스는 일부 제공 (법적 불확실성 risk)
 
+### 7.5 Liquid Staking 프로토콜 집중도 리스크
+
+**Lido dominance**: 2026-04 기준 Lido가 **Ethereum 전체 스테이킹의 ~28~32%** 차지 (네트워크 보안 위험 수준). 상위 3 LST 프로토콜(Lido·Rocket Pool·Frax)이 40%+ 점유 → 검열 저항성·탈중앙화 훼손.
+
+| 프로토콜 | ETH Staked 점유 (2026-Q1) | LST |
+|---|---|---|
+| Lido | ~28~32% | stETH |
+| Rocket Pool | ~5~7% | rETH |
+| Frax Ether | ~2~3% | sfrxETH |
+| Binance Staked ETH | ~2~3% | WBETH |
+| Coinbase Wrapped Staked ETH | ~2~3% | cbETH |
+
+**AML 함의**:
+- LST가 **Tornado·Railgun 같은 mixer로 유입**되는 경로 분석 필요 (Chainalysis 2025-Q3 리포트: Lido stETH → privacy pool 연간 ~$200M 추정)
+- 한 프로토콜 장악이 AML 통제의 단일 실패점(SPOF) 가능성 — validator 지점에서 특정 주소 censoring 압박 시 네트워크 전체 영향
+
+### 7.6 기술적 리스크 (Slashing · MEV · Restaking)
+
+**Slashing (슬래싱)**: Validator가 이중 서명·비활성 등 위반 시 **stake 일부 자동 소각**. AML 관점:
+- Slashing으로 고객 자산 손실 시 **VASP 책임 경계** 불명 (약관 이슈)
+- Slashing 주소가 제재 대상으로 전환 시 원본 스테이커는 제재 노출 가능
+
+**MEV (Maximal Extractable Value)**: Block builder가 tx 재정렬로 추출하는 가치. Lido·Rocket Pool 같은 프로토콜이 MEV-Boost 연동:
+- MEV 수익이 stake 보상에 포함 → **자금원천 불투명**
+- Sandwich attack·frontrunning은 **가격 조작** 유형 → 한국 이용자보호법 위반 소지
+- Flashbots·builder censorship 이슈 (OFAC 제재 tx 필터링)
+
+**Restaking (EigenLayer 등)**: Staked ETH를 **재차 staking**해 추가 수익. 2024-06 main net launch.
+- Operator 지점에 여러 프로토콜 위임 → **연쇄 slashing 리스크**
+- 각 AVS(Actively Validated Service)별 slashing 조건 다름 → 고객이 이해·통제 어려움
+- 한국 FIU·FSS 아직 가이드라인 없음 (2026년 이후 예상)
+
+### 7.7 한국 VASP 미출시 주요 이유 (정리)
+
+한국 4대 거래소가 Staking·Liquid Staking을 미출시한 이유:
+
+1. **법적 불확실성**: 특금법·이용자보호법 양쪽 적용 범위 불명 (증권성 여부)
+2. **집중도 리스크**: Lido 등 글로벌 프로토콜 이용 시 **외국 인프라 의존**
+3. **Slashing 책임**: 고객 자산 손실 시 배상 구조 불명확
+4. **상장 심사 부담**: DAXA 공동 기준 미정립
+5. **수익성 한계**: Staking 수수료 모델이 전통 거래소 fee 대비 낮음
+
+**예상 출시 시기**: 2026년 중 FIU 가이드라인 발표 후, 2026-Q4 ~ 2027-Q1 사이 일부 거래소 파일럿 가능성.
+
+### 7.8 참고 자료
+
+- [Lido Protocol Dominance Dashboard](https://dune.com/lido/staking-pool)
+- [EigenLayer Risk Framework](https://docs.eigenlayer.xyz/)
+- [Chainalysis 2025 Crypto Crime Report — Staking Section](https://www.chainalysis.com/reports/)
+- [FSC 가상자산 스테이킹 검토 보고서 (2026년 예정)]
+
 ---
 
 ## 8. NFT 로열티 세탁 — 숨은 typology
