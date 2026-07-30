@@ -1,0 +1,66 @@
+name: KB Validate
+
+# 지식 그래프 무결성 검증 — 차단 위반이 있으면 merge 를 막는다.
+# 규칙 정의: docs/ontology/04-node-edge-spec.md §8, docs/governance/01-data-quality.md §4
+
+on:
+  pull_request:
+    paths:
+      - "kb/**"
+      - "quality/validate_kb.py"
+      - "quality/requirements.txt"
+      - ".github/workflows/kb-validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "kb/**"
+      - "quality/validate_kb.py"
+  workflow_dispatch:
+  schedule:
+    - cron: "30 21 * * *"  # 매일 KST 06:30 — 신선도 SLA 만료 스캔
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: quality/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r quality/requirements.txt
+
+      # 금칙어 목록은 저장소에 두지 않는다 (목록 자체가 무엇을 숨기려 했는지 드러냄).
+      # 시크릿 미설정 시 검증기는 조직명 검사를 생략하고 경고만 남긴다.
+      - name: Restore forbidden terms
+        if: ${{ secrets.FORBIDDEN_TERMS != '' }}
+        run: printf '%s\n' "${{ secrets.FORBIDDEN_TERMS }}" > quality/rules/forbidden_terms.local.txt
+
+      - name: Validate knowledge graph
+        run: python quality/validate_kb.py
+
+      - name: Rebuild derived artifacts
+        run: python scripts/build_crosswalk.py
+
+      # 파생물은 SSOT 에서 결정적으로 재생성되어야 한다 (ADR-0003).
+      # 커밋된 내용과 재생성 결과가 다르면 누군가 생성물을 손으로 고친 것이다.
+      - name: Check derived artifacts are reproducible
+        run: |
+          if ! git diff --quiet -- kb/derived; then
+            echo "::error::kb/derived 가 재생성 결과와 다릅니다. 생성물을 직접 편집하지 마세요."
+            git diff --stat -- kb/derived
+            exit 1
+          fi
+
+      - name: Upload quality report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dq-report
+          path: quality/dq_report.md
+          retention-days: 90
