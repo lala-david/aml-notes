@@ -1,0 +1,45 @@
+id: "ROLE:x-curator"
+type: "ROLE"
+layer: "kinetic"
+label:
+  ko: "큐레이터"
+  en: "Curator"
+summary: >
+  변화 신호를 판정하고 검증을 통과한 사실을 L2 로 승격한다. 상충을 판정하고
+  오류를 폐기한다. 지식베이스에서 사실을 확정할 수 있는 유일한 사람 역할이다.
+is_agent: false
+tags: ["governance", "human"]
+can_execute:
+  - "ACTION:x-promote-fact"
+  - "ACTION:x-retract-fact"
+  - "ACTION:x-promote-confidence"
+  - "ACTION:x-resolve-contradiction"
+  - "ACTION:x-amend-node"
+cannot_execute:
+  - "ACTION:x-transmit-originator-info"
+scope:
+  node_types: ["FACT", "STATE", "EVT"]
+  jurisdictions: "all"
+  properties_writable: ["confidence", "retracted_at", "retraction_reason", "review_due"]
+  properties_readonly: ["id", "created_at", "type", "layer"]
+constraints:
+  - "자기 작성 변경을 자기 승인할 수 없다"
+  - "1인 운영 기간에는 작성 후 24시간 경과 재검토로 대체한다"
+  - "확신도 승격은 원문 확인 후에만 — 강등은 자동이나 승격은 사람"
+edges:
+  - predicate: "AUTHORIZES"
+    to: "ACTION:x-promote-fact"
+  - predicate: "AUTHORIZES"
+    to: "ACTION:x-retract-fact"
+  - predicate: "AUTHORIZES"
+    to: "ACTION:x-promote-confidence"
+  - predicate: "AUTHORIZES"
+    to: "ACTION:x-resolve-contradiction"
+  - predicate: "AUTHORIZES"
+    to: "ACTION:x-amend-node"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  properties_writable / properties_readonly 가 속성 단위 접근통제의 표현이다.
+  현재는 선언만 되어 있고 코드 집행은 미구현 (ADR-0004 §결과).

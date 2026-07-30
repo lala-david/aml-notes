@@ -1,0 +1,47 @@
+id: "REG:intl-fatf-r16"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "FATF 권고 16 (지급 투명성)"
+  en: "FATF Recommendation 16 (Payment Transparency)"
+  short: "R.16"
+aliases: ["Recommendation 16", "R.16", "INR.16", "Wire transfers"]
+summary: >
+  자금이체 시 당사자 정보 전달을 요구하는 권고. 2025-06-18 개정으로 표제가
+  "Wire transfers"에서 "Payment transparency"로 변경되고 적용범위가
+  wire transfer 에서 "payments or value transfers" 전반으로 확대되었다.
+  다만 VASP 는 직접 적용 대상에서 명시적으로 제외되었다.
+reg_kind: "recommendation"
+citation: "FATF Recommendation 16 / Interpretive Note to Recommendation 16"
+binding: "soft-law"
+language: "en"
+tags: ["fatf", "payment-transparency", "wire-transfer"]
+edges:
+  - predicate: "ISSUED_BY"
+    to: "ORG:intl-fatf"
+    evidence:
+      - doc: "DOC:intl-fatf-recommendations"
+        confidence: "A"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:intl-fatf-r16-explanatory-note"
+    confidence: "A"
+    locator: "§54"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  ⚠️ 이 권고에는 서로 다른 세 일자가 존재한다 (CTR:00003) —
+    standard_revised_on          = 2025-06-18 (기준 개정 공표)
+    national_implementation_deadline = 2030-12-31 (각국 이행 기대시한)
+    methodology_effective_on     = 미정 (2022 Methodology Annex IV, 각주 95
+                                   "adopted by the FATF but are not yet in effect")
+  결과적으로 현재 진행 중인 5차 라운드 상호평가는 구 R.16 기준으로 채점된다.
+  단일 "개정일" 필드로 뭉치면 어느 질문에도 답할 수 없으므로 STATE 로 분리 관리한다.
+
+  ⚠️ VASP 직접 적용 제외 — 트래블룰을 이 권고에 직결하는 서술은 오류다.
+  근거는 REG:intl-fatf-r15 (INR.15 §7(b)). FACT:0000006 참조.
+
+  de minimis 임계값은 USD/EUR 1,000 으로 변경 없음. 바뀐 것은 초과 시 요구정보
+  확대(송금인 주소, 수취인 국가·도시, 자연인 생년월일, 법인 BIC/LEI 등).

@@ -1,0 +1,33 @@
+id: "DOC:intl-fatf-r16-explanatory-note"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FATF 권고 16 개정 설명자료 (Explanatory Note)"
+  en: "FATF R.16 Explanatory Note"
+  short: "R.16 Explanatory Note"
+summary: >
+  2025-06 권고 16 개정의 배경과 적용범위를 설명하는 FATF 공식 문서.
+  §54 에서 VASP 를 R.16 직접 적용 대상에서 제외하고 R.15 를 통해 간접
+  적용한다는 합의를 명시한다. 각주 95 는 개정 평가기준(2022 Methodology
+  Annex IV)이 "채택되었으나 미발효"임을 밝힌다.
+src: "SRC:intl-fatf"
+url: "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/r16-payment-transparency.html"
+published: "2025-06-18"
+accessed: "2026-07-30"
+doc_kind: "official-guidance"
+language: "en"
+translation: false
+tags: ["fatf", "r16", "travel-rule", "payment-transparency"]
+evidence:
+  - doc: "DOC:intl-fatf-r16-explanatory-note"
+    confidence: "A"
+    locator: "§54"
+    quote: "FATF has agreed not to bring VASPs directly into the scope of R.16 but to apply the updated requirements indirectly through R.15"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  이 문서의 §54 가 CTR:00002 판정 근거다. 업계 통설 및 기존 저장소 산문 다수가
+  "R.16 이 가상자산 트래블룰의 근거"로 서술하는데, 원문은 그 반대를 명시한다.
+  url 은 확정 영구 링크가 아닐 수 있음 — 스냅샷 확보 필요(snapshot_path 미설정).

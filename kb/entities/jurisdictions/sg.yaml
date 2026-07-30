@@ -1,0 +1,23 @@
+id: "JUR:sg"
+type: "JUR"
+layer: "semantic"
+label:
+  ko: "싱가포르"
+  en: "Singapore"
+summary: >
+  Payment Services Act 의 DPT 라이선스와 FSM Act Part 9 의 DTSP 체제를 병행한다. 역외영업에 대해 사실상 금지에 가까운 입장을 취한다.
+iso: "sg"
+fatf_member: true
+fatf_style_body: "APG"
+legal_family: "common"
+tags: ["sg"]
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 증거가 자체 실측 기록뿐이다. 관할 속성(fatf_member·fatf_style_body)의
+  직접 근거가 아니므로 FATF 회원국 목록 문서로 재결속해야 한다. 재검토 과제.

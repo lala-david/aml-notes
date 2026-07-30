@@ -1,0 +1,45 @@
+id: "OBL:x-travel-rule-originator"
+type: "OBL"
+layer: "semantic"
+label:
+  ko: "송신인 정보 전달 의무"
+  en: "Originator information transmission requirement"
+  short: "트래블룰(송신인)"
+aliases: ["travel rule originator obligation", "송금인 정보 제공 의무"]
+summary: >
+  가상자산 이체 시 송신 사업자가 수신 사업자에게 송신인 식별정보를 이체와 동시에
+  또는 사전에 전달해야 하는 의무. 관할에서 탈각된 추상 의무이며, 각국 조문이
+  IMPOSES 엣지로 이를 가리키고 임계값·자기수탁 취급 등 관할별 차이는 엣지
+  한정자에 담긴다.
+obl_kind: "information-transmission"
+actor_class: "VASP"
+trigger: "virtual-asset-transfer"
+tags: ["travel-rule", "fatf-r16", "cross-jurisdiction"]
+edges:
+  - predicate: "SATISFIED_BY"
+    to: "CTL:x-travel-rule-messaging"
+    qualifiers:
+      sufficiency: "partial"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-art10-10"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-sd-art10-10"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  이 노드는 관할 비교표의 축이다. 리서치 도시에에서 확인된 관할별 임계값을
+  각국 PROV 노드의 IMPOSES 한정자로 연결하면 비교표가 질의 결과로 생성된다.
+
+  현재 결속: 한국(100만원). 검증 대기 중인 관할별 값 —
+  미국 $3,000(us-regime 도시에: 시행 중, $250 하향안은 2025-04-16 철회),
+  EU 임계값 없음(eu-uk-regime 도시에: EUR 1,000 은 자기수탁 소유확인 트리거일 뿐),
+  영국 £800, 싱가포르 SGD 1,500, 홍콩 HKD 8,000, 일본·호주 전건.
+  각각 해당 관할 PROV 노드 생성 후 연결할 것.
+
+  SATISFIED_BY 의 sufficiency 를 partial 로 둔 이유: 메시징 프로토콜만으로는
+  sunrise problem(상대 VASP 미도입)과 자기수탁 지갑 케이스를 해소하지 못한다.

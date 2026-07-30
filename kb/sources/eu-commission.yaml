@@ -1,0 +1,19 @@
+id: "SRC:eu-commission"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "유럽연합 집행위원회"
+  en: "European Commission"
+summary: >
+  EU 통합 금융제재목록(FSF)을 배포한다. 고정 공개 토큰으로 XML·CSV 를 제공한다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://ec.europa.eu"
+language: "en"
+paywall: false
+tags: ["eu"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

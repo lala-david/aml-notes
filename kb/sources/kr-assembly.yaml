@@ -1,0 +1,33 @@
+id: "SRC:kr-assembly"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "국회 의안정보시스템"
+  en: "National Assembly Bill Information System"
+  short: "의안정보"
+aliases: ["likms.assembly.go.kr", "의안정보시스템"]
+summary: >
+  대한민국 국회의 법안 발의·심사·처리 이력 공식 제공처. 의안번호·발의자·소관위·
+  처리단계·정부이송일·공포일자·공포번호를 제공한다. 법제처 법령 원문과 독립적인
+  입법 사실 T1 교차검증 경로다.
+tier: "T1"
+publisher_kind: "government"
+base_url: "https://likms.assembly.go.kr"
+language: "ko"
+paywall: false
+tags: ["korea", "legislative-tracker", "primary-source"]
+evidence:
+  - doc: "DOC:kr-assembly-bill-2214894"
+    confidence: "A"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  【수집 경로】 1파는 접근에 실패했으나 2파에서 확인되었다 —
+  POST `/bill/bi/bill/sch/findSchPaging.do`, **인증키 불요**.
+  열린국회정보 OpenAPI(인증키 필요)와 별개 경로다.
+
+  이 출처의 가치는 **독립성**이다. 법제처와 국회는 별개 기관이므로, 두 곳의
+  공포일자가 일치하면 단일 출처 확인보다 강한 근거가 된다. CTR:00001 이
+  이 방식으로 해소되었다.

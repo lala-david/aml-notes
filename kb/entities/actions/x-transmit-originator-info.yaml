@@ -1,0 +1,46 @@
+id: "ACTION:x-transmit-originator-info"
+type: "ACTION"
+layer: "kinetic"
+label:
+  ko: "송신인 정보 전달"
+  en: "Transmit originator information"
+summary: >
+  가상자산 이체 시 송신 사업자가 수신 사업자에게 송신인·수신인 식별정보를
+  표준 데이터 모델로 전달하는 트랜잭션. 트래블룰 의무의 실행 형태다.
+  ⚠️ 운용 액션 — 명세만 존재하며 본 저장소에 구현되지 않는다.
+action_kind: "operational"
+tier: "external"
+implements_obligation: "OBL:x-travel-rule-originator"
+tags: ["operational", "travel-rule", "specification-only"]
+change_set:
+  creates: ["전달 기록"]
+  modifies:
+    - target: "이체 건"
+      properties: ["travel_rule_status", "counterparty_vasp", "transmitted_at"]
+  never_touches: ["이체 금액", "송신 주소", "수신 주소"]
+submission_criteria:
+  - "이체 금액이 해당 관할 임계값 이상이다 (관할별 상이 — 크로스워크 참조)"
+  - "수신 사업자가 식별되었다 (자기수탁 지갑이면 별도 경로)"
+  - "필수 식별정보 필드가 모두 채워졌다"
+  - "수신 사업자가 동일 전송 네트워크에 참여한다 (sunrise problem)"
+side_effects:
+  - "전달 실패 시 이체 보류 또는 거절 판단으로 분기한다"
+  - "전달 기록을 보존한다 — 기록보존 의무의 증빙"
+authorized_roles: []
+requires_proposal: false
+edges:
+  - predicate: "IMPLEMENTS_OBLIGATION"
+    to: "OBL:x-travel-rule-originator"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  ⚠️ **명세 예약 노드.** 본 저장소는 이 액션을 실행하지 않는다.
+  존재 이유는 조문 → 의무 → 통제 → 액션 사슬을 완성해서, 규제 조문에서
+  실행 명세까지 한 경로로 이어지게 하는 것이다.
+
+  submission_criteria 의 임계값은 관할마다 다르므로 여기 고정값을 두지 않았다.
+  FUNC:x-crosswalk 가 생성하는 관할 비교표를 참조해야 한다.
+
+  authorized_roles 가 비어 있는 것은 의도적이다 — 실행 주체는 본 저장소의
+  역할이 아니라 배포된 시스템의 주체다.

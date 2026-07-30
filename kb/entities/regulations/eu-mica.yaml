@@ -1,0 +1,51 @@
+id: "REG:eu-mica"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "암호자산시장 규정 (MiCA)"
+  en: "Markets in Crypto-Assets Regulation"
+  short: "MiCA"
+aliases: ["MiCA", "Regulation (EU) 2023/1114"]
+summary: >
+  EU 암호자산 시장의 인가·영업행위·발행 규율을 담은 규정. 단계별로 적용되어
+  스테이블코인(Title III·IV)은 2024-06-30, CASP(암호자산서비스제공자)는
+  2024-12-30 적용 개시되었다. 회원국별 경과규정은 6~18개월로 갈렸고
+  2026-07-01 EU 전역에서 종료되었다.
+reg_kind: "regulation-eu"
+citation: "Regulation (EU) 2023/1114"
+binding: "binding"
+language: "en"
+tags: ["eu", "mica", "casp", "stablecoin"]
+external_ids:
+  celex: "32023R1114"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:eu"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "C"
+        retrieved: "2026-07-30"
+  - predicate: "ISSUED_BY"
+    to: "ORG:eu-commission"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "C"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "C"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 C — 리서치 도시에(eu-uk-regime, T1 28건)에서 사실은 확인되었으나
+  아직 KB 에 DOC 노드로 등재하지 않았다. EUR-Lex CELEX 32023R1114 를 DOC 으로
+  만들어 재결속할 것. **최우선 재검토 과제.**
+
+  ⚠️ **발효일(entry into force)과 적용개시일(date of application)을 구분할 것.**
+  발효 2023-06-29 ≠ 적용개시 2024-12-30. 이 혼동이 EU 규정에서 가장 흔한 오류다.
+  상태 이력은 STATE 레코드로 분리 관리해야 한다.
+
+  ⚠️ EUR-Lex 는 robots.txt 로 원문 경로 크롤링을 금지한다. CELLAR SPARQL
+  (SRC:eu-publications) 을 써야 한다.

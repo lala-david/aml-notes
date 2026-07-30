@@ -1,0 +1,29 @@
+id: "DOC:intl-fatf-recommendations"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FATF 권고안 (International Standards on Combating Money Laundering...)"
+  en: "The FATF Recommendations"
+  short: "FATF 권고안"
+summary: >
+  FATF 40개 권고안 본문 및 해석주석(Interpretive Notes). 개정 이력은 문서 말미
+  (인쇄 pp.143-149)에 수록된다. 최신 개정은 2026-06 (INR.6 — 인도적 예외 관련,
+  가상자산 무관). 가상자산 관련 최신 개정은 2025-06 (R.16/INR.16 및 INR.15 각주 정합화).
+src: "SRC:intl-fatf"
+url: "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html"
+accessed: "2026-07-30"
+doc_kind: "standard"
+language: "en"
+translation: false
+tags: ["fatf", "recommendations", "primary-standard"]
+evidence:
+  - doc: "DOC:intl-fatf-recommendations"
+    confidence: "A"
+    locator: "개정 이력 · 인쇄 pp.143-149"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  published 필드 미기재 — 권고안은 지속 개정 문서이므로 단일 발행일이 없다.
+  개정 이력은 EVT 노드와 STATE 로 관리한다. 접근 시 §SRC:intl-fatf 의 헤더 주의사항 참조.

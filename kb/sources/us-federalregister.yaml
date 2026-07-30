@@ -1,0 +1,19 @@
+id: "SRC:us-federalregister"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "미국 연방관보"
+  en: "Federal Register"
+summary: >
+  연방기관 규칙제정 공고의 공식 매체이자 공개 API 제공처. 미국 연방기관 직접 접근이 막힐 때의 주 우회로다.
+tier: "T1"
+tier_basis: >
+  연방 규칙제정의 법정 공고 매체. 다만 규칙 철회는 공고되지 않을 수 있다(FACT:0000011·0000012).
+publisher_kind: "government"
+base_url: "https://www.federalregister.gov"
+language: "en"
+paywall: false
+tags: ["us"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

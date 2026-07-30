@@ -1,0 +1,22 @@
+id: "ORG:intl-unsc"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "유엔 안전보장이사회"
+  en: "UN Security Council"
+summary: >
+  국제 제재를 결의하는 유엔 기관. 통합 제재목록을 배포한다.
+org_kind: "intl-body"
+website: "https://www.un.org/securitycouncil"
+tags: ["intl"]
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  HAS_JURISDICTION 을 두지 않았다 — 국제기구는 특정 법역에 귀속되지 않는다
+  (ORG:intl-fatf 와 동일한 처리).
+  ⚠️ 확신도 B — 자체 실측 기록이 유일한 증거다. 설립 근거 문서 확보 필요.

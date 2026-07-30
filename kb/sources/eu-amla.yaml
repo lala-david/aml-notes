@@ -1,0 +1,19 @@
+id: "SRC:eu-amla"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "유럽 자금세탁방지청"
+  en: "Anti-Money Laundering Authority"
+summary: >
+  프랑크푸르트 소재. 2028년부터 최대 40개 기관을 직접 감독할 예정이며 최초 감독대상 명단이 최우선 감시 항목이다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.amla.europa.eu"
+language: "en"
+paywall: false
+tags: ["eu"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

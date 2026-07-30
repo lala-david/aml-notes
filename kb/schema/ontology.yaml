@@ -1,0 +1,712 @@
+# 가상자산 AML 지식베이스 온톨로지 — 기계판
+# 규범적 정의는 docs/ontology/04-node-edge-spec.md
+# 이 파일은 validator·빌더가 직접 소비한다. 문서와 불일치 시 문서가 우선하며 즉시 동기화할 것.
+
+version: "0.1.0"
+updated: "2026-07-30"
+# slug 는 관할(JUR) 노드에만 생략 가능 — namespace 자체가 식별자이므로.
+# 그 외 클래스의 slug 누락은 validator 규칙 ID-9 가 차단한다.
+id_pattern: "^[A-Z]{3,7}:[a-z0-9]{1,4}(-[a-z0-9][a-z0-9-]*)?$"
+slug_optional_classes: [JUR]
+
+namespaces:
+  jurisdictional: [kr, us, eu, gb, jp, sg, hk, ae, au, in, cn, ca, ch, de, fr, it, kp, ru, th, vn, id, ph, my, br]
+  special:
+    intl: "국제기구·다자기준"
+    x: "무국적·기술·추상"
+
+confidence_levels:
+  A: "T1/T2 원문 직접 확인"
+  B: "T3 복수 출처 일치 또는 T2 간접 확인"
+  C: "T4 단일 출처"
+  D: "T5 또는 상충 정보 존재 — 미검증"
+
+source_tiers:
+  T1: "법령·규정 원문, 관보, 감독기관 공식 발간물"
+  T2: "감독기관 보도자료·연설·FAQ, 국제기구 보고서"
+  T3: "주요 분석업체 연례보고서, 대형 로펌 브리핑, 동료심사 논문"
+  T4: "전문 매체 보도"
+  T5: "블로그·SNS·미확인"
+
+lifecycle_states:
+  - drafted
+  - proposed
+  - enacted
+  - in_force
+  - amended
+  - suspended
+  - superseded
+  - repealed
+  - withdrawn
+
+node_status:
+  - active
+  - deprecated
+  - merged
+  - disputed
+
+date_precision:
+  - day
+  - month
+  - year
+  - range
+
+# ─────────────────────────────────────────────────────────────
+# L1 · SEMANTIC
+# ─────────────────────────────────────────────────────────────
+classes:
+
+  JUR:
+    layer: semantic
+    label: { ko: "관할", en: "Jurisdiction" }
+    dir: "kb/entities/jurisdictions"
+    required: [iso]
+    fields:
+      iso: { type: string, desc: "ISO 3166-1 alpha-2 또는 eu/intl" }
+      parent: { type: ref, target: JUR, desc: "상위 관할 (예: 홍콩→중국)" }
+      fatf_member: { type: boolean }
+      fatf_style_body: { type: string, desc: "APG, MONEYVAL 등" }
+      legal_family: { type: enum, values: [civil, common, mixed, other] }
+
+  ORG:
+    layer: semantic
+    label: { ko: "기관", en: "Organization" }
+    dir: "kb/entities/regulators"
+    required: [org_kind]
+    fields:
+      org_kind: { type: enum, values: [regulator, fiu, supervisor, law-enforcement, intl-body, sro, association, court, central-bank] }
+      jurisdiction: { type: ref, target: JUR }
+      founded: { type: date }
+      website: { type: url }
+
+  REG:
+    layer: semantic
+    label: { ko: "규범", en: "Regulation" }
+    dir: "kb/entities/regulations"
+    required: [reg_kind, binding]
+    fields:
+      reg_kind: { type: enum, values: [statute, decree, subordinate-rule, regulation-eu, directive-eu, guidance, recommendation, standard, self-regulatory, order, no-action] }
+      citation: { type: string, desc: "공식 인용 표기" }
+      promulgated: { type: date }
+      binding: { type: enum, values: [binding, soft-law, advisory] }
+      language: { type: string }
+      external_ids: { type: object }
+
+  PROV:
+    layer: semantic
+    label: { ko: "조문", en: "Provision" }
+    dir: "kb/entities/regulations/{reg}/provisions"
+    required: [parent_reg, citation_path]
+    fields:
+      parent_reg: { type: ref, target: REG }
+      citation_path: { type: string, desc: "제5조의3 제1항 / §1010.410(f)" }
+      text_orig: { type: text, desc: "원어 원문" }
+      text_ko: { type: text, desc: "한국어 번역 (원문 아님을 명시)" }
+      heading: { type: string }
+
+  OBL:
+    layer: semantic
+    label: { ko: "의무", en: "Obligation" }
+    dir: "kb/entities/obligations"
+    required: [obl_kind, actor_class]
+    fields:
+      obl_kind: { type: enum, values: [registration, customer-identification, ongoing-monitoring, record-keeping, reporting, information-transmission, screening, risk-assessment, governance, training, audit, asset-segregation, disclosure] }
+      actor_class: { type: enum, values: [VASP, financial-institution, issuer, custodian, individual, supervisor] }
+      trigger: { type: string, desc: "의무 발생 계기" }
+      deadline: { type: string, desc: "이행 기한 (있는 경우)" }
+
+  CTL:
+    layer: semantic
+    label: { ko: "통제", en: "Control" }
+    dir: "kb/entities/controls"
+    required: [ctl_kind]
+    fields:
+      ctl_kind: { type: enum, values: [preventive, detective, corrective, governance] }
+      automatable: { type: enum, values: [full, partial, manual] }
+      maturity: { type: enum, values: [basic, standard, advanced] }
+
+  CONCEPT:
+    layer: semantic
+    label: { ko: "개념", en: "Concept" }
+    dir: "kb/entities/concepts"
+    required: [definition_ko]
+    fields:
+      definition_ko: { type: text }
+      definition_en: { type: text }
+      contested: { type: boolean, desc: "관할별 정의가 상이한가" }
+
+  RISK:
+    layer: semantic
+    label: { ko: "위험요인", en: "RiskFactor" }
+    dir: "kb/entities/risks"
+    required: [risk_kind]
+    fields:
+      risk_kind: { type: enum, values: [customer, product, channel, geography, technology, counterparty] }
+      severity_default: { type: enum, values: [high, medium, low] }
+
+  TYP:
+    layer: semantic
+    label: { ko: "유형론", en: "Typology" }
+    dir: "kb/entities/typologies"
+    required: [stage]
+    fields:
+      stage: { type: enum, values: [placement, layering, integration, cross-cutting] }
+      predicate_offenses: { type: list }
+
+  TEC:
+    layer: semantic
+    label: { ko: "기법", en: "Technique" }
+    dir: "kb/entities/techniques"
+    required: [parent_typology]
+    fields:
+      parent_typology: { type: ref, target: TYP }
+      chains: { type: list, desc: "적용 가능 체인" }
+      detectability: { type: enum, values: [high, medium, low, very-low] }
+      external_ids: { type: object, desc: "mitre_attack 등" }
+
+  IND:
+    layer: semantic
+    label: { ko: "지표", en: "Indicator" }
+    dir: "kb/entities/indicators"
+    required: [signal_type]
+    fields:
+      signal_type: { type: enum, values: [onchain, transactional, behavioral, kyc, external, network] }
+      data_required: { type: list }
+      fp_risk: { type: enum, values: [high, medium, low], desc: "오탐 위험" }
+      rule_sketch: { type: text, desc: "의사코드 수준 탐지 로직" }
+
+  ASSET:
+    layer: semantic
+    label: { ko: "가상자산", en: "Asset" }
+    dir: "kb/entities/assets"
+    required: [symbol, asset_kind]
+    fields:
+      symbol: { type: string }
+      asset_kind: { type: enum, values: [native, stablecoin-fiat, stablecoin-algo, token, nft, privacy-coin, wrapped, rwa] }
+      native_chain: { type: ref, target: CHAIN }
+      issuer: { type: string }
+      freezable: { type: boolean, desc: "발행사 동결 기능 보유 여부" }
+
+  CHAIN:
+    layer: semantic
+    label: { ko: "블록체인", en: "Chain" }
+    dir: "kb/entities/chains"
+    required: [model]
+    fields:
+      model: { type: enum, values: [utxo, account, hybrid] }
+      consensus: { type: string }
+      launched: { type: date }
+      privacy_default: { type: enum, values: [transparent, opt-in-private, private] }
+      analytics_coverage: { type: enum, values: [mature, partial, minimal, none] }
+
+  PROTO:
+    layer: semantic
+    label: { ko: "프로토콜·서비스", en: "Protocol" }
+    dir: "kb/entities/protocols"
+    required: [proto_kind]
+    fields:
+      proto_kind: { type: enum, values: [mixer, bridge, dex, lending, swap-service, travel-rule, wallet, privacy, gambling, marketplace, payment] }
+      custody: { type: enum, values: [custodial, non-custodial, hybrid] }
+      chains: { type: list }
+      sanctioned: { type: boolean, desc: "L2 STATE 로도 관리 — 여기는 편의 플래그" }
+
+  VASP:
+    layer: semantic
+    label: { ko: "가상자산사업자", en: "VASP" }
+    dir: "kb/entities/vasps"
+    required: [vasp_kind]
+    fields:
+      vasp_kind: { type: enum, values: [exchange, custodian, wallet-provider, broker, otc, atm, payment-processor, issuer] }
+      hq: { type: ref, target: JUR }
+      founded: { type: date }
+      external_ids: { type: object }
+
+  VEND:
+    layer: semantic
+    label: { ko: "솔루션 공급자", en: "Vendor" }
+    dir: "kb/entities/vendors"
+    required: [vend_kind]
+    fields:
+      vend_kind: { type: enum, values: [blockchain-analytics, travel-rule, kyc-idv, aml-platform, sanctions-screening, case-management, data-provider] }
+      hq: { type: ref, target: JUR }
+      founded: { type: date }
+
+  CAP:
+    layer: semantic
+    label: { ko: "역량", en: "Capability" }
+    dir: "kb/entities/capabilities"
+    required: [cap_kind]
+    fields:
+      cap_kind: { type: enum, values: [coverage, detection, investigation, integration, deployment, compliance, support] }
+      measurable: { type: boolean }
+
+  ACT:
+    layer: semantic
+    label: { ko: "위협행위자", en: "ThreatActor" }
+    dir: "kb/entities/threat-actors"
+    required: [actor_kind]
+    fields:
+      actor_kind: { type: enum, values: [state-sponsored, ransomware, fraud-syndicate, darknet-operator, sanctions-evader, terrorist-financing, proliferation] }
+      attributed_state: { type: ref, target: JUR }
+      active_since: { type: date }
+      aliases_external: { type: list, desc: "타 기관 명명 (APT38 등)" }
+      external_ids: { type: object, desc: "mitre_attack intrusion-set 등" }
+
+  SRC:
+    layer: semantic
+    label: { ko: "출처", en: "Source" }
+    dir: "kb/sources"
+    # tier_basis 필수 — 등급은 판단이므로 근거를 남겨야 한다 (SRC-6)
+    required: [tier, publisher_kind, tier_basis]
+    fields:
+      tier: { type: enum, values: [T1, T2, T3, T4, T5] }
+      tier_basis: { type: text, desc: "이 등급을 부여한 근거. '공식 발간 주체' 같은 한 줄이면 충분하나 비워둘 수 없다" }
+      publisher_kind: { type: enum, values: [government, regulator, intl-body, court, vendor, academic, media, industry, community] }
+      base_url: { type: url }
+      language: { type: string }
+      paywall: { type: boolean }
+
+  DOC:
+    layer: semantic
+    label: { ko: "문서", en: "Document" }
+    dir: "kb/sources/documents"
+    required: [src, url]
+    fields:
+      src: { type: ref, target: SRC }
+      url: { type: url }
+      published: { type: date }
+      doc_kind: { type: enum, values: [statute-text, official-guidance, press-release, report, filing, judgment, dataset, article, blog] }
+      content_hash: { type: string }
+      snapshot_path: { type: string, desc: "본문 스냅샷 (링크 사망 대비)" }
+      accessed: { type: date }
+
+  ERA:
+    layer: semantic
+    label: { ko: "국면", en: "Era" }
+    dir: "kb/entities/eras"
+    required: [valid_from]
+    fields:
+      starts_with: { type: ref, target: EVT }
+      ends_with: { type: ref, target: EVT }
+      valid_from: { type: string }
+      valid_to: { type: string }
+      dominant_traits: { type: list }
+
+# ─────────────────────────────────────────────────────────────
+# L2 · DYNAMIC
+# ─────────────────────────────────────────────────────────────
+
+  FACT:
+    layer: dynamic
+    label: { ko: "원자적 사실", en: "Claim" }
+    dir: "kb/facts"
+    storage: jsonl
+    required: [claim, confidence, evidence, recorded_at]
+    fields:
+      claim: { type: text, desc: "주어1·술어1·값1·시점1" }
+      subject: { type: ref }
+      attribute: { type: string }
+      value: { type: any }
+      unit: { type: string }
+      valid_from: { type: date }
+      valid_to: { type: date }
+      confidence: { type: enum, values: [A, B, C, D] }
+      evidence: { type: list }
+      recorded_at: { type: date }
+      retracted_at: { type: date }
+      superseded_by: { type: ref, target: FACT }
+      derived_from: { type: list, desc: "ITEM ID" }
+
+  EVT:
+    layer: dynamic
+    label: { ko: "사건", en: "Event" }
+    dir: "kb/entities/events"
+    required: [occurred_on, evt_kind, date_precision]
+    fields:
+      evt_kind: { type: enum, values: [legislative, enforcement, incident, technical, market, institutional, judicial, sanctions] }
+      track: { type: enum, values: [A, B, C] }
+      occurred_on: { type: date }
+      announced_on: { type: date }
+      date_precision: { type: enum, values: [day, month, year, range] }
+      jurisdiction: { type: ref, target: JUR }
+      impact: { type: enum, values: [H, M, L] }
+      era: { type: ref, target: ERA }
+      significance: { type: text }
+
+  STATE:
+    layer: dynamic
+    label: { ko: "구간 상태", en: "StateAssertion" }
+    dir: "kb/states"
+    storage: jsonl
+    required: [subject, attribute, value, valid_from, recorded_at]
+    fields:
+      subject: { type: ref }
+      attribute: { type: string }
+      value: { type: any }
+      valid_from: { type: date }
+      valid_to: { type: date }
+      recorded_at: { type: date }
+      retracted_at: { type: date }
+      retraction_reason: { type: text }
+      superseded_by: { type: ref, target: STATE }
+
+  ENF:
+    layer: dynamic
+    label: { ko: "집행조치", en: "EnforcementAction" }
+    dir: "kb/entities/enforcement"
+    required: [authority, target]
+    fields:
+      authority: { type: ref, target: ORG }
+      target: { type: ref }
+      penalty_usd: { type: number }
+      penalty_note: { type: text, desc: "형사/민사/총액 구분" }
+      settled_on: { type: date }
+      monitorship: { type: boolean }
+      monitorship_years: { type: number }
+
+  INC:
+    layer: dynamic
+    label: { ko: "사고", en: "Incident" }
+    dir: "kb/entities/incidents"
+    required: [occurred_on]
+    fields:
+      occurred_on: { type: date }
+      disclosed_on: { type: date }
+      loss_usd: { type: number }
+      loss_estimate_source: { type: string }
+      vector: { type: enum, values: [private-key, smart-contract, social-engineering, insider, supply-chain, bridge, oracle, phishing, unknown] }
+      recovered_usd: { type: number }
+
+  CASE:
+    layer: dynamic
+    label: { ko: "판례·소송", en: "LegalCase" }
+    dir: "kb/entities/cases"
+    required: [court]
+    fields:
+      court: { type: string }
+      docket: { type: string }
+      filed: { type: date }
+      decided: { type: date }
+      holding: { type: text }
+      status: { type: enum, values: [pending, decided, appealed, settled, dismissed] }
+
+  METRIC:
+    layer: dynamic
+    label: { ko: "관측 수치", en: "MetricObservation" }
+    dir: "kb/metrics"
+    storage: jsonl
+    required: [subject, measure, value, period, estimator]
+    fields:
+      subject: { type: ref }
+      measure: { type: string }
+      value: { type: number }
+      unit: { type: string }
+      period: { type: object }
+      method: { type: text }
+      estimator: { type: string }
+      revision: { type: string }
+      caveat: { type: text }
+
+# ─────────────────────────────────────────────────────────────
+# L3 · KINETIC — 동사의 세계 (쓰기·실행)
+# 근거: DOC:jp-leadingai-palantir-ontology · ADR-0004
+# Kinetics = Action / Function / Dynamic security. 수집이 아니다.
+# ─────────────────────────────────────────────────────────────
+
+  ACTION:
+    layer: kinetic
+    label: { ko: "액션", en: "Action type" }
+    dir: "kb/entities/actions"
+    required: [action_kind, change_set, authorized_roles]
+    fields:
+      action_kind: { type: enum, values: [governance, operational] }
+      tier: { type: string, desc: "L1-write | L2-write | funnel-write | external" }
+      change_set: { type: object, desc: "creates / modifies / never_touches" }
+      submission_criteria: { type: list, desc: "충족하지 않으면 실행 거부" }
+      side_effects: { type: list }
+      authorized_roles: { type: list, desc: "ROLE ID 목록" }
+      requires_proposal: { type: boolean, desc: "브랜치-리뷰-머지 필수 여부" }
+      reversible_by: { type: ref, target: ACTION }
+      implements_obligation: { type: ref, target: OBL, desc: "운용 액션이 이행하는 의무" }
+
+  FUNC:
+    layer: kinetic
+    label: { ko: "함수", en: "Function" }
+    dir: "kb/entities/functions"
+    required: [func_kind, deterministic]
+    fields:
+      func_kind: { type: enum, values: [derivation, scoring, validation, projection] }
+      inputs: { type: list }
+      output: { type: string }
+      deterministic: { type: boolean, desc: "동일 입력 → 동일 출력 보장" }
+      implementation: { type: string, desc: "구현 파일 경로. 미구현이면 null" }
+      cache_invalidated_by: { type: list, desc: "ACTION ID 목록" }
+
+  ROLE:
+    layer: kinetic
+    label: { ko: "역할", en: "Role" }
+    dir: "kb/entities/roles"
+    required: [can_execute]
+    fields:
+      can_execute: { type: list, desc: "ACTION ID 목록" }
+      cannot_execute: { type: list, desc: "명시적 금지 — can_execute 보다 우선" }
+      scope: { type: object, desc: "node_types / jurisdictions / properties" }
+      constraints: { type: list }
+      is_agent: { type: boolean, desc: "AI 에이전트 역할이면 true — 직접 실행 불가" }
+
+  ALOG:
+    layer: kinetic
+    label: { ko: "액션 로그", en: "Action log" }
+    dir: "kb/alog"
+    storage: jsonl
+    append_only: true
+    required: [action, actor, executed_at, targets, result]
+    fields:
+      action: { type: ref, target: ACTION }
+      actor: { type: ref, target: ROLE }
+      actor_identity: { type: string, desc: "사람·에이전트 식별자" }
+      basis: { type: string, desc: "TASK / SIGNAL / manual" }
+      proposal: { type: string, desc: "PR 참조" }
+      executed_at: { type: datetime }
+      targets: { type: list, desc: "영향받은 노드 ID" }
+      change: { type: object, desc: "created / modified (전·후 값)" }
+      result: { type: enum, values: [applied, rejected, rolled_back] }
+
+# ─────────────────────────────────────────────────────────────
+# FUNNEL — 계층이 아니라 온톨로지를 채우는 인프라 (ADR-0004)
+# 사실 후보까지만 만든다. 후보가 지식이 되는 것은 ACTION 을 통해서다.
+# ─────────────────────────────────────────────────────────────
+
+  FEED:
+    layer: funnel
+    label: { ko: "수집 피드", en: "Feed" }
+    dir: "ingest/config"
+    required: [src, transport, endpoint, priority]
+    fields:
+      src: { type: ref, target: SRC }
+      transport: { type: enum, values: [rss, api, html, file, email] }
+      endpoint: { type: url }
+      format: { type: string }
+      cadence: { type: enum, values: [realtime, daily, twice-daily, weekly, on-change] }
+      auth: { type: enum, values: [none, api-key, oauth, registration] }
+      priority: { type: enum, values: [P0, P1, P2] }
+      robots_ok: { type: boolean }
+      tos_note: { type: text }
+      parser: { type: string }
+      parser_difficulty: { type: number }
+      watch_nodes: { type: list }
+      enabled: { type: boolean }
+
+  RUN:
+    layer: funnel
+    label: { ko: "수집 실행", en: "IngestRun" }
+    dir: "data/curated/runs"
+    storage: jsonl
+    required: [feed, started_at, status]
+    fields:
+      feed: { type: ref, target: FEED }
+      started_at: { type: datetime }
+      finished_at: { type: datetime }
+      status: { type: enum, values: [ok, partial, failed, skipped] }
+      items_seen: { type: number }
+      items_new: { type: number }
+      error: { type: text }
+
+  ITEM:
+    layer: funnel
+    label: { ko: "원시 항목", en: "RawItem" }
+    dir: "data/staging/items"
+    storage: jsonl
+    required: [run, url, content_hash]
+    fields:
+      run: { type: ref, target: RUN }
+      url: { type: url }
+      title: { type: string }
+      published: { type: date }
+      raw_path: { type: string }
+      content_hash: { type: string }
+      lang: { type: string }
+      matched_nodes: { type: list }
+
+  SIG:
+    layer: funnel
+    label: { ko: "변화 신호", en: "Signal" }
+    dir: "data/curated/signals"
+    storage: jsonl
+    required: [sig_kind, severity, detected_at]
+    fields:
+      sig_kind: { type: enum, values: [new_norm, status_change, value_change, list_diff, enforcement, incident, sla_expiry, contradiction, feed_silence, link_rot, silent_withdrawal] }
+      subject: { type: ref }
+      severity: { type: number, desc: "0~100" }
+      detected_at: { type: datetime }
+      evidence_items: { type: list }
+      affected_nodes: { type: list }
+
+  TASK:
+    layer: funnel
+    label: { ko: "검증 과제", en: "ReviewTask" }
+    dir: "data/curated/tasks"
+    storage: jsonl
+    required: [signal, state]
+    fields:
+      signal: { type: ref, target: SIG }
+      state: { type: enum, values: [open, in_review, approved, rejected, deferred] }
+      priority: { type: enum, values: [P0, P1, P2] }
+      due: { type: date }
+      checklist: { type: list }
+      resolution: { type: text }
+      rejection_reason: { type: text }
+
+  PROD:
+    layer: funnel
+    label: { ko: "분석 산출물", en: "Product" }
+    dir: "intel"
+    required: [prod_kind, published_at]
+    fields:
+      prod_kind: { type: enum, values: [daily-brief, weekly-brief, assessment, watchlist, quality-report] }
+      period: { type: object }
+      facts: { type: list }
+      published_at: { type: date }
+
+# ─────────────────────────────────────────────────────────────
+# 엣지 술어
+# ─────────────────────────────────────────────────────────────
+predicates:
+
+  # L1 구조
+  HAS_JURISDICTION: { from: [ORG, REG, VASP, VEND], to: [JUR], symmetric: false }
+  PART_OF:          { from: [JUR, PROV, TEC, ASSET], to: [JUR, REG, TYP, CHAIN], symmetric: false }
+  ISSUED_BY:        { from: [REG, DOC], to: [ORG], symmetric: false }
+  SUPERVISES:       { from: [ORG], to: [VASP, JUR], symmetric: false, qualifiers: [since] }
+  IMPLEMENTS:       { from: [REG], to: [REG], symmetric: false, qualifiers: [fidelity] }
+  # 국내 법령 위계에서 상위 규범이 하위 규범에 구체화를 위임하는 관계.
+  # IMPLEMENTS(국제기준 이행)와 구별해야 한다 — 위임은 같은 관할 안의 수직 관계다.
+  DELEGATES_TO:     { from: [PROV, REG], to: [PROV, REG], symmetric: false, qualifiers: [ceiling, currency, delegation_kind] }
+  IMPOSES:          { from: [PROV], to: [OBL], symmetric: false, qualifiers: [threshold, currency, grace_until] }
+  APPLIES_TO:       { from: [OBL], to: [VASP, CONCEPT], symmetric: false, qualifiers: [scope_note] }
+  SATISFIED_BY:     { from: [OBL], to: [CTL], symmetric: false, qualifiers: [sufficiency] }
+  EQUIVALENT_TO:    { from: [OBL, PROV, CONCEPT], to: [OBL, PROV, CONCEPT], symmetric: true, qualifiers: [equivalence] }
+  DEFINES:          { from: [REG, PROV], to: [CONCEPT], symmetric: false }
+  BROADER:          { from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: NARROWER }
+  NARROWER:         { from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: BROADER }
+  MITIGATES:        { from: [CTL], to: [RISK], symmetric: false, qualifiers: [effectiveness] }
+  EXPLOITS:         { from: [TYP, TEC], to: [RISK], symmetric: false }
+  USES_TECHNIQUE:   { from: [TYP, ACT], to: [TEC], symmetric: false }
+  DETECTED_BY:      { from: [TEC], to: [IND], symmetric: false, qualifiers: [precision_est, recall_est] }
+  REQUIRES_DATA:    { from: [IND], to: [CONCEPT], symmetric: false }
+  OPERATES_ON:      { from: [PROTO, ASSET], to: [CHAIN], symmetric: false }
+  BRIDGES:          { from: [PROTO], to: [CHAIN], symmetric: false, qualifiers: [direction] }
+  PROVIDES:         { from: [VEND], to: [CAP], symmetric: false, qualifiers: [evidence_kind] }
+  COMPETES_WITH:    { from: [VEND], to: [VEND], symmetric: true, qualifiers: [segment] }
+  USES_VENDOR:      { from: [VASP], to: [VEND], symmetric: false, qualifiers: [since, disclosed_by] }
+  MEMBER_OF:        { from: [VASP, ORG], to: [ORG], symmetric: false, qualifiers: [since] }
+  MERGED_INTO:      { from: ["*"], to: ["*"], symmetric: false }
+
+  # L2 시간·증거
+  ASSERTS:          { from: [DOC], to: [FACT], symmetric: false, qualifiers: [quote, locator] }
+  EVIDENCED_BY:     { from: ["*"], to: [DOC], symmetric: false, qualifiers: [confidence] }
+  SUPPORTS:         { from: [FACT], to: [FACT], symmetric: false }
+  CONTRADICTS:      { from: [FACT], to: [FACT], symmetric: true, qualifiers: [resolution] }
+  CHANGES_STATE_OF: { from: [EVT], to: ["*"], symmetric: false, qualifiers: [attribute, from_value, to_value] }
+  HAS_STATE:        { from: ["*"], to: [STATE], symmetric: false }
+  SUPERSEDES:       { from: [REG, STATE], to: [REG, STATE], symmetric: false, qualifiers: [effective] }
+  AMENDS:           { from: [REG], to: [REG], symmetric: false, qualifiers: [effective, articles] }
+  TARGETS:          { from: [ENF], to: [VASP, ACT, PROTO], symmetric: false }
+  VIOLATED:         { from: [ENF], to: [PROV], symmetric: false, qualifiers: [count] }
+  ATTRIBUTED_TO:    { from: [INC], to: [ACT], symmetric: false, qualifiers: [attributor, basis, confidence] }
+  LAUNDERED_VIA:    { from: [INC], to: [PROTO, TEC], symmetric: false, qualifiers: [amount_usd, share] }
+  LICENSED_IN:      { from: [VASP], to: [JUR], symmetric: false, qualifiers: [license_kind, since, until, status] }
+  DESIGNATED_BY:    { from: [VASP, ACT, PROTO], to: [ORG], symmetric: false, qualifiers: [list, designated_on, delisted_on] }
+  MEASURES:         { from: [METRIC], to: ["*"], symmetric: false }
+  CAUSED:           { from: [EVT], to: [EVT], symmetric: false, qualifiers: [mechanism, lag_days, confidence, basis] }
+
+  # L3 KINETIC — 동사 (ADR-0004)
+  MODIFIES:              { from: [ACTION], to: ["*"], symmetric: false, qualifiers: [properties] }
+  AUTHORIZES:            { from: [ROLE], to: [ACTION], symmetric: false }
+  EMITS_LOG:             { from: [ACTION], to: [ALOG], symmetric: false }
+  LOGGED_ON:             { from: [ALOG], to: ["*"], symmetric: false }
+  EXECUTED_BY:           { from: [CTL], to: [ACTION], symmetric: false }
+  IMPLEMENTS_OBLIGATION: { from: [ACTION], to: [OBL], symmetric: false }
+  COMPUTES_OVER:         { from: [FUNC], to: ["*"], symmetric: false }
+  REVERSED_BY:           { from: [ACTION], to: [ACTION], symmetric: false }
+  INVALIDATES_CACHE:     { from: [ACTION], to: [FUNC], symmetric: false }
+
+  # FUNNEL 흐름 — 계층 아님
+  EMITS:            { from: [FEED], to: [ITEM], symmetric: false }
+  PRODUCED_BY:      { from: [ITEM], to: [RUN], symmetric: false }
+  MATCHES:          { from: [ITEM], to: ["*"], symmetric: false, qualifiers: [score] }
+  RAISES:           { from: [ITEM, RUN], to: [SIG], symmetric: false }
+  RESOLVES:         { from: [TASK], to: [SIG], symmetric: false }
+  PROMOTES:         { from: [TASK], to: [FACT, EVT, STATE], symmetric: false }
+  DERIVED_FROM:     { from: [FACT], to: [ITEM], symmetric: false }
+  INCLUDES:         { from: [PROD], to: [FACT, EVT], symmetric: false }
+  WATCHES:          { from: ["*"], to: [FEED], symmetric: false }
+
+# ─────────────────────────────────────────────────────────────
+# 불변식 (validator 강제)
+# ─────────────────────────────────────────────────────────────
+invariants:
+  - id: I-1
+    rule: "모든 노드는 evidence 를 1개 이상 갖는다"
+    # ACTION·FUNC·ROLE 은 외부 사실이 아니라 내부 설계 산출물이므로 외부 증거를 요구하지 않는다.
+    # SRC 는 세계에 대한 주장이 아니라 출처 인프라 기술(記述)이다. 대신 tier_basis 를 강제한다(SRC-6).
+    exempt_classes: [CONCEPT, CAP, ACTION, FUNC, ROLE, SRC]
+  - id: I-2
+    rule: "PROV 는 정확히 하나의 REG 에 PART_OF 로 연결된다"
+  - id: I-3
+    rule: "STATE.valid_from < STATE.valid_to 또는 valid_to == null"
+  - id: I-4
+    rule: "동일 (subject, attribute) 의 유효 STATE 구간은 겹치지 않는다"
+  - id: I-5
+    rule: "EVT.occurred_on <= EVT.announced_on"
+  - id: I-6
+    rule: "CAUSED 엣지는 from.occurred_on <= to.occurred_on"
+  - id: I-7
+    rule: "모든 FACT 는 EVIDENCED_BY 로 최소 1개 DOC 에 연결된다"
+  - id: I-8
+    rule: "confidence C 또는 D 인 노드는 review_due 가 90일 이내"
+  - id: I-9
+    rule: "ID 는 id_pattern 을 만족한다"
+  - id: I-10
+    rule: "고립 노드(엣지 0개)가 없다"
+    severity: warn
+  - id: I-11
+    rule: "EQUIVALENT_TO 는 양방향으로 존재한다"
+  - id: I-12
+    rule: "어떤 노드·문서에도 비공개 조직 관련 문자열이 포함되지 않는다"
+    severity: error
+  - id: T-2
+    rule: "CAUSED 엣지의 basis 는 temporal_only 가 아니다"
+  - id: T-1
+    rule: "모든 EVT 는 date_precision 을 명시한다"
+
+  # ── L3 KINETIC (ADR-0004) ──
+  - id: K-1
+    rule: "모든 액션 실행은 정확히 하나의 ALOG 를 생성한다"
+  - id: K-2
+    rule: "ALOG 는 수정·삭제되지 않는다 (append-only)"
+  - id: K-3
+    rule: "ALOG.targets 의 모든 노드는 실존해야 한다"
+  - id: K-4
+    rule: "requires_proposal: true 인 액션의 ALOG 는 proposal 을 가져야 한다"
+  - id: K-5
+    rule: "ALOG.actor 는 해당 액션을 실행할 권한이 있는 ROLE 이어야 한다"
+  - id: K-6
+    rule: "액션의 change_set.never_touches 필드가 변경되면 실행을 거부한다"
+  - id: K-7
+    rule: "is_agent: true 인 ROLE 은 can_execute 가 비어 있어야 한다 (제안만 가능)"
+  - id: K-8
+    rule: "action_kind: operational 인 ACTION 은 implements_obligation 을 가져야 한다"
+
+# 신선도 SLA (일 단위)
+freshness_sla:
+  sanctions_state: 1
+  reg_lifecycle: 7
+  proposed_legislation: 14
+  vasp_license: 30
+  enforcement: 30
+  incident: 30
+  vendor: 90
+  low_confidence_any: 90
+  typology: 180
+  technique: 180

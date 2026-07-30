@@ -1,0 +1,31 @@
+id: "SRC:kr-lawgokr"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "국가법령정보센터"
+  en: "Korea Law Information Center"
+  short: "법령정보센터"
+aliases: ["law.go.kr", "법제처 국가법령정보센터"]
+summary: >
+  법제처가 운영하는 대한민국 법령 원문 공식 제공처. 법률·시행령·시행규칙·행정규칙·
+  판례를 조문 단위로 제공하며 오픈API(DRF)를 통한 기계 접근을 지원한다.
+  한국 법령 사실의 T1 근거원이다.
+tier: "T1"
+publisher_kind: "government"
+base_url: "https://www.law.go.kr"
+language: "ko"
+paywall: false
+tags: ["primary-law", "korea", "open-api"]
+external_ids:
+  homepage: "https://www.law.go.kr"
+  openapi_guide: "https://open.law.go.kr/LSO/openApi/guideList.do"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "A"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  오픈API 사용에는 OC(인증키) 발급이 필요하다. robots.txt 는 `Allow: /` 전면 허용
+  (2026-07-30 실측). 수집 설정은 ingest/config/sources.yaml 의 FEED:kr-law-api-* 참조.

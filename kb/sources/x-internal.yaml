@@ -1,0 +1,27 @@
+id: "SRC:x-internal"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "본 저장소 자체 관찰 기록"
+  en: "Internal observation record"
+summary: >
+  본 지식베이스가 직접 수행한 관찰·실측의 기록. 소스 접근성 실측, 파이프라인 실행
+  결과, 검증 절차 기록 등이 여기 속한다. 외부 발간물이 아니다.
+tier: "T1"
+tier_basis: >
+  직접 관찰(direct observation)이므로 해당 관찰 대상에 한해 1차 기록이다.
+  단 그 효력은 **관찰한 사실 자체**(HTTP 응답·파일 내용·실행 결과)에만 미치며,
+  법령·규제 내용에 대한 근거로는 사용할 수 없다.
+publisher_kind: "community"
+base_url: "https://github.com/lala-david/aml-notes"
+language: "ko"
+paywall: false
+tags: ["infrastructure", "self-authored"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  ⚠️ 자체 출처를 T1 로 두는 것은 오용 위험이 있다. tier_basis 에 적용 범위를
+  명시적으로 제한했다 — 인프라 사실에만 유효하고 규제 사실에는 무효다.
+  이 제한을 validator 로 강제하는 것이 과제다 (규제 도메인 FACT 가 SRC:x-internal 을
+  단독 근거로 삼으면 차단).

@@ -1,0 +1,22 @@
+id: "ORG:intl-fsb"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "금융안정위원회"
+  en: "Financial Stability Board"
+summary: >
+  글로벌 금융안정 관련 권고를 발간한다. AML/CFT 는 자기 범위에서 제외하고 FATF 준수를 요구한다.
+org_kind: "intl-body"
+website: "https://www.fsb.org"
+tags: ["intl"]
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  HAS_JURISDICTION 을 두지 않았다 — 국제기구는 특정 법역에 귀속되지 않는다
+  (ORG:intl-fatf 와 동일한 처리).
+  ⚠️ 확신도 B — 자체 실측 기록이 유일한 증거다. 설립 근거 문서 확보 필요.

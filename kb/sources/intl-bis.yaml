@@ -1,0 +1,19 @@
+id: "SRC:intl-bis"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "국제결제은행"
+  en: "Bank for International Settlements"
+summary: >
+  바젤위원회(BCBS) 암호자산 익스포저 건전성 기준(SCO60)의 발간 주체.
+tier: "T1"
+tier_basis: >
+  국제기준 설정기구의 공식 발간 경로.
+publisher_kind: "intl-body"
+base_url: "https://www.bis.org"
+language: "en"
+paywall: false
+tags: ["intl"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

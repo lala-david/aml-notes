@@ -1,0 +1,36 @@
+id: "CONCEPT:x-virtual-asset"
+type: "CONCEPT"
+layer: "semantic"
+label:
+  ko: "가상자산"
+  en: "Virtual asset"
+aliases: ["virtual asset", "crypto-asset", "암호자산", "디지털자산"]
+summary: >
+  규제 대상이 되는 디지털 가치 표상. **관할마다 정의가 다르며 그 차이가
+  규제 적용 범위를 가른다.** FATF 는 "virtual asset", EU 는 "crypto-asset",
+  한국은 "가상자산"이라는 서로 다른 용어와 정의를 쓴다.
+definition_ko: >
+  경제적 가치를 지니고 전자적으로 거래 또는 이전될 수 있는 전자적 증표
+  (한국 특금법 제2조제3호 계열 정의). 각국 정의의 정확한 문언은 DEFINES 엣지로
+  연결된 조문(PROV)을 참조할 것.
+definition_en: >
+  A digital representation of value that can be digitally traded or transferred
+  and used for payment or investment purposes (FATF 계열 정의).
+contested: true
+tags: ["definition", "cross-jurisdiction", "contested"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ **contested: true** — 이 개념은 관할마다 다르게 정의된다. 여기 적은 정의는
+  요약이며 **법적 근거로 인용하면 안 된다.** 반드시 DEFINES 엣지로 연결된
+  조문 원문(PROV.text_orig)을 확인할 것.
+
+  현재 DEFINES 엣지가 하나도 없다. 다음 조문을 PROV 로 등재하고 연결해야 한다 —
+    · 특금법 제2조제3호 (한국)
+    · 가상자산이용자보호법 제2조 (한국 — 특금법이 상호참조)
+    · MiCA 제3조(1)(5) "crypto-asset" (EU)
+    · FATF Glossary "virtual asset" (국제)
+  **재검토 과제.** 정의 차이가 규제 적용 범위를 가르므로 우선순위가 높다.
+
+  하위 개념(NARROWER)으로 스테이블코인·NFT 등을 분리 등재할 것.

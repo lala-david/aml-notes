@@ -1,0 +1,31 @@
+id: "DOC:us-reginfo-agenda-fall2025"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "통합규제의제 2025년 가을판 (FinCEN 부분)"
+  en: "Unified Agenda Fall 2025 — FinCEN"
+summary: >
+  FinCEN(agencyCode 1506)의 규칙제정 계획. CVC 믹싱 §311 규칙(RIN 1506-AB64)의
+  최종조치 목표를 2027-12 로 구체화했다(Spring 2025 판은 "To Be Determined").
+  Travel Rule $250 하향안(1506-AB41)과 비수탁 지갑 규칙(1506-AB47)의 종결 상태를
+  확인할 수 있는 문서다.
+src: "SRC:us-reginfo"
+url: "https://www.reginfo.gov/public/do/eAgendaMain?operation=OPERATION_GET_AGENCY_RULE_LIST&agencyCode=1506"
+published: "2025"
+accessed: "2026-07-30"
+doc_kind: "official-guidance"
+language: "en"
+translation: false
+tags: ["us", "fincen", "rulemaking", "unified-agenda"]
+evidence:
+  - doc: "DOC:us-reginfo-agenda-fall2025"
+    confidence: "A"
+    locator: "RIN 1506-AB64 · Final Action"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  통합의제는 반기 발간이므로 갱신 주기가 길다. 그러나 **철회 탐지의 유일한 경로**이므로
+  주간 폴링으로 상태 전이를 감시한다 (FEED:us-reginfo-agenda).
+  published 를 연도만 기재한 것은 정확한 발간일 미확인이기 때문이다 — 재확인 과제.

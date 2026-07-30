@@ -1,0 +1,19 @@
+id: "SRC:us-cftc"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "미국 상품선물거래위원회"
+  en: "Commodity Futures Trading Commission"
+summary: >
+  파생상품 규제·집행 주체. 가상자산 관련 집행조치를 다수 수행한다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.cftc.gov"
+language: "en"
+paywall: false
+tags: ["us"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

@@ -1,0 +1,19 @@
+id: "SRC:gb-fca"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "영국 금융행위감독청"
+  en: "Financial Conduct Authority"
+summary: >
+  암호자산 사업자 등록·감독 주체. 등록 승인율이 낮은 고관문형 운영으로 알려져 있다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.fca.org.uk"
+language: "en"
+paywall: false
+tags: ["gb"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

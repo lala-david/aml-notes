@@ -1,0 +1,19 @@
+id: "SRC:gb-fcdo"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "영국 외무영연방개발부"
+  en: "Foreign, Commonwealth & Development Office"
+summary: >
+  영국 제재목록(UK Sanctions List)의 공식 배포처. 구 OFSI Consolidated List 를 대체했다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "government"
+base_url: "https://sanctionslist.fcdo.gov.uk"
+language: "en"
+paywall: false
+tags: ["gb"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

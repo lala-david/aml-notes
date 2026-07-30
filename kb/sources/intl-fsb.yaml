@@ -1,0 +1,19 @@
+id: "SRC:intl-fsb"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "금융안정위원회"
+  en: "Financial Stability Board"
+summary: >
+  글로벌 암호자산 규제 프레임워크를 권고한다. AML/CFT 는 자기 범위에서 명시 제외하고 FATF 준수를 요구한다.
+tier: "T1"
+tier_basis: >
+  국제기준 설정기구의 공식 발간 경로.
+publisher_kind: "intl-body"
+base_url: "https://www.fsb.org"
+language: "en"
+paywall: false
+tags: ["intl"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

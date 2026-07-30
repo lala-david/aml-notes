@@ -1,0 +1,19 @@
+id: "SRC:jp-fsa"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "일본 금융청"
+  en: "Financial Services Agency"
+summary: >
+  암호자산교환업 등록·감독 주체. 전체 공지 RSS 를 제공하나 노이즈가 많아 키워드 필터가 필수다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.fsa.go.jp"
+language: "ja"
+paywall: false
+tags: ["jp"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
