@@ -25,3 +25,26 @@ __pycache__/
 # Runtime outputs
 regulatory-changes.json
 regulatory-changes.md
+
+# 리서치 스테이징 (검증 전 원시 산출물 — 절대 커밋 금지)
+_research/
+
+# 비공개 분석 레이어 (사업/경쟁 분석 — 공개 저장소 대상 아님)
+_private/
+
+# 데이터 레이크 랜딩/스테이징 존 (curated 만 커밋)
+data/raw/
+data/staging/
+
+# 잘못 생성된 경로 파일
+# 경로 구분자(: \)가 유니코드 사유영역 문자(U+F03A·U+F05C)로 치환된 채
+# 파일명이 되어버린 흔적. 접두어 매칭이 안 되므로 확장자로 제외한다.
+# 이 저장소에 정당한 스프레드시트는 없다.
+*.xlsx
+*.xls
+
+# 금칙어 목록 (목록 자체가 무엇을 숨기려 했는지 드러내므로 커밋 금지)
+quality/rules/forbidden_terms.local.txt
+
+# 빌드 산출물 (전부 재생성 가능)
+build/

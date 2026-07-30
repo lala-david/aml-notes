@@ -13,7 +13,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CHARTS_DIR = Path(__file__).resolve().parent
+# 이 스크립트는 quality/ 에 있으나 mmdc 툴체인·설정·캐시는 charts/ 에 있다.
+CHARTS_DIR = ROOT / "charts"
 MMDC = CHARTS_DIR / "node_modules" / ".bin" / (
     "mmdc.cmd" if os.name == "nt" else "mmdc"
 )

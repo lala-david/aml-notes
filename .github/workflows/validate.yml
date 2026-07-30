@@ -39,10 +39,10 @@ jobs:
         run: npm ci
 
       - name: Validate internal links
-        run: python charts/validate_links.py
+        run: python quality/validate_links.py
 
       - name: Validate Mermaid diagrams
-        run: python charts/validate_mermaid.py
+        run: python quality/validate_mermaid.py
         env:
           PUPPETEER_ARGS: "--no-sandbox"
 
@@ -57,5 +57,5 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check external URLs
-        run: python charts/check_external_urls.py
+        run: python quality/check_external_urls.py
         continue-on-error: true

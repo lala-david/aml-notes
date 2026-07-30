@@ -10,7 +10,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EXCLUDE_DIRS = {"node_modules", ".git", "print/days", "mermaid-cache", "charts/output"}
+# _research/ 와 _private/ 는 gitignore 대상이므로 검증하지 않는다.
+# 검증 전 리서치 원시 산출물과 비공개 레이어는 공개 저장소의 품질 기준 적용 대상이 아니다.
+EXCLUDE_DIRS = {
+    "node_modules", ".git", "print/days", "mermaid-cache", "charts/output",
+    "_research", "_private",
+}
 
 LINK_RE = re.compile(r"\[([^\]]*)\]\(([^)]+)\)")
 

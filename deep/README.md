@@ -105,7 +105,7 @@ deep 폴더 4개 파일은 **분기별** 리뷰를 통해 최신성 유지:
 
 - [ ] 각 파일 마지막 갱신 날짜 3개월 이내인가
 - [ ] 기술된 "2025년 리포트" 등 연도 표기 stale한가
-- [ ] 외부 URL 동작 (`charts/check_external_urls.py`)
+- [ ] 외부 URL 동작 (`quality/check_external_urls.py`)
 - [ ] 신규 주요 논문·사건 반영됐는가
 
 ### 리뷰 리듬

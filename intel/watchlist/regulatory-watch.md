@@ -4,7 +4,7 @@
 
 ## 배포 상태 (2026-04-23 기준)
 
-- [x] **`scripts/regulatory_rss.py`** — 13개 피드 수집, 키워드 필터, JSON+Markdown 출력
+- [x] **`ingest/legacy/regulatory_rss.py`** — 13개 피드 수집, 키워드 필터, JSON+Markdown 출력
 - [x] **GitHub Actions 자동화** — `.github/workflows/regulatory-watch.yml`, 매주 월요일 UTC 00:00 (KST 09:00) 실행
 - [x] **자동 Issue 생성** — 변화 감지 시 `regulatory-update` · `automated` 라벨로 Issue
 - [x] **수동 실행 지원** — `workflow_dispatch` 트리거로 on-demand 실행
@@ -69,7 +69,7 @@
 
 ## 2. 자동 모니터링 인프라 (배포됨)
 
-### 2.1 RSS aggregator — `scripts/regulatory_rss.py`
+### 2.1 RSS aggregator — `ingest/legacy/regulatory_rss.py`
 
 배포 상태: **운영 중** · 13 개 피드 수집 · 키워드 필터 · 에러 격리 (피드 하나 다운 ≠ 전체 실패).
 
@@ -88,13 +88,13 @@
 실행:
 
 ```bash
-pip install -r scripts/requirements.txt
-python scripts/regulatory_rss.py --days 7 --verbose
+pip install -r ingest/legacy/requirements.txt
+python ingest/legacy/regulatory_rss.py --days 7 --verbose
 # → regulatory-changes.json + regulatory-changes.md 생성
 # → exit code 1 이면 신규 항목 있음 (CI 에서 Issue 생성)
 ```
 
-자세한 사용법은 [`scripts/README.md`](../scripts/README.md) 참조.
+자세한 사용법은 [`ingest/legacy/README.md`](../../ingest/legacy/README.md) 참조.
 
 ### 2.2 GitHub Actions — `.github/workflows/regulatory-watch.yml`
 
@@ -103,8 +103,8 @@ python scripts/regulatory_rss.py --days 7 --verbose
 잡 흐름:
 
 1. `actions/checkout@v4` · `actions/setup-python@v5` (3.11, pip 캐시)
-2. `pip install -r scripts/requirements.txt`
-3. `python scripts/regulatory_rss.py --days 7 --verbose` → 산출물 2 개 생성
+2. `pip install -r ingest/legacy/requirements.txt`
+3. `python ingest/legacy/regulatory_rss.py --days 7 --verbose` → 산출물 2 개 생성
 4. **신규 항목 있으면** `peter-evans/create-issue-from-file@v5` 로 Issue 자동 생성 (`regulatory-update` · `automated` 라벨)
 5. `actions/upload-artifact@v4` 로 JSON+MD 90 일 보관
 
@@ -136,9 +136,9 @@ python scripts/regulatory_rss.py --days 7 --verbose
   - 날짜·금액·조항 정확성 검증
   - "마지막 업데이트" 타임스탬프
 - [ ] **Step 5: 자동 검증**
-  - `python charts/validate_mermaid.py`
-  - `python charts/validate_links.py`
-  - `python charts/check_external_urls.py`
+  - `python quality/validate_mermaid.py`
+  - `python quality/validate_links.py`
+  - `python quality/check_external_urls.py`
 - [ ] **Step 6: CHANGELOG 추가**
 - [ ] **Step 7: GitHub release tag** (분기별 v0.X.Y)
 
@@ -167,7 +167,7 @@ python scripts/regulatory_rss.py --days 7 --verbose
 
 자동:
 ```bash
-python charts/check_external_urls.py
+python quality/check_external_urls.py
 ```
 
 수동 (분기별):

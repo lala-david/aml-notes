@@ -4,10 +4,10 @@ Regulatory RSS Aggregator
 주요 AML 규제기관의 RSS 피드를 수집해 최근 변화를 JSON·Markdown으로 출력.
 
 Usage:
-    python scripts/regulatory_rss.py [--days N] [--output-dir DIR] [--verbose]
+    python ingest/legacy/regulatory_rss.py [--days N] [--output-dir DIR] [--verbose]
 
 Requires:
-    pip install -r scripts/requirements.txt
+    pip install -r ingest/legacy/requirements.txt
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ try:
     import feedparser  # type: ignore
 except ImportError:
     print(
-        "[ERROR] feedparser 미설치. `pip install -r scripts/requirements.txt` 후 재실행.",
+        "[ERROR] feedparser 미설치. `pip install -r ingest/legacy/requirements.txt` 후 재실행.",
         file=sys.stderr,
     )
     sys.exit(2)
