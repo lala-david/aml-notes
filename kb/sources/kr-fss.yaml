@@ -1,0 +1,19 @@
+id: "SRC:kr-fss"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "금융감독원"
+  en: "Financial Supervisory Service"
+summary: >
+  금융기관 검사·감독 집행기관의 공식 발간 경로. 목록 페이지가 JS 렌더링이라 수집 난이도가 높다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "supervisor"
+base_url: "https://www.fss.or.kr"
+language: "ko"
+paywall: false
+tags: ["kr"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

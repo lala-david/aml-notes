@@ -1,0 +1,38 @@
+id: "ORG:us-fincen"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "미국 금융범죄단속네트워크"
+  en: "Financial Crimes Enforcement Network"
+  short: "FinCEN"
+aliases: ["FinCEN", "금융범죄단속네트워크"]
+summary: >
+  미국 재무부 산하 금융정보분석기구(FIU). 은행비밀법(BSA) 집행을 담당하며
+  MSB 등록·의심거래보고·기록보존 의무를 규정하고 규칙제정을 수행한다.
+  가상자산 사업자의 BSA 적용은 "other value that substitutes for currency" 문언에 근거한다.
+org_kind: "fiu"
+jurisdiction: "JUR:us"
+website: "https://www.fincen.gov"
+tags: ["us", "fiu", "bsa"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:us"
+    evidence:
+      - doc: "DOC:us-reginfo-agenda-fall2025"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:us-reginfo-agenda-fall2025"
+    confidence: "B"
+    locator: "agencyCode 1506"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 현재 증거가 규칙제정 의제 문서뿐이다. 조직 근거 법령(31 U.S.C. 310)과
+  공식 소개 문서를 확보해 A 로 승격할 것. 2파에서 fincen.gov 접근이 열렸으므로
+  (fetch_strategy: browser_headers) 다음 라운드에서 해소 가능하다.
+
+  Federal Register API 필터링 시 주의 — FinCEN 의 short_name 이 "TD" 로 오기되어 있으므로
+  **slug(financial-crimes-enforcement-network) 또는 id 로만** 필터링해야 한다.

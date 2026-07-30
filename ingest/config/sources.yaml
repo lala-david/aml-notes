@@ -1,0 +1,1272 @@
+# 수집 소스 레지스트리
+# 스키마: docs/ingestion/01-source-registry.md §2
+# 근거: _research/wave1/ingestion-sources.md (실측 2026-07-30 02:31Z~02:55Z, 88개 후보)
+#
+# 등재 원칙
+#   - probe.status 가 ok 인 것만 enabled: true
+#   - unverified / failed 는 enabled: false + blocker 명시
+#   - robots_ok 가 false 이면 수집기가 거부한다 (설정으로 우회 불가)
+#
+# 실측 표기
+#   ok            : 200 응답 + 콘텐츠 확인
+#   ok-unparsed   : 200/302 확인했으나 크기 제한으로 본문 미파싱
+#   failed        : 접속 실패 (사유 기록)
+#   unverified    : 열어보지 않음 — 검증된 것으로 취급 금지
+
+version: "0.1.0"
+updated: "2026-07-30"
+
+defaults:
+  user_agent: "aml-kb-collector/0.1 (+contact: <운영자 이메일 등록 필요>)"
+  min_interval_seconds: 2
+  max_concurrent_per_host: 1
+  max_concurrent_total: 8
+  retry: { attempts: 3, backoff_seconds: [2, 8, 32] }
+  conditional_request: true
+  fetch_strategy: "plain"
+
+# ── 도메인별 페치 전략 (2파 실측, 2026-07-30) ──
+# 봇 차단은 도메인마다 다르게 걸리며, 한 방식이 다른 방식보다 항상 낫지 않다.
+# 1파는 표준 클라이언트만 써서 미국 연방기관 전체를 "차단"으로 오판했다.
+fetch_strategies:
+  browser_headers:
+    desc: "브라우저 헤더 일체 부착 (User-Agent·Accept·Accept-Language·Sec-Fetch-*·Upgrade-Insecure-Requests)"
+    domains:
+      - fincen.gov
+      - ofac.treasury.gov
+      - home.treasury.gov
+      - justice.gov
+      - sec.gov
+      - ecfr.gov
+      - ca5.uscourts.gov
+      - courtlistener.com
+      - federalregister.gov
+      - fatf-gafi.org
+      - bis.org
+      - iosco.org
+  plain:
+    desc: "표준 클라이언트. ⚠️ 아래 도메인은 브라우저 헤더를 붙이면 오히려 403 이 된다 (역전 사례)"
+    domains:
+      - dfs.ny.gov
+      - dos.ny.gov
+  blocked:
+    desc: "양쪽 모두 실패 — 대체 경로 필수"
+    domains:
+      - congress.gov        # api.congress.gov 키 발급 외 경로 없음
+      - govt.westlaw.com    # 뉴욕 공식 NYCRR 포털
+
+feeds:
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 제재 명단 (일 2회 · SLA 1일)
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:us-ofac-delta"
+    src: "SRC:us-ofac"
+    label: { ko: "OFAC 일일 변경분 델타", en: "OFAC daily delta" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://sanctionslistservice.ofac.treas.gov/changes/latest?type=SDN"
+    format: "xml"
+    cadence: "twice-daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    language: "en"
+    watch_nodes: ["ORG:us-ofac"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "공식 배포 API"
+    license: "gov-open"
+    parser: "ofac_delta_xml"
+    parser_difficulty: 3
+    parser_note: >
+      루트 <sanctionsData>, ns .../DeltaFile/1.0, <entity action="add|remove|modify">.
+      전체 파일 재다운로드 불필요 — 이 델타가 list_diff 신호의 1차 소스.
+    probe: { status: "ok", checked_at: "2026-07-30T02:36:00Z", note: "2026-07-29 델타 확인" }
+    enabled: true
+
+  - id: "FEED:us-ofac-sdn-csv"
+    src: "SRC:us-ofac"
+    label: { ko: "OFAC SDN 전체 목록 (CSV)", en: "OFAC SDN list (CSV)" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV"
+    format: "csv"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-ofac"]
+    robots_ok: true
+    tos_note: "공식 배포 API"
+    license: "gov-open"
+    parser: "ofac_sdn_csv"
+    parser_difficulty: 3
+    parser_note: >
+      11열 CSV. 가상자산 주소는 11번째 remarks 컬럼의 자유텍스트:
+      "Digital Currency Address - <TICKER> <ADDR>", 복수는 "; alt. " 구분.
+      정규식 파싱 필수 — 구조화 필드 아님. SDN_ENHANCED.XML 스키마 확정 시 교체 예정.
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "배포일 2026-07-28, TRX 주소 형식 확인" }
+    enabled: true
+
+  - id: "FEED:us-ofac-sdn-enhanced"
+    src: "SRC:us-ofac"
+    label: { ko: "OFAC SDN Enhanced (XML)", en: "OFAC SDN Enhanced" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://sanctionslistservice.ofac.treas.gov/api/publicationpreview/exports/SDN_ENHANCED.XML"
+    format: "xml"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-ofac"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "ofac_sdn_enhanced_xml"
+    parser_difficulty: 3
+    probe: { status: "ok-unparsed", checked_at: "2026-07-30T02:36:00Z", note: "302 확인, 스키마 미확인" }
+    blocker: "digital currency address 의 feature type ID·XPath 미확정"
+    enabled: false
+
+  - id: "FEED:intl-un-consolidated"
+    src: "SRC:intl-unsc"
+    label: { ko: "UN 안보리 통합 제재목록", en: "UN Security Council Consolidated List" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://scsanctions.un.org/resources/xml/en/consolidated.xml"
+    format: "xml"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:intl"
+    watch_nodes: ["ORG:intl-unsc"]
+    robots_ok: true
+    tos_note: "공식 공개 배포"
+    license: "gov-open"
+    parser: "un_consolidated_xml"
+    parser_difficulty: 3
+    parser_note: "가상자산 주소 필드 없음 — 전통 신분증 필드만. 개인·단체 식별 대조용."
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "dateGenerated 2026-07-29T23:00Z" }
+    enabled: true
+
+  - id: "FEED:eu-fsf-xml"
+    src: "SRC:eu-commission"
+    label: { ko: "EU 통합 금융제재목록", en: "EU Consolidated Financial Sanctions List" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw"
+    format: "xml"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:eu"
+    watch_nodes: ["ORG:eu-commission"]
+    robots_ok: true
+    tos_note: "공개 배포 파일 · 고정 공개 토큰"
+    license: "gov-open"
+    parser: "eu_fsf_xml"
+    parser_difficulty: 3
+    parser_note: "토큰 dG9rZW4tMjAxNw 유효. n002 토큰은 403."
+    probe: { status: "ok-unparsed", checked_at: "2026-07-30T02:52:00Z", note: ">10MB, upstream 변경 2026-07-28" }
+    blocker: "가상자산 주소 필드 유무 미확인 — 로컬 다운로드 후 헤더 확인 필요"
+    enabled: true
+
+  - id: "FEED:gb-uk-sanctions-csv"
+    src: "SRC:gb-fcdo"
+    label: { ko: "영국 제재목록", en: "UK Sanctions List" }
+    category: "sanctions-list"
+    transport: "file"
+    endpoint: "https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.csv"
+    format: "csv"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:gb"
+    watch_nodes: ["ORG:gb-fcdo", "ORG:gb-ofsi"]
+    robots_ok: true
+    tos_note: "공개 배포 파일"
+    license: "gov-open"
+    parser: "uk_sanctions_csv"
+    parser_difficulty: 2
+    parser_note: >
+      ⚠ OFSI Consolidated List(ofsistorage.blob.core.windows.net/.../ConList.csv)는
+      2026-01-28 철회됨. 구 소스를 쓰면 안 된다.
+    probe: { status: "ok-unparsed", checked_at: "2026-07-30T02:36:00Z", note: ">10MB, 최신 2026-07-24" }
+    blocker: "가상자산 주소 필드 유무 미확인"
+    enabled: true
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 미국
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:us-fedreg-agency"
+    src: "SRC:us-federalregister"
+    label: { ko: "연방관보 — 기관별", en: "Federal Register by agency" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.federalregister.gov/api/v1/documents.json?conditions[agencies][]=financial-crimes-enforcement-network&order=newest"
+    format: "json"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-fincen", "REG:us-bsa"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "robots 는 /documents/search 등 HTML 경로만 Disallow, /api/ 제한 없음"
+    license: "gov-open"
+    parser: "federal_register_json"
+    parser_difficulty: 1
+    parser_note: >
+      FinCEN·OFAC·DOJ 직접 접근이 전부 차단되어 이 API 가 미국 1차 규범의 주 우회로다.
+      기관 slug 는 /api/v1/agencies 로 확정 필요 — 현재 FinCEN slug 만 검증됨.
+    probe: { status: "ok", checked_at: "2026-07-30T02:44:00Z", note: "315건 반환" }
+    enabled: true
+
+  - id: "FEED:us-fedreg-term"
+    src: "SRC:us-federalregister"
+    label: { ko: "연방관보 — 주제어", en: "Federal Register by term" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.federalregister.gov/api/v1/documents.json?conditions[term]=virtual+currency&order=newest"
+    format: "json"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["REG:us-bsa"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "federal_register_json"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "537건 반환" }
+    enabled: true
+
+  - id: "FEED:us-sec-press"
+    src: "SRC:us-sec"
+    label: { ko: "SEC 보도자료", en: "SEC Press Releases" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.sec.gov/news/pressreleases.rss"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-sec"]
+    robots_ok: null
+    tos_note: "robots.txt 403 으로 미확인. SEC 는 연락처 포함 User-Agent 요구가 알려져 있음 — UA 명시 필수"
+    license: "gov-open"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "최신 2026-07-27, 25건" }
+    enabled: true
+
+  - id: "FEED:us-cftc-enforcement"
+    src: "SRC:us-cftc"
+    label: { ko: "CFTC 집행조치", en: "CFTC Enforcement" }
+    category: "enforcement"
+    transport: "rss"
+    endpoint: "https://www.cftc.gov/RSS/RSSENF/rssenf.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-cftc"]
+    robots_ok: null
+    tos_note: "공식 RSS 경로 · robots 미확인"
+    license: "gov-open"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:34:00Z", note: "최신 2026-07-07" }
+    enabled: true
+
+  # ── 미국 연방기관: 2파에서 브라우저 헤더로 차단 해제 (BLK-03 해소) ──
+  - id: "FEED:us-fincen-releases"
+    src: "SRC:us-fincen"
+    label: { ko: "FinCEN 보도자료", en: "FinCEN News Releases" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.fincen.gov/news-room/news-releases"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-fincen", "REG:us-bsa"]
+    fetch_strategy: "browser_headers"
+    robots_ok: null
+    tos_note: "robots.txt 미확인. 브라우저 헤더로 200 확인 — 요청 간격 2초 준수"
+    parser: "html_list"
+    parser_difficulty: 4
+    probe: { status: "ok", checked_at: "2026-07-30T12:00:00Z", note: "2파 curl+헤더로 200. 1파의 timeout 판정은 클라이언트 문제였음" }
+    enabled: true
+
+  - id: "FEED:us-ofac-recent"
+    src: "SRC:us-ofac"
+    label: { ko: "OFAC 최근 조치", en: "OFAC Recent Actions" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://ofac.treasury.gov/recent-actions"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-ofac"]
+    fetch_strategy: "browser_headers"
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    parser_note: "FEED:us-ofac-delta 가 구조화 데이터를 주므로 이 피드는 지정 사유·설명 보강용"
+    probe: { status: "ok", checked_at: "2026-07-30T12:00:00Z", note: "2파 브라우저 헤더로 200" }
+    enabled: true
+
+  - id: "FEED:us-doj-press"
+    src: "SRC:us-doj"
+    label: { ko: "DOJ 보도자료", en: "DOJ Press Releases" }
+    category: "enforcement"
+    transport: "html"
+    endpoint: "https://www.justice.gov/opa/pr"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-doj"]
+    fetch_strategy: "browser_headers"
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    parser_note: "RSS(/news/rss)는 403 지속. /opa/pr 목록 페이지네이션으로 대체. search.justice.gov 는 JS 봇검증(202)"
+    probe: { status: "ok", checked_at: "2026-07-30T12:00:00Z", note: "2파 브라우저 헤더로 200" }
+    enabled: true
+
+  # ⚠️ 철회 탐지 전용 — 연방관보만으로는 규칙 철회를 알 수 없다 (2파 발견)
+  - id: "FEED:us-reginfo-agenda"
+    src: "SRC:us-reginfo"
+    label: { ko: "OIRA 통합규제의제", en: "OIRA Unified Agenda" }
+    category: "legislative-tracker"
+    transport: "html"
+    endpoint: "https://www.reginfo.gov/public/do/eAgendaMain?operation=OPERATION_GET_AGENCY_RULE_LIST&currentPubId=<PUBID>&agencyCode=1506"
+    format: "html"
+    cadence: "weekly"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["ORG:us-fincen", "REG:us-bsa"]
+    robots_ok: null
+    parser: "reginfo_agenda"
+    parser_difficulty: 4
+    parser_note: >
+      ⚠️ **이 피드가 없으면 규칙 철회를 탐지할 수 없다.**
+      2파 실측: Travel Rule $250 안(2025-04-16 철회)과 비수탁 지갑 안(2024-04-12 철회)
+      **둘 다 연방관보 철회공고 없이** 통합의제상 "Completed Actions" 로만 종결되었다.
+      같은 기관이 ABLV 건(89 FR 79184)에서는 관보 공고를 냈으므로 형식 선택은 의도적이다.
+      RIN 단위로 상태(Proposed/Final/Long-Term/Completed)를 추적해야 한다.
+      ⚠️ pubId 202604 는 미발행 — **빈 응답을 "규칙 없음"으로 오독하면 안 된다.**
+    probe: { status: "ok", checked_at: "2026-07-30T12:00:00Z", note: "2파에서 Fall 2025 의제 조회 성공. CVC 믹싱 최종조치 2027-12 로 구체화 확인" }
+    enabled: true
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · EU / 영국
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:eu-esma-news"
+    src: "SRC:eu-esma"
+    label: { ko: "ESMA 뉴스", en: "ESMA News" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.esma.europa.eu/rss.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:eu"
+    watch_nodes: ["ORG:eu-esma", "REG:eu-mica"]
+    robots_ok: null
+    tos_note: "공식 피드 · robots 미확인"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:40:00Z", note: "최신 2026-07-27" }
+    enabled: true
+
+  - id: "FEED:eu-eba-news"
+    src: "SRC:eu-eba"
+    label: { ko: "EBA 뉴스", en: "EBA News" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.eba.europa.eu/rss.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:eu"
+    watch_nodes: ["ORG:eu-eba"]
+    robots_ok: null
+    parser: "generic_rss"
+    parser_difficulty: 2
+    probe: { status: "ok", checked_at: "2026-07-30T02:40:00Z", note: "최신 2026-07-24" }
+    enabled: true
+
+  - id: "FEED:eu-amla-news"
+    src: "SRC:eu-amla"
+    label: { ko: "AMLA 뉴스", en: "AMLA News" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.amla.europa.eu/news-media/news-articles_en"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:eu"
+    watch_nodes: ["ORG:eu-amla"]
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    parser_note: "AMLA 직접감독 대상 명단 발표가 최우선 감시 대상"
+    probe: { status: "ok", checked_at: "2026-07-30T02:44:00Z", note: "최신 2026-07-22" }
+    enabled: true
+
+  - id: "FEED:eu-cellar-sparql"
+    src: "SRC:eu-publications"
+    label: { ko: "EU 법령 SPARQL", en: "EU Publications Office SPARQL" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://publications.europa.eu/webapi/rdf/sparql"
+    format: "sparql-json"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:eu"
+    watch_nodes: ["REG:eu-mica", "REG:eu-tfr", "REG:eu-amlr"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: >
+      ⚠ eur-lex.europa.eu robots: Crawl-delay 10, /legal-content/*/TXT/DOC/ 및 /SIG/ 전면 Disallow.
+      EUR-Lex 원문 직접 크롤링 금지 — 이 SPARQL 엔드포인트가 유일한 합법 경로.
+    parser: "cellar_sparql"
+    parser_difficulty: 4
+    probe: { status: "ok", checked_at: "2026-07-30T02:50:00Z" }
+    blocker: "SPARQL 쿼리 작성 필요"
+    enabled: false
+
+  - id: "FEED:gb-fca-news"
+    src: "SRC:gb-fca"
+    label: { ko: "FCA 뉴스", en: "FCA News" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.fca.org.uk/news/rss.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:gb"
+    watch_nodes: ["ORG:gb-fca"]
+    robots_ok: null
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:44:00Z", note: "최신 2026-07-28" }
+    enabled: true
+
+  - id: "FEED:gb-govuk-hmt"
+    src: "SRC:gb-govuk"
+    label: { ko: "GOV.UK 재무부 제재", en: "GOV.UK HM Treasury sanctions" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.gov.uk/search/all.atom?keywords=sanctions&organisations[]=hm-treasury"
+    format: "atom"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:gb"
+    watch_nodes: ["ORG:gb-hmt", "ORG:gb-ofsi"]
+    robots_ok: true
+    tos_note: "GOV.UK 공식 검색 피드"
+    license: "gov-open"
+    parser: "generic_atom"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:38:00Z", note: "최신 2026-07-29" }
+    enabled: true
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 아시아
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:jp-fsa-news"
+    src: "SRC:jp-fsa"
+    label: { ko: "일본 금융청 공지", en: "JFSA News", orig: "金融庁 新着情報" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "https://www.fsa.go.jp/fsaNewsListAll_rss2.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:jp"
+    language: "ja"
+    watch_nodes: ["ORG:jp-fsa"]
+    robots_ok: null
+    parser: "generic_rss"
+    parser_difficulty: 2
+    parser_note: "전체 공지 피드라 노이즈 다량 — 암호자산 관련 키워드 필터 필수"
+    probe: { status: "ok", checked_at: "2026-07-30T02:40:00Z", note: "2026-07-30 11:00 JST" }
+    enabled: true
+
+  - id: "FEED:hk-sfc-alert"
+    src: "SRC:hk-sfc"
+    label: { ko: "홍콩 SFC 경고 목록", en: "SFC Alert List" }
+    category: "warning-list"
+    transport: "html"
+    endpoint: "https://www.sfc.hk/en/alert-list"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:hk"
+    watch_nodes: ["ORG:hk-sfc"]
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    parser_note: "'Suspicious virtual asset trading platforms' 유형 존재 — 해당 유형만 추출"
+    probe: { status: "ok", checked_at: "2026-07-30T02:36:00Z" }
+    enabled: true
+
+  - id: "FEED:sg-mas-news"
+    src: "SRC:sg-mas"
+    label: { ko: "MAS 뉴스", en: "MAS News" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.mas.gov.sg/news"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:sg"
+    watch_nodes: ["ORG:sg-mas"]
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    probe: { status: "failed", checked_at: "2026-07-30T02:46:00Z", note: "서비스 오류 페이지 반환" }
+    blocker: "MAS 사이트 전면 장애 또는 차단 — 재실측 필요. 싱가포르 규제 도시에도 동일 문제 보고"
+    enabled: false
+
+  - id: "FEED:au-austrac-news"
+    src: "SRC:au-austrac"
+    label: { ko: "AUSTRAC 뉴스", en: "AUSTRAC News" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.austrac.gov.au/news-and-media"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:au"
+    watch_nodes: ["ORG:au-austrac"]
+    robots_ok: null
+    parser: "html_list"
+    parser_difficulty: 4
+    probe: { status: "failed", checked_at: "2026-07-30T02:50:00Z", note: "timeout ×2, ECONNRESET ×1" }
+    blocker: "재실측 필요"
+    enabled: false
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 한국
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:kr-fsc-press"
+    src: "SRC:kr-fsc"
+    label: { ko: "금융위원회 보도자료", en: "FSC Press Releases" }
+    category: "regulator-notice"
+    transport: "rss"
+    endpoint: "http://www.fsc.go.kr/about/fsc_bbs_rss/?fid=0111"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-fsc", "REG:kr-tfia", "REG:kr-vaupa"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "robots: User-agent:* / Allow: / — 전면 허용"
+    license: "gov-open"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:36:00Z", note: "2026-07-30 갱신 확인" }
+    enabled: true
+
+  - id: "FEED:kr-fsc-legislative"
+    src: "SRC:kr-fsc"
+    label: { ko: "금융위원회 입법예고", en: "FSC legislative notice" }
+    category: "legislative-tracker"
+    transport: "html"
+    endpoint: "https://www.fsc.go.kr/po040301"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-fsc"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    license: "gov-open"
+    parser: "html_list"
+    parser_difficulty: 4
+    parser_note: "첨부파일 hwpx/pdf — 본문 추출 별도 처리 필요. proposed 상태 규범의 1차 소스."
+    probe: { status: "ok", checked_at: "2026-07-30T02:52:00Z", note: "총 1,412건" }
+    enabled: true
+
+  - id: "FEED:kr-kofiu-report"
+    src: "SRC:kr-kofiu"
+    label: { ko: "금융정보분석원 알림", en: "KoFIU notifications" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.kofiu.go.kr/kor/notification/report.do"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-kofiu", "REG:kr-tfia"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "robots: Googlebot 만 /kor/etc/search.do 차단, 그 외 Allow: /"
+    license: "gov-open"
+    parser: "html_js_render"
+    parser_difficulty: 5
+    probe: { status: "ok", checked_at: "2026-07-30T02:42:00Z", note: "도달했으나 목록 미렌더 — JS 렌더 추정" }
+    blocker: "JS 렌더링 필요 또는 내부 XHR 엔드포인트 추적 필요"
+    enabled: false
+
+  - id: "FEED:kr-fss-press"
+    src: "SRC:kr-fss"
+    label: { ko: "금융감독원 보도자료", en: "FSS Press Releases" }
+    category: "regulator-notice"
+    transport: "html"
+    endpoint: "https://www.fss.or.kr/fss/bbs/B0000188/list.do?menuNo=200218"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-fss"]
+    robots_ok: null
+    parser: "html_js_render"
+    parser_difficulty: 5
+    probe: { status: "ok", checked_at: "2026-07-30T02:48:00Z", note: "도달했으나 목록 미렌더, RSS 미발견" }
+    blocker: "JS 렌더링 필요"
+    enabled: false
+
+  - id: "FEED:kr-law-api-law"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "국가법령정보 법령 API", en: "Korea law API (statutes)" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=law&type=JSON&query=<query>"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["REG:kr-tfia", "REG:kr-vaupa"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "robots: Allow: / 전면 허용. OC 발급 신청 필요(무료)"
+    license: "gov-open"
+    parser: "law_go_kr_json"
+    parser_difficulty: 2
+    probe: { status: "ok", checked_at: "2026-07-30T02:36:00Z", note: "OC=test 로 동작 확인, totalCnt=2" }
+    blocker: "OC(오픈API 인증키) 발급 필요 — https://open.law.go.kr/LSO/openApi/cuAskList.do"
+    enabled: false
+
+  - id: "FEED:kr-law-api-prec"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "국가법령정보 판례 API", en: "Korea law API (precedents)" }
+    category: "enforcement"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=prec&type=JSON&query=<query>"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-scourt"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_go_kr_json"
+    parser_difficulty: 2
+    parser_note: "대법원 종합법률정보(glaw.scourt.go.kr) DNS 실패 → 이 API 가 판례 대체 경로"
+    probe: { status: "ok", checked_at: "2026-07-30T02:46:00Z", note: "totalCnt=4" }
+    blocker: "OC 발급 필요"
+    enabled: false
+
+  # ⭐ 온톨로지 자동 구축 3종 — 손으로 만들려던 관계를 API 가 직접 준다
+  - id: "FEED:kr-law-delegation"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "위임법령 조회", en: "Delegation mapping" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawService.do?OC=<OC>&target=lsDelegated&type=JSON&ID=<법령ID>"
+    format: "json"
+    cadence: "weekly"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["REG:kr-tfia", "PROV:kr-tfia-art5-3"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_delegation_json"
+    parser_difficulty: 3
+    parser_note: >
+      ⭐ **PROV → PROV 위임 엣지를 자동 생성한다.**
+      반환 필드: 위임구분 · 위임법령일련번호 · 위임법령조문정보 · 링크텍스트 · 조항호목.
+      트래블룰의 3단 위임(법률 제5조의3 → 제6조제3항 → 시행령 제10조의10)을
+      손으로 추적했는데, 이 API 가 조항호목 단위로 직접 준다.
+      → 신규 술어 DELEGATES_TO 필요 (온톨로지 확장 과제).
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-law-article-history"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "조문별 변경 이력", en: "Article-level amendment history" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=lsJoHstInf&type=JSON&ID=<법령ID>"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["REG:kr-tfia", "REG:kr-vaupa"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_article_history_json"
+    parser_difficulty: 3
+    parser_note: >
+      ⭐ **L2 STATE 레코드를 직접 준다.** 조문 단위 개정 이력이므로
+      PROV 노드의 valid_from / valid_to 구간을 API 에서 생성할 수 있다.
+      "일자별 조문 개정 이력"과 함께 쓰면 규범 상태 전이(EVT)까지 자동화된다.
+      기존 설계는 이걸 사람이 큐레이션할 계획이었다.
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-law-article-unit"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "조항호목 본문 조회", en: "Article/paragraph/item body" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawService.do?OC=<OC>&target=lawjosub&type=JSON&ID=<법령ID>&JO=<조문번호>"
+    format: "json"
+    cadence: "on-change"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["PROV:kr-tfia-art5-3"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_article_unit_json"
+    parser_difficulty: 2
+    parser_note: >
+      ⭐ **PROV 노드 생성기.** 조/항/호/목 단위로 본문을 반환하므로
+      citation_path("제5조의3 제1항 제1호")와 text_orig 를 그대로 채울 수 있다.
+      현재 씨앗 노드의 text_orig 미확보 문제가 이걸로 해소된다.
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-law-term-article"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "법령용어-조문 연계", en: "Legal term ↔ article linkage" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawService.do?OC=<OC>&target=lstrmRlt&type=JSON&query=<용어>"
+    format: "json"
+    cadence: "weekly"
+    auth: "registration"
+    priority: "P1"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["CONCEPT:x-virtual-asset"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_term_article_json"
+    parser_difficulty: 3
+    parser_note: >
+      ⭐ **CONCEPT ↔ PROV 의 DEFINES 엣지를 자동 생성한다.**
+      용어사전 250개 노드를 손으로 조문에 결속할 계획이었는데 이 API 가 대체한다.
+      양방향(법령용어-조문 / 조문-법령용어) 모두 제공되므로 역엣지도 확보된다.
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-law-oldnew"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "신구법 비교", en: "Old/new law comparison" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawService.do?OC=<OC>&target=oldAndNew&type=JSON&ID=<법령ID>"
+    format: "json"
+    cadence: "on-change"
+    auth: "registration"
+    priority: "P1"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_oldnew_json"
+    parser_difficulty: 3
+    parser_note: "AMENDS 엣지의 articles[] 한정자를 조문 단위로 채운다. 개정 전후 대조."
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-fsc-decisions"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "금융위원회 결정문", en: "FSC decisions" }
+    category: "enforcement"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=fsc&type=JSON&query=가상자산"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P1"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-fsc", "ORG:kr-kofiu"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_committee_decision_json"
+    parser_difficulty: 2
+    parser_note: >
+      제재 의결 원문. FIU 제재공시 PDF 를 손으로 읽던 것을 구조화 데이터로 대체.
+      증권선물위원회(target=sfc)도 동일 패턴 — 불공정거래 제재.
+    probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-law-api-admrul"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "국가법령정보 행정규칙 API", en: "Korea law API (admin rules)" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=admrul&type=JSON&query=<query>"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["ORG:kr-kofiu"]
+    robots_ok: true
+    license: "gov-open"
+    parser: "law_go_kr_json"
+    parser_difficulty: 2
+    probe: { status: "unverified", checked_at: "2026-07-30T02:38:00Z", note: "191종 API 목록에 존재 확인, 호출 미실행" }
+    blocker: "OC 발급 + 실측 필요"
+    enabled: false
+
+  # ⚠️ 최우선 감시 — 특금법 시행 2026-08-20, 하위법령은 2026-07-30 기준 미공포
+  - id: "FEED:kr-law-eflaw-watch"
+    src: "SRC:kr-lawgokr"
+    label: { ko: "특금법 하위법령 공포 감시", en: "TFIA subordinate legislation watch" }
+    category: "primary-law"
+    transport: "api"
+    endpoint: "https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=eflaw&type=JSON&query=특정금융거래정보"
+    format: "json"
+    cadence: "daily"
+    auth: "registration"
+    priority: "P0"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["REG:kr-tfia", "PROV:kr-tfia-art5-3"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    license: "gov-open"
+    parser: "law_go_kr_json"
+    parser_difficulty: 2
+    parser_note: >
+      ⚠️ **target=eflaw 는 「시행예정」만 반환하지 않는다 — 연혁 전체를 반환한다.**
+      2026-07-30 직접 조회 결과 totalCnt=81 (과거 개정 이력 포함).
+      따라서 파서가 `시행일자 > 오늘` 필터를 직접 적용해야 한다. API 가 걸러주지 않는다.
+      → FACT:0000019 참조.
+
+      JSON 응답 구조: 루트 `LawSearch` → `law[]`, 각 항목에
+      법령ID · 법령일련번호(MST) · 법령명한글 · 공포일자 · 공포번호 · 시행일자 ·
+      제개정구분명 · 소관부처명 · 법령상세링크.
+      본문은 법령상세링크 또는 MST 로 lawService.do 재호출.
+
+      감시 대상: 시행령 제10조의10(트래블룰 기준금액 폐지안), 제10조의20,
+      감독규정 제26조·제28조의2(1,000만원 기준).
+      ⚠️ 「감독규정」과 「검사 및 제재규정」은 **별개 행정규칙**이다 (FACT:0000018).
+    probe:
+      status: "ok"
+      checked_at: "2026-07-30T13:40:00Z"
+      note: >
+        OC=test 로 직접 조회 성공. totalCnt=81. 법률 제21358호(공포 20260219 /
+        시행 20260820 / 일부개정)가 첫 행에 확인됨 — CTR:00001 의 3중 교차검증
+        (법제처 부칙 · 국회 의안정보 · 법제처 API).
+    blocker: "BLK-01 OC 발급"
+    enabled: false
+
+  - id: "FEED:kr-assembly-bill"
+    src: "SRC:kr-assembly"
+    label: { ko: "국회 의안정보 검색", en: "National Assembly bill search" }
+    category: "legislative-tracker"
+    transport: "api"
+    endpoint: "https://likms.assembly.go.kr/bill/bi/bill/sch/findSchPaging.do"
+    format: "json"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    watch_nodes: ["JUR:kr", "REG:kr-tfia"]
+    robots_ok: null
+    parser: "assembly_bill_search"
+    parser_difficulty: 3
+    parser_note: >
+      POST 요청. **인증키 불요** (2파 실측 확인). 열린국회정보 OpenAPI(인증키 필요)와 별개 경로.
+      ⚠️ 검색어 주의 — 스테이블코인 법안은 법률용어로 "가치안정형"·"가치고정형" 을 쓰므로
+      "스테이블코인" 검색은 0건을 반환한다.
+    probe: { status: "ok", checked_at: "2026-07-30T00:00:00Z", note: "2파에서 POST 경로 확인, 의안 2214894 조회 성공" }
+    enabled: true
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 국제기구
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:intl-fsb-news"
+    src: "SRC:intl-fsb"
+    label: { ko: "FSB 발간물", en: "FSB publications" }
+    category: "intl-body"
+    transport: "rss"
+    endpoint: "https://www.fsb.org/feed/"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:intl"
+    watch_nodes: ["ORG:intl-fsb"]
+    robots_ok: null
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "최신 2026-07-28" }
+    enabled: true
+
+  - id: "FEED:intl-bis-press"
+    src: "SRC:intl-bis"
+    label: { ko: "BIS 보도자료", en: "BIS Press Releases" }
+    category: "intl-body"
+    transport: "rss"
+    endpoint: "https://www.bis.org/doclist/all_pressrels.rss"
+    format: "rss1"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:intl"
+    watch_nodes: ["ORG:intl-bis"]
+    robots_ok: true
+    tos_note: "공식 RSS 안내 페이지 게재"
+    parser: "rss1_rdf"
+    parser_difficulty: 2
+    probe: { status: "ok", checked_at: "2026-07-30T02:44:00Z", note: "최신 2026-06-28" }
+    enabled: true
+
+  - id: "FEED:intl-fatf-publications"
+    src: "SRC:intl-fatf"
+    label: { ko: "FATF 발간물", en: "FATF Publications" }
+    category: "intl-body"
+    transport: "html"
+    endpoint: "https://www.fatf-gafi.org/en/publications.html"
+    format: "html"
+    cadence: "daily"
+    auth: "none"
+    priority: "P1"
+    jurisdiction: "JUR:intl"
+    watch_nodes: ["ORG:intl-fatf", "REG:intl-fatf-r15", "REG:intl-fatf-r16"]
+    robots_ok: false
+    robots_checked: "2026-07-30"
+    tos_note: >
+      ⚠ robots.txt 자체가 403 — 정책 확인 불가. 봇 차단으로 간주하고 자동수집하지 않는다.
+      대체: 이메일 구독 또는 총회 후 수동 취득.
+    parser: "html_list"
+    parser_difficulty: 4
+    probe: { status: "failed", checked_at: "2026-07-30T02:34:00Z", note: "HTTP 403" }
+    blocker: "robots_ok: false — 수집기가 거부. 수동 경로 확정 필요"
+    enabled: false
+
+  # ══════════════════════════════════════════════════════════
+  # P0 · 산업 · 온체인 · 학술
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:x-chainalysis-blog"
+    src: "SRC:us-chainalysis"
+    label: { ko: "Chainalysis 블로그", en: "Chainalysis Blog" }
+    category: "industry-research"
+    transport: "rss"
+    endpoint: "https://www.chainalysis.com/blog/feed/"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:us"
+    watch_nodes: ["VEND:us-chainalysis"]
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: >
+      robots: /wp-content/uploads/ 및 *.pdf Disallow, /blog 제한 없음.
+      ⚠ 피드 수집은 허용되나 첨부 PDF 자동 다운로드는 금지.
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "최신 2026-07-29" }
+    enabled: true
+
+  - id: "FEED:x-elliptic-blog"
+    src: "SRC:gb-elliptic"
+    label: { ko: "Elliptic 블로그", en: "Elliptic Blog" }
+    category: "industry-research"
+    transport: "rss"
+    endpoint: "https://www.elliptic.co/blog/rss.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:gb"
+    watch_nodes: ["VEND:gb-elliptic"]
+    robots_ok: null
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    parser_note: "10건 롤링 — 매일 수집하지 않으면 유실"
+    probe: { status: "ok", checked_at: "2026-07-30T02:36:00Z", note: "최신 2026-07-29" }
+    enabled: true
+
+  - id: "FEED:x-defillama-hacks"
+    src: "SRC:x-defillama"
+    label: { ko: "DefiLlama 해킹 추적", en: "DefiLlama Hacks" }
+    category: "incident-tracker"
+    transport: "api"
+    endpoint: "https://api.llama.fi/hacks"
+    format: "json"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:x"
+    watch_nodes: ["TYP:x-exploit"]
+    robots_ok: true
+    tos_note: "공개 API"
+    parser: "defillama_hacks_json"
+    parser_difficulty: 1
+    parser_note: "500+ 레코드 전체 스냅샷 — list_diff 방식으로 신규 사고 탐지"
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z" }
+    enabled: true
+
+  - id: "FEED:x-arxiv-aml"
+    src: "SRC:x-arxiv"
+    label: { ko: "arXiv 자금세탁 논문", en: "arXiv AML papers" }
+    category: "academic"
+    transport: "api"
+    endpoint: "http://export.arxiv.org/api/query?search_query=cat:cs.CR+AND+abs:%22money+laundering%22&sortBy=submittedDate&sortOrder=descending"
+    format: "atom"
+    cadence: "daily"
+    auth: "none"
+    priority: "P0"
+    jurisdiction: "JUR:x"
+    robots_ok: true
+    tos_note: "arXiv API ToS: 요청 간 3초 간격 권장"
+    license: "cc-various"
+    parser: "arxiv_atom"
+    parser_difficulty: 1
+    min_interval_seconds: 3
+    probe: { status: "ok", checked_at: "2026-07-30T02:31:00Z", note: "totalResults=61, 최신 2026-07-21" }
+    enabled: true
+
+  # ══════════════════════════════════════════════════════════
+  # P0 보조 · 매체 (노이즈 필터 전제 · 2차 확인용)
+  # ══════════════════════════════════════════════════════════
+
+  - id: "FEED:x-coindesk"
+    src: "SRC:x-coindesk"
+    label: { ko: "CoinDesk", en: "CoinDesk" }
+    category: "media"
+    transport: "rss"
+    endpoint: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P2"
+    jurisdiction: "JUR:x"
+    robots_ok: null
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    parser_note: "T4 — 단독 근거로 사용 금지. 1차 출처 차단 시 조기 경보용."
+    probe: { status: "ok", checked_at: "2026-07-30T02:42:00Z", note: "26건" }
+    enabled: true
+
+  - id: "FEED:x-theblock"
+    src: "SRC:x-theblock"
+    label: { ko: "The Block", en: "The Block" }
+    category: "media"
+    transport: "rss"
+    endpoint: "https://www.theblock.co/rss.xml"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P2"
+    jurisdiction: "JUR:x"
+    robots_ok: true
+    robots_checked: "2026-07-30"
+    tos_note: "robots: /search?query=* 만 Disallow"
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:40:00Z", note: "20건" }
+    enabled: true
+
+  - id: "FEED:kr-blockmedia"
+    src: "SRC:kr-blockmedia"
+    label: { ko: "블록미디어", en: "Blockmedia" }
+    category: "media"
+    transport: "rss"
+    endpoint: "https://www.blockmedia.co.kr/feed"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P2"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    robots_ok: null
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:42:00Z", note: "최신 2026-07-30" }
+    enabled: true
+
+  - id: "FEED:kr-tokenpost"
+    src: "SRC:kr-tokenpost"
+    label: { ko: "토큰포스트", en: "TokenPost" }
+    category: "media"
+    transport: "rss"
+    endpoint: "https://www.tokenpost.kr/rss"
+    format: "rss2"
+    cadence: "daily"
+    auth: "none"
+    priority: "P2"
+    jurisdiction: "JUR:kr"
+    language: "ko"
+    robots_ok: null
+    license: "proprietary"
+    parser: "generic_rss"
+    parser_difficulty: 1
+    probe: { status: "ok", checked_at: "2026-07-30T02:48:00Z", note: "24건" }
+    enabled: true
+
+# ══════════════════════════════════════════════════════════
+# 폐기 (수집 금지 — 기록 보존용)
+# ══════════════════════════════════════════════════════════
+retired:
+  - id: "FEED:gb-ofsi-conlist"
+    endpoint: "https://ofsistorage.blob.core.windows.net/publishlive/2022format/ConList.csv"
+    reason: "OFSI Consolidated List 2026-01-28 철회. 파일은 잔존하나 갱신되지 않음."
+    superseded_by: "FEED:gb-uk-sanctions-csv"
+    retired_at: "2026-07-30"
+
+  - id: "FEED:eu-eurlex-rss"
+    endpoint: "https://eur-lex.europa.eu/EN/display-feed.rss?myRssId=oj+l"
+    reason: "피드 무효 응답 + robots 가 원문 경로 전면 Disallow"
+    superseded_by: "FEED:eu-cellar-sparql"
+    retired_at: "2026-07-30"
+
+  - id: "FEED:kr-coindeskkorea"
+    endpoint: "https://www.coindeskkorea.com/rss/allArticle.xml"
+    reason: "RSS 아닌 무관 콘텐츠 HTML 반환 — 도메인 성격 변질 의심. 신뢰 불가."
+    retired_at: "2026-07-30"
+
+# ══════════════════════════════════════════════════════════
+# 선행 작업 (등재 전 해소 필요)
+# ══════════════════════════════════════════════════════════
+blockers:
+  - id: "BLK-01"
+    title: "법제처 오픈API OC 발급"
+    detail: "https://open.law.go.kr/LSO/openApi/cuAskList.do 에서 신청(무료). 한국 1차 법령 소스 3종이 전부 여기 묶임."
+    blocks: ["FEED:kr-law-api-law", "FEED:kr-law-api-prec", "FEED:kr-law-api-admrul"]
+    priority: "P0"
+
+  - id: "BLK-02"
+    title: "국내 IP 재실측"
+    detail: >
+      DAXA(DNS 실패), 대법원 glaw(DNS 실패), FSS·KoFIU 목록 미렌더 — 해외 러너 문제일 가능성.
+      국내 고정 IP 에서 재실측 후 CI 러너 위치 결정. 실패 시 국내 실행환경 별도 확보 필요.
+    blocks: ["FEED:kr-kofiu-report", "FEED:kr-fss-press"]
+    priority: "P0"
+
+  - id: "BLK-03"
+    title: "미국 연방기관 UA 재실측"
+    status: "resolved"
+    resolved_at: "2026-07-30"
+    detail: >
+      ✅ 해소 — 브라우저 헤더 일체 부착으로 fincen.gov·ofac.treasury.gov·justice.gov·
+      sec.gov·home.treasury.gov 전부 200 확인. 1파의 "차단" 판정은 클라이언트 문제였다.
+      fetch_strategies.browser_headers 로 등록하고 해당 피드를 활성화했다.
+      잔여 차단: congress.gov(키 발급 필요), govt.westlaw.com.
+    blocks: []
+    priority: "P1"
+
+  - id: "BLK-04"
+    title: "제재 목록 가상자산 주소 필드 확인"
+    detail: >
+      EU FSF XML, UK Sanctions CSV 의 가상자산 주소 필드 유무 미확인(10MB 초과로 미파싱).
+      OFAC SDN_ENHANCED.XML 의 feature type ID·XPath 확정 시 정규식 파싱을 구조화 파싱으로 교체.
+    blocks: ["FEED:us-ofac-sdn-enhanced"]
+    priority: "P0"
+
+  - id: "BLK-05"
+    title: "Federal Register 기관 slug 확정"
+    status: "resolved"
+    resolved_at: "2026-07-30"
+    detail: >
+      ✅ 해소 — OFAC slug 는 `foreign-assets-control-office`.
+      ⚠️ FinCEN 의 `short_name` 이 "TD" 로 오기되어 있으므로 **slug 또는 id 로만 필터링**할 것.
+      short_name 기반 매칭은 잘못된 결과를 낸다.
+    blocks: []
+    priority: "P1"
+
+  - id: "BLK-07"
+    title: "Binance 모니터십 현황 확인"
+    detail: >
+      FinCEN 집행조치 페이지에 2023-11-21 동의명령만 있고 변경·조기종료 공시 없음(소극적 증거).
+      DOJ 1차 문서 특정 실패. 다음 단계: justice.gov/opa/pr 의 2025-09~2026-04 구간 페이지네이션
+      스크레이핑 (FEED:us-doj-press 로 수집 가능해졌으므로 처리 가능).
+    blocks: []
+    priority: "P1"
+
+  - id: "BLK-08"
+    title: "23 NYCRR §200.15 현행본 확인"
+    detail: >
+      $3,000(h)(4)·$10,000(e)(2)·SAR(e)(3) 조문을 확보했으나 출처가 Wayback 아카이브
+      사본(2023-03-29 기준)이라 확신도 B. 공식 포털 govt.westlaw.com 이 차단되어
+      이후 개정 유무 미확인. dfs.ny.gov 는 plain 전략으로 접근 가능하므로 우회 탐색 필요.
+    blocks: []
+    priority: "P1"
+
+  - id: "BLK-06"
+    title: "URL 재탐색"
+    detail: "TRM Labs RSS(404), Merkle Science RSS(404), SFC VATP 목록(404×3), 열린국회정보 OpenAPI(404×3), 한국 금융제재대상자 목록"
+    blocks: []
+    priority: "P1"

@@ -1,0 +1,23 @@
+id: "JUR:hk"
+type: "JUR"
+layer: "semantic"
+label:
+  ko: "홍콩"
+  en: "Hong Kong"
+summary: >
+  SFC 의 VATP 라이선스 제도와 스테이블코인 조례를 운영한다. 인가 대비 탈락 비율이 높은 고관문형 체계다.
+iso: "hk"
+fatf_member: true
+fatf_style_body: "APG"
+legal_family: "common"
+tags: ["hk"]
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 증거가 자체 실측 기록뿐이다. 관할 속성(fatf_member·fatf_style_body)의
+  직접 근거가 아니므로 FATF 회원국 목록 문서로 재결속해야 한다. 재검토 과제.

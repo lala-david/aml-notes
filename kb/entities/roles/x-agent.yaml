@@ -1,0 +1,36 @@
+id: "ROLE:x-agent"
+type: "ROLE"
+layer: "kinetic"
+label:
+  ko: "AI 에이전트"
+  en: "AI agent"
+summary: >
+  리서치·구축·검증을 수행하는 AI 에이전트. **어떤 액션도 직접 실행할 수 없다.**
+  산출물은 _research/ 에만 쓰고, 지식 확정은 반드시 사람 역할을 거친다.
+is_agent: true
+tags: ["governance", "ai", "propose-only"]
+can_execute: []
+cannot_execute:
+  - "ACTION:x-promote-fact"
+  - "ACTION:x-retract-fact"
+  - "ACTION:x-transmit-originator-info"
+scope:
+  node_types: []
+  writable_paths: ["_research/"]
+  readonly_paths: ["kb/", "ingest/config/", "quality/rules/"]
+constraints:
+  - "kb/ 에 직접 쓰지 않는다 — 제안까지만"
+  - "산출물은 검증 게이트를 통과해야 지식이 된다"
+  - "발주사·자사 관련 문자열을 어떤 산출물에도 포함하지 않는다 (I-12)"
+  - "출처 없는 주장을 생성하지 않는다"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  ⭐ 이 노드가 AI 자율성 제한의 **구조적** 표현이다. 문서상 약속이 아니라
+  온톨로지 요소이므로 스키마가 강제한다 — node.schema.json 이
+  is_agent: true 인 ROLE 의 can_execute 를 maxItems: 0 으로 제약한다 (K-7).
+
+  근거: DOC:jp-leadingai-palantir-ontology — AI FDE 는 사용자의 기존 권한을
+  엄격히 준수하며 변경 시 항상 브랜치 제안을 만들어 사람 리뷰에 제출한다.
+  본 저장소는 이를 더 보수적으로 적용해, 에이전트에게 kb/ 쓰기 권한 자체를 주지 않는다.

@@ -1,0 +1,19 @@
+id: "SRC:us-chainalysis"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "Chainalysis"
+  en: "Chainalysis"
+summary: >
+  온체인 분석업체. 연례 범죄 보고서의 추정치가 널리 인용되나 이듬해 대폭 상향 개정되는 경향이 있어 revision 관리가 필수다.
+tier: "T3"
+tier_basis: >
+  온체인 분석업체의 자체 조사 보고서. 방법론이 공개되나 검증은 제3자가 하지 않는다.
+publisher_kind: "vendor"
+base_url: "https://www.chainalysis.com"
+language: "en"
+paywall: false
+tags: ["us"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

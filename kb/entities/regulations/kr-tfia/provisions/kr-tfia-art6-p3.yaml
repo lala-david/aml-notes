@@ -1,0 +1,55 @@
+id: "PROV:kr-tfia-art6-p3"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "특금법 제6조 제3항 (가상자산사업자에 대한 적용 위임)"
+  en: "TFIA Article 6(3) — delegation for VASP application"
+  short: "특금법 제6조제3항"
+summary: >
+  가상자산사업자에 대한 정보제공 의무의 구체적 적용 방식을 대통령령에 위임하는 조문.
+  제5조의3(전신송금 정보제공)이 일반 원칙과 상한을 정하고, 이 조문이 VASP 적용을
+  위임하며, 시행령 제10조의10이 기준금액을 확정하는 3단 구조의 **중간 고리**다.
+parent_reg: "REG:kr-tfia"
+citation_path: "제6조 제3항"
+language: "ko"
+tags: ["korea", "travel-rule", "delegation"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:kr-tfia"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        locator: "제6조 제3항"
+        retrieved: "2026-07-30"
+  - predicate: "DELEGATES_TO"
+    to: "PROV:kr-tfia-sd-art10-10"
+    qualifiers:
+      delegation_kind: "scope"
+    valid_from: "2022-03-25"
+    valid_to: null
+    recorded_at: "2026-07-30"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        locator: "제6조 제3항"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "B"
+    locator: "제6조 제3항"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 조문 존재와 위임 구조는 리서치에서 확인되었으나 **원문 문언을
+  직접 확보하지 않았다.** OC 발급 후 lawService.do target=lawjosub 으로
+  text_orig 를 채우고 A 로 승격할 것.
+
+  【3단 위임 사슬 완성】
+    PROV:kr-tfia-art5-3   --DELEGATES_TO(ceiling=5,000,000 KRW)--> 시행령 제10조의10
+    PROV:kr-tfia-art6-p3  --DELEGATES_TO(kind=scope)-----------> 시행령 제10조의10
+    PROV:kr-tfia-sd-art10-10 --IMPOSES(threshold=1,000,000 KRW)--> OBL
+
+  두 개의 법률 조문이 같은 시행령 조문으로 수렴한다 — 하나는 상한을,
+  다른 하나는 적용범위를 위임한다. 이 구조 때문에 임계값이 법률 개정 없이 바뀔 수 있다.

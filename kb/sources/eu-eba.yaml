@@ -1,0 +1,19 @@
+id: "SRC:eu-eba"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "유럽은행감독청"
+  en: "European Banking Authority"
+summary: >
+  AML 관련 가이드라인과 스테이블코인(ART·EMT) 규정을 담당한다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.eba.europa.eu"
+language: "en"
+paywall: false
+tags: ["eu"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

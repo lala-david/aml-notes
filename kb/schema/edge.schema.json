@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aml-kb/edge.schema.json",
+  "title": "AML KB Edge",
+  "description": "지식베이스 엣지 스키마. 저장은 각 노드 파일의 edges[] 블록(출발점 기준)이며, 빌드 단계에서 이 형태로 정규화된다. 역엣지는 자동 생성한다.",
+  "type": "object",
+  "required": ["predicate", "from", "to", "recorded_at"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^E:[0-9a-f]{12}$",
+      "description": "sha256(from|predicate|to|valid_from)[:12] · 참조가 필요한 경우에만 발급"
+    },
+    "predicate": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]*$",
+      "description": "ontology.yaml 의 predicates 에 정의된 것만 허용"
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,7}:[a-z0-9]{1,4}(-[a-z0-9][a-z0-9-]*)?$"
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,7}:[a-z0-9]{1,4}(-[a-z0-9][a-z0-9-]*)?$"
+    },
+    "qualifiers": {
+      "type": "object",
+      "description": "술어별 한정자. 스키마는 ontology.yaml 참조.",
+      "properties": {
+        "threshold": { "type": ["number", "null"] },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "grace_until": { "type": "string", "format": "date" },
+        "fidelity": { "type": "string", "enum": ["full", "partial", "divergent"] },
+        "sufficiency": { "type": "string", "enum": ["sufficient", "partial"] },
+        "equivalence": { "type": "string", "enum": ["strict", "broad", "narrow"] },
+        "effectiveness": { "type": "string", "enum": ["high", "medium", "low"] },
+        "precision_est": { "type": "number", "minimum": 0, "maximum": 1 },
+        "recall_est": { "type": "number", "minimum": 0, "maximum": 1 },
+        "license_kind": { "type": "string" },
+        "status": { "type": "string" },
+        "list": { "type": "string" },
+        "designated_on": { "type": "string", "format": "date" },
+        "delisted_on": { "type": ["string", "null"], "format": "date" },
+        "attributor": { "type": "string" },
+        "basis": {
+          "type": "string",
+          "enum": ["explicit_legislative", "official_statement", "contemporaneous_record", "expert_consensus", "forensic", "temporal_only"]
+        },
+        "mechanism": { "type": "string" },
+        "lag_days": { "type": "integer", "minimum": 0 },
+        "confidence": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "amount_usd": { "type": "number", "minimum": 0 },
+        "share": { "type": "number", "minimum": 0, "maximum": 1 },
+        "attribute": { "type": "string" },
+        "from_value": {},
+        "to_value": {},
+        "since": { "type": "string", "format": "date" },
+        "until": { "type": ["string", "null"], "format": "date" },
+        "scope_note": { "type": "string" },
+        "segment": { "type": "string" },
+        "disclosed_by": { "type": "string" },
+        "articles": { "type": "array", "items": { "type": "string" } },
+        "count": { "type": "integer" },
+        "direction": { "type": "string" },
+        "evidence_kind": {
+          "type": "string",
+          "enum": ["official-doc", "procurement", "press", "vendor-claim"]
+        },
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "resolution": { "type": "string" },
+        "quote": { "type": "string" },
+        "locator": { "type": "string" },
+        "effective": { "type": "string", "format": "date" }
+      },
+      "additionalProperties": true
+    },
+    "valid_from": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "이 관계가 성립하기 시작한 날. null = 시점 불명 또는 항구적."
+    },
+    "valid_to": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "null = 현재까지 유효"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date",
+      "description": "우리가 이 관계를 기록한 날 (transaction time)"
+    },
+    "retracted_at": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "retraction_reason": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["doc", "confidence"],
+        "properties": {
+          "doc": { "type": "string", "pattern": "^DOC:[a-z0-9]{1,4}-[a-z0-9][a-z0-9-]*$" },
+          "confidence": { "type": "string", "enum": ["A", "B", "C", "D"] },
+          "locator": { "type": "string" },
+          "quote": { "type": "string" },
+          "retrieved": { "type": "string", "format": "date" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "derived": {
+      "type": "boolean",
+      "default": false,
+      "description": "빌드가 생성한 역엣지·추론 엣지 여부. true 면 소스 파일에 저장하지 않는다."
+    }
+  },
+  "allOf": [
+    {
+      "description": "CAUSED 엣지는 근거 유형이 필수이며 temporal_only 를 허용하지 않는다",
+      "if": {
+        "properties": { "predicate": { "const": "CAUSED" } },
+        "required": ["predicate"]
+      },
+      "then": {
+        "properties": {
+          "qualifiers": {
+            "type": "object",
+            "required": ["mechanism", "basis", "confidence"],
+            "properties": {
+              "basis": { "not": { "const": "temporal_only" } }
+            }
+          }
+        },
+        "required": ["qualifiers"]
+      }
+    },
+    {
+      "description": "IMPOSES 에 임계값이 있으면 통화 단위가 필수",
+      "if": {
+        "properties": {
+          "predicate": { "const": "IMPOSES" },
+          "qualifiers": { "type": "object", "required": ["threshold"] }
+        },
+        "required": ["predicate", "qualifiers"]
+      },
+      "then": {
+        "properties": {
+          "qualifiers": { "required": ["currency"] }
+        }
+      }
+    },
+    {
+      "description": "ATTRIBUTED_TO 는 귀속 주체와 근거가 필수",
+      "if": {
+        "properties": { "predicate": { "const": "ATTRIBUTED_TO" } },
+        "required": ["predicate"]
+      },
+      "then": {
+        "properties": {
+          "qualifiers": {
+            "type": "object",
+            "required": ["attributor", "basis", "confidence"]
+          }
+        },
+        "required": ["qualifiers"]
+      }
+    }
+  ]
+}

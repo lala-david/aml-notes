@@ -1,0 +1,37 @@
+id: "ACTION:x-resolve-contradiction"
+type: "ACTION"
+layer: "kinetic"
+label:
+  ko: "상충 판정"
+  en: "Resolve contradiction"
+summary: >
+  출처가 엇갈리는 상충 레코드(CTR)에 판정을 기록한다. **어느 쪽도 삭제하지 않는다** —
+  판정 유형과 근거를 남기고, 필요 시 오류 측에 폐기 표시를 한다.
+action_kind: "governance"
+tier: "L2-write"
+tags: ["governance", "contradiction"]
+change_set:
+  creates: []
+  modifies:
+    - target: "CTR"
+      properties: ["resolution", "action", "resolved_by", "resolved_at", "verify_method"]
+    - target: "FACT"
+      properties: ["confidence", "retracted_at", "superseded_by"]
+  never_touches: ["facts", "issue", "detected_at", "sources"]
+submission_criteria:
+  - "resolution 이 허용 값이다 (a_correct / b_correct / both_valid_different_scope / both_valid_different_time / superseded / unresolved)"
+  - "analysis 에 판정 근거가 서술되어 있다"
+  - "unresolved 로 두는 경우에도 verify_method 를 명시한다"
+  - "어느 쪽 사실도 파일에서 삭제하지 않는다"
+side_effects:
+  - "판정에 따라 관련 FACT 의 확신도가 조정된다"
+  - "unresolved 인 사실을 산문이 인용하면 경고 표시가 붙는다"
+  - "ALOG 레코드를 생성한다"
+authorized_roles: ["ROLE:x-curator", "ROLE:x-reviewer"]
+requires_proposal: true
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  `unresolved` 는 실패가 아니다. **모른다는 것을 아는 상태**가 잘못 아는 상태보다 낫다.
+  2026-07-30 기준 CTR 5건 전부 판정 완료 — a_correct 3, both_valid_different_scope 2.

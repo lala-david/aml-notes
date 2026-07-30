@@ -1,0 +1,45 @@
+id: "REG:kr-tfia-sd"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보의 보고 및 이용 등에 관한 법률 시행령"
+  en: "Enforcement Decree of the Act on Reporting and Using Specified Financial Transaction Information"
+  short: "특금법 시행령"
+aliases: ["특금법 시행령", "특정금융정보법 시행령"]
+summary: >
+  특금법의 위임사항을 구체화하는 대통령령. 트래블룰 적용 기준금액(제10조의10),
+  고객확인 절차, 신고 요건 등을 정한다. 법률이 정한 상한 범위 안에서
+  시행령만 개정해도 실무 기준이 바뀌므로 감시 우선순위가 높다.
+reg_kind: "decree"
+citation: "대통령령 제35947호 (2025-12-30 공포, 2026-01-02 시행, 타법개정)"
+binding: "binding"
+language: "ko"
+tags: ["korea", "aml", "travel-rule", "subordinate-legislation"]
+external_ids:
+  law_go_kr_id: "009256"
+  law_go_kr_mst: "281385"
+  decree_no: "35947"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:kr"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-art10-10"
+        confidence: "A"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-sd-art10-10"
+    confidence: "A"
+    locator: "law.go.kr DRF lawSearch target=law (JSON, 2026-07-30 직접 조회)"
+    quote: "법령ID=009256 / 법령일련번호=281385 / 공포일자=20251230 / 공포번호=35947 / 시행일자=20260102 / 제개정구분명=타법개정"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-08-21"
+curator_note: >
+  ⚠️ 현행 시행본은 **타법개정**(2025-12-30 공포)이며, AML 실체 규정 개정
+  (트래블룰 기준금액 폐지 등)은 2026-07-30 기준 미공포다 — FACT:0000007·0000008.
+  두 가지를 혼동하지 말 것: 시행령이 최근 개정되었다는 사실과
+  AML 관련 개정이 이루어졌다는 사실은 별개다.
+
+  ISSUED_BY 를 두지 않았다. 대통령령의 발령 주체 모델링은 REG:kr-tfia 와 동일한
+  미해결 논점이다 (ADR 대상).

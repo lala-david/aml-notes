@@ -1,0 +1,29 @@
+id: "ORG:gb-ofsi"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "영국 금융제재이행청"
+  en: "Office of Financial Sanctions Implementation"
+summary: >
+  영국 금융제재 이행·집행 기관. Consolidated List 는 2026-01-28 철회되고 UK Sanctions List 로 통합되었다.
+org_kind: "regulator"
+jurisdiction: "JUR:gb"
+website: "https://www.gov.uk/ofsi"
+tags: ["gb"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:gb"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 증거가 자체 실측 기록뿐이며 이 기관의 설립 근거·법적 권한에 대한
+  직접 근거가 아니다. 설립 근거 법령 또는 공식 소개 문서를 확보해 재결속할 것. 재검토 과제.

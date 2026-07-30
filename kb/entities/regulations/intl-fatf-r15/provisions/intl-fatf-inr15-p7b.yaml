@@ -1,0 +1,94 @@
+id: "PROV:intl-fatf-inr15-p7b"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "FATF 권고 15 해석주석 제7항(b) — 가상자산 이체 정보요건"
+  en: "INR.15 paragraph 7(b) — VA transfer information requirements"
+  short: "INR.15 §7(b)"
+summary: >
+  가상자산 이체 시 송신 VASP 가 송신인·수신인 정보를 확보·보유하고 수신 VASP 에
+  즉시·안전하게 전달할 의무의 국제기준 근거 조항. 수신 VASP 의 보유 의무와
+  당국 요청 시 제공 의무도 함께 규정한다. 2025-06 R.16 개정으로 확대된 정보요건은
+  각주 48(→INR.16 ¶9)을 경유해 이 조항으로 유입된다.
+parent_reg: "REG:intl-fatf-r15"
+citation_path: "INR.15 §7(b)"
+heading: "INTERPRETIVE NOTE TO RECOMMENDATION 15 (NEW TECHNOLOGIES)"
+language: "en"
+text_orig: >
+  7.  With respect to the preventive measures, the requirements set out in
+  Recommendations 10 to 21 apply to VASPs, subject to the following qualifications:
+
+  (a)  R. 10 – The occasional transactions designated threshold above which VASPs
+  are required to conduct CDD is USD/EUR 1 000.
+
+  (b) R. 16 – Countries should ensure that originating VASPs obtain and hold
+  required and accurate originator information and required beneficiary
+  information[48] on virtual asset transfers, submit[49] the above information to
+  the beneficiary VASP or financial institution (if any) immediately and securely,
+  and make it available on request to appropriate authorities. Countries should
+  ensure that beneficiary VASPs obtain and hold required originator information and
+  required and accurate beneficiary information on virtual asset transfers and make
+  it available on request to appropriate authorities. Other requirements of R. 16
+  (including monitoring of the availability of information, and taking freezing
+  action and prohibiting transactions with designated persons and entities) apply on
+  the same basis as set out in R. 16. The same obligations apply to financial
+  institutions when sending or receiving virtual asset transfers on behalf of a
+  customer.
+footnotes:
+  "48": "As defined in INR. 16, paragraph 9, or the equivalent information in a virtual asset context."
+  "49": "The information can be submitted either directly or indirectly. It is not necessary for this information to be attached directly to the virtual asset transfers."
+tags: ["fatf", "travel-rule", "virtual-assets"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:intl-fatf-r15"
+    evidence:
+      - doc: "DOC:intl-fatf-recommendations"
+        confidence: "A"
+        locator: "INR.15 §7(b) · PDF p.80 (인쇄 p.79)"
+        retrieved: "2026-07-30"
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      threshold: null
+      scope_note: "본 조항 자체에 임계값 없음 — 아래 curator_note 참조"
+    valid_from: "2019-06"
+    valid_to: null
+    recorded_at: "2026-07-30"
+    evidence:
+      - doc: "DOC:intl-fatf-recommendations"
+        confidence: "A"
+        locator: "INR.15 §7(b)"
+        quote: "Countries should ensure that originating VASPs obtain and hold required and accurate originator information and required beneficiary information on virtual asset transfers, submit the above information to the beneficiary VASP or financial institution (if any) immediately and securely"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:intl-fatf-recommendations"
+    confidence: "A"
+    locator: "INR.15 §7(b) · PDF p.80"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 【2026-07-30 정정】 초기 등재 시 IMPOSES 한정자에 threshold: 1000 / currency: USD 를
+  넣었으나 **오류였다.** 원문 전문 확보 결과 §7(b) 에는 임계값 문언이 없다.
+
+  USD/EUR 1 000 은 **§7(a) 의 CDD 임시거래 기준**이다 —
+  "The occasional transactions designated threshold above which VASPs are required
+  to conduct CDD is USD/EUR 1 000." 이는 R.10(고객확인) 소관이지 R.16(정보전달) 소관이 아니다.
+  두 임계값을 혼동한 것이며, 업계에서도 흔한 혼동이다.
+
+  → threshold 를 null 로 두고, CDD 임계값은 별도 PROV 노드(INR.15 §7(a))와
+  별도 의무(OBL:x-occasional-transaction-cdd)로 분리 등재할 것. **재검토 과제.**
+
+  【각주 49 의 규범적 의의】 "It is not necessary for this information to be attached
+  directly to the virtual asset transfers." — 트래블룰 정보가 온체인에 첨부될 필요가 없다는
+  근거 조항이다. 오프체인 메시징 프로토콜(TRP·TRISA·상용 네트워크)이 허용되는 원천이며,
+  CTL:x-travel-rule-messaging 의 정당성 근거다.
+
+  【기준서와 채점기준의 참조 불일치】 권고안 각주 48 은 INR.16 **¶9** 를 가리키나,
+  시행 중인 평가방법론 c.15.9 각주 91 은 여전히 INR.16 **¶6** 을 가리킨다.
+  Annex IV(개정 채점기준)가 미발효이기 때문이며, 상호평가는 구 기준으로 채점된다.
+  → 이 이원화 자체를 FACT 로 기록했다.
+
+  text_orig 의 위첨자 각주 표기는 [48]·[49] 로 치환했다(원문은 위첨자).
+  항번호 서식("7. " 뒤 공백 2칸, "R. 16" 의 마침표 뒤 공백)은 원문 그대로 보존했다.

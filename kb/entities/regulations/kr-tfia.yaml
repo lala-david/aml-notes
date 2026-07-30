@@ -1,0 +1,59 @@
+id: "REG:kr-tfia"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보의 보고 및 이용 등에 관한 법률"
+  en: "Act on Reporting and Using Specified Financial Transaction Information"
+  short: "특금법"
+aliases: ["특정금융정보법", "특금법", "TFIA", "특정금융거래정보법"]
+summary: >
+  대한민국 자금세탁방지 기본법. 2020년 개정으로 가상자산사업자를 규제 대상에
+  편입하여 신고 의무(제7조), 고객확인(제5조의2), 트래블룰(제5조의3), 의심거래보고
+  등을 부과한다. 가상자산 정의는 가상자산이용자보호법 제2조를 상호참조한다.
+reg_kind: "statute"
+citation: "법률 제19563호 (현행 시행본) / 법률 제21358호 (2026-08-20 시행 예정)"
+binding: "binding"
+language: "ko"
+tags: ["korea", "aml", "vasp-registration", "travel-rule"]
+external_ids:
+  law_no_current: "19563"
+  law_no_pending: "21358"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:kr"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "A"
+        retrieved: "2026-07-30"
+  - predicate: "ISSUED_BY"
+    to: "ORG:kr-kofiu"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "A"
+        retrieved: "2026-07-30"
+  - predicate: "IMPLEMENTS"
+    to: "REG:intl-fatf-r15"
+    qualifiers:
+      fidelity: "partial"
+    evidence:
+      - doc: "DOC:intl-fatf-r16-explanatory-note"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "A"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-08-27"
+curator_note: >
+  ⚠️ 생애주기 상태는 이 노드의 속성이 아니라 kb/states/ 의 STATE 레코드로 관리한다
+  (L1 에 시간을 넣지 않는 원칙). 현행 시행본은 법률 제19563호(공포 2023-07-18,
+  시행 2024-07-19, 타법개정)이며, 법률 제21358호가 2026-08-20 시행 예정이다.
+
+  ISSUED_BY 를 ORG:kr-kofiu 로 둔 것은 잠정 처리다. 법률의 발의·공포 주체는
+  국회·정부이며 FIU 는 집행기관이므로, ORG:kr-nabo / ORG:kr-fsc 노드 생성 후
+  정정해야 한다. → 재검토 과제.
+
+  IMPLEMENTS → REG:intl-fatf-r16 엣지가 누락되어 있다. FATF 도시에 검증 완료 후
+  추가할 것. 현재 추가하면 미검증 노드 참조가 되므로 보류.

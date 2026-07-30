@@ -1,0 +1,19 @@
+id: "SRC:us-fincen"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "미국 금융범죄단속네트워크"
+  en: "FinCEN"
+summary: >
+  BSA 집행·규칙제정 주체의 공식 발간 경로. 브라우저 헤더 부착 시에만 접근 가능하다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.fincen.gov"
+language: "en"
+paywall: false
+tags: ["us"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

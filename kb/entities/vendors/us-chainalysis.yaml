@@ -1,0 +1,49 @@
+id: "VEND:us-chainalysis"
+type: "VEND"
+layer: "semantic"
+label:
+  ko: "체이널리시스"
+  en: "Chainalysis"
+aliases: ["Chainalysis"]
+summary: >
+  온체인 분석 솔루션 공급자. 거래 모니터링(KYT)·조사 도구·제재 스크리닝을 제공하며
+  각국 수사·감독기관 조달 실적이 다수 확인된다. 사후 추적에서 사전 차단으로
+  축을 이동 중이다.
+vend_kind: "blockchain-analytics"
+hq: "JUR:us"
+tags: ["vendor", "onchain-analytics"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:us"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "C"
+        retrieved: "2026-07-30"
+  - predicate: "COMPETES_WITH"
+    to: "VEND:gb-elliptic"
+    qualifiers:
+      segment: "blockchain-analytics"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "C"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "C"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 C — 증거가 블로그 피드 실측뿐이다. market-vendors 도시에가 확보한
+  1차 근거(연방조달 기록·투자 발표)를 DOC 으로 등재해 재결속할 것. **재검토 과제.**
+
+  【도시에 확인 사항 — DOC 등재 후 FACT 로 분리할 것】
+  · 마지막 공개 1차 평가액은 2022-05 기준이며, 이후 2차시장 추정치와 성격이 달라
+    병렬 인용 시 반드시 구분해야 한다
+  · Hexagate(2024-12)·Alterya(2025-01-13) 인수 — 후자는 공식 가격 미공개
+  · 미 연방조달 기록이 가장 단단한 검증 근거다 (FBI IDC, IRS-CI 구독)
+  · 한국 FIU 「'26년 AML 업무계획」에 분석도구 도입이 명시되어 있다
+
+  ⚠️ **벤더 자체 홍보 자료는 T5 로 취급한다.** 조달 공고·감사보고서·검증 보도만
+  상향 인용할 것.

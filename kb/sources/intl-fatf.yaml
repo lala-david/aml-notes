@@ -1,0 +1,32 @@
+id: "SRC:intl-fatf"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "국제자금세탁방지기구"
+  en: "Financial Action Task Force"
+  short: "FATF"
+aliases: ["FATF", "GAFI", "fatf-gafi.org"]
+summary: >
+  자금세탁·테러자금조달 방지 국제기준을 제정하는 정부간 기구의 공식 발간 경로.
+  권고안(Recommendations), 평가방법론, 가이던스, 상호평가보고서, 이행현황
+  업데이트를 발간한다. 가상자산 관련 국제기준의 T1 근거원이다.
+tier: "T1"
+publisher_kind: "intl-body"
+base_url: "https://www.fatf-gafi.org"
+language: "en"
+paywall: false
+tags: ["fatf", "international-standards"]
+evidence:
+  - doc: "DOC:intl-fatf-recommendations"
+    confidence: "A"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  ⚠️ 수집 인프라 주의 — fatf-gafi.org 는 robots.txt 자체가 403 을 반환하며
+  표준 HTTP 클라이언트에 403 을 준다. 브라우저 헤더 일체(User-Agent·Accept·
+  Sec-Fetch-*·Upgrade-Insecure-Requests)를 붙인 요청만 200 을 반환한다.
+  robots 정책을 확인할 수 없으므로 자동수집을 하지 않고 수동·이메일 경로를 쓴다.
+  FATF 는 RSS 를 제공하지 않는다(후보 3건 전부 실패 실측, 2026-07-30).
+  → ingest/config/sources.yaml 의 FEED:intl-fatf-publications 는 robots_ok: false, disabled.

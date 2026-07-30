@@ -1,0 +1,54 @@
+id: "REG:us-bsa"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "은행비밀법"
+  en: "Bank Secrecy Act"
+  short: "BSA"
+aliases: ["BSA", "Currency and Foreign Transactions Reporting Act", "은행비밀법"]
+summary: >
+  미국 AML 체계의 근간 법률. 금융기관에 기록보존·보고 의무를 부과한다.
+  가상자산 사업자는 별도 카테고리 신설 없이 MSB 정의의
+  "other value that substitutes for currency" 문언(31 CFR 1010.100(ff)(5)(i)(A))으로 포섭된다.
+reg_kind: "statute"
+citation: "31 U.S.C. 5311 et seq. / 31 CFR Chapter X"
+binding: "binding"
+language: "en"
+tags: ["us", "aml", "bsa", "msb"]
+external_ids:
+  usc: "31 U.S.C. 5311"
+  cfr: "31 CFR Chapter X"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:us"
+    evidence:
+      - doc: "DOC:us-reginfo-agenda-fall2025"
+        confidence: "B"
+        retrieved: "2026-07-30"
+  - predicate: "ISSUED_BY"
+    to: "ORG:us-fincen"
+    evidence:
+      - doc: "DOC:us-reginfo-agenda-fall2025"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:us-reginfo-agenda-fall2025"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 현재 증거가 규칙제정 의제 문서뿐이다. eCFR 조문 원문(31 CFR 1010.100(ff),
+  1010.410(f))을 확보해 PROV 노드로 분리하고 A 로 승격할 것.
+  2파에서 ecfr.gov 접근이 확인되었으므로(browser_headers) 다음 라운드에서 가능하다.
+
+  【2파 확정 사항 — PROV 노드 생성 시 반영할 것】
+  · Travel Rule 임계값 $3,000 은 시행 중. $250 하향안(RIN 1506-AB41)은 2025-04-16 철회
+  · 비수탁 지갑 규칙(RIN 1506-AB47)은 2024-04-12 철회 — 자기수탁 상대방 신원확인 의무 없음
+  · CVC 믹싱 §311 규칙(RIN 1506-AB64)은 proposed, 최종조치 목표 2027-12
+  · 위 철회 2건 모두 연방관보 공고 없음 → FACT:0000011·0000012 참조
+
+  ISSUED_BY 를 ORG:us-fincen 으로 둔 것은 잠정 처리다. BSA 는 의회 제정 법률이고
+  FinCEN 은 집행·규칙제정 기관이므로, 한국 REG:kr-tfia 와 동일한 문제가 있다.
+  → 발행 주체 모델링을 ADR 로 확정할 것 (REG:kr-tfia curator_note 참조).

@@ -1,0 +1,19 @@
+id: "SRC:intl-unsc"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "유엔 안전보장이사회"
+  en: "UN Security Council"
+summary: >
+  통합 제재목록을 XML 로 배포한다. 가상자산 주소 필드는 포함하지 않고 전통 신분증 필드만 제공한다.
+tier: "T1"
+tier_basis: >
+  국제기준 설정기구의 공식 발간 경로.
+publisher_kind: "intl-body"
+base_url: "https://scsanctions.un.org"
+language: "en"
+paywall: false
+tags: ["intl"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

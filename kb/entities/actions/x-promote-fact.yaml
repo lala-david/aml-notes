@@ -1,0 +1,46 @@
+id: "ACTION:x-promote-fact"
+type: "ACTION"
+layer: "kinetic"
+label:
+  ko: "사실 승격"
+  en: "Promote fact"
+summary: >
+  검증 게이트를 통과한 사실 후보를 L2 로 승격한다. 원자적 사실 레코드를 생성하고
+  증거를 결속하며, 관련 노드의 갱신 시각과 재검토 기한을 조정한다.
+  Funnel 이 만든 후보가 지식이 되는 유일한 경로다.
+action_kind: "governance"
+tier: "L2-write"
+tags: ["governance", "l2-write"]
+change_set:
+  creates: ["FACT"]
+  modifies:
+    - target: "any"
+      properties: ["updated_at", "review_due"]
+  never_touches: ["id", "created_at", "type", "layer"]
+submission_criteria:
+  - "evidence 가 1개 이상 존재한다"
+  - "evidence.doc 가 실존하는 DOC 노드를 가리킨다"
+  - "수치 값에는 unit 이 있다 (Q-1)"
+  - "통화 금액에는 ISO 통화코드가 있다 (Q-2)"
+  - "기존 FACT 와 상충하지 않거나, 상충 시 CTR 레코드가 함께 생성된다"
+  - "confidence 가 C 또는 D 이면 review_due 가 90일 이내다 (I-8)"
+  - "상대 시간 표현이 없다 (Q-5)"
+side_effects:
+  - "참조하는 산문 문서에 재검토 플래그를 설정한다"
+  - "영향 노드의 파생 크로스워크 캐시를 무효화한다"
+  - "ALOG 레코드를 생성한다"
+authorized_roles: ["ROLE:x-curator", "ROLE:x-reviewer"]
+requires_proposal: true
+reversible_by: "ACTION:x-retract-fact"
+edges:
+  - predicate: "REVERSED_BY"
+    to: "ACTION:x-retract-fact"
+  - predicate: "INVALIDATES_CACHE"
+    to: "FUNC:x-crosswalk"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  ⚠️ 집행 상태 — 제출 기준은 quality/validate_kb.py 가 사후 검사한다.
+  액션 실행 런타임과 ALOG 자동 생성은 미구현이므로, 현재 이 명세는
+  "검증기가 무엇을 검사해야 하는가"의 규범 역할만 한다. → ADR-0004 §결과

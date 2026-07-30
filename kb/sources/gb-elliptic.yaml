@@ -1,0 +1,19 @@
+id: "SRC:gb-elliptic"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "Elliptic"
+  en: "Elliptic"
+summary: >
+  온체인 분석업체. 크로스체인 세탁 추적 리서치를 다수 발간한다. RSS 가 10건 롤링이라 매일 수집하지 않으면 유실된다.
+tier: "T3"
+tier_basis: >
+  온체인 분석업체의 자체 조사 보고서. 방법론이 공개되나 검증은 제3자가 하지 않는다.
+publisher_kind: "vendor"
+base_url: "https://www.elliptic.co"
+language: "en"
+paywall: false
+tags: ["gb"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

@@ -46,5 +46,5 @@ body:
       options:
         - label: 최신 main 브랜치에서 재현했습니다
           required: true
-        - label: (Mermaid) `charts/validate_mermaid.py` 를 돌려봤습니다 — 결과 첨부 가능
-        - label: (링크) `charts/validate_links.py` 또는 `charts/check_external_urls.py` 를 돌려봤습니다
+        - label: (Mermaid) `quality/validate_mermaid.py` 를 돌려봤습니다 — 결과 첨부 가능
+        - label: (링크) `quality/validate_links.py` 또는 `quality/check_external_urls.py` 를 돌려봤습니다

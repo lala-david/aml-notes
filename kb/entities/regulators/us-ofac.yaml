@@ -1,0 +1,29 @@
+id: "ORG:us-ofac"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "미국 해외자산통제국"
+  en: "Office of Foreign Assets Control"
+summary: >
+  미국 재무부 산하 제재 집행기관. 가상자산 주소를 SDN 목록에 직접 등재한다.
+org_kind: "regulator"
+jurisdiction: "JUR:us"
+website: "https://ofac.treasury.gov"
+tags: ["us"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:us"
+    evidence:
+      - doc: "DOC:x-source-probe-20260730"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:x-source-probe-20260730"
+    confidence: "B"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 증거가 자체 실측 기록뿐이며 이 기관의 설립 근거·법적 권한에 대한
+  직접 근거가 아니다. 설립 근거 법령 또는 공식 소개 문서를 확보해 재결속할 것. 재검토 과제.

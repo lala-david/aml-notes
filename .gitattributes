@@ -1,0 +1,30 @@
+# 개행 정규화 — docs/architecture/02-storage-topology.md §3
+# Windows 환경에서 CRLF 가 섞이면 diff 가 무의미해진다. 저장소 안에서는 항상 LF.
+
+* text=auto eol=lf
+
+# 지식베이스 데이터 — diff 가독성이 핵심이므로 반드시 텍스트로 취급
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.json   text eol=lf
+*.jsonl  text eol=lf
+*.md     text eol=lf
+*.py     text eol=lf
+*.csv    text eol=lf
+*.txt    text eol=lf
+
+# 바이너리 — 변환 금지
+*.png    binary
+*.jpg    binary
+*.pdf    binary
+*.hwp    binary
+*.hwpx   binary
+*.xlsx   binary
+
+# SVG 는 텍스트지만 생성물이므로 diff 를 접어둔다
+*.svg    text eol=lf linguist-generated=true
+
+# 생성물 — 언어 통계·diff 에서 제외
+kb/derived/**    linguist-generated=true
+charts/mermaid-cache/**  linguist-generated=true
+print/days/**    linguist-generated=true

@@ -1,0 +1,45 @@
+id: "REG:kr-vaupa"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "가상자산 이용자 보호 등에 관한 법률"
+  en: "Act on the Protection of Virtual Asset Users"
+  short: "가상자산이용자보호법"
+aliases: ["이용자보호법", "가상자산법", "VAUPA"]
+summary: >
+  가상자산 이용자 보호와 불공정거래 규율을 담당하는 법률. 2024-07-19 시행.
+  예치금 보호·이상거래 감시 의무·불공정거래 처벌을 규정한다.
+  특금법(AML)과 2축을 이루며 가상자산 정의를 상호참조한다.
+reg_kind: "statute"
+binding: "binding"
+language: "ko"
+tags: ["korea", "user-protection", "market-abuse"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:kr"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        retrieved: "2026-07-30"
+  - predicate: "ISSUED_BY"
+    to: "ORG:kr-fsc"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "B"
+    locator: "특금법 제2조제1호 하목·제3호 상호참조"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 현재 증거가 특금법 문서의 상호참조뿐이다. 이용자보호법 자체의
+  법령 원문(법령ID 확보 필요)으로 재결속하고 조문을 PROV 로 분리할 것.
+  OC 발급 후 law.go.kr 에서 수집 가능하다.
+
+  【2축 구조】 특금법 제2조제1호 하목·제3호가 이 법 제2조를 참조하므로,
+  가상자산 정의가 두 법 사이에 결합되어 있다. 정의 변경 시 양쪽 모두 영향받는다.
+  → CONCEPT:x-virtual-asset 의 DEFINES 엣지로 표현할 것.

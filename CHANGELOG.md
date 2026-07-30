@@ -2,6 +2,76 @@
 
 > 본 저장소의 주요 변경 이력. [Keep a Changelog](https://keepachangelog.com/) 형식을 따르며, 날짜는 KST 기준입니다.
 
+## [1.0.0] — 2026-07-30
+
+**성격 전환: 학습 교재 → 질의 가능한 지식베이스**
+
+산문 아래에 시점 질의가 되는 지식 그래프를 깔았습니다. 산문은 폐기하지 않고 그래프의 한 가지 투영으로 재정의했습니다.
+
+### Added — 온톨로지
+
+- `docs/ontology/` — **3계층 설계** (L1 의미 / L2 동적 / L3 운동), 33 클래스 · 50+ 술어
+  - `04-node-edge-spec.md` — 노드·엣지 규범적 정의. 프로퍼티 그래프 채택
+  - `02-dynamic-layer.md` — **이중시간(bitemporal)** 모델. 유효시간 + 기록시간
+  - `06-timeline-model.md` — 3트랙 역사 타임라인 + `CAUSED` 인과 엣지 + 국면(ERA)
+  - `05-identifier-scheme.md` — 식별자 불변성·병합 규칙
+- `kb/schema/ontology.yaml` — 기계판 온톨로지 (클래스·술어·불변식·신선도 SLA)
+- `kb/schema/node.schema.json` · `edge.schema.json` — JSON Schema
+- `docs/adr/` — 아키텍처 결정 기록 3건 (프로퍼티 그래프 / 이중시간 / 파일 SSOT)
+
+### Added — 거버넌스·품질
+
+- `docs/governance/` — 품질 6차원 · 출처 등급 T1~T5 · 확신도 A~D · 검증 워크플로
+- `quality/validate_kb.py` — 불변식 강제 검증기. 차단 위반 시 CI 차단
+- `quality/README.md` — 검증 도구 사용법 · 미검증 부채 상한 5%
+- `kb/facts/contradictions.jsonl` — **상충 레지스트리.** 출처가 엇갈리면 지우지 않고 기록
+- `.github/workflows/kb-validate.yml` — 그래프 검증 + 파생물 재현성 확인
+
+### Added — 수집
+
+- `docs/ingestion/` — 소스 등재 기준 · 일일 파이프라인 운영 설계
+- `ingest/config/sources.yaml` — **실측 검증된 소스 레지스트리.** 88개 후보 중 51개 OK 확인,
+  가동 22개. 추측 URL 미등재, 미검증은 `enabled: false`
+
+### Added — 도구
+
+- `scripts/build_crosswalk.py` — 관할 비교표 생성 + `--as-of` 시점 질의
+- `kb/derived/crosswalk/` — 생성된 관할 비교표
+
+### Changed — 디렉터리 구조 개편
+
+| 이동 | 이유 |
+|---|---|
+| `charts/validate_*.py`, `check_external_urls.py` → `quality/` | 검증기를 검증 계층으로 |
+| `scripts/regulatory_rss.py` → `ingest/legacy/` | 수집기를 수집 계층으로. 전환 대상임을 위치로 표시 |
+| `meta/regulatory-watch.md` → `intel/watchlist/` | 규제 추적은 분석 산출물 |
+| `meta/outreach/`, `meta/submissions/`, 프로젝트 운영 문서 → `_private/` | 지식베이스 구성물이 아니며 공개 대상 아님 |
+
+- `meta/` 디렉터리 제거. `scripts/` 를 **파생물 생성 전용**으로 재정의
+- `README.md` 전면 개편 — 지식베이스 정체성 반영
+- `.github/workflows/validate.yml`·`regulatory-watch.yml` 경로 갱신
+- `CONTRIBUTING.md`·`deep/README.md`·이슈 템플릿 경로 참조 일괄 정정
+- `quality/validate_mermaid.py` — `charts/` 툴체인 참조로 수정 (이동에 따른 파손 방지)
+- `quality/validate_links.py` — `_research/`·`_private/` 검증 제외
+
+### Fixed
+
+- **식별자 규격 버그** — `JUR:kr` 이 자기 정규식(`namespace-slug` 필수)을 위반했다.
+  씨앗 노드 검증에서 드러남. 정규식을 완화하고 클래스별 slug 강제를 validator 로 이관 (ID-9)
+- **가상자산 트래블룰의 FATF 근거 정정** — R.16 Explanatory Note §54 원문 확인 결과,
+  FATF 는 VASP 를 R.16 **직접 적용 대상에서 제외**했다. 근거는 INR.15 §7(b).
+  R.16 을 직결 근거로 서술한 기존 내용은 정정 대상 (`CTR:00002`)
+- **OFSI Consolidated List 폐기 반영** — 2026-01-28 철회. 구 워처가 갱신되지 않는 파일을
+  계속 수집하고 있었다. UK Sanctions List 로 교체
+
+### Known issues
+
+- KB 노드 17개 — 구축 초기. 목표 1,200
+- `CTR:00001` 미해소 — 특금법 개정 법률 제21358호의 공포일·시행일 상충 (재검증 진행 중)
+- 개정 법률의 생애주기 모델링 미결 — 원법 속성 vs 독립 `REG` + `AMENDS`. ADR 필요
+
+---
+
 ## [0.6.0] — 2026-04-20
 
 **저장소 메타 정비**

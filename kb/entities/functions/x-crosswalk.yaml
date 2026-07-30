@@ -1,0 +1,35 @@
+id: "FUNC:x-crosswalk"
+type: "FUNC"
+layer: "kinetic"
+label:
+  ko: "관할 크로스워크"
+  en: "Jurisdiction crosswalk"
+summary: >
+  추상 의무(OBL) 하나에 걸린 각국 조문(PROV)의 IMPOSES 한정자를 모아 관할 비교표를
+  생성한다. 손으로 유지하던 비교표를 질의 결과로 대체한다. --as-of 로 시점 질의를 지원한다.
+func_kind: "derivation"
+tags: ["derivation", "crosswalk", "implemented"]
+inputs:
+  - "OBL 노드"
+  - "PROV 노드"
+  - "IMPOSES 엣지 (threshold · currency · valid_from · valid_to 한정자)"
+output: "관할 × 임계값 × 유효기간 × 확신도 비교표 (Markdown)"
+deterministic: true
+implementation: "scripts/build_crosswalk.py"
+output_path: "kb/derived/crosswalk/"
+cache_invalidated_by:
+  - "ACTION:x-promote-fact"
+  - "ACTION:x-retract-fact"
+edges:
+  - predicate: "COMPUTES_OVER"
+    to: "OBL:x-travel-rule-originator"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  deterministic: true 이므로 CI 가 재생성 결과와 커밋된 산출물을 대조한다.
+  불일치는 "누군가 생성물을 손으로 고쳤다"는 신호다 (ADR-0003).
+
+  현재 등재 관할은 국제기준(INR.15 §7(b))과 한국(제5조의3) 둘뿐이다.
+  리서치에서 값이 확인된 미국·EU·영국·일본·싱가포르·홍콩·호주는 PROV 노드가
+  생성되면 자동으로 표에 합류한다 — 함수를 고칠 필요가 없다.

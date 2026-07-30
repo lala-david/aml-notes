@@ -39,12 +39,12 @@
    - [ ] 관련 문서 `## 더 읽을거리` 링크 최소 3개
    - [ ] `마지막 업데이트: YYYY-MM-DD` 포함
 5. **Mermaid 추가/변경 시**:
-   - [ ] `charts/validate_mermaid.py` 통과
+   - [ ] `quality/validate_mermaid.py` 통과
    - [ ] 파이프 레이블에 괄호 `()` 넣지 않기 (mmdc 파서 오류)
    - [ ] 한국어는 `<br/>` 개행 OK, `\n`은 금지
 6. **링크 추가/변경 시**:
-   - [ ] `charts/validate_links.py` 통과 (내부 링크)
-   - [ ] `charts/check_external_urls.py` 통과 (외부 URL)
+   - [ ] `quality/validate_links.py` 통과 (내부 링크)
+   - [ ] `quality/check_external_urls.py` 통과 (외부 URL)
 7. **커밋 메시지 형식**:
    ```
    <scope>: <요지>
@@ -64,13 +64,13 @@ pip install -r charts/requirements.txt        # seaborn·matplotlib·markdown
 cd charts && npm install && cd ..             # @mermaid-js/mermaid-cli
 
 # Mermaid 컴파일 검증 (전체 114+ 블록)
-python charts/validate_mermaid.py
+python quality/validate_mermaid.py
 
 # 내부 링크 검증 (.md·.png·.svg 상대 경로)
-python charts/validate_links.py
+python quality/validate_links.py
 
 # 외부 URL 검증 (400+개, 느림 — CI에서만 돌려도 OK)
-python charts/check_external_urls.py
+python quality/check_external_urls.py
 
 # 차트 재생성 (seaborn 8개)
 python charts/generate.py
@@ -119,7 +119,7 @@ python print/generator.py
 
 처음 기여하실 때 추천:
 
-- [ ] 외부 URL 깨짐 수정 (`charts/check_external_urls.py` 결과 처리)
+- [ ] 외부 URL 깨짐 수정 (`quality/check_external_urls.py` 결과 처리)
 - [ ] 한국어 → 영어 용어 번역 추가 (`notes/glossary.md`)
 - [ ] 새 일자·금액 fact-check (`grep` 후 1차 자료 검증)
 - [ ] Mermaid 다이어그램 가독성 개선 (color·layout)

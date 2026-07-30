@@ -1,0 +1,38 @@
+id: "DOC:kr-assembly-bill-2214894"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "국회 의안정보 — 의안번호 2214894 (정무위원장 대안)"
+  en: "National Assembly bill record 2214894"
+  short: "의안 2214894"
+summary: >
+  특정 금융거래정보의 보고 및 이용 등에 관한 법률 일부개정법률안(정무위원장 대안)의
+  의안정보 레코드. 정부이송일 2026-02-06, 공포일자 2026-02-19, 공포번호 21358.
+  법제처 법령 원문과 독립적인 T1 교차검증 경로다.
+src: "SRC:kr-assembly"
+url: "https://likms.assembly.go.kr/bill/billDetail.do?billId=2214894"
+published: "2026-02-19"
+accessed: "2026-07-30"
+doc_kind: "filing"
+language: "ko"
+translation: false
+tags: ["korea", "tfia", "legislative-record", "cross-verification"]
+external_ids:
+  bill_no: "2214894"
+  promulgation_no: "21358"
+evidence:
+  - doc: "DOC:kr-assembly-bill-2214894"
+    confidence: "A"
+    locator: "의안 처리 경과"
+    quote: "정부이송일 2026-02-06 / 공포일자 2026-02-19 / 공포번호 21358"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  ⭐ CTR:00001 을 해소한 **독립 교차검증 출처**다. 법제처와 국회는 별개 기관이므로
+  두 곳의 공포일자 일치는 단일 출처 확인보다 강한 근거가 된다.
+
+  【수집 경로 확보】 1파에서 접근 실패했던 의안정보 검색이 확인되었다 —
+  POST /bill/bi/bill/sch/findSchPaging.do, 인증키 불요.
+  → ingest/config/sources.yaml 의 FEED:kr-assembly-bill 갱신 필요.

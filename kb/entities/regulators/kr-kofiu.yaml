@@ -1,0 +1,43 @@
+id: "ORG:kr-kofiu"
+type: "ORG"
+layer: "semantic"
+label:
+  ko: "금융정보분석원"
+  en: "Korea Financial Intelligence Unit"
+  short: "FIU"
+aliases: ["KoFIU", "FIU", "금융위원회 금융정보분석원"]
+summary: >
+  대한민국의 금융정보분석기구(FIU). 특금법에 따라 가상자산사업자 신고를 수리하고,
+  의심거래보고(STR)·고액현금거래보고(CTR)를 접수·분석하며, 자금세탁방지 의무
+  이행 여부를 검사하고 제재한다.
+org_kind: "fiu"
+jurisdiction: "JUR:kr"
+website: "https://www.kofiu.go.kr"
+tags: ["korea", "fiu", "supervisor"]
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:kr"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "A"
+        locator: "제7조"
+        retrieved: "2026-07-30"
+  - predicate: "SUPERVISES"
+    to: "JUR:kr"
+    qualifiers:
+      since: "2001-11-28"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "A"
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "A"
+    locator: "제7조"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-30"
+curator_note: >
+  SUPERVISES 의 since(2001-11-28)는 FIU 설립 시점으로 알려진 값이나 이 문서로
+  직접 확인되지 않았다 — 설립 근거 문서 확보 후 재검증 필요.

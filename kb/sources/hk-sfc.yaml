@@ -1,0 +1,19 @@
+id: "SRC:hk-sfc"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "홍콩 증권선물위원회"
+  en: "Securities and Futures Commission"
+summary: >
+  VATP 라이선스 발급·감독 주체. 경고 목록에 '의심 가상자산 거래 플랫폼' 유형을 별도 운영한다.
+tier: "T1"
+tier_basis: >
+  감독기관·정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "regulator"
+base_url: "https://www.sfc.hk"
+language: "en"
+paywall: false
+tags: ["hk"]
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"

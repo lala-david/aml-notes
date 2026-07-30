@@ -1,0 +1,39 @@
+id: "SRC:jp-leadingai"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "Leading.AI (Satoshi Yamauchi)"
+  en: "Leading.AI / Satoshi Yamauchi"
+  orig: "山内怜史 / Leading.AI"
+summary: >
+  AI 전략 관련 오픈소스 서적을 발간하는 조직·저자. 본 지식베이스는 이 출처의
+  『パランティアの衝撃』(The Palantir Impact) 을 **온톨로지 설계 방법론의 근거**로
+  사용한다. 가상자산 AML 사실관계의 출처로는 사용하지 않는다.
+tier: "T3"
+publisher_kind: "industry"
+base_url: "https://github.com/Leading-AI-IO"
+language: "ja"
+paywall: false
+tags: ["methodology", "ontology-design", "reference-only"]
+external_ids:
+  github_org: "Leading-AI-IO"
+  website: "https://www.leading-ai.io/"
+evidence:
+  - doc: "DOC:jp-leadingai-palantir-ontology"
+    confidence: "A"
+    retrieved: "2026-07-30"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2027-01-30"
+curator_note: >
+  ⚠️ 사용 범위 제한 — 이 출처는 **설계 방법론**의 근거로만 쓴다.
+  가상자산 AML 규제·사실관계에 대한 근거로 인용하지 말 것 (해당 도메인 문서가 아님).
+
+  tier T3 판정 근거: Palantir 공식 문서를 인용한 구조 분석서이나, 그 자체가
+  1차 문서는 아니다. 아키텍처 주장은 Palantir 공식 문서(해당 도메인의 T1)로
+  교차 확인이 필요하다. 서적이 인용한 공식 출처 —
+  https://www.palantir.com/docs/foundry/ontology/overview/
+  https://www.palantir.com/platforms/aip/
+
+  라이선스: CC BY 4.0. 저작자 표시 및 변경 사실 명시 의무가 있다.
+  → docs/references.md 및 docs/adr/0004 에 표시했다.

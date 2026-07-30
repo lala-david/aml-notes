@@ -1,0 +1,36 @@
+id: "ACTION:x-promote-confidence"
+type: "ACTION"
+layer: "kinetic"
+label:
+  ko: "확신도 승격"
+  en: "Promote confidence"
+summary: >
+  원문 확인으로 사실·노드의 확신도를 상향한다. 강등(자동)과 달리 **반드시 사람이
+  원문을 열어본 뒤에만** 수행한다. 이 비대칭이 지식 인플레이션을 막는다.
+action_kind: "governance"
+tier: "L2-write"
+tags: ["governance", "confidence"]
+change_set:
+  creates: []
+  modifies:
+    - target: "FACT"
+      properties: ["confidence", "evidence"]
+    - target: "any"
+      properties: ["evidence", "review_due", "updated_at"]
+  never_touches: ["claim", "value", "recorded_at", "id"]
+submission_criteria:
+  - "상향 근거가 되는 원문 인용문(quote)이 evidence 에 추가되어 있다"
+  - "출처 tier 가 목표 확신도를 지지한다 (A 는 T1/T2 원문 직접 확인)"
+  - "복수 출처로 상향하는 경우 독립 출처여야 한다 — 같은 원출처를 인용한 매체는 독립이 아니다"
+side_effects:
+  - "미검증 부채 총량이 감소한다"
+  - "ALOG 레코드를 생성한다"
+authorized_roles: ["ROLE:x-curator", "ROLE:x-reviewer"]
+requires_proposal: true
+reversible_by: "ACTION:x-demote-confidence"
+created_at: "2026-07-30"
+updated_at: "2026-07-30"
+review_due: "2026-10-28"
+curator_note: >
+  2026-07-30 CTR:00001 해소 시 FACT:0000003·0000004 를 B → A 로 복원하며 사용했다.
+  당시 이 노드가 없어 ALOG 가 댕글링 참조를 냈고, K-3 검사가 이를 잡았다.
