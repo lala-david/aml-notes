@@ -37,9 +37,16 @@ jobs:
 
       # 금칙어 목록은 저장소에 두지 않는다 (목록 자체가 무엇을 숨기려 했는지 드러냄).
       # 시크릿 미설정 시 검증기는 조직명 검사를 생략하고 경고만 남긴다.
+      #
+      # ⚠️ secrets 컨텍스트는 if: 조건에서 사용할 수 없다 — 워크플로 파싱이 실패한다.
+      #    env 로 올린 뒤 env.* 로 검사해야 한다.
+      # ⚠️ 시크릿을 run: 에 직접 보간하지 않는다 — 스크립트 인젝션 위험.
+      #    env 로 전달하고 셸 변수로 참조한다.
       - name: Restore forbidden terms
-        if: ${{ secrets.FORBIDDEN_TERMS != '' }}
-        run: printf '%s\n' "${{ secrets.FORBIDDEN_TERMS }}" > quality/rules/forbidden_terms.local.txt
+        env:
+          FORBIDDEN_TERMS: ${{ secrets.FORBIDDEN_TERMS }}
+        if: env.FORBIDDEN_TERMS != ''
+        run: printf '%s\n' "$FORBIDDEN_TERMS" > quality/rules/forbidden_terms.local.txt
 
       - name: Validate knowledge graph
         run: python quality/validate_kb.py
