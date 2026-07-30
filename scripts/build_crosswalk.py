@@ -40,11 +40,16 @@ def parse_date(value) -> date | None:
 
 
 def load_nodes(kb_root: Path) -> dict[str, dict]:
+    """노드를 적재한다.
+
+    ⚠️ rglob 은 파일시스템 순회 순서를 따르므로 OS 마다 다르다.
+    정렬하지 않으면 파생물이 비결정적이 되어 재현성 검사가 깨진다.
+    """
     nodes: dict[str, dict] = {}
     for base in (kb_root / "entities", kb_root / "sources"):
         if not base.exists():
             continue
-        for path in base.rglob("*.yaml"):
+        for path in sorted(base.rglob("*.yaml")):
             data = yaml.safe_load(path.read_text(encoding="utf-8"))
             if isinstance(data, dict) and data.get("id"):
                 nodes[data["id"]] = data
@@ -125,7 +130,10 @@ def render(obl_id: str, obl: dict, rows: list[dict], at: date | None) -> str:
         "| 관할 | 근거 조문 | 임계값 | 통화 | 유효기간 | 확신도 |",
         "|---|---|---:|---|---|---|",
     ]
-    for r in sorted(rows, key=lambda x: (x["namespace"] != "intl", x["namespace"])):
+    # ⚠️ 정렬 키에 prov 를 포함해야 한다. 같은 관할에 조문이 둘 이상이면
+    #    namespace 만으로는 동률이 되고, 안정 정렬 특성상 입력 순서가 그대로 남아
+    #    OS 별로 결과가 갈린다 (CI 재현성 검사가 이를 잡았다).
+    for r in sorted(rows, key=lambda x: (x["namespace"] != "intl", x["namespace"], x["prov"])):
         jur = NAMESPACE_LABEL.get(r["namespace"], r["namespace"])
         thr = f"{r['threshold']:,}" if isinstance(r["threshold"], (int, float)) else "임계값 없음"
         cur = r["currency"] or "—"
