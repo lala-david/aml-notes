@@ -1,0 +1,56 @@
+id: "PROV:kr-tfia-art2-3"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "특금법 제2조 제3호 (가상자산의 정의)"
+  en: "TFIA Article 2(3) — definition of virtual asset"
+  short: "특금법 제2조제3호"
+summary: >
+  특금법상 "가상자산"의 정의 조항. 경제적 가치를 지니고 전자적으로 거래·이전될 수
+  있는 전자적 증표를 가리키되, 제외 대상을 열거하는 방식으로 범위를 좁힌다.
+  가상자산이용자보호법 제2조와 상호참조 관계에 있다.
+parent_reg: "REG:kr-tfia"
+citation_path: "제2조 제3호"
+heading: "정의"
+language: "ko"
+tags: ["korea", "definition", "virtual-asset"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:kr-tfia"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        locator: "제2조 제3호"
+        retrieved: "2026-07-30"
+  - predicate: "DEFINES"
+    to: "CONCEPT:x-virtual-asset"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        locator: "제2조 제3호"
+        retrieved: "2026-07-30"
+  - predicate: "EQUIVALENT_TO"
+    to: "PROV:kr-vaupa-art2"
+    qualifiers:
+      equivalence: "strict"
+      scope_note: "이 조문이 이용자보호법 제2조를 직접 참조한다"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        retrieved: "2026-07-31"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "B"
+    locator: "제2조 제3호"
+    retrieved: "2026-07-30"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 조문의 존재와 위치는 확인했으나 **원문 문언(text_orig)을 확보하지
+  않았다.** 정의 조항은 제외 열거가 규제 범위를 직접 가르므로 축조 확인이 필수다.
+  OC 발급 후 lawService.do target=lawjosub 으로 전문을 채우고 A 로 승격할 것.
+
+  【2축 상호참조】 특금법 제2조제1호 하목·제3호가 가상자산이용자보호법 제2조를
+  참조한다. 즉 두 법의 정의가 결합되어 있어, 한쪽이 바뀌면 양쪽 적용 범위가 함께
+  움직인다. 이용자보호법 조문도 PROV 로 등재해 DEFINES 를 이중으로 걸어야 한다.

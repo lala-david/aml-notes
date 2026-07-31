@@ -1,0 +1,36 @@
+id: "TEC:x-victim-direct-transfer"
+type: "TEC"
+layer: "semantic"
+label:
+  ko: "피해자 직접 송금 유도"
+summary: >
+  투자사기·로맨스스캠으로 피해자가 스스로 신규 지갑이나 거래소에서 코인을 사서 사기범 주소로 송금하게 만든다.
+parent_typology: "TYP:x-placement-onramp"
+detectability: "medium"
+chains: ['all']
+tags: ["technique", "placement-onramp"]
+edges:
+  - predicate: "PART_OF"
+    to: "TYP:x-placement-onramp"
+    evidence:
+      - doc: "DOC:x-typology-taxonomy-2026"
+        confidence: "B"
+        retrieved: "2026-07-31"
+  - predicate: "DETECTED_BY"
+    to: "IND:x-new-accounts-converge"
+    evidence:
+      - doc: "DOC:x-typology-taxonomy-2026"
+        confidence: "B"
+        retrieved: "2026-07-31"
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 원천은 리서치 도시에이며 FATF 원문(2020 Red Flag Indicators,
+  2025 Targeted Update)을 직접 확보하지 못했다. 개별 사례·수치는 도시에 §4-B 참조.
+  MITRE ATT&CK 매핑(external_ids.mitre_attack)은 미기입 — 해당 기법이 사이버
+  공격 기법이 아니라 자금세탁 기법이므로 직접 대응하는 항목이 없는 경우가 많다.

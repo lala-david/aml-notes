@@ -1,0 +1,22 @@
+id: "TYP:x-placement-onramp"
+type: "TYP"
+layer: "semantic"
+label:
+  ko: "배치·진입"
+  en: "Placement & On-ramp"
+summary: >
+  범죄수익을 가상자산 형태로 최초 확보한다. 가상자산 환경에서는 수익이 애초에 온체인에서 발생하는 경우가 많아(랜섬웨어·해킹·온라인사기) 전통적 배치 단계가 사실상 생략되기도 한다.
+stage: "placement"
+predicate_offenses: ['fraud', 'ransomware', 'theft']
+tags: ["typology", "placement"]
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 7전술로 세분한 체계의 일부다.
+  MITRE ATT&CK 의 tactic→technique→indicator 구조를 차용했다.
+  ⚠️ 확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.

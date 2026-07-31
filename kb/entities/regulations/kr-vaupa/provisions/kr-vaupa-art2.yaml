@@ -1,0 +1,53 @@
+id: "PROV:kr-vaupa-art2"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "가상자산이용자보호법 제2조 (정의)"
+  en: "VAUPA Article 2 — definitions"
+  short: "이용자보호법 제2조"
+parent_reg: "REG:kr-vaupa"
+citation_path: "제2조"
+heading: "정의"
+language: "ko"
+summary: >
+  가상자산이용자보호법의 정의 조항. 특금법 제2조제1호 하목·제3호가 이 조문을
+  참조하므로, 두 법의 가상자산 정의가 결합되어 있다. 한쪽이 개정되면 다른 쪽의
+  적용 범위도 함께 움직인다.
+tags: ["korea", "definition", "cross-reference"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:kr-vaupa"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        locator: "특금법 제2조제1호 하목·제3호의 상호참조"
+        retrieved: "2026-07-31"
+  - predicate: "DEFINES"
+    to: "CONCEPT:x-virtual-asset"
+    qualifiers:
+      scope_note: "특금법이 이 조문을 참조한다 — 두 법의 정의가 결합"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        retrieved: "2026-07-31"
+  - predicate: "EQUIVALENT_TO"
+    to: "PROV:kr-tfia-art2-3"
+    qualifiers:
+      equivalence: "strict"
+      scope_note: "특금법이 이 조문을 직접 참조하므로 동일 정의"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "B"
+        retrieved: "2026-07-31"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ 확신도 B — 상호참조 관계는 korea-regime 도시에가 T1 으로 확인했으나
+  이 조문 자체의 원문은 미확보. 이용자보호법 법령ID 확보 후 채울 것.
+
+  EQUIVALENT_TO 는 대칭 술어이므로 PROV:kr-tfia-art2-3 에 역엣지가 필요하다(I-11).

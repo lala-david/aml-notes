@@ -224,14 +224,47 @@ def search(
         "total": total,
         "offset": offset,
         "limit": limit,
-        "items": [
-            {**(node_brief(g, n.id) or {}),
-             "summary": n.raw.get("summary"),
-             "tags": n.raw.get("tags") or [],
-             "jurisdiction": g.jurisdiction_of(n)}
-            for n in page
-        ],
+        "items": [_list_item(g, n) for n in page],
     }
+
+
+# 목록에서 자주 쓰이는 클래스별 요약 필드.
+# 없으면 화면이 상세를 건건이 다시 부른다 (출처 화면이 38회 왕복하던 원인).
+LIST_EXTRA: dict[str, tuple[str, ...]] = {
+    "SRC": ("tier", "publisher_kind", "base_url", "language"),
+    "DOC": ("doc_kind", "published", "url", "src"),
+    "REG": ("reg_kind", "binding", "citation"),
+    "PROV": ("citation_path", "parent_reg"),
+    "OBL": ("obl_kind", "actor_class"),
+    "TEC": ("parent_typology", "detectability"),
+    "TYP": ("stage",),
+    "IND": ("signal_type", "fp_risk"),
+    "VASP": ("vasp_kind",),
+    "VEND": ("vend_kind",),
+    "ORG": ("org_kind",),
+    "ACTION": ("action_kind",),
+}
+
+
+def _list_item(g: Graph, n: Node) -> dict:
+    """목록 한 줄. 공통 요약 + 클래스별 추가 필드 + 최저 확신도."""
+    confs: list[str] = []
+    for ev in n.raw.get("evidence") or []:
+        if isinstance(ev, dict) and isinstance(ev.get("confidence"), str):
+            confs.append(ev["confidence"])
+
+    item = {
+        **(node_brief(g, n.id) or {}),
+        "summary": n.raw.get("summary"),
+        "tags": n.raw.get("tags") or [],
+        "jurisdiction": g.jurisdiction_of(n),
+        "confidence": max(confs) if confs else None,
+        "review_due": n.raw.get("review_due"),
+    }
+    for f in LIST_EXTRA.get(n.type, ()):
+        if n.raw.get(f) is not None:
+            item[f] = n.raw[f]
+    return item
 
 
 def as_of_param(value: str | None) -> date | None:

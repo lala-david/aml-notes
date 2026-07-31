@@ -1,0 +1,22 @@
+id: "TYP:x-integration-offramp"
+type: "TYP"
+layer: "semantic"
+label:
+  ko: "통합·현금화"
+  en: "Integration & Off-ramp"
+summary: >
+  세탁된 가치를 사용 가능한 형태로 실현한다. 법정화폐 환전뿐 아니라 스테이블코인 상태 그대로 실물결제되는 경로가 확대되었다.
+stage: "integration"
+predicate_offenses: ['all']
+tags: ["typology", "integration"]
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 7전술로 세분한 체계의 일부다.
+  MITRE ATT&CK 의 tactic→technique→indicator 구조를 차용했다.
+  ⚠️ 확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.

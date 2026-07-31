@@ -1,0 +1,22 @@
+id: "TYP:x-evasion-counter-detection"
+type: "TYP"
+layer: "semantic"
+label:
+  ko: "회피·대응방해"
+  en: "Evasion & Counter-Detection"
+summary: >
+  제재·동결·수사 대응을 무력화한다. 사후통제에 대한 적극적 대항 행위이며 집행이 강화될수록 정교해진다.
+stage: "cross-cutting"
+predicate_offenses: ['sanctions-evasion']
+tags: ["typology", "cross-cutting"]
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 7전술로 세분한 체계의 일부다.
+  MITRE ATT&CK 의 tactic→technique→indicator 구조를 차용했다.
+  ⚠️ 확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.

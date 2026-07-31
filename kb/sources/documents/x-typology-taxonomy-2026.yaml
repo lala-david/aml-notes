@@ -1,0 +1,43 @@
+id: "DOC:x-typology-taxonomy-2026"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "가상자산 자금세탁 유형론 체계 (2026-07-30 조사)"
+  en: "VA money laundering typology taxonomy, 2026-07-30"
+summary: >
+  7 전술 × 62 기법 × 탐지지표 3단 계층 체계. MITRE ATT&CK 의
+  tactic → technique → indicator 구조를 자금세탁 도메인에 적용했다.
+  전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 재분류하고,
+  세탁 서비스 산업화(TA-05)와 제재 대응방해(TA-07)를 신규 전술로 추가했다.
+src: "SRC:x-internal"
+url: "_research/wave1/typologies-threat-actors.md"
+published: "2026-07-30"
+accessed: "2026-07-31"
+doc_kind: "report"
+language: "ko"
+translation: false
+tags: ["typology", "taxonomy", "self-authored"]
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    locator: "§4-A 유형론 3단 계층"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  ⚠️ **자체 작성 조사 산출물이다.** 외부 권위 문서가 아니다.
+
+  ⚠️ **확신도 상한은 B 다.** 조사 과정에서 FATF 원문 2건
+  (2025 Targeted Update, 2020 Red Flag Indicators for VA)이 HTTP 403 으로
+  차단되어 T3 요약과 검색 스니펫에 의존했다. 지표 체계의 근거 원칙이 그 문서에
+  있으므로, 원문 확보 전까지 이 체계에서 파생된 노드를 A 로 승격하면 안 된다.
+  → 최우선 재검토 과제. curl 브라우저 헤더 우회로 재시도할 것.
+
+  【인용 원칙】 FATF 원칙상 "단일 지표의 존재만으로 범죄를 시사하지 않으며,
+  합리적 사업적 설명이 없는 상태에서 복수 지표가 동시 발현할 때 의심의 근거가
+  된다." 이 체계에서 파생된 IND 노드는 전부 이 전제 하에서만 사용해야 한다.
+
+  【통계 주의】 도시에가 인용한 정량 수치(불법 유입 추정액·비중 등)는 산출 주체마다
+  방법론이 다르고 이듬해 대폭 상향 개정되는 경향이 있다. 기법 노드에는 수치를 넣지
+  않았고, 필요한 경우 METRIC 레코드로 revision 을 명시해 별도 등재해야 한다.

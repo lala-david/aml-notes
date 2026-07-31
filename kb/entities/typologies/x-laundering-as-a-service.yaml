@@ -1,0 +1,22 @@
+id: "TYP:x-laundering-as-a-service"
+type: "TYP"
+layer: "semantic"
+label:
+  ko: "세탁 인프라·서비스"
+  en: "Laundering-as-a-Service"
+summary: >
+  세탁 기능을 전문 사업자에게 외주화한다. 2025~2026년 가장 두드러진 구조 변화이며, 세탁이 별도 산업으로 분리되었다.
+stage: "cross-cutting"
+predicate_offenses: ['all']
+tags: ["typology", "cross-cutting"]
+evidence:
+  - doc: "DOC:x-typology-taxonomy-2026"
+    confidence: "B"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-28"
+curator_note: >
+  전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 7전술로 세분한 체계의 일부다.
+  MITRE ATT&CK 의 tactic→technique→indicator 구조를 차용했다.
+  ⚠️ 확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.
