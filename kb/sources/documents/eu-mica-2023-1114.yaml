@@ -1,0 +1,41 @@
+id: "DOC:eu-mica-2023-1114"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "규정 (EU) 2023/1114 — 암호자산시장 (MiCA)"
+  en: "Regulation (EU) 2023/1114 on markets in crypto-assets"
+  short: "MiCA 원문"
+summary: >
+  EU 암호자산 규제법 원문. 제3조 제1항이 이 규정에서 쓰는 용어를 정의하며,
+  제5호가 "crypto-asset" 의 정의다. 인가·영업행위·발행 규율의 적용 범위가
+  이 정의에서 갈린다.
+src: "SRC:eu-publications"
+url: "http://publications.europa.eu/resource/celex/32023R1114"
+accessed: "2026-07-31"
+published: "2023-05-31"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["eu", "definition", "crypto-asset"]
+evidence:
+  - doc: "DOC:eu-mica-2023-1114"
+    confidence: "A"
+    locator: "Article 3(1)(5)"
+    quote: >
+      'crypto-asset' means a digital representation of a value or of a right
+      that is able to be transferred and stored electronically using
+      distributed ledger technology or similar technology
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2027-01-29"
+curator_note: >
+  【확보 경로 — 기존 차단 해소】 EUR-Lex 원문 경로는 robots.txt 로 막혀 있고,
+  이전 조사에서는 HTML/PDF 가 도구에서 절단되어 축조 문언을 못 가져왔다.
+  출판국 CELLAR 내용협상으로 해결했다. Accept 헤더가 관건이다 —
+  text/html·text/plain 은 400(Illegal accept header), application/xhtml+xml
+  이라야 200 이다. 전문 1.6MB 를 받았다.
+
+  같은 방법으로 TFR(32023R1113)도 받았다(DOC:eu-tfr-2023-1113).
+  SRC:eu-publications 의 "SPARQL 이 유일한 합법 경로" 서술은 과했다 —
+  내용협상 REST 로 충분하다. 출처 노드에 반영했다.

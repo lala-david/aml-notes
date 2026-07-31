@@ -5,10 +5,11 @@ label:
   ko: "EU 출판국"
   en: "Publications Office of the EU"
 summary: >
-  CELLAR SPARQL 엔드포인트로 EU 법령 메타데이터와 원문을 제공한다.
+  EU 법령 원문과 메타데이터의 공식 보관소(CELLAR). 내용협상 REST 와
+  SPARQL 두 경로를 제공한다.
 tier: "T1"
 tier_basis: >
-  EU 법령 원문의 공식 보관·배포처. EUR-Lex 원문 크롤링이 robots 로 금지되므로 이 SPARQL 엔드포인트가 유일한 합법 경로다.
+  EU 법령 원문의 공식 보관·배포처. EUR-Lex 원문 크롤링이 robots 로 금지되므로 이곳이 합법적 확보 경로다.
 publisher_kind: "government"
 base_url: "https://publications.europa.eu"
 language: "en"
@@ -17,3 +18,19 @@ tags: ["eu"]
 created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2027-01-30"
+curator_note: >
+  【실측 확보법 — 2026-07-31】 SPARQL 을 짤 필요가 없다. CELEX 번호로
+  내용협상 REST 를 부르면 전문이 나온다.
+
+    curl -L -H "Accept: application/xhtml+xml" -H "Accept-Language: eng" \
+      http://publications.europa.eu/resource/celex/{CELEX}
+
+  Accept 헤더가 관건이다. text/html·text/plain 은 400
+  (Illegal accept header), application/xhtml+xml 이라야 200 이다.
+  메타데이터만 필요하면 Accept: application/xml;notice=object 를 쓴다.
+
+  이 방법으로 MiCA(32023R1114) 1.6MB, TFR(32023R1113) 326KB 를 받았다.
+  이전에 "EUR-Lex HTML/PDF 가 도구에서 절단된다" 던 문제가 사라진다.
+
+  【주의】 cellar/{UUID} 직접 주소는 문서마다 보유한 형식이 달라
+  application/xhtml+xml 이 없으면 404 를 준다. CELEX 경로를 쓰는 편이 안전하다.

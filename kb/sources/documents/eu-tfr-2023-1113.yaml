@@ -1,0 +1,47 @@
+id: "DOC:eu-tfr-2023-1113"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "규정 (EU) 2023/1113 — 자금 및 특정 암호자산 이체 시 동반정보"
+  en: "Regulation (EU) 2023/1113 on information accompanying transfers of funds and certain crypto-assets"
+  short: "EU TFR"
+summary: >
+  EU 의 트래블룰 규정 원문. 제14조가 암호자산 이체 시 암호자산서비스제공자가
+  송신인·수신인 정보를 동반시킬 의무를 정한다. 자금이체에는 EUR 1,000 기준이
+  여럿 있으나 암호자산 이체의 정보 동반 의무 자체에는 기준금액이 없다.
+src: "SRC:eu-publications"
+url: "http://publications.europa.eu/resource/celex/32023R1113"
+accessed: "2026-07-31"
+published: "2023-05-31"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["eu", "travel-rule", "crypto-asset"]
+evidence:
+  - doc: "DOC:eu-tfr-2023-1113"
+    confidence: "A"
+    locator: "Article 14(1)"
+    quote: >
+      The crypto-asset service provider of the originator shall ensure that
+      transfers of crypto-assets are accompanied by the following information
+      on the originator: (a) the name of the originator; (b) the originator's
+      distributed ledger address …
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-29"
+curator_note: >
+  【확보 경로 — 기존 차단 해소】 EUR-Lex 는 robots.txt 로 원문 경로 크롤링을
+  금지하지만, 출판국 CELLAR 의 내용협상 엔드포인트로는 받을 수 있다.
+    curl -L -H "Accept: application/xhtml+xml" -H "Accept-Language: eng" \
+      http://publications.europa.eu/resource/celex/32023R1113
+  Accept 를 text/html 로 주면 400(Illegal accept header)이고,
+  application/xhtml+xml 이라야 200 이다. 이 경로로 전문 326KB 를 받아
+  제14조를 축조 확인했다.
+
+  【EUR 1 000 의 정확한 소재 — 흔한 오해】 원문 검색 결과 EUR 1 000 은
+  (1) 자금이체(암호자산 아님)의 정보 검증 면제선, (2) 자기수탁 주소로/에서
+  오가는 이체에서 **주소 소유·통제 여부를 평가할 의무**의 발동선으로 쓰인다.
+  제14조 제1항·제2항의 정보 동반 의무 자체에는 금액 기준이 없다.
+  따라서 "EU 트래블룰 임계값은 EUR 1,000" 은 틀린 서술이다.
+  → REG:eu-tfr 의 기존 서술이 옳았음을 원문으로 확인했다.

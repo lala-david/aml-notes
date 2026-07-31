@@ -1,0 +1,88 @@
+id: "PROV:us-bsa-cfr1010-410f"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "31 CFR 1010.410(f) (이체지시 동반정보 — 트래블룰)"
+  en: "31 CFR 1010.410(f) — Travel Rule"
+  short: "31 CFR 1010.410(f)"
+plain: >
+  미국에서 돈을 보낼 때 3,000달러 이상이면 보내는 사람 정보를 이체지시에 넣어 함께 보내라고 정한 규정입니다.
+  가상자산을 직접 언급하지는 않고, 거래소를 송금업자로 보는 다른 규정을 거쳐 적용됩니다.
+summary: >
+  미국 트래블룰의 규정 근거. 미국 내 송신 금융기관·중개 금융기관은
+  **3,000달러 이상**의 자금이체에 대해 송신인 성명·계좌번호·주소·금액·실행일과
+  수신 금융기관 정보를 이체지시에 포함시켜야 한다. 조문 자체는 가상자산을
+  언급하지 않으며, 가상자산사업자 적용은 MSB 정의를 경유한다.
+parent_reg: "REG:us-bsa"
+citation_path: "31 CFR 1010.410(f)"
+heading: "Records to be made and retained by financial institutions"
+language: "en"
+text_orig: >
+  Any transmittor's financial institution or intermediary financial institution
+  located within the United States shall include in any transmittal order for a
+  transmittal of funds in the amount of $3,000 or more, information as required
+  in this paragraph (f): (1) A transmittor's financial institution shall include
+  in a transmittal order, at the time it is sent to a receiving financial
+  institution, the following information: (i) The name and, if the payment is
+  ordered from an account, the account number of the transmittor; (ii) The
+  address of the transmittor …; (iii) The amount of the transmittal order;
+  (iv) The execution date of the transmittal order; (v) The identity of the
+  recipient's financial institution;
+tags: ["us", "travel-rule", "threshold"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:us-bsa"
+    evidence:
+      - doc: "DOC:us-ecfr-1010-410"
+        confidence: "A"
+        locator: "§ 1010.410(f)"
+        retrieved: "2026-07-31"
+  # 조문 문언은 A 로 확인했다. 다만 이 조문이 **가상자산** 트래블룰의
+  # 근거가 되는 경로(MSB 정의 → FinCEN 2019 지침)는 아직 원문으로
+  # 확인하지 않았으므로 이 엣지의 확신도는 B 다. 문언 확인과 적용 확인은 다르다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      threshold: 3000
+      currency: "USD"
+      scope_note: "조문은 '자금이체' 를 규율하며 가상자산을 명시하지 않는다. 가상자산사업자 적용은 MSB 정의(31 CFR 1010.100(ff))를 경유한다 — 그 조문 미등재"
+    valid_from: null
+    valid_to: null
+    recorded_at: "2026-07-31"
+    evidence:
+      - doc: "DOC:us-ecfr-1010-410"
+        confidence: "B"
+        locator: "§ 1010.410(f)"
+        quote: >
+          shall include in any transmittal order for a transmittal of funds in
+          the amount of $3,000 or more
+        retrieved: "2026-07-31"
+evidence:
+  - doc: "DOC:us-ecfr-1010-410"
+    confidence: "A"
+    locator: "§ 1010.410(f)"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-29"
+curator_note: >
+  eCFR API 로 title-31 2026-07-29 발행본을 받아 (e)항·(f)항을 축조 확인했다.
+  3,000달러 기준은 두 항 모두에 나온다. (e)는 기록보존(Recordkeeping Rule),
+  (f)가 정보전달(Travel Rule)이다 — 흔히 뭉뚱그리지만 별개 항이다.
+
+  【확신도가 갈리는 지점】 조문 문언은 A 다. 그러나 이 조문이 가상자산에
+  적용된다는 명제는 조문 안에 없다. "transmittal of funds" 를 규율할 뿐이고,
+  가상자산사업자는 MSB 정의(31 CFR 1010.100(ff)(5)(i)(A) 의 "other value
+  that substitutes for currency")를 거쳐 포섭된다. 그 조문과 FinCEN 2019
+  지침을 등재하기 전까지 IMPOSES 엣지는 B 를 넘길 수 없다.
+  → 최우선 재검토 과제. 한국 사례에서 이미 같은 유형의 오류를 냈다 —
+  "의무를 부과하는 조문" 과 "적용 범위를 정하는 조문" 은 다르다.
+
+  【시행 예정 개정】 89 FR 72274 (2024-09-04 공포) 개정이 두 차례 연기되어
+  2028-01-01 시행 예정이다(91 FR 36, 2026-01-02). 개정 내용은 이 조문
+  본문에 없으므로 연방관보 원문을 따로 확보해야 한다.
+  FinCEN 이 오래 추진해 온 임계값 250달러 하향안(RIN 1506-AB41)은 이와
+  별개이며 2025-04 철회되었다(FACT 기록 있음).
+
+  valid_from 은 비워 두었다. 이 조문의 최초 시행일을 원문으로 확인하지
+  않았고, 추정으로 채우면 시점 질의가 조용히 틀린 답을 낸다.

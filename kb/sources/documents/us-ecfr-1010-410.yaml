@@ -1,0 +1,48 @@
+id: "DOC:us-ecfr-1010-410"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "31 CFR 1010.410 (금융기관 기록 작성·보존)"
+  en: "31 CFR 1010.410 — Records to be made and retained by financial institutions"
+  short: "31 CFR 1010.410"
+summary: >
+  미국 자금이체 기록보존·정보전달 의무의 규정 근거. (e)항이 은행 아닌
+  금융기관의 기록보존을, (f)항이 이체지시에 송신인 정보를 포함시킬 의무
+  (이른바 Travel Rule)를 정한다. 두 항 모두 적용 기준금액은 3,000달러다.
+src: "SRC:us-ecfr"
+url: "https://www.ecfr.gov/api/versioner/v1/full/2026-07-29/title-31.xml?part=1010&section=1010.410"
+accessed: "2026-07-31"
+published: "2026-07-29"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["us", "travel-rule", "threshold", "recordkeeping"]
+evidence:
+  - doc: "DOC:us-ecfr-1010-410"
+    confidence: "A"
+    locator: "§ 1010.410(f)"
+    quote: >
+      Any transmittor's financial institution or intermediary financial
+      institution located within the United States shall include in any
+      transmittal order for a transmittal of funds in the amount of $3,000
+      or more, information as required in this paragraph (f)
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-29"
+curator_note: >
+  eCFR API 로 title-31 의 2026-07-29 발행본을 직접 받아 축조 확인했다.
+  (e)항·(f)항 전문을 읽었고 3,000달러 기준을 두 항 모두에서 확인했다.
+
+  【시행 예정 개정 — 감시 대상】 본문 머리에 다음 주석이 붙어 있다.
+  "Link to an amendment published at 89 FR 72274, Sept. 4, 2024.
+   This amendment was delayed until Jan. 1, 2028, at 91 FR 36, Jan. 2, 2026."
+  즉 2024-09-04 공포된 개정이 두 차례 연기되어 2028-01-01 시행 예정이다.
+  개정 내용 자체는 이 문서에 없으므로 89 FR 72274 원문을 따로 확보해야 한다.
+  → 재검토 과제. 연방관보 피드(FEED:us-fedreg-term)로 추적 가능하다.
+
+  【가상자산 적용 경로에 주의】 이 조문은 "transmittal of funds" 를 규율하며
+  가상자산을 명시하지 않는다. 가상자산 사업자에 대한 적용은 MSB 정의
+  (31 CFR 1010.100(ff))를 거쳐 들어오고, FinCEN 2019 지침이 그 해석을
+  밝히고 있다. 그 연결고리는 아직 이 지식베이스에 조문으로 등재되지 않았다
+  — 등재 전까지 "미국 트래블룰 = 3,000달러" 를 가상자산에 그대로 대입하면 안 된다.

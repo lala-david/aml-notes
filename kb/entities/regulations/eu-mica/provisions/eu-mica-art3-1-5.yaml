@@ -9,6 +9,10 @@ parent_reg: "REG:eu-mica"
 citation_path: "Article 3(1)(5)"
 heading: "Definitions"
 language: "en"
+text_orig: >
+  'crypto-asset' means a digital representation of a value or of a right that
+  is able to be transferred and stored electronically using distributed ledger
+  technology or similar technology;
 plain: >
   EU 가 무엇을 규제 대상으로 볼지 정한 조항입니다. 한국이나 FATF 가 쓰는 정의와 범위가 달라서, 같은 자산이
   한쪽에서는 규제 대상이고 다른 쪽에서는 아닐 수 있습니다.
@@ -21,32 +25,44 @@ edges:
   - predicate: "PART_OF"
     to: "REG:eu-mica"
     evidence:
-      - doc: "DOC:x-source-probe-20260730"
-        confidence: "C"
+      - doc: "DOC:eu-mica-2023-1114"
+        confidence: "A"
+        locator: "Article 3(1)(5)"
         retrieved: "2026-07-31"
   - predicate: "DEFINES"
     to: "CONCEPT:x-virtual-asset"
     qualifiers:
       scope_note: "EU 용어는 crypto-asset. 한국·FATF 정의와 범위가 다르다"
     evidence:
-      - doc: "DOC:x-source-probe-20260730"
-        confidence: "C"
+      - doc: "DOC:eu-mica-2023-1114"
+        confidence: "A"
+        locator: "Article 3(1)(5)"
         retrieved: "2026-07-31"
 evidence:
-  - doc: "DOC:x-source-probe-20260730"
-    confidence: "C"
+  - doc: "DOC:eu-mica-2023-1114"
+    confidence: "A"
+    locator: "Article 3(1)(5)"
+    quote: >
+      'crypto-asset' means a digital representation of a value or of a right
+      that is able to be transferred and stored electronically using
+      distributed ledger technology or similar technology
     retrieved: "2026-07-31"
 created_at: "2026-07-31"
 updated_at: "2026-07-31"
-review_due: "2026-10-28"
+review_due: "2027-01-29"
 curator_note: >
-  확신도 C — 증거가 자체 실측 기록뿐이다. **정의 조문을 원문으로 확보하지
-  않았다.** eu-uk-regime 도시에는 MiCA 를 T1 28건으로 조사했으나 EUR-Lex HTML/PDF 가
-  도구에서 절단되어 축조 문언을 못 가져왔다.
-
-  EUR-Lex 는 robots.txt 로 원문 경로 크롤링을 금지한다. CELLAR SPARQL
-  (SRC:eu-publications) 로 CELEX 32023R1114 를 조회해야 한다.
-  → 확보 후 text_orig 를 채우고 DOC 을 만들어 재결속할 것. **최우선 재검토 과제.**
+  【2026-07-31 승급 C → A】 원문을 확보해 축조 확인했다. 이전 판정은
+  "증거가 자체 실측 기록뿐" 이었고 EUR-Lex 크롤링 금지가 걸림돌이었다.
+  출판국 CELLAR 내용협상으로 우회했다 —
+    curl -L -H "Accept: application/xhtml+xml" -H "Accept-Language: eng" \
+      http://publications.europa.eu/resource/celex/32023R1114
+  Accept 를 text/html 로 주면 400 이고 application/xhtml+xml 이라야 200 이다.
+  SPARQL 을 짤 필요가 없었다.
 
   【왜 중요한가】 정의가 다르면 같은 자산이 한 관할에서는 규제 대상이고 다른
   관할에서는 아니다. 이 차이가 규제 차익(regulatory arbitrage)의 출발점이다.
+
+  【범위 차이 — 아직 미검증】 한국 "가상자산"·FATF "virtual asset" 과 범위가
+  일치하지 않는다는 서술은 유지하되, 세 정의를 축조 대조한 기록은 아직 없다.
+  FATF Glossary 원문을 확보해 셋을 나란히 놓고 차이를 조문 단위로 적을 것.
+  → 재검토 과제.

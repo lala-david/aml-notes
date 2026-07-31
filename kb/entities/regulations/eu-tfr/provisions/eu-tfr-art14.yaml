@@ -1,0 +1,87 @@
+id: "PROV:eu-tfr-art14"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "EU 자금이체규정 제14조 (암호자산 이체 시 동반정보)"
+  en: "TFR Article 14 — Information accompanying transfers of crypto-assets"
+  short: "TFR 제14조"
+plain: >
+  EU 에서 암호자산을 보낼 때 누가 보냈는지를 함께 넘기라고 정한 조항입니다. 금액과 상관없이 모든 이체에
+  적용된다는 점이 한국·미국과 다릅니다.
+summary: >
+  암호자산서비스제공자가 암호자산 이체에 송신인 정보를 동반시킬 의무의 근거 조항.
+  이름·분산원장 주소·계정번호·주소지(또는 생년월일과 출생지)를 요구하며,
+  **정보 동반 의무 자체에는 기준금액이 없다.** EUR 1,000 은 자기수탁 주소의
+  소유·통제 여부를 평가할 의무를 발동시키는 별개의 기준이다.
+parent_reg: "REG:eu-tfr"
+citation_path: "Article 14"
+heading: "Information accompanying transfers of crypto-assets"
+language: "en"
+text_orig: >
+  The crypto-asset service provider of the originator shall ensure that
+  transfers of crypto-assets are accompanied by the following information on
+  the originator: (a) the name of the originator; (b) the originator's
+  distributed ledger address, in cases where a transfer of crypto-assets is
+  registered on a network using DLT or similar technology, and the crypto-asset
+  account number of the originator, where such an account exists and is used to
+  process the transaction; (c) the originator's crypto-asset account number, in
+  cases where a transfer of crypto-assets is not registered on a network using
+  DLT or similar technology; (d) the originator's address, including the name of
+  the country, official personal document number and customer identification
+  number, or, alternatively, the originator's date and place of birth; and
+  (e) subject to the existence of the necessary field in the relevant message
+  format, and where provided by the originator to its crypto-asset service
+  provider, the current LEI or, in its absence, any other available equivalent
+  official identifier of the originator.
+tags: ["eu", "travel-rule", "crypto-asset", "no-threshold"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:eu-tfr"
+    evidence:
+      - doc: "DOC:eu-tfr-2023-1113"
+        confidence: "A"
+        locator: "Article 14"
+        retrieved: "2026-07-31"
+  # 임계값 한정자를 두지 않는다 — 이 조문에는 금액 기준이 없다.
+  # 비워 두는 것과 "없음"은 다르므로 curator_note 에 근거를 남긴다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      scope_note: "금액 기준 없음 — 모든 암호자산 이체에 적용"
+    valid_from: "2024-12-30"
+    valid_to: null
+    recorded_at: "2026-07-31"
+    evidence:
+      - doc: "DOC:eu-tfr-2023-1113"
+        confidence: "A"
+        locator: "Article 14(1)"
+        quote: >
+          The crypto-asset service provider of the originator shall ensure that
+          transfers of crypto-assets are accompanied by the following
+          information on the originator
+        retrieved: "2026-07-31"
+evidence:
+  - doc: "DOC:eu-tfr-2023-1113"
+    confidence: "A"
+    locator: "Article 14"
+    retrieved: "2026-07-31"
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+review_due: "2026-10-29"
+curator_note: >
+  CELLAR 내용협상으로 전문을 받아 축조 확인했다(DOC:eu-tfr-2023-1113 참조).
+  text_orig 는 제14조 제1항 전문이다. 제2항(수신인 정보)은 별도 조문 노드가
+  아니라 이 노드의 범위에 함께 두었다 — 필요해지면 분리한다.
+
+  【임계값 없음의 근거】 원문에서 EUR 1 000 이 나오는 자리를 전수 확인했다.
+  암호자산 관련 등장은 자기수탁 주소 소유·통제 평가 의무(제14조 제5항,
+  제16조 제2항)뿐이고, 정보 동반 의무 자체에는 금액 기준이 없다.
+  따라서 IMPOSES 한정자에 threshold 를 넣지 않았다.
+  "EU 트래블룰 임계값 EUR 1,000" 은 흔한 오해다.
+
+  valid_from(2024-12-30)은 TFR 적용개시일로 알려진 값이며 MiCA 의 CASP 적용
+  개시일과 같다. 이 문서의 최종 조항으로 직접 확인하지 않았다 — 제39조
+  (적용개시)를 축조 확인해 채울 것. 재검토 과제.
+
+  자기수탁 주소 평가 의무(EUR 1,000)는 트래블룰과 성격이 다른 별개 의무이므로
+  OBL 을 새로 만들어 걸어야 한다 — 미등재. 과제로 남긴다.

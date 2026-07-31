@@ -1,0 +1,34 @@
+id: "SRC:us-ecfr"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "미국 전자연방규정집 (eCFR)"
+  en: "Electronic Code of Federal Regulations"
+  short: "eCFR"
+summary: >
+  미국 연방규정(CFR) 현행본의 공식 전자판. 국립문서기록관리청(NARA)과
+  연방관보국(OFR)이 정부출판국(GPO)과 공동 운영한다. 조문 단위 REST API 를
+  제공하며 날짜를 지정해 그날 시행 중이던 본문을 그대로 받을 수 있다.
+tier: "T1"
+tier_basis: >
+  연방규정 원문의 공식 배포처다. 법적 효력을 갖는 것은 연간 인쇄본이나,
+  eCFR 은 OFR 이 매일 갱신하는 준공식 현행본으로 실무 인용에 쓰인다.
+  시점 지정 조회가 가능해 이 지식베이스의 시점 질의와 직접 맞물린다.
+publisher_kind: "government"
+base_url: "https://www.ecfr.gov"
+language: "en"
+paywall: false
+tags: ["us", "statute-text", "api"]
+created_at: "2026-07-31"
+updated_at: "2026-07-31"
+curator_note: >
+  【API】 /api/versioner/v1/full/{YYYY-MM-DD}/title-{n}.xml?part=&section=
+  으로 조문 XML 을 받는다. 요청 날짜가 해당 편(title)의 최신 발행일보다
+  뒤면 404 와 함께 최신 발행일을 알려 준다 — 그 값을 그대로 재요청하면 된다.
+  2026-07-31 실측: title-31 최신 발행일 2026-07-29.
+
+  【인증·헤더】 불필요. 표준 클라이언트로 200. 브라우저 헤더 우회가 필요 없다.
+
+  【주의】 eCFR 은 편찬본이지 법령 그 자체가 아니다. 개정 예고는 본문
+  머리의 "Link to an amendment published at ..." 주석으로만 드러나므로,
+  조문을 받을 때 그 주석을 함께 읽어야 시행 예정 개정을 놓치지 않는다.
