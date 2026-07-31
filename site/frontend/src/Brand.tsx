@@ -27,33 +27,35 @@ export function Mark({ size = 22 }: { size?: number }) {
  * 하나만 갖고, 나머지는 전부 무채색이다. Funnel 은 층이 아니므로 회색이며
  * 맨 위(유입)에 둔다.
  */
+/* 이름은 질문으로, 코드는 뒤에 작게. 「L1 SEMANTIC」 을 앞세우면
+   읽는 사람은 그 줄에서 멈춘다 — 코드가 뜻을 가로막는다. */
 const STRATA = [
   {
     k: 'funnel',
     id: 'FUNNEL',
-    name: '유입 — 계층이 아니다',
-    desc: '수집 파이프라인. 사실 후보까지만 만든다.',
+    name: '어디서 들어왔는가',
+    desc: '자동 수집 장치. 사실 후보까지만 만들고, 확정은 사람이 한다.',
     types: ['FEED', 'RUN', 'ITEM', 'SIG', 'TASK'],
   },
   {
     k: 'kinetic',
-    id: 'L3 KINETIC',
-    name: '동사 — 무엇을 바꾸는가',
-    desc: '실행·역할·기록.',
+    id: 'L3',
+    name: '무엇을 바꾸는가',
+    desc: '사람이 하는 일과 그 기록.',
     types: ['ACTION', 'FUNC', 'ROLE', 'ALOG'],
   },
   {
     k: 'dynamic',
-    id: 'L2 DYNAMIC',
-    name: '시간 — 언제 참이었는가',
-    desc: '유효기간이 붙은 주장. 시점 질의의 근거.',
+    id: 'L2',
+    name: '언제 그랬는가',
+    desc: '언제부터 언제까지 참이었는지가 붙은 주장. 시점을 되감을 수 있는 근거.',
     types: ['FACT', 'EVT', 'STATE', 'METRIC'],
   },
   {
     k: 'semantic',
-    id: 'L1 SEMANTIC',
-    name: '명사 — 무엇이 존재하는가',
-    desc: '관할·기관·법령·조문·의무.',
+    id: 'L1',
+    name: '무엇이 있는가',
+    desc: '관할 · 기관 · 법령 · 조문 · 의무.',
     types: ['JUR', 'ORG', 'REG', 'PROV', 'OBL', 'CTL'],
   },
 ]

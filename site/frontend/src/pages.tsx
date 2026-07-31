@@ -26,7 +26,7 @@ const CLASS_KO: Record<string, string> = {
   ACT: '위협행위자', ACTION: '액션', ALOG: '액션 로그', ASSET: '가상자산',
   CAP: '역량', CASE: '판례·소송', CHAIN: '블록체인', CONCEPT: '개념',
   CTL: '통제', DOC: '문서', ENF: '집행조치', ERA: '국면', EVT: '사건',
-  FACT: '원자적 사실', FEED: '수집 피드', FUNC: '함수', INC: '사고',
+  FACT: '사실', FEED: '수집 피드', FUNC: '함수', INC: '사고',
   IND: '지표', ITEM: '원시 항목', JUR: '관할', METRIC: '관측 수치',
   OBL: '의무', ORG: '기관', PROD: '분석 산출물', PROTO: '프로토콜·서비스',
   PROV: '조문', REG: '규범', RISK: '위험요인', ROLE: '역할',
@@ -1147,11 +1147,13 @@ export function OntologyPage() {
   if (loading) return <Loading rows={5} />
   if (error) return <ErrorBox error={error} />
   const o = data!
+  // 이 화면은 체계 자체를 보는 곳이라 구조 어휘가 정당하다. 다만
+  // 「L1 SEMANTIC」 처럼 코드를 앞세우지 않고 질문을 앞세운다.
   const layers: [string, string][] = [
-    ['semantic', 'L1 SEMANTIC — 명사 · 무엇이 존재하는가'],
-    ['dynamic', 'L2 DYNAMIC — 시간 · 언제 참이었는가'],
-    ['kinetic', 'L3 KINETIC — 동사 · 무엇을 바꿀 수 있는가'],
-    ['funnel', 'FUNNEL — 계층 아님 · 유입 인프라'],
+    ['semantic', '무엇이 있는가 — 관할 · 기관 · 법령 · 조문 · 의무'],
+    ['dynamic', '언제 그랬는가 — 시점이 붙은 사실과 사건'],
+    ['kinetic', '무엇을 바꾸는가 — 사람이 하는 일과 그 기록'],
+    ['funnel', '어디서 들어왔는가 — 자동 수집 장치'],
   ]
 
   return (
@@ -1161,16 +1163,16 @@ export function OntologyPage() {
         lead="등재할 수 있는 것의 종류와, 그것들이 맺을 수 있는 관계의 정의입니다."
         aside={
           <span className="count">
-            클래스 {Object.keys(o.classes).length} · 술어 {Object.keys(o.predicates).length}
+            종류 {Object.keys(o.classes).length} · 관계 {Object.keys(o.predicates).length}
           </span>
         }
       />
 
-      <Section num="§ 01" title="세 겹" note="계층은 색과 세로 위치로도 부호화됩니다">
+      <Section num="§ 01" title="세 겹" note="색과 세로 위치로도 구분됩니다">
         <Strata compact />
       </Section>
 
-      <Section num="§ 02" title="클래스" note={<Count n={Object.keys(o.classes).length} unit="개" />}>
+      <Section num="§ 02" title="등재할 수 있는 것" note={<Count n={Object.keys(o.classes).length} unit="개" />}>
         {layers.map(([layer, title]) => {
           const cls = Object.entries(o.classes).filter(([, c]) => c.layer === layer)
           if (!cls.length) return null

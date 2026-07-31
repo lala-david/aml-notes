@@ -5,8 +5,8 @@ label:
   ko: "상충 판정"
   en: "Resolve contradiction"
 summary: >
-  출처가 엇갈리는 상충 레코드(CTR)에 판정을 기록한다. **어느 쪽도 삭제하지 않는다** —
-  판정 유형과 근거를 남기고, 필요 시 오류 측에 폐기 표시를 한다.
+  출처가 서로 엇갈릴 때 어느 쪽이 맞는지 판정해 기록한다. **어느 쪽도 지우지 않는다** — 판정 근거를
+  남기고, 필요하면 틀린 쪽에 폐기 표시를 붙인다.
 action_kind: "governance"
 tier: "L2-write"
 tags: ["governance", "contradiction"]

@@ -5,8 +5,8 @@ label:
   ko: "관할 크로스워크"
   en: "Jurisdiction crosswalk"
 summary: >
-  추상 의무(OBL) 하나에 걸린 각국 조문(PROV)의 IMPOSES 한정자를 모아 관할 비교표를
-  생성한다. 손으로 유지하던 비교표를 질의 결과로 대체한다. --as-of 로 시점 질의를 지원한다.
+  의무 하나를 골라, 그것을 정하고 있는 각국 조문과 기준금액을 모아 비교표를 만든다. 손으로 유지하던 표를
+  질의 결과로 대체한다. 기준 시점을 주면 그날 시행 중이던 조문만 남는다.
 func_kind: "derivation"
 tags: ["derivation", "crosswalk", "implemented"]
 inputs:

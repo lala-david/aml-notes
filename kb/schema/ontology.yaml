@@ -298,7 +298,7 @@ classes:
 
   FACT:
     layer: dynamic
-    label: { ko: "원자적 사실", en: "Claim" }
+    label: { ko: "사실", en: "Claim" }
     dir: "kb/facts"
     storage: jsonl
     required: [claim, confidence, evidence, recorded_at]

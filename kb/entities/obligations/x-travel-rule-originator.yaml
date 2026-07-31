@@ -7,10 +7,9 @@ label:
   short: "트래블룰(송신인)"
 aliases: ["travel rule originator obligation", "송금인 정보 제공 의무"]
 summary: >
-  가상자산 이체 시 송신 사업자가 수신 사업자에게 송신인 식별정보를 이체와 동시에
-  또는 사전에 전달해야 하는 의무. 관할에서 탈각된 추상 의무이며, 각국 조문이
-  IMPOSES 엣지로 이를 가리키고 임계값·자기수탁 취급 등 관할별 차이는 엣지
-  한정자에 담긴다.
+  가상자산을 보낼 때, 보내는 쪽 사업자가 받는 쪽 사업자에게 "누가 보냈는지"를 이체와 동시에 또는 그 전에
+  알려야 하는 의무. 나라를 가리지 않는 공통 형태로 적어 둔 것이며, 이 의무를 실제로 정하는 조문은
+  나라마다 다르다. 기준금액이나 개인지갑 취급 같은 나라별 차이는 각 조문 쪽에 붙어 있다.
 obl_kind: "information-transmission"
 actor_class: "VASP"
 trigger: "virtual-asset-transfer"

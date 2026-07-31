@@ -5,8 +5,8 @@ label:
   ko: "확신도 승격"
   en: "Promote confidence"
 summary: >
-  원문 확인으로 사실·노드의 확신도를 상향한다. 강등(자동)과 달리 **반드시 사람이
-  원문을 열어본 뒤에만** 수행한다. 이 비대칭이 지식 인플레이션을 막는다.
+  원문을 직접 확인한 결과로 확신도를 올린다. 내리는 것은 자동으로 되지만 **올리는 것은 반드시 사람이
+  원문을 열어본 뒤에만** 한다. 이 비대칭이 근거 없는 확신이 쌓이는 것을 막는다.
 action_kind: "governance"
 tier: "L2-write"
 tags: ["governance", "confidence"]
