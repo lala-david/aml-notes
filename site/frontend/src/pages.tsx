@@ -8,6 +8,8 @@ import {
   NodeRef, PageHead, Rich, Section, TierMark,
 } from './components'
 import { Graph } from './Graph'
+import { Dag } from './Dag'
+import type { DagEdge, DagNode } from './Dag'
 import { Strata } from './Brand'
 import { AsOfContrast, CrosswalkPreview, DelegationChain } from './Explain'
 import { JurChip } from './Jur'
@@ -114,6 +116,37 @@ function factValue(v: unknown): string {
   if (/^\d{4,}$/.test(s)) return Number(s).toLocaleString('ko-KR')
   return s
 }
+
+/**
+ * 주제 축 셋.
+ *
+ * 계층(L1·L2·L3)은 자료를 **담는 방식**이고, 이 축은 **보러 온 것**이다.
+ * 처음 온 사람은 "무엇이 명사이고 무엇이 동사인가"가 아니라
+ * "규제를 보러 왔는가, 수법을 보러 왔는가, 근거를 보러 왔는가"로 갈린다.
+ */
+const AXES = [
+  {
+    key: 'norm',
+    name: '규범',
+    question: '누가 정하고, 어디에 적혀 있고, 무엇을 시키는가',
+    chain: ['JUR', 'ORG', 'REG', 'PROV', 'OBL', 'CTL'],
+    steps: ['소관 기관', '제정', '조문', '부과하는 의무', '이행 수단'],
+  },
+  {
+    key: 'threat',
+    name: '위협',
+    question: '어떤 수법이 있고, 무엇으로 탐지하는가',
+    chain: ['TYP', 'TEC', 'IND'],
+    steps: ['속한 기법', '탐지 지표'],
+  },
+  {
+    key: 'evidence',
+    name: '증거',
+    question: '어디서 얻었고, 얼마나 확인했는가',
+    chain: ['SRC', 'DOC', 'FACT'],
+    steps: ['발행 문서', '뒷받침하는 사실'],
+  },
+]
 
 /** URL 쿼리로 as_of 를 유지 — 링크를 공유하면 시점도 함께 간다. */
 function useAsOf(): [string | null, (v: string | null) => void] {
@@ -387,6 +420,65 @@ export function CrosswalkPage() {
    계보
    ═══════════════════════════════════════════════════════════════════════ */
 
+/**
+ * 여러 경로를 하나의 그림으로 합친다.
+ *
+ * 이전에는 「경로 01 / 경로 02」 로 나눠 나열했는데, 같은 조문이 여러
+ * 경로에 중복해서 나오고 갈래가 어디서 갈리는지는 보이지 않았다.
+ * 노드를 합치면 갈래가 그림에서 그대로 갈린다.
+ */
+function LineageDag({ paths }: { paths: Lineage['paths'] }) {
+  const nodes = new Map<string, DagNode>()
+  const edges = new Map<string, DagEdge>()
+
+  const put = (b: NodeBrief) => {
+    if (nodes.has(b.id)) return
+    nodes.set(b.id, { id: b.id, type: CLASS_KO[b.type] ?? b.type, layer: b.layer, title: b.title })
+  }
+
+  for (const path of paths) {
+    for (const s of path) {
+      put(s.from)
+      put(s.to)
+      const key = `${s.from.id}→${s.to.id}`
+      if (edges.has(key)) continue
+
+      // 한정자는 **관계에 붙은 값**이다. 상자에 적으면 그 항목 자체가
+      // 그 수치를 가진 것처럼 읽힌다 — 「트래블룰 1,000,000원」 처럼.
+      // 이 지식베이스의 요점이 바로 "숫자가 어느 조문에 있느냐" 이므로
+      // 여기서 틀리면 화면이 정반대를 말한다. 화살표에 적는다.
+      const q = s.qualifiers ?? {}
+      const th = q.threshold
+      const ceil = q.delegation_ceiling ?? q.ceiling
+      const money = (v: unknown) =>
+        `${Number(v).toLocaleString('ko-KR')}${q.currency ? ` ${q.currency}` : ''}`
+      const value =
+        th != null ? money(th)
+        : ceil != null ? `상한 ${money(ceil)}`
+        : null
+
+      edges.set(key, {
+        from: s.from.id,
+        to: s.to.id,
+        label: s.predicate_ko ?? s.predicate,
+        value,
+        confidence: s.confidence,
+      })
+    }
+  }
+
+  // 나가는 화살표가 없는 것이 사슬의 끝이다.
+  const hasOut = new Set([...edges.values()].map((e) => e.from))
+  for (const n of nodes.values()) if (!hasOut.has(n.id)) n.terminal = true
+
+  return (
+    <>
+      <Dag nodes={[...nodes.values()]} edges={[...edges.values()]} height={380} />
+      <p className="dag-foot">왼쪽에서 오른쪽으로 거슬러 올라갑니다. 상자를 누르면 그 항목으로 갑니다.</p>
+    </>
+  )
+}
+
 export function LineagePage() {
   const { id = '' } = useParams()
   const [at, setAt] = useAsOf()
@@ -412,32 +504,7 @@ export function LineagePage() {
             }
           />
           {!data.paths.length && <Empty>이 조문에서 거슬러 올라갈 상위 경로가 없습니다.</Empty>}
-          {data.paths.filter((p) => p.length > 0).map((path, i) => (
-            <div className="path" key={i}>
-              <h4>경로 {String(i + 1).padStart(2, '0')}</h4>
-              <ol>
-                <li className="origin">
-                  <NodeRef node={path[0].from} />
-                </li>
-                {path.map((s, j) => (
-                  <li key={j}>
-                    <span className="path-rel">
-                      <span className="pred">{s.predicate}</span>
-                      <ConfMark value={s.confidence} />
-                      {Object.entries(s.qualifiers ?? {})
-                        .filter(([, v]) => v != null)
-                        .map(([k, v]) => (
-                          <span className="path-q" key={k}>
-                            {k}={String(v)}
-                          </span>
-                        ))}
-                    </span>
-                    <NodeRef node={s.to} />
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))}
+          {data.paths.length > 0 && <LineageDag paths={data.paths} />}
         </>
       )}
     </>
@@ -1150,6 +1217,9 @@ function ActionLog() {
 
 export function OntologyPage() {
   const { data, error, loading } = useAsync<Ontology>(() => api.ontology(), [])
+  // 축 도해에 실제 등재 수를 얹는다 — 빈 칸이면 아직 안 채웠다는 뜻이다.
+  const st = useAsync<Stats>(() => api.stats(), [])
+  const stats = st.data
   if (loading) return <Loading rows={5} />
   if (error) return <ErrorBox error={error} />
   const o = data!
@@ -1178,7 +1248,38 @@ export function OntologyPage() {
         <Strata compact />
       </Section>
 
-      <Section num="§ 02" title="등재할 수 있는 것" note={<Count n={Object.keys(o.classes).length} unit="개" />}>
+      <Section num="§ 02" title="세 갈래" note="이 지식베이스가 실제로 다루는 덩어리">
+        <p className="sec-lead">
+          계층은 자료를 담는 방식이고, 이쪽은 무엇을 보러 왔는지에 따른 갈래입니다.
+        </p>
+        {AXES.map((ax) => (
+          <div className="axis" key={ax.key}>
+            <h4 className="sub-head">
+              {ax.name}
+              <span className="axis-q">{ax.question}</span>
+            </h4>
+            <Dag
+              nodes={ax.chain.map((c, i) => ({
+                id: c,
+                type: c,
+                layer: o.classes[c]?.layer ?? 'semantic',
+                title: o.classes[c]?.label?.ko ?? c,
+                note: stats?.by_type[c] != null ? `${stats.by_type[c]}건` : null,
+                terminal: i === ax.chain.length - 1,
+              }))}
+              edges={ax.chain.slice(1).map((c, i) => ({
+                from: ax.chain[i],
+                to: c,
+                label: ax.steps[i] ?? null,
+              }))}
+              height={132}
+              compact
+            />
+          </div>
+        ))}
+      </Section>
+
+      <Section num="§ 03" title="등재할 수 있는 것" note={<Count n={Object.keys(o.classes).length} unit="개" />}>
         {layers.map(([layer, title]) => {
           const cls = Object.entries(o.classes).filter(([, c]) => c.layer === layer)
           if (!cls.length) return null
@@ -1198,7 +1299,7 @@ export function OntologyPage() {
         })}
       </Section>
 
-      <Section num="§ 03" title="관계 종류" note={<Count n={Object.keys(o.predicates).length} unit="개" />}>
+      <Section num="§ 04" title="관계 종류" note={<Count n={Object.keys(o.predicates).length} unit="개" />}>
         <ul className="preds">
           {Object.entries(o.predicates).map(([p, spec]) => (
             <li key={p}>

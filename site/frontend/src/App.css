@@ -1180,6 +1180,109 @@ h3.rec-title { margin-bottom: var(--s-2); }
    0 건 클래스가 아예 사라진다 — 흐리게가 아니라 안 보이게 된다. */
 .facets button:disabled { color: var(--ink-4); cursor: default; }
 
+/* ═══ 계층 DAG (React Flow) ══════════════════════════════════════════
+   라이브러리 기본 스킨을 쓰지 않는다. 파랑 손잡이·둥근 그림자 카드는
+   어느 사이트에나 있는 그 모습이라, 여기 활자·색 토큰으로 다시 칠한다.
+   라이브러리를 쓰되 라이브러리처럼 보이지 않게 하는 것이 목적이다. */
+
+.rf {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-3);
+  background: var(--panel);
+  overflow: hidden;
+}
+.rf .react-flow__pane { cursor: grab; }
+.rf .react-flow__pane:active { cursor: grabbing; }
+.rf .react-flow__background path { stroke: var(--rule); }
+.rf .react-flow__attribution {
+  background: transparent;
+  font-size: 9px; letter-spacing: var(--tr-label);
+}
+.rf .react-flow__attribution a { color: var(--ink-4); }
+
+/* 노드 — 카드가 아니라 괘선 상자. 그림자를 쓰지 않는다. */
+.kbn {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  width: 196px; height: 74px;
+  padding: 0 var(--s-4) 0 calc(var(--s-4) + 3px);
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+}
+.kbn.compact {
+  width: 132px; height: 56px;
+  padding: 0 var(--s-3) 0 calc(var(--s-3) + 3px);
+}
+.kbn.compact .kbn-title { font-size: var(--fs-1); }
+.kbn:hover { border-color: var(--ink-3); }
+.kbn.term { border-color: var(--ink); border-width: 1.5px; }
+/* 왼쪽 눈금이 계층을 말한다 — 상자를 통째로 칠하면 글자가 죽는다 */
+.kbn-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  border-radius: var(--r-2) 0 0 var(--r-2);
+}
+.kbn-kind {
+  font-size: var(--fs-00); letter-spacing: var(--tr-ko); color: var(--ink-4);
+}
+.kbn-title {
+  font-size: var(--fs-2); font-weight: 600; letter-spacing: var(--tr-head);
+  color: var(--ink); line-height: var(--lh-head);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.kbn-note {
+  font-family: var(--mono); font-size: var(--fs-00); color: var(--ink-3);
+}
+.kbn.term .kbn-note { color: var(--ink); font-weight: 600; }
+
+/* 연결 손잡이는 감춘다 — 읽는 도면이지 편집기가 아니다 */
+.rf .react-flow__handle {
+  width: 1px; height: 1px; min-width: 0; min-height: 0;
+  background: transparent; border: 0; opacity: 0;
+}
+
+/* 간선 */
+.rf .react-flow__edge-path { stroke: var(--ink-4); stroke-width: 1.2; }
+.rf .react-flow__edge.has-value .react-flow__edge-path { stroke: var(--ink-3); stroke-width: 1.6; }
+.rf .react-flow__arrowhead polyline,
+.rf .react-flow__arrowhead path { stroke: var(--ink-4); fill: var(--ink-4); }
+.rf .react-flow__edge-text {
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: var(--tr-ko); fill: var(--ink-3);
+}
+.rf .react-flow__edge-textbg { fill: var(--panel); }
+.rf .react-flow__edge.has-value .react-flow__edge-text { fill: var(--ink); font-weight: 600; }
+
+/* 확대 조작 — 기본 흰 버튼 대신 지면과 같은 조판 */
+.rf .react-flow__controls {
+  box-shadow: none; border: 1px solid var(--rule-2); border-radius: var(--r-2);
+  overflow: hidden;
+}
+.rf .react-flow__controls-button {
+  width: 24px; height: 24px;
+  background: var(--panel); border-bottom: 1px solid var(--rule);
+  fill: var(--ink-3);
+}
+.rf .react-flow__controls-button:last-child { border-bottom: 0; }
+.rf .react-flow__controls-button:hover { background: var(--hover); fill: var(--ink); }
+
+.dag-foot {
+  margin-top: var(--s-2);
+  font-size: var(--fs-0); color: var(--ink-4);
+}
+
+/* 주제 축 — 계층과 다른 갈래. 축마다 도해 하나. */
+.axis { margin-top: var(--s-8); }
+.axis:first-of-type { margin-top: var(--s-5); }
+.axis .sub-head { display: flex; align-items: baseline; gap: var(--s-3); flex-wrap: wrap; }
+.axis-q {
+  font-size: var(--fs-0); font-weight: 400;
+  letter-spacing: var(--tr-ko); color: var(--ink-3);
+}
+
 /* 쉬운 말 — 제목 다음 첫 줄. 정밀한 서술보다 크고 진하다.
    첫 줄만 읽고 떠나는 사람이 그래도 무엇인지는 알고 가야 한다. */
 .nodehead-plain {

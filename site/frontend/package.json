@@ -11,6 +11,8 @@
     "gen:types": "node scripts/gen-types.mjs"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
+    "@xyflow/react": "^12.11.2",
     "d3-force": "^3.0.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

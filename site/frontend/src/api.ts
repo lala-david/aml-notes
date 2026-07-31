@@ -106,6 +106,7 @@ export type Crosswalk = {
 
 export type LineageStep = {
   predicate: string
+  predicate_ko?: string | null
   from: NodeBrief
   to: NodeBrief
   qualifiers: Record<string, unknown>

@@ -183,6 +183,7 @@ def lineage(g: Graph, node_id: str, at: date | None = None, max_depth: int = 6) 
         return None
 
     paths: list[list[dict]] = []
+    preds = (g.ontology.get("predicates") or {})
 
     def walk(nid: str, trail: list[dict], seen: set[str]) -> None:
         if len(trail) > max_depth:
@@ -200,6 +201,7 @@ def lineage(g: Graph, node_id: str, at: date | None = None, max_depth: int = 6) 
         for e in steps:
             walk(e.target, trail + [{
                 "predicate": e.predicate,
+                "predicate_ko": (preds.get(e.predicate) or {}).get("label_ko"),
                 "from": node_brief(g, e.source),
                 "to": node_brief(g, e.target),
                 "qualifiers": e.qualifiers,
