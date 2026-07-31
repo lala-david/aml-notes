@@ -4,6 +4,8 @@ layer: "semantic"
 label:
   ko: "싱가포르"
   en: "Singapore"
+plain: >
+  두 갈래 라이선스를 함께 운영하며, 싱가포르에 적만 두고 해외에서만 영업하는 것은 사실상 막고 있습니다.
 summary: >
   Payment Services Act 의 DPT 라이선스와 FSM Act Part 9 의 DTSP 체제를 병행한다. 역외영업에 대해 사실상 금지에 가까운 입장을 취한다.
 iso: "sg"

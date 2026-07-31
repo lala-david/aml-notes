@@ -6,6 +6,9 @@ label:
   en: "Act on Reporting and Using Specified Financial Transaction Information"
   short: "특금법"
 aliases: ["특정금융정보법", "특금법", "TFIA", "특정금융거래정보법"]
+plain: >
+  한국에서 자금세탁을 막기 위한 기본 법률입니다. 2020년 개정으로 거래소도 여기 들어와, 신고하고 고객을 확인하고
+  수상한 거래를 보고할 의무를 지게 됐습니다.
 summary: >
   대한민국 자금세탁방지 기본법. 2020년 개정으로 가상자산사업자를 규제 대상에
   편입하여 신고 의무(제7조), 고객확인(제5조의2), 트래블룰(제5조의3), 의심거래보고

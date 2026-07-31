@@ -6,6 +6,9 @@ label:
   en: "Bank Secrecy Act"
   short: "BSA"
 aliases: ["BSA", "Currency and Foreign Transactions Reporting Act", "은행비밀법"]
+plain: >
+  미국 자금세탁방지 체계의 뿌리가 되는 법률입니다. 가상자산을 위한 조항을 따로 만들지 않고, 기존 송금업 정의의 한
+  구절로 끌어와 적용합니다.
 summary: >
   미국 AML 체계의 근간 법률. 금융기관에 기록보존·보고 의무를 부과한다.
   가상자산 사업자는 별도 카테고리 신설 없이 MSB 정의의

@@ -6,6 +6,9 @@ label:
   en: "FATF Recommendation 15 (New Technologies)"
   short: "R.15"
 aliases: ["Recommendation 15", "R.15", "INR.15", "권고 15"]
+plain: >
+  새로운 기술이 만드는 자금세탁 위험을 각국이 살피고 대응하라는 국제 기준입니다. 2018년에 가상자산과 거래소가
+  명시적으로 여기 들어왔습니다.
 summary: >
   신기술 관련 위험 평가·완화를 요구하는 권고. 2018-10 개정으로 가상자산과
   가상자산사업자를 명시적 규제 대상으로 편입했다. 해석주석(INR.15) §7(b)가

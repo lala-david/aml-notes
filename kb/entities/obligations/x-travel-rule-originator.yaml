@@ -6,6 +6,9 @@ label:
   en: "Originator information transmission requirement"
   short: "트래블룰(송신인)"
 aliases: ["travel rule originator obligation", "송금인 정보 제공 의무"]
+plain: >
+  가상자산을 보낼 때 "누가 보냈는지"를 받는 쪽에 함께 넘기라는 규칙입니다. 은행 송금에 원래 있던 규칙을
+  가상자산에 옮겨 온 것입니다.
 summary: >
   가상자산을 보낼 때, 보내는 쪽 사업자가 받는 쪽 사업자에게 "누가 보냈는지"를 이체와 동시에 또는 그 전에
   알려야 하는 의무. 나라를 가리지 않는 공통 형태로 적어 둔 것이며, 이 의무를 실제로 정하는 조문은

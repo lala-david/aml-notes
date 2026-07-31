@@ -5,6 +5,9 @@ label:
   ko: "가상자산"
   en: "Virtual asset"
 aliases: ["virtual asset", "crypto-asset", "암호자산", "디지털자산"]
+plain: >
+  규제 대상이 되는 디지털 자산을 가리키는 말입니다. 나라마다 부르는 이름도 범위도 달라서, 어디까지가 규제
+  대상인지가 나라마다 갈립니다.
 summary: >
   규제 대상이 되는 디지털 가치 표상. **관할마다 정의가 다르며 그 차이가
   규제 적용 범위를 가른다.** FATF 는 "virtual asset", EU 는 "crypto-asset",

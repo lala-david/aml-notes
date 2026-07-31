@@ -6,6 +6,9 @@ label:
   en: "Markets in Crypto-Assets Regulation"
   short: "MiCA"
 aliases: ["MiCA", "Regulation (EU) 2023/1114"]
+plain: >
+  EU 가 가상자산 사업을 하려면 어떤 인가를 받고 어떻게 영업해야 하는지 정한 법입니다. 회원국마다 다르던 규칙을
+  하나로 통일했습니다.
 summary: >
   EU 암호자산 시장의 인가·영업행위·발행 규율을 담은 규정. 단계별로 적용되어
   스테이블코인(Title III·IV)은 2024-06-30, CASP(암호자산서비스제공자)는

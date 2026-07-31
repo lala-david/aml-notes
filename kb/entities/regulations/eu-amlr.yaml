@@ -6,6 +6,9 @@ label:
   en: "Anti-Money Laundering Regulation"
   short: "AMLR"
 aliases: ["AMLR", "Regulation (EU) 2024/1624"]
+plain: >
+  EU 의 자금세탁방지 규칙을 회원국 공통으로 통일한 법입니다. 전에는 나라마다 옮겨 적으면서 내용이 갈라졌는데 그
+  문제를 없앴습니다.
 summary: >
   EU 의 AML 실체 규범을 규정(Regulation) 형태로 통일한 법령. 종전 지침(Directive)
   체계가 회원국 전환 과정에서 갈라지던 문제를 해소한다.

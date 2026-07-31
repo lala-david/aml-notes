@@ -4,6 +4,8 @@ layer: "semantic"
 label:
   ko: "호주"
   en: "Australia"
+plain: >
+  등록제로 운영하며, 거래소 의무와 트래블룰이 2026년에 차례로 시작됐습니다.
 summary: >
   AUSTRAC 등록제 기반. 2026년 VASP 의무와 가상자산 트래블룰이 순차 개시되었다.
 iso: "au"

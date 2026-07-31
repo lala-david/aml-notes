@@ -6,6 +6,8 @@ label:
   en: "United States of America"
   short: "미국"
 aliases: ["USA", "US", "United States"]
+plain: >
+  연방 법과 주 법이 함께 적용되는데, 연방은 규제를 푸는 쪽으로 주는 조이는 쪽으로 방향이 갈립니다.
 summary: >
   은행비밀법(BSA)을 근간으로 하는 연방 AML 체계와 주(州) 단위 규제가 병존하는 관할.
   연방 차원의 완화와 주 차원의 강화가 동시에 진행되는 이중구조가 특징이다.

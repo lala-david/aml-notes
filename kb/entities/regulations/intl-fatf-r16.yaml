@@ -6,6 +6,9 @@ label:
   en: "FATF Recommendation 16 (Payment Transparency)"
   short: "R.16"
 aliases: ["Recommendation 16", "R.16", "INR.16", "Wire transfers"]
+plain: >
+  송금할 때 보내는 사람·받는 사람 정보를 함께 넘기라는 국제 기준입니다. 흔히 이것을 가상자산 트래블룰의 근거로
+  오해하는데, 거래소는 여기서 명시적으로 빠져 있습니다.
 summary: >
   자금이체 시 당사자 정보 전달을 요구하는 권고. 2025-06-18 개정으로 표제가
   "Wire transfers"에서 "Payment transparency"로 변경되고 적용범위가

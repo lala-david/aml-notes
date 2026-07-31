@@ -4,6 +4,8 @@ layer: "semantic"
 label:
   ko: "홍콩"
   en: "Hong Kong"
+plain: >
+  거래소 라이선스와 스테이블코인 규제를 운영합니다. 신청 대비 탈락이 많아 문턱이 높은 편입니다.
 summary: >
   SFC 의 VATP 라이선스 제도와 스테이블코인 조례를 운영한다. 인가 대비 탈락 비율이 높은 고관문형 체계다.
 iso: "hk"

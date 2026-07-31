@@ -291,7 +291,9 @@ def _list_item(g: Graph, n: Node) -> dict:
 
     item = {
         **(node_brief(g, n.id) or {}),
-        "summary": n.raw.get("summary"),
+        # 목록에서는 쉬운 말이 있으면 그것을 보여준다. 한 줄만 보고
+        # 들어갈지 말지를 정하는 자리이므로 법률 표현이 앞설 이유가 없다.
+        "summary": n.raw.get("plain") or n.raw.get("summary"),
         "tags": n.raw.get("tags") or [],
         "jurisdiction": g.jurisdiction_of(n),
         "confidence": max(confs) if confs else None,

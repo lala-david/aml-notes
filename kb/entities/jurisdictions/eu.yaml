@@ -4,6 +4,9 @@ layer: "semantic"
 label:
   ko: "유럽연합"
   en: "European Union"
+plain: >
+  회원국 규칙을 하나로 통일한 지역 연합입니다. 다만 법 형식에 따라 바로 적용되는 것과 나라별로 옮겨 적어야 하는
+  것이 있어 시행 시점이 갈립니다.
 summary: >
   MiCA·TFR·AML 패키지로 회원국 규제를 통일한 초국가체. 규정(Regulation)은 직접 적용되고 지침(Directive)은 국내 전환이 필요해 이행 시점이 갈린다.
 iso: "eu"

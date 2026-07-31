@@ -1180,6 +1180,21 @@ h3.rec-title { margin-bottom: var(--s-2); }
    0 건 클래스가 아예 사라진다 — 흐리게가 아니라 안 보이게 된다. */
 .facets button:disabled { color: var(--ink-4); cursor: default; }
 
+/* 쉬운 말 — 제목 다음 첫 줄. 정밀한 서술보다 크고 진하다.
+   첫 줄만 읽고 떠나는 사람이 그래도 무엇인지는 알고 가야 한다. */
+.nodehead-plain {
+  margin-top: var(--s-4);
+  max-width: var(--measure);
+  font-size: var(--fs-4); line-height: var(--lh-body);
+  letter-spacing: var(--tr-body); color: var(--ink);
+}
+.nodehead-plain + .nodehead-sum {
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-1); color: var(--ink-3);
+}
+
 /* 사실 값 — 값이 먼저, 기계 속성명은 뒤에 작게 */
 .rec-kv code {
   margin-left: var(--s-3); font-family: var(--mono);

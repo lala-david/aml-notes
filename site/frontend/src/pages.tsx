@@ -450,7 +450,7 @@ export function LineagePage() {
 
 const HIDDEN_PROPS = new Set([
   'id', 'type', 'layer', 'label', 'title', 'path', 'edges_out', 'edges_in',
-  'facts', 'states', 'evidence', 'summary', 'curator_note',
+  'facts', 'states', 'evidence', 'summary', 'plain', 'curator_note',
   // 등재 장부용 날짜. TEC 노드에서는 속성 5줄 중 3줄이 이것이었다.
   // 언제 등재했는지는 방문자가 아니라 관리자의 관심사다.
   'created_at', 'updated_at', 'review_due',
@@ -484,6 +484,12 @@ export function NodePage() {
             <span className="label">{CLASS_KO[n.type] ?? n.type}</span>
             <h1>{n.title}</h1>
             <code className="nid">{n.id}</code>
+            {/* 쉬운 말이 먼저 선다. 첫 줄만 읽고 떠나는 사람이 그래도
+                무엇인지는 알고 가야 한다. 정밀한 서술은 바로 아래에
+                그대로 남는다 — 쉽게 만들려고 정확한 것을 지우지 않는다. */}
+            {typeof n.plain === 'string' && (
+              <p className="nodehead-plain"><Rich text={n.plain} /></p>
+            )}
             {n.summary && <p className="nodehead-sum"><Rich text={n.summary} /></p>}
           </header>
 

@@ -5,6 +5,9 @@ label:
   ko: "트래블룰 메시징 연동"
   en: "Travel rule messaging interoperability"
   short: "트래블룰 메시징"
+plain: >
+  거래소끼리 보낸 사람·받는 사람 정보를 주고받는 실제 방법입니다. 상대 거래소가 같은 방식을 쓰지 않으면 정보를
+  넘길 방법이 없다는 것이 이 방식의 근본 한계입니다.
 summary: >
   송수신 사업자 간 이체 당사자 정보를 표준 데이터 모델로 교환하는 통제 수단.
   IVMS101 데이터 모델과 프로토콜 구현(TRP·TRISA·OpenVASP 및 상용 네트워크)으로

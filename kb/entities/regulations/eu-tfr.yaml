@@ -6,6 +6,9 @@ label:
   en: "Transfer of Funds Regulation"
   short: "TFR"
 aliases: ["TFR", "Regulation (EU) 2023/1113"]
+plain: >
+  EU 에서 자금과 가상자산을 보낼 때 당사자 정보를 붙이라고 요구하는 규정입니다. 가상자산은 금액과 상관없이 모든
+  이체에 적용됩니다.
 summary: >
   자금 및 특정 암호자산 이체 시 당사자 정보 첨부를 요구하는 EU 규정.
   가상자산 이체에는 **임계값이 없다** — 모든 이체에 적용된다.

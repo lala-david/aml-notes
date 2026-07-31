@@ -5,6 +5,9 @@ label:
   ko: "FATF 권고 15 해석주석 제7항(b) — 가상자산 이체 정보요건"
   en: "INR.15 paragraph 7(b) — VA transfer information requirements"
   short: "INR.15 §7(b)"
+plain: >
+  전 세계 트래블룰의 뿌리가 되는 조항입니다. 각국 법이 결국 이 문장을 자기 나라 말로 옮긴 것이며, 여기에는 금액
+  기준이 없습니다.
 summary: >
   가상자산 이체 시 송신 VASP 가 송신인·수신인 정보를 확보·보유하고 수신 VASP 에
   즉시·안전하게 전달할 의무의 국제기준 근거 조항. 수신 VASP 의 보유 의무와
