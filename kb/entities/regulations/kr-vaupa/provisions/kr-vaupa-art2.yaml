@@ -47,7 +47,7 @@ created_at: "2026-07-31"
 updated_at: "2026-07-31"
 review_due: "2026-10-28"
 curator_note: >
-  ⚠️ 확신도 B — 상호참조 관계는 korea-regime 도시에가 T1 으로 확인했으나
+  확신도 B — 상호참조 관계는 korea-regime 도시에가 T1 으로 확인했으나
   이 조문 자체의 원문은 미확보. 이용자보호법 법령ID 확보 후 채울 것.
 
   EQUIVALENT_TO 는 대칭 술어이므로 PROV:kr-tfia-art2-3 에 역엣지가 필요하다(I-11).

@@ -19,4 +19,4 @@ review_due: "2026-10-28"
 curator_note: >
   전통 3단계(배치·은닉·통합)를 가상자산 환경에 맞춰 7전술로 세분한 체계의 일부다.
   MITRE ATT&CK 의 tactic→technique→indicator 구조를 차용했다.
-  ⚠️ 확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.
+  확신도 B — FATF 원문(2020 Red Flag Indicators)을 직접 확보하지 못했다.

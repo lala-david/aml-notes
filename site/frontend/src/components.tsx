@@ -12,15 +12,19 @@ export function Section({
   num,
   title,
   note,
+  minor,
   children,
 }: {
   num?: ReactNode
   title: string
   note?: ReactNode
+  /** 곁가지. 본줄기와 같은 무게를 주지 않는다 — 모든 섹션이 똑같은
+   *  껍데기로 반복되면 무엇이 중요한지 지면이 말하지 못한다. */
+  minor?: boolean
   children: ReactNode
 }) {
   return (
-    <section className="sec">
+    <section className={minor ? 'sec sec-minor' : 'sec'}>
       <div className="sec-head">
         {num && <span className="sec-num">{num}</span>}
         <h2>{title}</h2>
@@ -192,15 +196,14 @@ export function AsOfControl({
           전체 기간
         </button>
       </div>
-      <p className="asof-state">
-        {value ? (
-          <>
-            <b>{value}</b> 시점에 유효했던 조문만 표시됩니다. {effect}
-          </>
-        ) : (
-          <>기간을 제한하지 않았습니다. 날짜를 고르면 그날 시행 중이던 것만 남습니다.</>
-        )}
-      </p>
+      {/* 날짜가 걸렸을 때만 말한다. 아직 아무것도 안 고른 사람에게
+          컨트롤 사용법을 읊는 문장은 순수 소음이다 — 「전체 기간」 이
+          눌려 있는 것을 이미 눈으로 본다. */}
+      {value && (
+        <p className="asof-state">
+          <b>{value}</b> 시점에 유효했던 조문만 표시됩니다. {effect}
+        </p>
+      )}
     </div>
   )
 }

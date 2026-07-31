@@ -32,7 +32,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-30"
 curator_note: >
-  ⚠️ 이 권고에는 서로 다른 세 일자가 존재한다 (CTR:00003) —
+  이 권고에는 서로 다른 세 일자가 존재한다 (CTR:00003) —
     standard_revised_on          = 2025-06-18 (기준 개정 공표)
     national_implementation_deadline = 2030-12-31 (각국 이행 기대시한)
     methodology_effective_on     = 미정 (2022 Methodology Annex IV, 각주 95
@@ -40,7 +40,7 @@ curator_note: >
   결과적으로 현재 진행 중인 5차 라운드 상호평가는 구 R.16 기준으로 채점된다.
   단일 "개정일" 필드로 뭉치면 어느 질문에도 답할 수 없으므로 STATE 로 분리 관리한다.
 
-  ⚠️ VASP 직접 적용 제외 — 트래블룰을 이 권고에 직결하는 서술은 오류다.
+  VASP 직접 적용 제외 — 트래블룰을 이 권고에 직결하는 서술은 오류다.
   근거는 REG:intl-fatf-r15 (INR.15 §7(b)). FACT:0000006 참조.
 
   de minimis 임계값은 USD/EUR 1,000 으로 변경 없음. 바뀐 것은 초과 시 요구정보

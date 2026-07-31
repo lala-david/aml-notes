@@ -42,7 +42,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-08-27"
 curator_note: >
-  ⚠️ 시행(2026-08-20) 은 아직 발생하지 않았으므로 별도 EVT 를 만들지 않았다.
+  시행(2026-08-20) 은 아직 발생하지 않았으므로 별도 EVT 를 만들지 않았다.
   시행일 도래 시 EVT:kr-tfia-21358-effective-2026 을 생성하고 REG:kr-tfia 의
   pending_amendment_law_no STATE 를 종료할 것. → review_due 를 시행 직후로 설정.
 

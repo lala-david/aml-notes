@@ -5,7 +5,7 @@ import type { Confidence, Crosswalk, Lineage, NodeBrief, NodeDetail, Ontology, S
 import { useAsync } from './useAsync'
 import {
   AsOfControl, ConfMark, Count, Empty, ErrorBox, EvidenceList, LegalNote, Loading,
-  NodeRef, PageHead, Rich, Section, TierMark, confLabel,
+  NodeRef, PageHead, Rich, Section, TierMark,
 } from './components'
 import { Graph } from './Graph'
 import { Strata } from './Brand'
@@ -16,11 +16,23 @@ import { IconArrow, IconSearch } from './Icons'
 const TRAVEL_RULE = 'OBL:x-travel-rule-originator'
 const ROOT_PROV = 'PROV:kr-tfia-art5-3'
 
-const LAYER_KO: Record<string, string> = {
-  semantic: 'L1 명사',
-  dynamic: 'L2 시간',
-  kinetic: 'L3 동사',
-  funnel: '유입',
+/* 노드 상세에서 「TEC · L1 명사」 를 걷어냈다. 처음 온 사람에게 계층
+   번호는 아무 뜻도 아니고, 계층은 NodeRef 좌측 2px 색눈금이 이미
+   조용히 말한다. 계층 이름이 필요한 곳은 /ontology 뿐이고 거기서는
+   Strata 가 자기 라벨을 들고 있다. */
+
+/** 클래스 코드 → 한글. 화면에 나가는 이름은 코드가 아니라 이쪽이다. */
+const CLASS_KO: Record<string, string> = {
+  ACT: '위협행위자', ACTION: '액션', ALOG: '액션 로그', ASSET: '가상자산',
+  CAP: '역량', CASE: '판례·소송', CHAIN: '블록체인', CONCEPT: '개념',
+  CTL: '통제', DOC: '문서', ENF: '집행조치', ERA: '국면', EVT: '사건',
+  FACT: '원자적 사실', FEED: '수집 피드', FUNC: '함수', INC: '사고',
+  IND: '지표', ITEM: '원시 항목', JUR: '관할', METRIC: '관측 수치',
+  OBL: '의무', ORG: '기관', PROD: '분석 산출물', PROTO: '프로토콜·서비스',
+  PROV: '조문', REG: '규범', RISK: '위험요인', ROLE: '역할',
+  RUN: '수집 실행', SIG: '변화 신호', SRC: '출처', STATE: '구간 상태',
+  TASK: '검증 과제', TEC: '기법', TYP: '유형론', VASP: '가상자산사업자',
+  VEND: '솔루션 공급자',
 }
 
 /**
@@ -78,7 +90,7 @@ export function Home() {
   return (
     <>
       <div className="lede">
-        <p className="kicker">위임 계보 · 시점 질의 · 원문 증거</p>
+        <p className="kicker">한국 · FATF · EU 가상자산 자금세탁방지 규제</p>
         <h1>100만원. 이 숫자는 법률 어디에도 없습니다.</h1>
         <p className="lede-body">
           가상자산을 100만원 넘게 보내면 받는 거래소에 송신인 정보를 넘겨야 합니다. 그런데{' '}
@@ -87,17 +99,32 @@ export function Home() {
         </p>
       </div>
 
-      {s.data && <Census stats={s.data} />}
+      {/* 표제가 심은 질문을 그대로 문으로 만든다. 기능 이름(위임 계보·크로스워크)이
+          아니라 방금 읽은 질문으로 적는다 — 처음 온 사람은 기능 이름을 모른다. */}
+      <div className="entry">
+        <Link className="btn btn-key" to={`/lineage/${encodeURIComponent(ROOT_PROV)}`}>
+          그 숫자는 어느 조문에 있나
+          <IconArrow size={14} />
+        </Link>
+        <Link className="btn" to={`/obl/${encodeURIComponent(TRAVEL_RULE)}`}>
+          나라마다 기준이 얼마인가
+        </Link>
+        <Link className="btn" to="/search">
+          조문 · 기관 찾아보기
+        </Link>
+      </div>
 
       <Section num="§ 01" title="위임은 어디까지 내려가는가" note="조문 셋을 따라가면 숫자가 나옵니다">
         <DelegationChain />
       </Section>
 
-      <Section num="§ 02" title="같은 의무, 다른 조문" note={<>관할 비교<br />크로스워크</>}>
+      {/* 재고 통계는 이야기 뒤에 와야 근거로 읽힌다. 앞에 두면 처음 온 사람이
+          아무것도 할 수 없는 숫자 다섯을 두 번째로 읽는다. */}
+      {s.data && <Census stats={s.data} />}
+
+      <Section num="§ 02" title="같은 의무, 다른 조문">
         <p className="sec-lead">
-          트래블룰이라는 하나의 의무를 나라마다 다른 조문이 정하고, 기준금액도 제각각입니다. 아래
-          표는 손으로 만든 것이 아니라 그래프에서 뽑아낸 결과입니다 — 조문을 등재하면 한 줄이
-          자동으로 늘어납니다.
+          트래블룰이라는 하나의 의무를 나라마다 다른 조문이 정하고, 기준금액도 제각각입니다.
         </p>
         {cw.loading && <Loading rows={4} />}
         {cw.error ? <ErrorBox error={cw.error} /> : null}
@@ -113,24 +140,21 @@ export function Home() {
         </div>
       </Section>
 
-      <Section num="§ 03" title="2021년에는 어땠는가" note={<>시점 질의<br />as-of</>}>
+      <Section num="§ 03" title="2021년에는 어땠는가">
         <p className="sec-lead">
-          규제는 계속 바뀝니다. 이 지식베이스는 모든 사실에 유효기간을 붙여 두어서 과거 어느 날의
-          규제 지형을 그대로 재현합니다. 아래는 같은 질의를 두 시점에 던진 결과입니다 — 그날
-          시행되지 않았던 조문은 답에서 빠집니다.
+          같은 질문을 두 시점에 던진 결과입니다. 그날 시행되지 않았던 조문은 답에서 빠집니다.
         </p>
         {cw.data && <AsOfContrast rows={cw.data.rows} />}
       </Section>
 
-      <Section num="§ 04" title="지식을 담는 세 겹" note="온톨로지">
+      {/* 곁가지다. 본줄기와 같은 무게를 주지 않는다. */}
+      <Section num="§ 04" title="지식을 담는 세 겹" minor>
         <p className="sec-lead">
-          무엇이 존재하는가(명사), 언제 참이었는가(시간), 무엇을 바꿀 수 있는가(동사). 수집
-          파이프라인은 계층이 아니라 이 세 겹을 채우는 인프라입니다.
+          무엇이 존재하는가(명사), 언제 참이었는가(시간), 무엇을 바꿀 수 있는가(동사).
         </p>
-        <Strata />
         <div className="btnrow gap-top">
           <Link className="btn" to="/ontology">
-            클래스 · 술어 전체
+            분류 체계 보기
             <IconArrow size={14} />
           </Link>
         </div>
@@ -154,28 +178,18 @@ function Census({ stats }: { stats: Stats }) {
     ],
     ['변경 기록', stats.action_log, '누가 · 언제 · 왜'],
   ]
+  // 확신도 분포(A~D 막대)는 뺐다 — 처음 온 사람이 두 번째로 읽는 것이
+  // KB 품질 지표일 이유가 없다. /ontology 와 /facts 필터에 그대로 있다.
   return (
-    <>
-      <dl className="census">
-        {cells.map(([k, v, n]) => (
-          <div className="census-cell" key={k}>
-            <dt>{k}</dt>
-            <dd>{v.toLocaleString()}</dd>
-            <small>{n}</small>
-          </div>
-        ))}
-      </dl>
-      <div className="confrow">
-        <span className="label">확신도 분포</span>
-        {(['A', 'B', 'C', 'D'] as const).map((c) => (
-          <span className="confrow-item" key={c}>
-            <ConfMark value={c} />
-            <b>{stats.confidence[c] ?? 0}</b>
-            <span>{confLabel(c)}</span>
-          </span>
-        ))}
-      </div>
-    </>
+    <dl className="census">
+      {cells.map(([k, v, n]) => (
+        <div className="census-cell" key={k}>
+          <dt>{k}</dt>
+          <dd>{v.toLocaleString()}</dd>
+          <small>{n}</small>
+        </div>
+      ))}
+    </dl>
   )
 }
 
@@ -189,11 +203,11 @@ export function CrosswalkIndex() {
     <>
       <PageHead
         title="관할 비교"
-        lead="관할에서 탈각된 추상 의무 하나에 각국 조문이 어떻게 걸려 있는지를 나란히 봅니다. 기준 시점을 바꾸면 그날 시행 중이던 조문만 남습니다."
+        lead="같은 의무를 나라마다 어느 조문이 정하는지 나란히 봅니다. 기준 시점을 바꾸면 그날 시행 중이던 조문만 남습니다."
       />
       {loading && <Loading rows={3} />}
       {error ? <ErrorBox error={error} /> : null}
-      {data && !data.items.length && <Empty>등재된 추상 의무가 없습니다.</Empty>}
+      {data && !data.items.length && <Empty>등재된 의무가 없습니다.</Empty>}
       {data && data.items.length > 0 && (
         <ul className="ledger split">
           {data.items.map((o) => (
@@ -387,6 +401,9 @@ export function LineagePage() {
 const HIDDEN_PROPS = new Set([
   'id', 'type', 'layer', 'label', 'title', 'path', 'edges_out', 'edges_in',
   'facts', 'states', 'evidence', 'summary', 'curator_note',
+  // 등재 장부용 날짜. TEC 노드에서는 속성 5줄 중 3줄이 이것이었다.
+  // 언제 등재했는지는 방문자가 아니라 관리자의 관심사다.
+  'created_at', 'updated_at', 'review_due',
 ])
 
 export function NodePage() {
@@ -402,29 +419,36 @@ export function NodePage() {
     ([k, v]) => !HIDDEN_PROPS.has(k) && v != null && typeof v !== 'object',
   )
 
+  // 시간에 결속된 것이 하나도 없는 노드에서는 날짜를 무엇으로 바꿔도
+  // 화면이 변하지 않는다. 그런 노드에 조작기를 제목 위에 세워 둘 이유가 없다.
+  const temporal =
+    at != null ||
+    n.facts.some((f) => f.valid_from || f.valid_to) ||
+    [...n.edges_out, ...n.edges_in].some((e) => e.valid_from || e.valid_to)
+
   return (
     <>
-      <AsOfControl value={at} onChange={setAt} effect="그 시점에 유효했던 관계·사실만 남습니다." />
-
       <div className="with-rail">
         <div>
           <header className="nodehead">
-            <span className="label">
-              {n.type} · {LAYER_KO[n.layer] ?? n.layer}
-            </span>
+            <span className="label">{CLASS_KO[n.type] ?? n.type}</span>
             <h1>{n.title}</h1>
             <code className="nid">{n.id}</code>
             {n.summary && <p className="nodehead-sum"><Rich text={n.summary} /></p>}
           </header>
 
+          {temporal && (
+            <AsOfControl value={at} onChange={setAt} effect="그 시점에 유효했던 관계·사실만 남습니다." />
+          )}
+
           {n.evidence?.length ? (
-            <Section num="§" title="원문 증거" note={<Count n={n.evidence.length} />}>
+            <Section title="원문 증거" note={<Count n={n.evidence.length} />}>
               <EvidenceList items={n.evidence} />
             </Section>
           ) : null}
 
           {n.facts.length > 0 && (
-            <Section num="§" title="사실" note={<Count n={n.facts.length} />}>
+            <Section title="사실" note={<Count n={n.facts.length} />}>
               <ul className="ledger split">
                 {n.facts.map((f) => (
                   <li key={f.id}>
@@ -450,7 +474,6 @@ export function NodePage() {
           )}
 
           <Section
-            num="§"
             title="관계"
             note={<Count n={n.edges_out.length + n.edges_in.length} unit="개" />}
           >
@@ -461,10 +484,16 @@ export function NodePage() {
 
           <NeighborGraph id={n.id} />
 
+          {/* 245개 중 214개에 있다. 즉 예외가 아니라 기본값인데, 내용은
+              「임계값 한정자를 옮겼다」 「OC 발급 후 채울 것」 같은 담당자
+              작업 기록이다. 지우지는 않는다 — 판단의 흔적을 남기는 것이
+              이 저장소의 원칙이다. 다만 접어서 원하는 사람만 연다. */}
           {n.curator_note && (
-            <Section num="§" title="큐레이터 메모" note="판단의 흔적">
+            <details className="disc gap-top">
+              <summary>등재 · 정정 기록</summary>
               <pre className="note"><Rich text={n.curator_note} /></pre>
-            </Section>
+              <p className="rail-path">{n.path}</p>
+            </details>
           )}
         </div>
 
@@ -508,11 +537,8 @@ export function NodePage() {
               </dl>
             </div>
           )}
-
-          <div>
-            <h4>원본 파일</h4>
-            <p className="rail-path">{n.path}</p>
-          </div>
+          {/* 원본 파일 경로는 「등재 · 정정 기록」 안으로 옮겼다.
+              저장소 경로는 방문자용 정보가 아니다. */}
         </aside>
       </div>
     </>
@@ -527,7 +553,12 @@ function EdgeList({ title, edges }: { title: string; edges: NodeDetail['edges_ou
       <ul className="rels">
         {edges.map((e, i) => (
           <li key={i}>
-            <span className="pred">{e.predicate}</span>
+            {/* 한글이 1차, 코드는 작게 뒤에. PART_OF 만 있으면 처음 온
+                사람은 이 행이 무슨 관계인지 읽을 수 없다. */}
+            <span className="pred">
+              {e.predicate_ko ?? e.predicate}
+              {e.predicate_ko && <code>{e.predicate}</code>}
+            </span>
             <NodeRef node={e.node} />
             <span className="rels-side">
               {(e.valid_from || e.valid_to) && (
@@ -555,7 +586,7 @@ function NeighborGraph({ id }: { id: string }) {
   if (!data || data.nodes.length < 2) return null
   return (
     <Section
-      num="§"
+      minor
       title="주변 연결망"
       note={
         <>
@@ -573,11 +604,9 @@ function NeighborGraph({ id }: { id: string }) {
           ))}
         </div>
       </div>
+      {/* 그래프 하나에 설명 세 줄이 붙어 있었다. 눌러 보면 아는 것을
+          글로 적지 않는다 — 범례만 남긴다. */}
       <Graph nodes={data.nodes} links={data.links} height={380} focusId={id} />
-      <p className="graph-foot">
-        색은 계층, 모양은 클래스군입니다. 색을 구분하기 어려워도 모양과 세로 위치로 읽을 수
-        있습니다. 노드를 누르면 그 상세로 이동합니다.
-      </p>
     </Section>
   )
 }
@@ -586,10 +615,28 @@ function NeighborGraph({ id }: { id: string }) {
    탐색 — 결과 + 타입 패싯
    ═══════════════════════════════════════════════════════════════════════ */
 
+/**
+ * 아무 조건 없이 들어왔을 때 보여줄 시작점.
+ *
+ * 그냥 두면 245건 중 200건이 쏟아지는데, 그 절반이 IND·TEC(지표·기법)라
+ * 홈이 조문 이야기를 해 놓고 첫 목록은 「필체인」 「계단식 감소 선형 체인」
+ * 이 된다. 약속과 재고가 어긋난다.
+ */
+const SEED_NODES = [
+  'PROV:kr-tfia-art5-3', 'OBL:x-travel-rule-originator',
+  'REG:kr-tfia', 'REG:intl-fatf-r15',
+  'JUR:kr', 'ORG:kr-fsc',
+]
+
+const FACET_HEAD = 8
+
 export function SearchPage() {
   const [sp, setSp] = useSearchParams()
   const q = sp.get('q') ?? ''
   const type = sp.get('type') ?? ''
+  const showAll = sp.has('all')
+  const blank = !q && !type && !showAll
+  const [moreFacets, setMoreFacets] = useState(false)
   const stats = useAsync<Stats>(() => api.stats(), [])
   const ont = useAsync<Ontology>(() => api.ontology(), [])
   const { data, error, loading } = useAsync(
@@ -618,13 +665,13 @@ export function SearchPage() {
     : base
   const types = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   const totalShown = data ? data.matched : stats.data?.nodes
+  // 고른 클래스가 뒤쪽에 있으면 접혀 사라지면 안 된다.
+  const selectedHidden = type ? types.findIndex(([c]) => c === type) >= FACET_HEAD : false
+  const shownTypes = moreFacets || selectedHidden ? types : types.slice(0, FACET_HEAD)
 
   return (
     <>
-      <PageHead
-        title="탐색"
-        lead="ID · 제목 · 요약 · 별칭으로 찾습니다. 오른쪽에서 클래스를 눌러 좁힐 수 있습니다."
-      />
+      <PageHead title="찾아보기" lead="제목 · 요약 · ID 로 찾습니다." />
 
       <div className="field">
         <IconSearch size={17} />
@@ -646,9 +693,23 @@ export function SearchPage() {
 
       <div className="with-rail gap-top">
         <div>
+          {blank && data ? (
+            <div className="seed">
+              <h4>여기서 시작</h4>
+              <ul className="ledger">
+                {SEED_NODES.map((sid) => {
+                  const node = data.items.find((x) => x.id === sid)
+                  return node ? <li key={sid}><NodeRef node={node} /></li> : null
+                })}
+              </ul>
+              <button className="btn btn-quiet" onClick={() => setParam('all', '1')}>
+                전체 {data.total}건 보기
+              </button>
+            </div>
+          ) : null}
           {loading && <Loading rows={5} />}
           {error ? <ErrorBox error={error} /> : null}
-          {data && !data.items.length && (
+          {!blank && data && !data.items.length && (
             <div className="noresult">
               {/* 어느 조건이 결과를 죽였는지 말하고, 그 조건만 떼는 길을 준다.
                   「없습니다」 만 남으면 다음에 뭘 할지 알 수 없다. */}
@@ -683,7 +744,7 @@ export function SearchPage() {
               )}
             </div>
           )}
-          {data && data.items.length > 0 && (
+          {!blank && data && data.items.length > 0 && (
             <>
               <p className="resultbar">
                 <Count n={data.total} />
@@ -717,7 +778,7 @@ export function SearchPage() {
                   <span className="n">{totalShown ?? ''}</span>
                 </button>
               </li>
-              {types.map(([code, n]) => (
+              {shownTypes.map(([code, n]) => (
                 <li key={code}>
                   <button
                     aria-pressed={type === code}
@@ -732,6 +793,12 @@ export function SearchPage() {
                 </li>
               ))}
             </ul>
+            {/* 한 자릿수 클래스가 절반이라 다 펴면 레일이 화면 높이를 먹는다. */}
+            {types.length > FACET_HEAD && (
+              <button className="btn btn-quiet facet-more" onClick={() => setMoreFacets((v) => !v)}>
+                {moreFacets ? '접기' : `나머지 ${types.length - FACET_HEAD}개`}
+              </button>
+            )}
           </div>
         </aside>
       </div>
@@ -761,8 +828,8 @@ export function FactsPage() {
   return (
     <>
       <PageHead
-        title="원자적 사실"
-        lead="주어 하나 · 술어 하나 · 값 하나 · 시점 하나. 쪼갤 수 있는 만큼 쪼개 두어야 어느 부분이 틀렸는지 지목할 수 있습니다. 모든 사실은 원문 인용까지 추적됩니다."
+        title="사실"
+        lead="모든 사실은 원문 인용까지 추적됩니다."
         aside={
           <div className="seg">
             {['', 'A', 'B', 'C', 'D'].map((c) => (
@@ -1022,8 +1089,8 @@ export function OntologyPage() {
   return (
     <>
       <PageHead
-        title={`온톨로지 v${o.version}`}
-        lead="이 사이트의 화면은 손으로 만들지 않았습니다. 아래 정의를 읽어 렌더링합니다. 클래스가 늘면 화면이 늘고, 정의에 어긋난 노드는 검증기가 막습니다."
+        title={`분류 체계 v${o.version}`}
+        lead="등재할 수 있는 것의 종류와, 그것들이 맺을 수 있는 관계의 정의입니다."
         aside={
           <span className="count">
             클래스 {Object.keys(o.classes).length} · 술어 {Object.keys(o.predicates).length}
@@ -1055,7 +1122,7 @@ export function OntologyPage() {
         })}
       </Section>
 
-      <Section num="§ 03" title="술어" note={<Count n={Object.keys(o.predicates).length} unit="개" />}>
+      <Section num="§ 03" title="관계 종류" note={<Count n={Object.keys(o.predicates).length} unit="개" />}>
         <ul className="preds">
           {Object.entries(o.predicates).map(([p, spec]) => (
             <li key={p}>

@@ -574,73 +574,73 @@ classes:
 predicates:
 
   # L1 구조
-  HAS_JURISDICTION: { from: [ORG, REG, VASP, VEND], to: [JUR], symmetric: false }
-  PART_OF:          { from: [JUR, PROV, TEC, ASSET], to: [JUR, REG, TYP, CHAIN], symmetric: false }
-  ISSUED_BY:        { from: [REG, DOC], to: [ORG], symmetric: false }
-  SUPERVISES:       { from: [ORG], to: [VASP, JUR], symmetric: false, qualifiers: [since] }
-  IMPLEMENTS:       { from: [REG], to: [REG], symmetric: false, qualifiers: [fidelity] }
+  HAS_JURISDICTION: { label_ko: "관할", from: [ORG, REG, VASP, VEND], to: [JUR], symmetric: false }
+  PART_OF:          { label_ko: "~의 일부", from: [JUR, PROV, TEC, ASSET], to: [JUR, REG, TYP, CHAIN], symmetric: false }
+  ISSUED_BY:        { label_ko: "발행 주체", from: [REG, DOC], to: [ORG], symmetric: false }
+  SUPERVISES:       { label_ko: "감독", from: [ORG], to: [VASP, JUR], symmetric: false, qualifiers: [since] }
+  IMPLEMENTS:       { label_ko: "이행", from: [REG], to: [REG], symmetric: false, qualifiers: [fidelity] }
   # 국내 법령 위계에서 상위 규범이 하위 규범에 구체화를 위임하는 관계.
   # IMPLEMENTS(국제기준 이행)와 구별해야 한다 — 위임은 같은 관할 안의 수직 관계다.
-  DELEGATES_TO:     { from: [PROV, REG], to: [PROV, REG], symmetric: false, qualifiers: [ceiling, currency, delegation_kind] }
-  IMPOSES:          { from: [PROV], to: [OBL], symmetric: false, qualifiers: [threshold, currency, grace_until] }
-  APPLIES_TO:       { from: [OBL], to: [VASP, CONCEPT], symmetric: false, qualifiers: [scope_note] }
-  SATISFIED_BY:     { from: [OBL], to: [CTL], symmetric: false, qualifiers: [sufficiency] }
-  EQUIVALENT_TO:    { from: [OBL, PROV, CONCEPT], to: [OBL, PROV, CONCEPT], symmetric: true, qualifiers: [equivalence] }
-  DEFINES:          { from: [REG, PROV], to: [CONCEPT], symmetric: false }
-  BROADER:          { from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: NARROWER }
-  NARROWER:         { from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: BROADER }
-  MITIGATES:        { from: [CTL], to: [RISK], symmetric: false, qualifiers: [effectiveness] }
-  EXPLOITS:         { from: [TYP, TEC], to: [RISK], symmetric: false }
-  USES_TECHNIQUE:   { from: [TYP, ACT], to: [TEC], symmetric: false }
-  DETECTED_BY:      { from: [TEC], to: [IND], symmetric: false, qualifiers: [precision_est, recall_est] }
-  REQUIRES_DATA:    { from: [IND], to: [CONCEPT], symmetric: false }
-  OPERATES_ON:      { from: [PROTO, ASSET], to: [CHAIN], symmetric: false }
-  BRIDGES:          { from: [PROTO], to: [CHAIN], symmetric: false, qualifiers: [direction] }
-  PROVIDES:         { from: [VEND], to: [CAP], symmetric: false, qualifiers: [evidence_kind] }
-  COMPETES_WITH:    { from: [VEND], to: [VEND], symmetric: true, qualifiers: [segment] }
-  USES_VENDOR:      { from: [VASP], to: [VEND], symmetric: false, qualifiers: [since, disclosed_by] }
-  MEMBER_OF:        { from: [VASP, ORG], to: [ORG], symmetric: false, qualifiers: [since] }
-  MERGED_INTO:      { from: ["*"], to: ["*"], symmetric: false }
+  DELEGATES_TO:     { label_ko: "~에 위임", from: [PROV, REG], to: [PROV, REG], symmetric: false, qualifiers: [ceiling, currency, delegation_kind] }
+  IMPOSES:          { label_ko: "의무 부과", from: [PROV], to: [OBL], symmetric: false, qualifiers: [threshold, currency, grace_until] }
+  APPLIES_TO:       { label_ko: "적용 대상", from: [OBL], to: [VASP, CONCEPT], symmetric: false, qualifiers: [scope_note] }
+  SATISFIED_BY:     { label_ko: "~로 충족", from: [OBL], to: [CTL], symmetric: false, qualifiers: [sufficiency] }
+  EQUIVALENT_TO:    { label_ko: "동등", from: [OBL, PROV, CONCEPT], to: [OBL, PROV, CONCEPT], symmetric: true, qualifiers: [equivalence] }
+  DEFINES:          { label_ko: "정의", from: [REG, PROV], to: [CONCEPT], symmetric: false }
+  BROADER:          { label_ko: "상위 개념", from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: NARROWER }
+  NARROWER:         { label_ko: "하위 개념", from: [CONCEPT, TYP, TEC, RISK], to: [CONCEPT, TYP, TEC, RISK], symmetric: false, inverse: BROADER }
+  MITIGATES:        { label_ko: "완화", from: [CTL], to: [RISK], symmetric: false, qualifiers: [effectiveness] }
+  EXPLOITS:         { label_ko: "악용", from: [TYP, TEC], to: [RISK], symmetric: false }
+  USES_TECHNIQUE:   { label_ko: "기법 사용", from: [TYP, ACT], to: [TEC], symmetric: false }
+  DETECTED_BY:      { label_ko: "~로 탐지", from: [TEC], to: [IND], symmetric: false, qualifiers: [precision_est, recall_est] }
+  REQUIRES_DATA:    { label_ko: "필요 데이터", from: [IND], to: [CONCEPT], symmetric: false }
+  OPERATES_ON:      { label_ko: "동작 대상", from: [PROTO, ASSET], to: [CHAIN], symmetric: false }
+  BRIDGES:          { label_ko: "연결", from: [PROTO], to: [CHAIN], symmetric: false, qualifiers: [direction] }
+  PROVIDES:         { label_ko: "제공", from: [VEND], to: [CAP], symmetric: false, qualifiers: [evidence_kind] }
+  COMPETES_WITH:    { label_ko: "경쟁", from: [VEND], to: [VEND], symmetric: true, qualifiers: [segment] }
+  USES_VENDOR:      { label_ko: "벤더 사용", from: [VASP], to: [VEND], symmetric: false, qualifiers: [since, disclosed_by] }
+  MEMBER_OF:        { label_ko: "회원", from: [VASP, ORG], to: [ORG], symmetric: false, qualifiers: [since] }
+  MERGED_INTO:      { label_ko: "~로 통합", from: ["*"], to: ["*"], symmetric: false }
 
   # L2 시간·증거
-  ASSERTS:          { from: [DOC], to: [FACT], symmetric: false, qualifiers: [quote, locator] }
-  EVIDENCED_BY:     { from: ["*"], to: [DOC], symmetric: false, qualifiers: [confidence] }
-  SUPPORTS:         { from: [FACT], to: [FACT], symmetric: false }
-  CONTRADICTS:      { from: [FACT], to: [FACT], symmetric: true, qualifiers: [resolution] }
-  CHANGES_STATE_OF: { from: [EVT], to: ["*"], symmetric: false, qualifiers: [attribute, from_value, to_value] }
-  HAS_STATE:        { from: ["*"], to: [STATE], symmetric: false }
-  SUPERSEDES:       { from: [REG, STATE], to: [REG, STATE], symmetric: false, qualifiers: [effective] }
-  AMENDS:           { from: [REG], to: [REG], symmetric: false, qualifiers: [effective, articles] }
-  TARGETS:          { from: [ENF], to: [VASP, ACT, PROTO], symmetric: false }
-  VIOLATED:         { from: [ENF], to: [PROV], symmetric: false, qualifiers: [count] }
-  ATTRIBUTED_TO:    { from: [INC], to: [ACT], symmetric: false, qualifiers: [attributor, basis, confidence] }
-  LAUNDERED_VIA:    { from: [INC], to: [PROTO, TEC], symmetric: false, qualifiers: [amount_usd, share] }
-  LICENSED_IN:      { from: [VASP], to: [JUR], symmetric: false, qualifiers: [license_kind, since, until, status] }
-  DESIGNATED_BY:    { from: [VASP, ACT, PROTO], to: [ORG], symmetric: false, qualifiers: [list, designated_on, delisted_on] }
-  MEASURES:         { from: [METRIC], to: ["*"], symmetric: false }
-  CAUSED:           { from: [EVT], to: [EVT], symmetric: false, qualifiers: [mechanism, lag_days, confidence, basis] }
+  ASSERTS:          { label_ko: "주장", from: [DOC], to: [FACT], symmetric: false, qualifiers: [quote, locator] }
+  EVIDENCED_BY:     { label_ko: "근거 문서", from: ["*"], to: [DOC], symmetric: false, qualifiers: [confidence] }
+  SUPPORTS:         { label_ko: "뒷받침", from: [FACT], to: [FACT], symmetric: false }
+  CONTRADICTS:      { label_ko: "상충", from: [FACT], to: [FACT], symmetric: true, qualifiers: [resolution] }
+  CHANGES_STATE_OF: { label_ko: "상태 변경", from: [EVT], to: ["*"], symmetric: false, qualifiers: [attribute, from_value, to_value] }
+  HAS_STATE:        { label_ko: "상태", from: ["*"], to: [STATE], symmetric: false }
+  SUPERSEDES:       { label_ko: "대체", from: [REG, STATE], to: [REG, STATE], symmetric: false, qualifiers: [effective] }
+  AMENDS:           { label_ko: "개정", from: [REG], to: [REG], symmetric: false, qualifiers: [effective, articles] }
+  TARGETS:          { label_ko: "대상", from: [ENF], to: [VASP, ACT, PROTO], symmetric: false }
+  VIOLATED:         { label_ko: "위반", from: [ENF], to: [PROV], symmetric: false, qualifiers: [count] }
+  ATTRIBUTED_TO:    { label_ko: "귀속", from: [INC], to: [ACT], symmetric: false, qualifiers: [attributor, basis, confidence] }
+  LAUNDERED_VIA:    { label_ko: "세탁 경로", from: [INC], to: [PROTO, TEC], symmetric: false, qualifiers: [amount_usd, share] }
+  LICENSED_IN:      { label_ko: "인가 관할", from: [VASP], to: [JUR], symmetric: false, qualifiers: [license_kind, since, until, status] }
+  DESIGNATED_BY:    { label_ko: "지정 주체", from: [VASP, ACT, PROTO], to: [ORG], symmetric: false, qualifiers: [list, designated_on, delisted_on] }
+  MEASURES:         { label_ko: "측정", from: [METRIC], to: ["*"], symmetric: false }
+  CAUSED:           { label_ko: "유발", from: [EVT], to: [EVT], symmetric: false, qualifiers: [mechanism, lag_days, confidence, basis] }
 
   # L3 KINETIC — 동사 (ADR-0004)
-  MODIFIES:              { from: [ACTION], to: ["*"], symmetric: false, qualifiers: [properties] }
-  AUTHORIZES:            { from: [ROLE], to: [ACTION], symmetric: false }
-  EMITS_LOG:             { from: [ACTION], to: [ALOG], symmetric: false }
-  LOGGED_ON:             { from: [ALOG], to: ["*"], symmetric: false }
-  EXECUTED_BY:           { from: [CTL], to: [ACTION], symmetric: false }
-  IMPLEMENTS_OBLIGATION: { from: [ACTION], to: [OBL], symmetric: false }
-  COMPUTES_OVER:         { from: [FUNC], to: ["*"], symmetric: false }
-  REVERSED_BY:           { from: [ACTION], to: [ACTION], symmetric: false }
-  INVALIDATES_CACHE:     { from: [ACTION], to: [FUNC], symmetric: false }
+  MODIFIES:              { label_ko: "수정", from: [ACTION], to: ["*"], symmetric: false, qualifiers: [properties] }
+  AUTHORIZES:            { label_ko: "승인", from: [ROLE], to: [ACTION], symmetric: false }
+  EMITS_LOG:             { label_ko: "로그 기록", from: [ACTION], to: [ALOG], symmetric: false }
+  LOGGED_ON:             { label_ko: "기록 대상", from: [ALOG], to: ["*"], symmetric: false }
+  EXECUTED_BY:           { label_ko: "실행 주체", from: [CTL], to: [ACTION], symmetric: false }
+  IMPLEMENTS_OBLIGATION: { label_ko: "의무 이행", from: [ACTION], to: [OBL], symmetric: false }
+  COMPUTES_OVER:         { label_ko: "계산 범위", from: [FUNC], to: ["*"], symmetric: false }
+  REVERSED_BY:           { label_ko: "~로 취소", from: [ACTION], to: [ACTION], symmetric: false }
+  INVALIDATES_CACHE:     { label_ko: "캐시 무효화", from: [ACTION], to: [FUNC], symmetric: false }
 
   # FUNNEL 흐름 — 계층 아님
-  EMITS:            { from: [FEED], to: [ITEM], symmetric: false }
-  PRODUCED_BY:      { from: [ITEM], to: [RUN], symmetric: false }
-  MATCHES:          { from: [ITEM], to: ["*"], symmetric: false, qualifiers: [score] }
-  RAISES:           { from: [ITEM, RUN], to: [SIG], symmetric: false }
-  RESOLVES:         { from: [TASK], to: [SIG], symmetric: false }
-  PROMOTES:         { from: [TASK], to: [FACT, EVT, STATE], symmetric: false }
-  DERIVED_FROM:     { from: [FACT], to: [ITEM], symmetric: false }
-  INCLUDES:         { from: [PROD], to: [FACT, EVT], symmetric: false }
-  WATCHES:          { from: ["*"], to: [FEED], symmetric: false }
+  EMITS:            { label_ko: "산출", from: [FEED], to: [ITEM], symmetric: false }
+  PRODUCED_BY:      { label_ko: "생성 주체", from: [ITEM], to: [RUN], symmetric: false }
+  MATCHES:          { label_ko: "일치", from: [ITEM], to: ["*"], symmetric: false, qualifiers: [score] }
+  RAISES:           { label_ko: "발생", from: [ITEM, RUN], to: [SIG], symmetric: false }
+  RESOLVES:         { label_ko: "해소", from: [TASK], to: [SIG], symmetric: false }
+  PROMOTES:         { label_ko: "승급", from: [TASK], to: [FACT, EVT, STATE], symmetric: false }
+  DERIVED_FROM:     { label_ko: "파생", from: [FACT], to: [ITEM], symmetric: false }
+  INCLUDES:         { label_ko: "포함", from: [PROD], to: [FACT, EVT], symmetric: false }
+  WATCHES:          { label_ko: "감시", from: ["*"], to: [FEED], symmetric: false }
 
 # ─────────────────────────────────────────────────────────────
 # 불변식 (validator 강제)

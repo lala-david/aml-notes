@@ -8,18 +8,25 @@ import { BackendNotice, ThemeToggle } from './components'
 import './App.css'
 
 /**
- * 화면 여섯. 이전에는 일곱 개가 아이콘을 달고 나란히 있었다.
- * 상충과 이력은 성격이 같다 — "무엇이 다투고 무엇이 바뀌었는가" — 그래서
- * 「검토」 하나로 합쳤다. 아이콘은 뗐다. 여섯 개의 낱말이 여섯 개의
- * 그림보다 빨리 읽힌다.
+ * 상단은 셋뿐이다.
+ *
+ * 이전에는 여섯이었는데 그중 「사실 · 검토 · 체계」 는 전부 KB 자체의
+ * 기계장치를 보는 화면이다 — FACT 목록, 상충·변경 로그, 온톨로지.
+ * 읽으러 온 사람의 과업이 아니라 만드는 사람의 과업인데 1급 자리
+ * 절반을 차지했다. 아래 FOOT_NAV 로 내렸다. 죽이지는 않는다.
+ *
+ * 남은 셋은 낱말만 보고 무엇이 나올지 예측할 수 있어야 한다.
  */
 const NAV = [
-  { to: '/search', label: '탐색', match: ['/search', '/n/'] },
+  { to: '/search', label: '찾아보기', match: ['/search', '/n/'] },
   { to: '/crosswalk', label: '관할 비교', match: ['/crosswalk', '/obl/', '/lineage/'] },
-  { to: '/facts', label: '사실', match: ['/facts'] },
   { to: '/sources', label: '출처', match: ['/sources'] },
-  { to: '/audit', label: '검토', match: ['/audit'] },
-  { to: '/ontology', label: '체계', match: ['/ontology'] },
+]
+
+const FOOT_NAV = [
+  { to: '/facts', label: '사실' },
+  { to: '/audit', label: '검토' },
+  { to: '/ontology', label: '분류 체계' },
 ]
 
 function TopNav() {
@@ -76,6 +83,11 @@ export default function App() {
         </main>
 
         <footer className="foot">
+          <nav className="foot-nav" aria-label="자료 화면">
+            {FOOT_NAV.map((n) => (
+              <Link key={n.to} to={n.to}>{n.label}</Link>
+            ))}
+          </nav>
           <div>
             <Mark size={16} />
             <span>가상자산 자금세탁방지 규제 지식베이스</span>

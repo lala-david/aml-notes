@@ -35,7 +35,7 @@ edges:
         confidence: "A"
         locator: "제5조의3"
         retrieved: "2026-07-30"
-  # ⭐ 3단 위임 구조 — 임계값의 실제 소재를 그래프로 표현한다
+  # 3단 위임 구조 — 임계값의 실제 소재를 그래프로 표현한다
   - predicate: "DELEGATES_TO"
     to: "PROV:kr-tfia-sd-art10-10"
     qualifiers:
@@ -59,7 +59,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-30"
 curator_note: >
-  ⚠️ 【2026-07-30 정정】 초기 등재 시 IMPOSES 한정자에 threshold: 1000000 을 넣었으나
+  【2026-07-30 정정】 초기 등재 시 IMPOSES 한정자에 threshold: 1000000 을 넣었으나
   **위치가 틀렸다.** 이 조문은 기준금액을 정하지 않는다 — 500만원 범위에서 대통령령에
   위임할 뿐이다. 실제 기준금액 100만원은 시행령 제10조의10 제1호가 정한다.
   → 임계값 한정자를 PROV:kr-tfia-sd-art10-10 으로 이관하고, 여기에는 DELEGATES_TO 를 두었다.

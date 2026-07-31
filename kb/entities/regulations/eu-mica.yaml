@@ -39,13 +39,13 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-28"
 curator_note: >
-  ⚠️ 확신도 C — 리서치 도시에(eu-uk-regime, T1 28건)에서 사실은 확인되었으나
+  확신도 C — 리서치 도시에(eu-uk-regime, T1 28건)에서 사실은 확인되었으나
   아직 KB 에 DOC 노드로 등재하지 않았다. EUR-Lex CELEX 32023R1114 를 DOC 으로
   만들어 재결속할 것. **최우선 재검토 과제.**
 
-  ⚠️ **발효일(entry into force)과 적용개시일(date of application)을 구분할 것.**
+  **발효일(entry into force)과 적용개시일(date of application)을 구분할 것.**
   발효 2023-06-29 ≠ 적용개시 2024-12-30. 이 혼동이 EU 규정에서 가장 흔한 오류다.
   상태 이력은 STATE 레코드로 분리 관리해야 한다.
 
-  ⚠️ EUR-Lex 는 robots.txt 로 원문 경로 크롤링을 금지한다. CELLAR SPARQL
+  EUR-Lex 는 robots.txt 로 원문 경로 크롤링을 금지한다. CELLAR SPARQL
   (SRC:eu-publications) 을 써야 한다.

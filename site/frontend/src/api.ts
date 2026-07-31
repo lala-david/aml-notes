@@ -32,6 +32,8 @@ export type Confidence = 'A' | 'B' | 'C' | 'D'
 
 export type EdgeView = {
   predicate: string
+  /** 술어 한글명. 출처는 kb/schema/ontology.yaml 하나뿐이다. */
+  predicate_ko?: string | null
   direction: 'in' | 'out'
   node: NodeBrief & { missing?: boolean }
   qualifiers: Record<string, unknown>

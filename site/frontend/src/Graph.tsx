@@ -15,6 +15,15 @@ type SimLink = SimulationLinkDatum<SimNode> & { predicate: string }
 
 const LAYERS: Layer[] = ['semantic', 'dynamic', 'kinetic', 'funnel']
 
+/** 형태 = 클래스군. theme.ts 의 SHAPE_BY_TYPE 를 사람 말로 옮긴 것. */
+const SHAPE_LEGEND = [
+  ['square', '법령 · 조문'],
+  ['diamond', '의무 · 통제'],
+  ['hex', '관할 · 기관'],
+  ['triangle', '위협 · 기법'],
+  ['circle', '출처 · 증거'],
+] as const
+
 export function Graph({
   nodes,
   links,
@@ -125,7 +134,20 @@ export function Graph({
             {LAYER_LABEL[l]}
           </button>
         ))}
-        <span className="graph-hint">휠 확대 · 드래그 이동 · 노드 클릭</span>
+      </div>
+
+      {/* 「모양은 클래스군」 이라고만 하고 어느 모양이 어느 군인지는
+          어디에도 없었다. 색맹 대비의 이차 부호화인데 해독표가 없으면
+          아무 소용이 없다. shapePath 를 그대로 다시 쓴다. */}
+      <div className="graph-shapes">
+        {SHAPE_LEGEND.map(([shape, label]) => (
+          <span key={shape} className="lg-shape">
+            <svg width="12" height="12" viewBox="-6 -6 12 12" aria-hidden="true">
+              <path d={shapePath(shape, 4.6)} />
+            </svg>
+            {label}
+          </span>
+        ))}
       </div>
 
       <svg
@@ -137,12 +159,14 @@ export function Graph({
           ;(e.target as Element).setPointerCapture?.(e.pointerId)
         }}
         onPointerMove={(e) => {
-          if (!drag.current) return
-          setView((v) => ({
-            ...v,
-            x: drag.current!.vx + (e.clientX - drag.current!.x),
-            y: drag.current!.vy + (e.clientY - drag.current!.y),
-          }))
+          const d = drag.current
+          if (!d) return
+          // 값을 여기서 확정한다. setView 업데이터 안에서 drag.current 를
+          // 다시 읽으면, React 가 그 함수를 실행하기 전에 onPointerUp 이
+          // null 로 만들어 버려 터진다 (reading 'vx' of null).
+          const dx = e.clientX - d.x
+          const dy = e.clientY - d.y
+          setView((v) => ({ ...v, x: d.vx + dx, y: d.vy + dy }))
         }}
         onPointerUp={() => (drag.current = null)}
         className="graph-svg"
@@ -151,9 +175,6 @@ export function Graph({
           <marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
             <path d="M0,0 L8,4 L0,8 z" fill="var(--edge)" />
           </marker>
-          <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" floodOpacity="0.16" />
-          </filter>
         </defs>
 
         <g transform={`translate(${view.x},${view.y}) scale(${view.k})`}>
@@ -195,12 +216,11 @@ export function Graph({
                 >
                   {focus && <circle r={n.r + 8} className="focus-ring" />}
                   {shape === 'circle' ? (
-                    <circle r={n.r} style={{ fill: `var(--layer-${n.layer})` }} filter="url(#soft)" />
+                    <circle r={n.r} style={{ fill: `var(--layer-${n.layer})` }} />
                   ) : (
                     <path
                       d={shapePath(shape, n.r)}
                       style={{ fill: `var(--layer-${n.layer})` }}
-                      filter="url(#soft)"
                     />
                   )}
                   {(hover === n.id || focus || n.deg >= 6) && (

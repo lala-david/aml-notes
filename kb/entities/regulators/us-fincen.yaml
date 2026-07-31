@@ -30,7 +30,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-28"
 curator_note: >
-  ⚠️ 확신도 B — 현재 증거가 규칙제정 의제 문서뿐이다. 조직 근거 법령(31 U.S.C. 310)과
+  확신도 B — 현재 증거가 규칙제정 의제 문서뿐이다. 조직 근거 법령(31 U.S.C. 310)과
   공식 소개 문서를 확보해 A 로 승격할 것. 2파에서 fincen.gov 접근이 열렸으므로
   (fetch_strategy: browser_headers) 다음 라운드에서 해소 가능하다.
 

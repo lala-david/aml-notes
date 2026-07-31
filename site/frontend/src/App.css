@@ -29,7 +29,9 @@
 
   /* ── 괘선 ─────────────────────────────────────────────────────────── */
   --rule:   light-dark(#e6e3da, #2a2a27);   /* 행 구분          */
-  --rule-2: light-dark(#ccc9be, #3a3936);   /* 입력·테두리      */
+  /* 조작부 테두리. 순수 장식인 --rule 과 달리 "여기를 누른다"를 말하므로
+     WCAG 1.4.11 을 향해 올린다. 1.59:1 이면 버튼이 버튼으로 안 보인다. */
+  --rule-2: light-dark(#adaa9e, #4d4b46);   /* 입력·테두리      */
   --rule-3: light-dark(#a5a399, #55534d);   /* 섹션 머리        */
   --edge:   light-dark(#ccc9be, #3a3936);   /* 그래프 간선 (SVG marker 참조) */
 
@@ -42,12 +44,17 @@
   /* ── 상태 ─────────────────────────────────────────────────────────── */
   --link: light-dark(#1c5fae, #79b0ee);
   --ok:   light-dark(#16652c, #4fa869);
-  --warn: light-dark(#8a5600, #d8a03c);
-  --crit: light-dark(#a3211d, #e5776f);
+  /* 다크값은 명도 밴드(L 0.48~0.67) 안으로 넣었다. 밖으로 나가면
+     어두운 지면에서 홀로 타오른다. */
+  --warn: light-dark(#8a5600, #b8842a);
+  --crit: light-dark(#a3211d, #d1544b);
 
-  /* 확신도 — 문자 A~D 가 1차 부호, 색은 보조 */
+  /* 확신도 — 문자 A~D 가 1차 부호, 색은 보조.
+     B 는 221건 중 169건이라 색으로 말할 것이 없다. 무채로 내린다.
+     파랑으로 두면 계층 색(--layer-semantic)과 ΔE 8.9 로 정상 시각도
+     구별하지 못하는데 뜻은 전혀 다르다 — 관계 한 행에 두 파랑이 섞였다. */
   --conf-a: var(--ok);
-  --conf-b: light-dark(#1c5fae, #79b0ee);
+  --conf-b: var(--ink-2);
   --conf-c: var(--warn);
   --conf-d: var(--crit);
 
@@ -133,6 +140,11 @@ body {
   font-size: var(--fs-3);
   line-height: var(--lh-body);
   letter-spacing: var(--tr-body);
+  /* 한국어는 낱말 안에서 끊으면 안 된다. 이게 없으면 「특금법」 이
+     특 / 금법 으로 갈라진다. 긴 mono ID 는 아래 개별 규칙이
+     overflow-wrap: anywhere 로 덮으므로 계속 접힌다. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
   font-feature-settings: 'kern' 1;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -246,6 +258,16 @@ button { font-family: inherit; letter-spacing: inherit; }
   border-top: 1px solid var(--rule);
   margin-top: var(--s-16);
 }
+/* 상단에서 내려온 자료 화면들. 죽이지 않고 자리만 옮겼다. */
+.foot-nav {
+  max-width: var(--page-w); margin: 0 auto;
+  padding: var(--s-6) var(--pad-x) 0;
+  display: flex; gap: var(--s-5); flex-wrap: wrap;
+  font-size: var(--fs-1);
+}
+.foot-nav a { color: var(--ink-2); }
+.foot-nav a:hover { color: var(--ink); }
+
 .foot > div {
   max-width: var(--page-w); margin: 0 auto;
   padding: var(--s-6) var(--pad-x) var(--s-12);
@@ -257,6 +279,17 @@ button { font-family: inherit; letter-spacing: inherit; }
 /* ── 섹션 — 참고서의 조판. 번호 · 표제 · 방주 ──────────────────────── */
 .sec { margin-top: var(--s-16); }
 .sec:first-child { margin-top: 0; }
+/* 곁가지 섹션 — 여백도 제목도 한 단 낮춘다. 모든 섹션이 동일한 껍데기로
+   반복되면 지면이 무엇이 중요한지 말하지 못하고 기계 리듬이 된다. */
+.sec-minor { margin-top: var(--s-10); }
+.sec-minor h2 { font-size: var(--fs-4); }
+.sec-minor .sec-head { border-bottom-color: var(--rule); }
+
+/* 표제 바로 아래 진입 동선. 처음 온 사람이 누를 것이 첫 화면에 있어야 한다. */
+.entry {
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
+  margin: var(--s-6) 0 var(--s-4);
+}
 .sec-head {
   display: flex; align-items: baseline; gap: var(--s-3);
   padding-bottom: var(--s-2); margin-bottom: var(--s-6);
@@ -390,9 +423,12 @@ button { font-family: inherit; letter-spacing: inherit; }
 }
 
 .chain-val { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* 중간 단계 수치는 작게. 500만원은 본문이 「답이 아니다」 라고 말하는
+   위임 상한인데, 20px 로 키우면 표제 다음 두 번째로 눈에 든다 —
+   크기로 강조하고 색으로 죽이는 모순이 된다. 큰 숫자는 결론 하나만. */
 .chain-val b {
-  display: block; font-size: var(--fs-5); font-weight: 500;
-  color: var(--ink-4); letter-spacing: -0.01em; line-height: var(--lh-flat);
+  display: block; font-size: var(--fs-2); font-weight: 500;
+  color: var(--ink-3); letter-spacing: -0.01em; line-height: var(--lh-flat);
 }
 .chain-val span {
   display: block; margin-top: var(--s-1);
@@ -582,10 +618,15 @@ table.data .period {
 .nref.missing .tcode::before { background: var(--crit); }
 
 /* 술어 */
+/* 한글이 1차. 코드는 뒤에 작게 붙여 대조용으로만 남긴다. */
 .pred {
-  font-family: var(--mono); font-size: var(--fs-00); font-weight: 600;
-  letter-spacing: var(--tr-label); color: var(--ink-3);
-  white-space: nowrap;
+  font-size: var(--fs-1); font-weight: 500;
+  letter-spacing: var(--tr-ko); color: var(--ink-2);
+}
+.pred code {
+  display: block; margin-top: 1px;
+  font-size: var(--fs-00); font-weight: 400;
+  letter-spacing: var(--tr-label); color: var(--ink-4);
 }
 
 /* ═══ 신뢰 표식 — 문자·형태가 1차, 색은 보조 ═════════════════════════ */
@@ -797,7 +838,7 @@ table.data .period {
   overflow-wrap: anywhere;
 }
 .spec-ref {
-  font-family: var(--mono); font-size: var(--fs-00); color: var(--ink-1);
+  font-family: var(--mono); font-size: var(--fs-00); color: var(--ink);
   text-decoration: underline; text-decoration-color: var(--rule);
   text-underline-offset: 2px;
 }
@@ -805,8 +846,10 @@ table.data .period {
 
 /* 관계 목록 */
 .rels { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+/* 가운데 열을 전폭으로 늘리면 노드명이 끝난 뒤 확신도 배지까지 470px 이
+   비어 한 행의 좌우를 눈으로 잇지 못한다. 본문 줄길이에서 끊는다. */
 .rels > li {
-  display: grid; grid-template-columns: 152px minmax(0, 1fr) auto;
+  display: grid; grid-template-columns: 152px minmax(0, 34em) auto;
   column-gap: var(--s-4); align-items: baseline;
   padding: var(--s-2) 0; border-bottom: 1px solid var(--rule);
   font-size: var(--fs-2);
@@ -888,13 +931,22 @@ table.data .period {
 .lg.off { color: var(--ink-4); }
 .lg.off .lg-dot { opacity: 0.25; }
 .lg-dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
-.graph-hint {
-  margin-left: auto; font-size: var(--fs-0);
-  letter-spacing: var(--tr-ko); color: var(--ink-4); white-space: nowrap;
+
+/* 형태 해독표. 색 범례와 다른 축이므로 줄을 나눈다 — 같은 줄에 두면
+   계층(색)과 클래스군(형태)이 한 축인 것처럼 읽힌다. */
+.graph-shapes {
+  display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap;
+  padding: var(--s-2) var(--s-4);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--fs-00); color: var(--ink-3);
 }
+.lg-shape { display: inline-flex; align-items: center; gap: var(--s-2); white-space: nowrap; }
+.lg-shape svg { flex: none; }
+.lg-shape path { fill: var(--ink-3); }
 .graph-svg { display: block; cursor: grab; touch-action: none; }
 .graph-svg:active { cursor: grabbing; }
-.edge { stroke: var(--rule-2); stroke-width: 1; opacity: 0.7; }
+/* 지식 그래프에서 관계가 곧 내용인데 간선이 노드보다 훨씬 희미했다. */
+.edge { stroke: var(--ink-4); stroke-width: 1; opacity: 0.55; }
 .edge.dim { opacity: 0.12; }
 .gnode { cursor: pointer; }
 .gnode path, .gnode circle { stroke: var(--panel); stroke-width: 1.5; transition: opacity 0.16s; }
@@ -939,7 +991,7 @@ table.data .period {
   color: var(--ink-2); font-size: var(--fs-1); line-height: var(--lh-body);
 }
 .offline > svg { flex: none; margin-top: 2px; color: var(--crit); }
-.offline b { color: var(--ink-1); font-weight: 600; }
+.offline b { color: var(--ink); font-weight: 600; }
 .offline code {
   display: block; margin-top: var(--s-2);
   font-family: var(--mono); font-size: var(--fs-00);
@@ -1124,13 +1176,20 @@ h3.rec-title { margin-bottom: var(--s-2); }
 .facets button[aria-pressed='true'] { color: var(--ink); font-weight: 600; }
 /* 현재 검색어로 0 건인 클래스 — 남겨 두되 누를 수는 없다.
    목록에서 지우면 무엇이 빠졌는지 알 수 없고, 누를 수 있으면 빈 화면으로 간다. */
-.facets button:disabled { color: var(--ink-5, var(--ink-4)); cursor: default; opacity: 0.55; }
+/* 색 하나로만 낮춘다. opacity 를 겹치면 다크에서 1.85:1 까지 떨어져
+   0 건 클래스가 아예 사라진다 — 흐리게가 아니라 안 보이게 된다. */
+.facets button:disabled { color: var(--ink-4); cursor: default; }
+
+/* 빈 검색창 앞에서 멈추지 않게. 설명은 제목 네 글자로 끝낸다. */
+.seed h4 { color: var(--ink-3); margin-bottom: var(--s-2); }
+.seed .btn { margin-top: var(--s-5); }
+.facet-more { margin-top: var(--s-3); font-size: var(--fs-0); }
 
 /* 결과 없음 — 어느 조건이 죽였는지 말하고 빠져나갈 길을 준다 */
 .noresult { padding: var(--s-8) 0; max-width: var(--measure); }
 .noresult p { margin: 0 0 var(--s-2); font-size: var(--fs-2); color: var(--ink-2); line-height: var(--lh-body); }
 .noresult p.dim { color: var(--ink-4); font-size: var(--fs-1); }
-.noresult b { font-weight: 600; color: var(--ink-1); }
+.noresult b { font-weight: 600; color: var(--ink); }
 .noresult code { font-family: var(--mono); font-size: var(--fs-00); color: var(--ink-2); }
 .noresult button { margin-top: var(--s-2); }
 .facets code { font-family: var(--mono); font-size: var(--fs-00); font-weight: 600; min-width: 52px; }

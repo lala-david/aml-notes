@@ -47,7 +47,7 @@ created_at: "2026-07-31"
 updated_at: "2026-07-31"
 review_due: "2026-10-28"
 curator_note: >
-  ⚠️ 확신도 B — 조문의 존재와 위치는 확인했으나 **원문 문언(text_orig)을 확보하지
+  확신도 B — 조문의 존재와 위치는 확인했으나 **원문 문언(text_orig)을 확보하지
   않았다.** 정의 조항은 제외 열거가 규제 범위를 직접 가르므로 축조 확인이 필수다.
   OC 발급 후 lawService.do target=lawjosub 으로 전문을 채우고 A 로 승격할 것.
 

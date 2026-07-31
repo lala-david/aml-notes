@@ -27,7 +27,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2027-01-30"
 curator_note: >
-  ⭐ 이 노드가 AI 자율성 제한의 **구조적** 표현이다. 문서상 약속이 아니라
+  이 노드가 AI 자율성 제한의 **구조적** 표현이다. 문서상 약속이 아니라
   온톨로지 요소이므로 스키마가 강제한다 — node.schema.json 이
   is_agent: true 인 ROLE 의 can_execute 를 maxItems: 0 으로 제약한다 (K-7).
 

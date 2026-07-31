@@ -46,6 +46,10 @@ def node_detail(g: Graph, node_id: str, at: date | None = None) -> dict | None:
     if n is None:
         return None
 
+    # 술어 한글명은 온톨로지가 유일한 출처다. 프론트에 상수를 또 두면
+    # 술어를 추가할 때 한쪽만 고쳐지고 말없이 어긋난다.
+    preds = (g.ontology.get("predicates") or {})
+
     def render(edges, direction: str) -> list[dict]:
         out = []
         for e in edges:
@@ -54,6 +58,7 @@ def node_detail(g: Graph, node_id: str, at: date | None = None) -> dict | None:
             other = e.target if direction == "out" else e.source
             out.append({
                 "predicate": e.predicate,
+                "predicate_ko": (preds.get(e.predicate) or {}).get("label_ko"),
                 "direction": direction,
                 "node": node_brief(g, other) or {"id": other, "missing": True},
                 "qualifiers": e.qualifiers,

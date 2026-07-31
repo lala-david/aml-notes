@@ -42,7 +42,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-28"
 curator_note: >
-  ⚠️ 확신도 B — 조문 존재와 위임 구조는 리서치에서 확인되었으나 **원문 문언을
+  확신도 B — 조문 존재와 위임 구조는 리서치에서 확인되었으나 **원문 문언을
   직접 확보하지 않았다.** OC 발급 후 lawService.do target=lawjosub 으로
   text_orig 를 채우고 A 로 승격할 것.
 

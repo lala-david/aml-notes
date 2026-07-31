@@ -12,12 +12,8 @@
 
 export type Layer = 'semantic' | 'dynamic' | 'kinetic' | 'funnel'
 
-export const LAYER_COLOR: Record<Layer, { light: string; dark: string }> = {
-  semantic: { light: '#2a78d6', dark: '#3987e5' }, // 명사 — 무엇이 존재하는가
-  dynamic: { light: '#1baf7a', dark: '#199e70' }, // 시간 — 언제 참이었는가
-  kinetic: { light: '#eb6834', dark: '#d95926' }, // 동사 — 무엇을 바꾸는가
-  funnel: { light: '#898781', dark: '#898781' }, // 계층 아님 — 유입 인프라
-}
+/* 계층 색의 실제 정의는 App.css 의 --layer-* 하나뿐이다.
+   여기에 값을 복제해 두면 두 곳이 말없이 어긋난다. */
 
 export const LAYER_LABEL: Record<Layer, string> = {
   semantic: 'L1 의미 · 명사',
@@ -46,13 +42,6 @@ export const shapeFor = (type: string): Shape => SHAPE_BY_TYPE[type] ?? 'circle'
 
 /** 노드 반지름 — 중요도(연결 수)에 따라 커진다. */
 export const radiusFor = (degree: number) => 5 + Math.min(9, Math.sqrt(degree) * 2.6)
-
-export const CONFIDENCE_COLOR = {
-  A: { light: '#006300', dark: '#0ca30c' },
-  B: { light: '#2a78d6', dark: '#3987e5' },
-  C: { light: '#b06e00', dark: '#fab219' },
-  D: { light: '#d03b3b', dark: '#e66767' },
-} as const
 
 /** SVG 형태 path — 모두 중심 (0,0) 기준. */
 export function shapePath(shape: Shape, r: number): string {

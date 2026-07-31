@@ -21,7 +21,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2027-01-30"
 curator_note: >
-  ⚠️ 자체 출처를 T1 로 두는 것은 오용 위험이 있다. tier_basis 에 적용 범위를
+  자체 출처를 T1 로 두는 것은 오용 위험이 있다. tier_basis 에 적용 범위를
   명시적으로 제한했다 — 인프라 사실에만 유효하고 규제 사실에는 무효다.
   이 제한을 validator 로 강제하는 것이 과제다 (규제 도메인 FACT 가 SRC:x-internal 을
   단독 근거로 삼으면 차단).
