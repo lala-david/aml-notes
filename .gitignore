@@ -50,8 +50,3 @@ quality/rules/forbidden_terms.local.txt
 build/
 
 # 사이트 빌드 산출물·의존성
-site/frontend/node_modules/
-site/frontend/dist/
-site/frontend/.env.local
-site/backend/__pycache__/
-site/**/__pycache__/
