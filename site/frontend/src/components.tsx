@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ApiUnreachable, api } from './api'
 import type { Confidence, Evidence, NodeBrief } from './api'
+import { GLOSSARY, TERM_RE } from './glossary'
 import { IconAuto, IconMoon, IconSun, IconTime, IconWarn } from './Icons'
 
 /* ═══ 섹션 ═══════════════════════════════════════════════════════════
@@ -58,13 +59,126 @@ export function PageHead({
 /* ═══ 본문 ═══════════════════════════════════════════════════════════
    KB 원문은 마크다운 강조를 쓴다. 별표를 화면에 그대로 흘리지 않는다. */
 
+/**
+ * 용어 한 낱말. 눌러야 펴진다.
+ *
+ * 본문에 설명을 덧붙이면 글이 길어지고 아는 사람에게는 방해가 된다.
+ * 낱말에 붙여 두면 지면 길이가 그대로다 — 모르는 사람만 비용을 낸다.
+ */
+function Term({ word }: { word: string }) {
+  const [open, setOpen] = useState(false)
+
+  // 바깥을 누르거나 Esc 로 닫는다. 열어 둔 채 다른 곳을 읽으려 하면
+  // 풀이가 본문을 덮은 채 남는다.
+  useEffect(() => {
+    if (!open) return
+    const away = (e: MouseEvent) => {
+      if (!(e.target as Element)?.closest?.('.term-wrap')) setOpen(false)
+    }
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('click', away)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('click', away)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [open])
+
+  return (
+    <span className="term-wrap">
+      <button
+        type="button"
+        className="term"
+        aria-expanded={open}
+        title={`${word} — 눌러서 뜻 보기`}
+        onClick={(e) => {
+          e.stopPropagation()
+          // 열려 있던 다른 풀이를 먼저 닫는다 — 한 번에 하나만.
+          if (!open) document.dispatchEvent(new MouseEvent('click'))
+          setOpen((v) => !v)
+        }}
+      >
+        {word}
+      </button>
+      {open && (
+        <span className="term-def" role="note">
+          {GLOSSARY[word]}
+        </span>
+      )}
+    </span>
+  )
+}
+
+/**
+ * 문장 안의 노드 ID 를 링크로. 메모에 「개정령안(FACT:0000008)은 …」 처럼
+ * 내부 ID 가 박혀 있는데, 눌러 갈 수 없으면 그냥 읽기를 막는 기호다.
+ */
+const ID_RE = /\b([A-Z]{3,7}:[a-z0-9][a-z0-9-]*|(?:FACT|CTR|ALOG):\d+)\b/
+
+function linkIds(s: string, key: string): ReactNode[] {
+  const out: ReactNode[] = []
+  let rest = s
+  let i = 0
+  for (;;) {
+    const m = rest.match(ID_RE)
+    if (!m || m.index === undefined) break
+    out.push(rest.slice(0, m.index))
+    const id = m[1]
+    out.push(
+      id.startsWith('CTR:') ? (
+        <Link key={`${key}-${i}`} to="/audit?tab=conflict" className="idref">{id}</Link>
+      ) : (
+        <Link key={`${key}-${i}`} to={`/n/${encodeURIComponent(id)}`} className="idref">{id}</Link>
+      ),
+    )
+    i++
+    rest = rest.slice(m.index + id.length)
+  }
+  out.push(rest)
+  return out
+}
+
+/**
+ * KB 문장을 그린다. **강조** 를 처리하고, 아는 용어에 풀이를 붙인다.
+ *
+ * 용어는 **한 덩어리에서 처음 나온 것만** 표시한다. 같은 낱말마다 점선을
+ * 그으면 문장이 밑줄투성이가 되어 오히려 안 읽힌다.
+ */
 export function Rich({ text }: { text?: string | null }) {
   const t = (text ?? '').replace(/\s+$/, '')
   if (!t) return null
+  const used = new Set<string>()
+
+  const gloss = (s: string, key: string): ReactNode[] => {
+    const out: ReactNode[] = []
+    let rest = s
+    let i = 0
+    for (;;) {
+      const m = rest.match(TERM_RE)
+      if (!m || m.index === undefined) break
+      const word = m[1]
+      out.push(...linkIds(rest.slice(0, m.index), `${key}-a${i}`))
+      if (used.has(word)) {
+        out.push(word)
+      } else {
+        used.add(word)
+        out.push(<Term key={`${key}-t${i}`} word={word} />)
+      }
+      i++
+      rest = rest.slice(m.index + word.length)
+    }
+    out.push(...linkIds(rest, `${key}-z`))
+    return out
+  }
+
   return (
     <>
       {t.split(/(\*\*[^*]+\*\*)/g).map((p, i) =>
-        p.startsWith('**') && p.endsWith('**') ? <strong key={i}>{p.slice(2, -2)}</strong> : p,
+        p.startsWith('**') && p.endsWith('**') ? (
+          <strong key={i}>{gloss(p.slice(2, -2), `b${i}`)}</strong>
+        ) : (
+          <span key={i}>{gloss(p, `p${i}`)}</span>
+        ),
       )}
     </>
   )
@@ -143,7 +257,10 @@ export function EvidenceList({ items, empty }: { items?: Evidence[]; empty?: str
         <li key={i}>
           <div className="ev-head">
             <ConfMark value={e.confidence} />
-            <Link to={`/n/${encodeURIComponent(e.doc)}`}>{e.doc}</Link>
+            {/* 제목이 1차. DOC:kr-lawgokr-tfia-21358 은 사람이 읽는 이름이 아니다. */}
+            <Link to={`/n/${encodeURIComponent(e.doc)}`} title={e.doc}>
+              {e.doc_title ?? e.doc}
+            </Link>
             {e.locator && <span className="loc">{e.locator}</span>}
             {e.retrieved && <span>확인 {e.retrieved}</span>}
           </div>

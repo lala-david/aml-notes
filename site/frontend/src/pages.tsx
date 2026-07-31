@@ -64,6 +64,57 @@ function SpecValue({ value }: { value: unknown }) {
   return <>{String(value)}</>
 }
 
+/**
+ * 속성 이름 한글. 화면에 PARENT_REG · CITATION_PATH 가 그대로 나오면
+ * 방문자는 그 줄을 읽을 수 없다. 없는 키는 코드를 그대로 쓴다 —
+ * 모르는 것을 아는 척 옮기지 않는다.
+ */
+const PROP_KO: Record<string, string> = {
+  parent_reg: '소속 법령', citation_path: '조문 위치', heading: '조문 제목',
+  language: '언어', tier: '출처 등급', tier_basis: '등급 근거',
+  publisher_kind: '발행 주체', base_url: '주소', paywall: '유료 여부',
+  website: '웹사이트', jurisdiction: '관할', org_kind: '기관 종류',
+  reg_kind: '규범 종류', binding: '구속력', citation: '인용 표기',
+  src: '출처', url: '주소', accessed: '확인일', doc_kind: '문서 종류',
+  published: '발행일', translation: '번역본 여부',
+  iso: 'ISO 코드', legal_family: '법계', fatf_member: 'FATF 회원',
+  fatf_style_body: '지역기구',
+  signal_type: '신호 유형', fp_risk: '오탐 위험', rule_sketch: '판별 규칙',
+  parent_typology: '상위 유형', detectability: '탐지 난이도', stage: '단계',
+  action_kind: '액션 종류', requires_proposal: '제안 필요', is_agent: '에이전트',
+  reversible_by: '되돌리는 액션', vend_kind: '공급자 종류', hq: '본사',
+  implements_obligation: '이행 의무', definition_ko: '정의(국문)',
+  definition_en: '정의(영문)', contested: '쟁점 여부', ctl_kind: '통제 종류',
+  automatable: '자동화 가능', maturity: '성숙도', track: '분류',
+  evt_kind: '사건 종류', occurred_on: '발생일', announced_on: '공표일',
+  date_precision: '날짜 정밀도', impact: '영향', significance: '중요도',
+  func_kind: '함수 종류', output: '산출', deterministic: '결정적',
+  implementation: '구현', output_path: '산출 경로',
+  obl_kind: '의무 종류', actor_class: '수범자', trigger: '발동 조건',
+  text_orig: '원문', license: '이용 허락', attribution: '출처 표시',
+  content_hash: '내용 해시', snapshot_path: '보존본 경로',
+}
+
+/** 기계 열거값 → 사람 말. threshold_abolished 는 읽을 수 있는 말이 아니다. */
+const VALUE_KO: Record<string, string> = {
+  threshold_abolished: '기준금액 폐지',
+  proposed: '입법 예고 단계 (공포 전)',
+  undetermined: '미확정',
+  partial: '일부',
+  full_history: '전체 이력',
+  true: '예',
+  false: '아니오',
+}
+
+/** 사실의 값. 큰 수는 자릿점을 찍는다 — 1000000 은 눈으로 못 읽는다. */
+function factValue(v: unknown): string {
+  if (typeof v === 'number') return v.toLocaleString('ko-KR')
+  const s = String(v)
+  if (VALUE_KO[s]) return VALUE_KO[s]
+  if (/^\d{4,}$/.test(s)) return Number(s).toLocaleString('ko-KR')
+  return s
+}
+
 /** URL 쿼리로 as_of 를 유지 — 링크를 공유하면 시점도 함께 간다. */
 function useAsOf(): [string | null, (v: string | null) => void] {
   const [sp, setSp] = useSearchParams()
@@ -92,10 +143,9 @@ export function Home() {
       <div className="lede">
         <p className="kicker">한국 · FATF · EU 가상자산 자금세탁방지 규제</p>
         <h1>100만원. 이 숫자는 법률 어디에도 없습니다.</h1>
+        {/* 점선 친 낱말은 눌러서 뜻을 볼 수 있다. Rich 가 용어를 잡아 준다. */}
         <p className="lede-body">
-          가상자산을 100만원 넘게 보내면 받는 거래소에 송신인 정보를 넘겨야 합니다. 그런데{' '}
-          <strong>특금법 본문에는 이 금액이 없습니다.</strong> 법률은 상한만 긋고 위임했고, 실제
-          기준은 두 단계 아래 시행령에 있습니다.
+          <Rich text="가상자산을 100만원 넘게 보내면 받는 거래소에 보내는 사람이 누구인지를 함께 넘겨야 합니다. 그런데 **특금법 본문에는 이 금액이 없습니다.** 법률은 상한만 긋고 위임했고, 실제 기준은 두 단계 아래 시행령에 있습니다." />
         </p>
       </div>
 
@@ -124,7 +174,7 @@ export function Home() {
 
       <Section num="§ 02" title="같은 의무, 다른 조문">
         <p className="sec-lead">
-          트래블룰이라는 하나의 의무를 나라마다 다른 조문이 정하고, 기준금액도 제각각입니다.
+          <Rich text="트래블룰이라는 하나의 의무를 나라마다 다른 조문이 정하고, 기준금액도 제각각입니다." />
         </p>
         {cw.loading && <Loading rows={4} />}
         {cw.error ? <ErrorBox error={cw.error} /> : null}
@@ -459,12 +509,30 @@ export function NodePage() {
                     <div className="rec-body">
                       <p className="rec-claim"><Rich text={f.claim} /></p>
                       {f.value != null && (
+                        /* 값이 먼저, 기계 이름은 뒤에 작게.
+                           travel_rule_threshold = 1000000 KRW 는 사람이 읽는
+                           자리에 데이터베이스 열 이름을 세워 둔 것이었다. */
                         <p className="rec-kv">
-                          {f.attribute} = <b>{String(f.value)}</b> {f.unit ?? ''}
-                          {f.valid_from && ` · ${f.valid_from} ~ ${f.valid_to ?? '현재'}`}
+                          <b>{factValue(f.value)}</b>
+                          {f.unit ? ` ${f.unit}` : ''}
+                          {f.valid_from && (
+                            <span className="dim"> · {f.valid_from}부터 {f.valid_to ?? '현재까지'}</span>
+                          )}
+                          <code title="기계 판독용 속성명">{f.attribute}</code>
                         </p>
                       )}
-                      {f.note && <p className="rec-note"><Rich text={f.note} /></p>}
+                      {f.note && (
+                        <p className="rec-note">
+                          {/* CTR:00004 로 시작하는 메모가 있다. 설명 없는
+                              내부 ID 는 막다른 길이므로 검토 화면으로 잇는다. */}
+                          {/^CTR:\d+/.test(f.note) && (
+                            <Link to="/audit?tab=conflict" className="ctr-link">
+                              상충 기록
+                            </Link>
+                          )}
+                          <Rich text={f.note.replace(/^CTR:\d+\s*—\s*/, '')} />
+                        </p>
+                      )}
                       <EvidenceList items={f.evidence} />
                     </div>
                   </li>
@@ -530,7 +598,7 @@ export function NodePage() {
               <dl className="spec">
                 {props.map(([k, v]) => (
                   <div key={k}>
-                    <dt>{k}</dt>
+                    <dt title={k}>{PROP_KO[k] ?? k}</dt>
                     <dd><SpecValue value={v} /></dd>
                   </div>
                 ))}

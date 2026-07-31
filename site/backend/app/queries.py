@@ -41,6 +41,22 @@ def _min_confidence(evidence: list) -> str | None:
     return max(vals) if vals else None
 
 
+def ev_view(g: Graph, evidence: list) -> list:
+    """증거에 문서 제목을 붙인다.
+
+    화면에 DOC:kr-lawgokr-tfia-21358 이 그대로 나가면 사람이 읽을 수 없다.
+    제목은 그래프가 이미 들고 있으므로 여기서 얹는다.
+    """
+    out = []
+    for e in evidence:
+        if not isinstance(e, dict):
+            out.append(e)
+            continue
+        doc = g.get(e.get("doc", ""))
+        out.append({**e, "doc_title": doc.title if doc else None})
+    return out
+
+
 def node_detail(g: Graph, node_id: str, at: date | None = None) -> dict | None:
     n = g.get(node_id)
     if n is None:
@@ -65,18 +81,23 @@ def node_detail(g: Graph, node_id: str, at: date | None = None) -> dict | None:
                 "valid_from": e.valid_from,
                 "valid_to": e.valid_to,
                 "confidence": _min_confidence(e.evidence),
-                "evidence": e.evidence,
+                "evidence": ev_view(g, e.evidence),
             })
         return out
 
     body = {k: v for k, v in n.raw.items() if k not in ("edges",)}
+    if isinstance(body.get("evidence"), list):
+        body["evidence"] = ev_view(g, body["evidence"])
     return {
         **body,
         "title": n.title,
         "path": n.path,
         "edges_out": render(n.out, "out"),
         "edges_in": render(n.inc, "in"),
-        "facts": [f for f in g.facts if f.get("subject") == node_id],
+        "facts": [
+            {**f, "evidence": ev_view(g, f.get("evidence") or [])}
+            for f in g.facts if f.get("subject") == node_id
+        ],
         "states": [s for s in g.states if s.get("subject") == node_id],
     }
 
@@ -139,7 +160,7 @@ def crosswalk(g: Graph, obl_id: str, at: date | None = None) -> dict | None:
             "valid_from": e.valid_from,
             "valid_to": e.valid_to,
             "confidence": _min_confidence(e.evidence),
-            "evidence": e.evidence,
+            "evidence": ev_view(g, e.evidence),
         })
 
     rows.sort(key=lambda r: (r["namespace"] != "intl", r["namespace"], r["provision"]["id"]))

@@ -45,6 +45,8 @@ export type EdgeView = {
 
 export type Evidence = {
   doc: string
+  /** 문서 제목. 백엔드가 그래프에서 찾아 얹는다. */
+  doc_title?: string | null
   confidence: Confidence
   locator?: string
   quote?: string

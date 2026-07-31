@@ -15,11 +15,13 @@ export type Layer = 'semantic' | 'dynamic' | 'kinetic' | 'funnel'
 /* 계층 색의 실제 정의는 App.css 의 --layer-* 하나뿐이다.
    여기에 값을 복제해 두면 두 곳이 말없이 어긋난다. */
 
+/** 그래프 범례에 나가는 이름. L1·L2·L3 은 내부 계층 번호라 뜻이 없다 —
+ *  그 번호가 필요한 곳은 /ontology 뿐이고 거기서는 Strata 가 따로 말한다. */
 export const LAYER_LABEL: Record<Layer, string> = {
-  semantic: 'L1 의미 · 명사',
-  dynamic: 'L2 동적 · 시간',
-  kinetic: 'L3 운동 · 동사',
-  funnel: 'Funnel · 유입',
+  semantic: '무엇이 있는가',
+  dynamic: '언제 그랬는가',
+  kinetic: '무엇을 바꾸는가',
+  funnel: '어디서 들어왔는가',
 }
 
 /** 노드 형태 — 계층 색의 보조 부호화. */

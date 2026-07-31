@@ -33,6 +33,6 @@ curator_note: >
   CTR:00001 을 해소한 **독립 교차검증 출처**다. 법제처와 국회는 별개 기관이므로
   두 곳의 공포일자 일치는 단일 출처 확인보다 강한 근거가 된다.
 
-  【수집 경로 확보】 1파에서 접근 실패했던 의안정보 검색이 확인되었다 —
+  【수집 경로 확보】 1차 조사에서 접근 실패했던 의안정보 검색이 확인되었다 —
   POST /bill/bi/bill/sch/findSchPaging.do, 인증키 불요.
   → ingest/config/sources.yaml 의 FEED:kr-assembly-bill 갱신 필요.

@@ -671,17 +671,17 @@ table.data .period {
 
 /* ═══ 관할 표식 ══════════════════════════════════════════════════════ */
 
-.jm .jm-bg   { fill: var(--sunken); }
-.jm .jm-band { fill: var(--jc, var(--rule-2)); }
-.jm .jm-ring { fill: none; stroke: var(--jc, var(--rule-2)); stroke-width: 1.1; }
-.jm .jm-dash { fill: none; stroke: var(--rule-2); stroke-width: 1.2; stroke-dasharray: 2.6 2.2; }
+/* 색조 없음 — 명도와 형태로만 가른다. 색맹·흑백 인쇄에서 그대로 살아남는다. */
+.jm .jm-tile { fill: none; stroke: var(--rule-3); stroke-width: 1.1; }
+.jm .jm-fill { fill: var(--ink-2); }
+.jm .jm-ring { fill: none; stroke: var(--ink-3); stroke-width: 1.1; }
+.jm .jm-dash { fill: none; stroke: var(--ink-4); stroke-width: 1.2; stroke-dasharray: 2.6 2.2; }
 .jm .jm-code {
-  font: 700 7.4px var(--mono); fill: var(--ink-2);
-  text-anchor: middle; letter-spacing: 0.02em;
+  /* 10px × (18/20) = 실효 9px. 이전 7.4px 은 실효 6.7px 로 판독 한계 아래였다. */
+  font: 650 10px var(--mono); fill: var(--ink-2);
+  text-anchor: middle; letter-spacing: -0.02em;
 }
-.jm-ko { --jc: #2a78d6; } .jm-ap { --jc: #1baf7a; } .jm-am { --jc: #eb6834; }
-.jm-eu { --jc: #4a3aa7; } .jm-me { --jc: #b07b12; } .jm-gl { --jc: #898781; }
-.jm-nx { --jc: #a9a79c; }
+.jm-home .jm-code { fill: var(--paper); }
 .jurchip {
   display: inline-flex; align-items: center; gap: var(--s-2);
   white-space: nowrap; font-size: var(--fs-2);
@@ -826,11 +826,11 @@ table.data .period {
   column-gap: var(--s-3);
   padding: var(--s-2) 0; border-bottom: 1px solid var(--rule);
 }
+/* 한글 이름이므로 mono·대문자·넓은 자간을 쓰지 않는다. 그 조판은
+   라틴 코드용이고 한글에 씌우면 곧바로 기계가 짠 화면처럼 보인다. */
 .spec dt {
-  font-family: var(--mono); font-size: var(--fs-00);
-  letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--ink-3);
-  line-height: var(--lh-dense); padding-top: 2px;
-  /* 낱자 단위로 끊지 않는다 — 밑줄에서만 접는다. */
+  font-size: var(--fs-0); letter-spacing: var(--tr-ko);
+  color: var(--ink-3); line-height: var(--lh-dense); padding-top: 2px;
   overflow-wrap: break-word; hyphens: none;
 }
 .spec dd {
@@ -1179,6 +1179,47 @@ h3.rec-title { margin-bottom: var(--s-2); }
 /* 색 하나로만 낮춘다. opacity 를 겹치면 다크에서 1.85:1 까지 떨어져
    0 건 클래스가 아예 사라진다 — 흐리게가 아니라 안 보이게 된다. */
 .facets button:disabled { color: var(--ink-4); cursor: default; }
+
+/* 사실 값 — 값이 먼저, 기계 속성명은 뒤에 작게 */
+.rec-kv code {
+  margin-left: var(--s-3); font-family: var(--mono);
+  font-size: var(--fs-00); color: var(--ink-4);
+}
+.ctr-link {
+  margin-right: var(--s-2); padding: 1px var(--s-2);
+  border: 1px solid var(--rule-2); border-radius: var(--r-1);
+  font-size: var(--fs-00); color: var(--ink-3); white-space: nowrap;
+}
+.ctr-link:hover { color: var(--ink); text-decoration: none; border-color: var(--ink-4); }
+/* 문장 속 내부 ID — 눌러 갈 수 있음을 조용히 표시한다 */
+.idref {
+  font-family: var(--mono); font-size: 0.92em; color: var(--ink-3);
+  text-decoration: underline; text-decoration-color: var(--rule-2);
+  text-underline-offset: 2px;
+}
+.idref:hover { color: var(--ink); text-decoration-color: currentColor; }
+
+/* ═══ 용어 풀이 ══════════════════════════════════════════════════════
+   모르는 사람만 비용을 낸다. 아는 사람에게는 점선 하나가 전부다. */
+
+.term-wrap { position: relative; }
+.term {
+  padding: 0; border: 0; background: none; color: inherit;
+  font: inherit; letter-spacing: inherit; cursor: help;
+  text-decoration: underline dotted var(--ink-4);
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.term:hover, .term[aria-expanded='true'] { text-decoration-color: var(--ink-2); }
+.term-def {
+  position: absolute; left: 0; top: calc(100% + 6px); z-index: 20;
+  display: block; width: max-content; max-width: min(30em, 78vw);
+  padding: var(--s-3) var(--s-4);
+  background: var(--panel); border: 1px solid var(--rule-3);
+  border-radius: var(--r-2); box-shadow: 0 6px 20px rgb(0 0 0 / 0.10);
+  font-size: var(--fs-1); font-weight: 400; line-height: var(--lh-body);
+  letter-spacing: var(--tr-body); color: var(--ink-2); text-align: left;
+  white-space: normal;
+}
 
 /* 빈 검색창 앞에서 멈추지 않게. 설명은 제목 네 글자로 끝낸다. */
 .seed h4 { color: var(--ink-3); margin-bottom: var(--s-2); }

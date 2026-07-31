@@ -24,7 +24,7 @@ created_at: "2026-07-30"
 updated_at: "2026-07-30"
 review_due: "2026-10-30"
 curator_note: >
-  【수집 경로】 1파는 접근에 실패했으나 2파에서 확인되었다 —
+  【수집 경로】 1차 조사는 접근에 실패했으나 2차 조사에서 확인되었다 —
   POST `/bill/bi/bill/sch/findSchPaging.do`, **인증키 불요**.
   열린국회정보 OpenAPI(인증키 필요)와 별개 경로다.
 
