@@ -19,11 +19,24 @@ uvicorn app.main:app --reload --port 8000
 # 프론트 (터미널 2)
 cd site/frontend
 npm install
-npm run dev            # http://localhost:5173
+npm run dev            # http://localhost:5173 (포트가 잡혀 있으면 다음 번호로)
 ```
 
-포트를 바꾸려면 `site/frontend/.env.local` 에 `VITE_API_BASE` 를 넣는다.
-백엔드 CORS 는 `localhost`/`127.0.0.1` × `5173`/`4173`/`3000` 을 기본 허용한다.
+**백엔드를 먼저 띄운다.** 프론트만 띄우면 모든 화면이 비고 상단에
+연결 실패 안내가 뜬다.
+
+프론트는 브라우저에서 같은 출처로 `/api` 를 부르고, Vite 가 백엔드로
+넘긴다(`vite.config.ts`). 그래서 두 포트를 손으로 맞출 필요가 없고 CORS 도
+개발에서는 관여하지 않는다. 백엔드를 8000 이 아닌 곳에 띄웠다면
+`site/frontend/.env.local` 에 대상만 바꿔 준다.
+
+```bash
+VITE_API_TARGET=http://127.0.0.1:8100
+```
+
+프론트와 백엔드를 **서로 다른 호스트**에 배포할 때만 `VITE_API_BASE` 로
+절대주소를 준다. 이 경우 브라우저가 직접 부르므로 백엔드 `CORS_ORIGINS`
+에 프론트 출처를 넣어야 한다.
 
 ---
 

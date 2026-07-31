@@ -23,6 +23,35 @@ const LAYER_KO: Record<string, string> = {
   funnel: '유입',
 }
 
+/**
+ * 속성값 한 칸. 값이 노드 ID 면 링크로 만든다.
+ * `parent_typology: TYP:x-onchain-layering` 처럼 다른 노드를 가리키는
+ * 속성이 맨 텍스트로 남으면 거기서 탐색이 끊긴다 — 관계 목록에서는
+ * 눌러 갈 수 있는 대상이 속성 칸에서만 막다른 길이 될 이유가 없다.
+ */
+const NODE_ID = /^[A-Z]{3,7}:[a-z0-9][a-z0-9-]*$/
+
+function SpecValue({ value }: { value: unknown }) {
+  if (Array.isArray(value)) {
+    return (
+      <>
+        {value.map((v, i) => (
+          <span key={i}>
+            {i > 0 && ', '}
+            <SpecValue value={v} />
+          </span>
+        ))}
+      </>
+    )
+  }
+  if (typeof value === 'string' && NODE_ID.test(value)) {
+    return <Link to={`/n/${encodeURIComponent(value)}`} className="spec-ref">{value}</Link>
+  }
+  if (typeof value === 'boolean') return <>{value ? '예' : '아니오'}</>
+  if (value && typeof value === 'object') return <>{JSON.stringify(value)}</>
+  return <>{String(value)}</>
+}
+
 /** URL 쿼리로 as_of 를 유지 — 링크를 공유하면 시점도 함께 간다. */
 function useAsOf(): [string | null, (v: string | null) => void] {
   const [sp, setSp] = useSearchParams()
@@ -473,7 +502,7 @@ export function NodePage() {
                 {props.map(([k, v]) => (
                   <div key={k}>
                     <dt>{k}</dt>
-                    <dd>{String(v)}</dd>
+                    <dd><SpecValue value={v} /></dd>
                   </div>
                 ))}
               </dl>

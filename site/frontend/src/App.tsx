@@ -4,7 +4,7 @@ import {
   NodePage, NotFound, OntologyPage, SearchPage, SourcesPage,
 } from './pages'
 import { Mark } from './Brand'
-import { ThemeToggle } from './components'
+import { BackendNotice, ThemeToggle } from './components'
 import './App.css'
 
 /**
@@ -53,6 +53,8 @@ export default function App() {
             <ThemeToggle />
           </div>
         </header>
+
+        <BackendNotice />
 
         <main className="page">
           <Routes>

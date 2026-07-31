@@ -779,18 +779,29 @@ table.data .period {
 /* 제원표 */
 .spec { margin: 0; border-top: 1px solid var(--rule); }
 .spec > div {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr); column-gap: var(--s-3);
+  /* 열쇠말 열은 최소 104px 이되 긴 이름에 맞춰 늘어난다. 고정폭이면
+     PARENT_TYPOLOGY 같은 이름이 낱자 단위로 잘려 읽히지 않는다. */
+  display: grid; grid-template-columns: minmax(104px, max-content) minmax(0, 1fr);
+  column-gap: var(--s-3);
   padding: var(--s-2) 0; border-bottom: 1px solid var(--rule);
 }
 .spec dt {
   font-family: var(--mono); font-size: var(--fs-00);
   letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--ink-3);
-  line-height: var(--lh-dense); padding-top: 2px; overflow-wrap: anywhere;
+  line-height: var(--lh-dense); padding-top: 2px;
+  /* 낱자 단위로 끊지 않는다 — 밑줄에서만 접는다. */
+  overflow-wrap: break-word; hyphens: none;
 }
 .spec dd {
   margin: 0; font-size: var(--fs-1); line-height: var(--lh-dense);
   overflow-wrap: anywhere;
 }
+.spec-ref {
+  font-family: var(--mono); font-size: var(--fs-00); color: var(--ink-1);
+  text-decoration: underline; text-decoration-color: var(--rule);
+  text-underline-offset: 2px;
+}
+.spec-ref:hover { text-decoration-color: currentColor; }
 
 /* 관계 목록 */
 .rels { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
@@ -917,6 +928,25 @@ table.data .period {
   padding: var(--s-8) 0; color: var(--ink-4); font-size: var(--fs-2);
   border-top: 1px solid var(--rule);
 }
+
+/* 백엔드 부재 — 원인이 하나이므로 화면에도 하나만 둔다.
+   조치 방법까지 여기 적고, 아래 본문은 조용히 비운다. */
+.offline {
+  display: flex; gap: var(--s-3); align-items: flex-start;
+  width: 100%; max-width: var(--page-w); margin: 0 auto;
+  padding: var(--s-4) var(--pad-x);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-2); font-size: var(--fs-1); line-height: var(--lh-body);
+}
+.offline > svg { flex: none; margin-top: 2px; color: var(--crit); }
+.offline b { color: var(--ink-1); font-weight: 600; }
+.offline code {
+  display: block; margin-top: var(--s-2);
+  font-family: var(--mono); font-size: var(--fs-00);
+  color: var(--ink-2); overflow-x: auto; white-space: pre;
+}
+.offline span { display: block; margin-top: var(--s-2); color: var(--ink-4); font-size: var(--fs-00); }
+.offline span code { display: inline; margin: 0; white-space: normal; }
 
 /* 면책 — 각주로 둔다. 눈에 띄되 화면을 차지하지 않는다. */
 .legal {

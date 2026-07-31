@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { ApiUnreachable, api } from './api'
 import type { Confidence, Evidence, NodeBrief } from './api'
 import { IconAuto, IconMoon, IconSun, IconTime, IconWarn } from './Icons'
 
@@ -216,12 +217,53 @@ export function Loading({ rows = 3 }: { rows?: number }) {
   )
 }
 
+/**
+ * 백엔드가 없으면 화면마다 조회가 여러 건이라 오류가 그 수만큼 쌓인다.
+ * 원인은 하나인데 화면은 오류로 도배된다. 그래서 연결 실패는 여기서
+ * 한 줄로 죽이고, 실제 안내는 위쪽 배너(BackendNotice) 하나가 맡는다.
+ */
 export function ErrorBox({ error }: { error: unknown }) {
+  if (error instanceof ApiUnreachable) return <p className="empty">서버 응답 없음</p>
   const msg = error instanceof Error ? error.message : String(error)
   return (
     <p className="err">
       불러오지 못했습니다 — {msg}
     </p>
+  )
+}
+
+/**
+ * 백엔드 연결 상태 배너. 닿으면 아무것도 그리지 않는다.
+ * 끊겼을 때만, 무엇을 하면 되는지까지 적어 한 번 보여준다.
+ */
+export function BackendNotice() {
+  const [down, setDown] = useState(false)
+
+  useEffect(() => {
+    let alive = true
+    const ping = () =>
+      api.health().then(
+        () => alive && setDown(false),
+        (e) => alive && setDown(e instanceof ApiUnreachable),
+      )
+    ping()
+    const t = setInterval(ping, 5000)
+    return () => {
+      alive = false
+      clearInterval(t)
+    }
+  }, [])
+
+  if (!down) return null
+  return (
+    <div className="offline" role="status">
+      <IconWarn size={15} />
+      <div>
+        <b>백엔드에 연결하지 못했습니다.</b> 지식베이스를 읽어 오는 서버가 떠 있지 않습니다.
+        <code>cd site/backend &amp;&amp; uvicorn app.main:app --reload --port 8000</code>
+        <span>다른 포트에 띄웠다면 <code>site/frontend/.env.local</code> 에 <code>VITE_API_TARGET</code> 을 넣고 Vite 를 다시 시작합니다.</span>
+      </div>
+    </div>
   )
 }
 
