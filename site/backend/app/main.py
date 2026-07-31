@@ -27,19 +27,14 @@ app = FastAPI(
     docs_url="/docs",
 )
 
-# 개발 기본값 — vite dev(5173) · vite preview(4173) 를 localhost/127.0.0.1 양쪽으로.
-# 호스트 표기가 다르면 CORS 는 다른 오리진으로 취급한다.
-_DEV_ORIGINS = [
-    f"http://{host}:{port}"
-    for host in ("localhost", "127.0.0.1")
-    for port in (5173, 4173, 3000)
-]
+# CORS_ORIGINS 를 주면 그 목록만 허용한다(운영). 없으면 로컬 임의 포트를 허용한다(개발).
+# vite 는 포트가 점유되면 5174·5175… 로 자동 이동하므로 고정 목록은 계속 어긋난다.
+_origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        o.strip() for o in os.environ.get("CORS_ORIGINS", ",".join(_DEV_ORIGINS)).split(",") if o.strip()
-    ],
+    allow_origins=_origins,
+    allow_origin_regex=None if _origins else r"^http://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_methods=["GET"],
     allow_headers=["*"],
 )
@@ -109,6 +104,45 @@ def list_nodes(
 ):
     return q.search(G, q=q_, node_type=type, jurisdiction=jurisdiction, tag=tag,
                     limit=limit, offset=offset)
+
+
+@app.get("/api/graph", tags=["query"], summary="전체 그래프 (시각화용)")
+def get_graph(
+    layer: str | None = Query(None, description="semantic·dynamic·kinetic·funnel"),
+    min_degree: int = Query(0, ge=0, description="이 연결 수 미만 노드는 제외"),
+    limit: int = Query(400, ge=10, le=2000),
+):
+    """노드·링크 배열. 연결 수가 많은 노드를 우선 반환한다."""
+    deg: dict[str, int] = {}
+    raw_links = []
+    for n in G.nodes.values():
+        for e in n.out:
+            if e.target not in G.nodes:
+                continue
+            deg[e.source] = deg.get(e.source, 0) + 1
+            deg[e.target] = deg.get(e.target, 0) + 1
+            raw_links.append((e.source, e.target, e.predicate))
+
+    cand = [
+        n for n in G.nodes.values()
+        if (not layer or n.layer == layer) and deg.get(n.id, 0) >= min_degree
+    ]
+    cand.sort(key=lambda n: (-deg.get(n.id, 0), n.id))
+    keep = {n.id for n in cand[:limit]}
+
+    return {
+        "nodes": [
+            {"id": n.id, "type": n.type, "layer": n.layer, "title": n.title,
+             "degree": deg.get(n.id, 0)}
+            for n in cand[:limit]
+        ],
+        "links": [
+            {"source": s, "target": t, "predicate": p}
+            for s, t, p in raw_links if s in keep and t in keep
+        ],
+        "truncated": len(cand) > limit,
+        "total_nodes": len(cand),
+    }
 
 
 @app.get("/api/nodes/{node_id:path}/neighbors", tags=["nodes"], summary="이웃 그래프")

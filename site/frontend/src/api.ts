@@ -145,6 +145,24 @@ export const api = {
     s.set('limit', String(p.limit ?? 100))
     return get<{ total: number; items: NodeBrief[] }>(`/api/nodes?${s}`)
   },
+  graph: (p: { layer?: string; min_degree?: number; limit?: number } = {}) => {
+    const s = new URLSearchParams()
+    if (p.layer) s.set('layer', p.layer)
+    s.set('min_degree', String(p.min_degree ?? 0))
+    s.set('limit', String(p.limit ?? 400))
+    return get<{
+      nodes: { id: string; type: string; layer: string; title: string; degree: number }[]
+      links: { source: string; target: string; predicate: string }[]
+      truncated: boolean
+      total_nodes: number
+    }>(`/api/graph?${s}`)
+  },
+  neighbors: (id: string, depth = 1) =>
+    get<{
+      root: string
+      nodes: { id: string; type: string; layer: string; title: string }[]
+      links: { source: string; target: string; predicate: string }[]
+    }>(`/api/nodes/${encodeURIComponent(id)}/neighbors?depth=${depth}`),
   facts: (p: { subject?: string; confidence?: string; limit?: number }) => {
     const s = new URLSearchParams()
     if (p.subject) s.set('subject', p.subject)

@@ -8,10 +8,11 @@ from .graph import Graph, Node, parse_date
 # 위임·이행 계보를 거슬러 올라갈 때 따라가는 술어
 LINEAGE_UP = ("DELEGATES_TO", "IMPLEMENTS", "PART_OF", "IMPOSES")
 
+# 표시는 프론트가 한다 — 여기서는 이름만 준다.
 NS_LABEL = {
-    "kr": "🇰🇷 한국", "us": "🇺🇸 미국", "eu": "🇪🇺 EU", "gb": "🇬🇧 영국",
-    "jp": "🇯🇵 일본", "sg": "🇸🇬 싱가포르", "hk": "🇭🇰 홍콩", "ae": "🇦🇪 UAE",
-    "au": "🇦🇺 호주", "intl": "🌐 국제기준", "x": "— 무국적",
+    "kr": "한국", "us": "미국", "eu": "EU", "gb": "영국",
+    "jp": "일본", "sg": "싱가포르", "hk": "홍콩", "ae": "UAE",
+    "au": "호주", "intl": "국제기준", "x": "무국적",
 }
 
 
