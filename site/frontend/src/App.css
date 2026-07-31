@@ -1120,8 +1120,19 @@ h3.rec-title { margin-bottom: var(--s-2); }
   padding: var(--s-2) 0; border: 0; background: none; text-align: left;
   font-family: inherit; font-size: var(--fs-1); color: var(--ink-2); cursor: pointer;
 }
-.facets button:hover { color: var(--ink); }
+.facets button:hover:not(:disabled) { color: var(--ink); }
 .facets button[aria-pressed='true'] { color: var(--ink); font-weight: 600; }
+/* 현재 검색어로 0 건인 클래스 — 남겨 두되 누를 수는 없다.
+   목록에서 지우면 무엇이 빠졌는지 알 수 없고, 누를 수 있으면 빈 화면으로 간다. */
+.facets button:disabled { color: var(--ink-5, var(--ink-4)); cursor: default; opacity: 0.55; }
+
+/* 결과 없음 — 어느 조건이 죽였는지 말하고 빠져나갈 길을 준다 */
+.noresult { padding: var(--s-8) 0; max-width: var(--measure); }
+.noresult p { margin: 0 0 var(--s-2); font-size: var(--fs-2); color: var(--ink-2); line-height: var(--lh-body); }
+.noresult p.dim { color: var(--ink-4); font-size: var(--fs-1); }
+.noresult b { font-weight: 600; color: var(--ink-1); }
+.noresult code { font-family: var(--mono); font-size: var(--fs-00); color: var(--ink-2); }
+.noresult button { margin-top: var(--s-2); }
 .facets code { font-family: var(--mono); font-size: var(--fs-00); font-weight: 600; min-width: 52px; }
 .facets .fname { color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .facets .n {

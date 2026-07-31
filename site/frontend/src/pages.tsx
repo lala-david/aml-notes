@@ -604,7 +604,20 @@ export function SearchPage() {
     setSp(next, { replace: true })
   }
 
-  const types = Object.entries(stats.data?.by_type ?? {}).sort((a, b) => b[1] - a[1])
+  /**
+   * 패싯 숫자는 **현재 검색어 기준**이어야 한다. 전체 개수를 그대로 쓰면
+   * 「TEC 62」 를 눌러 0 건이 나온다 — 화면이 62 건을 약속하고 0 건을 준다.
+   * 검색 중에는 서버가 준 집계를 쓰고, 검색어가 없을 때만 전체 분포를 쓴다.
+   * 검색어에 걸리지 않은 클래스도 0 으로 남겨 둔다. 목록에서 사라지면
+   * 무엇이 빠졌는지 알 수 없다.
+   */
+  const base = stats.data?.by_type ?? {}
+  // 클래스 목록은 전체 분포에서 얻고(0 건도 남겨 둔다), 숫자는 조회 결과에서 얻는다.
+  const counts: Record<string, number> = data
+    ? Object.fromEntries(Object.keys(base).map((k) => [k, data.facets[k] ?? 0]))
+    : base
+  const types = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  const totalShown = data ? data.matched : stats.data?.nodes
 
   return (
     <>
@@ -616,6 +629,9 @@ export function SearchPage() {
       <div className="field">
         <IconSearch size={17} />
         <input
+          /* key 로 q 를 물린다. 비제어 입력이라 이게 없으면 「초기화」 를 눌러
+             주소는 비워졌는데 입력칸에는 옛 검색어가 남는다. */
+          key={q}
           placeholder="예: 트래블룰, 특금법, FATF, SRC:"
           defaultValue={q}
           onKeyDown={(e) => e.key === 'Enter' && setParam('q', (e.target as HTMLInputElement).value)}
@@ -632,13 +648,52 @@ export function SearchPage() {
         <div>
           {loading && <Loading rows={5} />}
           {error ? <ErrorBox error={error} /> : null}
-          {data && !data.items.length && <Empty>조건에 맞는 노드가 없습니다.</Empty>}
+          {data && !data.items.length && (
+            <div className="noresult">
+              {/* 어느 조건이 결과를 죽였는지 말하고, 그 조건만 떼는 길을 준다.
+                  「없습니다」 만 남으면 다음에 뭘 할지 알 수 없다. */}
+              {type && data.matched > 0 ? (
+                <>
+                  <p>
+                    {q && <>“{q}” 에 <b>{data.matched}건</b>이 있지만, </>}
+                    그 중 <code>{type}</code> 클래스는 없습니다.
+                  </p>
+                  <button className="btn btn-quiet" onClick={() => setParam('type', '')}>
+                    클래스 조건 없이 {data.matched}건 보기
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p>
+                    {q ? <>“{q}” 로 찾은 노드가 없습니다.</> : <>조건에 맞는 노드가 없습니다.</>}
+                  </p>
+                  <p className="dim">
+                    제목·요약·별칭·ID 를 글자 그대로 훑습니다. 짧게 줄이거나
+                    <code>SRC:</code> 처럼 클래스 앞자리로 찾아 보세요.
+                  </p>
+                  {(q || type) && (
+                    <button
+                      className="btn btn-quiet"
+                      onClick={() => setSp(new URLSearchParams(), { replace: true })}
+                    >
+                      조건 모두 지우기
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          )}
           {data && data.items.length > 0 && (
             <>
               <p className="resultbar">
                 <Count n={data.total} />
                 {type && <span className="dim"> · 클래스 {type}</span>}
                 {q && <span className="dim"> · “{q}”</span>}
+                {/* 245 건이라 적고 200 행만 그리면 나머지가 없는 것처럼 보인다.
+                    잘렸으면 잘렸다고 말한다. */}
+                {data.items.length < data.total && (
+                  <span className="dim"> · 아래 {data.items.length}건만 표시</span>
+                )}
               </p>
               <ul className="ledger">
                 {data.items.map((n: NodeBrief) => (
@@ -659,12 +714,17 @@ export function SearchPage() {
               <li>
                 <button aria-pressed={!type} onClick={() => setParam('type', '')}>
                   전체
-                  <span className="n">{stats.data?.nodes ?? ''}</span>
+                  <span className="n">{totalShown ?? ''}</span>
                 </button>
               </li>
               {types.map(([code, n]) => (
                 <li key={code}>
-                  <button aria-pressed={type === code} onClick={() => setParam('type', code)}>
+                  <button
+                    aria-pressed={type === code}
+                    /* 0 건인 클래스는 누를 수 없다. 눌러 봐야 빈 화면뿐이다. */
+                    disabled={n === 0 && type !== code}
+                    onClick={() => setParam('type', code)}
+                  >
                     <code>{code}</code>
                     <span className="fname">{ont.data?.classes[code]?.label?.ko ?? ''}</span>
                     <span className="n">{n}</span>

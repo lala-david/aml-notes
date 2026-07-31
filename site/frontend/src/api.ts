@@ -169,7 +169,14 @@ export const api = {
     if (p.type) s.set('type', p.type)
     if (p.jurisdiction) s.set('jurisdiction', p.jurisdiction)
     s.set('limit', String(p.limit ?? 100))
-    return get<{ total: number; items: NodeBrief[] }>(`/api/nodes?${s}`)
+    return get<{
+      total: number
+      items: NodeBrief[]
+      /** 클래스 필터 적용 전 결과 수 — 「검색어는 맞는데 이 클래스에 없다」를 구분한다. */
+      matched: number
+      /** 현재 검색어 기준 클래스별 개수. 전체 개수가 아니다. */
+      facets: Record<string, number>
+    }>(`/api/nodes?${s}`)
   },
   graph: (p: { layer?: string; min_degree?: number; limit?: number } = {}) => {
     const s = new URLSearchParams()

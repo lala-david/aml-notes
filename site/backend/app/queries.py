@@ -197,11 +197,12 @@ def search(
     limit: int = 100,
     offset: int = 0,
 ) -> dict:
-    items: list[Node] = []
+    # 클래스를 뺀 나머지 조건까지만 적용한 모집단.
+    # 패싯 집계는 여기서 낸다 — 클래스 개수가 검색어를 무시하면
+    # 「62건」이라고 적힌 것을 눌러 0건이 나온다.
+    pool: list[Node] = []
     needle = (q or "").lower().strip()
     for n in g.nodes.values():
-        if node_type and n.type != node_type:
-            continue
         if tag and tag not in (n.raw.get("tags") or []):
             continue
         if jurisdiction and g.jurisdiction_of(n) != jurisdiction:
@@ -215,8 +216,13 @@ def search(
             ]).lower()
             if needle not in hay:
                 continue
-        items.append(n)
+        pool.append(n)
 
+    facets: dict[str, int] = {}
+    for n in pool:
+        facets[n.type] = facets.get(n.type, 0) + 1
+
+    items = [n for n in pool if not node_type or n.type == node_type]
     items.sort(key=lambda n: (n.type, n.id))
     total = len(items)
     page = items[offset: offset + limit]
@@ -225,6 +231,10 @@ def search(
         "offset": offset,
         "limit": limit,
         "items": [_list_item(g, n) for n in page],
+        # 클래스 필터를 적용하기 전의 결과 수. 「검색어로는 15건인데
+        # 이 클래스에는 0건」을 화면이 구분해서 말할 수 있게 한다.
+        "matched": len(pool),
+        "facets": dict(sorted(facets.items(), key=lambda kv: (-kv[1], kv[0]))),
     }
 
 
