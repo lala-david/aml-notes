@@ -1,0 +1,11 @@
+flowchart TB
+    UI["Customer-facing UI and API"]
+    ENG["Internal Risk Engine<br/>KYC + KYT + Sanctions + Travel Rule + RBA scoring"]
+    KYT["Chainalysis KYT"]
+    TR["Travel Rule Provider<br/>VerifyVASP / CODE / Notabene"]
+    KYC["KYC Providers<br/>ARGOS / PASS / NICE"]
+
+    UI --> ENG
+    ENG --> KYT
+    ENG --> TR
+    ENG --> KYC

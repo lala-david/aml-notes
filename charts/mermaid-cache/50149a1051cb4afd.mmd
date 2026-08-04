@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant A as ⛓️ Chain A (ETH)
+    participant B as 🌉 Bridge
+    participant C as ⛓️ Chain B (Tron)
+    A->>B: deposit (lock)
+    B->>C: mint wrapped
+    Note over A,C: 추적 단절 위험
+    A-->>C: time·amount 매칭<br/>(Chainalysis Crosschain · TRM Multichain)
