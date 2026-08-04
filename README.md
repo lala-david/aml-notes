@@ -3,10 +3,10 @@
 > **질의 가능한 규제 지식 그래프 + 매일 갱신되는 수집 파이프라인.**
 > 산문 교재가 아니라, 산문 아래에 시점 질의가 되는 그래프를 깐 지식 저장소.
 
-![as of](https://img.shields.io/badge/as%20of-2026--07--30-blue)
+![as of](https://img.shields.io/badge/as%20of-2026--08--04-blue)
 ![License CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
 ![ontology](https://img.shields.io/badge/ontology-38%20classes%20%C2%B7%2059%20predicates-4f46e5)
-![nodes](https://img.shields.io/badge/KB%20nodes-109-059669)
+![nodes](https://img.shields.io/badge/KB%20nodes-276-059669)
 ![feeds](https://img.shields.io/badge/sources-33%20live%20%2F%2050-ea580c)
 ![docs](https://img.shields.io/badge/design%20docs-21-orange)
 ![status](https://img.shields.io/badge/KB-under%20construction-yellow)
@@ -259,8 +259,11 @@ python print/generator.py all
 | **한국 R.15 등급 상충** | 국가페이지 C vs 부속표 N/A 는 상충이 아니라 **적용기준 차이**. 한국은 개정 R.15 로 평가받은 적이 없다 |
 | **식별자 규격 버그** | 문서에 예시로 적은 `JUR:kr` 이 자기 정규식을 위반. validator 가 잡았다 |
 | **폐기된 소스 사용 중** | 영국 OFSI Consolidated List 는 2026-01-28 철회 — 갱신 안 되는 파일을 계속 받고 있었다 |
+| **임계값 오귀속 3번째** | 일본 10만엔은 트래블룰이 **아니라** 시행령 제7조의 고객확인(CDD) 기준. 법률·정령·성령 3층위를 다 확인해야 드러났다 (`CTR:00006`) |
+| **인용 수치가 원논문에 없었다** | "CIOH 정확도 0.75 → 0.95 (Möser 2017, Bellei 2024)" — 두 논문 PDF 를 받아 대조하니 **어느 수치도 없고** 한 편은 클러스터링 논문조차 아니었다 (`CTR:00007`) |
+| **"사이트 장애" 오진** | 싱가포르 MAS 를 두 차례 「접근 불가」로 기록했으나 실제로는 Referer 검사였다. 이 오진으로 한 관할이 두 라운드 미등재로 남았다 (`FACT:0000029`) |
 
-상충 5건은 전부 판정 완료했습니다 (`a_correct` 3 · `both_valid_different_scope` 2).
+상충 7건은 전부 판정 완료했습니다 (`a_correct` 5 · `both_valid_different_scope` 2).
 어느 쪽도 삭제하지 않고 [`kb/facts/contradictions.jsonl`](kb/facts/contradictions.jsonl) 에 판정과 근거를 남겼습니다.
 
 ---
@@ -269,22 +272,27 @@ python print/generator.py all
 
 | 항목 | 수 |
 |---|---:|
-| **KB 노드** | **109** *(목표 1,200)* |
-| ├ semantic (명사) | 98 |
-| ├ kinetic (동사) | 10 |
-| └ dynamic (시간) | 1 |
-| 원자적 사실 · 구간 상태 | 19 · 3 |
-| 상충 레지스트리 | 5 *(전부 판정 완료)* |
+| **KB 노드** | **276** *(목표 1,200)* |
+| ├ 엔티티 (semantic 203 · kinetic 10 · dynamic 1) | 214 |
+| └ 출처(SRC) · 문서(DOC) | 42 · 20 |
+| 규범 · 조문 (REG · PROV) | 16 · 16 |
+| 원자적 사실 · 구간 상태 | 34 · 3 |
+| 상충 레지스트리 | 7 *(전부 판정 완료)* |
 | 액션 로그 | 11 |
 | 온톨로지 클래스 / 술어 / 불변식 | 38 / 59 / 22 |
 | 설계 문서 · ADR | 21 · 4 |
 | 수집 소스 (가동 / 전체) | 33 / 50 *(실측 88 후보)* |
-| 산문 | 123 파일 · 27,446 줄 |
+| 산문 | 137 파일 · 30,297 줄 |
 
 > ⚠️ **KB 는 구축 초기입니다.** 온톨로지·파이프라인·검증 체계는 완성되었고
 > 노드 대량 등재가 다음 단계입니다.
-> `techniques/`(62기법) · `indicators/` · `protocols/` · `vasps/` · `threat-actors/` 는
-> 리서치 자료는 확보했으나 아직 비어 있습니다.
+> `techniques/`(62) · `indicators/`(63) · `typologies/`(8) 은 등재를 시작했고,
+> `protocols/` · `vasps/` · `threat-actors/` · `chains/` · `assets/` · `risks/` ·
+> `cases/` · `incidents/` · `enforcement/` 는 아직 비어 있습니다.
+>
+> 트래블룰 의무는 **8개 관할**(국제기준·EU·영국·일본·한국·미국·홍콩·싱가포르·호주)의
+> 근거 조문을 원문으로 확인해 등재했습니다 —
+> `python scripts/build_crosswalk.py` 로 비교표가 생성됩니다.
 >
 > 알려진 부채와 진행 상황 → [`kb/README.md`](kb/README.md) · [`docs/PLAN.md`](docs/PLAN.md)
 
