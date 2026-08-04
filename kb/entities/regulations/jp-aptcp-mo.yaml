@@ -1,0 +1,46 @@
+id: "REG:jp-aptcp-mo"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "범죄에 의한 수익의 이전방지에 관한 법률 시행규칙"
+  en: "Ordinance for Enforcement of the Act on Prevention of Transfer of Criminal Proceeds"
+  short: "범수법 시행규칙"
+aliases: ["犯罪による収益の移転防止に関する法律施行規則", "犯収法施行規則", "범수법 시행규칙"]
+plain: >
+  범수법이 "자세한 항목은 부처가 정하라"고 넘긴 부분을 채운 성령입니다. 코인을 보낼 때 상대 거래소에 정확히
+  무엇을 알려야 하는지가 제31조의7에 적혀 있습니다.
+summary: >
+  범수법의 주무성령. 복수 부처 공동령이다. 제31조의7이 법 제10조의5를
+  이행하여 암호자산 이전 시 통지할 사항(의뢰고객·수취고객의 본인특정사항과
+  이전 식별부호)을 정한다. 이 조문에도 금액 기준이 없다.
+reg_kind: "ordinance"
+citation: "平成20年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第1号"
+binding: "binding"
+language: "ja"
+tags: ["jp", "aml", "travel-rule", "subordinate-legislation"]
+external_ids:
+  egov_law_id: "420M60000F5A001"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:jp"
+    evidence:
+      - doc: "DOC:jp-egov-aptcp-mo"
+        confidence: "A"
+        locator: "법령 제목·법령ID"
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:jp-egov-aptcp-mo"
+    confidence: "A"
+    locator: "e-Gov lawId=420M60000F5A001"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  일본 범수법 체계는 법률 → 정령(시행령) → 성령(시행규칙) 세 층위다.
+  트래블룰을 정확히 서술하려면 세 층위를 모두 봐야 한다는 것이
+  이번 수집의 교훈이다. 법률만 보면 「금액 기준 없음」이 확정되지 않고,
+  정령만 보면 십만엔을 트래블룰 기준으로 오인한다.
+
+  이 성령은 복수 부처 공동령이라 REG:jp-aptcp 와 같은 이유로
+  ISSUED_BY 를 비워 둔다.

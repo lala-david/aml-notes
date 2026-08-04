@@ -1,0 +1,56 @@
+id: "PROV:jp-aptcp-mo-art31-7"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "범수법 시행규칙 제31조의7 (암호자산 이전 통지사항)"
+  en: "APTCP Enforcement Ordinance Art. 31-7 — items to be notified on crypto-asset transfer"
+  short: "범수법 시행규칙 제31조의7"
+plain: >
+  코인을 다른 거래소로 보낼 때 상대에게 정확히 무엇을 알려야 하는지 항목을 정한 조문입니다. 보내는 사람은
+  이름·주소, 받는 사람은 이름과 식별부호입니다. 금액 조건은 없습니다.
+summary: >
+  법 제10조의5가 주무성령에 위임한 통지사항을 정하는 조항.
+  의뢰고객이 자연인·인격 없는 사단등이면 성명, 주소 또는 식별번호 또는
+  고객번호, 이전에 관한 식별부호. 법인이면 명칭, 주된 사무소 소재지 또는
+  고객번호, 이전에 관한 식별부호. 수취고객은 성명·명칭과 식별부호.
+  **이 조문에도 금액 기준이 없다.**
+parent_reg: "REG:jp-aptcp-mo"
+citation_path: "第三十一条の七"
+heading: "暗号資産の移転に係る通知事項"
+language: "ja"
+tags: ["jp", "travel-rule", "crypto-asset", "no-threshold"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:jp-aptcp-mo"
+    evidence:
+      - doc: "DOC:jp-egov-aptcp-mo"
+        confidence: "A"
+        locator: "第三十一条の七"
+        retrieved: "2026-08-04"
+  # 위임 관계는 상위 규범 쪽에 건다 — PROV:jp-aptcp-art10-5 의 DELEGATES_TO 참조.
+  # 여기서 역방향 엣지를 만들면 같은 관계가 두 번 기록된다.
+evidence:
+  - doc: "DOC:jp-egov-aptcp-mo"
+    confidence: "A"
+    locator: "第三十一条の七"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  e-Gov 조문 단위 엔드포인트로 확인했다(枝番 URL 인코딩 article=31%E3%81%AE7).
+
+  【이 노드가 닫은 질문】 PROV:jp-aptcp-art10-5 가 「주무성령이 금액 한도를
+  두는지 미확인」을 최우선 과제로 남겼다. 이 조문이 그 주무성령이고,
+  금액 기준이 없다. 따라서 법률·정령·성령 세 층위 전부에서
+  통지의무에 금액 조건이 붙지 않음이 확정됐다.
+
+  【text_orig 미기재】 조문 내용은 확인했으나 일본어 축조 문언을 그대로
+  옮길 만큼 확보하지 못했다. 요약만 있는 상태에서 text_orig 를 채우면
+  원문인 척하는 서술이 된다 — PROV:au-amlctf-s66a 와 같은 판단이다.
+  원문 문언 확보를 과제로 남긴다.
+
+  【술어 정정 이력】 처음에 IMPLEMENTS 로 걸었다가 검증기에 차단됐다
+  (ONT-3, 치역 위반: IMPLEMENTS 는 REG→REG 로 국제기준 이행 관계다).
+  국내 법령 위계의 수직 위임은 DELEGATES_TO 이며, 상위 규범 쪽인
+  PROV:jp-aptcp-art10-5 에 걸었다. 검증기가 설계대로 작동했다.
