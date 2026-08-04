@@ -1,0 +1,111 @@
+id: "PROV:sg-psn02-para13"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "PSN02 제13절 (가치이전 동반정보)"
+  en: "PSN02 paragraph 13 — Value Transfers"
+  short: "PSN02 §13"
+plain: >
+  싱가포르에서 가상자산을 보낼 때 무엇을 함께 넘겨야 하는지 정한 조항입니다. 금액이 얼마든 양쪽 이름과
+  계좌번호는 넘겨야 하고, 1,500싱가포르달러를 넘으면 송신인 신원확인과 주소·신분증번호가 더해집니다.
+summary: >
+  싱가포르 가상자산 트래블룰의 근거 조항. 주문기관은 이전에 수반되는 메시지에
+  송신인·수신인 정보를 포함시켜야 한다. **의무 자체에 금액 조건이 없다.**
+  S$1,500 이하이면 4항목(양측 성명·계좌번호 또는 고유거래참조번호),
+  초과이면 송신인 **신원확인·검증** 의무가 더해지고 주소·고유식별번호 또는
+  생년월일·설립지 중 하나가 추가된다.
+parent_reg: "REG:sg-psn02"
+citation_path: "paragraph 13"
+heading: "Value Transfers"
+language: "en"
+text_orig: >
+  13.4 Subject to paragraph 13.5, in a value transfer where the amount to be
+  transferred or arranged to be transferred is below or equal to S$1,500,
+  every payment service provider which is an ordering institution shall
+  include in the message or payment instruction that accompanies or relates to
+  the value transfer the following: (a) the name of the value transfer
+  originator; (b) the value transfer originator's account number (or unique
+  transaction reference number where no account number exists); (c) the name of
+  the value transfer beneficiary; and (d) the value transfer beneficiary's
+  account number (or unique transaction reference number where no account
+  number exists).
+  13.6 Subject to paragraph 13.8, in a value transfer where the amount to be
+  transferred or arranged to be transferred exceeds S$1,500, every payment
+  service provider which is an ordering institution shall identify the value
+  transfer originator and verify the value transfer originator's identity, and
+  include in the message or payment instruction that accompanies or relates to
+  the value transfer the information required by paragraphs 13.4(a) to 13.4(d)
+  and any of the following: (a) the value transfer originator's (i) residential
+  address, or (ii) registered or business address, and if different, principal
+  place of business, as may be appropriate; (b) the value transfer originator's
+  unique identification number (such as an identity card number, birth
+  certificate number or passport number, or where the value transfer originator
+  is not a natural person, the incorporation number or business registration
+  number); or (c) the date and place of birth, incorporation or registration of
+  the value transfer originator (as may be appropriate).
+tags: ["sg", "travel-rule", "dpt", "no-threshold-on-base-duty"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:sg-psn02"
+    evidence:
+      - doc: "DOC:sg-mas-psn02"
+        confidence: "A"
+        locator: "¶13"
+        retrieved: "2026-08-04"
+  # threshold 한정자를 두지 않는다 — S$1,500 은 의무를 발동시키지 않고
+  # 요구 항목과 신원확인 의무 유무를 나눈다. 이하 구간에도 4항목 의무가 있다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      scope_note: >
+        금액 기준 없음 — S$1,500 이하에도 4항목 의무 존속.
+        초과 시 송신인 신원확인·검증 의무가 추가되고 주소·고유식별번호
+        또는 생년월일·설립지 중 하나가 더해진다.
+        싱가포르 국내 중개기관 앞으로는 고유거래참조번호와 수신인 정보만
+        보내고 나머지는 요청 시 3영업일 내 제공하는 완화가 있다(¶13.5).
+    valid_from: null
+    valid_to: null
+    recorded_at: "2026-08-04"
+    evidence:
+      - doc: "DOC:sg-mas-psn02"
+        confidence: "A"
+        locator: "¶13.4"
+        quote: >
+          in a value transfer where the amount to be transferred or arranged to
+          be transferred is below or equal to S$1,500, every payment service
+          provider which is an ordering institution shall include in the
+          message or payment instruction that accompanies or relates to the
+          value transfer the following …
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:sg-mas-psn02"
+    confidence: "A"
+    locator: "¶13.4 · ¶13.5 · ¶13.6"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  MAS 고시 원문(2025-06-30 최종개정본)을 받아 제13절을 축조 확인했다.
+
+  【경계값 — 관할마다 다르다】 PSN02 는 "below or equal to S$1,500" /
+  "exceeds S$1,500" 로 가른다. 따라서 **정확히 S$1,500 은 하위 구간**이다.
+  홍콩은 "not less than $8,000" 이라 정확히 HK$8,000 이 상위 구간이고,
+  일본 시행령은 "十万円を超える" 라 정확히 10만엔이 제외된다.
+  비교표에서 「이상/초과」를 뭉뚱그리면 세 관할의 경계가 각각 틀린다.
+
+  【이 관할만의 특징 — 신원확인 의무가 금액에 걸린다】 다른 B형 관할은
+  금액이 **정보 항목**만 나누는데, 싱가포르는 S$1,500 초과 시
+  "shall identify … and verify the value transfer originator's identity"
+  로 **CDD 성격의 의무**가 추가된다. 즉 정보 심화와 신원확인 강화가
+  같은 문턱에 걸려 있다. 「정보 심화 기준」 한 마디로 요약하면
+  이 부분이 지워지므로 scope_note 에 명시했다.
+
+  【¶13.5 완화 — 국내 중개기관 한정】 싱가포르 소재 중개기관 앞으로는
+  고유거래참조번호 + 수신인 정보만 보낼 수 있다. 단 추적 가능성 보장,
+  당국·법집행 요청 시 제공, 수익기관에는 전체 제공이 조건이다.
+  국경 간 이전에는 적용되지 않는다.
+
+  【미확인】 ¶13.8(¶13.6 의 예외)의 내용을 확인하지 않았다.
+  또한 이 고시가 DPT 서비스 전반을 다루므로 「가상자산 이전」과
+  「가치이전」의 범위가 완전히 일치하는지 제2절 정의를 확인해야 한다.

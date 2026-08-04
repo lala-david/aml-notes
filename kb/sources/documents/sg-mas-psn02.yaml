@@ -1,0 +1,65 @@
+id: "DOC:sg-mas-psn02"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "MAS 고시 PSN02 — 자금세탁방지·테러자금조달방지 (디지털지급토큰 서비스 사업자)"
+  en: "MAS Notice PSN02 — Prevention of Money Laundering and Countering the Financing of Terrorism (Holders of Payment Services Licence, Digital Payment Token Service)"
+  short: "MAS PSN02"
+summary: >
+  싱가포르 DPT 서비스 사업자의 AML/CFT 의무를 정하는 MAS 고시. 제13절이
+  가치이전(value transfer) 동반정보를 정하며, S$1,500 이하와 초과를
+  나누어 요구 항목을 달리한다. 이하 구간에도 의무는 존속한다.
+src: "SRC:sg-mas"
+url: "https://www.mas.gov.sg/-/media/amld-amendments---30-june-2025/mas-notice-psn02.pdf"
+accessed: "2026-08-04"
+published: "2024-04-02"
+doc_kind: "regulator-notice"
+language: "en"
+translation: false
+tags: ["sg", "aml", "travel-rule", "dpt"]
+external_ids:
+  notice_no: "PSN02"
+evidence:
+  - doc: "DOC:sg-mas-psn02"
+    confidence: "A"
+    locator: "¶13.4 · ¶13.6"
+    quote: >
+      13.4 … in a value transfer where the amount to be transferred or arranged
+      to be transferred is below or equal to S$1,500, every payment service
+      provider which is an ordering institution shall include in the message or
+      payment instruction that accompanies or relates to the value transfer the
+      following: (a) the name of the value transfer originator; (b) the value
+      transfer originator's account number …; (c) the name of the value
+      transfer beneficiary; and (d) the value transfer beneficiary's account
+      number …
+      13.6 … where the amount … exceeds S$1,500, every payment service provider
+      which is an ordering institution shall identify the value transfer
+      originator and verify the value transfer originator's identity, and
+      include … the information required by paragraphs 13.4(a) to 13.4(d) and
+      any of the following: (a) … address, (b) … unique identification number
+      …, or (c) the date and place of birth …
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  판본: 2024-04-02 발령, 2025-06-30 최종개정 (43쪽). 개정 이력은 미주에 있다.
+
+  【근거 법률이 통설과 다르다】 고시 제1.1절이 "This Notice is issued under
+  **section 16 of the Financial Services and Markets Act 2022**" 라고 명시한다.
+  이 저장소를 포함해 널리 「MAS PSA(Payment Services Act) 근거」로 서술되지만,
+  PSA 는 DPT 서비스 **라이선스**의 근거이고 이 AML 고시의 발령 근거는
+  FSMA 2022 다. 규범 계보를 그릴 때 구별해야 한다.
+
+  【접근 경로 — 중요】 이 파일은 Referer 헤더 없이 요청하면 MAS 의
+  「Maintenance」 안내 HTML(약 853KB)이 돌아온다. 고시 페이지를 Referer 로
+  넣으면 정상 PDF 가 온다.
+
+    curl -L -A "<브라우저 UA>" \
+      -H "Referer: https://www.mas.gov.sg/regulation/notices/psn02-aml-cft-notice---digital-payment-token-service" \
+      "https://www.mas.gov.sg/-/media/amld-amendments---30-june-2025/mas-notice-psn02.pdf"
+
+  즉 **MAS 사이트는 장애가 아니라 핫링크 차단**이다. 고시 목록 페이지 자체는
+  Referer 없이도 정상 응답한다(263KB). 이 저장소가 2026-07-30 과 08-04
+  두 차례에 걸쳐 「사이트 전면 장애」로 기록한 것은 오진이었다.
+  → FACT:0000029 로 정정. SRC:sg-mas 주석도 갱신.

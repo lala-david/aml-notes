@@ -1,0 +1,88 @@
+id: "PROV:hk-amlo-sch2-s13a"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "AMLO 부칙2 제13A조 (가상자산 이전 — 동반정보)"
+  en: "AMLO Schedule 2 section 13A — Information accompanying virtual asset transfers"
+  short: "AMLO 부칙2 §13A"
+plain: >
+  홍콩에서 가상자산을 다른 기관으로 보낼 때 송신인·수신인 정보를 함께 넘기라는 조문입니다. 금액이 얼마든
+  이름과 계좌번호는 넘겨야 하고, 8,000홍콩달러 이상이면 주소나 신분증번호가 추가로 붙습니다.
+summary: >
+  홍콩 가상자산 트래블룰의 근거 조항. 주문기관은 가상자산 이전 시
+  송신인·수신인 정보를 취득·기록하고 수익기관에 안전하게 즉시 제출해야 한다.
+  **의무 자체에 금액 조건이 없다.** HK$8,000 은 요구 항목을 나누는 기준으로,
+  미만이면 4항목(양측 성명·계좌번호), 이상이면 송신인의 주소·고객식별번호·
+  신분증번호 또는 생년월일·출생지가 추가된다.
+parent_reg: "REG:hk-amlo"
+citation_path: "Schedule 2, section 13A"
+heading: "Information accompanying virtual asset transfers"
+language: "en"
+tags: ["hk", "travel-rule", "virtual-asset", "no-threshold-on-base-duty"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:hk-amlo"
+    evidence:
+      - doc: "DOC:hk-sfc-amlguideline"
+        confidence: "A"
+        locator: "¶12.11.1"
+        quote: >
+          An FI should comply with section 13A of Schedule 2 … when acting as
+          an ordering institution, an intermediary institution or a beneficiary
+          institution … in a virtual asset transfer
+        retrieved: "2026-08-04"
+  # threshold 한정자를 두지 않는다 — HK$8,000 은 의무를 발동시키지 않고
+  # 요구 항목을 나눈다. 미만 거래에도 4항목 의무가 그대로 있다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      scope_note: >
+        금액 기준 없음 — HK$8,000 미만에도 의무 존속(성명·계좌번호 4항목).
+        HK$8,000 이상이면 송신인 주소·고객식별번호·신분증번호 또는
+        생년월일·출생지가 추가된다. 제출은 안전하게 즉시,
+        직접 또는 간접 경로 모두 허용.
+    valid_from: null
+    valid_to: null
+    recorded_at: "2026-08-04"
+    evidence:
+      - doc: "DOC:hk-sfc-amlguideline"
+        confidence: "A"
+        locator: "¶12.11.6 (여백 근거: s.13A(2)&(3), Sch.2)"
+        quote: >
+          Before carrying out a virtual asset transfer involving virtual assets
+          that amount to less than $8,000, an ordering institution must obtain
+          and record the following originator and recipient information:
+          (a) the originator's name; (b) the number of the originator's account
+          … (c) the recipient's name; and (d) the number of the recipient's
+          account …
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:hk-sfc-amlguideline"
+    confidence: "A"
+    locator: "¶12.11.4~12.11.10"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  【항별 대응 — SFC 지침 여백 표시 기준】
+    s.13A(1) & (8)  적용 범위 — 주문기관·중개기관·수익기관 정의 (¶12.11.4)
+    s.13A(2)        HK$8,000 이상 요구 항목 5종 (¶12.11.5)
+    s.13A(2) & (3)  HK$8,000 미만 요구 항목 4종 (¶12.11.6)
+    s.13A(4)        수익기관에 안전하게·즉시 제출 (¶12.11.9·12.11.10)
+
+  【HK$8,000 을 threshold 한정자에 넣지 않은 이유】
+  EU·영국과 같은 판단이다. 이 금액은 의무를 발동시키지 않는다 —
+  미만 거래에도 4항목 의무가 그대로 걸린다. 한정자에 넣으면
+  관할 비교표가 「홍콩 임계 HK$8,000」 이라는 틀린 표를 자동 생성한다.
+
+  【text_orig 미기재 — 의도적】 조례 축조 문언을 확보하지 못했다.
+  SFC 지침은 감독기관의 재서술이며 조문 자체가 아니다.
+  지침 문언을 text_orig 에 넣으면 원문인 척하는 서술이 된다 —
+  PROV:jp-aptcp-mo-art31-7 과 같은 판단.
+  elegislation.gov.hk 우회 경로 확보가 과제로 남는다.
+
+  【용어 주의】 지침이 "not less than $8,000" / "less than $8,000" 으로
+  가르므로 **정확히 HK$8,000 은 상위 구간**이다. 영국 £800(이상),
+  싱가포르 S$1,500(초과, 즉 1,500 은 하위 구간)과 경계 처리가 다르다.
+  비교표에 「8,000 이상 / 1,500 초과」를 뭉뚱그리면 경계값이 틀린다.

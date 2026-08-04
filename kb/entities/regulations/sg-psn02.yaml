@@ -1,0 +1,65 @@
+id: "REG:sg-psn02"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "MAS 고시 PSN02 (디지털지급토큰 서비스 AML/CFT)"
+  en: "MAS Notice PSN02 — AML/CFT for Digital Payment Token Service"
+  short: "PSN02"
+aliases: ["PSN02", "MAS Notice PSN02", "PS-N02"]
+plain: >
+  싱가포르 가상자산 사업자가 지켜야 할 자금세탁방지 규정입니다. 코인을 보낼 때 금액과 상관없이 이름·계좌를
+  넘겨야 하고, 1,500싱가포르달러를 넘으면 신원확인까지 해야 합니다.
+summary: >
+  싱가포르 DPT(디지털지급토큰) 서비스 라이선스 보유자의 AML/CFT 의무를
+  정하는 MAS 고시. 금융서비스시장법 2022 제16조에 근거해 발령된다.
+  제13절이 가치이전 동반정보를 정하며, S$1,500 이하/초과로 요구 항목이
+  갈린다. 이하 구간에도 4항목 의무가 존속한다.
+reg_kind: "notice"
+citation: "MAS Notice PSN02 (2024-04-02, 2025-06-30 최종개정)"
+binding: "binding"
+language: "en"
+tags: ["sg", "aml", "travel-rule", "dpt"]
+external_ids:
+  notice_no: "PSN02"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:sg"
+    evidence:
+      - doc: "DOC:sg-mas-psn02"
+        confidence: "A"
+        locator: "고시 표제"
+        retrieved: "2026-08-04"
+  - predicate: "ISSUED_BY"
+    to: "ORG:sg-mas"
+    evidence:
+      - doc: "DOC:sg-mas-psn02"
+        confidence: "A"
+        locator: "¶1.1"
+        quote: >
+          This Notice is issued under section 16 of the Financial Services and
+          Markets Act 2022
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:sg-mas-psn02"
+    confidence: "A"
+    locator: "¶1.1 · ¶13"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  【ISSUED_BY 를 채운 이유 — 다른 관할과 다르다】 지금까지 REG 노드는
+  「제정 주체와 집행 주체가 달라」 ISSUED_BY 를 비워 왔다(us-bsa·kr-tfia·
+  gb-mlr2017·jp-aptcp·au-amlctf). 여기는 다르다. PSN02 는 의회 제정 법률이
+  아니라 **MAS 가 자기 이름으로 발령한 고시**이며, 고시 본문이 발령 근거와
+  주체를 명시한다. 발행 주체가 명확하므로 채웠다.
+
+  【근거 법률 — 통설 정정】 제1.1절이 금융서비스시장법 2022 제16조를
+  발령 근거로 명시한다. 「MAS PSA 근거」라는 서술이 널리 퍼져 있으나
+  PSA 는 DPT 서비스 **라이선스**의 근거다. 두 법률을 구별해야 한다.
+  → REG:sg-psa(미등재) 와의 관계를 엣지로 표현할 것. 과제.
+
+  【미등재 — 과제】
+  · 금융서비스시장법 2022 (FSMA) 및 지급서비스법 2019 (PSA)
+  · PSN02 제13절 이외 조항 (CDD·기록보존·STR)
+  · 자기수탁 지갑 관련 요건

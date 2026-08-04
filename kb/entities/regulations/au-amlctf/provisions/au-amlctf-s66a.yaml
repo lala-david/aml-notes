@@ -17,56 +17,107 @@ parent_reg: "REG:au-amlctf"
 citation_path: "section 66A"
 heading: "Obligations of ordering and beneficiary institutions relating to virtual asset transfers"
 language: "en"
-tags: ["au", "travel-rule", "virtual-asset", "text-not-secured"]
+text_orig: >
+  Scope (1) This section applies to the transfer of a virtual asset.
+  Ordering institution obligations (2) Before commencing to provide the
+  designated service covered by item 29 of table 1 in section 6, an ordering
+  institution must undertake due diligence to determine, on reasonable
+  grounds, whether the virtual asset wallet to which the virtual asset is
+  being transferred is: (a) a custodial wallet controlled by a person who is
+  licensed or registered under a law that gives effect to the FATF
+  Recommendations; or (b) a custodial wallet controlled by a person who is not
+  required to be licensed or registered under a law that gives effect to the
+  FATF Recommendations; or (c) a custodial wallet controlled by a person who
+  is required to be licensed or registered under a law that gives effect to
+  the FATF Recommendations, but is not so licensed or registered; or (d) a
+  self-hosted wallet controlled by the payee.
+  (3) The ordering institution must pass on the information specified in the
+  AML/CTF Rules for the purposes of subsection 64(3) relating to the transfer
+  of value to a beneficiary institution if the beneficiary institution is:
+  (a) a person who is licensed or registered under a law that gives effect to
+  the FATF Recommendations; or (b) a person who is not required to be licensed
+  or registered under a law that gives effect to the FATF Recommendations.
+  (4) An ordering institution must not provide the designated service covered
+  by item 29 of table 1 in section 6 if this would involve passing on a
+  transfer message for a transfer of value to a person: (a) who is required to
+  be licensed or registered under a law that gives effect to the FATF
+  Recommendations; but (b) is not so licensed or registered.
+  … Civil penalty (8) Subsections (2) to (7) are civil penalty provisions.
+  Exceptions (9) Subsection (3) does not apply if: (a) either: (i) the
+  ordering institution has established on reasonable grounds that the
+  beneficiary institution is not capable of receiving the information
+  securely; or (ii) the ordering institution reasonably believes that there is
+  a risk that the beneficiary institution is not capable of safeguarding the
+  confidentiality of the information; and (b) the ordering institution makes
+  and keeps a record of the reasons for not passing on the information.
+tags: ["au", "travel-rule", "virtual-asset", "no-threshold"]
 edges:
   - predicate: "PART_OF"
     to: "REG:au-amlctf"
     evidence:
       - doc: "DOC:au-legis-amlctf"
         confidence: "A"
-        locator: "Part 5 목차"
-        quote: >
-          s 66A Obligations of ordering and beneficiary institutions relating
-          to virtual asset transfers
+        locator: "s 66A"
         retrieved: "2026-08-04"
-  # IMPOSES 엣지를 걸지 않는다 — 아래 curator_note 참조.
+  # 임계값 한정자를 두지 않는다 — (1)항이 "the transfer of a virtual asset" 로
+  # 적용 범위를 정할 뿐 금액 조건이 없다. 참조 대상인 제64조도 마찬가지다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      scope_note: >
+        금액 기준 없음 — 제66A조·제64조 본문 모두 금액 조건이 없다.
+        전달할 정보 항목은 AML/CTF Rules 에 위임(제64조 제3항 경유).
+        수익기관이 FATF 이행법상 등록 의무가 있으면서 미등록이면
+        서비스 제공 자체가 금지된다(제66A조 제4항).
+        수익기관이 안전 수신·기밀 보호 불가라고 볼 합리적 근거가 있으면
+        전달 의무 면제 + 사유 기록 의무(제66A조 제9항).
+    valid_from: null
+    valid_to: null
+    recorded_at: "2026-08-04"
+    evidence:
+      - doc: "DOC:au-legis-amlctf"
+        confidence: "A"
+        locator: "s 66A(3)"
+        quote: >
+          The ordering institution must pass on the information specified in
+          the AML/CTF Rules for the purposes of subsection 64(3) relating to
+          the transfer of value to a beneficiary institution
+        retrieved: "2026-08-04"
 evidence:
   - doc: "DOC:au-legis-amlctf"
     confidence: "A"
-    locator: "Part 5 목차"
+    locator: "s 66A"
     retrieved: "2026-08-04"
 created_at: "2026-08-04"
 updated_at: "2026-08-04"
 review_due: "2026-11-02"
 curator_note: >
-  【이 노드가 확정하는 것 — 딱 여기까지】
-  제66A조가 존재하고, 제5편(가치 이전 의무)에 속하며, 표제가
-  「가상자산 이전 관련 주문기관·수익기관 의무」라는 것.
-  이것은 공식 법령등록부 목차에서 직접 확인했으므로 A 다.
+  【본문 확보 완료 — 2026-08-04】 최초 등재 시 목차만 확보해 text_orig 를
+  비우고 IMPOSES 도 걸지 않았다. 같은 날 전문을 확보해 둘 다 채웠다.
+  확보 경로는 DOC:au-legis-amlctf 참조(EPUB HTML 직접 수신 후 태그 제거).
 
-  【text_orig 를 비워 둔 이유】 조문 본문을 확보하지 못했다.
-  legislation.gov.au 가 이 법률에 대해 목차만 반환한다.
-  다른 PROV 노드는 전부 text_orig 를 채웠으나 여기는 채울 수 없다.
-  **추정으로 채우지 않는다.** 2차 자료를 옮겨 적으면 원문인 척하는
-  가짜 조문이 저장소에 들어온다 — 그것이 이 계층에서 가장 위험한 오염이다.
+  【유보가 절반만 맞았다 — 기록해 둔다】 등재 시 「2차 자료는 (2)·(5)항을
+  상대방 실사로 서술하므로 트래블룰 OBL 에 걸면 오귀속」이라고 유보했다.
+  원문 확인 결과 (2)·(5)항이 상대방 실사인 것은 맞다. 그러나
+  **(3)항이 정보 전달 의무를 부과한다** — "must pass on the information
+  specified in the AML/CTF Rules for the purposes of subsection 64(3)".
+  즉 이 조문은 실사와 트래블룰을 한 조문에 담고 있다.
+  표제만으로 판단을 미룬 것은 옳았고, 결론은 IMPOSES 를 거는 쪽이다.
 
-  【IMPOSES 엣지를 걸지 않은 이유】 다른 관할 조문은 전부
-  OBL:x-travel-rule-originator 에 IMPOSES 를 걸었다. 여기는 걸지 않았다.
-  표제만으로는 이 조문이 「송신인 정보 동반 의무」를 부과하는지,
-  아니면 상대방 실사(counterparty due diligence) 의무만 부과하고
-  정보 동반은 하위 규칙(AML/CTF Rules)에 있는지 판별할 수 없기 때문이다.
-  2차 자료는 제66A(2)·(5)항이 **상대방 실사** 의무라고 서술한다 —
-  그렇다면 트래블룰 OBL 에 거는 것은 오귀속이 된다.
-  일본·영국 건에서 확인한 것처럼, 조문 표제와 조문이 실제로 부과하는
-  의무는 다를 수 있다. 본문 확보 후 결정한다.
+  【금액 조건 없음 — 두 조문 모두 확인】
+  제66A조 제1항은 "This section applies to the transfer of a virtual asset"
+  로 자산 유형만으로 적용 범위를 정한다. 참조 대상인 제64조도
+  "if an ordering institution commences to provide the designated service
+  covered by item 29 of table 1 in section 6" 로 서비스 제공 사실만 요건이며
+  금액이 없다. 두 조문 전문에서 금액 표현을 찾지 못했다.
+  → 호주는 EU·영국·일본과 같은 「의무 무임계」 유형이다.
 
-  【2차 정보 — 확정 아님, 인용 금지】
-  · 금액 임계 없음 (AUSTRAC 안내 요지)
-  · 주문기관은 수취 지갑의 수탁형/자기수탁형 판별 의무
-  · 수익기관이 정보를 안전히 보호할 수 없다고 볼 합리적 근거가 있으면
-    전달 의무 면제 + 사유 기록
-  · 시행 2026-03-31
+  【남은 층위 — AML/CTF Rules】 전달할 정보 **항목**은 AML/CTF Rules 에
+  위임돼 있다(제64조 제2항·제3항). 일본의 주무성령, 영국의 reg 64C(5)·(6)
+  과 같은 위치다. Rules 가 금액별로 항목을 나누는지는 미확인이므로
+  「정보 심화 기준 없음」을 확정 서술로 쓰지 않는다.
+  일본 건에서 배운 대로 **위임된 하위 규범을 봐야 끝난다.**
 
-  【최우선 과제】 조문 본문 확보. 경로 두 가지를 시도할 것 —
-  (1) legislation.gov.au 조문 단위 URL 형식 탐색,
-  (2) 개정법 AML/CTF Amendment Act 2024 원문에서 제66A 신설 조항 확인.
+  【신설 연혁】 법령 연혁표에서 "s 66A ... ad No 110, 2024" 확인 —
+  2024년 법률 제110호로 신설. 시행일 2026-03-31 은 내무부 안내 기준이며
+  부칙으로 확인하지 않았다.
