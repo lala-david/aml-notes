@@ -69,15 +69,29 @@ flowchart TB
 
 ```mermaid
 graph LR
-    P1["PROV:kr-tfia-art5-3"] -->|IMPOSES<br/>threshold=1,000,000 KRW| O["OBL:x-travel-rule-originator<br/>(관할 무관 추상 의무)"]
-    P2["PROV:us-31cfr-1010-410f"] -->|IMPOSES<br/>threshold=3,000 USD| O
-    P3["PROV:eu-tfr-art14"] -->|IMPOSES<br/>threshold=none| O
-    P4["PROV:sg-psn02-s13"] -->|IMPOSES<br/>threshold=1,500 SGD| O
+    P1["PROV:kr-tfia-art5-3"] -->|IMPOSES<br/>threshold=1,000,000 KRW| O["OBL:x-travel-rule-originator<br/>관할 무관 추상 의무"]
+    P2["PROV:us-bsa-cfr1010-410f"] -->|IMPOSES<br/>threshold=3,000 USD| O
+    P3["PROV:eu-tfr-art14"] -->|IMPOSES<br/>threshold 없음| O
+    P4["PROV:gb-mlr2017-reg64c"] -->|IMPOSES<br/>threshold 없음<br/>£800은 정보 심화 기준| O
+    P5["PROV:jp-aptcp-art10-5"] -->|IMPOSES<br/>threshold 없음| O
     O -->|SATISFIED_BY| C["CTL:x-travel-rule-messaging"]
     style O fill:#fef3c7,stroke:#f59e0b,stroke-width:3px
 ```
 
 이 구조 하나로 **관할 비교표가 질의 결과로 생성된다**. 지금까지 손으로 유지하던 비교표는 파생물이 된다.
+
+> ⚠️ **`threshold` 한정자에 아무 금액이나 넣으면 안 된다.**
+> 여기 들어갈 수 있는 것은 **그 금액 미만이면 의무 자체가 발생하지 않는** 기준뿐이다.
+> 원문 확인 결과 그런 관할은 미국·한국뿐이고, EU·영국·일본·홍콩·싱가포르는
+> 의무가 전건에 걸리며 금액은 **넘겨야 할 정보 항목의 깊이**만 나눈다.
+> 후자를 `threshold` 에 넣으면 위 구조가 자동 생성하는 비교표가 조용히 틀린다 —
+> 생성물이라 사람이 검토하지 않으므로 더 위험하다.
+> 정보 심화 기준은 `scope_note` 에 적고, 별도 한정자가 필요해지면 그때 신설한다.
+>
+> 이 저장소는 같은 유형의 오귀속을 세 번 냈다 — INR.15 §7(b) 에 §7(a) 의 CDD 기준을,
+> 특금법 제5조의3 에 시행령 수치를, 범수법 제10조의5 에 시행령 제7조의 10만엔을.
+> 세 번째 판정은 [`kb/facts/contradictions.jsonl`](../../kb/facts/contradictions.jsonl) `CTR:00006`.
+> **의무를 부과하는 조문과 수치를 정하는 조문은 다르다.**
 
 ### 2.2 축 2 — 위협 (RISK → TYP → TEC → IND)
 

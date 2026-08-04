@@ -11,7 +11,8 @@
 | **Primary AML law** | Tukgeumbeop (特金法) | BSA / FinCEN | AMLR + MiCA | PSA + FSMA | VARA Regs + CBUAE | PSA + FIEA | AMLO + VASP regime |
 | **Regulator** | KoFIU | FinCEN (fed) + state MTL | EU AMLA (2025+) + NCAs | MAS | VARA (Dubai) + CBUAE | FSA / JFSA + JVCEA | SFC + HKMA |
 | **VASP licensing model** | KoFIU registration | FinCEN MSB + 49 state MTLs | MiCA CASP + AMLR CASP | PSA Major Payment Institution | VARA full license | FSA Type-1 crypto | SFC Type 7 + VATP license |
-| **Travel Rule threshold** | KRW 1M (~USD 700) | USD 3,000 | EUR 1,000 (moving to EUR 0 under AMLR) | SGD 1,500 | USD 1,000 | JPY 100,000 (~USD 700) | HKD 8,000 |
+| **Travel Rule — duty trigger** | **KRW 1M (~USD 700)** | **USD 3,000** | All transfers, no de minimis | All transfers | All transfers | All transfers | All transfers |
+| **Travel Rule — data-depth tier** | — | — | (EUR 1,000 applies to a *separate* self-hosted-wallet duty) | SGD 1,500 | USD 1,000 | None | HKD 8,000 |
 | **Cold storage mandate** | 80%+ (VAUPA §6) | None at federal level | Industry standard, not statutory | MAS risk-based | VARA prescriptive | 95%+ (FSA guidance) | SFC 98% requirement |
 | **Self-hosted wallet handling** | Additional KYC (FATF R.16 2025-06) | Varies by state | AMLR extends KYC to unhosted transfers | MAS Notice PS-N02 | VARA Rulebook | JVCEA guideline | SFC restricts |
 | **Sanctions enforcement** | OFAC-aligned via MOFA, plus UN / EU lists | OFAC SDN (aggressive) | EU consolidated list | MAS Targeted Financial Sanctions | UAE FCCU | MOFA-JAFIC | HKMA + SFC |
@@ -63,13 +64,17 @@ Korea's model looks like a registration on paper but operates as a substantive l
 
 | Jurisdiction | Threshold | Protocol | Unhosted wallets |
 |---|---|---|---|
-| Korea | KRW 1M | IVMS101 via VerifyVASP / CODE | Additional KYC |
-| United States | USD 3,000 | TRUST, Sygna, Notabene | Mostly permissive |
-| EU (AMLR) | EUR 0 (full coverage) | Protocol-neutral | Mandatory KYC |
-| Singapore | SGD 1,500 | IVMS101 via Notabene, Sumsub | Risk-based |
-| UAE | USD 1,000 | IVMS101 | VARA-specified |
-| Japan | JPY 100,000 | IVMS101 via TRC / Notabene | JVCEA guideline |
-| Hong Kong | HKD 8,000 | IVMS101 | SFC restricts |
+| Korea | **KRW 1M** — duty trigger | IVMS101 via VerifyVASP / CODE | Additional KYC |
+| United States | **USD 3,000** — duty trigger | TRUST, Sygna, Notabene | Mostly permissive |
+| EU (TFR) | All transfers; no threshold | Protocol-neutral | Mandatory KYC |
+| Singapore | All transfers; SGD 1,500 = data tier | IVMS101 via Notabene, Sumsub | Risk-based |
+| UAE | All transfers; USD 1,000 = data tier | IVMS101 | VARA-specified |
+| Japan | All transfers; **no** amount tier | IVMS101 via TRC / Notabene | JVCEA guideline |
+| Hong Kong | All transfers; HKD 8,000 = data tier | IVMS101 | SFC restricts |
+
+> **Reading note.** Only Korea and the US gate the *duty itself* on an amount — below the figure, no Travel Rule obligation arises. Everywhere else the duty attaches to every transfer and the figure only widens the data set that must travel with it. Writing all of these in one "threshold" column makes the second group wrong, and invites a rule engine that silently drops sub-threshold transfers.
+>
+> The commonly cited **JPY 100,000 is not a Travel Rule figure at all** — it is the 特定取引 (specified transaction) definition in Art. 7(1)(i)(ya) of the APTCP Enforcement Order, which triggers **CDD**. Neither Art. 10-5 of the Act nor Art. 31-7 of the implementing Ordinance carries any amount. Likewise **EUR 1,000** under the EU TFR governs a separate duty to assess ownership/control of a self-hosted address.
 
 **Observation**: Korea's KRW 1M threshold is the lowest-equivalent among major jurisdictions. The EU's AMLR (effective 2027) will go even lower — zero threshold for crypto transfers.
 

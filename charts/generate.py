@@ -330,37 +330,69 @@ def chart_trend_2025():
 # ========================= Chart 6: Travel Rule Thresholds =========================
 
 def chart_travel_rule_thresholds():
-    """관할별 Travel Rule 임계금액 비교 (USD 환산)"""
-    data = pd.DataFrame({
-        "juris":  ["EU (TFR)",  "싱가포르",   "일본",      "FATF 권고", "한국",       "미국 (BSA)"],
-        "usd":    [0,           1130,         780,         1000,           770,          3000],
-        "native": ["€0 (모든 거래)", "SGD 1,500",  "¥100,000",  "USD/EUR 1,000", "₩1,000,000", "$3,000"],
+    """관할별 Travel Rule 금액 기준 — 의무 발동형(A) vs 정보 심화형(B)
+
+    한 축에 "임계금액"을 늘어놓으면 대부분의 관할이 틀린다. 금액이 의무를
+    발동시키는 관할(미국·한국)과, 의무는 전건이고 금액은 넘겨야 할 정보
+    항목만 늘리는 관할(EU·영국·일본·홍콩·싱가포르)은 성격이 다르기 때문이다.
+    두 패널로 분리해 그 차이를 그림 자체가 말하게 한다.
+    """
+    # A형 — 이 금액 미만은 Travel Rule 대상이 아니다
+    a_type = pd.DataFrame({
+        "juris":  ["한국",        "미국 (BSA)"],
+        "usd":    [770,           3000],
+        "native": ["₩1,000,000",  "$3,000"],
     })
-    data = data.sort_values("usd", ascending=True).reset_index(drop=True)
-    colors = ["#c9a646" if j == "FATF 권고" else ACCENT for j in data["juris"]]
+    # B형 — 금액과 무관하게 전건 의무. 아래 금액은 정보 항목이 늘어나는 지점.
+    b_type = pd.DataFrame({
+        "juris":  ["일본",   "EU (TFR)", "영국",  "홍콩",      "싱가포르"],
+        "usd":    [0,        0,          1010,    1020,        1130],
+        "native": ["해당 없음", "해당 없음",  "£800",  "HK$8,000",  "S$1,500"],
+    })
 
-    fig, ax = plt.subplots(figsize=(9.2, 4.8))
-    y = range(len(data))
-    bars = ax.barh(y, data["usd"], color=colors, edgecolor=INK, linewidth=0.6, height=0.62)
+    fig, (ax1, ax2) = plt.subplots(
+        2, 1, figsize=(9.2, 6.4), gridspec_kw={"height_ratios": [2, 5]}
+    )
 
-    for bar, juris, native in zip(bars, data["juris"], data["native"]):
-        ax.text(
-            bar.get_width() + 80, bar.get_y() + bar.get_height() / 2,
-            native, va="center", ha="left",
-            fontsize=9.5, color=INK, fontweight="bold",
-        )
+    def draw(ax, data, color, note_zero):
+        y = range(len(data))
+        bars = ax.barh(y, data["usd"], color=color, edgecolor=INK,
+                       linewidth=0.6, height=0.58)
+        for bar, native, usd in zip(bars, data["native"], data["usd"]):
+            if usd == 0:
+                ax.text(60, bar.get_y() + bar.get_height() / 2, note_zero,
+                        va="center", ha="left", fontsize=9,
+                        color=INK_MUTE, style="italic")
+            else:
+                ax.text(bar.get_width() + 80, bar.get_y() + bar.get_height() / 2,
+                        native, va="center", ha="left", fontsize=9.5,
+                        color=INK, fontweight="bold")
+        ax.set_yticks(y)
+        ax.set_yticklabels(data["juris"], fontsize=10)
+        ax.xaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f"${int(x):,}"))
+        ax.set_xlim(0, 4000)
+        ax.tick_params(axis="y", length=0)
+        ax.grid(axis="x", linewidth=0.5, color=RULE)
+        ax.set_axisbelow(True)
 
-    ax.set_yticks(y)
-    ax.set_yticklabels(data["juris"], fontsize=10)
-    ax.set_xlabel("USD 환산 임계금액")
-    ax.xaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f"${int(x):,}"))
-    ax.set_xlim(0, 4000)
-    ax.set_title("관할별 Travel Rule 임계금액 — EU가 가장 엄격 (임계 0)", loc="left", pad=14)
-    ax.tick_params(axis="y", length=0)
-    ax.grid(axis="x", linewidth=0.5, color=RULE)
-    ax.set_axisbelow(True)
+    draw(ax1, a_type, ACCENT, "")
+    ax1.set_title("A형 · 금액이 의무를 발동시킨다 — 이 미만은 대상 아님",
+                  loc="left", pad=10, fontsize=11)
+    ax1.set_xticklabels([])
 
-    fig.text(0.01, -0.02, "Source: FATF R.16 · 한국 특금법 시행령 §10의10 · BSA 1996 · EU TFR 2023/1113",
+    draw(ax2, b_type, PALETTE[2], "정보 심화 기준 없음")
+    ax2.set_title("B형 · 금액과 무관하게 전건 의무 — 금액은 정보 항목만 늘린다",
+                  loc="left", pad=10, fontsize=11)
+    ax2.set_xlabel("USD 환산")
+
+    fig.suptitle("Travel Rule 의 금액 기준은 두 종류다", x=0.01, ha="left",
+                 fontsize=13, fontweight="bold")
+
+    fig.text(0.01, -0.02,
+             "Source: 31 CFR 1010.410(f) · 특금법 시행령 §10의10 · EU TFR 2023/1113 art.14 · "
+             "MLR 2017 reg 64C · 범수법 제10조의5\n"
+             "일본 10만엔은 시행령 제7조의 특정거래(CDD) 기준이며 Travel Rule 기준이 아니다. "
+             "홍콩·싱가포르는 1차 출처 검증 중.",
              fontsize=7.5, color=INK_MUTE, ha="left")
     savefig(fig, "travel_rule_thresholds")
 
