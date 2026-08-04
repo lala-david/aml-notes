@@ -1,0 +1,51 @@
+id: "DOC:jp-egov-aptcp-so"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "범죄에 의한 수익의 이전방지에 관한 법률 시행령"
+  en: "Enforcement Order of the Act on Prevention of Transfer of Criminal Proceeds"
+  short: "범수법 시행령"
+summary: >
+  범수법의 위임사항을 정하는 정령. 제7조가 특정거래(特定取引)를 열거하며,
+  암호자산 이전은 「가액이 10만엔을 초과하는 것」이 특정거래에 해당한다.
+  이 기준은 거래시확인(CDD) 의무를 발동시키는 것이지 통지의무 기준이 아니다.
+src: "SRC:jp-egov"
+url: "https://laws.e-gov.go.jp/api/1/lawdata/420CO0000000020"
+accessed: "2026-08-04"
+published: "2008-02-01"
+doc_kind: "statute-text"
+language: "ja"
+translation: false
+tags: ["jp", "aml", "cdd", "threshold", "subordinate-legislation"]
+external_ids:
+  egov_law_id: "420CO0000000020"
+  law_no: "平成20年政令第20号"
+evidence:
+  - doc: "DOC:jp-egov-aptcp-so"
+    confidence: "A"
+    locator: "第七条第一項第一号ヤ"
+    quote: >
+      暗号資産交換業に関し管理する顧客等の暗号資産を当該顧客等の依頼に基づいて
+      移転させる行為…であって、当該移転に係る暗号資産の価額が十万円を超えるもの
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  e-Gov API 로 현행 전문을 받아 제7조의 십만엔 등장 지점을 전수 확인했다.
+
+  【십만엔이 나오는 자리 — 실측 4곳, 전부 제7조 제1항 제1호】
+    レ  전자결제수단의 교환등 … 가액 10만엔 초과
+    ソ  전자결제수단의 이전 행위 … 가액 10만엔 초과
+    ク  암호자산의 교환등 … 가액 10만엔 초과
+    ヤ  암호자산의 이전 행위 … 가액 10만엔 초과   ← 트래블룰과 혼동되는 자리
+
+  【결정적 구분】 제7조는 「特定取引」의 정의 조문이고, 특정거래에 해당하면
+  법 제4조의 **거래시확인(取引時確認 = CDD)** 의무가 발동한다.
+  통지의무(트래블룰)를 정하는 법 제10조의5와는 별개 계통이다.
+  따라서 이 10만엔을 "일본의 트래블룰 임계금액" 으로 옮겨 적으면
+  **의무를 부과하는 조문과 수치를 정하는 조문을 뒤바꾸는** 오류가 된다.
+  저장소가 INR.15 §7(b) 와 특금법 제5조의3 에서 이미 두 번 낸 유형이다.
+
+  【문언 정밀】 「十万円を超える」 — 초과다. 이상(以上)이 아니다.
+  10만엔 정확히는 포함되지 않는다.

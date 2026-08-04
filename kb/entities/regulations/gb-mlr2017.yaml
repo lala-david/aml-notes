@@ -1,0 +1,54 @@
+id: "REG:gb-mlr2017"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "영국 자금세탁방지규정 2017"
+  en: "Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017"
+  short: "MLR 2017"
+aliases: ["MLR 2017", "MLRs", "SI 2017/692", "영국 MLR"]
+plain: >
+  영국의 자금세탁방지 핵심 규정입니다. 2022년에 암호자산 편이 새로 붙어서, 거래소가 코인을 보낼 때 송신인
+  정보를 함께 보내야 합니다. 금액이 얼마든 기본 정보는 보내야 합니다.
+summary: >
+  영국 AML 체계의 중심 2차 입법(Statutory Instrument). FCA 등록제·고객확인·
+  기록보존 의무의 근거이며, 제7A편(Part 7A)이 암호자산 이전 시 정보 동반
+  의무를 정한다. 기본 의무(규정 64C(1))에는 금액 기준이 없고,
+  £800 은 추가 정보 항목을 요구하는 별개 기준이다.
+reg_kind: "regulation"
+citation: "SI 2017/692"
+binding: "binding"
+language: "en"
+tags: ["gb", "aml", "travel-rule", "crypto-asset"]
+external_ids:
+  si_number: "SI 2017/692"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:gb"
+    evidence:
+      - doc: "DOC:gb-legis-mlr2017"
+        confidence: "A"
+        locator: "SI 2017/692 표제"
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:gb-legis-mlr2017"
+    confidence: "A"
+    locator: "Part 7A"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  제7A편의 규정 64C 를 PROV 노드로 분리했다.
+
+  【ISSUED_BY 미기재 — 의도적】 MLR 2017 은 재무부(HM Treasury)가 제정한
+  2차 입법이고 FCA 는 암호자산 사업자 등록·감독 기관이다. 제정 주체와
+  집행 주체가 다르다. ORG:gb-hmt·ORG:gb-fca 가 모두 저장소에 있으나
+  어느 술어로 무엇을 걸지는 「발행 주체 모델링 ADR」 과제에 걸려 있다
+  (REG:us-bsa·REG:kr-tfia 와 동일 사유). 추측으로 채우지 않는다.
+
+  【미등재 — 과제】
+  · 제7A편을 신설한 개정령(SI 2022/860 으로 추정) 원문 미확보.
+    신설 시점을 확인해야 valid_from 을 채울 수 있다.
+  · 암호자산 활동을 RAO 규제활동으로 편입하는 전환(JUR:gb 서술 참조)은
+    별개 법령 계통이며 미등재.
+  · 규정 64D 이후(수익자 측 의무·미비 정보 처리) 미등재.

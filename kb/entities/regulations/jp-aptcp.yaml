@@ -1,0 +1,57 @@
+id: "REG:jp-aptcp"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "범죄에 의한 수익의 이전방지에 관한 법률"
+  en: "Act on Prevention of Transfer of Criminal Proceeds"
+  short: "범수법"
+aliases: ["犯罪による収益の移転防止に関する法律", "犯収法", "범수법", "APTCP"]
+plain: >
+  일본의 자금세탁방지 기본법입니다. 암호자산 거래소가 코인을 보낼 때 보내는 사람과 받는 사람 정보를 상대
+  거래소에 넘기라는 의무가 이 법 제10조의5에 있습니다.
+summary: >
+  일본 AML 체계의 근간 법률. 특정사업자에게 거래시확인·기록보존·의심거래신고
+  의무를 부과한다. 2022년 개정으로 제10조의5(암호자산 이전 시 통지의무)가
+  신설되어 트래블룰의 법적 근거가 되었으며 2023-06-01 시행되었다.
+  자금결제법상 암호자산교환업 등록제와는 별개 법률이다.
+reg_kind: "statute"
+citation: "平成19年法律第22号"
+binding: "binding"
+language: "ja"
+tags: ["jp", "aml", "travel-rule", "statute"]
+external_ids:
+  egov_law_id: "419AC0000000022"
+  law_no: "平成19年法律第22号"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:jp"
+    evidence:
+      - doc: "DOC:jp-egov-aptcp"
+        confidence: "A"
+        locator: "법령 제목·법령번호"
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:jp-egov-aptcp"
+    confidence: "A"
+    locator: "e-Gov lawId=419AC0000000022 현행 전문"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  e-Gov 원문으로 등재했다. 제10조의5는 PROV 노드로 분리했다.
+
+  【ISSUED_BY 미기재 — 의도적】 범수법의 주무대신은 단일 기관이 아니라
+  국가공안위원회와 복수 성청이 소관을 나눈다(내각부·총무성·법무성·재무성·
+  후생노동성·농림수산성·경제산업성·국토교통성 공동 성령 체계가 그 증거).
+  FIU 기능은 경찰청 JAFIC 가 수행한다. 어느 하나를 발행 주체로 적으면
+  틀린다. REG:us-bsa·REG:kr-tfia 가 남긴 「발행 주체 모델링 ADR」 과제가
+  해결되기 전까지 비워 둔다. 추측으로 채우지 않는다.
+
+  【미등재 — 과제】
+  · 시행일 2023-06-01 은 부칙 원문으로 아직 확인하지 않았다. FSA 공표자료
+    (2023-05-26 의견공모 결과)에 근거한 2차 정보이므로 valid_from 을
+    채우지 않았다. 부칙 확인 후 FACT 로 등재할 것.
+  · 자금결제법(암호자산교환업 등록제)은 별도 REG 노드로 미등재.
+  · 제10조의3(전자결제수단 이전 통지의무)도 미등재 — 스테이블코인 트래블룰
+    근거이므로 우선순위 높음.

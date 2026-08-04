@@ -1,0 +1,72 @@
+id: "PROV:au-amlctf-s66a"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "AML/CTF법 제66A조 (가상자산 이전 — 주문기관·수익기관 의무)"
+  en: "AML/CTF Act s 66A — Obligations of ordering and beneficiary institutions relating to virtual asset transfers"
+  short: "AML/CTF법 제66A조"
+plain: >
+  호주에서 가상자산을 보낼 때 보내는 쪽·받는 쪽 사업자가 각각 져야 할 의무를 정한 조문입니다. 일반 송금과
+  달리 가상자산만 따로 떼어 규정했습니다. 2026년 3월 31일부터 시행 중입니다.
+summary: >
+  호주 가상자산 트래블룰의 근거 조항. 가치 이전 사슬(value transfer chain)에서
+  주문기관(ordering institution)과 수익기관(beneficiary institution)이
+  가상자산 이전에 관해 지는 의무를 정한다. 일반 가치 이전 의무(제64~66조)와
+  **별도 조문으로 분리**된 점이 이 관할의 특징이다.
+parent_reg: "REG:au-amlctf"
+citation_path: "section 66A"
+heading: "Obligations of ordering and beneficiary institutions relating to virtual asset transfers"
+language: "en"
+tags: ["au", "travel-rule", "virtual-asset", "text-not-secured"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:au-amlctf"
+    evidence:
+      - doc: "DOC:au-legis-amlctf"
+        confidence: "A"
+        locator: "Part 5 목차"
+        quote: >
+          s 66A Obligations of ordering and beneficiary institutions relating
+          to virtual asset transfers
+        retrieved: "2026-08-04"
+  # IMPOSES 엣지를 걸지 않는다 — 아래 curator_note 참조.
+evidence:
+  - doc: "DOC:au-legis-amlctf"
+    confidence: "A"
+    locator: "Part 5 목차"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  【이 노드가 확정하는 것 — 딱 여기까지】
+  제66A조가 존재하고, 제5편(가치 이전 의무)에 속하며, 표제가
+  「가상자산 이전 관련 주문기관·수익기관 의무」라는 것.
+  이것은 공식 법령등록부 목차에서 직접 확인했으므로 A 다.
+
+  【text_orig 를 비워 둔 이유】 조문 본문을 확보하지 못했다.
+  legislation.gov.au 가 이 법률에 대해 목차만 반환한다.
+  다른 PROV 노드는 전부 text_orig 를 채웠으나 여기는 채울 수 없다.
+  **추정으로 채우지 않는다.** 2차 자료를 옮겨 적으면 원문인 척하는
+  가짜 조문이 저장소에 들어온다 — 그것이 이 계층에서 가장 위험한 오염이다.
+
+  【IMPOSES 엣지를 걸지 않은 이유】 다른 관할 조문은 전부
+  OBL:x-travel-rule-originator 에 IMPOSES 를 걸었다. 여기는 걸지 않았다.
+  표제만으로는 이 조문이 「송신인 정보 동반 의무」를 부과하는지,
+  아니면 상대방 실사(counterparty due diligence) 의무만 부과하고
+  정보 동반은 하위 규칙(AML/CTF Rules)에 있는지 판별할 수 없기 때문이다.
+  2차 자료는 제66A(2)·(5)항이 **상대방 실사** 의무라고 서술한다 —
+  그렇다면 트래블룰 OBL 에 거는 것은 오귀속이 된다.
+  일본·영국 건에서 확인한 것처럼, 조문 표제와 조문이 실제로 부과하는
+  의무는 다를 수 있다. 본문 확보 후 결정한다.
+
+  【2차 정보 — 확정 아님, 인용 금지】
+  · 금액 임계 없음 (AUSTRAC 안내 요지)
+  · 주문기관은 수취 지갑의 수탁형/자기수탁형 판별 의무
+  · 수익기관이 정보를 안전히 보호할 수 없다고 볼 합리적 근거가 있으면
+    전달 의무 면제 + 사유 기록
+  · 시행 2026-03-31
+
+  【최우선 과제】 조문 본문 확보. 경로 두 가지를 시도할 것 —
+  (1) legislation.gov.au 조문 단위 URL 형식 탐색,
+  (2) 개정법 AML/CTF Amendment Act 2024 원문에서 제66A 신설 조항 확인.

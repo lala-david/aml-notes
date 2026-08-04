@@ -1,0 +1,88 @@
+id: "PROV:gb-mlr2017-reg64c"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "MLR 2017 규정 64C (암호자산 사업자 간 이전 — 동반정보)"
+  en: "MLR 2017 regulation 64C — Information accompanying inter-cryptoasset business transfers"
+  short: "MLR 2017 reg 64C"
+plain: >
+  영국 거래소가 다른 거래소로 코인을 보낼 때 보내는 사람 정보를 함께 넘기라는 조문입니다. 금액과 상관없이
+  기본 정보는 항상 보내야 하고, £800 이상이면 주소·생년월일 같은 항목이 추가로 붙습니다.
+summary: >
+  영국 암호자산 트래블룰의 근거 조항. 송신인 측 암호자산사업자는 이전에
+  규정 64C(5)의 정보(송신인·수신인 성명, 법인명, 계좌번호 또는 고유거래식별자)를
+  동반시켜야 한다. **이 기본 의무에는 금액 기준이 없다.**
+  £800 은 규정 64C(4)에서 (6)항의 추가 정보를 요구하는 별개 기준이며,
+  연결된 이전을 합산해 판단한다.
+parent_reg: "REG:gb-mlr2017"
+citation_path: "regulation 64C"
+heading: "Information accompanying cryptoasset transfers"
+language: "en"
+text_orig: >
+  (1) … the cryptoasset business of the originator must ensure that the
+  cryptoasset transfer is accompanied by the information specified in
+  paragraph (5).
+tags: ["gb", "travel-rule", "crypto-asset", "no-threshold-on-base-duty"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:gb-mlr2017"
+    evidence:
+      - doc: "DOC:gb-legis-mlr2017"
+        confidence: "A"
+        locator: "regulation 64C"
+        retrieved: "2026-08-04"
+  # threshold 한정자를 두지 않는다 — 기본 의무에 금액 기준이 없다.
+  # £800 은 정보 항목을 늘리는 기준이지 의무를 발동시키는 기준이 아니므로
+  # qualifiers.threshold 에 넣으면 EU·일본과 같은 오귀속이 된다.
+  - predicate: "IMPOSES"
+    to: "OBL:x-travel-rule-originator"
+    qualifiers:
+      scope_note: >
+        기본 의무에 금액 기준 없음. £800(연결 이전 합산)은 규정 64C(6)의
+        추가 정보 항목을 발동시키는 별개 기준이며, 집행 사업자의 영국 밖
+        소재 여부가 조건으로 결합된다 — 조건 문언 미확보.
+    valid_from: null
+    valid_to: null
+    recorded_at: "2026-08-04"
+    evidence:
+      - doc: "DOC:gb-legis-mlr2017"
+        confidence: "A"
+        locator: "regulation 64C(1)"
+        quote: >
+          the cryptoasset business of the originator must ensure that the
+          cryptoasset transfer is accompanied by the information specified
+          in paragraph (5)
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:gb-legis-mlr2017"
+    confidence: "A"
+    locator: "regulation 64C"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  legislation.gov.uk 조문 단위 URL 로 규정 64C 를 확인했다.
+
+  【확보 수준 — 항마다 다르다】 text_orig 는 (1)항만 축조 문언이다.
+  (4)·(5)·(6)항은 내용을 확인했으나 문언을 확보하지 못했다.
+    (5) 송신인·수신인 성명 / 법인이면 등록·상호명 / 계좌번호 또는 고유거래식별자
+    (6) 법인: 고객식별번호 또는 등록사무소·주된영업소 주소
+        개인: 고객식별번호 또는 주소 또는 여권·신분증·출생증명서 번호
+              또는 생년월일·출생지
+  (4)항의 발동 조건은 두 표현이 엇갈렸다 — 「수익자 사업자가 영국 밖」 대
+  「집행 사업자 전부가 영국 소재는 아닐 것」. 원문 재확인 전까지 단정하지
+  않는다. **재검토 과제.**
+
+  【£800 을 threshold 한정자에 넣지 않은 이유】 EU TFR 제14조와 같은 판단이다.
+  이 금액은 의무를 발동시키지 않고 정보 항목의 깊이를 정한다.
+  qualifiers.threshold 에 넣으면 관할 비교표가 「영국 트래블룰 임계 £800」
+  이라는 틀린 표를 자동 생성하게 된다. 일본 건(CTR:00006)과 같은 유형의
+  오귀속이 코드로 고착되는 경로다.
+
+  【관할 비교에서 드러난 구조】 EU·영국·싱가포르·일본을 원문으로 확인한
+  결과, 「트래블룰 임계금액」을 단일 숫자로 적을 수 있는 관할이 드물다.
+  대부분 의무 자체엔 기준이 없고 금액은 정보 깊이를 나눈다.
+  산문의 임계금액 비교표는 이 구조를 표현하지 못한다 — 정정 대상.
+
+  valid_from 은 비워 두었다. 제7A편 신설 개정령을 확보하지 않았다.

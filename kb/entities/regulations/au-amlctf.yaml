@@ -1,0 +1,58 @@
+id: "REG:au-amlctf"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "자금세탁방지 및 테러자금조달방지법 2006"
+  en: "Anti-Money Laundering and Counter-Terrorism Financing Act 2006"
+  short: "AML/CTF Act 2006"
+aliases: ["AML/CTF Act", "AML/CTF Act 2006", "호주 AML/CTF법"]
+plain: >
+  호주의 자금세탁방지 기본법입니다. 2024년에 크게 고쳐서 가상자산 사업자도 정식으로 규제 대상이 됐고, 그
+  부분은 2026년 3월 31일부터 시행 중입니다.
+summary: >
+  호주 AML 체계의 근간 법률. AUSTRAC 이 감독한다. 제5편이 가치 이전(value
+  transfer)에 관한 의무를 정하며, 2024년 개정법(AML/CTF Amendment Act 2024)이
+  「digital currency」를 「virtual asset」으로 교체하고 제66A조를 신설해
+  가상자산 이전에 트래블룰을 적용했다. 가상자산 관련 개정은 2026-03-31 시행.
+reg_kind: "statute"
+citation: "Act No. 169 of 2006 (C2006A00169)"
+binding: "binding"
+language: "en"
+tags: ["au", "aml", "travel-rule", "virtual-asset"]
+external_ids:
+  frl_id: "C2006A00169"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:au"
+    evidence:
+      - doc: "DOC:au-legis-amlctf"
+        confidence: "A"
+        locator: "법률 표제·법령번호"
+        retrieved: "2026-08-04"
+evidence:
+  - doc: "DOC:au-legis-amlctf"
+    confidence: "A"
+    locator: "Part 5 목차"
+    retrieved: "2026-08-04"
+created_at: "2026-08-04"
+updated_at: "2026-08-04"
+review_due: "2026-11-02"
+curator_note: >
+  【확보 수준】 공식 법령등록부에서 목차를 받아 제5편의 조문 구성을 확인했다.
+  조문 본문은 받지 못했다 — DOC:au-legis-amlctf 참조.
+
+  【2026년 시행 — 감시 우선순위 높음】 가상자산 개정 시행일 2026-03-31 은
+  이 저장소 산문 최종 갱신일(2026-04-17) 직전이다. 산문이 이 변화를
+  반영했는지 별도 점검이 필요하다. 호주는 산문의 관할 비교표에 아예
+  없었다.
+
+  【ISSUED_BY 미기재】 연방의회 제정 법률이고 AUSTRAC 은 감독·규칙제정
+  기관이다. REG:us-bsa·REG:kr-tfia·REG:gb-mlr2017 과 동일하게
+  「발행 주체 모델링 ADR」 과제에 걸려 있다. 추측으로 채우지 않는다.
+
+  【미등재 — 과제】
+  · AML/CTF Rules(하위 규칙) — 트래블룰 정보 항목의 실질이 여기 있을
+    가능성이 높다. 영국 MLR·일본 주무성령과 같은 위치다.
+  · 개정법(AML/CTF Amendment Act 2024) 원문 및 시행일 부칙 미확보.
+    2026-03-31 은 내무부 안내 기준이며 부칙으로 확인하지 않았다.
+  · 제64·65·66조(일반 가치 이전) 미등재.
