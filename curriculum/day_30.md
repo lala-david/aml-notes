@@ -73,7 +73,24 @@ def is_coinjoin(tx: Transaction) -> bool:
 > - Bellei 2024(Elliptic2)는 `common input`·`multi-input`·`CIOH` 언급이 **0회**입니다. 자금세탁 탐지 GNN 논문이지 주소 클러스터링 논문이 아닙니다.
 > - Möser & Narayanan은 주제는 맞지만(multi-input 13회·fingerprint 12회) 그 수치가 **하나도 없고**, 2017년이 아니라 2021/22년 논문입니다. 저장소가 "Möser 2017"로 적은 것은 별개 논문(*Anonymous Alone?*, 믹서 측정)입니다.
 >
+> 같은 표의 **GCN/GAT 행(0.92~0.94 / 0.83~0.86 / 0.87~0.90)도 틀렸습니다.** Weber et al. 2019([arXiv 1908.02591](https://arxiv.org/abs/1908.02591)) Table 1·2의 실제 illicit 클래스 수치는 아래와 같습니다 — 세 지표 전부 부풀려져 있었습니다.
+>
 > 판정 근거는 [`kb/facts/contradictions.jsonl`](../kb/facts/contradictions.jsonl) `CTR:00007`.
+
+### Elliptic 데이터셋 실제 성능 (Weber et al. 2019, illicit 클래스)
+
+| 방법 | Precision | Recall | F1 |
+|---|---|---|---|
+| **RandomForest** (전체 피처) | **0.956** | 0.670 | **0.788** |
+| EvolveGCN | 0.850 | 0.624 | 0.720 |
+| Skip-GCN | 0.812 | 0.623 | 0.705 |
+| GCN | 0.812 | 0.512 | 0.628 |
+| MLP | 0.694 | 0.617 | 0.653 |
+| Logistic Regression | 0.404 | 0.593 | 0.481 |
+
+**주목할 점: 이 논문에서 가장 좋은 모델은 GNN이 아니라 RandomForest입니다.** 그래프 구조 정보(노드 임베딩)를 피처에 더하면 모든 모델이 개선되지만, 그것과 "GNN이 최고 성능"은 다른 이야기입니다. 삭제된 표는 GNN 우위를 암시하고 있었는데 논문은 그렇게 말하지 않습니다.
+
+또 하나 — 논문의 핵심 관찰은 성능 수치가 아니라 **다크마켓 폐쇄 이후 모든 모델의 성능이 무너졌다**는 것입니다. 학습 시점 이후 생태계가 바뀌면 모델이 따라가지 못한다는 뜻이고, 이게 실무에서 훨씬 중요한 함의입니다.
 
 학계의 실제 입장은 정반대입니다. Möser & Narayanan은 초록에서 이렇게 씁니다.
 
