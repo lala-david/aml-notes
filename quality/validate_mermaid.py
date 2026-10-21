@@ -2,6 +2,10 @@
 """
 Scan all markdown files for ```mermaid blocks, compile each via mmdc,
 report which blocks fail to parse.
+
+Usage:
+    python quality/validate_mermaid.py              # 저장소 전체 (느림)
+    python quality/validate_mermaid.py a.md b.md    # 지정 파일만
 """
 from __future__ import annotations
 
@@ -61,7 +65,10 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    files = sorted(iter_md(ROOT))
+    if len(sys.argv) > 1:
+        files = [Path(a).resolve() for a in sys.argv[1:]]
+    else:
+        files = sorted(iter_md(ROOT))
     bad = []
     ok_count = 0
 
