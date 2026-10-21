@@ -1,6 +1,6 @@
 # 1️⃣ Foundations — 기초
 
-> 가상자산 AML을 시작하는 **맨 첫 장**. 용어를 외우기 전에 **무엇이 있고 왜 있는지**부터 잡습니다. 마지막 업데이트: 2026-04-20.
+> 가상자산 AML을 시작하는 **맨 첫 장**. 용어를 외우기 전에 **무엇이 있고 왜 있는지**부터 잡습니다. 마지막 업데이트: 2026-10-21. 2026-10-21 판부터 이 폴더의 노트는 `research/2026-10-*` 도시에와 정본 보고서로 확인된 사실만 쓰고, 근거 없는 조직 인원·연봉·사례 금액·벤더 매핑은 삭제했습니다.
 
 ## 누가 먼저 읽어야 하나
 
@@ -15,11 +15,13 @@ flowchart LR
     A[what-is-aml.md<br/>뭔가·왜 존재하나] --> B[why-crypto-different.md<br/>가상자산은 왜 다른가]
     B --> C[key-concepts.md<br/>용어 10개 동심원]
     C --> Next[▶ 2-regulations/로]
+    C -."이상거래 세 갈래".-> FDS[4-technology/fds.md]
 
     style A fill:#fef3c7
     style B fill:#fce7f3
     style C fill:#dbeafe
     style Next fill:#d1fae5
+    style FDS fill:#f3f4f6
 ```
 
 ## 파일 인덱스
@@ -28,7 +30,7 @@ flowchart LR
 |---|---|---|---|
 | 1 | [`what-is-aml.md`](what-is-aml.md) | 자금세탁이 뭔가? 왜 막아야 하나? | Placement·Layering·Integration 3단계 예시로 말함 |
 | 2 | [`why-crypto-different.md`](why-crypto-different.md) | 공개 원장인데 왜 어려운가? | mixer·bridge·stablecoin이 왜 생겼는지 구조적으로 이해 |
-| 3 | [`key-concepts.md`](key-concepts.md) | KYC·KYT·CDD·EDD·STR·CTR·PEP·BO가 각각 뭔가? | 용어 A를 봤을 때 B와 어떻게 다른지 30초 내 설명 |
+| 3 | [`key-concepts.md`](key-concepts.md) | KYC·KYT·CDD·EDD·STR·CTR·PEP·BO가 각각 뭔가? | 용어 A를 봤을 때 B와 어떻게 다른지 30초 내 설명, 특금법 조문(§4 STR · §4의2 CTR · §5의2 고객확인 · §5의3 트래블룰)과 연결 |
 
 ## 핵심 출구
 
@@ -38,6 +40,8 @@ flowchart LR
 - "KYC vs KYT" 차이를 30초 안에 말할 수 있는가
 - 왜 가상자산 AML은 전통 금융 AML과 다른 도구가 필요한가
 - CDD·EDD·SDD 동심원 구조를 손으로 그릴 수 있는가
+- 한국에서 "이상거래"가 FDS·보이스피싱 임시조치 / 이용자보호법 §12 시장감시 / 특금법 §4 STR 중 무엇인지 구분할 수 있는가
+- 가상자산 트래블룰의 FATF 근거가 R.16 본문이 아니라 INR.15 §7(b)라는 것, 한국 「100만원 이상」 기준이 2027-02-18까지이고 2027-02-19부터 전건이라는 것을 말할 수 있는가
 
 ## 다음 단계
 

@@ -1,6 +1,6 @@
 # Day 1 — AML이 뭔가 + 자금세탁 3단계
 
-> 자금세탁(ML)의 본질과 고전 3단계 모델을 머릿속에 박는다. ⏱️ ~75분.
+> 자금세탁(ML)의 본질과 고전 3단계 모델을 머릿속에 박는다. ⏱️ ~75분. 마지막 업데이트: 2026-10-21.
 
 
 <!-- MAP-START -->
@@ -48,60 +48,61 @@ flowchart LR
 
 ## 💼 실무 현장 (Industry Reality)
 
+> 2026-10-21 판에서 이전 판의 특정 거래소 조직 인원, 은행·벤더 매핑, "1일 1억원·월 3억원 EDD" 기준, 해외 거래소 팀 구성·인원, "Coinbase Lynx" 같은 사내 시스템명, 알람 건수·FP 80% 같은 수치를 삭제했습니다. 모두 공개 1차 근거가 없습니다.
+
+### 3단계가 VASP 통제와 만나는 곳
+
+3단계 모델은 "어디서 무엇으로 막는가"를 정할 때 쓰입니다. 한국 법령과 FATF 문서로 확인되는 통제 지점만 표시하면 다음과 같습니다.
+
+```mermaid
+flowchart LR
+    P["Placement 배치<br/>범죄수익이 처음 VASP로 들어옴"] --> L["Layering 은닉<br/>이전·교환을 반복해 출처를 흐림"]
+    L --> I["Integration 통합<br/>합법 자산처럼 회수"]
+    P -.-> C1["고객확인 CDD·EDD<br/>특금법 §5의2"]
+    L -.-> C2["거래모니터링체계<br/>AML 업무규정 제76~81조"]
+    L -.-> C3["트래블룰 정보제공<br/>특금법 §5의3"]
+    I -.-> C4["의심거래보고 STR<br/>특금법 §4"]
+    style P fill:#e5eaf2,stroke:#1a2e4a
+    style L fill:#e5eaf2,stroke:#1a2e4a
+    style I fill:#e5eaf2,stroke:#1a2e4a
+```
+
+실제 사건은 세 단계가 겹쳐 일어납니다. 화살표는 "주로 걸리는 곳"을 뜻할 뿐 단계와 통제가 1:1로 대응하지는 않습니다.
+
 ### 한국 VASP에서는
 
-**Upbit(두나무) 기준**. AML 조직은 통상 **AMLO(자금세탁방지책임자, 임원급) 1명 + 분석가(Analyst) 6~12명 + KYT 엔지니어 2~4명 + 정책팀 2~3명** 규모. Placement 방어선은 **본인확인기관**(PASS·NICE) API로 실명확인 + **법인 실명계좌**(Upbit=K뱅크) 단일화로 타 명의 입금 원천 차단. Layering 탐지는 **람다256 VerifyVASP + Chainalysis KYT** 2중 운영 — 입출금 주소에 mixer·Lazarus 노출 ≥ 특정 %면 자동 **차단 큐(frozen queue)**로 떨어짐. Integration은 고액 원화 출금에서 잡힘: **1일 누적 1억원 초과 또는 월 3억원 초과 시 자금원천 증빙(EDD)** 요구가 사실상의 표준.
+- **조직**: 2026-08-13 전면 개정된 가상자산사업자 신고매뉴얼은 **AML 업무 인력 4인 이상**(겸직 인정 가능)을 요구합니다([금융위 2026-08-13](https://www.fsc.go.kr/no010101/87521)). 개별 거래소의 실제 인원은 공개되지 않습니다.
+- **탐지의 법적 근거**: 거래모니터링은 가상자산 전용 조문이 아니라 FIU 고시 「자금세탁방지 업무규정」 제76~81조 "거래모니터링체계"(2026-01-22 시행)에 있습니다. 본문에 "가상자산"이라는 단어는 나오지 않습니다([법제처 DRF](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000267264&type=XML)).
+- **"이상거래"는 세 제도**: 같은 신호라도 FDS·보이스피싱 임시조치(통신사기피해환급법, 거래소 적용 2026-10-01~), 시장감시(가상자산이용자보호법 §12), 의심거래보고(특금법 §4)로 출구가 다릅니다. 자금세탁 3단계와 직접 관련된 출구는 STR입니다.
 
-### 글로벌 거래소에서는
+### 글로벌에서는
 
-**Coinbase**는 컴플라이언스를 **3개 팀으로 분리** — FCI(Financial Crimes Investigations, STR 작성), Sanctions Operations(OFAC 제재), AML Advisory(정책·감사 대응). 2024년 말 기준 전체 컴플라이언스 ~500명 중 AML·STR 라인만 200명+. **Binance**는 2023 DOJ 합의($4.3B) 이후 AML을 완전 재편 — Chief Compliance Officer 신규 지정, 5개 지역 hub(두바이·런던·싱가포르·아부다비·바하마)에 독립 AMLO 배치, **DOJ·FinCEN 모니터 5년 상주**.
+- FATF 2021 RBA 가이던스 para 275~276은 지속 모니터링에 대해 "automated systems may be the only realistic method of monitoring transactions, and flagged transactions should go through human/expert analysis"라고 합니다 — 자동화와 사람 검토를 함께 요구합니다([FATF 2021 가이던스](https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf)).
+- FATF 7차 Targeted Update(2026-07-16)는 처음으로 VASP에 "transactions monitoring and blockchain analytics tools"로 급속 이전을 탐지하라고 권고했습니다([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
 
-### 기술 스택 (실제 도구)
+### 룰/코드 예시 (가상 예시)
 
-- **이벤트 스트림**: Kafka → Flink(또는 Spark Streaming)로 실시간 거래 → 룰 엔진
-- **그래프 DB**: Neo4j 또는 TigerGraph — 지갑 간 관계·카운터파티 2~6 hop
-- **KYT API**: Chainalysis KYT(REST, webhook 기반 alert) / Elliptic Navigator / TRM Labs API
-- **피처 스토어**: Feast 또는 자체. "24h 거래빈도·지갑연령·mixer 노출률" 등 모델 입력
-- **모델**: XGBoost(룰-based FP 감축) → 최근 Graph Neural Network(Coinbase "Lynx" 2024 발표) 쪽으로 이동
+아래는 학습용 의사코드입니다. 임계값과 필드명은 가상이며 특정 벤더 API가 아닙니다. 핵심은 **알람이 곧 차단이나 STR이 아니라는 점**입니다 — 사람 검토를 거쳐 법적 출구를 고릅니다.
 
-### 룰/코드 예시
-
-실제 KYT 룰 pseudocode — 한국 거래소 공통 패턴:
 ```
-RULE: mixer_proximity_high
-WHEN incoming_tx AND
-     chainalysis.exposure.mixer_direct > 0.05 AND
-     customer.kyc_tier < 3
-THEN action = FREEZE_AND_REVIEW
-     sla = 24h
-     notify = ["AMLO", "FCI_QUEUE"]
+RULE: mixer_exposure_review          # 임계값은 사내 위험평가로 정함
+WHEN incoming_tx AND exposure.mixer_direct > THRESHOLD
+THEN open_case(queue = "AML_REVIEW")  # 자동 차단·자동 STR 아님
+     reviewer decides -> STR(특금법 §4) | EDD | 기록 후 종결
 ```
 
-Chainalysis KYT 응답 JSON 샘플(실제 필드 이름):
-```json
-{
-  "address": "0xabc...",
-  "risk": "Severe",
-  "exposure": {
-    "direct": [{"category": "mixing", "percentage": 7.3}],
-    "indirect": [{"category": "sanctions", "percentage": 1.1}]
-  }
-}
-```
+입출금을 막는 조치는 근거 절차가 따로 있습니다. 가상자산이용자보호법 §11은 정당한 사유 없는 입출금 차단을 금지하고, 보이스피싱 임시조치는 통신사기피해환급법 §2의5의 통지·본인확인·해제 절차를 따릅니다([`../notes/4-technology/kyc-kyt.md`](../notes/4-technology/kyc-kyt.md) §6).
 
-### AML Analyst 하루 루틴 (주니어 기준)
+### 업무 감각 — 공개 근거가 있는 것만
 
-- **09:00~10:00** — 전날 밤 KYT Alert 큐 리뷰 (보통 30~80건, 80%가 False Positive)
-- **10:00~11:30** — EDD 케이스 처리 (자금원천 증빙 서류 심사)
-- **11:30~12:00** — Sanctions list refresh 검증 (OFAC SDN 일일 diff)
-- **13:00~15:00** — STR 초안 작성 (팀장 리뷰 후 KoFIU FIU-TIS 시스템 제출)
-- **15:00~16:30** — Weekly FP 분석 + 룰 튜닝 제안 (월 1회 룰 위원회)
-- **16:30~18:00** — 고위험 거래 수동 모니터링 + 이상 패턴 브리핑
+- 알람→STR 전환율의 공개 벤치마크는 은행권 자료(EY 2018, 리테일 평균 14%)뿐이고 **가상자산 전용 벤치마크는 없습니다**(B)([EY 2018](https://ey.com/content/dam/ey-unified-site/ey-com/en-uk/industries/financial-services/documents/ey-anti-money-laundering-transaction-monitoring-2018-emeia-survey.pdf)).
+- 하루 알람 건수·오탐 비율·처리 시간은 회사마다 다르고 공개 자료가 없습니다. 자기 조직에서 직접 재서 기록하세요.
 
 ### 자주 나오는 오해
 
-- **"AML은 법무 업무"** — 한국은 준법(Compliance)이지만 미국은 Financial Crimes로 별도 부서. 데이터·엔지니어링 역량이 법적 지식만큼 중요
-- **"룰만 많이 쌓으면 된다"** — 룰 간 충돌·FP 폭증이 오히려 탐지 품질을 떨어뜨림. "룰 10개 튜닝된 것 > 룰 100개 기계 생성"이 현장 원칙
+- **"AML은 법무 업무"** — 업무규정 제76~81조는 분석 절차·분석담당자·분석자료 5년 이상 보존을 요구합니다. 데이터·시스템 역량 없이는 이 조문을 이행할 수 없습니다.
+- **"룰만 많이 쌓으면 된다"** — FATF 2021 가이던스는 룰의 무결성을 "regular basis"로 검증하라고 요구합니다. 룰 수보다 검증 기록이 중요합니다.
+- **"이상거래 = 자금세탁"** — 한국에서 "이상거래"는 법률상 이용자보호법 §12(시장감시) 용어입니다. 자금세탁 의심은 특금법상 "의심되는 거래"입니다.
 
 ## 더 깊이 (선택)
 - [`../notes/1-foundations/key-concepts.md`](../notes/1-foundations/key-concepts.md) — 내일 다룰 용어 미리보기

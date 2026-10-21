@@ -49,7 +49,7 @@
 
     <section class="title-block">
       <h1 class="title-block__heading">🔁 Week 1 리뷰 + 마인드맵</h1>
-      <p class="title-block__lead">1주일 학습을 한 장에 시각화.</p>
+      <p class="title-block__lead">1주일 학습을 한 장에 시각화.  ~90분. 마지막 업데이트: 2026-10-21.</p>
       <span class="title-block__time">⏱ ~90분</span>
     </section>
 
@@ -150,8 +150,8 @@
   </article>
   <div class="article-divider">
     <div class="article-divider__kicker">보조 읽기</div>
-    <h2 class="article-divider__title">🛡️ AML Notes — 가상자산 자금세탁방지 학습</h2>
-    <p class="article-divider__lead">가상자산·온체인 업계의 AML(Anti-Money Laundering) 학습 노트. **60일 데일리 챌린지** + **토픽별 산문 교재** + **자동화 미니 프로젝트**. 치트시트가 아니라 **위에서 아래로 읽히는 교재**를 지향합니다.</p>
+    <h2 class="article-divider__title">🛡️ 가상자산 AML 지식베이스</h2>
+    <p class="article-divider__lead">**질의 가능한 규제 지식 그래프 + 매일 갱신되는 수집 파이프라인.** 산문 교재가 아니라, 산문 아래에 시점 질의가 되는 그래프를 깐 지식 저장소.</p>
     <div class="article-divider__meta">README.md</div>
   </div>
 
@@ -161,334 +161,376 @@
       <span class="article-head__path">README.md</span>
     </header>
     <div class="article-body">
-<p><img alt="Made with Markdown" src="https://img.shields.io/badge/Made%20with-Markdown-1f425f?logo=markdown" />
-<img alt="Last updated" src="https://img.shields.io/badge/updated-2026--04--21-blue" />
+<p><img alt="as of" src="https://img.shields.io/badge/as%20of-2026--10--21-blue" />
 <img alt="License CC BY 4.0" src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey" />
-<img alt="Topics" src="https://img.shields.io/badge/topics-30%2B-orange" />
-<img alt="Daily Plans" src="https://img.shields.io/badge/daily%20plans-60-success" />
-<img alt="Mini Projects" src="https://img.shields.io/badge/projects-6-purple" />
-<img alt="Prose Revamp" src="https://img.shields.io/badge/prose%20revamp-complete-brightgreen" />
-<img alt="Print Ready" src="https://img.shields.io/badge/print%20ready-A4-red" /></p>
+<img alt="nodes" src="https://img.shields.io/badge/KB%20nodes-333-059669" />
+<img alt="feeds" src="https://img.shields.io/badge/sources-33%20live%20%2F%2050-ea580c" />
+<img alt="docs" src="https://img.shields.io/badge/design%20docs-10-orange" />
+<img alt="status" src="https://img.shields.io/badge/KB-under%20construction-yellow" /></p>
 <hr />
-<h2>✨ 이 노트의 특징</h2>
-<ul>
-<li>✅ <strong>산문 교재 스타일</strong> — 2026-04 전면 개편. 모든 노트가 prose intro + 용어 선설명 + 실무 포인트로 구성</li>
-<li>✅ <strong>초심자 read-through 가능</strong> — 글로서리·외부 검색 점프 없이 위에서 아래로 이해됨</li>
-<li>✅ <strong>조문 → 실무 번역</strong> — 특금법 §·이용자보호법 §가 실제 시스템의 어느 지점에 매핑되는지 명시</li>
-<li>✅ <strong>팩트 정확성</strong> — 감독당국 검사·STR 작성에 인용 가능한 정확도를 목표</li>
-<li>✅ <strong>한국 VASP 실무 관점</strong> — KoFIU 검사·DAXA 기준·본인확인기관·ISMS 등 한국 특수 인프라 반영</li>
-<li>🖨 <strong>A4 프린트 준비 완료</strong> — 60일 전체가 인쇄 최적화 HTML 패킷으로 생성돼 있어 종이 학습 가능</li>
-</ul>
-<hr />
-<h2>👋 처음이라면 — 5초 안에 시작</h2>
-<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 935.31px; background-color: transparent;" viewBox="0 0 935.3096313476562 576" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M150.153,288.5L154.237,288.417C158.32,288.333,166.487,288.167,174.07,288.083C181.653,288,188.653,288,192.153,288L195.653,288" id="my-svg-L_Start_Q_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Start_Q_0" data-points="W3sieCI6MTUwLjE1MzM3ODc4MzIyNDkyLCJ5IjoyODguNX0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjI4OH0seyJ4IjoxOTkuNjUzMzgxMzQ3NjU2MjUsInkiOjI4OH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M284.02,250.632L305.678,216.194C327.335,181.755,370.651,112.877,407.678,78.439C444.705,44,475.445,44,490.815,44L506.185,44" id="my-svg-L_Q_A_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_A_0" data-points="W3sieCI6Mjg0LjAyMDExNTM1OTMxMjc0LCJ5IjoyNTAuNjMyMzU5MDExNjU2NX0seyJ4Ijo0MTMuOTY1ODgxMzQ3NjU2MjUsInkiOjQ0fSx7IngiOjUxMC4xODQ2MzEzNDc2NTYyNSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M294.429,261.041L314.351,245.201C334.274,229.361,374.12,197.68,410.823,181.84C447.526,166,481.086,166,497.866,166L514.646,166" id="my-svg-L_Q_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_B_0" data-points="W3sieCI6Mjk0LjQyODUxNDIxMTM0MjksInkiOjI2MS4wNDA3NTc4NjM2ODY2fSx7IngiOjQxMy45NjU4ODEzNDc2NTYyNSwieSI6MTY2fSx7IngiOjUxOC42NDU1Njg4NDc2NTYyLCJ5IjoxNjZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M321.388,288L336.817,288C352.247,288,383.107,288,413.299,288C443.492,288,473.018,288,487.781,288L502.544,288" id="my-svg-L_Q_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_C_0" data-points="W3sieCI6MzIxLjM4Nzc1NjM0NzY1NjI1LCJ5IjoyODh9LHsieCI6NDEzLjk2NTg4MTM0NzY1NjI1LCJ5IjoyODh9LHsieCI6NTA2LjU0NDAwNjM0NzY1NjI1LCJ5IjoyODh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M294.429,314.959L314.351,330.799C334.274,346.639,374.12,378.32,410.816,394.16C447.513,410,481.06,410,497.833,410L514.607,410" id="my-svg-L_Q_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_D_0" data-points="W3sieCI6Mjk0LjQyODUxNDIxMTM0MjksInkiOjMxNC45NTkyNDIxMzYzMTM0fSx7IngiOjQxMy45NjU4ODEzNDc2NTYyNSwieSI6NDEwfSx7IngiOjUxOC42MDY1MDYzNDc2NTYyLCJ5Ijo0MTB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M284.02,325.368L305.678,359.806C327.335,394.245,370.651,463.123,409.623,497.561C448.596,532,483.226,532,500.541,532L517.857,532" id="my-svg-L_Q_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_E_0" data-points="W3sieCI6Mjg0LjAyMDExNTM1OTMxMjc0LCJ5IjozMjUuMzY3NjQwOTg4MzQzNX0seyJ4Ijo0MTMuOTY1ODgxMzQ3NjU2MjUsInkiOjUzMn0seyJ4Ijo1MjEuODU2NTA2MzQ3NjU2MiwieSI6NTMyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M678.841,44L683.614,44C688.388,44,697.935,44,706.208,44C714.482,44,721.482,44,724.982,44L728.482,44" id="my-svg-L_A_A1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_A1_0" data-points="W3sieCI6Njc4Ljg0MDg4MTM0NzY1NjIsInkiOjQ0fSx7IngiOjcwNy40ODE1MDYzNDc2NTYyLCJ5Ijo0NH0seyJ4Ijo3MzIuNDgxNTA2MzQ3NjU2MiwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M670.38,166L676.564,166C682.747,166,695.114,166,706.178,166C717.242,166,727.002,166,731.883,166L736.763,166" id="my-svg-L_B_B1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_B1_0" data-points="W3sieCI6NjcwLjM3OTk0Mzg0NzY1NjIsInkiOjE2Nn0seyJ4Ijo3MDcuNDgxNTA2MzQ3NjU2MiwieSI6MTY2fSx7IngiOjc0MC43NjI3NTYzNDc2NTYyLCJ5IjoxNjZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M682.482,288L686.648,288C690.815,288,699.148,288,706.915,288C714.682,288,721.883,288,725.483,288L729.083,288" id="my-svg-L_C_C1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_C1_0" data-points="W3sieCI6NjgyLjQ4MTUwNjM0NzY1NjIsInkiOjI4OH0seyJ4Ijo3MDcuNDgxNTA2MzQ3NjU2MiwieSI6Mjg4fSx7IngiOjczMy4wODMwNjg4NDc2NTYyLCJ5IjoyODh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M670.419,410L676.596,410C682.773,410,695.127,410,706.455,410C717.784,410,728.086,410,733.237,410L738.388,410" id="my-svg-L_D_D1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_D1_0" data-points="W3sieCI6NjcwLjQxOTAwNjM0NzY1NjIsInkiOjQxMH0seyJ4Ijo3MDcuNDgxNTA2MzQ3NjU2MiwieSI6NDEwfSx7IngiOjc0Mi4zODc3NTYzNDc2NTYyLCJ5Ijo0MTB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M667.169,532L673.888,532C680.607,532,694.044,532,707.329,532C720.614,532,733.747,532,740.314,532L746.88,532" id="my-svg-L_E_E1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_E1_0" data-points="W3sieCI6NjY3LjE2OTAwNjM0NzY1NjIsInkiOjUzMn0seyJ4Ijo3MDcuNDgxNTA2MzQ3NjU2MiwieSI6NTMyfSx7IngiOjc1MC44Nzk5NDM4NDc2NTYyLCJ5Ijo1MzJ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Start_Q_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(413.96588134765625, 44)"><g class="label" data-id="L_Q_A_0" transform="translate(-67.578125, -10.5)"><foreignObject width="135.15625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>🎯 처음부터 체계적으로</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(413.96588134765625, 166)"><g class="label" data-id="L_Q_B_0" transform="translate(-49.4296875, -10.5)"><foreignObject width="98.859375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>📚 토픽만 빠르게</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(413.96588134765625, 288)"><g class="label" data-id="L_Q_C_0" transform="translate(-49.4296875, -10.5)"><foreignObject width="98.859375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>🛠️ 코드로 배우기</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(413.96588134765625, 410)"><g class="label" data-id="L_Q_D_0" transform="translate(-37.328125, -10.5)"><foreignObject width="74.65625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>🔬 깊이 파기</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(413.96588134765625, 532)"><g class="label" data-id="L_Q_E_0" transform="translate(-40.765625, -10.5)"><foreignObject width="81.53125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>🖨 종이로 공부</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_A_A1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_B1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_C1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_D_D1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_E_E1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-Start-0" data-look="classic" transform="translate(78.82669067382812, 288)"><g class="basic label-container outer-path"><path d="M-52.8359375 -18 C-31.048026152942175 -18, -9.26011480588435 -18, 52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 C53.270714380319085 -17.986057551690028, 53.70549126063817 -17.97211510338005, 53.98920145965283 -17.963017069506055 C54.448426682475954 -17.91871616455944, 54.907651905299076 -17.874415259612828, 55.13772641032111 -17.85222024881843 C55.5673443884574 -17.782762945850536, 55.99696236659369 -17.71330564288264, 56.2767928166247 -17.668064825839178 C56.70054864546256 -17.571345323172146, 57.12430447430042 -17.474625820505114, 57.40172001037113 -17.41130753470253 C57.712577809528895 -17.319046571638392, 58.02343560868666 -17.22678560857425, 58.50788542442517 -17.083003446192034 C58.91547019804111 -16.93300848182902, 59.32305497165706 -16.78301351746601, 59.59074358782873 -16.68450163222839 C59.88460320062047 -16.554418698681186, 60.1784628134122 -16.424335765133986, 60.645844804116045 -16.217439622243546 C61.04901652239432 -16.00710519506158, 61.45218824067259 -15.796770767879616, 61.668853436070876 -15.683736674221011 C62.0474177549365 -15.4542487594338, 62.42598207380211 -15.224760844646589, 62.65556572178988 -15.085585888053133 C62.88651673393726 -14.924484459687294, 63.11746774608466 -14.763383031321457, 63.60192704884189 -14.425445193623219 C63.78955248617091 -14.275818900275894, 63.977177923499944 -14.126192606928571, 64.50404861554019 -13.706027250644421 C64.70557504539087 -13.523006279151172, 64.90710147524156 -13.339985307657924, 65.35822341086275 -12.930288301759097 C65.56736889199424 -12.714328421327501, 65.77651437312572 -12.498368540895905, 66.16094144735568 -12.101416024703706 C66.37875870555843 -11.845555479065652, 66.59657596376118 -11.589694933427596, 66.90890418442453 -11.222816433457204 C67.10972562679491 -10.953733995890651, 67.31054706916531 -10.684651558324099, 67.5990380827452 -10.298099882199057 C67.7761322029888 -10.026035757075068, 67.95322632323241 -9.753971631951078, 68.22850723409623 -9.331066229589453 C68.42451643127535 -8.983032051914451, 68.62052562845447 -8.63499787423945, 68.794725014714 -8.325689224335035 C68.96972440649293 -7.9622992429189585, 69.14472379827185 -7.598909261502882, 69.29536471428463 -7.286100176203093 C69.4241708960536 -6.967946416935643, 69.55297707782255 -6.649792657668192, 69.72836909689568 -6.216570979583546 C69.80612728829178 -5.982375696183815, 69.88388547968789 -5.748180412784083, 70.0919588546599 -5.121496559358589 C70.19621883563127 -4.723908065353144, 70.30047881660265 -4.326319571347698, 70.38463991927283 -4.005376811213661 C70.46692083646859 -3.5828816914914206, 70.54920175366435 -3.160386571769181, 70.6052096014601 -2.872798110600833 C70.64432963644374 -2.56939084439242, 70.68344967142737 -2.265983578184007, 70.75276153308556 -1.728414466338275 C70.76821361956496 -1.4877357467219698, 70.78366570604436 -1.2470570271056647, 70.82668939161238 -0.576928396289793 C70.82668939161238 -0.13173557755003573, 70.82668939161238 0.3134572411897215, 70.82668939161238 0.5769283962897886 C70.80039130395043 0.9865423390589069, 70.77409321628848 1.396156281828025, 70.75276153308556 1.7284144663382628 C70.71495666444314 2.0216215621132316, 70.67715179580071 2.3148286578882002, 70.6052096014601 2.8727981106008205 C70.5363435609189 3.2264106739371328, 70.46747752037767 3.580023237273445, 70.38463991927283 4.005376811213657 C70.2793120406292 4.407037661873205, 70.17398416198556 4.808698512532753, 70.0919588546599 5.121496559358577 C69.97014080690268 5.488393110133221, 69.84832275914545 5.855289660907865, 69.72836909689569 6.216570979583534 C69.5940533655805 6.5483334327500575, 69.45973763426531 6.88009588591658, 69.29536471428463 7.286100176203088 C69.10682155539926 7.677614079805893, 68.91827839651388 8.069127983408697, 68.794725014714 8.325689224335031 C68.6638046738981 8.558151546575722, 68.53288433308221 8.790613868816413, 68.22850723409623 9.33106622958945 C68.02392516756082 9.645359221764735, 67.81934310102542 9.959652213940023, 67.59903808274521 10.298099882199049 C67.3921649361317 10.575291052129772, 67.18529178951822 10.852482222060495, 66.90890418442454 11.2228164334572 C66.61795773334676 11.564578690215225, 66.32701128226897 11.906340946973248, 66.16094144735568 12.101416024703695 C65.96877096941044 12.299847820671815, 65.7766004914652 12.498279616639936, 65.35822341086276 12.930288301759093 C65.1258787457901 13.141297579075117, 64.89353408071744 13.352306856391142, 64.5040486155402 13.706027250644409 C64.27933745715366 13.885228419642619, 64.0546262987671 14.064429588640827, 63.601927048841894 14.425445193623217 C63.35262422142272 14.59934805388537, 63.10332139400355 14.773250914147525, 62.655565721789884 15.085585888053126 C62.330702454058 15.282519910060666, 62.005839186326114 15.479453932068203, 61.66885343607088 15.68373667422101 C61.291093277382295 15.880813907041917, 60.9133331186937 16.077891139862825, 60.64584480411605 16.217439622243543 C60.42660602506879 16.314490126240454, 60.20736724602153 16.41154063023736, 59.59074358782874 16.68450163222839 C59.24177675599085 16.812924652158767, 58.89280992415296 16.94134767208914, 58.50788542442518 17.08300344619203 C58.24960696035381 17.159659138597092, 57.99132849628243 17.236314831002154, 57.40172001037115 17.411307534702527 C57.0742601348171 17.48604811442235, 56.74680025926305 17.560788694142172, 56.276792816624706 17.668064825839174 C55.9046235008311 17.728234274600535, 55.532454185037494 17.7884037233619, 55.13772641032112 17.85222024881843 C54.75901038569017 17.888754528241922, 54.38029436105921 17.92528880766541, 53.98920145965283 17.963017069506055 C53.67023457410092 17.973245716694326, 53.351267688549 17.983474363882596, 52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 C18.616193682610863 18, -15.603550134778274 18, -52.8359375 18 C-53.28597275171068 17.985568245418115, -53.73600800342136 17.971136490836233, -53.989201459652826 17.963017069506055 C-54.23519992252227 17.939285893649476, -54.481198385391714 17.915554717792897, -55.137726410321115 17.85222024881843 C-55.544009161104725 17.786535604441525, -55.950291911888336 17.720850960064617, -56.2767928166247 17.668064825839174 C-56.55324228133925 17.604967039519426, -56.82969174605381 17.541869253199682, -57.40172001037113 17.41130753470253 C-57.84328450138512 17.28025351158889, -58.28484899239911 17.149199488475247, -58.50788542442516 17.083003446192038 C-58.93554206634218 16.925621848751913, -59.3631987082592 16.768240251311788, -59.59074358782873 16.68450163222839 C-59.86755433186781 16.561965727141267, -60.14436507590689 16.43942982205414, -60.645844804116045 16.217439622243546 C-60.921749226501646 16.073500461810195, -61.197653648887254 15.929561301376841, -61.668853436070876 15.683736674221013 C-62.024543540972566 15.468115242362533, -62.38023364587426 15.252493810504054, -62.65556572178986 15.085585888053139 C-62.90881139841822 14.908932666865844, -63.16205707504659 14.732279445678552, -63.60192704884189 14.42544519362322 C-63.87976012146637 14.203880711653765, -64.15759319409085 13.982316229684308, -64.50404861554019 13.706027250644423 C-64.72645726095993 13.504041603484499, -64.94886590637968 13.302055956324574, -65.35822341086275 12.930288301759106 C-65.66219478131903 12.616412905249355, -65.96616615177531 12.302537508739604, -66.16094144735568 12.101416024703703 C-66.45755563178447 11.752996125848412, -66.75416981621328 11.404576226993122, -66.90890418442453 11.222816433457206 C-67.07788782288785 10.996393752642525, -67.24687146135116 10.769971071827845, -67.5990380827452 10.29809988219906 C-67.82146100919589 9.956398538252214, -68.04388393564658 9.614697194305371, -68.22850723409623 9.33106622958946 C-68.43655466748689 8.96165694451728, -68.64460210087755 8.592247659445102, -68.794725014714 8.325689224335036 C-68.94282578632355 8.018154803238934, -69.0909265579331 7.710620382142832, -69.29536471428463 7.286100176203095 C-69.45071671206047 6.902377738170208, -69.60606870983631 6.518655300137321, -69.72836909689568 6.2165709795835475 C-69.84891954606445 5.853492233792899, -69.96946999523323 5.49041348800225, -70.0919588546599 5.121496559358584 C-70.17144450775231 4.818383314817223, -70.25093016084473 4.515270070275861, -70.38463991927281 4.005376811213663 C-70.44553484665565 3.692694229250306, -70.50642977403848 3.380011647286949, -70.6052096014601 2.8727981106008347 C-70.64642337525542 2.5531522196244363, -70.68763714905076 2.233506328648038, -70.75276153308556 1.7284144663382852 C-70.78102986830648 1.2881123274830324, -70.80929820352739 0.8478101886277797, -70.82668939161238 0.5769283962897952 C-70.82668939161238 0.15398182959771367, -70.82668939161238 -0.26896473709436786, -70.82668939161238 -0.5769283962897864 C-70.80276361697311 -0.9495916488339841, -70.77883784233386 -1.3222549013781817, -70.75276153308556 -1.7284144663382603 C-70.69811922661154 -2.1522094050069183, -70.64347692013752 -2.576004343675576, -70.6052096014601 -2.8727981106008262 C-70.54656338075253 -3.1739340590510956, -70.48791716004496 -3.4750700075013645, -70.38463991927283 -4.005376811213655 C-70.29728574516055 -4.338496136642332, -70.20993157104826 -4.671615462071008, -70.0919588546599 -5.121496559358575 C-69.97357267818948 -5.478056860611769, -69.85518650171907 -5.834617161864963, -69.72836909689569 -6.2165709795835244 C-69.6306602408197 -6.457913743163466, -69.5329513847437 -6.699256506743408, -69.29536471428463 -7.286100176203086 C-69.09892482201559 -7.694011815640116, -68.90248492974655 -8.101923455077145, -68.794725014714 -8.32568922433503 C-68.57548660195148 -8.714969226491505, -68.35624818918895 -9.10424922864798, -68.22850723409623 -9.331066229589455 C-68.0275462528206 -9.639796262408183, -67.82658527154499 -9.94852629522691, -67.59903808274521 -10.298099882199054 C-67.45093687853276 -10.496542003546471, -67.3028356743203 -10.694984124893889, -66.90890418442454 -11.2228164334572 C-66.61461683178639 -11.568503103290707, -66.32032947914824 -11.914189773124214, -66.16094144735568 -12.101416024703695 C-65.84020136885049 -12.432606489010485, -65.51946129034529 -12.763796953317275, -65.35822341086276 -12.930288301759086 C-65.160669775542 -13.109701286374634, -64.96311614022126 -13.28911427099018, -64.5040486155402 -13.706027250644407 C-64.18975754829312 -13.956666013137408, -63.87546648104603 -14.207304775630408, -63.601927048841894 -14.425445193623215 C-63.39204818207614 -14.571847605569298, -63.18216931531038 -14.718250017515379, -62.655565721789884 -15.085585888053124 C-62.351417359916496 -15.269962412394943, -62.04726899804311 -15.454338936736761, -61.66885343607088 -15.683736674221008 C-61.32039438980701 -15.865527535458202, -60.97193534354312 -16.0473183966954, -60.64584480411605 -16.217439622243543 C-60.26392594419708 -16.386503772309222, -59.882007084278094 -16.5555679223749, -59.59074358782874 -16.684501632228386 C-59.30393077407113 -16.790051398959775, -59.01711796031351 -16.895601165691165, -58.50788542442518 -17.08300344619203 C-58.11200279853225 -17.200499331526743, -57.71612017263932 -17.31799521686146, -57.40172001037115 -17.411307534702523 C-57.07205131531944 -17.486552263058794, -56.742382620267726 -17.56179699141506, -56.276792816624706 -17.668064825839174 C-55.99520998440181 -17.713588954445495, -55.713627152178915 -17.759113083051815, -55.13772641032112 -17.85222024881843 C-54.81210709790767 -17.88363235227244, -54.48648778549421 -17.915044455726445, -53.98920145965283 -17.963017069506055 C-53.56570466185987 -17.976597787524764, -53.142207864066904 -17.990178505543476, -52.83593750000001 -18 C-52.83593750000001 -18, -52.83593750000001 -18, -52.8359375 -18" stroke="none" stroke-width="0" fill="#fef3c7" style="fill:#fef3c7 !important;stroke:#f59e0b !important"/><path d="M-52.8359375 -18 C-17.242458979360947 -18, 18.351019541278106 -18, 52.8359375 -18 M-52.8359375 -18 C-30.056601265769434 -18, -7.277265031538867 -18, 52.8359375 -18 M52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 M52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 M52.8359375 -18 C53.24369755506609 -17.98692392869083, 53.65145761013219 -17.97384785738166, 53.98920145965283 -17.963017069506055 M52.8359375 -18 C53.144415423063734 -17.9901077134232, 53.45289334612747 -17.980215426846396, 53.98920145965283 -17.963017069506055 M53.98920145965283 -17.963017069506055 C54.225383299522825 -17.940232891464017, 54.46156513939282 -17.91744871342198, 55.13772641032111 -17.85222024881843 M53.98920145965283 -17.963017069506055 C54.44457679535851 -17.919087558539495, 54.89995213106418 -17.87515804757294, 55.13772641032111 -17.85222024881843 M55.13772641032111 -17.85222024881843 C55.43211733772662 -17.804625406711246, 55.72650826513213 -17.75703056460406, 56.2767928166247 -17.668064825839178 M55.13772641032111 -17.85222024881843 C55.41478590378481 -17.80742741854368, 55.691845397248514 -17.76263458826893, 56.2767928166247 -17.668064825839178 M56.2767928166247 -17.668064825839178 C56.674302156525954 -17.57733591299758, 57.0718114964272 -17.48660700015598, 57.40172001037113 -17.41130753470253 M56.2767928166247 -17.668064825839178 C56.523029856001756 -17.611862828448213, 56.76926689537881 -17.55566083105725, 57.40172001037113 -17.41130753470253 M57.40172001037113 -17.41130753470253 C57.77858835034569 -17.299454989620365, 58.15545669032026 -17.187602444538197, 58.50788542442517 -17.083003446192034 M57.40172001037113 -17.41130753470253 C57.64289447966158 -17.339728218167746, 57.88406894895202 -17.268148901632966, 58.50788542442517 -17.083003446192034 M58.50788542442517 -17.083003446192034 C58.88531498604781 -16.944105878594282, 59.262744547670444 -16.80520831099653, 59.59074358782873 -16.68450163222839 M58.50788542442517 -17.083003446192034 C58.8810297301084 -16.945682892392455, 59.25417403579163 -16.808362338592875, 59.59074358782873 -16.68450163222839 M59.59074358782873 -16.68450163222839 C59.93245341413335 -16.53323682858519, 60.27416324043796 -16.381972024941984, 60.645844804116045 -16.217439622243546 M59.59074358782873 -16.68450163222839 C59.90406171764703 -16.545804990409927, 60.21737984746533 -16.40710834859146, 60.645844804116045 -16.217439622243546 M60.645844804116045 -16.217439622243546 C60.9831032081904 -16.04149212886227, 61.32036161226476 -15.865544635480996, 61.668853436070876 -15.683736674221011 M60.645844804116045 -16.217439622243546 C60.98979335902076 -16.03800188145932, 61.33374191392547 -15.858564140675094, 61.668853436070876 -15.683736674221011 M61.668853436070876 -15.683736674221011 C62.06026702463703 -15.446459456630645, 62.45168061320318 -15.209182239040281, 62.65556572178988 -15.085585888053133 M61.668853436070876 -15.683736674221011 C62.05398505443867 -15.450267623881844, 62.43911667280647 -15.216798573542677, 62.65556572178988 -15.085585888053133 M62.65556572178988 -15.085585888053133 C62.93375401486542 -14.891533777380745, 63.21194230794097 -14.697481666708358, 63.60192704884189 -14.425445193623219 M62.65556572178988 -15.085585888053133 C62.991350783205384 -14.851356765110705, 63.32713584462089 -14.617127642168276, 63.60192704884189 -14.425445193623219 M63.60192704884189 -14.425445193623219 C63.922521019818355 -14.16978003313335, 64.24311499079482 -13.914114872643479, 64.50404861554019 -13.706027250644421 M63.60192704884189 -14.425445193623219 C63.89366252939748 -14.192793911287309, 64.18539800995308 -13.9601426289514, 64.50404861554019 -13.706027250644421 M64.50404861554019 -13.706027250644421 C64.80188390974264 -13.435541116739808, 65.0997192039451 -13.165054982835194, 65.35822341086275 -12.930288301759097 M64.50404861554019 -13.706027250644421 C64.84097372537036 -13.400040780446552, 65.17789883520055 -13.094054310248683, 65.35822341086275 -12.930288301759097 M65.35822341086275 -12.930288301759097 C65.58335063562353 -12.697825958904701, 65.8084778603843 -12.465363616050308, 66.16094144735568 -12.101416024703706 M65.35822341086275 -12.930288301759097 C65.53006626494373 -12.75284644635978, 65.70190911902472 -12.575404590960462, 66.16094144735568 -12.101416024703706 M66.16094144735568 -12.101416024703706 C66.42091959977488 -11.796030893696171, 66.68089775219407 -11.490645762688636, 66.90890418442453 -11.222816433457204 M66.16094144735568 -12.101416024703706 C66.36925476189064 -11.856719352087552, 66.57756807642559 -11.612022679471398, 66.90890418442453 -11.222816433457204 M66.90890418442453 -11.222816433457204 C67.0976544218121 -10.969908310858242, 67.28640465919965 -10.71700018825928, 67.5990380827452 -10.298099882199057 M66.90890418442453 -11.222816433457204 C67.08476594455436 -10.987177696219167, 67.2606277046842 -10.75153895898113, 67.5990380827452 -10.298099882199057 M67.5990380827452 -10.298099882199057 C67.84225502081782 -9.924453352426982, 68.08547195889042 -9.550806822654907, 68.22850723409623 -9.331066229589453 M67.5990380827452 -10.298099882199057 C67.76105656463649 -10.04919598595994, 67.92307504652779 -9.800292089720825, 68.22850723409623 -9.331066229589453 M68.22850723409623 -9.331066229589453 C68.44085781142641 -8.954016276712078, 68.6532083887566 -8.576966323834702, 68.794725014714 -8.325689224335035 M68.22850723409623 -9.331066229589453 C68.42289261820501 -8.985915296449736, 68.61727800231381 -8.64076436331002, 68.794725014714 -8.325689224335035 M68.794725014714 -8.325689224335035 C68.96582981057372 -7.970386454676179, 69.13693460643346 -7.615083685017324, 69.29536471428463 -7.286100176203093 M68.794725014714 -8.325689224335035 C68.95521166711693 -7.992435256756104, 69.11569831951985 -7.659181289177174, 69.29536471428463 -7.286100176203093 M69.29536471428463 -7.286100176203093 C69.4339059965728 -6.943900530437815, 69.57244727886098 -6.601700884672536, 69.72836909689568 -6.216570979583546 M69.29536471428463 -7.286100176203093 C69.4439460122986 -6.919101497484597, 69.59252731031258 -6.5521028187661, 69.72836909689568 -6.216570979583546 M69.72836909689568 -6.216570979583546 C69.80943900801765 -5.972401324020383, 69.89050891913962 -5.728231668457219, 70.0919588546599 -5.121496559358589 M69.72836909689568 -6.216570979583546 C69.842708411192 -5.872199182418749, 69.95704772548834 -5.527827385253952, 70.0919588546599 -5.121496559358589 M70.0919588546599 -5.121496559358589 C70.19801417915895 -4.717061642375324, 70.30406950365798 -4.312626725392057, 70.38463991927283 -4.005376811213661 M70.0919588546599 -5.121496559358589 C70.17453762705364 -4.806587910354898, 70.25711639944738 -4.491679261351205, 70.38463991927283 -4.005376811213661 M70.38463991927283 -4.005376811213661 C70.46984448298933 -3.5678693845203044, 70.55504904670585 -3.130361957826948, 70.6052096014601 -2.872798110600833 M70.38463991927283 -4.005376811213661 C70.45063208526953 -3.6665209862698345, 70.51662425126622 -3.3276651613260086, 70.6052096014601 -2.872798110600833 M70.6052096014601 -2.872798110600833 C70.64801244906796 -2.5408276769325004, 70.69081529667584 -2.208857243264168, 70.75276153308556 -1.728414466338275 M70.6052096014601 -2.872798110600833 C70.65854823299269 -2.459114217338215, 70.71188686452527 -2.045430324075597, 70.75276153308556 -1.728414466338275 M70.75276153308556 -1.728414466338275 C70.78231762503219 -1.2680544770215643, 70.81187371697881 -0.8076944877048533, 70.82668939161238 -0.576928396289793 M70.75276153308556 -1.728414466338275 C70.78230685639285 -1.2682222072715987, 70.81185217970013 -0.8080299482049227, 70.82668939161238 -0.576928396289793 M70.82668939161238 -0.576928396289793 C70.82668939161238 -0.19564390336187443, 70.82668939161238 0.18564058956604412, 70.82668939161238 0.5769283962897886 M70.82668939161238 -0.576928396289793 C70.82668939161238 -0.2174702789406609, 70.82668939161238 0.14198783840847118, 70.82668939161238 0.5769283962897886 M70.82668939161238 0.5769283962897886 C70.8044336608623 0.9235793672247508, 70.78217793011223 1.2702303381597129, 70.75276153308556 1.7284144663382628 M70.82668939161238 0.5769283962897886 C70.80765631312708 0.8733839569226958, 70.78862323464179 1.169839517555603, 70.75276153308556 1.7284144663382628 M70.75276153308556 1.7284144663382628 C70.71559815041654 2.016646323579251, 70.67843476774752 2.304878180820239, 70.6052096014601 2.8727981106008205 M70.75276153308556 1.7284144663382628 C70.69785165628824 2.1542846275967595, 70.6429417794909 2.580154788855256, 70.6052096014601 2.8727981106008205 M70.6052096014601 2.8727981106008205 C70.53870210720618 3.2143000372308252, 70.47219461295226 3.5558019638608296, 70.38463991927283 4.005376811213657 M70.6052096014601 2.8727981106008205 C70.55743367494327 3.118117395819147, 70.50965774842642 3.3634366810374736, 70.38463991927283 4.005376811213657 M70.38463991927283 4.005376811213657 C70.28895076816141 4.370281016341936, 70.19326161704998 4.735185221470214, 70.0919588546599 5.121496559358577 M70.38463991927283 4.005376811213657 C70.29282522259315 4.355506042394528, 70.20101052591347 4.705635273575398, 70.0919588546599 5.121496559358577 M70.0919588546599 5.121496559358577 C69.95868608734392 5.522892900382448, 69.82541332002796 5.924289241406319, 69.72836909689569 6.216570979583534 M70.0919588546599 5.121496559358577 C70.00591396644816 5.380650053261129, 69.91986907823645 5.639803547163681, 69.72836909689569 6.216570979583534 M69.72836909689569 6.216570979583534 C69.5939523706066 6.548582892288206, 69.45953564431751 6.880594804992876, 69.29536471428463 7.286100176203088 M69.72836909689569 6.216570979583534 C69.55736133100196 6.638963467551287, 69.38635356510822 7.061355955519041, 69.29536471428463 7.286100176203088 M69.29536471428463 7.286100176203088 C69.14248867696384 7.603550538722895, 68.98961263964306 7.921000901242701, 68.794725014714 8.325689224335031 M69.29536471428463 7.286100176203088 C69.10595734454893 7.679408632127762, 68.91654997481322 8.072717088052437, 68.794725014714 8.325689224335031 M68.794725014714 8.325689224335031 C68.58144354230498 8.704392075688247, 68.36816206989594 9.083094927041463, 68.22850723409623 9.33106622958945 M68.794725014714 8.325689224335031 C68.65036112667059 8.582021925984957, 68.50599723862716 8.838354627634883, 68.22850723409623 9.33106622958945 M68.22850723409623 9.33106622958945 C68.01345101185811 9.661450337628729, 67.79839478961999 9.991834445668008, 67.59903808274521 10.298099882199049 M68.22850723409623 9.33106622958945 C68.09562916446384 9.535202627302546, 67.96275109483146 9.739339025015642, 67.59903808274521 10.298099882199049 M67.59903808274521 10.298099882199049 C67.38732660323127 10.581773977435166, 67.17561512371734 10.865448072671281, 66.90890418442454 11.2228164334572 M67.59903808274521 10.298099882199049 C67.4330273045838 10.52053920104231, 67.26701652642241 10.74297851988557, 66.90890418442454 11.2228164334572 M66.90890418442454 11.2228164334572 C66.70202286330894 11.465831005120233, 66.49514154219335 11.708845576783265, 66.16094144735568 12.101416024703695 M66.90890418442454 11.2228164334572 C66.70889378481816 11.457760029749004, 66.50888338521177 11.692703626040807, 66.16094144735568 12.101416024703695 M66.16094144735568 12.101416024703695 C65.93863533447816 12.33096533792104, 65.71632922160065 12.560514651138384, 65.35822341086276 12.930288301759093 M66.16094144735568 12.101416024703695 C65.95240854907573 12.316743363047108, 65.74387565079577 12.53207070139052, 65.35822341086276 12.930288301759093 M65.35822341086276 12.930288301759093 C65.15157419275181 13.117961654008761, 64.94492497464087 13.30563500625843, 64.5040486155402 13.706027250644409 M65.35822341086276 12.930288301759093 C65.07178856520895 13.19042084993117, 64.78535371955513 13.450553398103247, 64.5040486155402 13.706027250644409 M64.5040486155402 13.706027250644409 C64.16205979540959 13.978754233993868, 63.820070975278966 14.251481217343327, 63.601927048841894 14.425445193623217 M64.5040486155402 13.706027250644409 C64.29166672246294 13.875396158653992, 64.07928482938568 14.044765066663576, 63.601927048841894 14.425445193623217 M63.601927048841894 14.425445193623217 C63.34224919528955 14.606585222988231, 63.0825713417372 14.787725252353246, 62.655565721789884 15.085585888053126 M63.601927048841894 14.425445193623217 C63.281895949277285 14.648685034756474, 62.961864849712676 14.871924875889732, 62.655565721789884 15.085585888053126 M62.655565721789884 15.085585888053126 C62.41561120508174 15.231047726210868, 62.175656688373586 15.376509564368611, 61.66885343607088 15.68373667422101 M62.655565721789884 15.085585888053126 C62.44780698812758 15.211530453325052, 62.240048254465286 15.33747501859698, 61.66885343607088 15.68373667422101 M61.66885343607088 15.68373667422101 C61.32606524689713 15.862569052946641, 60.98327705772338 16.041401431672274, 60.64584480411605 16.217439622243543 M61.66885343607088 15.68373667422101 C61.28991303282787 15.881429639869978, 60.910972629584855 16.079122605518947, 60.64584480411605 16.217439622243543 M60.64584480411605 16.217439622243543 C60.25845491369524 16.38892563522003, 59.87106502327443 16.560411648196517, 59.59074358782874 16.68450163222839 M60.64584480411605 16.217439622243543 C60.244193019077706 16.395238952903142, 59.84254123403936 16.573038283562738, 59.59074358782874 16.68450163222839 M59.59074358782874 16.68450163222839 C59.30659364274429 16.789071438672767, 59.02244369765984 16.89364124511714, 58.50788542442518 17.08300344619203 M59.59074358782874 16.68450163222839 C59.17065095167708 16.83909960562596, 58.750558315525424 16.99369757902353, 58.50788542442518 17.08300344619203 M58.50788542442518 17.08300344619203 C58.282231188146376 17.149976439036323, 58.05657695186757 17.216949431880618, 57.40172001037115 17.411307534702527 M58.50788542442518 17.08300344619203 C58.165917812985064 17.18449763824284, 57.823950201544946 17.285991830293643, 57.40172001037115 17.411307534702527 M57.40172001037115 17.411307534702527 C57.080822440193906 17.484550311043137, 56.75992487001666 17.557793087383747, 56.276792816624706 17.668064825839174 M57.40172001037115 17.411307534702527 C57.0244726746931 17.497411777302112, 56.64722533901505 17.583516019901694, 56.276792816624706 17.668064825839174 M56.276792816624706 17.668064825839174 C55.936529436065676 17.72307597042603, 55.59626605550665 17.77808711501289, 55.13772641032112 17.85222024881843 M56.276792816624706 17.668064825839174 C55.88702814532606 17.73107895522457, 55.49726347402742 17.794093084609965, 55.13772641032112 17.85222024881843 M55.13772641032112 17.85222024881843 C54.867631720665315 17.878275958693134, 54.597537031009516 17.904331668567842, 53.98920145965283 17.963017069506055 M55.13772641032112 17.85222024881843 C54.88472986507245 17.876626521265706, 54.63173331982379 17.901032793712982, 53.98920145965283 17.963017069506055 M53.98920145965283 17.963017069506055 C53.54362726044036 17.97730576681723, 53.098053061227894 17.99159446412841, 52.8359375 18 M53.98920145965283 17.963017069506055 C53.75542125674104 17.970513945587875, 53.52164105382925 17.978010821669695, 52.8359375 18 M52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 M52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 M52.8359375 18 C16.832963120359004 18, -19.170011259281992 18, -52.8359375 18 M52.8359375 18 C12.282222461211347 18, -28.271492577577305 18, -52.8359375 18 M-52.8359375 18 C-53.15338883799696 17.989819953471983, -53.47084017599391 17.979639906943966, -53.989201459652826 17.963017069506055 M-52.8359375 18 C-53.28299708176487 17.98566366936149, -53.730056663529744 17.971327338722975, -53.989201459652826 17.963017069506055 M-53.989201459652826 17.963017069506055 C-54.38971584647362 17.924379928298475, -54.79023023329442 17.885742787090898, -55.137726410321115 17.85222024881843 M-53.989201459652826 17.963017069506055 C-54.297498854362445 17.93327599062028, -54.60579624907206 17.90353491173451, -55.137726410321115 17.85222024881843 M-55.137726410321115 17.85222024881843 C-55.58119839008952 17.78052313830604, -56.02467036985793 17.70882602779365, -56.2767928166247 17.668064825839174 M-55.137726410321115 17.85222024881843 C-55.54060996281946 17.78708516045911, -55.943493515317805 17.721950072099787, -56.2767928166247 17.668064825839174 M-56.2767928166247 17.668064825839174 C-56.54058406140781 17.607856195616176, -56.80437530619092 17.547647565393177, -57.40172001037113 17.41130753470253 M-56.2767928166247 17.668064825839174 C-56.52603754320945 17.61117634347005, -56.7752822697942 17.554287861100924, -57.40172001037113 17.41130753470253 M-57.40172001037113 17.41130753470253 C-57.82585027766812 17.285427897673987, -58.249980544965105 17.159548260645444, -58.50788542442516 17.083003446192038 M-57.40172001037113 17.41130753470253 C-57.63616046463084 17.341726838481303, -57.870600918890545 17.27214614226008, -58.50788542442516 17.083003446192038 M-58.50788542442516 17.083003446192038 C-58.76020857490468 16.99014619436594, -59.0125317253842 16.89728894253984, -59.59074358782873 16.68450163222839 M-58.50788542442516 17.083003446192038 C-58.86111591391601 16.953011360832555, -59.21434640340686 16.823019275473072, -59.59074358782873 16.68450163222839 M-59.59074358782873 16.68450163222839 C-60.010889858628325 16.498515341341715, -60.43103612942792 16.312529050455044, -60.645844804116045 16.217439622243546 M-59.59074358782873 16.68450163222839 C-59.95088863200999 16.525076104492502, -60.31103367619126 16.365650576756618, -60.645844804116045 16.217439622243546 M-60.645844804116045 16.217439622243546 C-60.851474628136906 16.11016267476405, -61.057104452157766 16.002885727284557, -61.668853436070876 15.683736674221013 M-60.645844804116045 16.217439622243546 C-60.85431049119001 16.108683206825706, -61.062776178263974 15.999926791407862, -61.668853436070876 15.683736674221013 M-61.668853436070876 15.683736674221013 C-61.937197314946694 15.521065037882817, -62.20554119382252 15.358393401544621, -62.65556572178986 15.085585888053139 M-61.668853436070876 15.683736674221013 C-62.05527201927167 15.449487458237037, -62.44169060247246 15.215238242253061, -62.65556572178986 15.085585888053139 M-62.65556572178986 15.085585888053139 C-62.84499038509209 14.95345144299502, -63.034415048394315 14.8213169979369, -63.60192704884189 14.42544519362322 M-62.65556572178986 15.085585888053139 C-62.99932766867607 14.84579243512016, -63.34308961556228 14.60599898218718, -63.60192704884189 14.42544519362322 M-63.60192704884189 14.42544519362322 C-63.85858901466761 14.22076410593896, -64.11525098049333 14.016083018254701, -64.50404861554019 13.706027250644423 M-63.60192704884189 14.42544519362322 C-63.94217681452909 14.154105059914201, -64.2824265802163 13.882764926205182, -64.50404861554019 13.706027250644423 M-64.50404861554019 13.706027250644423 C-64.77206253231327 13.462624102690757, -65.04007644908636 13.21922095473709, -65.35822341086275 12.930288301759106 M-64.50404861554019 13.706027250644423 C-64.7982531802151 13.438838449232886, -65.09245774489001 13.17164964782135, -65.35822341086275 12.930288301759106 M-65.35822341086275 12.930288301759106 C-65.52323283642856 12.759902522336619, -65.68824226199436 12.589516742914133, -66.16094144735568 12.101416024703703 M-65.35822341086275 12.930288301759106 C-65.58597226407797 12.6951189122858, -65.81372111729318 12.459949522812494, -66.16094144735568 12.101416024703703 M-66.16094144735568 12.101416024703703 C-66.37699763005165 11.847624138563955, -66.59305381274761 11.593832252424207, -66.90890418442453 11.222816433457206 M-66.16094144735568 12.101416024703703 C-66.38466988031719 11.838611876838634, -66.6083983132787 11.575807728973565, -66.90890418442453 11.222816433457206 M-66.90890418442453 11.222816433457206 C-67.09721248688408 10.970500463400692, -67.28552078934361 10.718184493344177, -67.5990380827452 10.29809988219906 M-66.90890418442453 11.222816433457206 C-67.08843957758305 10.98225536263558, -67.26797497074156 10.741694291813957, -67.5990380827452 10.29809988219906 M-67.5990380827452 10.29809988219906 C-67.7599880289345 10.05083754374022, -67.92093797512379 9.803575205281382, -68.22850723409623 9.33106622958946 M-67.5990380827452 10.29809988219906 C-67.83293198829313 9.938776033969676, -68.06682589384106 9.579452185740292, -68.22850723409623 9.33106622958946 M-68.22850723409623 9.33106622958946 C-68.37046000400787 9.079014712334708, -68.5124127739195 8.826963195079953, -68.794725014714 8.325689224335036 M-68.22850723409623 9.33106622958946 C-68.45269335222936 8.933001075537986, -68.67687947036248 8.53493592148651, -68.794725014714 8.325689224335036 M-68.794725014714 8.325689224335036 C-68.93995153821496 8.02412324093549, -69.08517806171592 7.722557257535941, -69.29536471428463 7.286100176203095 M-68.794725014714 8.325689224335036 C-68.90095918961953 8.105091687096502, -69.00719336452507 7.884494149857969, -69.29536471428463 7.286100176203095 M-69.29536471428463 7.286100176203095 C-69.39541332215958 7.038978180443705, -69.49546193003454 6.791856184684314, -69.72836909689568 6.2165709795835475 M-69.29536471428463 7.286100176203095 C-69.40274382411906 7.020871698878181, -69.5101229339535 6.7556432215532665, -69.72836909689568 6.2165709795835475 M-69.72836909689568 6.2165709795835475 C-69.84131236893194 5.87640383927696, -69.9542556409682 5.536236698970373, -70.0919588546599 5.121496559358584 M-69.72836909689568 6.2165709795835475 C-69.82053716848428 5.938975432946647, -69.91270524007287 5.661379886309746, -70.0919588546599 5.121496559358584 M-70.0919588546599 5.121496559358584 C-70.155558348958 4.878964123404698, -70.21915784325611 4.636431687450811, -70.38463991927281 4.005376811213663 M-70.0919588546599 5.121496559358584 C-70.17215143115796 4.815687509488949, -70.25234400765602 4.509878459619314, -70.38463991927281 4.005376811213663 M-70.38463991927281 4.005376811213663 C-70.4407884100907 3.717066177851539, -70.4969369009086 3.4287555444894147, -70.6052096014601 2.8727981106008347 M-70.38463991927281 4.005376811213663 C-70.4388344832302 3.7270991793177, -70.49302904718756 3.448821547421737, -70.6052096014601 2.8727981106008347 M-70.6052096014601 2.8727981106008347 C-70.65231284141493 2.5074746830980588, -70.69941608136973 2.1421512555952833, -70.75276153308556 1.7284144663382852 M-70.6052096014601 2.8727981106008347 C-70.65685741450645 2.472227871627644, -70.70850522755279 2.071657632654454, -70.75276153308556 1.7284144663382852 M-70.75276153308556 1.7284144663382852 C-70.76999288488972 1.4600222530916334, -70.78722423669389 1.1916300398449815, -70.82668939161238 0.5769283962897952 M-70.75276153308556 1.7284144663382852 C-70.77363359279953 1.4033152886698654, -70.7945056525135 1.0782161110014459, -70.82668939161238 0.5769283962897952 M-70.82668939161238 0.5769283962897952 C-70.82668939161238 0.14662206022450947, -70.82668939161238 -0.28368427584077627, -70.82668939161238 -0.5769283962897864 M-70.82668939161238 0.5769283962897952 C-70.82668939161238 0.3035761552676248, -70.82668939161238 0.030223914245454453, -70.82668939161238 -0.5769283962897864 M-70.82668939161238 -0.5769283962897864 C-70.8058308436228 -0.9018171179443527, -70.78497229563322 -1.226705839598919, -70.75276153308556 -1.7284144663382603 M-70.82668939161238 -0.5769283962897864 C-70.79856568589621 -1.0149778138658483, -70.77044198018002 -1.4530272314419101, -70.75276153308556 -1.7284144663382603 M-70.75276153308556 -1.7284144663382603 C-70.712731684819 -2.0388780647060094, -70.67270183655246 -2.3493416630737585, -70.6052096014601 -2.8727981106008262 M-70.75276153308556 -1.7284144663382603 C-70.71027617205081 -2.05792253684034, -70.66779081101606 -2.38743060734242, -70.6052096014601 -2.8727981106008262 M-70.6052096014601 -2.8727981106008262 C-70.52539338154467 -3.282637530702485, -70.44557716162926 -3.692476950804144, -70.38463991927283 -4.005376811213655 M-70.6052096014601 -2.8727981106008262 C-70.54854200526776 -3.1637742403478257, -70.49187440907541 -3.4547503700948257, -70.38463991927283 -4.005376811213655 M-70.38463991927283 -4.005376811213655 C-70.32448585650894 -4.234770323468066, -70.26433179374506 -4.464163835722476, -70.0919588546599 -5.121496559358575 M-70.38463991927283 -4.005376811213655 C-70.29556882057028 -4.345043514224863, -70.20649772186772 -4.684710217236071, -70.0919588546599 -5.121496559358575 M-70.0919588546599 -5.121496559358575 C-70.0056849026864 -5.381339956815242, -69.91941095071289 -5.641183354271908, -69.72836909689569 -6.2165709795835244 M-70.0919588546599 -5.121496559358575 C-70.00873888057266 -5.372141862007076, -69.92551890648544 -5.622787164655579, -69.72836909689569 -6.2165709795835244 M-69.72836909689569 -6.2165709795835244 C-69.55656423344553 -6.640932313926501, -69.38475936999536 -7.065293648269478, -69.29536471428463 -7.286100176203086 M-69.72836909689569 -6.2165709795835244 C-69.60285205448734 -6.526600501039091, -69.47733501207898 -6.836630022494658, -69.29536471428463 -7.286100176203086 M-69.29536471428463 -7.286100176203086 C-69.14132133921999 -7.6059745405250405, -68.98727796415534 -7.925848904846995, -68.794725014714 -8.32568922433503 M-69.29536471428463 -7.286100176203086 C-69.17532654375364 -7.535362005716081, -69.05528837322265 -7.784623835229075, -68.794725014714 -8.32568922433503 M-68.794725014714 -8.32568922433503 C-68.6714930017154 -8.544500142008484, -68.54826098871682 -8.763311059681937, -68.22850723409623 -9.331066229589455 M-68.794725014714 -8.32568922433503 C-68.63518526150304 -8.608968211312908, -68.47564550829208 -8.892247198290786, -68.22850723409623 -9.331066229589455 M-68.22850723409623 -9.331066229589455 C-68.06832497825492 -9.577149189520053, -67.90814272241363 -9.823232149450652, -67.59903808274521 -10.298099882199054 M-68.22850723409623 -9.331066229589455 C-68.04752029793157 -9.609110765335629, -67.86653336176691 -9.887155301081803, -67.59903808274521 -10.298099882199054 M-67.59903808274521 -10.298099882199054 C-67.42638910525827 -10.529433783386134, -67.25374012777134 -10.760767684573212, -66.90890418442454 -11.2228164334572 M-67.59903808274521 -10.298099882199054 C-67.438747501264 -10.512874658611496, -67.27845691978278 -10.727649435023936, -66.90890418442454 -11.2228164334572 M-66.90890418442454 -11.2228164334572 C-66.73453399919048 -11.427641574977747, -66.56016381395642 -11.632466716498293, -66.16094144735568 -12.101416024703695 M-66.90890418442454 -11.2228164334572 C-66.71650002302118 -11.448825309548512, -66.52409586161782 -11.674834185639824, -66.16094144735568 -12.101416024703695 M-66.16094144735568 -12.101416024703695 C-65.87709882405841 -12.394506837170898, -65.59325620076113 -12.687597649638098, -65.35822341086276 -12.930288301759086 M-66.16094144735568 -12.101416024703695 C-65.88560176703075 -12.38572685044736, -65.6102620867058 -12.670037676191024, -65.35822341086276 -12.930288301759086 M-65.35822341086276 -12.930288301759086 C-65.16082220985452 -13.109562849565211, -64.96342100884625 -13.288837397371335, -64.5040486155402 -13.706027250644407 M-65.35822341086276 -12.930288301759086 C-65.17800350995066 -13.093959247410186, -64.99778360903854 -13.257630193061287, -64.5040486155402 -13.706027250644407 M-64.5040486155402 -13.706027250644407 C-64.15840602555008 -13.98166801822592, -63.812763435559965 -14.257308785807432, -63.601927048841894 -14.425445193623215 M-64.5040486155402 -13.706027250644407 C-64.32151838022027 -13.851590255978502, -64.13898814490032 -13.997153261312596, -63.601927048841894 -14.425445193623215 M-63.601927048841894 -14.425445193623215 C-63.374379561998914 -14.584172470072932, -63.146832075155935 -14.74289974652265, -62.655565721789884 -15.085585888053124 M-63.601927048841894 -14.425445193623215 C-63.40024599725669 -14.566129164577042, -63.19856494567149 -14.706813135530869, -62.655565721789884 -15.085585888053124 M-62.655565721789884 -15.085585888053124 C-62.305069150613505 -15.298058969246728, -61.95457257943713 -15.51053205044033, -61.66885343607088 -15.683736674221008 M-62.655565721789884 -15.085585888053124 C-62.45100525362626 -15.20959164598466, -62.246444785462636 -15.333597403916194, -61.66885343607088 -15.683736674221008 M-61.66885343607088 -15.683736674221008 C-61.31819168994003 -15.866676682567906, -60.967529943809176 -16.049616690914803, -60.64584480411605 -16.217439622243543 M-61.66885343607088 -15.683736674221008 C-61.287254179891235 -15.88281676174394, -60.90565492371159 -16.081896849266876, -60.64584480411605 -16.217439622243543 M-60.64584480411605 -16.217439622243543 C-60.333613136380606 -16.35565531952668, -60.02138146864516 -16.49387101680982, -59.59074358782874 -16.684501632228386 M-60.64584480411605 -16.217439622243543 C-60.393290941942496 -16.329237725283633, -60.14073707976895 -16.441035828323727, -59.59074358782874 -16.684501632228386 M-59.59074358782874 -16.684501632228386 C-59.27594806694794 -16.800349293850417, -58.96115254606714 -16.916196955472447, -58.50788542442518 -17.08300344619203 M-59.59074358782874 -16.684501632228386 C-59.36534238844461 -16.767451357187593, -59.13994118906048 -16.8504010821468, -58.50788542442518 -17.08300344619203 M-58.50788542442518 -17.08300344619203 C-58.28317407180197 -17.149696596116637, -58.05846271917876 -17.216389746041248, -57.40172001037115 -17.411307534702523 M-58.50788542442518 -17.08300344619203 C-58.25231206314197 -17.15885627828894, -57.99673870185875 -17.234709110385847, -57.40172001037115 -17.411307534702523 M-57.40172001037115 -17.411307534702523 C-57.16801179856519 -17.464649908958624, -56.93430358675923 -17.517992283214728, -56.276792816624706 -17.668064825839174 M-57.40172001037115 -17.411307534702523 C-57.006998023330446 -17.501400252442878, -56.61227603628975 -17.591492970183232, -56.276792816624706 -17.668064825839174 M-56.276792816624706 -17.668064825839174 C-55.92266827373339 -17.725316935656995, -55.56854373084208 -17.78256904547482, -55.13772641032112 -17.85222024881843 M-56.276792816624706 -17.668064825839174 C-55.96461320406086 -17.718535604609446, -55.65243359149701 -17.769006383379715, -55.13772641032112 -17.85222024881843 M-55.13772641032112 -17.85222024881843 C-54.821132844225644 -17.88276164938019, -54.50453927813017 -17.913303049941952, -53.98920145965283 -17.963017069506055 M-55.13772641032112 -17.85222024881843 C-54.729237071162586 -17.89162672408675, -54.320747732004044 -17.931033199355063, -53.98920145965283 -17.963017069506055 M-53.98920145965283 -17.963017069506055 C-53.55616678647461 -17.97690364862402, -53.12313211329639 -17.99079022774199, -52.83593750000001 -18 M-53.98920145965283 -17.963017069506055 C-53.704337357377256 -17.972152106811695, -53.41947325510167 -17.981287144117335, -52.83593750000001 -18 M-52.83593750000001 -18 C-52.83593750000001 -18, -52.8359375 -18, -52.8359375 -18 M-52.83593750000001 -18 C-52.83593750000001 -18, -52.8359375 -18, -52.8359375 -18" stroke="#f59e0b" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#fef3c7 !important;stroke:#f59e0b !important"/></g><g class="label" style="" transform="translate(-58.8359375, -10.5)"><rect/><foreignObject width="117.671875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🙋 어떻게 학습할래?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Q-1" data-look="classic" transform="translate(260.52056884765625, 288)"><polygon points="60.8671875,0 121.734375,-60.8671875 60.8671875,-121.734375 0,-60.8671875" class="label-container" transform="translate(-60.3671875, 60.8671875)"/><g class="label" style="" transform="translate(-35.3671875, -10.5)"><rect/><foreignObject width="70.734375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>어떤 스타일?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-A-3" data-look="classic" transform="translate(594.5127563476562, 44)"><rect class="basic label-container" style="fill:#dbeafe !important;stroke:#3b82f6 !important" x="-84.328125" y="-36" width="168.65625" height="72"/><g class="label" style="" transform="translate(-54.328125, -21)"><rect/><foreignObject width="108.65625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📅 curriculum/<br />60일 데일리 챌린지</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-5" data-look="classic" transform="translate(594.5127563476562, 166)"><rect class="basic label-container" style="fill:#fce7f3 !important;stroke:#ec4899 !important" x="-75.8671875" y="-36" width="151.734375" height="72"/><g class="label" style="" transform="translate(-45.8671875, -21)"><rect/><foreignObject width="91.734375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📖 notes/<br />주제별 산문 교재</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-7" data-look="classic" transform="translate(594.5127563476562, 288)"><rect class="basic label-container" style="fill:#d1fae5 !important;stroke:#10b981 !important" x="-87.96875" y="-36" width="175.9375" height="72"/><g class="label" style="" transform="translate(-57.96875, -21)"><rect/><foreignObject width="115.9375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>⚙️ projects/<br />자동화 미니 프로젝트</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D-9" data-look="classic" transform="translate(594.5127563476562, 410)"><rect class="basic label-container" style="fill:#ede9fe !important;stroke:#8b5cf6 !important" x="-75.90625" y="-36" width="151.8125" height="72"/><g class="label" style="" transform="translate(-45.90625, -21)"><rect/><foreignObject width="91.8125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🎓 deep/<br />논문·리포트·링크</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-11" data-look="classic" transform="translate(594.5127563476562, 532)"><rect class="basic label-container" style="fill:#fee2e2 !important;stroke:#ef4444 !important" x="-72.65625" y="-36" width="145.3125" height="72"/><g class="label" style="" transform="translate(-42.65625, -21)"><rect/><foreignObject width="85.3125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🖨 print/<br />A4 프린트 패킷</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-A1-13" data-look="classic" transform="translate(829.8955688476562, 44)"><rect class="basic label-container" style="" x="-97.4140625" y="-25.5" width="194.828125" height="51"/><g class="label" style="" transform="translate(-67.4140625, -10.5)"><rect/><foreignObject width="134.828125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>curriculum/day_01.md</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B1-15" data-look="classic" transform="translate(829.8955688476562, 166)"><rect class="basic label-container" style="" x="-89.1328125" y="-25.5" width="178.265625" height="51"/><g class="label" style="" transform="translate(-59.1328125, -10.5)"><rect/><foreignObject width="118.265625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>notes/README.md</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C1-17" data-look="classic" transform="translate(829.8955688476562, 288)"><rect class="basic label-container" style="" x="-96.8125" y="-25.5" width="193.625" height="51"/><g class="label" style="" transform="translate(-66.8125, -10.5)"><rect/><foreignObject width="133.625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>projects/README.md</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D1-19" data-look="classic" transform="translate(829.8955688476562, 410)"><rect class="basic label-container" style="" x="-87.5078125" y="-25.5" width="175.015625" height="51"/><g class="label" style="" transform="translate(-57.5078125, -10.5)"><rect/><foreignObject width="115.015625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>deep/README.md</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E1-21" data-look="classic" transform="translate(829.8955688476562, 532)"><rect class="basic label-container" style="" x="-79.015625" y="-25.5" width="158.03125" height="51"/><g class="label" style="" transform="translate(-49.015625, -10.5)"><rect/><foreignObject width="98.03125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>print/index.html</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
-<blockquote>
-<p>🚀 <strong>추천 시작점</strong> → <a href="curriculum/day_01.md"><code>curriculum/day_01.md</code></a></p>
-</blockquote>
-<hr />
-<h2>📁 폴더 구조 (5개)</h2>
-<pre><code>aml-notes/
-├── 📅 curriculum/   ← 60일 데일리 챌린지 + 진척 트래커
-├── 📖 notes/        ← 토픽별 산문 교재 (7카테고리 + 용어집)
-├── 🛠️ projects/     ← 자동화 미니 프로젝트 6개 (코드 사양)
-├── 🎓 deep/         ← 학술 논문·산업 리포트·컨퍼런스·외부 링크
-└── 🖨 print/        ← A4 프린트 패킷 (Task Sheet + Reading 통합)
-</code></pre>
+<h2>무엇이 다른가</h2>
+<p>기존 AML 자료는 "지금 규제가 이렇다"를 문장으로 적습니다. 6개월 뒤 자동으로 틀린 문서가 됩니다.</p>
+<p>이 저장소는 <strong>모든 사실에 유효기간과 출처를 붙이고, 관계를 그래프로 표현</strong>합니다. 그래서 이런 질문에 답할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
-<th>폴더</th>
-<th>누가 봐야</th>
-<th>입구</th>
+<th>질문</th>
+<th>답하는 방식</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>📅 <strong><code>curriculum/</code></strong></td>
-<td>"처음부터 끝까지 끌고 가줘"</td>
-<td><a href="curriculum/README.md"><code>curriculum/README.md</code></a></td>
+<td>"2024-12-30 시점 EU CASP 규제 지형은?"</td>
+<td><code>as_of(2024-12-30)</code> 시점 질의</td>
 </tr>
 <tr>
-<td>📖 <strong><code>notes/</code></strong></td>
-<td>"특정 주제 빨리 보고 싶음"</td>
-<td><a href="notes/README.md"><code>notes/README.md</code></a></td>
+<td>"이 의무의 국제적 뿌리는?"</td>
+<td>조문 → 규범 → <code>IMPLEMENTS</code> → 국제기준 경로 탐색</td>
 </tr>
 <tr>
-<td>🛠️ <strong><code>projects/</code></strong></td>
-<td>"손으로 만들어야 이해됨"</td>
-<td><a href="projects/README.md"><code>projects/README.md</code></a></td>
+<td>"관할별 트래블룰 임계값 비교"</td>
+<td>추상 의무 하나에 걸린 각국 조문의 한정자를 모아 <strong>표를 생성</strong></td>
 </tr>
 <tr>
-<td>🎓 <strong><code>deep/</code></strong></td>
-<td>"논문·리포트 더 줘"</td>
-<td><a href="deep/README.md"><code>deep/README.md</code></a></td>
+<td>"규제가 바뀌면 어느 문서를 고쳐야 하나?"</td>
+<td>사실 ID 역참조로 영향 문서 자동 표시</td>
 </tr>
 <tr>
-<td>🖨 <strong><code>print/</code></strong></td>
-<td>"종이에 프린트해서 공부하고 싶음"</td>
-<td><a href="print/index.html"><code>print/index.html</code></a></td>
+<td>"그때 우리는 무엇을 근거로 판단했나?"</td>
+<td>이중시간(bitemporal) — 기록시간 축 질의</td>
 </tr>
 </tbody>
 </table>
+<p>마지막 질문이 감독 검사 대응의 핵심입니다. 과거 판단의 정당성은 <em>당시 알 수 있었던 정보</em>로 평가되기 때문입니다.</p>
 <hr />
-<h2>🎯 60일 챌린지 한눈에</h2>
-<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784 316" style="max-width: 784px; background-color: transparent;" role="graphics-document document" aria-roledescription="gantt"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .mermaid-main-font{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;}#my-svg .exclude-range{fill:#eeeeee;}#my-svg .section{stroke:none;opacity:0.2;}#my-svg .section0{fill:#f7f5ef;}#my-svg .section2{fill:#e5eaf2;}#my-svg .section1,#my-svg .section3{fill:white;opacity:0.2;}#my-svg .sectionTitle0{fill:#080a10;}#my-svg .sectionTitle1{fill:#080a10;}#my-svg .sectionTitle2{fill:#080a10;}#my-svg .sectionTitle3{fill:#080a10;}#my-svg .sectionTitle{text-anchor:start;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;}#my-svg .grid .tick{stroke:lightgrey;opacity:0.8;shape-rendering:crispEdges;}#my-svg .grid .tick text{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;fill:#111418;}#my-svg .grid path{stroke-width:0;}#my-svg .today{fill:none;stroke:red;stroke-width:2px;}#my-svg .task{stroke-width:2;}#my-svg .taskText{text-anchor:middle;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;}#my-svg .taskTextOutsideRight{fill:#111418;text-anchor:start;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;}#my-svg .taskTextOutsideLeft{fill:#111418;text-anchor:end;}#my-svg .task.clickable{cursor:pointer;}#my-svg .taskText.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#my-svg .taskTextOutsideLeft.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#my-svg .taskTextOutsideRight.clickable{cursor:pointer;fill:#003163!important;font-weight:bold;}#my-svg .taskText0,#my-svg .taskText1,#my-svg .taskText2,#my-svg .taskText3{fill:#111418;}#my-svg .task0,#my-svg .task1,#my-svg .task2,#my-svg .task3{fill:#e5eaf2;stroke:#1a2e4a;}#my-svg .taskTextOutside0,#my-svg .taskTextOutside2{fill:#111418;}#my-svg .taskTextOutside1,#my-svg .taskTextOutside3{fill:#111418;}#my-svg .active0,#my-svg .active1,#my-svg .active2,#my-svg .active3{fill:hsl(216.9230769231, 33.3333333333%, 100%);stroke:#e5eaf2;}#my-svg .activeText0,#my-svg .activeText1,#my-svg .activeText2,#my-svg .activeText3{fill:#111418!important;}#my-svg .done0,#my-svg .done1,#my-svg .done2,#my-svg .done3{stroke:grey;fill:lightgrey;stroke-width:2;}#my-svg .doneText0,#my-svg .doneText1,#my-svg .doneText2,#my-svg .doneText3{fill:#111418!important;}#my-svg .doneText0.taskTextOutsideLeft,#my-svg .doneText0.taskTextOutsideRight,#my-svg .doneText1.taskTextOutsideLeft,#my-svg .doneText1.taskTextOutsideRight,#my-svg .doneText2.taskTextOutsideLeft,#my-svg .doneText2.taskTextOutsideRight,#my-svg .doneText3.taskTextOutsideLeft,#my-svg .doneText3.taskTextOutsideRight{fill:#111418!important;}#my-svg .crit0,#my-svg .crit1,#my-svg .crit2,#my-svg .crit3{stroke:#ff8888;fill:red;stroke-width:2;}#my-svg .activeCrit0,#my-svg .activeCrit1,#my-svg .activeCrit2,#my-svg .activeCrit3{stroke:#ff8888;fill:hsl(216.9230769231, 33.3333333333%, 100%);stroke-width:2;}#my-svg .doneCrit0,#my-svg .doneCrit1,#my-svg .doneCrit2,#my-svg .doneCrit3{stroke:#ff8888;fill:lightgrey;stroke-width:2;cursor:pointer;shape-rendering:crispEdges;}#my-svg .milestone{transform:rotate(45deg) scale(0.8,0.8);}#my-svg .milestoneText{font-style:italic;}#my-svg .doneCritText0,#my-svg .doneCritText1,#my-svg .doneCritText2,#my-svg .doneCritText3{fill:#111418!important;}#my-svg .doneCritText0.taskTextOutsideLeft,#my-svg .doneCritText0.taskTextOutsideRight,#my-svg .doneCritText1.taskTextOutsideLeft,#my-svg .doneCritText1.taskTextOutsideRight,#my-svg .doneCritText2.taskTextOutsideLeft,#my-svg .doneCritText2.taskTextOutsideRight,#my-svg .doneCritText3.taskTextOutsideLeft,#my-svg .doneCritText3.taskTextOutsideRight{fill:#111418!important;}#my-svg .vert{stroke:navy;}#my-svg .vertText{font-size:15px;text-anchor:middle;fill:navy!important;}#my-svg .activeCritText0,#my-svg .activeCritText1,#my-svg .activeCritText2,#my-svg .activeCritText3{fill:#111418!important;}#my-svg .titleText{text-anchor:middle;font-size:18px;fill:#080a10;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><g class="grid" transform="translate(75, 266)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="currentColor" d="M0.5,-231V0.5H634.5V-231"/><g class="tick" opacity="1" transform="translate(11.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D01</text></g><g class="tick" opacity="1" transform="translate(57.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D02</text></g><g class="tick" opacity="1" transform="translate(102.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D02</text></g><g class="tick" opacity="1" transform="translate(147.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D03</text></g><g class="tick" opacity="1" transform="translate(192.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D03</text></g><g class="tick" opacity="1" transform="translate(238.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D04</text></g><g class="tick" opacity="1" transform="translate(283.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D04</text></g><g class="tick" opacity="1" transform="translate(328.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D05</text></g><g class="tick" opacity="1" transform="translate(374.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D05</text></g><g class="tick" opacity="1" transform="translate(419.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D06</text></g><g class="tick" opacity="1" transform="translate(464.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D06</text></g><g class="tick" opacity="1" transform="translate(509.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D07</text></g><g class="tick" opacity="1" transform="translate(555.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D07</text></g><g class="tick" opacity="1" transform="translate(600.5,0)"><line stroke="currentColor" y2="-231"/><text fill="#000" y="3" dy="1em" stroke="none" font-size="10" style="text-anchor: middle;">D08</text></g></g><g><rect x="0" y="48" width="746.5" height="24" class="section section0"/><rect x="0" y="72" width="746.5" height="24" class="section section1"/><rect x="0" y="96" width="746.5" height="24" class="section section2"/><rect x="0" y="120" width="746.5" height="24" class="section section3"/><rect x="0" y="144" width="746.5" height="24" class="section section0"/><rect x="0" y="168" width="746.5" height="24" class="section section1"/><rect x="0" y="192" width="746.5" height="24" class="section section2"/><rect x="0" y="216" width="746.5" height="24" class="section section3"/><rect x="0" y="240" width="746.5" height="24" class="section section0"/></g><g><rect id="my-svg-w1" rx="3" ry="3" x="75" y="50" width="634" height="20" transform-origin="392px 60px" class="task task0"/><rect id="my-svg-w2" rx="3" ry="3" x="75" y="74" width="634" height="20" transform-origin="392px 84px" class="task task1"/><rect id="my-svg-w3" rx="3" ry="3" x="75" y="98" width="634" height="20" transform-origin="392px 108px" class="task task2"/><rect id="my-svg-w4" rx="3" ry="3" x="75" y="122" width="634" height="20" transform-origin="392px 132px" class="task task3"/><rect id="my-svg-w5" rx="3" ry="3" x="75" y="146" width="634" height="20" transform-origin="392px 156px" class="task task0"/><rect id="my-svg-w6" rx="3" ry="3" x="75" y="170" width="634" height="20" transform-origin="392px 180px" class="task task1"/><rect id="my-svg-w7" rx="3" ry="3" x="75" y="194" width="634" height="20" transform-origin="392px 204px" class="task task2"/><rect id="my-svg-w8" rx="3" ry="3" x="75" y="218" width="634" height="20" transform-origin="392px 228px" class="task task3"/><rect id="my-svg-cap" rx="3" ry="3" x="75" y="242" width="362" height="20" transform-origin="256px 252px" class="task task0"/><text id="my-svg-w1-text" font-size="11" x="392" y="63.5" class="taskText taskText0  width-78.5732421875">AML 기초 (D1-7)              </text><text id="my-svg-w2-text" font-size="11" x="392" y="87.5" class="taskText taskText1  width-81.9560546875">한국 규제 (D8-14)             </text><text id="my-svg-w3-text" font-size="11" x="392" y="111.5" class="taskText taskText2  width-110.24560546875">FATF + 글로벌 (D15-21)       </text><text id="my-svg-w4-text" font-size="11" x="392" y="135.5" class="taskText taskText3  width-126.0625">🛠️ Travel Rule + IVMS101    </text><text id="my-svg-w5-text" font-size="11" x="392" y="159.5" class="taskText taskText0  width-68.171875">🛠️ 온체인 분석              </text><text id="my-svg-w6-text" font-size="11" x="392" y="183.5" class="taskText taskText1  width-77.671875">🛠️ 자금세탁 유형            </text><text id="my-svg-w7-text" font-size="11" x="392" y="207.5" class="taskText taskText2  width-96.6875">🛠️ 컴플라이언스 운영         </text><text id="my-svg-w8-text" font-size="11" x="392" y="231.5" class="taskText taskText3  width-77.828125">🛠️ 사례 + 리서치            </text><text id="my-svg-cap-text" font-size="11" x="256" y="255.5" class="taskText taskText0  width-125.171875">🎓 통합 설계 + 90일 로드맵   </text></g><g><text dy="0em" x="10" y="62" font-size="11" class="sectionTitle sectionTitle0"><tspan alignment-baseline="central" x="10">Week 1</tspan></text><text dy="0em" x="10" y="86" font-size="11" class="sectionTitle sectionTitle1"><tspan alignment-baseline="central" x="10">Week 2</tspan></text><text dy="0em" x="10" y="110" font-size="11" class="sectionTitle sectionTitle2"><tspan alignment-baseline="central" x="10">Week 3</tspan></text><text dy="0em" x="10" y="134" font-size="11" class="sectionTitle sectionTitle3"><tspan alignment-baseline="central" x="10">Week 4</tspan></text><text dy="0em" x="10" y="158" font-size="11" class="sectionTitle sectionTitle0"><tspan alignment-baseline="central" x="10">Week 5</tspan></text><text dy="0em" x="10" y="182" font-size="11" class="sectionTitle sectionTitle1"><tspan alignment-baseline="central" x="10">Week 6</tspan></text><text dy="0em" x="10" y="206" font-size="11" class="sectionTitle sectionTitle2"><tspan alignment-baseline="central" x="10">Week 7</tspan></text><text dy="0em" x="10" y="230" font-size="11" class="sectionTitle sectionTitle3"><tspan alignment-baseline="central" x="10">Week 8</tspan></text><text dy="0em" x="10" y="254" font-size="11" class="sectionTitle sectionTitle0"><tspan alignment-baseline="central" x="10">Capstone</tspan></text></g><g class="today"><line x1="1862595" x2="1862595" y1="25" y2="291" class="today"/></g><text x="392" y="25" class="titleText">60일 가상자산 AML 데일리 챌린지</text></svg></div></p>
+<h2>🧭 5초 진입</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 360.669px; background-color: transparent;" viewBox="0 0 360.66900634765625 576" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M86.396,270.5L101.105,232.75C115.815,195,145.234,119.5,165.86,81.75C186.487,44,198.32,44,204.237,44L210.153,44" id="my-svg-L_S_A_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_A_0" data-points="W3sieCI6ODYuMzk1ODcyNzcyNzE3MDcsInkiOjI3MC41MDAwMDAwMDAwMDAwNn0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjQ0fSx7IngiOjIxNC4xNTMzODEzNDc2NTYyNSwieSI6NDR9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M93.465,270.5L106.996,253.083C120.528,235.667,147.591,200.833,167.039,183.417C186.487,166,198.32,166,204.237,166L210.153,166" id="my-svg-L_S_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_B_0" data-points="W3sieCI6OTMuNDY1MDU0ODcxNjA2MDEsInkiOjI3MC41MDAwMDAwMDAwMDAwNn0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjE2Nn0seyJ4IjoyMTQuMTUzMzgxMzQ3NjU2MjUsInkiOjE2Nn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M150.153,288.5L154.237,288.417C158.32,288.333,166.487,288.167,176.487,288.083C186.487,288,198.32,288,204.237,288L210.153,288" id="my-svg-L_S_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_C_0" data-points="W3sieCI6MTUwLjE1MzM3ODc4MzIyNDkyLCJ5IjoyODguNX0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjI4OH0seyJ4IjoyMTQuMTUzMzgxMzQ3NjU2MjUsInkiOjI4OH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M93.465,306.5L106.996,323.75C120.528,341,147.591,375.5,164.622,392.75C181.653,410,188.653,410,192.153,410L195.653,410" id="my-svg-L_S_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_D_0" data-points="W3sieCI6OTMuNDY1MDU0ODcxNjA2MDEsInkiOjMwNi40OTk5OTk5OTk5OTk5NH0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjQxMH0seyJ4IjoxOTkuNjUzMzgxMzQ3NjU2MjUsInkiOjQxMH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M86.396,306.5L101.105,344.083C115.815,381.667,145.234,456.833,163.844,494.417C182.453,532,190.252,532,194.152,532L198.052,532" id="my-svg-L_S_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_E_0" data-points="W3sieCI6ODYuMzk1ODcyNzcyNzE3MDcsInkiOjMwNi40OTk5OTk5OTk5OTk5NH0seyJ4IjoxNzQuNjUzMzgxMzQ3NjU2MjUsInkiOjUzMn0seyJ4IjoyMDIuMDUxODE4ODQ3NjU2MjUsInkiOjUzMn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_S_A_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-S-0" data-look="classic" transform="translate(78.82669067382812, 288)"><g class="basic label-container outer-path"><path d="M-52.8359375 -18 C-28.606331040569145 -18, -4.376724581138291 -18, 52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 C53.2960844355604 -17.985243983398256, 53.75623137112081 -17.970487966796508, 53.98920145965283 -17.963017069506055 C54.235184153976945 -17.93928741482208, 54.481166848301065 -17.915557760138103, 55.13772641032111 -17.85222024881843 C55.52582587837151 -17.789475336580367, 55.91392534642192 -17.726730424342303, 56.2767928166247 -17.668064825839178 C56.54768259761197 -17.606236001049858, 56.81857237859923 -17.54440717626054, 57.40172001037113 -17.41130753470253 C57.64323596472253 -17.33962686719415, 57.88475191907393 -17.267946199685767, 58.50788542442517 -17.083003446192034 C58.940385001938886 -16.92383960368472, 59.3728845794526 -16.764675761177404, 59.59074358782873 -16.68450163222839 C59.84176835815593 -16.57338041278978, 60.09279312848312 -16.462259193351176, 60.645844804116045 -16.217439622243546 C60.926665054625275 -16.070935877426834, 61.20748530513451 -15.924432132610121, 61.668853436070876 -15.683736674221011 C61.891168632054224 -15.5489678959468, 62.113483828037566 -15.41419911767259, 62.65556572178988 -15.085585888053133 C62.88630158118115 -14.924634540936147, 63.117037440572425 -14.763683193819162, 63.60192704884189 -14.425445193623219 C63.96253271974846 -14.137871767195143, 64.32313839065503 -13.850298340767067, 64.50404861554019 -13.706027250644421 C64.84522290608922 -13.396181786944847, 65.18639719663827 -13.086336323245273, 65.35822341086275 -12.930288301759097 C65.5256337059861 -12.757423427403396, 65.69304400110944 -12.584558553047696, 66.16094144735568 -12.101416024703706 C66.40573762082899 -11.813864510045084, 66.65053379430229 -11.526312995386464, 66.90890418442453 -11.222816433457204 C67.14567128433906 -10.905570089498278, 67.38243838425358 -10.588323745539352, 67.5990380827452 -10.298099882199057 C67.8285999832297 -9.945431157053337, 68.05816188371419 -9.592762431907614, 68.22850723409623 -9.331066229589453 C68.43217092618157 -8.969440721106809, 68.63583461826691 -8.607815212624164, 68.794725014714 -8.325689224335035 C68.98834056829348 -7.923642384618072, 69.18195612187294 -7.521595544901109, 69.29536471428463 -7.286100176203093 C69.44603061522035 -6.913952487964812, 69.59669651615607 -6.541804799726531, 69.72836909689568 -6.216570979583546 C69.80941824017076 -5.972463873466309, 69.89046738344584 -5.728356767349072, 70.0919588546599 -5.121496559358589 C70.15999735749476 -4.862036259975583, 70.22803586032963 -4.602575960592576, 70.38463991927283 -4.005376811213661 C70.433878751441 -3.7525458146609765, 70.48311758360917 -3.4997148181082927, 70.6052096014601 -2.872798110600833 C70.64489441408017 -2.565010540572206, 70.68457922670024 -2.2572229705435793, 70.75276153308556 -1.728414466338275 C70.77259313277801 -1.4195212933491719, 70.79242473247047 -1.1106281203600687, 70.82668939161238 -0.576928396289793 C70.82668939161238 -0.23961973621313687, 70.82668939161238 0.09768892386351924, 70.82668939161238 0.5769283962897886 C70.80790360507733 0.8695321851870552, 70.7891178185423 1.1621359740843218, 70.75276153308556 1.7284144663382628 C70.71178253982448 2.0462394458536632, 70.67080354656342 2.3640644253690635, 70.6052096014601 2.8727981106008205 C70.5510071041315 3.151116478681359, 70.49680460680288 3.4294348467618976, 70.38463991927283 4.005376811213657 C70.31059785645962 4.287731286753413, 70.23655579364642 4.57008576229317, 70.0919588546599 5.121496559358577 C69.96697034566958 5.497942034222915, 69.84198183667925 5.874387509087253, 69.72836909689569 6.216570979583534 C69.56972091762087 6.608435049646223, 69.41107273834605 7.000299119708913, 69.29536471428463 7.286100176203088 C69.12647751941886 7.636798049948946, 68.95759032455308 7.987495923694805, 68.794725014714 8.325689224335031 C68.67538846297109 8.5375833560908, 68.55605191122817 8.749477487846566, 68.22850723409623 9.33106622958945 C68.03399633210537 9.629887208537962, 67.83948543011452 9.928708187486476, 67.59903808274521 10.298099882199049 C67.40975788239189 10.551718106891514, 67.22047768203856 10.805336331583979, 66.90890418442454 11.2228164334572 C66.71759508321001 11.447538989540032, 66.52628598199547 11.672261545622861, 66.16094144735568 12.101416024703695 C65.8653672997856 12.40662059915863, 65.56979315221552 12.711825173613564, 65.35822341086276 12.930288301759093 C65.08483284793866 13.178574377488859, 64.81144228501454 13.426860453218625, 64.5040486155402 13.706027250644409 C64.31782707012368 13.854533977550638, 64.13160552470717 14.003040704456865, 63.601927048841894 14.425445193623217 C63.325123997016654 14.618531019965516, 63.04832094519141 14.811616846307816, 62.655565721789884 15.085585888053126 C62.424715486853344 15.22552865709822, 62.193865251916804 15.365471426143316, 61.66885343607088 15.68373667422101 C61.447132029608426 15.799408589953137, 61.22541062314596 15.915080505685262, 60.64584480411605 16.217439622243543 C60.286211958703724 16.37663841477826, 59.9265791132914 16.535837207312973, 59.59074358782874 16.68450163222839 C59.31342736506838 16.786556565687263, 59.03611114230802 16.888611499146137, 58.50788542442518 17.08300344619203 C58.134880413060294 17.19370937562187, 57.761875401695406 17.304415305051712, 57.40172001037115 17.411307534702527 C57.151234627608034 17.468479188748326, 56.90074924484492 17.525650842794125, 56.276792816624706 17.668064825839174 C55.86836368509773 17.734096480409235, 55.459934553570754 17.8001281349793, 55.13772641032112 17.85222024881843 C54.763416728989974 17.88832945360319, 54.389107047658825 17.924438658387952, 53.98920145965283 17.963017069506055 C53.54742958185757 17.97718383377015, 53.10565770406232 17.991350598034252, 52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 C31.44676015239052 18, 10.057582804781042 18, -52.8359375 18 C-53.19557286360634 17.988467193876915, -53.55520822721267 17.97693438775383, -53.989201459652826 17.963017069506055 C-54.41998322138507 17.921460071042613, -54.85076498311731 17.87990307257917, -55.137726410321115 17.85222024881843 C-55.51907359089593 17.790566994054647, -55.900420771470735 17.728913739290864, -56.2767928166247 17.668064825839174 C-56.539054697264646 17.608205263001818, -56.801316577904586 17.548345700164464, -57.40172001037113 17.41130753470253 C-57.66018610130436 17.334596155629743, -57.918652192237595 17.257884776556956, -58.50788542442516 17.083003446192038 C-58.769957580858346 16.98655847005617, -59.03202973729152 16.8901134939203, -59.59074358782873 16.68450163222839 C-59.83422039801984 16.576721670839746, -60.07769720821095 16.468941709451105, -60.645844804116045 16.217439622243546 C-61.00115418349001 16.032074946610667, -61.35646356286398 15.846710270977788, -61.668853436070876 15.683736674221013 C-61.90022253686104 15.54347936564626, -62.1315916376512 15.403222057071504, -62.65556572178986 15.085585888053139 C-62.96977388922425 14.866407872303256, -63.28398205665864 14.647229856553372, -63.60192704884189 14.42544519362322 C-63.95771575988326 14.141713164502955, -64.31350447092463 13.857981135382689, -64.50404861554019 13.706027250644423 C-64.82636149451066 13.413311221894903, -65.14867437348113 13.120595193145382, -65.35822341086275 12.930288301759106 C-65.56573720477975 12.71601327234047, -65.77325099869675 12.501738242921835, -66.16094144735568 12.101416024703703 C-66.44608353125432 11.766471907912145, -66.73122561515297 11.431527791120589, -66.90890418442453 11.222816433457206 C-67.11976253219758 10.940285457031973, -67.33062087997064 10.65775448060674, -67.5990380827452 10.29809988219906 C-67.84991823422392 9.912680598774278, -68.10079838570265 9.527261315349497, -68.22850723409623 9.33106622958946 C-68.4476620532749 8.941934656305888, -68.66681687245357 8.552803083022315, -68.794725014714 8.325689224335036 C-68.91725867428454 8.071245458436499, -69.03979233385509 7.816801692537962, -69.29536471428463 7.286100176203095 C-69.43333620119022 6.945307936049069, -69.57130768809579 6.604515695895042, -69.72836909689568 6.2165709795835475 C-69.80269038180512 5.992727110924954, -69.87701166671457 5.7688832422663605, -70.0919588546599 5.121496559358584 C-70.1561278411001 4.876792403047411, -70.22029682754031 4.632088246736238, -70.38463991927281 4.005376811213663 C-70.44328326470882 3.7042556266752182, -70.50192661014484 3.403134442136773, -70.6052096014601 2.8727981106008347 C-70.64708679237346 2.5480068874635178, -70.68896398328681 2.223215664326201, -70.75276153308556 1.7284144663382852 C-70.76873226700708 1.479657394166278, -70.78470300092859 1.230900321994271, -70.82668939161238 0.5769283962897952 C-70.82668939161238 0.18603496422176247, -70.82668939161238 -0.20485846784627026, -70.82668939161238 -0.5769283962897864 C-70.79897022357206 -1.0086768130275483, -70.77125105553174 -1.4404252297653102, -70.75276153308556 -1.7284144663382603 C-70.7022182857142 -2.1204179120575066, -70.65167503834283 -2.5124213577767534, -70.6052096014601 -2.8727981106008262 C-70.52466625821623 -3.2863711553164845, -70.44412291497237 -3.6999442000321423, -70.38463991927283 -4.005376811213655 C-70.27770297915623 -4.413173710641257, -70.17076603903963 -4.8209706100688585, -70.0919588546599 -5.121496559358575 C-70.01012603004011 -5.367963988823394, -69.92829320542033 -5.6144314182882145, -69.72836909689569 -6.2165709795835244 C-69.6022637877013 -6.528053531373958, -69.47615847850692 -6.839536083164391, -69.29536471428463 -7.286100176203086 C-69.16083353890254 -7.565457040390029, -69.02630236352044 -7.844813904576972, -68.794725014714 -8.32568922433503 C-68.60653858077721 -8.659833293732593, -68.41835214684042 -8.993977363130155, -68.22850723409623 -9.331066229589455 C-68.04896138965661 -9.606896861458646, -67.869415545217 -9.882727493327835, -67.59903808274521 -10.298099882199054 C-67.34106718841817 -10.64375737896535, -67.0830962940911 -10.989414875731647, -66.90890418442454 -11.2228164334572 C-66.67798056205542 -11.494072460218323, -66.44705693968629 -11.765328486979447, -66.16094144735568 -12.101416024703695 C-65.89361562239769 -12.377451886831226, -65.6262897974397 -12.653487748958756, -65.35822341086276 -12.930288301759086 C-65.07168944587411 -13.190510867488502, -64.78515548088546 -13.450733433217916, -64.5040486155402 -13.706027250644407 C-64.29365903330081 -13.873807343778402, -64.08326945106144 -14.041587436912398, -63.601927048841894 -14.425445193623215 C-63.28605428745684 -14.64578435805397, -62.97018152607179 -14.866123522484724, -62.655565721789884 -15.085585888053124 C-62.42486367608967 -15.2254388239123, -62.19416163038946 -15.365291759771479, -61.66885343607088 -15.683736674221008 C-61.3095593579318 -15.871180164647324, -60.950265279792724 -16.058623655073642, -60.64584480411605 -16.217439622243543 C-60.396599547422774 -16.327773103783812, -60.147354290729496 -16.43810658532408, -59.59074358782874 -16.684501632228386 C-59.25364339086759 -16.80855762083015, -58.91654319390644 -16.932613609431918, -58.50788542442518 -17.08300344619203 C-58.2783158273433 -17.15113849757053, -58.04874623026142 -17.219273548949026, -57.40172001037115 -17.411307534702523 C-56.95410398639761 -17.513472971206948, -56.50648796242407 -17.615638407711376, -56.276792816624706 -17.668064825839174 C-55.99041388372572 -17.714364350808488, -55.70403495082674 -17.7606638757778, -55.13772641032112 -17.85222024881843 C-54.766816016865924 -17.88800152839004, -54.39590562341073 -17.92378280796165, -53.98920145965283 -17.963017069506055 C-53.535008601107236 -17.977582150446842, -53.08081574256165 -17.992147231387634, -52.83593750000001 -18 C-52.83593750000001 -18, -52.8359375 -18, -52.8359375 -18" stroke="none" stroke-width="0" fill="#fef3c7" style="fill:#fef3c7 !important;stroke:#f59e0b !important"/><path d="M-52.8359375 -18 C-11.687270277465444 -18, 29.46139694506911 -18, 52.8359375 -18 M-52.8359375 -18 C-28.07585636774333 -18, -3.3157752354866616 -18, 52.8359375 -18 M52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 M52.8359375 -18 C52.8359375 -18, 52.8359375 -18, 52.8359375 -18 M52.8359375 -18 C53.171097222544425 -17.989252080046825, 53.50625694508886 -17.97850416009365, 53.98920145965283 -17.963017069506055 M52.8359375 -18 C53.23488115994943 -17.98720665332215, 53.63382481989886 -17.974413306644298, 53.98920145965283 -17.963017069506055 M53.98920145965283 -17.963017069506055 C54.325763525518546 -17.930549331787095, 54.66232559138426 -17.89808159406813, 55.13772641032111 -17.85222024881843 M53.98920145965283 -17.963017069506055 C54.418745219557216 -17.92157949959003, 54.8482889794616 -17.880141929674007, 55.13772641032111 -17.85222024881843 M55.13772641032111 -17.85222024881843 C55.38260331515337 -17.81263044989391, 55.62748021998563 -17.77304065096939, 56.2767928166247 -17.668064825839178 M55.13772641032111 -17.85222024881843 C55.516591121635614 -17.79096834043282, 55.89545583295012 -17.72971643204721, 56.2767928166247 -17.668064825839178 M56.2767928166247 -17.668064825839178 C56.57703095757809 -17.599537429403536, 56.877269098531485 -17.53101003296789, 57.40172001037113 -17.41130753470253 M56.2767928166247 -17.668064825839178 C56.71365966327336 -17.568352818914217, 57.15052650992202 -17.46864081198926, 57.40172001037113 -17.41130753470253 M57.40172001037113 -17.41130753470253 C57.71234049905253 -17.319117004142107, 58.02296098773393 -17.226926473581685, 58.50788542442517 -17.083003446192034 M57.40172001037113 -17.41130753470253 C57.79357292095395 -17.295007647719448, 58.18542583153677 -17.17870776073637, 58.50788542442517 -17.083003446192034 M58.50788542442517 -17.083003446192034 C58.82374479614276 -16.966764277627934, 59.139604167860355 -16.850525109063835, 59.59074358782873 -16.68450163222839 M58.50788542442517 -17.083003446192034 C58.91778270946898 -16.932157456246944, 59.327679994512785 -16.781311466301858, 59.59074358782873 -16.68450163222839 M59.59074358782873 -16.68450163222839 C59.96019738894789 -16.52095539393056, 60.32965119006704 -16.357409155632734, 60.645844804116045 -16.217439622243546 M59.59074358782873 -16.68450163222839 C59.82263457415197 -16.5818503713848, 60.054525560475206 -16.479199110541206, 60.645844804116045 -16.217439622243546 M60.645844804116045 -16.217439622243546 C60.897061827061265 -16.086379862285206, 61.14827885000649 -15.955320102326867, 61.668853436070876 -15.683736674221011 M60.645844804116045 -16.217439622243546 C60.948051660795855 -16.059778498686416, 61.25025851747567 -15.902117375129288, 61.668853436070876 -15.683736674221011 M61.668853436070876 -15.683736674221011 C61.908522271200965 -15.538448017914742, 62.14819110633105 -15.393159361608474, 62.65556572178988 -15.085585888053133 M61.668853436070876 -15.683736674221011 C62.04757824233365 -15.454151471030515, 62.426303048596424 -15.224566267840018, 62.65556572178988 -15.085585888053133 M62.65556572178988 -15.085585888053133 C62.98180564970555 -14.858015037038019, 63.30804557762123 -14.630444186022904, 63.60192704884189 -14.425445193623219 M62.65556572178988 -15.085585888053133 C62.856332897210976 -14.945539397550322, 63.057100072632075 -14.80549290704751, 63.60192704884189 -14.425445193623219 M63.60192704884189 -14.425445193623219 C63.825582940840945 -14.24708557148721, 64.04923883284 -14.068725949351201, 64.50404861554019 -13.706027250644421 M63.60192704884189 -14.425445193623219 C63.93269191897613 -14.161669011714013, 64.26345678911038 -13.897892829804809, 64.50404861554019 -13.706027250644421 M64.50404861554019 -13.706027250644421 C64.79295633517518 -13.443648903751305, 65.08186405481015 -13.18127055685819, 65.35822341086275 -12.930288301759097 M64.50404861554019 -13.706027250644421 C64.77564943067718 -13.459366576500784, 65.04725024581417 -13.212705902357149, 65.35822341086275 -12.930288301759097 M65.35822341086275 -12.930288301759097 C65.64792898557006 -12.631143510603765, 65.93763456027739 -12.331998719448434, 66.16094144735568 -12.101416024703706 M65.35822341086275 -12.930288301759097 C65.56825450376816 -12.713413954460846, 65.77828559667357 -12.496539607162594, 66.16094144735568 -12.101416024703706 M66.16094144735568 -12.101416024703706 C66.43169811063895 -11.783369841520598, 66.7024547739222 -11.465323658337487, 66.90890418442453 -11.222816433457204 M66.16094144735568 -12.101416024703706 C66.34550260857198 -11.884619982911463, 66.53006376978827 -11.66782394111922, 66.90890418442453 -11.222816433457204 M66.90890418442453 -11.222816433457204 C67.1675703826087 -10.876227292865842, 67.42623658079287 -10.529638152274481, 67.5990380827452 -10.298099882199057 M66.90890418442453 -11.222816433457204 C67.16314283764497 -10.882159799759597, 67.41738149086542 -10.541503166061991, 67.5990380827452 -10.298099882199057 M67.5990380827452 -10.298099882199057 C67.75344099913785 -10.060895539631531, 67.90784391553049 -9.823691197064004, 68.22850723409623 -9.331066229589453 M67.5990380827452 -10.298099882199057 C67.84550784500483 -9.919456140970118, 68.09197760726448 -9.540812399741176, 68.22850723409623 -9.331066229589453 M68.22850723409623 -9.331066229589453 C68.42086614135951 -8.989513511291953, 68.61322504862281 -8.647960792994454, 68.794725014714 -8.325689224335035 M68.22850723409623 -9.331066229589453 C68.44702046924264 -8.94307385372257, 68.66553370438908 -8.555081477855689, 68.794725014714 -8.325689224335035 M68.794725014714 -8.325689224335035 C68.94592093647151 -8.011727657731099, 69.09711685822901 -7.6977660911271615, 69.29536471428463 -7.286100176203093 M68.794725014714 -8.325689224335035 C68.96951641237024 -7.962731147165078, 69.14430781002648 -7.5997730699951225, 69.29536471428463 -7.286100176203093 M69.29536471428463 -7.286100176203093 C69.46214887248546 -6.874140080894714, 69.62893303068627 -6.462179985586333, 69.72836909689568 -6.216570979583546 M69.29536471428463 -7.286100176203093 C69.42981972183976 -6.953993708031169, 69.5642747293949 -6.621887239859245, 69.72836909689568 -6.216570979583546 M69.72836909689568 -6.216570979583546 C69.80643753388901 -5.981441285875897, 69.88450597088233 -5.746311592168249, 70.0919588546599 -5.121496559358589 M69.72836909689568 -6.216570979583546 C69.85265585600742 -5.842239063544862, 69.97694261511914 -5.467907147506178, 70.0919588546599 -5.121496559358589 M70.0919588546599 -5.121496559358589 C70.16404691805964 -4.846593530451021, 70.2361349814594 -4.571690501543452, 70.38463991927283 -4.005376811213661 M70.0919588546599 -5.121496559358589 C70.18801986326817 -4.7551743004307445, 70.28408087187644 -4.3888520415029, 70.38463991927283 -4.005376811213661 M70.38463991927283 -4.005376811213661 C70.45145138612365 -3.6623140495432027, 70.51826285297447 -3.3192512878727443, 70.6052096014601 -2.872798110600833 M70.38463991927283 -4.005376811213661 C70.47158281817053 -3.5589434007621676, 70.55852571706822 -3.112509990310674, 70.6052096014601 -2.872798110600833 M70.6052096014601 -2.872798110600833 C70.64629820059582 -2.554123049565811, 70.68738679973154 -2.2354479885307894, 70.75276153308556 -1.728414466338275 M70.6052096014601 -2.872798110600833 C70.6530942800611 -2.501413999270783, 70.7009789586621 -2.130029887940733, 70.75276153308556 -1.728414466338275 M70.75276153308556 -1.728414466338275 C70.77461009160537 -1.3881055315532107, 70.79645865012519 -1.0477965967681464, 70.82668939161238 -0.576928396289793 M70.75276153308556 -1.728414466338275 C70.77807536952244 -1.3341310308729208, 70.80338920595932 -0.9398475954075669, 70.82668939161238 -0.576928396289793 M70.82668939161238 -0.576928396289793 C70.82668939161238 -0.18519973785852006, 70.82668939161238 0.20652892057275285, 70.82668939161238 0.5769283962897886 M70.82668939161238 -0.576928396289793 C70.82668939161238 -0.122408367801016, 70.82668939161238 0.332111660687761, 70.82668939161238 0.5769283962897886 M70.82668939161238 0.5769283962897886 C70.8115393481665 0.8129025518542609, 70.79638930472062 1.048876707418733, 70.75276153308556 1.7284144663382628 M70.82668939161238 0.5769283962897886 C70.80880898092694 0.8554302255230802, 70.79092857024152 1.1339320547563718, 70.75276153308556 1.7284144663382628 M70.75276153308556 1.7284144663382628 C70.69834175319244 2.150483532788358, 70.6439219732993 2.5725525992384526, 70.6052096014601 2.8727981106008205 M70.75276153308556 1.7284144663382628 C70.70156855459585 2.125457098307411, 70.65037557610616 2.522499730276559, 70.6052096014601 2.8727981106008205 M70.6052096014601 2.8727981106008205 C70.54019791870084 3.206619361345605, 70.47518623594158 3.5404406120903897, 70.38463991927283 4.005376811213657 M70.6052096014601 2.8727981106008205 C70.53728682679781 3.2215672030082216, 70.4693640521355 3.570336295415623, 70.38463991927283 4.005376811213657 M70.38463991927283 4.005376811213657 C70.27461771134786 4.424939173958116, 70.16459550342289 4.844501536702574, 70.0919588546599 5.121496559358577 M70.38463991927283 4.005376811213657 C70.29469591162211 4.348372294365313, 70.20475190397141 4.691367777516969, 70.0919588546599 5.121496559358577 M70.0919588546599 5.121496559358577 C69.97989850137776 5.459004489051748, 69.86783814809563 5.7965124187449195, 69.72836909689569 6.216570979583534 M70.0919588546599 5.121496559358577 C70.01123162431564 5.3646341150180055, 69.9305043939714 5.607771670677434, 69.72836909689569 6.216570979583534 M69.72836909689569 6.216570979583534 C69.63241847599782 6.453570868280313, 69.53646785509997 6.690570756977092, 69.29536471428463 7.286100176203088 M69.72836909689569 6.216570979583534 C69.61308074362289 6.501335441116048, 69.49779239035007 6.786099902648561, 69.29536471428463 7.286100176203088 M69.29536471428463 7.286100176203088 C69.19254118800272 7.499615428598493, 69.08971766172081 7.713130680993897, 68.794725014714 8.325689224335031 M69.29536471428463 7.286100176203088 C69.15664904145964 7.574146238864096, 69.01793336863466 7.862192301525104, 68.794725014714 8.325689224335031 M68.794725014714 8.325689224335031 C68.59789920592031 8.675173378622572, 68.40107339712664 9.024657532910116, 68.22850723409623 9.33106622958945 M68.794725014714 8.325689224335031 C68.57731449937681 8.711723609518131, 68.35990398403963 9.097757994701231, 68.22850723409623 9.33106622958945 M68.22850723409623 9.33106622958945 C68.10135837089909 9.526401027710671, 67.97420950770194 9.721735825831892, 67.59903808274521 10.298099882199049 M68.22850723409623 9.33106622958945 C68.02372641040705 9.645664566126714, 67.81894558671786 9.960262902663978, 67.59903808274521 10.298099882199049 M67.59903808274521 10.298099882199049 C67.44105326122772 10.509785150319157, 67.28306843971023 10.721470418439266, 66.90890418442454 11.2228164334572 M67.59903808274521 10.298099882199049 C67.43786791139368 10.514053228905441, 67.27669774004214 10.730006575611833, 66.90890418442454 11.2228164334572 M66.90890418442454 11.2228164334572 C66.70445417705488 11.462975045648575, 66.50000416968524 11.70313365783995, 66.16094144735568 12.101416024703695 M66.90890418442454 11.2228164334572 C66.74932567106154 11.41026643552802, 66.58974715769854 11.59771643759884, 66.16094144735568 12.101416024703695 M66.16094144735568 12.101416024703695 C65.9385851216389 12.331017186800137, 65.7162287959221 12.56061834889658, 65.35822341086276 12.930288301759093 M66.16094144735568 12.101416024703695 C65.99490611108219 12.272861141160712, 65.82887077480868 12.444306257617729, 65.35822341086276 12.930288301759093 M65.35822341086276 12.930288301759093 C65.12461219570858 13.142447826348073, 64.89100098055441 13.354607350937052, 64.5040486155402 13.706027250644409 M65.35822341086276 12.930288301759093 C65.14787801712525 13.121318422917351, 64.93753262338775 13.312348544075611, 64.5040486155402 13.706027250644409 M64.5040486155402 13.706027250644409 C64.24215067900133 13.91488388563737, 63.98025274246247 14.12374052063033, 63.601927048841894 14.425445193623217 M64.5040486155402 13.706027250644409 C64.24732133374891 13.91076042607307, 63.99059405195764 14.11549360150173, 63.601927048841894 14.425445193623217 M63.601927048841894 14.425445193623217 C63.412585474247074 14.557521679595903, 63.22324389965225 14.68959816556859, 62.655565721789884 15.085585888053126 M63.601927048841894 14.425445193623217 C63.34468231422743 14.604887984545188, 63.08743757961295 14.784330775467161, 62.655565721789884 15.085585888053126 M62.655565721789884 15.085585888053126 C62.31795663921776 15.290246497919536, 61.98034755664565 15.494907107785947, 61.66885343607088 15.68373667422101 M62.655565721789884 15.085585888053126 C62.282786581486405 15.31156679359849, 61.91000744118292 15.537547699143854, 61.66885343607088 15.68373667422101 M61.66885343607088 15.68373667422101 C61.341173071025054 15.854687310776127, 61.013492705979225 16.025637947331244, 60.64584480411605 16.217439622243543 M61.66885343607088 15.68373667422101 C61.420276720350955 15.81341898759111, 61.17170000463103 15.943101300961212, 60.64584480411605 16.217439622243543 M60.64584480411605 16.217439622243543 C60.430017929432424 16.31297977738922, 60.21419105474879 16.4085199325349, 59.59074358782874 16.68450163222839 M60.64584480411605 16.217439622243543 C60.2484140167551 16.393370442442805, 59.85098322939415 16.569301262642067, 59.59074358782874 16.68450163222839 M59.59074358782874 16.68450163222839 C59.274932227746106 16.80072313206701, 58.95912086766347 16.91694463190563, 58.50788542442518 17.08300344619203 M59.59074358782874 16.68450163222839 C59.35054021301959 16.77289869457381, 59.11033683821044 16.861295756919237, 58.50788542442518 17.08300344619203 M58.50788542442518 17.08300344619203 C58.252777162310885 17.15871823929696, 57.99766890019659 17.234433032401892, 57.40172001037115 17.411307534702527 M58.50788542442518 17.08300344619203 C58.25289678607624 17.15868273559132, 57.99790814772731 17.23436202499061, 57.40172001037115 17.411307534702527 M57.40172001037115 17.411307534702527 C57.08251176875628 17.484164732822673, 56.7633035271414 17.557021930942824, 56.276792816624706 17.668064825839174 M57.40172001037115 17.411307534702527 C57.06073254488498 17.48913569854858, 56.719745079398805 17.566963862394637, 56.276792816624706 17.668064825839174 M56.276792816624706 17.668064825839174 C55.841053954732466 17.73851170582457, 55.40531509284023 17.808958585809965, 55.13772641032112 17.85222024881843 M56.276792816624706 17.668064825839174 C55.97391848381221 17.717031199142767, 55.67104415099972 17.765997572446363, 55.13772641032112 17.85222024881843 M55.13772641032112 17.85222024881843 C54.77807018874909 17.886915851963593, 54.41841396717706 17.921611455108756, 53.98920145965283 17.963017069506055 M55.13772641032112 17.85222024881843 C54.809641946428556 17.88387016247085, 54.481557482536 17.91552007612327, 53.98920145965283 17.963017069506055 M53.98920145965283 17.963017069506055 C53.544873170931545 17.9772658128928, 53.10054488221026 17.99151455627954, 52.8359375 18 M53.98920145965283 17.963017069506055 C53.55642063527517 17.976895508187074, 53.123639810897494 17.990773946868092, 52.8359375 18 M52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 M52.8359375 18 C52.8359375 18, 52.8359375 18, 52.8359375 18 M52.8359375 18 C14.864810678214369 18, -23.106316143571263 18, -52.8359375 18 M52.8359375 18 C21.52365575870223 18, -9.78862598259554 18, -52.8359375 18 M-52.8359375 18 C-53.215143908068356 17.987839588573745, -53.594350316136705 17.97567917714749, -53.989201459652826 17.963017069506055 M-52.8359375 18 C-53.2967722677263 17.98522192595948, -53.757607035452594 17.970443851918954, -53.989201459652826 17.963017069506055 M-53.989201459652826 17.963017069506055 C-54.28961894950635 17.934036155564776, -54.59003643935988 17.9050552416235, -55.137726410321115 17.85222024881843 M-53.989201459652826 17.963017069506055 C-54.33224581407671 17.929923993205982, -54.67529016850058 17.896830916905905, -55.137726410321115 17.85222024881843 M-55.137726410321115 17.85222024881843 C-55.47386075530252 17.797876654682614, -55.80999510028392 17.743533060546795, -56.2767928166247 17.668064825839174 M-55.137726410321115 17.85222024881843 C-55.39844433294382 17.810069396986478, -55.659162255566514 17.767918545154526, -56.2767928166247 17.668064825839174 M-56.2767928166247 17.668064825839174 C-56.58880044429423 17.596851120863654, -56.90080807196376 17.52563741588813, -57.40172001037113 17.41130753470253 M-56.2767928166247 17.668064825839174 C-56.618641639845265 17.59004006271113, -56.96049046306583 17.512015299583084, -57.40172001037113 17.41130753470253 M-57.40172001037113 17.41130753470253 C-57.813617698973935 17.289058462820304, -58.22551538757674 17.166809390938077, -58.50788542442516 17.083003446192038 M-57.40172001037113 17.41130753470253 C-57.792091660283354 17.295447278111187, -58.18246331019558 17.179587021519843, -58.50788542442516 17.083003446192038 M-58.50788542442516 17.083003446192038 C-58.825554397599845 16.966098327563955, -59.14322337077453 16.849193208935876, -59.59074358782873 16.68450163222839 M-58.50788542442516 17.083003446192038 C-58.82258780156267 16.96719006232855, -59.13729017870018 16.851376678465062, -59.59074358782873 16.68450163222839 M-59.59074358782873 16.68450163222839 C-59.881603802560065 16.555746443228543, -60.172464017291404 16.4269912542287, -60.645844804116045 16.217439622243546 M-59.59074358782873 16.68450163222839 C-60.012047833321844 16.498002740294996, -60.433352078814956 16.3115038483616, -60.645844804116045 16.217439622243546 M-60.645844804116045 16.217439622243546 C-61.015528322986995 16.024575967242164, -61.38521184185795 15.831712312240784, -61.668853436070876 15.683736674221013 M-60.645844804116045 16.217439622243546 C-60.96490795522037 16.050984580682123, -61.2839711063247 15.884529539120695, -61.668853436070876 15.683736674221013 M-61.668853436070876 15.683736674221013 C-61.96931871688318 15.50159285526261, -62.269783997695484 15.319449036304206, -62.65556572178986 15.085585888053139 M-61.668853436070876 15.683736674221013 C-61.8665168662459 15.56391194124966, -62.06418029642093 15.444087208278306, -62.65556572178986 15.085585888053139 M-62.65556572178986 15.085585888053139 C-62.95817905132379 14.874495929290173, -63.260792380857716 14.663405970527208, -63.60192704884189 14.42544519362322 M-62.65556572178986 15.085585888053139 C-62.898529464735816 14.91610489870496, -63.14149320768176 14.746623909356783, -63.60192704884189 14.42544519362322 M-63.60192704884189 14.42544519362322 C-63.80422822224036 14.264115391298253, -64.00652939563884 14.102785588973285, -64.50404861554019 13.706027250644423 M-63.60192704884189 14.42544519362322 C-63.938717877465606 14.15686347017615, -64.27550870608933 13.88828174672908, -64.50404861554019 13.706027250644423 M-64.50404861554019 13.706027250644423 C-64.73845246538818 13.493147876198492, -64.97285631523616 13.28026850175256, -65.35822341086275 12.930288301759106 M-64.50404861554019 13.706027250644423 C-64.71824110463777 13.511503299268702, -64.93243359373537 13.31697934789298, -65.35822341086275 12.930288301759106 M-65.35822341086275 12.930288301759106 C-65.54859908416486 12.733709788941221, -65.73897475746696 12.537131276123334, -66.16094144735568 12.101416024703703 M-65.35822341086275 12.930288301759106 C-65.59142227224628 12.689491331398022, -65.82462113362982 12.44869436103694, -66.16094144735568 12.101416024703703 M-66.16094144735568 12.101416024703703 C-66.40658537141975 11.812868693962805, -66.6522292954838 11.52432136322191, -66.90890418442453 11.222816433457206 M-66.16094144735568 12.101416024703703 C-66.36953689482786 11.856387942685668, -66.57813234230005 11.611359860667633, -66.90890418442453 11.222816433457206 M-66.90890418442453 11.222816433457206 C-67.13735245579701 10.916716561883746, -67.3658007271695 10.610616690310286, -67.5990380827452 10.29809988219906 M-66.90890418442453 11.222816433457206 C-67.15389412171878 10.894552236525342, -67.39888405901303 10.56628803959348, -67.5990380827452 10.29809988219906 M-67.5990380827452 10.29809988219906 C-67.79885837957266 9.991122247009358, -67.99867867640015 9.684144611819658, -68.22850723409623 9.33106622958946 M-67.5990380827452 10.29809988219906 C-67.80080291261795 9.988134922071563, -68.00256774249073 9.678169961944066, -68.22850723409623 9.33106622958946 M-68.22850723409623 9.33106622958946 C-68.34824076407448 9.118467222778452, -68.46797429405272 8.905868215967443, -68.794725014714 8.325689224335036 M-68.22850723409623 9.33106622958946 C-68.38716805422432 9.049347877301845, -68.54582887435241 8.767629525014227, -68.794725014714 8.325689224335036 M-68.794725014714 8.325689224335036 C-68.92402484825067 8.057195353422903, -69.05332468178734 7.78870148251077, -69.29536471428463 7.286100176203095 M-68.794725014714 8.325689224335036 C-68.97280164397077 7.955909293453893, -69.15087827322753 7.58612936257275, -69.29536471428463 7.286100176203095 M-69.29536471428463 7.286100176203095 C-69.44859781866292 6.90761144582818, -69.6018309230412 6.529122715453266, -69.72836909689568 6.2165709795835475 M-69.29536471428463 7.286100176203095 C-69.39222509875587 7.046853153890975, -69.48908548322711 6.807606131578856, -69.72836909689568 6.2165709795835475 M-69.72836909689568 6.2165709795835475 C-69.83531137994636 5.8944778619737646, -69.94225366299705 5.572384744363981, -70.0919588546599 5.121496559358584 M-69.72836909689568 6.2165709795835475 C-69.84791943122829 5.8565044203327465, -69.96746976556092 5.496437861081945, -70.0919588546599 5.121496559358584 M-70.0919588546599 5.121496559358584 C-70.20087056020255 4.706169023492674, -70.3097822657452 4.290841487626762, -70.38463991927281 4.005376811213663 M-70.0919588546599 5.121496559358584 C-70.20768197682543 4.68019413982297, -70.32340509899096 4.238891720287357, -70.38463991927281 4.005376811213663 M-70.38463991927281 4.005376811213663 C-70.44216196258606 3.7100132760883198, -70.49968400589931 3.414649740962976, -70.6052096014601 2.8727981106008347 M-70.38463991927281 4.005376811213663 C-70.46717531190609 3.581575013903235, -70.54971070453936 3.157773216592806, -70.6052096014601 2.8727981106008347 M-70.6052096014601 2.8727981106008347 C-70.65029552211408 2.5231206132305894, -70.69538144276807 2.173443115860344, -70.75276153308556 1.7284144663382852 M-70.6052096014601 2.8727981106008347 C-70.63983384918157 2.6042592826042092, -70.67445809690304 2.3357204546075834, -70.75276153308556 1.7284144663382852 M-70.75276153308556 1.7284144663382852 C-70.77945450244684 1.3126499223592787, -70.80614747180812 0.8968853783802724, -70.82668939161238 0.5769283962897952 M-70.75276153308556 1.7284144663382852 C-70.77092640979477 1.4454818491677124, -70.78909128650399 1.1625492319971396, -70.82668939161238 0.5769283962897952 M-70.82668939161238 0.5769283962897952 C-70.82668939161238 0.19619280653024396, -70.82668939161238 -0.18454278322930728, -70.82668939161238 -0.5769283962897864 M-70.82668939161238 0.5769283962897952 C-70.82668939161238 0.15117572006589597, -70.82668939161238 -0.27457695615800326, -70.82668939161238 -0.5769283962897864 M-70.82668939161238 -0.5769283962897864 C-70.80548961338886 -0.9071320542739663, -70.78428983516535 -1.237335712258146, -70.75276153308556 -1.7284144663382603 M-70.82668939161238 -0.5769283962897864 C-70.80326150216551 -0.9418366850766281, -70.77983361271866 -1.3067449738634698, -70.75276153308556 -1.7284144663382603 M-70.75276153308556 -1.7284144663382603 C-70.70936438471557 -2.064994179359673, -70.66596723634558 -2.4015738923810854, -70.6052096014601 -2.8727981106008262 M-70.75276153308556 -1.7284144663382603 C-70.71252837236366 -2.040454915961101, -70.67229521164177 -2.352495365583942, -70.6052096014601 -2.8727981106008262 M-70.6052096014601 -2.8727981106008262 C-70.53217714975021 -3.247804314716992, -70.45914469804032 -3.6228105188331576, -70.38463991927283 -4.005376811213655 M-70.6052096014601 -2.8727981106008262 C-70.56001943496403 -3.104840064613061, -70.51482926846796 -3.336882018625295, -70.38463991927283 -4.005376811213655 M-70.38463991927283 -4.005376811213655 C-70.30255825770276 -4.318389761197473, -70.2204765961327 -4.631402711181289, -70.0919588546599 -5.121496559358575 M-70.38463991927283 -4.005376811213655 C-70.27115511562054 -4.438143552164836, -70.15767031196826 -4.870910293116015, -70.0919588546599 -5.121496559358575 M-70.0919588546599 -5.121496559358575 C-69.99379212178785 -5.417159118024331, -69.89562538891582 -5.712821676690087, -69.72836909689569 -6.2165709795835244 M-70.0919588546599 -5.121496559358575 C-69.96044087268791 -5.517607766513419, -69.82892289071594 -5.913718973668264, -69.72836909689569 -6.2165709795835244 M-69.72836909689569 -6.2165709795835244 C-69.57463188032135 -6.596304876829051, -69.42089466374699 -6.976038774074578, -69.29536471428463 -7.286100176203086 M-69.72836909689569 -6.2165709795835244 C-69.60091165553358 -6.531393323969935, -69.47345421417147 -6.846215668356345, -69.29536471428463 -7.286100176203086 M-69.29536471428463 -7.286100176203086 C-69.16591496398202 -7.554905352487392, -69.03646521367942 -7.823710528771698, -68.794725014714 -8.32568922433503 M-69.29536471428463 -7.286100176203086 C-69.13243650989742 -7.6244240787182544, -68.96950830551019 -7.962747981233423, -68.794725014714 -8.32568922433503 M-68.794725014714 -8.32568922433503 C-68.60245366214876 -8.667086480400268, -68.41018230958352 -9.008483736465507, -68.22850723409623 -9.331066229589455 M-68.794725014714 -8.32568922433503 C-68.63927889173443 -8.601699556312072, -68.48383276875485 -8.877709888289113, -68.22850723409623 -9.331066229589455 M-68.22850723409623 -9.331066229589455 C-68.0773781664467 -9.563241061336067, -67.92624909879717 -9.79541589308268, -67.59903808274521 -10.298099882199054 M-68.22850723409623 -9.331066229589455 C-68.07909888817242 -9.56059757068687, -67.92969054224862 -9.790128911784286, -67.59903808274521 -10.298099882199054 M-67.59903808274521 -10.298099882199054 C-67.32307837476259 -10.667860750449192, -67.04711866677995 -11.03762161869933, -66.90890418442454 -11.2228164334572 M-67.59903808274521 -10.298099882199054 C-67.42263383429653 -10.53446550436264, -67.24622958584786 -10.770831126526224, -66.90890418442454 -11.2228164334572 M-66.90890418442454 -11.2228164334572 C-66.6494600995671 -11.527574218317392, -66.39001601470966 -11.832332003177584, -66.16094144735568 -12.101416024703695 M-66.90890418442454 -11.2228164334572 C-66.726464881902 -11.437120019290576, -66.54402557937945 -11.65142360512395, -66.16094144735568 -12.101416024703695 M-66.16094144735568 -12.101416024703695 C-65.88702814091873 -12.384254002300542, -65.61311483448178 -12.667091979897387, -65.35822341086276 -12.930288301759086 M-66.16094144735568 -12.101416024703695 C-65.9523828729863 -12.316769875717478, -65.74382429861693 -12.532123726731262, -65.35822341086276 -12.930288301759086 M-65.35822341086276 -12.930288301759086 C-65.08325370561128 -13.180008512768753, -64.8082840003598 -13.429728723778421, -64.5040486155402 -13.706027250644407 M-65.35822341086276 -12.930288301759086 C-65.13195565133141 -13.13577869424861, -64.90568789180004 -13.341269086738135, -64.5040486155402 -13.706027250644407 M-64.5040486155402 -13.706027250644407 C-64.28913496278807 -13.877415169621749, -64.07422131003592 -14.048803088599092, -63.601927048841894 -14.425445193623215 M-64.5040486155402 -13.706027250644407 C-64.2741704643982 -13.889348958865646, -64.04429231325618 -14.072670667086888, -63.601927048841894 -14.425445193623215 M-63.601927048841894 -14.425445193623215 C-63.32089009477719 -14.621484406885088, -63.039853140712495 -14.817523620146961, -62.655565721789884 -15.085585888053124 M-63.601927048841894 -14.425445193623215 C-63.30372032733037 -14.633461293388741, -63.00551360581884 -14.841477393154268, -62.655565721789884 -15.085585888053124 M-62.655565721789884 -15.085585888053124 C-62.35589372904449 -15.26724881112349, -62.056221736299086 -15.448911734193857, -61.66885343607088 -15.683736674221008 M-62.655565721789884 -15.085585888053124 C-62.357356959939956 -15.26636179195576, -62.05914819809002 -15.447137695858395, -61.66885343607088 -15.683736674221008 M-61.66885343607088 -15.683736674221008 C-61.42430528306479 -15.811317289003718, -61.1797571300587 -15.93889790378643, -60.64584480411605 -16.217439622243543 M-61.66885343607088 -15.683736674221008 C-61.37343750604398 -15.83785497569311, -61.07802157601707 -15.991973277165213, -60.64584480411605 -16.217439622243543 M-60.64584480411605 -16.217439622243543 C-60.32692761550573 -16.358614801299055, -60.00801042689542 -16.499789980354567, -59.59074358782874 -16.684501632228386 M-60.64584480411605 -16.217439622243543 C-60.332315955512435 -16.356229543017516, -60.01878710690881 -16.495019463791493, -59.59074358782874 -16.684501632228386 M-59.59074358782874 -16.684501632228386 C-59.24248354336455 -16.81266454787177, -58.89422349890035 -16.940827463515156, -58.50788542442518 -17.08300344619203 M-59.59074358782874 -16.684501632228386 C-59.29382318428759 -16.793771085433654, -58.99690278074643 -16.903040538638923, -58.50788542442518 -17.08300344619203 M-58.50788542442518 -17.08300344619203 C-58.12587042015667 -17.196383494221248, -57.74385541588817 -17.30976354225046, -57.40172001037115 -17.411307534702523 M-58.50788542442518 -17.08300344619203 C-58.27166663024532 -17.15311194436686, -58.03544783606546 -17.22322044254169, -57.40172001037115 -17.411307534702523 M-57.40172001037115 -17.411307534702523 C-57.15582945864896 -17.467430448547308, -56.90993890692677 -17.523553362392093, -56.276792816624706 -17.668064825839174 M-57.40172001037115 -17.411307534702523 C-57.02679929084842 -17.496880742347248, -56.651878571325696 -17.58245394999197, -56.276792816624706 -17.668064825839174 M-56.276792816624706 -17.668064825839174 C-55.839789616344326 -17.738716114250074, -55.40278641606394 -17.809367402660975, -55.13772641032112 -17.85222024881843 M-56.276792816624706 -17.668064825839174 C-56.004435714103494 -17.71209741001393, -55.73207861158229 -17.756129994188683, -55.13772641032112 -17.85222024881843 M-55.13772641032112 -17.85222024881843 C-54.771168150717926 -17.887581683271545, -54.404609891114724 -17.92294311772466, -53.98920145965283 -17.963017069506055 M-55.13772641032112 -17.85222024881843 C-54.83757034551009 -17.88117594340027, -54.53741428069905 -17.910131637982104, -53.98920145965283 -17.963017069506055 M-53.98920145965283 -17.963017069506055 C-53.7167647622741 -17.97175358412513, -53.44432806489538 -17.980490098744202, -52.83593750000001 -18 M-53.98920145965283 -17.963017069506055 C-53.64595010414309 -17.97402447237902, -53.30269874863335 -17.985031875251984, -52.83593750000001 -18 M-52.83593750000001 -18 C-52.83593750000001 -18, -52.8359375 -18, -52.8359375 -18 M-52.83593750000001 -18 C-52.83593750000001 -18, -52.83593750000001 -18, -52.8359375 -18" stroke="#f59e0b" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#fef3c7 !important;stroke:#f59e0b !important"/></g><g class="label" style="" transform="translate(-58.8359375, -10.5)"><rect/><foreignObject width="117.671875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🙋 무엇을 하려는가?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-A-1" data-look="classic" transform="translate(276.16119384765625, 44)"><rect class="basic label-container" style="fill:#eef2ff !important" x="-62.0078125" y="-36" width="124.015625" height="72"/><g class="label" style="" transform="translate(-32.0078125, -21)"><rect/><foreignObject width="64.015625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📘 docs/<br />설계를 이해</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-3" data-look="classic" transform="translate(276.16119384765625, 166)"><rect class="basic label-container" style="fill:#eef2ff !important" x="-62.0078125" y="-36" width="124.015625" height="72"/><g class="label" style="" transform="translate(-32.0078125, -21)"><rect/><foreignObject width="64.015625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>🧠 kb/<br />지식 그래프</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-5" data-look="classic" transform="translate(276.16119384765625, 288)"><rect class="basic label-container" style="fill:#fce7f3 !important" x="-62.0078125" y="-36" width="124.015625" height="72"/><g class="label" style="" transform="translate(-32.0078125, -21)"><rect/><foreignObject width="64.015625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📖 notes/<br />주제별 산문</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D-7" data-look="classic" transform="translate(276.16119384765625, 410)"><rect class="basic label-container" style="fill:#dbeafe !important" x="-76.5078125" y="-36" width="153.015625" height="72"/><g class="label" style="" transform="translate(-46.5078125, -21)"><rect/><foreignObject width="93.015625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>📅 curriculum/<br />60일 학습 경로</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-9" data-look="classic" transform="translate(276.16119384765625, 532)"><rect class="basic label-container" style="fill:#fff7ed !important" x="-74.109375" y="-36" width="148.21875" height="72"/><g class="label" style="" transform="translate(-44.109375, -21)"><rect/><foreignObject width="88.21875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>⚡ ingest/<br />수집 파이프라인</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
 <ul>
-<li><strong>하루 60~120분 × 60일</strong> = 8주 + 캡스톤 4일</li>
-<li>매주 끝에 <strong>🛠️ 미니 프로젝트</strong> (총 6개)</li>
-<li>마지막 <strong>🎓 캡스톤</strong> = Mini AML Risk Engine 설계서</li>
-<li>각 day 상단에 <strong>"📖 오늘 뭘 배우나"</strong> 2~3문단 intro로 맥락 연결</li>
+<li><strong>설계부터</strong> → <a href="docs/README.md"><code>docs/README.md</code></a> · <a href="docs/PLAN.md"><code>docs/PLAN.md</code></a> · <a href="kb/schema/schema.yaml"><code>kb/schema/schema.yaml</code></a></li>
+<li><strong>AML 처음</strong> → <a href="curriculum/day_01.md"><code>curriculum/day_01.md</code></a></li>
+<li><strong>주제만 빠르게</strong> → <a href="notes/README.md"><code>notes/README.md</code></a></li>
+<li><strong>흐름을 한 번에</strong> → <a href="reports/가상자산%20AML%20KYT%20FDS%20트래블룰%20흐름.md">가상자산 AML·KYT·FDS·트래블룰 연대기 보고서 (2026-10-21)</a> · <a href="research/README.md">리서치 도시에</a></li>
 </ul>
-<p>자세히 → <a href="curriculum/README.md"><code>curriculum/README.md</code></a> | 매일 진척 → <a href="curriculum/progress.md"><code>curriculum/progress.md</code></a></p>
 <hr />
-<h2>🛠️ 미니 프로젝트 6개</h2>
+<h2>📁 저장소 구조</h2>
+<pre><code>├── 📘 docs/          설계 문서 — 여기서 시작
+│   ├── PLAN.md          마스터 계획
+│   ├── architecture/    저장소 위상
+│   ├── governance/      데이터 품질 · 출처·확신도 · 검증 워크플로
+│   ├── ingestion/       소스 레지스트리 · 일일 파이프라인
+│   └── adr/             아키텍처 결정 기록
+│
+├── 🧠 kb/            지식 그래프 — SSOT · 커밋·리뷰 대상 → [kb/README.md](kb/README.md)
+│   ├── schema/          데이터 스키마 기계판 · JSON Schema
+│   ├── entities/        노드 인스턴스 (1 노드 = 1 YAML)
+│   │   ├── jurisdictions/ regulators/ regulations/{reg}/provisions/
+│   │   ├── obligations/ controls/ concepts/ risks/
+│   │   ├── typologies/ techniques/ indicators/
+│   │   ├── chains/ assets/ protocols/ vasps/ vendors/ threat-actors/
+│   │   └── events/ eras/ incidents/ enforcement/ cases/
+│   ├── facts/           원자적 사실 + 상충 레지스트리 (JSONL)
+│   ├── states/          구간 상태 — 이중시간 (JSONL)
+│   ├── metrics/         관측 수치 시계열 (JSONL)
+│   ├── sources/         출처(SRC)·문서(DOC) 레지스트리
+│   └── derived/         🤖 생성물 — 직접 편집 금지
+│
+├── ⚡ ingest/         수집 파이프라인 (Funnel)
+│   ├── config/          소스 레지스트리 (실측 검증 필수)
+│   ├── collectors/      수집기 구현
+│   └── legacy/          전환 대상 구 워처
+│
+├── 📦 data/           데이터 레이크 (raw·staging 은 gitignore)
+├── ✅ quality/        검증기 · 규칙 · 품질 리포트
+├── 📰 intel/          분석 산출물 — 브리프 · 평가서 · 워치리스트
+│
+├── 📖 notes/          주제별 산문 (7 카테고리)
+├── 📅 curriculum/     60일 학습 경로
+├── 🌐 en/             영문
+├── 🛠 projects/       구현 사양
+├── 🎓 deep/           논문·리포트 큐레이션
+├── 📊 charts/         다이어그램 툴체인
+└── 🖨 print/          A4·모바일 패킷
+</code></pre>
+<p><code>_research/</code>(검증 전 리서치 원시 산출물)와 <code>_private/</code>(비공개 레이어)는 커밋되지 않습니다.</p>
+<hr />
+<h2>🔬 데이터 규율</h2>
+<p>지식베이스가 죽는 유일한 이유는 <strong>검증되지 않은 지식이 누적되는 것</strong>입니다. 그래서 다음을 기계가 강제합니다.</p>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>프로젝트</th>
-<th>주차</th>
-<th>학습 포인트</th>
+<th>원칙</th>
+<th>강제 수단</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>01</td>
-<td><a href="projects/01-ivms101-builder/">IVMS101 빌더</a></td>
-<td>W4</td>
-<td>Travel Rule 메시지 표준 직접 작성</td>
+<td>AI 는 제안만, 확정은 사람</td>
+<td>리서치 산출물은 <code>_research/</code> 에만. <code>kb/</code> 반영은 PR 리뷰를 거친다</td>
 </tr>
 <tr>
-<td>02</td>
-<td><a href="projects/02-onchain-tracer/">Onchain Tracer</a></td>
-<td>W5</td>
-<td>Etherscan API로 2-hop 자금 추적</td>
+<td>증거 없는 노드 금지</td>
+<td>불변식 I-1 — 모든 노드가 최소 1개 출처 문서에 결속</td>
 </tr>
 <tr>
-<td>03</td>
-<td><a href="projects/03-mixer-fetcher/">Mixer Fetcher</a></td>
-<td>W6</td>
-<td>OSINT 위험 wallet 데이터셋 구축</td>
+<td>시점 없는 주장 금지</td>
+<td>모든 사실에 유효기간. 상대 시간 표현("현재", "최근") 검출</td>
 </tr>
 <tr>
-<td>04</td>
-<td><a href="projects/04-ofac-screener/">OFAC Screener</a></td>
-<td>W7</td>
-<td>제재 스크리닝 엔진</td>
+<td>제안 ≠ 시행</td>
+<td>상태기계 9단계 고정. <code>proposed</code>/<code>enacted</code>/<code>in_force</code> 혼동 차단</td>
 </tr>
 <tr>
-<td>05</td>
-<td><a href="projects/05-kyt-wrapper/">KYT Wrapper</a></td>
-<td>W8</td>
-<td>통합 위험 평가 API</td>
+<td>덮어쓰기 금지</td>
+<td>정정은 항상 폐기 표시 + 새 레코드</td>
 </tr>
 <tr>
-<td>🎓</td>
-<td><a href="projects/06-capstone-risk-engine/">Risk Engine 설계</a></td>
-<td>Capstone</td>
-<td>시스템 통합 + 설계 문서</td>
+<td>상충은 지우지 않고 기록</td>
+<td><code>kb/facts/contradictions.jsonl</code></td>
+</tr>
+<tr>
+<td>인과는 근거 없이 주장 금지</td>
+<td><code>basis: temporal_only</code> 를 validator 가 거부</td>
+</tr>
+<tr>
+<td>강등은 자동, 승격은 사람</td>
+<td>확신도 인플레이션 방지</td>
+</tr>
+<tr>
+<td>미검증 부채 상한 5%</td>
+<td>초과 시 신규 저확신도 유입 차단</td>
 </tr>
 </tbody>
 </table>
-<p><strong>연결 구조</strong>: 01~04 각자 → 05에서 통합(<code>kyt_check()</code>) → 06 Capstone 설계서로 결산</p>
-<p>→ <a href="projects/README.md"><code>projects/README.md</code></a></p>
-<hr />
-<h2>🖨 A4 프린트 패킷 — 종이로 공부하고 싶을 때</h2>
-<blockquote>
-<p>하루 Day를 <strong>A4 용지에 바로 프린트</strong>해서 손으로 체크하고 정리할 수 있도록, 60일 전체를 <strong>인쇄 최적화된 HTML 패킷</strong>으로 만들어 뒀습니다.</p>
-</blockquote>
-<h3>입구</h3>
-<p><code>print/index.html</code> 을 브라우저에서 열기 → 원하는 Day 카드 클릭 → 🖨 <strong>Print A4</strong> 버튼 (또는 <code>Ctrl+P</code> · <code>⌘+P</code>).</p>
-<h3>각 Day 패킷 구성</h3>
-<ul>
-<li><strong>1페이지 — Task Sheet</strong>: 큰 DAY 번호 + Week 진척 점 + 핵심 질문 + 읽기·외부 자료 목록 + 미니 챌린지 + ✅ 손으로 채우는 체크박스 + 💭 오늘의 한 줄 괘선 + 날짜 기입란</li>
-<li><strong>N페이지 — Reading Articles</strong>: Task Sheet의 📖 읽기·더 깊이가 가리키는 <strong>내부 노트 전체 본문</strong>이 A4 타이포그래피로 포매팅되어 연속 수록</li>
-<li>Day 1 기준 <strong>약 10~13 페이지</strong>, 리뷰·프로젝트 일은 <strong>1~3 페이지</strong></li>
-</ul>
-<h3>디자인 특징</h3>
-<ul>
-<li><strong>정확한 A4 사이즈</strong> (210×297 mm) · 18mm 여백</li>
-<li><strong>Pretendard Variable</strong> 본문 + <strong>IBM Plex Serif</strong> 숫자 + <strong>IBM Plex Mono</strong> 레이블</li>
-<li><strong>잉크 절약형</strong> 흑백 + 차콜 네이비(<code>#1a2e4a</code>) 단일 액센트</li>
-<li><strong>한글 끊어읽기 방지</strong> + <strong>손으로 쓰는 공간</strong> (체크박스·괘선·Date 기입란)</li>
-</ul>
-<h3>재생성</h3>
-<p>커리큘럼·노트를 수정한 뒤:</p>
-<pre><code class="language-bash">pip install markdown
-python print/generator.py all         # 전체
-python print/generator.py 1           # Day 1만
-python print/generator.py 1-7         # 범위
-</code></pre>
-<p>자세히 → <a href="print/README.md"><code>print/README.md</code></a></p>
-<hr />
-<h2>🗺️ 학습 경로 추천</h2>
-<h3>🟢 입문자 (AML 0)</h3>
-<pre><code>curriculum/day_01.md ▶ 매일 1편씩 ▶ 60일 후 캡스톤
-</code></pre>
-<p>처음이면 <strong>Day 1 → Day 60 순차 학습</strong> 이 가장 효율적입니다. 각 day의 "📖 오늘 뭘 배우나" intro가 맥락을 이어줍니다.</p>
-<h3>🟡 한국 규제만 빨리</h3>
-<pre><code>1. notes/2-regulations/korea-fiu-act.md       (특금법, 조문→실무 번역)
-2. notes/2-regulations/korea-user-protection.md (이용자보호법)
-3. notes/3-crypto-aml/vasp-obligations.md     (VASP 9 의무)
-4. notes/3-crypto-aml/travel-rule.md          (Travel Rule 운영)
-</code></pre>
-<h3>🔵 기술 / 분석가</h3>
-<pre><code>1. notes/4-technology/kyc-kyt.md              (KYC·KYT 파이프라인 5단계)
-2. notes/4-technology/blockchain-analytics.md (CIOH·Attribution·Exposure)
-3. projects/02-onchain-tracer/                (실습)
-4. projects/05-kyt-wrapper/                   (통합 실습)
-</code></pre>
-<h3>🟣 솔루션 / 사업</h3>
-<pre><code>1. notes/7-vendors/analytics-vendors.md        (Chainalysis·TRM·Elliptic·Crystal 비교)
-2. notes/7-vendors/travel-rule-vendors.md      (Notabene·VerifyVASP·CODE)
-3. notes/7-vendors/korea-solutions.md          (한국 시장 지도)
-4. deep/reports.md                             (Chainalysis Crypto Crime Report 등)
-</code></pre>
-<hr />
-<h2>⚡ 약어 빠른 참조 (Top 15)</h2>
-<details>
-<summary>가장 중요한 15개 — 펼쳐 보기</summary>
-
-| 약어 | 풀이 |
-|---|---|
-| **AML / CFT** | 자금세탁방지 / 테러자금조달방지 |
-| **KYC / KYT** | 고객확인(사람) / 거래·지갑확인(가상자산 특화) |
-| **CDD / EDD** | 표준 실사 / 강화 실사 |
-| **STR** | Suspicious Transaction Report — 의심거래 보고 |
-| **VASP** | Virtual Asset Service Provider — 가상자산사업자 |
-| **FATF / FIU** | 국제 표준 제정 / 각국 집행 (한국 KoFIU) |
-| **특금법 / 이용자보호법** | 한국 양대 법 (AML vs 자산보호·시장규제) |
-| **Travel Rule / IVMS101** | 송수신인 정보 동반 / 메시지 표준 |
-| **OFAC / SDN** | 미국 제재 집행 / 제재 명단 |
-| **PEP** | Politically Exposed Person — 정치적 주요인물 |
-| **RBA** | Risk-Based Approach — 위험기반접근법 |
-| **AMLO** | AML Officer — 자금세탁방지 보고책임자 (임원급) |
-| **Mixer / Tornado Cash** | 익명화 도구 (2022 제재 → 2025-03 해제) |
-| **Lazarus / DPRK** | 1순위 위협, Bybit $1.46B |
-| **Tipping-off** | STR 사실 고객 누설 금지 (별도 처벌) |
-
-전체 → [`notes/glossary.md`](notes/glossary.md) (💡 **실무** 블록 40+ 용어)
-
-</details>
-
-<hr />
-<h2>📊 컨텐츠 현황</h2>
+<h3>출처 등급과 확신도</h3>
 <table>
 <thead>
 <tr>
-<th>영역</th>
+<th>등급</th>
+<th>출처</th>
+<th></th>
+<th>확신도</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T1</strong></td>
+<td>법령 원문·관보·감독기관 발간물</td>
+<td></td>
+<td><strong>A</strong></td>
+<td>T1/T2 원문 직접 확인</td>
+</tr>
+<tr>
+<td><strong>T2</strong></td>
+<td>감독기관 보도자료·국제기구 보고서</td>
+<td></td>
+<td><strong>B</strong></td>
+<td>T3 복수 일치 또는 T2 간접</td>
+</tr>
+<tr>
+<td><strong>T3</strong></td>
+<td>분석업체 연례보고서·동료심사 논문</td>
+<td></td>
+<td><strong>C</strong></td>
+<td>T4 단일 출처</td>
+</tr>
+<tr>
+<td><strong>T4</strong></td>
+<td>전문 매체</td>
+<td></td>
+<td><strong>D</strong></td>
+<td>T5 또는 상충 존재</td>
+</tr>
+<tr>
+<td><strong>T5</strong></td>
+<td>블로그·SNS (단독 근거 금지)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>→ <a href="docs/governance/02-provenance-confidence.md"><code>docs/governance/02-provenance-confidence.md</code></a></p>
+<hr />
+<h2>⚡ 매일 갱신</h2>
+<pre><code>07:00 KST  수집(P0→P1→P2) → 정규화·중복제거 → 노드 매칭 → 변화 탐지
+           → 검증 큐 갱신 → 일일 브리프 → 품질 스코어카드
+19:00 KST  제재 명단 2차 (SLA 1일)
+</code></pre>
+<p><strong>검증 게이트가 유일한 사람 개입 지점이자 유일한 관문입니다.</strong> 자동화는 변화를 <em>제안</em>까지만 합니다.</p>
+<p>소스는 <strong>실측 검증된 것만</strong> 등재합니다. 추측 URL은 넣지 않고, 열어보지 않은 소스는 <code>enabled: false</code> 로 둡니다.</p>
+<p>→ <a href="ingest/config/sources.yaml"><code>ingest/config/sources.yaml</code></a> · <a href="docs/ingestion/02-daily-pipeline.md"><code>docs/ingestion/02-daily-pipeline.md</code></a></p>
+<hr />
+<h2>🕰 역사 타임라인</h2>
+<p>제도·기술·시장을 <strong>3트랙</strong>으로 분리하고 트랙 간 인과로 잇습니다. 조문만 읽으면 규정의 취지를 알 수 없고, 취지를 모르면 회색지대에서 판단할 수 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>트랙</th>
+<th>범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A · 제도</strong></td>
+<td>1970~ 국제기준·주요국 입법·감독체계 형성</td>
+</tr>
+<tr>
+<td><strong>B · 기술·시장</strong></td>
+<td>2008~ 프로토콜·사고·세탁 기법 진화</td>
+</tr>
+<tr>
+<td><strong>C · 한국</strong></td>
+<td>2001~ 국내 법제·시장·집행</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🚀 사용법</h2>
+<pre><code class="language-bash">pip install -r quality/requirements.txt
+
+# 지식 그래프 무결성 검증 (차단 위반 시 exit 1)
+python quality/validate_kb.py
+
+# 관할 비교표 생성
+python scripts/build_crosswalk.py
+
+# 시점 질의 — 2020-01-01 기준 규제 지형
+python scripts/build_crosswalk.py --stdout --as-of 2020-01-01
+
+# 산문 계층 검증
+python quality/validate_links.py
+python quality/validate_mermaid.py
+</code></pre>
+<p>A4·모바일 패킷 재생성:</p>
+<pre><code class="language-bash">pip install markdown &amp;&amp; cd charts &amp;&amp; npm install &amp;&amp; cd ..
+python print/generator.py all
+</code></pre>
+<hr />
+<h2>🔍 검증이 무엇을 잡아냈나</h2>
+<p>설계가 장식이 아니라는 증거입니다. 규율이 실제로 오류를 걸러냈습니다.</p>
+<table>
+<thead>
+<tr>
+<th>발견</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FATF 근거 규범 오류</strong></td>
+<td>가상자산 트래블룰의 근거는 R.16 이 <strong>아니라</strong> INR.15 §7(b). R.16 Explanatory Note §54 가 VASP 직접 적용을 명시적으로 배제한다 — 업계 통설이 부정확</td>
+</tr>
+<tr>
+<td><strong>임계값 오귀속 2건</strong></td>
+<td>INR.15 §7(b) 에 §7(a) 의 CDD 기준을, 특금법 제5조의3 에 시행령의 100만원을 붙였다. <strong>"의무를 부과하는 조문"과 "수치를 정하는 조문"은 다르다</strong></td>
+</tr>
+<tr>
+<td><strong>관보가 철회를 안 보여준다</strong></td>
+<td>미국 규칙 철회 2건이 연방관보 공고 없이 통합의제에서만 종결. 관보만 감시하면 철회된 제안이 영원히 <code>proposed</code> 로 남는다</td>
+</tr>
+<tr>
+<td><strong>한국 R.15 등급 상충</strong></td>
+<td>국가페이지 C vs 부속표 N/A 는 상충이 아니라 <strong>적용기준 차이</strong>. 한국은 개정 R.15 로 평가받은 적이 없다</td>
+</tr>
+<tr>
+<td><strong>식별자 규격 버그</strong></td>
+<td>문서에 예시로 적은 <code>JUR:kr</code> 이 자기 정규식을 위반. validator 가 잡았다</td>
+</tr>
+<tr>
+<td><strong>폐기된 소스 사용 중</strong></td>
+<td>영국 OFSI Consolidated List 는 2026-01-28 철회 — 갱신 안 되는 파일을 계속 받고 있었다</td>
+</tr>
+<tr>
+<td><strong>임계값 오귀속 3번째</strong></td>
+<td>일본 10만엔은 트래블룰이 <strong>아니라</strong> 시행령 제7조의 고객확인(CDD) 기준. 법률·정령·성령 3층위를 다 확인해야 드러났다 (<code>CTR:00006</code>)</td>
+</tr>
+<tr>
+<td><strong>인용 수치가 원논문에 없었다</strong></td>
+<td>"CIOH 정확도 0.75 → 0.95 (Möser 2017, Bellei 2024)" — 두 논문 PDF 를 받아 대조하니 <strong>어느 수치도 없고</strong> 한 편은 클러스터링 논문조차 아니었다 (<code>CTR:00007</code>)</td>
+</tr>
+<tr>
+<td><strong>"사이트 장애" 오진</strong></td>
+<td>싱가포르 MAS 를 두 차례 「접근 불가」로 기록했으나 실제로는 Referer 검사였다. 이 오진으로 한 관할이 두 라운드 미등재로 남았다 (<code>FACT:0000029</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>상충 7건은 전부 판정 완료했습니다 (<code>a_correct</code> 5 · <code>both_valid_different_scope</code> 2).
+어느 쪽도 삭제하지 않고 <a href="kb/facts/contradictions.jsonl"><code>kb/facts/contradictions.jsonl</code></a> 에 판정과 근거를 남겼습니다.</p>
+<hr />
+<h2>📊 현황</h2>
+<table>
+<thead>
+<tr>
 <th>항목</th>
-<th>수량</th>
+<th style="text-align: right;">수</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>📅 일일 학습 플랜</td>
-<td><code>curriculum/day_NN.md</code></td>
-<td><strong>60</strong> (모두 prose intro 포함)</td>
+<td><strong>KB 노드</strong></td>
+<td style="text-align: right;"><strong>333</strong> <em>(목표 1,200)</em></td>
 </tr>
 <tr>
-<td>📖 토픽 노트</td>
-<td><code>notes/**/*.md</code></td>
-<td><strong>27</strong> (전면 산문화 완료)</td>
+<td>├ 엔티티</td>
+<td style="text-align: right;">232</td>
 </tr>
 <tr>
-<td>🛠️ 미니 프로젝트 사양</td>
-<td><code>projects/**/README.md</code></td>
-<td><strong>6</strong></td>
+<td>└ 출처(SRC) · 문서(DOC)</td>
+<td style="text-align: right;">45 · 56</td>
 </tr>
 <tr>
-<td>🎓 학술·리포트 큐레이션</td>
-<td><code>deep/*.md</code></td>
-<td><strong>5</strong> (README 포함)</td>
+<td>규범 · 조문 (REG · PROV)</td>
+<td style="text-align: right;">18 · 21</td>
 </tr>
 <tr>
-<td>🖨 A4 프린트 패킷</td>
-<td><code>print/days/day_NN.html</code></td>
-<td><strong>60</strong> (Task + Reading 통합)</td>
+<td>원자적 사실 · 구간 상태</td>
+<td style="text-align: right;">49 · 3</td>
 </tr>
 <tr>
-<td>🔗 외부 참고 링크</td>
-<td>1차·2차·벤더</td>
-<td><strong>150+</strong></td>
+<td>상충 레지스트리</td>
+<td style="text-align: right;">7 <em>(전부 판정 완료 · CTR:00004 2026-10-21 재판정)</em></td>
 </tr>
 <tr>
-<td>📚 글로서리</td>
-<td><code>notes/glossary.md</code></td>
-<td><strong>200+</strong> 용어 (Top 15 우선순위)</td>
+<td>스키마 클래스 / 술어 / 불변식</td>
+<td style="text-align: right;">34 / 50 / 14</td>
+</tr>
+<tr>
+<td>설계 문서 · ADR</td>
+<td style="text-align: right;">10 · 2</td>
+</tr>
+<tr>
+<td>수집 소스 (가동 / 전체)</td>
+<td style="text-align: right;">33 / 50 <em>(실측 88 후보)</em></td>
+</tr>
+<tr>
+<td>산문</td>
+<td style="text-align: right;">137 파일 · 30,297 줄</td>
 </tr>
 </tbody>
 </table>
-<p><strong>총 분량</strong>: 약 <strong>12,000+ 줄</strong>의 한국어 AML 학습 자료</p>
-<hr />
-<h2>🎓 2026-04 대규모 개편 (Prose Revamp)</h2>
-<p>2026-04 기간 동안 <strong>치트시트 → 산문 교재</strong>로 전면 개편. 주요 변화:</p>
-<h3>표준 6원칙 일관 적용</h3>
-<p>모든 notes 파일에:
-1. 상단 "이 글을 읽고 나면 무엇을 할 수 있는가" intro
-2. 영문 약어 <strong>처음 나올 때</strong> 1~2문장 풀이
-3. 각 <code>##</code> 섹션 2~4문장 prose intro
-4. 표 위 "어떻게 읽어야 하나" 가이드
-5. 각 섹션 말미 "실무에서 어떻게 쓰나" 포인트
-6. 기존 bullet·table은 요약 부록으로 보존</p>
-<h3>팩트 교정</h3>
-<ul>
-<li>Bybit 해킹 <code>$1.5B (ETH)</code> → <strong><code>$1.46B (ETH + stETH + mETH + cmETH)</code></strong></li>
-<li>Tornado Cash 타임라인 표준화: <strong>2022-08 제재 → 2024-11 Van Loon 판결 → 2025-03-21 해제</strong></li>
-<li>기록보관 두 법 분리: <strong>가상자산이용자보호법 §11 (거래정보 15년)</strong> vs <strong>특금법 §5의4 (AML 기록 5년)</strong></li>
-<li>Chainalysis DB 표현: <strong>누적 추적 거래량 $24T+</strong> (가치가 아님)</li>
-<li>FATF Travel Rule Supervision 날짜 교정 (2025-06 발표)</li>
-</ul>
-<h3>스펙 보강</h3>
-<ul>
-<li>프로젝트 02 Etherscan 2-hop tracer: <strong>fan-out 폭발 가드</strong> (캐싱·max_fanout·백오프)</li>
-<li>프로젝트 01 IVMS101 빌더: <strong>중첩 스키마 상세화</strong> (naturalPerson·nameIdentifier·LEI)</li>
-<li>링크 오류 15+ 건 수정 (underscore→hyphen)</li>
-</ul>
-<h3>🖨 Print 패킷 신설 (2026-04-21)</h3>
-<ul>
-<li><code>print/</code> 폴더 전체 신설 — A4 정확 사이즈의 HTML 프린트 템플릿</li>
-<li>60일 모든 Day가 <strong>Task Sheet 1p + 링크된 읽기 노트 전체</strong>를 하나로 묶은 학습 패킷으로 자동 생성됨</li>
-<li><code>python print/generator.py all</code> 로 언제든 재생성</li>
-<li>디자인: Pretendard · IBM Plex 타이포그래피, 흑백 + 차콜 네이비, 손글씨 공간 확보</li>
-</ul>
-<hr />
-<h2>🤝 사용 가이드</h2>
-<h3>이 노트의 성격</h3>
-<ul>
-<li>✅ <strong>학습용 노트</strong> — 빠르게 일별·토픽별로 흡수하기 위한 구조</li>
-<li>✅ <strong>참조용 1차 자료</strong> — 항상 출처 링크 포함</li>
-<li>✅ <strong>감독 대응 참고 자료</strong> — 조문 번호와 함께 인용 가능한 정확도 목표</li>
-<li>❌ <strong>법률 자문 아님</strong> — 실무 적용 전 법무·컨설팅 검토 필수</li>
-<li>❌ <strong>벤더 추천 아님</strong> — 시장 정보 정리, 평가·선정은 별개</li>
-</ul>
-<h3>컨트리뷰션</h3>
-<p>이 저장소는 개인 학습 노트지만, 다음은 환영:</p>
-<ul>
-<li>오타·링크 깨짐·사실 오류 PR</li>
-<li>새 사례·논문·리포트 추가 제안</li>
-<li>한국어 번역 개선</li>
-<li>실무 경험에 기반한 "실무 포인트" 보강</li>
-</ul>
+<blockquote>
+<p>⚠️ <strong>KB 는 구축 초기입니다.</strong> 스키마·파이프라인·검증 체계는 완성되었고
+노드 대량 등재가 다음 단계입니다.
+<code>techniques/</code>(62) · <code>indicators/</code>(80) · <code>typologies/</code>(8) 은 등재를 시작했고,
+<code>protocols/</code> · <code>vasps/</code> · <code>threat-actors/</code> · <code>chains/</code> · <code>assets/</code> · <code>risks/</code> ·
+<code>cases/</code> · <code>incidents/</code> · <code>enforcement/</code> 는 아직 비어 있습니다.</p>
+<p>트래블룰 의무는 국제기준과 <strong>8개 관할</strong>(EU·영국·일본·한국·미국·홍콩·싱가포르·호주)의
+근거 조문을 원문으로 확인해 등재했습니다. 한국 100만원 기준은 2027-02-19 폐지가
+확정됐으나 그 전까지는 유효합니다(대통령령 제36592호, enacted-not-in-force) —
+<code>python scripts/build_crosswalk.py</code> 로 비교표가 생성됩니다.</p>
+<p>알려진 부채와 진행 상황 → <a href="kb/README.md"><code>kb/README.md</code></a> · <a href="docs/PLAN.md"><code>docs/PLAN.md</code></a></p>
+</blockquote>
+<p>이력 → <a href="CHANGELOG.md"><code>CHANGELOG.md</code></a> · 기여 → <a href="CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> · 거버넌스 → <a href="GOVERNANCE.md"><code>GOVERNANCE.md</code></a>
+라이선스 → 문서 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · 코드 <a href="LICENSE">MIT</a></p>
 <hr />
 <h2>⚠️ 면책</h2>
-<ul>
-<li>모든 문서는 <strong>2026년 4월 기준</strong> 최신화</li>
-<li>가상자산 규제는 <strong>빠르게 변동</strong> — 원문 (법령정보센터 / FATF / FSC / ESMA / OFAC) 재확인 필수</li>
-<li>사실 주장에는 출처 + 발행일 표기. 의심 시 원문 우선</li>
-<li>법령 조문 번호 인용은 편의용이며, 실무 적용 시 현행 법령 반드시 재확인</li>
-</ul>
-<hr />
-<h2>📜 라이선스</h2>
-<p><a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0)</a></p>
-<ul>
-<li>자유 사용 · 공유 · 수정 가능</li>
-<li>출처 명시만 부탁드립니다</li>
-</ul>
+<p>학습·참조용이며 <strong>법률 자문이 아닙니다.</strong> 가상자산 규제는 빠르게 변동합니다.</p>
+<p>이 저장소는 확신도 등급을 명시하지만, <strong>실무 적용 시 원문 재확인은 반드시 필요합니다.</strong> 특히 확신도 <code>C</code>/<code>D</code> 항목과 <code>proposed</code> 상태 규범은 그대로 인용하지 마십시오.</p>
 <hr />
 <div align="center">
 
-### 🚀 [지금 Day 1 시작하기 →](curriculum/day_01.md)
+**[📘 설계 문서 →](docs/README.md)** · **[📅 Day 1 시작 →](curriculum/day_01.md)**
 
 </div>
     </div>
@@ -523,8 +565,8 @@ python print/generator.py 1-7         # 범위
 <ul>
 <li><strong>AML</strong> (Anti-Money Laundering) — 자금세탁방지.</li>
 <li>💡 <strong>실무</strong>: 회사 AML 프로그램 = 9대 의무(신고·KYC·EDD·KYT·제재·STR·Travel Rule·기록·내부통제)의 합. "AML 담당자"는 보통 이 9개 운영.</li>
-<li><strong>AMLA</strong> (Anti-Money Laundering Authority) — EU AML 감독기구, 프랑크푸르트 본부, 2025부터 운영.</li>
-<li>💡 <strong>실무</strong>: 2028년경 대형 cross-border 금융기관 40여 개 <strong>직접 감독</strong> 개시. 한국 VASP가 EU 진출 시 이 리스트 포함 여부가 감독 강도 결정.</li>
+<li><strong>AMLA</strong> (Anti-Money Laundering Authority) — EU AML 감독기구, 프랑크푸르트 본부. 2026-01-01 EBA로부터 AML/CFT 규칙제정·가이던스 권한을 넘겨받았다.</li>
+<li>💡 <strong>실무</strong>: 2026-10-01 AMLR 첫 RTS 3건 최종안을 집행위에 제출(채택 전). 직접감독 대상은 6개 이상 회원국에서 영업하는 금융기관(그룹) 약 40개로 VASP 전용이 아니며, CASP 포함 여부는 공개되지 않았다(B).</li>
 <li><strong>AMLD</strong> (Anti-Money Laundering Directive) — EU AML 지침. AMLD5 → AMLD6 진행 중.</li>
 <li><strong>AMLO</strong> (Anti-Money Laundering Officer) — AML 책임자.</li>
 <li>💡 <strong>실무</strong>: 한국 특금법은 <strong>임원급</strong> 요구. STR 결정권·CEO 직접 보고 채널이 핵심. Binance CZ 사례 이후 <strong>개인 형사 책임</strong> 가능성 명확해짐.</li>
@@ -544,22 +586,22 @@ python print/generator.py 1-7         # 범위
 <li><strong>BSA</strong> (Bank Secrecy Act, 1970) — 미국 AML 모법.</li>
 <li>💡 <strong>실무</strong>: FATF 권고의 원형이 이 법. 한국 특금법 많은 조항이 BSA 구조를 차용했으므로, 미국 법을 알면 한국 법 이해가 빨라짐.</li>
 <li><strong>Bridge</strong> — 체인 간 자산 이동 인프라.</li>
-<li>💡 <strong>실무</strong>: 출금 주소가 브리지 컨트랙트면 <strong>다음 홉 추적 불가</strong>. 자동 STR 후보 큐잉하는 회사 많음.</li>
+<li>💡 <strong>실무</strong>: 출금 주소가 브리지 컨트랙트면 단순 휴리스틱으로는 다음 홉 추적이 어렵다. 크로스체인 자동 매칭 연구(ABCTracer·ConneX)가 있으나 브리지 집합이 달라 정확도를 직접 비교할 수 없다. 브리지 노출은 STR 자동 대상이 아니라 <strong>검토 큐</strong>의 입력이다.</li>
 </ul>
 <h2>C</h2>
 <ul>
 <li><strong>CASP</strong> (Crypto-Asset Service Provider) — EU MiCA 용어, ≈ VASP.</li>
 <li><strong>CCO</strong> (Chief Compliance Officer) — 컴플라이언스 총괄.</li>
 <li><strong>CDD</strong> (Customer Due Diligence) — 고객실사 (표준).</li>
-<li>💡 <strong>실무</strong>: 4단계(식별·BO·목적·모니터링). onboarding 1회로 끝 아니고 <strong>지속 모니터링</strong>이 핵심. 저5/중3/고1년 주기 재실사.</li>
+<li>💡 <strong>실무</strong>: 4단계(식별·BO·목적·모니터링). onboarding 1회로 끝 아니고 <strong>지속 모니터링</strong>이 핵심. 재실사 주기는 위험등급별로 사내 기준을 정한다.</li>
 <li><strong>CFT</strong> (Combating the Financing of Terrorism) — 테러자금조달방지.</li>
 <li><strong>Chain Hopping</strong> — BTC → ETH → Tron → BNB 같은 체인 점프 layering.</li>
 <li><strong>Chainalysis</strong> — 미국 블록체인 분석 회사 (시장 표준).</li>
-<li>💡 <strong>실무</strong>: 미 연방정부 표준 도구. 검사·법집행 증거로 인정받기 가장 쉬움. 한국 4대 거래소 다수 사용.</li>
+<li>💡 <strong>실무</strong>: FIU는 2026-02-05 업무계획에 "체이널리시스(가상자산 분석도구) 도입"을 넣었다. 거래소별 도입 현황은 공개 근거가 없어 적지 않는다.</li>
 <li><strong>Cluster / Clustering</strong> — 같은 엔티티 추정 주소 묶음.</li>
 <li>💡 <strong>실무</strong>: UTXO(BTC) 모델이 Account(ETH) 모델보다 클러스터링 정확도 높음. Ethereum은 Attribution DB 의존도 ↑.</li>
 <li><strong>CMLN</strong> (Chinese Money Laundering Network) — 중국어 자금세탁 네트워크.</li>
-<li>💡 <strong>실무</strong>: 텔레그램·위챗 OTC + <strong>Laundering-as-a-Service</strong>. Lazarus 세탁 파트너 역할. 2025년 $16.1B 처리.</li>
+<li>💡 <strong>실무</strong>: 텔레그램·위챗 OTC + <strong>Laundering-as-a-Service</strong>. 처리 규모 추정치는 분석업체마다 정의가 달라 여기서는 인용하지 않는다.</li>
 <li><strong>CODE</strong> — 한국 Travel Rule 컨소시엄 (빗썸·코빗·코인원 합작).</li>
 <li><strong>Cold Wallet</strong> — 오프라인 지갑 (콜드월렛).</li>
 <li>💡 <strong>실무</strong>: 가상자산이용자보호법 시행령은 <strong>이용자 가상자산의 80% 이상</strong> 콜드월렛 보관 의무.</li>
@@ -590,10 +632,12 @@ python print/generator.py 1-7         # 범위
 <li>💡 <strong>실무</strong>: 한국 RBA 가이드라인 연 1회 이상 수행 요구. 감독 검사에서 <strong>가장 먼저 요구되는 문서</strong>.</li>
 <li><strong>ESMA</strong> (European Securities and Markets Authority) — EU 증권 감독.</li>
 <li><strong>Exposure</strong> — 한 주소가 위험 주소에 직간접 노출된 정도.</li>
-<li>💡 <strong>실무</strong>: KYT 시스템의 핵심 출력. Direct(1-hop) vs Indirect(N-hop)·금액·시간·카테고리 가중치로 Risk Score 구성.</li>
+<li>💡 <strong>실무</strong>: KYT 시스템의 핵심 출력. Direct vs Indirect 구분이 일반적이나, 노출도 산정 공식·홉 정의는 벤더별 자사 주장이며 공개 표준은 없다.</li>
 </ul>
 <h2>F</h2>
 <ul>
+<li><strong>FDS</strong> (Fraud Detection System) — 이상금융거래탐지시스템. 금감원(2014-12-10)은 "전자금융거래 접속정보·거래내역 등을 분석하여 이상거래를 탐지·차단하는 시스템"으로 정의.</li>
+<li>💡 <strong>실무</strong>: AML의 하위가 아니라 <strong>병렬 제도</strong>. 목적은 이용자 자산 보호(계정탈취·보이스피싱), 1차 산출물은 <strong>임시조치</strong>(지연·일시정지)·지급정지. 전자금융감독규정에는 FDS라는 용어가 없고, 실질적 법정 근거는 통신사기피해환급법 §2의5(가상자산거래소 2026-10-01~). → <a href="4-technology/fds.md"><code>4-technology/fds.md</code></a></li>
 <li><strong>FATF</strong> (Financial Action Task Force) — 국제자금세탁방지기구.</li>
 <li>💡 <strong>실무</strong>: 법 아닌 권고 발표. 한국 규제의 모태. Grey/Black List가 사실상 경제 제재처럼 작동.</li>
 <li><strong>FinCEN</strong> (Financial Crimes Enforcement Network) — 미국 FIU.</li>
@@ -603,7 +647,7 @@ python print/generator.py 1-7         # 범위
 </ul>
 <h2>G</h2>
 <ul>
-<li><strong>GENIUS Act</strong> — 미국 stablecoin 입법 (2025-07). 2027-01 전면 시행.</li>
+<li><strong>GENIUS Act</strong> — 미국 stablecoin 입법 (2025-07-18 서명). 2026-10-21 기준 enacted-not-in-force — 법정 최종 시행기한 2027-01-18 시행이 예상된다(B).</li>
 <li><strong>GLEIF LEI</strong> (Legal Entity Identifier) — 법인 식별 글로벌 표준.</li>
 <li><strong>Grandfathering</strong> — 기존 사업자 전환기간. MiCA는 2026-07-01 종료.</li>
 <li><strong>Grey List</strong> — FATF 강화 모니터링 국가 목록.</li>
@@ -630,14 +674,14 @@ python print/generator.py 1-7         # 범위
 <li><strong>KoFIU</strong> — 한국 FIU (금융정보분석원).</li>
 <li><strong>KYC</strong> (Know Your Customer) — 고객확인.</li>
 <li>💡 <strong>실무</strong>: "고객을 안다"는 광범위 개념. 한국 VASP는 PASS·NICE 등 본인확인기관 + ARGOS 같은 SDK + PEP 스크리닝 조합.</li>
-<li><strong>KYT</strong> (Know Your Transaction) — 거래·지갑 확인 (가상자산 특화).</li>
-<li>💡 <strong>실무</strong>: KYC와 대체재가 아닌 보완재. KYT만으로는 "주소 위험"만 알 수 있고, STR 작성에는 KYC의 "누구" 정보가 반드시 결합돼야 함.</li>
+<li><strong>KYT</strong> (Know Your Transaction) — 거래·지갑 확인 (가상자산 특화). <strong>업계 용어</strong>다 — FATF·MAS·한국 고시 어디에도 "KYT"라는 말은 나오지 않는다. 규범 문언은 "ongoing monitoring"(FATF 2021 가이던스 para 275), "transactions monitoring and blockchain analytics tools"(FATF 7차 TU, 2026-07-16), 한국은 「자금세탁방지 업무규정」 제76~81조 "거래모니터링체계".</li>
+<li>💡 <strong>실무</strong>: KYC와 대체재가 아닌 보완재. KYT만으로는 "주소 위험"만 알 수 있고, STR 작성에는 KYC의 "누구" 정보가 반드시 결합돼야 함. KYT 알림의 법적 출구는 STR이다 — FDS의 임시조치, §12 시장감시의 통보와 섞지 않는다.</li>
 </ul>
 <h2>L</h2>
 <ul>
 <li><strong>Layering</strong> — 자금세탁 3단계 중 둘째 (은닉).</li>
 <li><strong>Lazarus Group</strong> — 북한 후원 사이버 부대.</li>
-<li>💡 <strong>실무</strong>: 2025년 $2.02B 탈취, 누적 $6.75B. Bybit 사건 이후 <strong>가짜 채용·Insider threat</strong>이 HR 보안의 새 영역.</li>
+<li>💡 <strong>실무</strong>: FATF 6차 TU(2025-06-26)는 DPRK의 Bybit USD 14.6억 탈취(회수율 3.8%)를 헤드라인으로 올렸고, 7차 TU(2026-07-16)는 RPC 노드·멀티시그 공급자 같은 제3자 인프라 공격과 딥페이크 채용사기를 위험요인으로 들었다.</li>
 <li><strong>LE</strong> (Law Enforcement) — 법집행기관.</li>
 <li><strong>LEI</strong> (Legal Entity Identifier) — 법인 식별자.</li>
 <li><strong>Liveness Check</strong> — 살아있는 사람 vs 사진·영상 검증.</li>
@@ -646,9 +690,11 @@ python print/generator.py 1-7         # 범위
 </ul>
 <h2>M</h2>
 <ul>
+<li><strong>Market Surveillance / 시장감시</strong> — 가상자산이용자보호법 §12의 "이상거래에 대한 감시". 시세조종·미공개정보 이용 등 불공정거래(§10) 우려 거래를 상시 감시하고, 위반 의심 시 금융위·금감원에 <strong>통보</strong>(혐의가 충분히 증명된 경우 등은 수사기관 신고 후 보고).</li>
+<li>💡 <strong>실무</strong>: 의무 주체는 가상자산시장을 개설·운영하는 거래소. 조치는 「가상자산시장조사업무규정」 §3(거래유의 안내·조회공시·주문제한·거래중지). 위반 시 과태료 1억원 이하(§22①6·7호). 보이스피싱 탐지(FDS)와도, STR과도 다른 제도.</li>
 <li><strong>MEV</strong> (Maximal Extractable Value) — 블록 순서 조작으로 추출하는 가치.</li>
 <li><strong>MiCA</strong> (Markets in Crypto-Assets Regulation) — EU 가상자산 규제.</li>
-<li>💡 <strong>실무</strong>: 2024-12-30 전면 시행, 2026-07-01 grandfathering 종료. EU passporting으로 한 국가 라이선스만 받으면 27개국 영업 가능.</li>
+<li>💡 <strong>실무</strong>: 발효 2023-06-29, 적용개시 2024-12-30. EU passporting으로 한 회원국 인가로 역내 영업 가능. ESMA 임시 CASP 등록부는 2026-10-19 기준 379행.</li>
 <li><strong>Mixer / Tumbler</strong> — 자금 섞기 서비스.</li>
 <li><strong>MLRO</strong> (Money Laundering Reporting Officer) — 영국·EU AML 책임자.</li>
 <li><strong>ML/TF</strong> — Money Laundering / Terrorism Financing.</li>
@@ -667,11 +713,11 @@ python print/generator.py 1-7         # 범위
 <li><strong>OCC</strong> (Office of the Comptroller of the Currency) — 미국 은행 감독.</li>
 <li><strong>OFAC</strong> (Office of Foreign Assets Control) — 미국 제재 집행.</li>
 <li>💡 <strong>실무</strong>: <strong>2차 제재</strong>로 인해 한국 VASP도 실질적으로 OFAC 준수 필수. 미국 고객 없어도 USD 결제망·스테이블코인·클라우드로 영향받음.</li>
-<li><strong>OpenVASP</strong> — Travel Rule 분산 프로토콜. 2026년 활용도 낮음.</li>
+<li><strong>OpenVASP</strong> — OpenVASP Association은 Travel Rule 프로토콜 TRP를 관리하는 협회.</li>
 <li><strong>Originator</strong> — 송신인 (Travel Rule).</li>
 <li><strong>OSINT</strong> (Open Source Intelligence) — 공개정보 첩보.</li>
 <li><strong>OTC</strong> (Over-The-Counter) — 장외 거래.</li>
-<li>💡 <strong>실무</strong>: 거액·국경 간·특수 고객이 집중되어 <strong>STR 건수가 거래소 못지않게 많음</strong>. "작은 사업"이라 얕보면 AML 지적의 단골.</li>
+<li>💡 <strong>실무</strong>: 거액·국경 간·특수 고객이 집중되는 영역이라 고위험으로 다룬다. STR 건수 비교 자료는 공개되지 않았다.</li>
 </ul>
 <h2>P</h2>
 <ul>
@@ -705,18 +751,20 @@ python print/generator.py 1-7         # 범위
 <li>💡 <strong>실무</strong>: <strong>유일하게 가상자산 지갑주소를 명시</strong>하는 제재 명단. SDN.XML의 <code>&lt;feature&gt;&lt;type&gt;Digital Currency Address&lt;/type&gt;</code> 구조.</li>
 <li><strong>SEC</strong> (Securities and Exchange Commission) — 미국 증권거래위원회.</li>
 <li><strong>Smurfing / Structuring</strong> — 분할 입금 (KYC 회피).</li>
-<li><strong>STR</strong> (Suspicious Transaction Report) — 의심거래보고.</li>
-<li>💡 <strong>실무</strong>: 금액 무관·의심만 있으면 보고. 감독당국은 STR 건수가 <strong>적은 회사를 오히려 의심</strong>. Tipping-off(고객 누설)은 별도 처벌.</li>
+<li><strong>STR</strong> (Suspicious Transaction Report) — <strong>의심거래보고</strong>(특금법 §4). "이상거래보고"라고 쓰지 않는다.</li>
+<li>💡 <strong>실무</strong>: 금액 무관·의심만 있으면 보고. Tipping-off(고객 누설)은 별도 처벌 대상. 입력원은 KYT·CS뿐 아니라 FDS 알림·§12 시장감시 적출도 포함되지만, 그 1차 산출물(임시조치·통보)은 STR이 아니다. 2027-02-19부터 해외 VASP·자기수탁 지갑 1천만원 이상 이전은 "자체 의심거래 감시체계" 대상 — 자동 STR이 아니다.</li>
 <li><strong>Sunrise Issue</strong> — Travel Rule 관할별 시행 격차 문제.</li>
-<li>💡 <strong>실무</strong>: Notabene Gateway가 글로벌 1위 된 이유. 2030 FATF 발효 전까지 해결 안 됨 → 폴백 정책 필수.</li>
+<li>💡 <strong>실무</strong>: FATF 7차 TU(2026-07-16) 기준 트래블룰 입법 관할 83%(91/109) 중 60%(55/91)가 감독·집행 조치 없음. 상대 VASP 실사와 폴백 정책이 필요. 한국은 2027-02-19부터 해외 VASP를 위험 등급별로 차등 허용한다.</li>
 </ul>
 <h2>T</h2>
 <ul>
+<li><strong>Temporary Measure / 임시조치</strong> — 통신사기피해환급법 §2의5. 금융회사등이 "자체점검을 상시적으로 실시"해 피해의심거래계좌등으로 추정되면 이체·송금·출금 또는 <strong>가상자산 이전</strong>을 지연·일시정지하고, 즉시 통지·본인확인 후 해당 없으면 해제하는 조치.</li>
+<li>💡 <strong>실무</strong>: 법률 제21503호로 2026-10-01부터 가상자산거래소에 적용(in-force). 통지·해제·본인확인 내역 보존 의무(§2의5④). FDS의 법정 산출물이며 AML의 거래거절과 다르다.</li>
 <li><strong>TF</strong> (Terrorism Financing) — 테러자금조달.</li>
 <li><strong>TFR</strong> (Transfer of Funds Regulation) — EU Travel Rule.</li>
 <li>💡 <strong>실무</strong>: <strong>임계금액 0</strong> (모든 거래). 전 세계에서 가장 엄격 → 글로벌 VASP의 설계 baseline.</li>
 <li><strong>Tipping-off</strong> — STR 사실을 고객에게 알리는 행위 (금지).</li>
-<li>💡 <strong>실무</strong>: 특금법 §9 — 1년 징역 또는 1천만원 벌금. 계좌폐쇄 사유 안내 시 "내부 정책상" 같은 일반 표현으로.</li>
+<li>💡 <strong>실무</strong>: 특금법상 금지·처벌 대상(조문·형량은 원문 확인 — 이 사전의 이전 판은 조문 번호와 형량을 서로 다르게 적어 삭제했다). 계좌폐쇄 사유 안내 시 "내부 정책상" 같은 일반 표현으로.</li>
 <li><strong>TM</strong> (Transaction Monitoring) — 거래 모니터링.</li>
 <li><strong>Tornado Cash</strong> — 이더리움 mixer (2022-08 OFAC 제재 → 2024-11 Van Loon v. Treasury 5th Cir. 판결 → 2025-03-21 지정 해제).</li>
 <li>💡 <strong>실무</strong>: 제재 해제됐지만 <strong>업계는 여전히 고위험 카테고리 유지</strong>. "법적으로 허용 ≠ 실무 허용".</li>
@@ -731,7 +779,7 @@ python print/generator.py 1-7         # 범위
 <li><strong>UBO</strong> (Ultimate Beneficial Owner) — 최종 실소유자.</li>
 <li><strong>UNODC</strong> (UN Office on Drugs and Crime) — UN 마약범죄국.</li>
 <li><strong>Unhosted Wallet</strong> — 개인지갑 (거래소 외부).</li>
-<li>💡 <strong>실무</strong>: 한국 4대 거래소 <strong>외부지갑 등록제</strong>로 관리. 출금 전 지갑 소유 증명(Satoshi Test·Signed Message) 필수.</li>
+<li>💡 <strong>실무</strong>: 2026-10-21 현재 한국 법령은 자기수탁 지갑 이전을 직접 규율하지 않는다. 2027-02-19부터는 "독점적인 관리 권한을 가지지 않은 가상자산주소"와의 이전이 <strong>고객과 상대방이 동일인일 때만</strong> 허용되며(시행령 §10-20 ⑧, 고시 §28-2④), 확인 방법은 정하지 않았다(enacted-not-in-force).</li>
 <li><strong>USAPA</strong> — USA PATRIOT Act.</li>
 <li><strong>UTXO</strong> (Unspent Transaction Output) — 비트코인 거래 모델.</li>
 </ul>
@@ -745,7 +793,7 @@ python print/generator.py 1-7         # 범위
 <h2>W</h2>
 <ul>
 <li><strong>Wash Trading</strong> — 가짜 거래 (가격·거래량 부풀리기).</li>
-<li>💡 <strong>실무</strong>: NFT에서 특히 빈번. 2022~2023 NFT 시장의 <strong>25~50%가 wash trading</strong>(Chainalysis 추정).</li>
+<li>💡 <strong>실무</strong>: 한국에서는 가상자산이용자보호법 §10 불공정거래이자 §12 시장감시의 탐지 대상. 금융위는 2026-09-23 사업자 임원이 마켓메이커를 고용해 거래량의 90% 이상을 가장매매한 사건을 고발·통보 의결했다.</li>
 <li><strong>Wolfsberg Group</strong> — 글로벌 은행 AML 모범사례 그룹. HSBC·Citi·JPMorgan 등.</li>
 </ul>
 <h2>Z</h2>
@@ -754,6 +802,196 @@ python print/generator.py 1-7         # 범위
 <li>💡 <strong>실무</strong>: 프라이버시와 컴플라이언스 양립의 장기 열쇠. zk-KYC·Polygon ID·Worldcoin이 초기 실용화 시도.</li>
 <li><strong>zk-SNARK</strong> — 영지식 증명 일종 (Tornado Cash, Zcash).</li>
 </ul>
+<hr />
+<h2>용어 짝 비교 — 자주 혼동되는 짝</h2>
+<p>한국 AML 실무에서 영문·국문·법령 용어가 뒤섞여 쓰입니다. 다음 짝은 <strong>엄밀히는 의미가 다르거나, 같은 뜻이지만 출처 맥락이 다른 경우</strong>.</p>
+<h3>고객확인 vs 실명확인 vs KYC</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>출처·맥락</th>
+<th>정의</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>고객확인(顧客確認)</strong></td>
+<td>특금법 §5의2</td>
+<td>법정 용어. 법령상 VASP가 해야 할 "고객 실명 + 목적 + 자금원천" 확인 전체. 포괄 개념.</td>
+</tr>
+<tr>
+<td><strong>실명확인(實名確認)</strong></td>
+<td>금융실명법·특금법 §5의2 ①</td>
+<td><strong>고객확인의 한 부분</strong> — 신분증·본인확인기관(PASS/NICE) 통한 본인 일치 검증만. 더 좁음.</td>
+</tr>
+<tr>
+<td><strong>KYC (Know Your Customer)</strong></td>
+<td>FATF·글로벌</td>
+<td>국제 표준 용어. <strong>한국 "고객확인"과 대체로 등가</strong>이나, 각국 법 상세 조항 차이.</td>
+</tr>
+<tr>
+<td><strong>CDD (Customer Due Diligence)</strong></td>
+<td>FATF R.10</td>
+<td>KYC의 공식 법적 표현. "고객실사" 번역.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>실무 사용</strong>:
+- 한국 법 문서 → "고객확인" 또는 "실명확인"
+- 영문 회사 자료·FATF → "KYC" 또는 "CDD"
+- <strong>두 표기 혼용 허용</strong>, 단 한 문서 내 일관성 유지</p>
+<h3>STR vs SAR</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>관할</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STR (Suspicious Transaction Report)</strong></td>
+<td>FATF·한국·EU·싱가포르</td>
+<td>의심거래 보고. 한국 특금법 §4. (§5의3은 트래블룰 조문)</td>
+</tr>
+<tr>
+<td><strong>SAR (Suspicious Activity Report)</strong></td>
+<td>미국 FinCEN</td>
+<td>의심활동 보고. BSA 31 CFR 1020.320. 거래가 없어도 활동 의심 시 보고 가능 (더 넓음).</td>
+</tr>
+</tbody>
+</table>
+<h3>Travel Rule vs Wire Transfer Rule</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>맥락</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Travel Rule</strong></td>
+<td>가상자산 송수신 정보 동반. FATF R.16. 2019~.</td>
+</tr>
+<tr>
+<td><strong>Wire Transfer Rule</strong></td>
+<td>전통 금융 전신환. BSA 1996~. Travel Rule의 기원.</td>
+</tr>
+</tbody>
+</table>
+<h3>AMLO vs MLRO vs Compliance Officer</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>관할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AMLO (Anti-Money Laundering Officer)</strong></td>
+<td>한국·글로벌 일반</td>
+</tr>
+<tr>
+<td><strong>MLRO (Money Laundering Reporting Officer)</strong></td>
+<td>영국·EU 전통</td>
+</tr>
+<tr>
+<td><strong>Compliance Officer (CO)</strong></td>
+<td>더 넓은 준법 (AML 포함하거나 독립)</td>
+</tr>
+<tr>
+<td><strong>CCO (Chief Compliance Officer)</strong></td>
+<td>C-level, 임원급</td>
+</tr>
+</tbody>
+</table>
+<h3>Tipping-off vs Disclosure</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tipping-off</strong></td>
+<td>의심거래 보고 사실을 <strong>고객에게 누설</strong> — 특금법상 금지(조문·형량은 원문 확인)</td>
+</tr>
+<tr>
+<td><strong>Disclosure</strong></td>
+<td>일반적 "공개" — Tipping-off는 Disclosure의 한 형태 (특정 사실에 대한 금지)</td>
+</tr>
+</tbody>
+</table>
+<h3>이상거래 vs 이상금융거래 vs 의심거래</h3>
+<p>한국에서 가장 자주 섞이는 짝. 세 용어는 <strong>법적 근거·목적·산출물·수령 기관이 전부 다르다</strong>. 상세는 <a href="4-technology/fds.md"><code>4-technology/fds.md</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>출처</th>
+<th>목적</th>
+<th>산출물</th>
+<th>수령 기관</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>이상금융거래</strong> (FDS)</td>
+<td>금감원·금보원 「FDS 운영 가이드라인」(2023-10-05), 통신사기피해환급법 "피해의심거래계좌등"</td>
+<td>이용자 자산 보호(계정탈취·보이스피싱)</td>
+<td>임시조치(지연·일시정지)·지급정지·피해환급</td>
+<td>금융위 금융안전과·금감원 금융사기대응단, 금융보안원</td>
+</tr>
+<tr>
+<td><strong>이상거래</strong> (§12)</td>
+<td>가상자산이용자보호법 §12, 시행령 §18</td>
+<td>불공정거래 적발(시장 건전성)</td>
+<td>금융위·금감원 통보, 거래유의·주문제한·거래중지</td>
+<td>금융위 가상자산과·금감원 가상자산조사국</td>
+</tr>
+<tr>
+<td><strong>의심거래</strong> (STR)</td>
+<td>특금법 §4</td>
+<td>자금세탁·테러자금 차단</td>
+<td>의심거래보고(STR), 거래거절, EDD</td>
+<td>KoFIU</td>
+</tr>
+</tbody>
+</table>
+<p><strong>실무 사용</strong>: "이상거래보고"는 어느 법에도 없는 말이다. STR은 "의심거래보고", §12는 "이상거래 통보", FDS는 "임시조치"로 쓴다.</p>
+<h3>PEP vs BO</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PEP (Politically Exposed Person)</strong></td>
+<td>정치적 주요인물. 고위 공직자·가족·측근. 부패 위험 ↑</td>
+</tr>
+<tr>
+<td><strong>BO (Beneficial Owner)</strong></td>
+<td>실소유자. 법인 소유권의 실제 최종 수익자 (보통 25%+).</td>
+</tr>
+</tbody>
+</table>
+<h3>동일 용어·다른 표기 (한 문서 내 일관성 필요)</h3>
+<ul>
+<li>FATF R.15 / FATF Recommendation 15 — 같은 의미. <strong>긴 형태가 공식</strong>.</li>
+<li>특금법 / 특정금융정보법 / 특정 금융거래정보의 보고 및 이용 등에 관한 법률 — 법정 풀네임은 마지막, <strong>첫 등장 시 풀네임 + 약칭 병기</strong>.</li>
+<li>가상자산이용자보호법 / 이용자보호법 — 같음. 공식은 "가상자산 이용자 보호 등에 관한 법률".</li>
+</ul>
+<h3>실무 포인트</h3>
+<p>회사 AML 정책 문서는 <strong>영문판·국문판</strong>을 따로 작성하는 경우가 많고, 용어 짝을 서로 매핑하는 <strong>용어 대조표</strong>를 첨부하는 게 표준. 감독 검사 시 용어 혼용으로 오해가 생기는 경우를 줄임.</p>
 <hr />
 <h2>한국어 → 영어 빠른 매핑</h2>
 <table>
@@ -786,7 +1024,35 @@ python print/generator.py 1-7         # 범위
 </tr>
 <tr>
 <td>의심거래보고</td>
-<td>STR</td>
+<td>STR (Suspicious Transaction Report)</td>
+</tr>
+<tr>
+<td>이상거래 (가상자산이용자보호법 §12)</td>
+<td>abnormal trading — 시장감시 대상</td>
+</tr>
+<tr>
+<td>이상거래에 대한 감시 / 시장감시</td>
+<td>market surveillance</td>
+</tr>
+<tr>
+<td>이상금융거래 (FDS)</td>
+<td>abnormal financial transaction</td>
+</tr>
+<tr>
+<td>이상금융거래탐지시스템</td>
+<td>Fraud Detection System (FDS)</td>
+</tr>
+<tr>
+<td>임시조치 (통신사기피해환급법 §2의5)</td>
+<td>temporary measure (payment delay·suspension)</td>
+</tr>
+<tr>
+<td>지급정지</td>
+<td>payment suspension</td>
+</tr>
+<tr>
+<td>거래모니터링체계</td>
+<td>transaction monitoring (업계 용어 KYT)</td>
 </tr>
 <tr>
 <td>고액현금거래보고</td>
@@ -885,6 +1151,7 @@ python print/generator.py 1-7         # 범위
 <h2>더 읽을거리</h2>
 <ul>
 <li><a href="1-foundations/key-concepts.md"><code>1-foundations/key-concepts.md</code></a> — 핵심 개념 정리 (동심원·짝 비교표)</li>
+<li><a href="4-technology/fds.md"><code>4-technology/fds.md</code></a> — FDS·시장감시·STR 세 제도의 경계</li>
 <li><a href="../README.md"><code>../README.md</code></a> — 전체 학습 로드맵</li>
 </ul>
     </div>

@@ -13,7 +13,7 @@
 ```mermaid
 flowchart LR
     A[vasp-obligations.md<br/>9대 의무] --> B[travel-rule.md<br/>INR.15 §7b 운영]
-    B --> C[onchain-typology.md<br/>자금세탁 7유형]
+    B --> C[onchain-typology.md<br/>자금세탁 고전 9유형]
     C --> D[defi-nft-risks.md<br/>회색지대]
     D --> Next[▶ 4-technology/로]
 

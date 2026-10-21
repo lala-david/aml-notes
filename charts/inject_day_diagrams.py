@@ -44,7 +44,7 @@ DIAGRAMS[2] = """\
 flowchart LR
     T["🏦 전통 금융"] -->|비공개·T+1·국경 有·동결 가능| V1["AML 표준"]
     C["⛓️ 가상자산"] -->|공개·24/7·국경 X·가명| V2["KYT + KYC 결합"]
-    V2 --> P["🎯 실시간 Pre-tx<br/>차단 필수"]
+    V2 --> P["🎯 사전 스크리닝<br/>+ 사람 검토"]
     style T fill:#e5eaf2,stroke:#1a2e4a
     style C fill:#fff7d6,stroke:#c9a646
     style P fill:#fed7aa,stroke:#ea580c
@@ -55,7 +55,7 @@ DIAGRAMS[3] = """\
 flowchart TB
     KYC["🌂 KYC"] --> CDD["📋 CDD (모든 고객)"]
     CDD --> EDD["🔒 EDD<br/>PEP · 고위험국 · 비대면+위험"]
-    CDD --> SDD["🟢 SDD<br/>정부·상장사 (한국 X)"]
+    CDD --> SDD["🟢 SDD<br/>정부·상장사 등 저위험<br/>VASP에선 드묾"]
     style KYC fill:#fff,stroke:#1a2e4a,stroke-width:2px
     style CDD fill:#f7f5ef,stroke:#c9a646
     style EDD fill:#fed7aa,stroke:#ea580c
@@ -72,7 +72,7 @@ flowchart LR
         KEX["exposure·cluster·SDN"]
     end
     KYC & KYT --> RE["🎯 Risk Score"]
-    RE -->|threshold 초과| STR["📝 STR (금액 무관)"]
+    RE -->|알람 후 분석가가 의심 판단| STR["📝 STR (금액 무관)"]
     STR -.Tipping-off 금지.-> FIU["🏛 KoFIU"]
     style KYC fill:#e5eaf2,stroke:#1a2e4a
     style KYT fill:#fff7d6,stroke:#c9a646
@@ -138,10 +138,10 @@ flowchart LR
     A["🏢 신규 VASP"] --> B["ISMS 인증"]
     A --> C["실명확인 계좌<br/>(거래소)"]
     A --> D["AML 내부통제"]
-    A --> E["AMLO 임명 (임원)"]
-    A --> F["대주주 자격심사<br/>(2026-01)"]
+    A --> E["AML 인력 4인 이상<br/>보고책임자 지정"]
+    A --> F["대주주 심사<br/>(2026-08-20 시행)"]
     B & C & D & E & F --> G["📋 FIU 신고 → 수리"]
-    G -.3년.-> H["갱신"]
+    G -.유효기간.-> H["갱신"]
     style A fill:#fff7d6,stroke:#c9a646
     style G fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
@@ -152,10 +152,10 @@ flowchart LR
     S["특금법"] --> K["§5의2 KYC"]
     S --> STR["§4 STR (금액無)"]
     S --> CTR["§4의2 CTR 1천만원"]
-    S --> TR["§5의2+시행령<br/>Travel Rule 100만원"]
-    S --> R["§5의4 기록 5년"]
-    S --> T["§9 Tipping-off 금지"]
-    S --> P["§17 처벌"]
+    S --> TR["§5의3 + 시행령 §10의10<br/>트래블룰 100만원 이상<br/>2027-02-19~ 전건"]
+    S --> R["기록 보존 5년"]
+    S --> T["누설 Tipping-off 금지"]
+    S --> P["벌칙 · 과태료"]
     style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style T fill:#fee2e2,stroke:#dc2626
 ```"""
@@ -163,11 +163,11 @@ flowchart LR
 DIAGRAMS[10] = """\
 ```mermaid
 flowchart TB
-    U["👤 이용자"] -->|원화 예치금| B["🏦 제휴 은행 분리보관<br/>+ 이용료 지급"]
+    U["👤 이용자"] -->|원화 예치금| B["🏦 은행에 분리보관"]
     U -->|가상자산 예치| C["📦 자기자산과 분리 보관"]
-    C --> CW["❄️ 콜드월렛 80%+"]
-    C --> HW["🔥 핫월렛 20% (보험·준비금)"]
-    B -.파산 시.-> UV["✅ 우선변제권"]
+    C --> CW["❄️ 콜드월렛 보관<br/>비율은 하위규범 소관"]
+    C --> HW["🔥 핫월렛<br/>보험 또는 준비금"]
+    B -.사업자 사고 시.-> UV["✅ 고유재산과 분리"]
     style U fill:#fff7d6,stroke:#c9a646
     style B fill:#e5eaf2,stroke:#1a2e4a
     style C fill:#e5eaf2,stroke:#1a2e4a
@@ -176,11 +176,11 @@ flowchart TB
 DIAGRAMS[11] = """\
 ```mermaid
 flowchart LR
-    M["⚠️ 불공정거래 4종"] --> MM["시세조종"]
-    M --> IT["내부자 거래"]
-    M --> F["부정거래"]
-    M --> SL["자기발행 상장 제한"]
-    MM & IT & F --> P["💣 1년+ 징역<br/>부당이득 3~5배"]
+    M["⚠️ 불공정거래 금지 §10"] --> IT["① 미공개중요정보 이용"]
+    M --> MM["②③ 시세조종"]
+    M --> F["④ 부정거래"]
+    M --> SL["⑤ 자기·특수관계인 발행<br/>가상자산 거래"]
+    IT & MM & F --> P["💣 1년 이상 유기징역 또는<br/>이익의 3~5배 벌금 §19"]
     style M fill:#fed7aa,stroke:#ea580c
     style P fill:#fee2e2,stroke:#dc2626
 ```"""
@@ -229,9 +229,9 @@ flowchart LR
 DIAGRAMS[15] = """\
 ```mermaid
 flowchart TB
-    F["🌍 FATF (1989)<br/>39+2 회원국"] --> R["40 권고"]
-    R --> R15["R.15 — VASP AML/CFT"]
-    R --> R16["R.16 — Travel Rule"]
+    F["🌍 FATF<br/>정부간 작업반 · soft law"] --> R["40 권고"]
+    R --> R15["R.15 + INR.15 §7b<br/>VASP AML/CFT · 트래블룰 원천"]
+    R --> R16["R.16 2025-06 개정<br/>VASP는 R.15 경유"]
     R --> RO["R.1 RBA · R.10 CDD · R.20 STR"]
     F -->|평가| ME["상호평가<br/>C/LC/PC/NC"]
     ME -->|미흡| BL["⚠️ Grey · Black List"]
@@ -252,21 +252,22 @@ flowchart LR
 DIAGRAMS[17] = """\
 ```mermaid
 timeline
-    title R.16 Travel Rule 진화
-    2019 : 가상자산 확장
-    2022~2025 : 현재 글로벌 운영<br/>USD/EUR 1,000 권고
-    2025-06-18 : 개정 발표<br/>VASP tailored framework
-    2026 후반 : 가이던스 발표 예정
-    2030 말 : 발효
+    title 가상자산 트래블룰 국제 기준 - 2026-10-21 기준
+    2019-06 : INR.15 §7b 신설 - 금액 기준 없음
+    2021-10-28 : RBA 가이던스 - R.16을 amended way로 적용
+    2025-06 : R.16 개정 - VASP는 R.15 경유 - de minimis USD/EUR 1,000 이하
+    2026-06-24~08-21 : R.16 이행 가이던스 초안 의견수렴
+    2026-10-21 : 최종본 미발간
+    2030 말 : 개정 R.16 이행 기대시한
 ```"""
 
 DIAGRAMS[18] = """\
 ```mermaid
 flowchart LR
-    BSA["🇺🇸 BSA (1970)"] -->|2001 강화| P["PATRIOT Act"]
-    BSA --> M["MSB 등록<br/>(가상자산 2013~)"]
-    M --> R["AML 프로그램<br/>SAR · CTR $10K"]
-    M --> TR["Travel Rule $3,000"]
+    BSA["🇺🇸 BSA<br/>31 U.S.C. 5311 et seq."] -->|배경: 2001 강화| P["PATRIOT Act"]
+    BSA --> M["MSB 정의로 포섭<br/>other value that<br/>substitutes for currency"]
+    M --> R["AML 프로그램 · SAR"]
+    M --> TR["트래블룰<br/>$3,000 or more"]
     style BSA fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
@@ -285,21 +286,21 @@ flowchart TB
 DIAGRAMS[20] = """\
 ```mermaid
 flowchart TB
-    EU["🇪🇺 EU 가상자산<br/>3종 세트"] --> M["MiCA (2024-12-30)<br/>시장·라이선스"]
-    EU --> T["TFR (2024-12-30)<br/>Travel Rule 임계 0"]
-    EU --> A["AMLR+AMLD6 (2027-07-10)<br/>27개국 단일 규칙"]
-    M --> MG["grandfathering<br/>2026-07-01 종료"]
-    A --> AMLA["AMLA 감독기구<br/>(프랑크푸르트)"]
+    EU["🇪🇺 EU 가상자산<br/>3종 세트"] --> M["MiCA 발효 2023-06-29<br/>CASP 적용 2024-12-30"]
+    EU --> T["TFR 2024-12-30 적용<br/>금액 기준 없이 전건"]
+    EU --> A["AMLR 2027-07-10 적용 예정<br/>27개국 단일 규칙"]
+    M --> MG["회원국별 경과기간<br/>최장 2026-07-01 종료"]
+    A --> AMLA["AMLA 프랑크푸르트<br/>2026-01-01 EBA 권한 이관"]
     style EU fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
 DIAGRAMS[21] = """\
 ```mermaid
 flowchart LR
-    KR["🇰🇷 100만원"] & US["🇺🇸 $3,000"] & EU["🇪🇺 임계 無"] --> TR["Travel Rule 대상"]
-    KR -.특이.-> UW["외부지갑 등록제"]
-    US -.특이.-> UM["unhosted 룰 부재"]
-    EU -.특이.-> UE["unhosted 1,000€+ 신원검증"]
+    KR["🇰🇷 100만원 이상 ~2027-02-18<br/>전건 2027-02-19~"] & US["🇺🇸 USD 3,000 이상"] & EU["🇪🇺 금액 기준 없음 - 전건"] --> TR["Travel Rule 대상"]
+    KR -.특이.-> UW["외부지갑: 거래소 자율<br/>2027-02-19~ 동일인만 허용"]
+    US -.특이.-> UM["비수탁지갑 NPRM<br/>2026-10-06 withdrawn"]
+    EU -.특이.-> UE["자기수탁 EUR 1,000 이상<br/>소유·통제 평가"]
     style KR fill:#e5eaf2,stroke:#1a2e4a
     style US fill:#fff7d6,stroke:#c9a646
     style EU fill:#fed7aa,stroke:#ea580c
@@ -316,10 +317,10 @@ sequenceDiagram
     participant K as 🔍 KYT
     participant V as 🌐 Travel Rule
     participant B as 🏦 VASP B
-    A->>U: 출금 요청 (≥100만원)
+    A->>U: 출금 요청 - 100만원 이상 ~2027-02-18 / 전건 2027-02-19~
     U->>K: 주소 위험도 체크
     K-->>U: OK
-    U->>V: IVMS101 메시지
+    U->>V: IVMS 101.2023 메시지
     V->>B: 라우팅
     B-->>V: Accept
     U->>A: 온체인 송금 실행
@@ -328,7 +329,7 @@ sequenceDiagram
 DIAGRAMS[23] = """\
 ```mermaid
 flowchart TB
-    I["📝 IVMS101 Message"] --> O["Originator"]
+    I["📝 IVMS 101.2023 Message"] --> O["Originator"]
     I --> B["Beneficiary"]
     I --> OV["OriginatingVASP"]
     I --> BV["BeneficiaryVASP"]
@@ -343,22 +344,20 @@ flowchart TB
 DIAGRAMS[24] = """\
 ```mermaid
 flowchart LR
-    S["📨 IVMS101 Payload"] --> T["TRISA<br/>gRPC + PKI"]
-    S --> P["TRP<br/>REST API"]
-    S --> O["OpenVASP<br/>Ethereum 기반"]
-    T -.분산형.-> D["누구나 참여<br/>(VASP Discovery 별도)"]
-    P -.분산형.-> D
+    S["📨 IVMS 101.2023 Payload"] --> T["TRISA<br/>gRPC/protobuf + GDS"]
+    S --> P["TRP<br/>양자 간 암호화 교환"]
+    O["OpenVASP Association<br/>Zug - TRP 관리 협회"] -.관리.-> P
+    T -.오픈 표준.-> D["사양 공개·각자 구현<br/>상대 식별은 별도"]
+    P -.오픈 표준.-> D
     style S fill:#e5eaf2,stroke:#1a2e4a
 ```"""
 
 DIAGRAMS[25] = """\
 ```mermaid
 flowchart LR
-    VV["🔐 VerifyVASP<br/>(람다256 + Chainalysis)"] <--> UP["🏦 Upbit"]
-    CD["🔐 CODE<br/>(3사 합작법인)"] <--> B["🏦 빗썸"]
-    CD <--> KB["🏦 코빗"]
-    CD <--> CO["🏦 코인원"]
-    VV <-.연동.-> CD
+    VV["🔐 VerifyVASP<br/>운영 주체 홈페이지 미명시"] --> P1["TravelRule API<br/>VerifyName API · VerifyWallet"]
+    CD["🔐 CODE<br/>CODE Inc."] --> P2["상호운용 표시 목록<br/>VerifyVASP · GTR · Sumsub<br/>Sygna · Notabene · CryptoSwift"]
+    CD -.홈페이지에 상호운용 표시.-> VV
     style VV fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style CD fill:#c9a646,color:#fff,stroke:#c9a646
 ```"""
@@ -366,32 +365,31 @@ flowchart LR
 DIAGRAMS[26] = """\
 ```mermaid
 flowchart LR
-    V1["🏦 VASP A<br/>(TRISA)"] --> N["🌐 Notabene<br/>Gateway"]
-    V2["🏦 VASP B<br/>(VerifyVASP)"] --> N
-    V3["🏦 VASP C<br/>(CODE)"] --> N
-    V4["🏦 VASP D<br/>(TRP)"] --> N
-    N -.1,500+ VASP.-> S["✅ 단일 연결로<br/>Sunrise 해결"]
+    V1["🏦 VASP A<br/>TRISA"] --> N["🌐 멀티프로토콜<br/>연동 솔루션"]
+    V2["🏦 VASP B<br/>솔루션 네트워크"] --> N
+    V3["🏦 VASP C<br/>TRP"] --> N
+    N -.연동 표시 ≠ 커버리지 보장.-> S["미연결 상대방은 남는다<br/>→ Sunrise 정책 필요"]
     style N fill:#1a2e4a,color:#fff,stroke:#1a2e4a
-    style S fill:#d1fae5,stroke:#10b981
+    style S fill:#fef3c7,stroke:#d97706
 ```"""
 
 DIAGRAMS[27] = """\
 ```mermaid
 flowchart TB
-    Q["❓ 지갑주소 0xABC...<br/>어느 VASP?"] --> A["Attribution DB<br/>Chainalysis · TRM"]
-    Q --> D["VASP Directory<br/>Notabene · TRISA"]
-    Q --> T["DTI (ISO 24165)"]
-    Q --> L["GLEIF LEI"]
-    Q --> R["직접 등록<br/>(화이트리스트)"]
+    Q["❓ 지갑주소 0xABC...<br/>어느 VASP?"] --> A["블록체인 분석 라벨<br/>Attribution DB"]
+    Q --> D["네트워크 디렉터리<br/>TRISA GDS · 솔루션 네트워크 회원"]
+    Q --> L["LEI ISO 17442<br/>법인 식별"]
+    Q --> C["고객에게 직접 확인<br/>EBA GL ¶77~78"]
+    T["DTI ISO 24165<br/>토큰 식별 - VASP 식별자 아님"] -.보조.-> Q
     style Q fill:#fff7d6,stroke:#c9a646
 ```"""
 
 DIAGRAMS[28] = """\
 ```mermaid
 flowchart LR
-    I["📥 Input<br/>송수신 정보"] --> B["🔨 Builder"]
-    B --> M["📝 IVMS101 JSON"]
-    M --> V["🔍 Validator"]
+    I["📥 Input<br/>송수신 정보 + 실행일"] --> B["🔨 Builder"]
+    B --> M["📝 IVMS 101.2023 페이로드"]
+    M --> V["🔍 Validator<br/>C1·C9 + 관할·시점 규칙"]
     V --> O["✅ 성공"]
     V --> E["⚠️ 필드 누락<br/>포맷 오류"]
     style B fill:#1a2e4a,color:#fff,stroke:#1a2e4a
@@ -408,11 +406,11 @@ flowchart LR
     subgraph KYC["👤 KYC"]
         K1["신분증·PEP<br/>onboarding"]
     end
-    subgraph KYT["⛓️ KYT"]
-        T1["주소·클러스터<br/>실시간"]
+    subgraph KYT["⛓️ KYT - 거래모니터링"]
+        T1["주소·클러스터<br/>노출도"]
     end
     KYC & KYT --> RE["Risk Engine"]
-    RE --> A["Allow · Review · Block"]
+    RE --> A["사람 검토 → STR · EDD·거래거절 · 종결"]
     style KYC fill:#e5eaf2,stroke:#1a2e4a
     style KYT fill:#fff7d6,stroke:#c9a646
 ```"""
@@ -438,7 +436,7 @@ flowchart LR
     D1 & D2 & DN --> C["🏦 consolidation"]
     C --> H["🔥 hot wallet"]
     C --> CW["❄️ cold wallet"]
-    C -.Deposit Heuristic.-> EX["✅ 거래소 클러스터"]
+    C -.Deposit Heuristic.-> EX["✅ 거래소 클러스터 후보"]
     style EX fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
@@ -448,43 +446,43 @@ flowchart LR
     CL["📦 Cluster"] --> A["🏷 Attribution"]
     A --> E["Exchange"]
     A --> M["Mixer"]
-    A --> S["Sanctions (OFAC SDN)"]
+    A --> S["Sanctions - OFAC SDN 등"]
     A --> D["Darknet"]
     A --> R["Ransomware"]
-    A -.벤더.-> V["Chainalysis · TRM<br/>Elliptic · Crystal"]
+    SRC["라벨 원천<br/>자체 거래 · 공개 주소 · 법집행<br/>제재목록 · OSINT"] -.-> A
     style A fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
 DIAGRAMS[33] = """\
 ```mermaid
 flowchart LR
-    W["🪪 주소"] --> D["Direct (1-hop)"]
-    W --> I["Indirect (N-hop)"]
-    D --> W1["× 금액 가중"]
-    I --> W2["× 시간 거리"]
-    W1 & W2 --> C["× 카테고리<br/>(SDN > Mixer > HR Exchange)"]
-    C --> S["🎯 Risk Score 0~100"]
-    S --> A["Threshold<br/>차단 · 검토 · 통과"]
+    W["🪪 주소"] --> D["Direct"]
+    W --> I["Indirect - N-hop"]
+    D --> W1["금액"]
+    I --> W2["경과 시간"]
+    W1 & W2 --> C["카테고리<br/>제재 · 믹서 · 다크넷 등"]
+    C --> S["🎯 노출도 점수<br/>계수 비공개 - 블랙박스"]
+    S --> A["사람 검토 → STR · EDD·거래거절 · 종결"]
     style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
 DIAGRAMS[34] = """\
 ```mermaid
 sequenceDiagram
-    participant A as ⛓️ Chain A (ETH)
+    participant A as ⛓️ Chain A
     participant B as 🌉 Bridge
-    participant C as ⛓️ Chain B (Tron)
-    A->>B: deposit (lock)
-    B->>C: mint wrapped
+    participant C as ⛓️ Chain B
+    A->>B: deposit - lock 또는 burn
+    B->>C: mint 또는 release
     Note over A,C: 추적 단절 위험
-    A-->>C: time·amount 매칭<br/>(Chainalysis Crosschain · TRM Multichain)
+    A-->>C: 순번·수취인·시간·금액 매칭
 ```"""
 
 DIAGRAMS[35] = """\
 ```mermaid
 flowchart LR
     T["🎯 주소 X"] --> H1["1-hop<br/>카운터파티"]
-    H1 --> H2["2-hop<br/>(fan-out 최대 10,000)"]
+    H1 --> H2["2-hop<br/>fan-out 상한은 직접 설정"]
     H2 --> L["🏷 라벨 매칭"]
     L --> G["📊 Mermaid 그래프"]
     style T fill:#1a2e4a,color:#fff,stroke:#1a2e4a
@@ -512,16 +510,16 @@ DIAGRAMS[37] = """\
 ```mermaid
 flowchart LR
     subgraph Mixer["🔀 Mixer"]
-        TC["Tornado Cash<br/>(zk-SNARK)"]
-        W["Wasabi CoinJoin"]
-        S["Samourai (폐쇄)"]
+        TC["Tornado Cash<br/>zk-SNARK 고정 액면 풀"]
+        W["CoinJoin<br/>Wasabi · Samourai · JoinMarket"]
+        RG["Railgun 등 차폐 풀"]
     end
     subgraph Privacy["🔒 Privacy Coin"]
         XMR["Monero<br/>Ring Sig + Stealth + RingCT"]
         ZEC["Zcash<br/>zk-SNARK shielded"]
     end
-    Mixer --> HR["거래소 차단 카테고리"]
-    Privacy --> D["한국·일본 상장폐지"]
+    Mixer --> HR["노출도·행태 기반 위험평가"]
+    Privacy --> D["EU AMLR 제79조<br/>2027-07-10 취급 금지 예정"]
     style HR fill:#fee2e2,stroke:#dc2626
 ```"""
 
@@ -538,17 +536,17 @@ flowchart LR
 DIAGRAMS[39] = """\
 ```mermaid
 flowchart LR
-    F["💰 자금"] --> S["DEX Swap<br/>ETH→USDT→DAI"]
+    F["💰 자금"] --> S["DEX Swap<br/>연쇄 교환"]
     F --> LP["LP 입금<br/>→ 다른 자산 인출"]
     F --> FL["Flash Loan<br/>+ 가격 조작"]
-    S & LP & FL --> C["👤 frontend 운영자<br/>책임 검토"]
+    S & LP & FL --> C["👤 통제자 판정<br/>FATF 2021 para 67·93"]
     style C fill:#fed7aa,stroke:#ea580c
 ```"""
 
 DIAGRAMS[40] = """\
 ```mermaid
 flowchart LR
-    W["👥 자금세탁자들"] --> S["Self-trading<br/>A ↔ B (same owner)"]
+    W["👥 자금세탁자들"] --> S["Self-trading<br/>A ↔ B same owner"]
     W --> L["Loop trading<br/>A → B → C → A"]
     W --> P["Pump<br/>고가 만들어 외부 매도"]
     S & L & P --> G["📈 가짜 가격/거래량"]
@@ -558,10 +556,10 @@ flowchart LR
 DIAGRAMS[41] = """\
 ```mermaid
 flowchart TB
-    C["💼 CMLN<br/>(중국어 자금세탁 네트워크)"] -.Laundering-as-a-Service.-> F["💰 Lazarus · 범죄조직"]
-    C --> T["📱 텔레그램·위챗 OTC"]
-    C --> U["USDT(Tron) 기반<br/>5~15% 수수료"]
-    C -.2025.-> N["$16.1B · 1,800+ wallet"]
+    C["💼 전문 세탁 네트워크<br/>CMLN · OTC 환전망"] -.Laundering-as-a-Service.-> F["💰 DPRK · 사기조직"]
+    C --> T["📱 메신저 기반 OTC"]
+    C --> U["스테이블코인 경유<br/>2025 불법 거래량의 84%, B"]
+    C -.FATF 7차 TU.-> N["캄보디아 복합체<br/>최소 USD 40억 · 2021-08~2025-01"]
     style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style N fill:#fed7aa,stroke:#ea580c
 ```"""
@@ -585,10 +583,10 @@ DIAGRAMS[43] = """\
 ```mermaid
 flowchart LR
     C["CDD"] --> S1["1. 신원확인"]
-    C --> S2["2. 실소유자 (25%)"]
+    C --> S2["2. 실소유자 BO<br/>지분 + 실질 지배"]
     C --> S3["3. 거래목적·자금원천"]
     C --> S4["4. 지속 모니터링"]
-    S4 -.주기.-> R["저5·중3·고1년 재실사"]
+    S4 -.근거.-> R["업무규정 제76~81조<br/>거래모니터링체계"]
     style C fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
@@ -612,7 +610,7 @@ flowchart TB
 DIAGRAMS[45] = """\
 ```mermaid
 flowchart LR
-    A["🚨 1선 알람"] --> B["🔍 2선 분석"]
+    A["🚨 1선 알람<br/>KYT·CS·FDS·시장감시"] --> B["🔍 2선 분석"]
     B --> C["📝 STR 작성<br/>(사실·사유·증빙·유관)"]
     C --> D["✍️ AMLO 결재"]
     D --> K["🏛 KoFIU"]
@@ -651,23 +649,23 @@ flowchart TB
 DIAGRAMS[48] = """\
 ```mermaid
 flowchart TB
-    CEO["👔 CEO"] -->|직접 보고| A["🎖 AMLO (임원급)"]
-    A -->|STR 결정권| K["🏛 KoFIU"]
-    A -->|감독 대응| F["FIU · 금감원"]
-    A -->|전 거래 접근| D["Data"]
-    A -.개인 형사책임.-> CZ["Binance CZ 4개월 징역 교훈"]
+    CEO["👔 CEO · 이사회"] -->|보고 채널| A["🎖 AMLO 보고책임자"]
+    A -->|STR 결재| K["🏛 KoFIU"]
+    A -->|감독 대응| F["FIU · 금감원 검사수탁"]
+    A -->|데이터 접근| D["거래·고객 Data"]
+    A -.개인 제재 가능.-> P["임직원 제재·퇴직자 제재통보<br/>2026-08-18 시행령"]
     style A fill:#1a2e4a,color:#fff,stroke:#1a2e4a
-    style CZ fill:#fee2e2,stroke:#dc2626
+    style P fill:#fee2e2,stroke:#dc2626
 ```"""
 
 DIAGRAMS[49] = """\
 ```mermaid
 flowchart LR
-    A["🔍 주소 입력"] --> S["OFAC SDN<br/>캐시 (일 1회 갱신)"]
+    A["🔍 주소 입력"] --> S["OFAC SDN<br/>캐시 · 정기 갱신 + diff"]
     S --> M{"매칭?"}
-    M -->|YES| B["⛔ 차단 + STR"]
-    M -->|NO| P["✅ 통과"]
-    M -->|모호| R["👀 수동 검토<br/>(FP disposition)"]
+    M -->|YES| B["⛔ 거래 거절·동결<br/>+ STR 검토"]
+    M -->|NO| P["✅ 목록상 통과<br/>위험평가는 별도"]
+    M -->|모호| R["👀 수동 검토<br/>FP disposition"]
     style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style B fill:#fee2e2,stroke:#dc2626
 ```"""
@@ -678,53 +676,58 @@ flowchart LR
 DIAGRAMS[50] = """\
 ```mermaid
 flowchart LR
-    A["⚔️ 공급망 공격"] --> B["🏦 Bybit cold wallet"]
-    B -->|$1.46B 탈취| L["🕵️ Lazarus"]
-    L -->|48h playbook| P1["peel chain"]
-    P1 --> P2["bridge (THORChain)"]
-    P2 --> P3["DEX swap"]
-    P3 --> P4["CMLN OTC 환전"]
-    P4 --> K["💰 북한 자금화"]
+    A["⚔️ 제3자 인프라 공격<br/>RPC 노드·멀티시그 공급자"] --> B["🏦 VASP · DeFi"]
+    B -->|"Bybit USD 14.6억"| L["🕵️ DPRK"]
+    L --> P1["분산<br/>BTC 35 · ETH 125,000 지갑"]
+    P1 --> P2["브리지"]
+    P1 --> P3["비수탁 지갑"]
+    P1 --> P4["OTC 네트워크"]
+    P2 --> K["세탁 노드<br/>동남아 금융 복합체 등"]
+    P3 --> K
+    P4 --> K
+    K --> R["회수 3.8%"]
     style L fill:#1a2e4a,color:#fff,stroke:#1a2e4a
-    style K fill:#fee2e2,stroke:#dc2626
+    style R fill:#fee2e2,stroke:#dc2626
 ```"""
 
 DIAGRAMS[51] = """\
 ```mermaid
 timeline
-    title Tornado Cash
-    2022-08 : OFAC 제재
-    2024-11 : 5th Cir. Van Loon 판결
-    2025-03-21 : 지정 해제
-    2025~ : Roman Storm 형사재판
+    title Tornado Cash와 믹서 규제
+    2022 : OFAC 최초 지정 · 세부는 원 공고로 확인
+    2025-03-21 : SDN 삭제 · 엔티티 1 · ETH 주소 90
+    2025-08-06 : Storm 배심 평결 B
+    2026-10-06 : FinCEN 믹싱 311조 NPRM 철회
+    2027-07-10 : EU AMLR 익명성강화 수단 금지
 ```"""
 
 DIAGRAMS[52] = """\
 ```mermaid
 flowchart LR
-    BM["BitMEX<br/>2020 $100M"] --> BT["Bittrex<br/>2022 $29M"]
-    BT --> BN["Binance<br/>2023 $4.3B<br/>CZ 4개월 징역"]
-    BN --> OK["OKX<br/>2025 $500M+"]
-    OK --> PX["Paxful<br/>2025 $3.5M"]
-    style BN fill:#fee2e2,stroke:#dc2626
+    PH["Prince Group TCO 146개 대상<br/>Huione 311조 최종규칙<br/>2025-10-14"] --> XC["FINTRAC Xeltox<br/>C$176,960,190<br/>2025-10-22"]
+    XC --> PX["FinCEN Paxful<br/>$3.5M<br/>2025-12-09"]
+    PX --> BB["OFAC BitBank 등<br/>E.O. 13902<br/>2026-09-17"]
+    BB --> A7["A7 네트워크 TCO B 2026-10-01<br/>9714조 특별조치 NPRM 2026-10-05"]
+    style PH fill:#fee2e2,stroke:#dc2626
+    style A7 fill:#fee2e2,stroke:#dc2626
 ```"""
 
 DIAGRAMS[53] = """\
 ```mermaid
 flowchart LR
-    F["🇰🇷 FIU"] --> U["미신고 VASP<br/>단속 강화 (2025-12)"]
-    F --> V["VASP 정기 검사"]
-    L["🏛 법원"] --> E["시세조종 1호 사건"]
-    L --> M["무신고 영업 기소<br/>(특금법 §17)"]
+    F["🇰🇷 FIU"] --> U["미신고 사업자 단속<br/>사이트 27건 접속차단 2026-10-13"]
+    F --> V["VASP 검사<br/>두나무 과태료 352억원 2025-11-06"]
+    G["금융위·금감원"] --> E["시장감시 집행<br/>첫 과징금 2025-09-03"]
+    T["통신사기피해환급법"] --> M["거래소 임시조치 의무<br/>2026-10-01 시행"]
     style F fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
 DIAGRAMS[54] = """\
 ```mermaid
 flowchart LR
-    M["📄 Meiklejohn 2013<br/>A Fistful of Bitcoins"] --> W["Weber 2019<br/>Elliptic GCN"]
-    W --> B["Bellei 2024<br/>Elliptic2 GNN"]
-    B --> F["🔮 Future<br/>ZKP + AI"]
+    M["📄 Meiklejohn 2013<br/>A Fistful of Bitcoins · CIOH"] --> W["Weber 2019<br/>Elliptic 데이터셋 · RF > GCN"]
+    W --> B["Bellei 2024<br/>Elliptic2 · 서브그래프 분류"]
+    B --> F["🔮 2025~2026<br/>경로 추적 · 크로스체인 · 프라이버시 누수 측정"]
     style M fill:#e5eaf2,stroke:#1a2e4a
     style F fill:#fff7d6,stroke:#c9a646
 ```"""
@@ -732,12 +735,12 @@ flowchart LR
 DIAGRAMS[55] = """\
 ```mermaid
 flowchart TB
-    R["📊 Chainalysis 2026"] --> N1["$154B 불법거래"]
-    R --> N2["84% 스테이블코인"]
-    R --> N3["$2B DPRK"]
-    R --> N4["$16.1B CMLN"]
-    R --> N5["$17B Scams"]
-    R --> N6["+162% YoY"]
+    R["📊 Chainalysis 2026<br/>서론 2026-01-08"] --> N1["최소 $154B<br/>불법 주소 수취 · 하한"]
+    R --> N2["스테이블코인 84% · B"]
+    R --> N3["DPRK 탈취 $2B"]
+    R --> N4["A7A5 1년 미만 $93.3B"]
+    R --> N5["2024 수치 $40.9B → $57.2B<br/>상향 수정"]
+    R --> N6["+162%로 서술<br/>산술값 약 +169%"]
     style R fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
@@ -747,15 +750,18 @@ flowchart LR
     D42["🔨 D42 Mixer fetcher"] --> W["🛠 KYT Wrapper"]
     D49["🔨 D49 OFAC screener"] --> W
     D35["🔨 D35 2-hop tracer"] --> W
-    W --> API["kyt_check(address)"]
-    API --> A["ALLOW · REVIEW · BLOCK"]
+    W --> API["kyt_check · address"]
+    API --> A["PASS · REVIEW"]
+    A --> H["👤 사람 검토<br/>FATF 2021 para 276"]
+    H --> O["STR · EDD · 거래거절<br/>법적 산출물은 별도 축"]
     style W fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
 # ================================================================
 # Capstone (57~60)
 # ================================================================
-DIAGRAMS[57] = """\n```mermaid
+DIAGRAMS[57] = """\
+```mermaid
 flowchart LR
     ML["🤖 AI·ML"] --> C["클러스터링 보조"]
     ML --> A["온체인 이상 패턴<br/>anomaly 탐지"]
@@ -777,7 +783,7 @@ flowchart LR
     P["🔒 Privacy"] & C["⚖️ Compliance"] --> ZK["🔐 ZKP"]
     ZK --> Z1["zk-KYC"]
     ZK --> Z2["Selective Disclosure"]
-    ZK --> Z3["Polygon ID · Worldcoin"]
+    ZK --> Z3["SSI · 검증가능 자격증명<br/>설계 연구 단계"]
     style ZK fill:#1a2e4a,color:#fff,stroke:#1a2e4a
 ```"""
 
@@ -785,9 +791,9 @@ DIAGRAMS[59] = """\
 ```mermaid
 flowchart TB
     D["📘 Design Doc"] --> P["문제 정의"]
-    D --> R["규제 매핑 (특금법 §·이용자보호법 §)"]
+    D --> R["규제 매핑<br/>특금법 §4·§5의3 · 이용자보호법 §12 · 통신사기피해환급법"]
     D --> A["아키텍처"]
-    D --> RS["Risk Score 모델"]
+    D --> RS["Risk Score 모델<br/>산출물 3축 분리"]
     D --> RC["룰 카탈로그 10+"]
     D --> G["거버넌스 (5 Pillars · 3LoD)"]
     D --> L["단계적 도입 로드맵"]

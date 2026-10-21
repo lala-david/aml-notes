@@ -1,46 +1,48 @@
 # Day 51 — 케이스: Tornado Cash + DeFi 제재의 한계
 
-> 코드를 제재할 수 있는가? ⏱️ ~80분.
+> 코드를 제재할 수 있는가, 제재를 풀면 위험도 풀리는가? ⏱️ ~80분. 마지막 업데이트: 2026-10-21.
 
 ## 📖 오늘 뭘 배우나
 
-Tornado Cash 사건은 "**코드 자체를 제재할 수 있는가**"라는 질문의 사법적 답을 처음 보여준 판례입니다. 2022 OFAC 제재 → 2024 5th Circuit Van Loon 판결 → 2025-03 해제라는 3년 흐름과, 동시에 진행 중인 **Roman Storm 개발자 형사재판**(별개)을 정리합니다. "코드는 제재 못 해도 개발자는 책임질 수 있다"는 결론이 DeFi 규제의 뉴노멀.
-
+Tornado Cash 사건은 "**코드 자체를 제재할 수 있는가**"와 "**제재를 풀면 위험도 풀리는가**"라는 두 질문을 동시에 던집니다. 2026-10-21 기준 원문으로 확인되는 흐름은 2025-03-21 OFAC 해제(엔티티 1·ETH 주소 90개) → 2025-08-06 Roman Storm 배심 평결(무면허 송금업 공모 유죄, B) → 2026-10-06 미국 믹싱 §311 제안규칙 철회(withdrawn) → 2027-07-10 EU AMLR 익명성강화 수단 취급 금지(enacted-not-in-force)입니다. "코드는 목록에서 빠져도 운영자는 송금업 규제로 유죄가 될 수 있다", 그리고 "해제 후에도 보안사고의 78.33%가 경유"라는 측정이 오늘의 결론입니다.
 
 <!-- MAP-START -->
 ## 🗺 오늘의 지도
 
 ```mermaid
 timeline
-    title Tornado Cash
-    2022-08 : OFAC 제재
-    2024-11 : 5th Cir. Van Loon 판결
-    2025-03-21 : 지정 해제
-    2025~ : Roman Storm 형사재판
+    title Tornado Cash와 믹서 규제
+    2022 : OFAC 최초 지정 · 세부는 원 공고로 확인
+    2025-03-21 : SDN 삭제 · 엔티티 1 · ETH 주소 90
+    2025-08-06 : Storm 배심 평결 B
+    2026-10-06 : FinCEN 믹싱 311조 NPRM 철회
+    2027-07-10 : EU AMLR 익명성강화 수단 금지
 ```
 <!-- MAP-END -->
 
 ## 🎯 핵심 질문
-1. Tornado Cash 제재 timeline (2022-08 → 2024-11 → 2025-03)?
-2. 5th Circuit 판결의 핵심 논리?
-3. Roman Storm 형사 재판이 별개인 이유?
+1. 2025-03-21 해제가 의미하는 것과 의미하지 않는 것?
+2. 제재 효과를 잰 학술 측정(WWW '26)은 무엇을 보여 주나?
+3. Roman Storm 형사 재판이 제재 해제와 별개인 이유?
 
 ## 📖 읽기 (~55분)
 - 메인: [`../notes/6-cases/tornado-cash.md`](../notes/6-cases/tornado-cash.md)
 
 ## 🌐 외부 자료 (~20분)
-- [Venable — Treasury Lifts Tornado Sanctions](https://www.venable.com/insights/publications/2025/04/a-legal-whirlwind-settles-treasury-lifts-sanctions)
-- [Steptoe — DeFi AML implications](https://www.steptoe.com/en/news-publications/critical-tornado-cash-developments-have-significant-implications-for-defi-aml-and-sanctions-compliance.html)
+- [OFAC 2025-03-21 Recent Actions](https://ofac.treasury.gov/recent-actions/20250321)
+- [Liu 외 — Tornado Cash 제재 효과 측정 (arXiv 2507.11721, WWW '26)](https://arxiv.org/abs/2507.11721)
+- [Willkie — Storm 평결 요약 (2025-08-08)](https://complianceconcourse.willkie.com/articles/tornado-cash-cofounder-convicted-for-conspiring-to-operate-an-unlicensed-money-transmitting-business/)
 
 ## 🛠️ 미니 챌린지 (~5분)
-- "Tornado 노출 wallet → 회사 정책" 의사결정 트리 메모 (2025-03 해제 후에도 차단 유지)
-- 다른 mixer 운명 5개 (Blender/Sinbad/Wasabi/Samourai/JoinMarket) 정리
+- "Tornado 노출 wallet → 회사 정책" 의사결정 트리 메모 — **제재 출구**(목록 대조)와 **위험 출구**(노출도·행태 평가)를 분리해서
+- 더스팅 공격(소액을 Tornado 관련 주소에서 고객 주소로 보냄)이 목록 대조 룰을 어떻게 오작동시키는지 3줄
 
 ## ✅ 체크포인트
-- [ ] Tornado Cash 전체 타임라인: 2022-08 OFAC 제재 → 2024-11 5th Cir. Van Loon 판결 → 2025-03-21 지정 해제
-- [ ] 5th Circuit "코드는 property 아니다" 안다
-- [ ] 개발자 형사책임 가능성 안다 (Storm 재판)
-- [ ] 회사 정책: mixer = 위험 카테고리 유지 안다
+- [ ] 2025-03-21 해제: 엔티티 1개·ETH 주소 90개(주 1·대체 89), Semenov [DPRK3] 유지
+- [ ] 제재 후 957일 입금액 71.03% 감소, 보안사고 78.33% 여전히 경유 (Liu 외)
+- [ ] Storm: 무면허 송금업 공모 유죄, 자금세탁·IEEPA 공모 배심 불일치 (2025-08-06, B)
+- [ ] 미국 믹싱 §311 NPRM withdrawn(관보 2026-10-06), EU AMLR 제79조 2027-07-10 적용 예정
+- [ ] 회사 정책: 제재 해제 ≠ 위험 해제
 
 ## 💭 오늘의 한 줄
 
@@ -48,94 +50,85 @@ timeline
 
 ### 한국 VASP에서는
 
-**Tornado Cash 지정 해제(2025-03) 이후에도 한국 4대 거래소는 전원 "mixer 노출 주소" 내부 블랙리스트 유지**. Chainalysis의 "Mixing" 카테고리 노출 >1%면 EDD 트리거, >5%면 freeze가 표준. 이유는 **특금법 §5의2(의심거래 보고)**는 OFAC 지정과 무관하게 "자금세탁 의심"을 독립 판단 대상으로 두기 때문. DAXA 가이드라인도 "mixer는 제재 유무와 무관하게 고위험 카테고리"로 명시.
+한국 법령에 "믹서 사용 = STR"이라는 규정은 없다. STR 은 **특금법 §4**의 "의심되는 합당한 근거"에 대한 판단이고, 거래모니터링 체계는 FIU 고시 「자금세탁방지 업무규정」 제76~81조(2026-01-22 시행)가 정한다([법제처 DRF](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000267264&type=XML)). 이전 판은 STR 근거를 "특금법 §5의2"로 적었는데 틀렸다 — §5의2 는 고객확인, §5의3 은 트래블룰이다. 해외 제재 목록 변경은 한국 STR 판단을 자동으로 바꾸지 않는다. 이전 판의 "4대 거래소 전원 내부 블랙리스트 유지", "Mixing 노출 >1% EDD·>5% freeze 표준", "DAXA 가이드라인 명시"는 공개 근거가 없어 삭제했다.
 
 ### 글로벌에서는
 
-**Coinbase·Kraken**은 2025-03 해제 직후 Tornado Cash 주소 **복원(unblock)**이 아니라 **카테고리를 "Sanctioned"에서 "High-Risk Mixer"로 재분류**. **Circle**은 USDC의 Tornado Cash 관련 blacklist를 **일부** 풀었지만 신규 유입은 계속 모니터링. **Roman Storm 재판(2025)**에서 유죄가 나오면 **"mixer 개발자 = 무등록 MSB"** 선례가 되어 프라이버시 도구 산업 전반에 충격.
+- **해제(2025-03-21)**: 재무부는 "exercised [its] discretion to remove the economic sanctions against Tornado Cash"라고 하면서도 "continue to monitor closely any transactions that may benefit malicious cyber actors or the DPRK"라고 덧붙였다([OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321)). 해제의 근거가 된 소송·판결 세부(이전 판의 항소심 판결 논리)는 이 저장소 근거 자료에서 원문 확인하지 않았다 — **공개 근거 미확인**.
+- **형사 트랙**: Storm 은 무면허 송금업 운영 공모로 유죄 평결을 받았다(B). 선고·재심 일정은 확인되지 않았다.
+- **규제 단위 이동**: FinCEN 은 2026-10-05 CVC 믹싱 §311 제안규칙(88 FR 72701)을 철회(관보 2026-10-06)하고, 같은 주 A7 네트워크 특별조치 NPRM(proposed)을 냈다([Federal Register 2026-20429](https://public-inspection.federalregister.gov/2026-20429.pdf); [Federal Register 2026-20371](https://public-inspection.federalregister.gov/2026-20371.pdf)). 유형 규제에서 네트워크 차단으로.
 
-### "코드 제재"의 법적 결론 (Van Loon 판결)
+이전 판의 거래소·발행사별 재분류·blacklist 해제 서술은 근거 자료로 확인되지 않아 삭제했다.
 
-```
-5th Circuit 핵심 논리:
-1. Immutable smart contract = "property"가 아님
-2. OFAC IEEPA(1977)은 "property" 지정 권한만 부여
-3. 따라서 OFAC이 code 자체를 제재할 권한 없음
+### 제재 효과 — 학술 측정 (Liu 외, WWW '26)
 
-→ 그러나 개발자 개인(Roman Storm)의 
-   무등록 MSB 운영·제재 회피 방조는 별개 형사 문제
-```
-
-### 회사 정책 의사결정 트리 (실무)
-
-```
-IF wallet has Tornado Cash direct exposure:
-    IF exposure occurred BEFORE 2022-08-08 (지정 전):
-        → LOW risk (증빙 보관)
-    IF exposure occurred 2022-08 ~ 2025-03 (지정 기간):
-        → BLOCK + STR (OFAC 위반 소급)
-    IF exposure AFTER 2025-03-21 (해제 후):
-        → HIGH risk (mixer 노출) + EDD
+```mermaid
+flowchart LR
+    S["제재 기간 957일<br/>입금액 71.03% 감소"] --> U["일반 사용 감소"]
+    S --> C["범죄 자금 경유 지속<br/>보안사고 78.33%"]
+    C --> D["이진 목록은<br/>더스팅에 취약"]
+    R["2025-03-21 해제"] --> L["목록 기반 차단 해제"]
+    L --> Q{"위험 판단도<br/>같이 풀리는가?"}
+    Q -->|"아니오"| K["노출도·행태 기반<br/>위험 평가 유지"]
+    style C fill:#fee2e2
+    style K fill:#d1fae5
 ```
 
-### 자주 나오는 오해
+한계: Ethereum 단일 체인, "보안사고" 정의는 초록에 없다([arXiv 2507.11721](https://arxiv.org/abs/2507.11721)).
 
-- **"제재 해제됐으니 지워도 된다"** — 한국·EU VASP 대다수는 **"mixer = 위험 카테고리"**로 별도 유지. 제재 해제 ≠ AML 위험 해제.
-- **"코드는 법적 책임 없다"** — Van Loon은 **정부의 제재 권한**을 제한했을 뿐, **개발자의 형사 책임**은 별개(Storm 재판). "익명성 도구 제공 = 무등록 MSB"라는 해석이 살아있음.
+### 회사 정책 의사결정 — 목록 출구와 위험 출구 분리
 
-## 🧭 Tornado 해제 후 — VASP 의사결정 프레임 (2025-03-21 이후)
+```python
+def mixer_exposure_review(tx):
+    # 1) 제재 출구 — 현행 공식 목록만. 해제된 주소는 여기서 빠진다
+    if sanctions_list.contains(tx.counterparty):
+        return "REJECT_AND_REVIEW_STR"
+    # 2) 위험 출구 — 목록과 무관하게 유지. 임계값은 자사 튜닝(공개 기준 없음)
+    exp = analytics.exposure(tx, category="mixer")
+    if exp.direction == "inbound_dust":
+        return "LOG_ONLY"            # 더스팅 의심: 고객 행위 아님
+    if exp.direct and exp.amount >= TUNED_THRESHOLD:
+        return "EDD"                 # 자금원천 확인
+    if exp.indirect:
+        return "ANALYST_REVIEW"      # 즉시 거래 너머 추적 (FATF 2021 para 277~278)
+    return None
+```
 
-### 핵심 원칙
-
-**OFAC 제재 해제 ≠ 회사 정책 자동 완화**. 각 VASP는 자체 위험 기반 접근(RBA)에 따라 독립적으로 정책을 결정할 법적 권한·의무가 있다 (한국 특금법 §5의2, 미국 BSA §1020.210, EU AMLR Article 8).
-
-### 해제 이후 4개 상황과 의사결정
-
-| 시나리오 | OFAC 변화 | 한국 VASP 표준 대응 | 근거 |
-|---|---|---|---|
-| 과거 Tornado 이용 직접 주소 | SDN 제거 | **여전히 High-Risk 라벨 유지** | 2022~2025 기간 익명화 이용 이력은 자체 RBA로 판단 |
-| 새로운 Tornado 지갑 | 제재 대상 아님 | **Chainalysis·TRM 라벨 유지 시 High-Risk** | 벤더 분류는 독립적 |
-| Lazarus·Ransomware가 Tornado 경유 | 제재 대상(Lazarus 지정됨) | **출처 제재 대상이면 여전히 차단** | OFAC 50% Rule 여전 적용 |
-| 일반 프라이버시 목적 이용 | 제재 대상 아님 | **거래 진행 + EDD 실시** | 자금원천 증빙 요구 |
-
-### 실제 주요 VASP의 정책 (추정)
-
-- **Coinbase**: 해제 후 Tornado "관찰" 라벨로 하향, 하지만 **2-hop 이내 접촉 주소는 여전히 EDD 필수**
-- **Binance**: 지역별 차등 — EU/US는 여전히 rejected list, 기타 지역은 enhanced review
-- **한국 4대 (Upbit·Bithumb·Coinone·Korbit)**: DAXA 공동 가이드 2025-04 발표 — **당분간 High-Risk 유지**
-- **Kraken**: 2025-Q2 내부 정책으로 "제재 해제는 OFAC 판단일 뿐, KYT 점수는 독립적"
-
-### 의사결정 플로차트
+이전 판의 "지정 기간 노출 = BLOCK + STR(OFAC 위반 소급)" 분기는 근거가 없어 뺐다. 과거 노출은 위험평가 입력이지 자동 차단 사유가 아니다.
 
 ```mermaid
 flowchart TD
-    A[Tornado 접촉 감지] --> B{접촉 시점}
-    B -->|2025-03-21 이전| C[과거 불법 은닉 가능성]
-    B -->|이후| D{현재 출처 확인}
-    C --> E[여전히 High-Risk]
-    D -->|OFAC 제재 대상 출처| F[차단]
-    D -->|일반 출처| G[EDD + 자금원천]
-    E --> H{자금원천 증빙}
-    G --> H
-    H -->|증빙 충분| I[거래 진행 + 기록 유지]
-    H -->|증빙 불충분| J[차단 + STR]
-    F --> J
+    A["Tornado 접촉 감지"] --> B{"현행 제재 목록·지정 주체와<br/>연계됐는가"}
+    B -->|"예: DPRK 지정 주체 출처"| F["거래 거절 + STR 검토"]
+    B -->|"아니오"| C{"노출 방향"}
+    C -->|"수신 더스팅"| G["기록만<br/>고객 행위 아님"]
+    C -->|"고객 송금·직접 노출"| H["EDD<br/>자금원천 확인"]
+    H --> I{"증빙"}
+    I -->|"충분"| J["거래 진행 + 기록 유지"]
+    I -->|"불충분"| K["STR 판단 특금법 4조"]
     style F fill:#fee2e2,stroke:#ef4444
-    style J fill:#fee2e2,stroke:#ef4444
-    style I fill:#d1fae5,stroke:#10b981
+    style K fill:#fee2e2,stroke:#ef4444
+    style J fill:#d1fae5,stroke:#10b981
 ```
 
-### 법적 근거
+### 법적 근거 (정정)
 
-- **특금법 §5의2** — 자체 위험 평가·통제 권한
-- **특금법 §5의3** — STR 보고 의무 (자금원천 의심 시)
-- **OFAC 50% Rule** — 제재 대상자가 50%+ 소유·지배하는 자산은 자동 블록 (Lazarus가 Tornado 사용 시 여전 적용)
-- **EU AMLR Article 8** — VASP 자체 RBA 강제
+- **특금법 §4** — 의심거래보고(STR)
+- **FIU 고시 자금세탁방지 업무규정 제76~81조** — 거래모니터링체계(2026-01-22 시행)
+- **FATF 2021 RBA 가이던스 para 277~278** — 고위험 상황에서 "extend beyond the immediate transaction"
+- **EU AMLR(2024/1624) 제79조** — CASP 의 익명성강화 수단 계좌 보유 금지, 2027-07-10 적용 예정
+
+이전 판의 "특금법 §5의2 = 자체 위험평가 권한", "§5의3 = STR", "OFAC 50% Rule 자동 적용", "AMLR Article 8"은 조문을 잘못 짚었거나 근거를 확인하지 못해 고쳤다.
 
 ### 규제 당국 질의 대응
 
-FIU 검사 시 "Tornado 해제됐는데 왜 계속 차단?"라는 질의에 답변:
-- "특금법 §5의2에 따라 **자체 위험 평가**에 기반한 독립적 판단"
-- "과거 이용 이력의 자금세탁 위험 여전 존재"
-- "DAXA 공동 가이드에 따른 표준 대응"
-- 문서화: 정책 결정 근거·AMLO 서명·이사회 승인
+FIU 검사 시 "Tornado 해제됐는데 왜 계속 EDD?"라는 질의에 답변:
+- "해외 제재 **목록 변경**과 자사 **위험평가**는 별개 — 정책 변경 근거를 정책 문서에 기록"
+- "해제 후에도 보안사고 78.33% 경유라는 측정(Liu 외)이 위험평가 근거"
+- 문서화: 정책 결정 근거·AMLO 결재·이사회 승인
+
+### 자주 나오는 오해
+
+- **"제재 해제됐으니 지워도 된다"** — 목록에서는 지우고, 위험평가에서는 유지한다. 제재 해제 ≠ AML 위험 해제.
+- **"코드는 법적 책임 없다"** — 정부 제재와 개발자 형사 책임은 별개 트랙. Storm 유죄 죄목은 제재가 아니라 무면허 송금업 공모다(B).
+- **"미국이 믹서 규칙을 철회했으니 규제 완화"** — 같은 주 특정 네트워크 차단 조치(A7)가 나왔다. 규제의 단위가 바뀐 것이다.

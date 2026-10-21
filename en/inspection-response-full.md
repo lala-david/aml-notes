@@ -1,52 +1,60 @@
 # FIU/FSS On-site Inspection Response — Full Workbook
 
-> Full English translation of the Korean inspection response workbook ([`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md), 901 lines). Korean VASPs face one to two regulator inspections per year. This workbook covers the 4-week preparation timeline, 40-item checklist, document requirements, interview guides, post-inspection remediation, and the three-stage appeals process. Reference date: 2026-04.
+> Full English translation of the Korean inspection response workbook ([`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md)). Covers the 4-week preparation timeline, self-assessment checklist, document requirements, interview guides, post-inspection remediation, and the appeals process. Inspection cycles, durations, and document counts here are **planning assumptions with no public basis**. Last updated: 2026-10-21.
 
 ## TL;DR
 
-- **Inspectors**: KoFIU (AML), FSS (prudential and user protection), FSC (policy). DAXA (industry self-regulator).
-- **Frequency**: One annual comprehensive inspection plus ad hoc.
-- **Preparation window**: 2-4 weeks after notice; on-site 1-2 days.
-- **Deliverables**: self-assessment report, 40-60 evidentiary documents, FAQ response kit.
+- **Inspectors**: KoFIU (AML — STR, transaction monitoring), FSS (prudential, user protection), the FSC/FSS virtual-asset line (§12 market surveillance under the Virtual Asset User Protection Act), the FSC Financial Safety Division / FSS fraud unit (Telecom Fraud Refund Act temporary measures, applied to exchanges from 2026-10-01), and FSC (policy).
+- **"Anomalous transaction" readiness splits three ways**: ① FIU — Tukgeumbeop §4 STR and transaction monitoring; ② §12 continuous surveillance; ③ Telecom Fraud Refund Act holds and payment stops ([§3-H](#h-three-way-anomalous-transaction-readiness)).
+- **Frequency**: no public cycle for regular or ad hoc inspections was confirmed in this repository's sources.
+- **Preparation window**: plan backward from an assumed 2-4 weeks after notice.
+- **Deliverables**: self-assessment report, evidence, FAQ response kit.
 - **Must-avoid**: missing documents, number inconsistencies, tipping-off violations, AMLO absence, unremediated prior findings.
 
 ---
 
 ## 1. Regulatory Body Overview
 
-### Division of labor across the three Korean agencies (+ DAXA)
+### Division of labor across Korean agencies
 
-| Agency | Scope | Annual inspection focus |
+| Agency | Scope | Example inspection focus |
 |---|---|---|
-| **KoFIU (FIU)** | AML, STR, CTR, Travel Rule | STR quality, tipping-off controls, internal controls |
-| **FSS (Financial Supervisory Service)** | Prudential, user asset protection | 80/20 asset segregation, cold-wallet evidence, insurance |
+| **KoFIU (FIU)** | AML, STR, CTR, Travel Rule | STR quality, transaction-monitoring system (AML Regulation Arts. 76-81), tipping-off controls, internal controls |
+| **FSS (Financial Supervisory Service)** | Prudential, user asset protection | Deposits and virtual-asset custody, insurance |
+| **FSC virtual-asset division / FSS virtual-asset investigation** | §12 continuous market surveillance | Surveillance organization, analysis system, handling and referral records of flagged trades |
+| **FSC Financial Safety Division / FSS fraud unit** | Telecom Fraud Refund Act (exchanges from 2026-10-01) | Temporary measures, purpose checks, payment stops, refund procedures and records |
 | **FSC (Financial Services Commission)** | Policy, licensing | VASP registration maintenance, major shareholder changes |
-| **DAXA (self-regulator)** | Industry self-regulation | Joint blacklist, listing review, coordinated responses |
+| **DAXA (self-regulator)** | Industry self-regulation | Inspection role and joint blacklist operations: no public basis confirmed in this repository |
 
 ```mermaid
 flowchart TB
     V["VASP"]
     FIU["KoFIU<br/>AML / STR"]
     FSS["FSS<br/>Prudential / User Protection"]
+    MS["FSC/FSS virtual-asset line<br/>§12 market surveillance"]
+    TS["FSC Financial Safety Div. / FSS fraud unit<br/>voice-phishing temporary measures"]
     FSC["FSC<br/>Policy / Licensing"]
-    DAXA["DAXA<br/>Industry Self-Reg"]
 
     V --- FIU
     V --- FSS
+    V --- MS
+    V --- TS
     V --- FSC
-    V --- DAXA
 
-    FIU --> R1["Tukgeumbeop §5-2<br/>§5-3, §4"]
-    FSS --> R2["VAUPA<br/>80/20 asset rule"]
-    FSC --> R3["VASP registration<br/>Major shareholder"]
-    DAXA --> R4["Joint blacklist<br/>Listing review"]
+    FIU --> R1["Tukgeumbeop §4 STR<br/>AML Regulation Arts. 76-81"]
+    FSS --> R2["User Protection Act<br/>deposits, custody"]
+    MS --> R5["User Protection Act §12<br/>Decree §18"]
+    TS --> R6["Telecom Fraud Refund Act<br/>§2-5, §2-6, §4"]
+    FSC --> R3["VASP registration §7<br/>Major shareholder"]
 ```
 
 ### Three inspection types
 
-1. **Comprehensive (annual)** — once a year, 4-5 days, all domains.
-2. **Thematic** — targeted (STR quality, Travel Rule, user protection), 2-3 days.
-3. **Ad hoc / emergency** — triggered by incidents (hack, large STR, complaint surge), no advance notice.
+1. **Comprehensive** — all domains.
+2. **Thematic** — targeted (STR quality, Travel Rule, user protection, §12 surveillance). Example: FSC/FSS on-site checks of Upbit and Bithumb surveillance operations on 2024-08-22 ([FSC/FSS 2024-08-22](https://fsc.go.kr/po010101/82943)).
+3. **Ad hoc / emergency** — triggered by incidents (hack, large STR, complaint surge).
+
+Cycles and on-site days differ by agency and matter; no public standard was confirmed, so none is stated.
 
 ### Legal basis
 
@@ -54,16 +62,20 @@ flowchart TB
 - **Tukgeumbeop §16** — document production authority
 - **VAUPA §13-14** — FSS inspection authority
 - **FSC Establishment Act §17** — FSC supervisory authority
+- **VAUPA §12, Decree §18, Market Investigation Regulation** — continuous surveillance duty and action/referral criteria; administrative fine up to KRW 100 million (§22 ① 6-7) ([law.go.kr](https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290735&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR))
+- **Telecom Fraud Refund Act §2-5, §2-6, §4** — exchange temporary measures, purpose checks, payment stops (in force 2026-10-01); damages for failing to stop payment (§4 ③) ([law.go.kr](https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290245&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR))
+
+(The Tukgeumbeop §15-16, VAUPA §13-14, and FSC Establishment Act article numbers were not re-verified in this repository's 2026-10 sources.)
 
 ### Intensity comparison
 
 | Item | Comprehensive | Thematic | Ad hoc |
 |---|---|---|---|
-| Notice | D-30 | D-14 | None |
-| Duration | 4-5 days | 2-3 days | 1-2 days |
-| Document requests | 50+ | 20-30 | 10+ |
-| Interviews | 8-10 people | 3-5 | 2-3 |
+| Notice | Advance notice | Advance notice | Depends on matter |
+| Scope | All domains | One area | Incident-related |
 | Penalty likelihood | Medium | Medium | High |
+
+Notice days, on-site days, document-request counts, and interview headcounts have no public standard; earlier figures were removed. The 4-week timeline below is a planning assumption.
 
 ---
 
@@ -71,7 +83,7 @@ flowchart TB
 
 ```mermaid
 gantt
-    title Inspection Response 4-Week Timeline
+    title Inspection Response 4-Week Timeline - illustrative dates
     dateFormat  YYYY-MM-DD
     section Pre
     Notice received          :a1, 2026-04-01, 1d
@@ -91,14 +103,14 @@ The notice typically includes:
 
 - Inspector agency, dates, location (firm HQ or FIU offices)
 - Scope and focus areas
-- **Required document list** (normally 30-50 items)
+- **Required document list**
 - Contact person, inspection team composition
 
 ### Immediate actions (within 24 hours of notice)
 
 - [ ] Brief the CEO, board, and audit committee
 - [ ] AMLO convenes the response task force (TF)
-- [ ] Put external counsel on standby (mandatory for comprehensive inspections)
+- [ ] Put external counsel on standby
 - [ ] Archive the original notice under chain-of-custody controls
 
 ### Week 1 (D-30 to D-22): Team Formation
@@ -113,7 +125,7 @@ The notice typically includes:
 
 ### Week 2 (D-21 to D-14): Evidence Collection
 
-- [ ] First-pass collection of the 40-60 requested items
+- [ ] First-pass collection of the requested items
 - [ ] Apply the self-diagnostic checklist (see §3)
 - [ ] Remediate any gaps you can fix before inspection
 - [ ] Cross-check key numbers (STR counts, volumes, account totals)
@@ -185,40 +197,41 @@ Prepared by: ____  Approved: AMLO ____
 
 ### B. AMLO and Governance (6 items)
 
-- [ ] AMLO appointment letter and resume (3+ years of relevant experience)
+- [ ] AMLO appointment letter and resume (qualification requirements per source text)
 - [ ] AMLO authority and reporting documents (direct board line)
 - [ ] Internal control standards current (AML policy and SOPs)
 - [ ] Quarterly board AML reporting records
 - [ ] Annual independent audit (internal or external) evidence
 - [ ] Annual employee AML training records
+- [ ] AML staffing meets the 2026-08-13 registration manual (4+ AML staff; IT infrastructure located in Korea, domestic cloud region accepted) ([FSC 2026-08-13](https://www.fsc.go.kr/no010101/87521))
 
 ### C. KYC / CDD / EDD (7 items)
 
 - [ ] KYC policy and SOP
-- [ ] Real-name verification (integration with 본인확인기관)
+- [ ] Tukgeumbeop §5-2 CDD procedures; real-name verification (integration with 본인확인기관)
 - [ ] Customer risk tier criteria (3-5 tiers)
 - [ ] EDD trigger list and execution records
 - [ ] Non-face-to-face verification flow (video call, document checks)
 - [ ] PEP screening vendor and records
-- [ ] Customer profile refresh cycle (low 3 years, high 1 year)
+- [ ] Customer profile refresh cycle (set by firm risk assessment; no statutory cycle confirmed)
 
 ### D. KYT and Transaction Monitoring (8 items)
 
-- [ ] KYT vendor contracts (Chainalysis, VerifyVASP, CODE, and others)
-- [ ] Rule catalog and activation status
-- [ ] Alert-handling SOP and SLA (24h, 48h)
-- [ ] False-positive management policy with quarterly tuning
-- [ ] Rule committee minutes (monthly cadence)
-- [ ] Wallet blacklist (DAXA shared + internal)
-- [ ] Enhanced monitoring evidence for top 100 customers
-- [ ] Real-time escalation system for anomalous transactions
+- [ ] KYT / blockchain-analytics vendor contracts (kept distinct from Travel Rule solution contracts)
+- [ ] Rule catalog and activation status, mapped to the transaction-monitoring system in AML Regulation Arts. 76-81 (in force 2026-01-22)
+- [ ] Alert-handling SOP and internal SLA
+- [ ] False-positive management policy with periodic tuning records
+- [ ] Rule committee minutes
+- [ ] Wallet blacklist (internal; any shared industry list documented with its source)
+- [ ] Enhanced monitoring evidence for top customers
+- [ ] STR-candidate escalation path, including FDS alerts and §12 surveillance referrals flowing into the AML queue (details in [§3-H](#h-three-way-anomalous-transaction-readiness))
 
 ### E. STR / CTR / Reporting (6 items)
 
-- [ ] STR submissions (annual count, processing time, AMLO approvals)
-- [ ] STR template — 7-section compliance
+- [ ] Tukgeumbeop §4 STR submissions (annual count, processing time, AMLO approvals)
+- [ ] Evidence of compliance with STR drafting criteria
 - [ ] Tipping-off controls and training records
-- [ ] CTR records (10M KRW+)
+- [ ] Tukgeumbeop §4-2 CTR records (threshold per Enforcement Decree)
 - [ ] Rejection and resubmission history with response
 - [ ] FIU-TIS portal access rights and logs
 
@@ -226,15 +239,53 @@ Prepared by: ____  Approved: AMLO ____
 
 - [ ] OFAC SDN daily refresh and update records
 - [ ] Daily comparison against UN, EU, Korean MOFA lists
-- [ ] Wallet-address sanctions screening (Chainalysis, TRM)
+- [ ] Wallet-address sanctions screening records
 - [ ] Potential-match disposition records
 
 ### G. Travel Rule (4 items)
 
-- [ ] Travel Rule vendor contract (VerifyVASP, CODE, Notabene)
-- [ ] IVMS101 message quality validation logs
-- [ ] Sunrise Issue policy plus handled cases
-- [ ] PIPA compliance — national ID hashing
+- [ ] Travel Rule (Tukgeumbeop §5-3) solution contract
+- [ ] Threshold applied correctly: Enforcement Decree §10-10 "KRW 1,000,000 or more" until 2027-02-18; all transfers to other VASPs from 2027-02-19 (Decree No. 36592, enacted-not-in-force)
+- [ ] IVMS 101 message quality validation logs
+- [ ] Sunrise Issue policy plus handled cases; readiness for the 2027-02 foreign-VASP three-tier rule and self-hosted same-person rule (Supervisory Regulation §28-2; exact effective date 02-19 or 02-21 not settled)
+- [ ] PIPA compliance — national ID handling
+
+### H. Three-way "anomalous transaction" readiness
+
+Lumping everything into "anomalous transaction escalation" blurs which inspection you are preparing for. In Korea, "이상거래" maps to three distinct legal regimes with different inspecting bodies ([`../notes/4-technology/fds.md`](../notes/4-technology/fds.md)).
+
+```mermaid
+flowchart LR
+    SIG["Anomalous signal"] --> A["① FIU inspection<br/>Tukgeumbeop STR"]
+    SIG --> B["② FSC/FSS virtual-asset line<br/>User Protection Act §12"]
+    SIG --> C["③ FSC Financial Safety Div. / FSS fraud unit<br/>Telecom Fraud Refund Act"]
+    A --> A1["Monitoring system and STR decision records"]
+    B --> B1["Surveillance org, flagging, review, referral records"]
+    C --> C1["Temporary measure, payment stop, refund records"]
+```
+
+**H-1. FIU — Tukgeumbeop STR and transaction monitoring**
+
+- [ ] Rules, alerts, and review records aligned to AML Regulation Arts. 76-81
+- [ ] STR decisions (filed / not filed, with reasons) for cases arriving from FDS or §12
+- [ ] 2027-02 readiness: an in-house suspicious-transaction monitoring system for transfers of KRW 10 million or more with foreign VASPs and self-hosted wallets (Supervisory Regulation §28-2 ③) — **not an automatic STR**
+
+**H-2. FSC/FSS virtual-asset line — §12 continuous surveillance**
+
+- [ ] Surveillance organization and committee separate from the listing function
+- [ ] Analysis-system flagging variables, thresholds, and change history
+- [ ] Records of flag, review, and referral to FSC/FSS (or report to investigators)
+- [ ] Retention of surveillance results and referral records (Decree §13)
+
+Basis: the 2024-08-22 on-site check covered surveillance organization, the analysis system, and handling of flagged trades ([FSC/FSS 2024-08-22](https://fsc.go.kr/po010101/82943)).
+
+**H-3. FSC Financial Safety Division / FSS fraud unit — Telecom Fraud Refund Act (from 2026-10-01)**
+
+- [ ] Temporary-measure procedure (delay or suspension of withdrawals and virtual-asset transfers) and execution records
+- [ ] Notice, identity confirmation, and release records (§2-5 ④)
+- [ ] Transaction-purpose checks and limits (§2-6)
+- [ ] Payment-stop execution on victim claims (§4; damages under §4 ③ if not executed)
+- [ ] Enhanced withdrawal-delay standard internal rules (2026-04-07) applied to exempt accounts
 
 ### Scoring
 
@@ -251,7 +302,7 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 - Customer mix (institutional / B2B customers produce fewer false positives)
 - KYT and EDD **prevention at entry** — risk filtered before transaction
 - STR quality policy (low rejection rate)
-- Support with concrete numbers: "N filings per year, zero rejections, 3-day average AMLO approval, fewer than 5% FIU supplementary requests"
+- Support with your own numbers (annual filings, rejection rate, average approval time, FIU supplementary requests), not with "industry averages"
 
 **Supporting evidence**:
 
@@ -263,18 +314,16 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 
 **Framing**:
 
-- "Independent risk assessment under Tukgeumbeop §5-2"
+- "Independent decision under the firm's risk assessment (Tukgeumbeop §5-2 CDD framework), even after the 2025-03-21 SDN removal" ([OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321))
 - "Past money-laundering risk persists"
-- "Consistent with the DAXA joint guideline"
 - Policy document + AMLO signature + board approval
 
 **Supporting evidence**:
 
 - Internal Tornado risk memo
-- DAXA guideline receipt log
 - Unblock / appeal SOP
 
-### Q3. "How do you evidence 80/20 user asset segregation?"
+### Q3. "How do you evidence user asset segregation?"
 
 **Answer**:
 
@@ -284,7 +333,7 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 
 **Supporting evidence**:
 
-- Big 4 or designated auditor opinion
+- External or designated auditor opinion
 - Signed multi-sig address list with balance snapshots
 - PoR Merkle tree report
 
@@ -294,7 +343,6 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 
 - Organizational chart — direct CEO / board reporting line
 - Transaction-stop authority in the SOP
-- Compensation at top-executive tier
 - Attendance at board and executive meetings
 
 **Supporting evidence**:
@@ -307,14 +355,14 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 
 **Answer**:
 
-- Monthly rule committee — AMLO + analytics lead + KYT engineer + legal
+- Regular rule committee — AMLO + analytics lead + KYT engineer + legal
 - Quantitative tuning from alert and FP data
 - Board reporting for material changes
 - Full version control (Git or equivalent)
 
 **Supporting evidence**:
 
-- 12 months of rule committee minutes
+- Rule committee minutes
 - Change log (Git commits or Jira)
 - Before/after FP metric comparison
 
@@ -331,7 +379,7 @@ Each item is marked **Complete / Partial / Deficient**. Three or more deficient 
 **Framing**:
 
 - API integration with 본인확인기관 (KCB, NICE, and others)
-- Recorded video calls with face matching (vendor name disclosed)
+- Recorded video calls with face matching
 - Forgery/impersonation detection statistics
 
 ### Q8. "Has any employee communicated favorably with a customer after an STR?"
@@ -381,7 +429,7 @@ Grouped into three sets.
 - [ ] Sanctions screening logs
 - [ ] IVMS101 message quality logs
 - [ ] Customer risk-tier distribution report
-- [ ] Escalation records for anomalous transactions
+- [ ] Escalation records kept separately per regime — STR decisions (Tukgeumbeop) / §12 flags and referrals (User Protection Act) / temporary measures and payment stops (Telecom Fraud Refund Act)
 - [ ] Prior-year remediation progress report
 
 ### Incident Response Records (10)
@@ -558,15 +606,17 @@ AMLO signature ____  CEO approval ____  Board resolution date ____
 
 ### Administrative fines
 
-- **Range**: KRW 10M - 100M+ under Tukgeumbeop §20
-- **Pre-decision comment**: 14-day right-of-reply under the §20 enforcement decree
-- **Appeal**: 60 days to initiate administrative review (see §8)
+- **Amounts**: take them from the statute text. Earlier "KRW 10M-100M+ under §20" and "14-day right of reply" figures were not sourced and are removed.
+- **Reference case**: FIU imposed KRW 35.2 billion in fines on Dunamu on 2025-11-06 for CDD, transaction-restriction, and STR violations; the Travel Rule (§5-3) was not a ground ([FIU press release, KDI mirror](https://eiec.kdi.re.kr/policy/materialView.do?num=273166)).
+- **Appeal**: see §8.
 
 ---
 
 ## 8. Appeals Process — when you disagree with the result
 
-When the inspection result (finding, administrative action, or fine) contains factual errors, legal misinterpretation, or proportionality problems, a VASP can pursue formal appeal routes. In practice, **large actions** (fine of USD 100K+, business suspension, deregistration) almost always prompt appeal consideration.
+When the inspection result (finding, administrative action, or fine) contains factual errors, legal misinterpretation, or proportionality problems, a VASP can pursue formal appeal routes. Large actions (major fines, business suspension, deregistration) usually prompt appeal consideration.
+
+> Filing deadlines and processing periods below come from general administrative law (Administrative Appeals Act, Administrative Litigation Act) and were **not re-verified** in this repository's 2026-10 sources. Confirm them against the statute text before relying on them.
 
 ### 8.1 Three-stage appeal path
 
@@ -595,15 +645,14 @@ flowchart LR
 - Administrative review petition (prescribed form)
 - Copy of the original disposition notice
 - Evidence rebutting the facts (transaction logs, emails, minutes, external audit)
-- Legal opinion (required for large matters — retain a top-tier law firm)
+- Legal opinion (for large matters)
 - Power of attorney (if acting through counsel)
 
 **Processing time**: 60 days (extendable by 30)
 
 **Practical tips**:
 - Filing **does not** stay enforcement. Fines are paid first, then refunded if the appeal prevails.
-- Large firms (Kim&Chang, Sejong, Lee&Ko, Yulchon) staff former FSC lawyers — win rates are higher.
-- Historical grant rate in Korean financial cases: roughly 10-20% (mostly denied, occasional partial mitigation).
+- No public grant-rate statistic for Korean VASP cases was found; earlier rate figures and law-firm references were removed.
 
 ### 8.3 Stage 2 — Administrative Lawsuit (행정소송)
 
@@ -620,19 +669,15 @@ flowchart LR
 
 **Processing time**: typically 1-2 years (longer for complex matters)
 
-**Grant rate**: Korean administrative litigation averages 15-25% (2024 court statistics)
-
 **Practical tips**:
-- Financial cases are preferably routed to specialist panels (Seoul Admin Court Divisions 2 or 3) — counsel experience matters.
 - **Preliminary injunction (stay of enforcement)** can be filed separately, suspending the disposition while the case proceeds.
-- Loss exposes the firm to counsel fees and court costs — often tens of millions to hundreds of millions of KRW.
+- Loss exposes the firm to counsel fees and court costs.
 
 ### 8.4 Stage 3 — Supreme Court
 
 Supreme Court appeal is available after losing at the administrative court, but:
 
 - **Legal review only** — no factual reargument, only law and application.
-- Summary dismissal rate exceeds 70%.
 - Virtually no precedent exists in major crypto matters — the industry's Korean history is still too short.
 
 ### 8.5 Negotiated settlement
@@ -640,37 +685,30 @@ Supreme Court appeal is available after losing at the administrative court, but:
 Korea has no formal consent-decree mechanism, but in practice:
 
 - **Demonstrated remediation** — showing "we are already improving" during or after the inspection can lead to reduced severity in negotiation.
-- **Voluntary self-reporting** — before a formal disposition, self-reporting plus remediation has historically produced fine reductions.
-- **Industry joint position** — DAXA or similar SRO position papers can influence supervisory decisions.
+- **Voluntary self-reporting** — self-reporting plus remediation before a formal disposition may be weighed in mitigation.
 
-**US-style consent decrees** — Korea has no formal equivalent. There are no Korean analogues to the Binance USD 4.3B or OKX USD 504M settlements.
+**US-style consent decrees** — Korea has no formal equivalent. Settlement amounts in foreign cases such as Binance (2023) and OKX (2025) are **not confirmed by a public source in this repository** ([`../notes/6-cases/major-enforcement.md`](../notes/6-cases/major-enforcement.md)).
 
-### 8.6 Real-world appeals (2020-2026)
+### 8.6 Appeals in practice
 
-| Year | Case | Route | Outcome |
-|---|---|---|---|
-| 2021 | VASP registration denial | Administrative review | Denied |
-| 2022 | KRW 100M fine (KYC deficiency) | Administrative lawsuit | Mitigated to 50M |
-| 2023 | Listed coin investigation non-compliance | Administrative review | Partially granted |
-| 2024 | Registration revocation | Lawsuit + preliminary injunction | Injunction granted (case continues) |
-| 2025 | STR omission penalty | Voluntary self-report | Closed before formal disposition |
+The earlier year-by-year appeals table (2021-2025) had no source and was removed. The primary-source large sanction is FIU's 2025-11-06 decision fining Dunamu KRW 35.2 billion (grounds: CDD, transaction restriction, STR; not the Travel Rule) ([FIU press release, KDI mirror](https://eiec.kdi.re.kr/policy/materialView.do?num=273166)). The progress of any subsequent challenge was not confirmed in primary sources.
 
-**Pattern**: Success rests overwhelmingly on **procedural defects** or **proportionality** arguments. Directly rebutting the facts has a low hit rate.
+**General view**: procedural-defect and proportionality arguments are commonly considered easier to contest than factual rebuttal, but no success-rate statistic for Korean VASP cases exists.
 
 ### 8.7 Risks of appealing
 
 - **Relationship risk** — you will work with FIU/FSS long term; emotionally charged appeals tend to invite stricter subsequent inspections.
 - **Reputational risk** — lawsuits are public and Korean court decisions are published by default.
-- **Cost risk** — top firms charge USD 500K - USD 2M+ depending on scale.
-- **Timing risk** — 90-day deadlines are strictly enforced.
+- **Cost risk** — external counsel costs scale with the matter; no public benchmark.
+- **Timing risk** — statutory deadlines are strict.
 
 ### 8.8 Recommended paths
 
 For most VASPs:
 
 1. **Minor findings**: accept and remediate diligently. Do not appeal.
-2. **Moderate action (fine under KRW 50M)**: attempt voluntary self-report closure.
-3. **Major action (fine KRW 100M+, suspension, deregistration)**: administrative review is effectively required, with top-tier counsel.
+2. **Moderate action**: attempt closure through voluntary remediation.
+3. **Major action (large fine, suspension, deregistration)**: administrative review with counsel.
 4. **Administrative review denied + existential business threat**: administrative lawsuit plus preliminary injunction.
 
 The operating principle: **appeals are usually about severity mitigation, not outright victory**.
@@ -687,7 +725,7 @@ Before deciding to appeal:
 - [ ] Reputational risk (public lawsuit)
 - [ ] Counsel opinion (objective probability of success)
 - [ ] Board approval for large matters
-- [ ] Confirm you can actually prepare within 90 days
+- [ ] Confirm you can prepare within the statutory deadline
 
 If the decision is "proceed", activate a dedicated TF, retain outside counsel, and set up shareholder communication promptly.
 
@@ -719,9 +757,10 @@ If the decision is "proceed", activate a dedicated TF, retain outside counsel, a
 - EDD coverage ratio
 - Alert -> STR conversion rate
 - Average AMLO processing time
-- False-positive rate (industry average 90%+)
+- False-positive rate
+- FDS temporary-measure counts, release rate, and handling time; §12 flag and referral counts (tracked separately per regime)
 
-Reporting significantly below peers invites scrutiny. A quarterly internal benchmark report is recommended.
+No public crypto-specific alert-to-STR benchmark exists (B; [EY 2018](https://ey.com/content/dam/ey-unified-site/ey-com/en-uk/industries/financial-services/documents/ey-anti-money-laundering-transaction-monitoring-2018-emeia-survey.pdf) is a banking survey). Do not lean on "industry averages"; produce a quarterly internal report that explains your own trends and calculation methods.
 
 ---
 
@@ -791,20 +830,15 @@ Attendees: AMLO, Ops lead, Legal, IT, CFO
 
 ### Retain external advisors when
 
-- Fine of KRW 50M+ is expected
+- A material fine is expected
 - Criminal referral is possible
 - Prior-year finding reached the **Warning** tier
 - Major shareholder or executive changes are concurrent
 - Structure ties to a foreign VASP are material
 
-### Cost ranges (2025 Korea market reference)
+### Cost
 
-| Service | Duration | Cost range |
-|---|---|---|
-| Legal advisory (Kim&Chang, Lee&Ko, Sejong) | Per matter | KRW 50M - 200M |
-| Compliance consulting (Big 4) | 1 month | KRW 100M - 300M |
-| Mock drill (external-run) | 2 days | KRW 20M - 50M |
-| Forensic audit (hacking-linked) | Hourly | KRW 500K - 1.5M / hour |
+No public benchmark exists for legal, consulting, mock-drill, or forensic costs. The earlier cost-range table was unsourced and has been removed.
 
 ---
 
@@ -812,11 +846,11 @@ Attendees: AMLO, Ops lead, Legal, IT, CFO
 
 | Country | Supervisor | Key distinction |
 |---|---|---|
-| Korea | FIU, FSS, FSC | Real-name banking + VAUPA dual regime |
+| Korea | FIU, FSS, FSC | Tukgeumbeop, VAUPA (incl. §12), and the Telecom Fraud Refund Act (from 2026-10-01) in parallel |
 | US | FinCEN, OCC, state regulators | BSA/AML exam + MSB state licensing |
 | Singapore | MAS | Payment Services Act basis, comprehensive on-site |
 | Japan | FSA, JAFIC | Joint inspection with JVCEA self-regulator |
-| EU | AMLA (from 2025), national FIUs | MiCA + AMLR dual inspection |
+| EU | AMLA (rule-making and guidance powers from 2026-01-01), national supervisors | MiCA and TFR apply; AMLR applies from 2027-07-10 |
 
 Korea's **real-name banking requirement** is unique globally. The partner bank effectively re-inspects the VASP, creating a double-check dynamic that other markets lack.
 
@@ -890,6 +924,7 @@ A single "No" on this list triggers emergency action the next morning.
 
 - Original Korean workbook with all templates: [`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md)
 - [`inspection-response-summary.md`](inspection-response-summary.md) — Condensed English summary
+- [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md) — Boundaries between FDS, §12 surveillance, and STR
 - [`korea-aml-overview.md`](korea-aml-overview.md) — Regulatory context
 - [KoFIU official site](https://www.kofiu.go.kr/)
 - [FSS official site](https://www.fss.or.kr/)

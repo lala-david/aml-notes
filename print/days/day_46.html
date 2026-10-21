@@ -49,7 +49,7 @@
 
     <section class="title-block">
       <h1 class="title-block__heading">제재 스크리닝 (이름 + Wallet)</h1>
-      <p class="title-block__lead">OFAC/UN/EU/외교부 + 가상자산 SDN.</p>
+      <p class="title-block__lead">OFAC/UN/EU/외교부 + 가상자산 SDN.  ~80분. 마지막 업데이트: 2026-10-21.</p>
       <span class="title-block__time">⏱ ~80분</span>
     </section>
 
@@ -120,6 +120,8 @@
       <div class="checkpoints__item"><span class="checkpoints__box"></span><span>Wallet 매칭 3종 (Direct/Cluster/Hop) 안다</span></div>
       <div class="checkpoints__item"><span class="checkpoints__box"></span><span>False Positive disposition 흐름 안다</span></div>
       <div class="checkpoints__item"><span class="checkpoints__box"></span><span>OFAC 2차 제재의 글로벌 영향 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>2025-03-21 Tornado Cash SDN 삭제, 2025-10-14 Prince Group, 2026-09-17 BitBank 지정 — 목록 변경 이력을 안다</span></div>
+      <div class="checkpoints__item"><span class="checkpoints__box"></span><span>"주소 일치 = 즉시 동결"이 아니라 이용자보호법 §11 차단 제한과 내부 절차를 따른다는 것을 안다</span></div>
     </div>
     </section>
     <section class="section">
@@ -154,7 +156,7 @@
   <div class="article-divider">
     <div class="article-divider__kicker">메인 읽기</div>
     <h2 class="article-divider__title">Sanctions Screening — 제재 스크리닝</h2>
-    <p class="article-divider__lead">거래 **전·중·후** 모든 단계에서 제재 대상자 차단. 이 글을 읽고 나면 OFAC 2차 제재가 왜 한국 거래소에도 실질적 강제력을 가지는지, 그리고 Binance $4.3B 사례가 왜 제재 위반 처벌의 상징이 됐는지 이해하게 됩니다..</p>
+    <p class="article-divider__lead">거래 **전·중·후** 모든 단계에서 제재 대상자 차단. 이 글을 읽고 나면 미국 제재 지정이 왜 한국 거래소 운영에도 실질적인 영향을 주는지, 그리고 2025~2026년 미국 제재가 "주소 목록"에서 **특정 조직·네트워크 지정**(Prince Group·Huione·BitBank·A7)으로 옮겨 가면서 주소 대조만으로는 왜 부족해졌는지 설명할 수 있게 됩니다..</p>
     <div class="article-divider__meta">notes/5-compliance/sanctions-screening.md</div>
   </div>
 
@@ -164,20 +166,23 @@
       <span class="article-head__path">notes/5-compliance/sanctions-screening.md</span>
     </header>
     <div class="article-body">
+<blockquote>
+<p><strong>근거 범위</strong>: <code>research/2026-10-*.md</code> 도시에·정본 보고서와 정정된 노트(<a href="../2-regulations/us-bsa-fincen.md"><code>../2-regulations/us-bsa-fincen.md</code></a>, <a href="../6-cases/major-enforcement.md"><code>../6-cases/major-enforcement.md</code></a>, <a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a>)에서 확인된 사실만 쓴다. 이전 판의 Binance·Bittrex·BitGo 벌금액·형량·모니터십, OFAC 벌금 상한, 2018~2024 주소 등재 연표, 거래소별 동기화 주기, DAXA 공동 블랙리스트, 비공식 통보 경로, FP 감축률·임계값 성능표는 이 근거 자료로 확인되지 않아 삭제했다(공개 근거 미확인).</p>
+</blockquote>
 <h2>TL;DR</h2>
 <ul>
-<li>핵심 리스트: <strong>OFAC SDN (미국) · UN Consolidated · EU CFSP · HM Treasury (영국) · 한국 외교부</strong></li>
-<li>가상자산 추가: <strong>OFAC SDN의 가상자산 지갑주소</strong> — 거래 전 실시간 차단 필수</li>
-<li>매칭 방식: <strong>이름(fuzzy) + 생년월일 + 국적 + 지갑주소(정확매칭)</strong></li>
-<li>사전·실시간·사후 모니터링 3중 체크</li>
-<li>위반 시 형사처벌 + 거대 벌금 (Binance $4.3B 사례)</li>
+<li>핵심 리스트: <strong>OFAC SDN(미국) · UN 안보리 · EU · 영국 · 한국 정부 지정 명단</strong>. 각 명단의 등재 형식(가상자산 주소 기재 여부)은 원 공고로 확인</li>
+<li><strong>SDN에 가상자산 주소가 기재될 수 있다</strong> — 그러면 거래 상대 주소 스크리닝 대상이 된다. 그러나 <strong>2026-09-17 BitBank 지정 공고에는 디지털화폐 주소가 기재되지 않았다</strong>(<a href="https://ofac.treasury.gov/recent-actions/20260917">OFAC 2026-09-17</a>) — 주소 대조만으로는 못 잡는다</li>
+<li>2025~2026 미국 축: Tornado Cash <strong>SDN 삭제(2025-03-21)</strong>, Prince Group TCO 지정·Huione §311 최종규칙(2025-10-14), BitBank 등 이란 거래소 지정(2026-09-17), A7 네트워크 TCO 지정(2026-10-01, B)</li>
+<li>매칭 방식: <strong>이름(fuzzy) + 보조 식별자(생년월일·국적) + 지갑주소(정확매칭) + 상대 VASP 식별</strong></li>
+<li>사전·실시간·사후 3중 체크. 트래블룰 수신 정보도 제재 스크리닝 입력이다(FATF 2021 가이던스 para 193~195)</li>
 </ul>
 <hr />
-<h2>1. 제재의 종류</h2>
-<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 685.562px; background-color: transparent;" viewBox="0 0 685.5625 442.921875" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M249.082,54.531L224.476,59.443C199.87,64.354,150.658,74.177,126.051,82.589C101.445,91,101.445,98,101.445,101.5L101.445,105" id="my-svg-L_S_Pre_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Pre_0" data-points="W3sieCI6MjQ5LjA4MjAzMTI1LCJ5Ijo1NC41MzE0NjU2NzAzMDUyNH0seyJ4IjoxMDEuNDQ1MzEyNSwieSI6ODR9LHsieCI6MTAxLjQ0NTMxMjUsInkiOjEwOX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M349.224,59L348.37,63.167C347.517,67.333,345.809,75.667,344.955,83.333C344.102,91,344.102,98,344.102,101.5L344.102,105" id="my-svg-L_S_Live_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Live_0" data-points="W3sieCI6MzQ5LjIyNDE2NDYwMzk2MDQsInkiOjU5fSx7IngiOjM0NC4xMDE1NjI1LCJ5Ijo4NH0seyJ4IjozNDQuMTAxNTYyNSwieSI6MTA5fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M459.816,56.536L480.753,61.113C501.69,65.691,543.564,74.845,564.501,82.923C585.438,91,585.438,98,585.438,101.5L585.438,105" id="my-svg-L_S_Batch_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Batch_0" data-points="W3sieCI6NDU5LjgxNjQwNjI1LCJ5Ijo1Ni41MzU5ODY2NzQxMDc1Mn0seyJ4Ijo1ODUuNDM3NSwieSI6ODR9LHsieCI6NTg1LjQzNzUsInkiOjEwOX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M101.445,181L101.445,185.167C101.445,189.333,101.445,197.667,136.3,211.207C171.154,224.747,240.863,243.494,275.718,252.868L310.572,262.241" id="my-svg-L_Pre_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Pre_M_0" data-points="W3sieCI6MTAxLjQ0NTMxMjUsInkiOjE4MX0seyJ4IjoxMDEuNDQ1MzEyNSwieSI6MjA2fSx7IngiOjMxNC40MzUwMDMwODg3MTk4LCJ5IjoyNjMuMjc5ODQwNjYxMjgwMn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M344.102,181L344.102,185.167C344.102,189.333,344.102,197.667,344.251,205.594C344.4,213.521,344.698,221.043,344.847,224.803L344.996,228.564" id="my-svg-L_Live_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Live_M_0" data-points="W3sieCI6MzQ0LjEwMTU2MjUsInkiOjE4MX0seyJ4IjozNDQuMTAxNTYyNSwieSI6MjA2fSx7IngiOjM0NS4xNTM4NzE1Mzc2NjczLCJ5IjoyMzIuNTYwOTcyMjEyMzMyNjd9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M585.438,181L585.438,185.167C585.438,189.333,585.438,197.667,551.642,211.171C517.846,224.676,450.255,243.352,416.459,252.69L382.664,262.028" id="my-svg-L_Batch_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Batch_M_0" data-points="W3sieCI6NTg1LjQzNzUsInkiOjE4MX0seyJ4Ijo1ODUuNDM3NSwieSI6MjA2fSx7IngiOjM3OC44MDgxNDk3MzM4OTA4NCwieSI6MjYzLjA5MzMwNTk4Mzg5MDg0fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M315.625,281.832L280.672,292.931C245.719,304.029,175.813,326.225,140.859,342.574C105.906,358.922,105.906,369.422,105.906,374.672L105.906,379.922" id="my-svg-L_M_BLOCK_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_BLOCK_0" data-points="W3sieCI6MzE1LjYyNTM2MDU2MTM4NSwieSI6MjgxLjgzMjM5MTgxMTM4NX0seyJ4IjoxMDUuOTA2MjUsInkiOjM0OC40MjE4NzV9LHsieCI6MTA1LjkwNjI1LCJ5IjozODMuOTIxODc1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M350.184,309.453L350.785,315.948C351.385,322.443,352.587,335.432,353.188,347.177C353.789,358.922,353.789,369.422,353.789,374.672L353.789,379.922" id="my-svg-L_M_REV_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_REV_0" data-points="W3sieCI6MzUwLjE4MzY0MjMzODM3OTcsInkiOjMwOS40NTMwNzY0MTE2MjAzfSx7IngiOjM1My43ODkwNjI1LCJ5IjozNDguNDIxODc1fSx7IngiOjM1My43ODkwNjI1LCJ5IjozODMuOTIxODc1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M377.596,282.04L411.493,293.104C445.39,304.168,513.183,326.295,547.08,342.608C580.977,358.922,580.977,369.422,580.977,374.672L580.977,379.922" id="my-svg-L_M_OK_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_OK_0" data-points="W3sieCI6Mzc3LjU5NjMzNzAyODE3NTg3LCJ5IjoyODIuMDQwMzgxNzIxODI0MTN9LHsieCI6NTgwLjk3NjU2MjUsInkiOjM0OC40MjE4NzV9LHsieCI6NTgwLjk3NjU2MjUsInkiOjM4My45MjE4NzV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_S_Pre_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_Live_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_Batch_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Pre_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Live_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Batch_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(105.90625, 348.421875)"><g class="label" data-id="L_M_BLOCK_0" transform="translate(-32.6640625, -10.5)"><foreignObject width="65.328125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>YES + 확실</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(353.7890625, 348.421875)"><g class="label" data-id="L_M_REV_0" transform="translate(-32.6640625, -10.5)"><foreignObject width="65.328125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>YES + 모호</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(580.9765625, 348.421875)"><g class="label" data-id="L_M_OK_0" transform="translate(-10.1171875, -10.5)"><foreignObject width="20.234375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>NO</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-S-0" data-look="classic" transform="translate(354.44921875, 33.5)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-105.3671875" y="-25.5" width="210.734375" height="51"/><g class="label" style="color:#fff !important" transform="translate(-75.3671875, -10.5)"><rect/><foreignObject width="150.734375" height="21"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>🔍 Sanctions Screening</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Pre-1" data-look="classic" transform="translate(101.4453125, 145)"><rect class="basic label-container" style="" x="-93.4453125" y="-36" width="186.890625" height="72"/><g class="label" style="" transform="translate(-63.4453125, -21)"><rect/><foreignObject width="126.890625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>A. 사전 (Onboarding)<br />이름·DOB·국적</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Live-3" data-look="classic" transform="translate(344.1015625, 145)"><rect class="basic label-container" style="" x="-99.2109375" y="-36" width="198.421875" height="72"/><g class="label" style="" transform="translate(-69.2109375, -21)"><rect/><foreignObject width="138.421875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>B. 실시간 (Transaction)<br />이름 + 지갑주소</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Batch-5" data-look="classic" transform="translate(585.4375, 145)"><rect class="basic label-container" style="" x="-92.125" y="-36" width="184.25" height="72"/><g class="label" style="" transform="translate(-62.125, -21)"><rect/><foreignObject width="124.25" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>C. 사후 (Daily Batch)<br />전체 고객 재대조</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-M-9" data-look="classic" transform="translate(346.71484375, 271.9609375)"><polygon points="40.9609375,0 81.921875,-40.9609375 40.9609375,-81.921875 0,-40.9609375" class="label-container" transform="translate(-40.4609375, 40.9609375)"/><g class="label" style="" transform="translate(-15.4609375, -10.5)"><rect/><foreignObject width="30.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>매칭?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-BLOCK-11" data-look="classic" transform="translate(105.90625, 409.421875)"><rect class="basic label-container" style="fill:#fee2e2 !important;stroke:#dc2626 !important" x="-74.1640625" y="-25.5" width="148.328125" height="51"/><g class="label" style="" transform="translate(-44.1640625, -10.5)"><rect/><foreignObject width="88.328125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>⛔ 차단 + STR</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-REV-13" data-look="classic" transform="translate(353.7890625, 409.421875)"><rect class="basic label-container" style="fill:#fed7aa !important;stroke:#ea580c !important" x="-123.71875" y="-25.5" width="247.4375" height="51"/><g class="label" style="" transform="translate(-93.71875, -10.5)"><rect/><foreignObject width="187.4375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>👀 분석가 검토 (FP disposition)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-OK-15" data-look="classic" transform="translate(580.9765625, 409.421875)"><rect class="basic label-container" style="fill:#d1fae5 !important;stroke:#10b981 !important" x="-53.46875" y="-25.5" width="106.9375" height="51"/><g class="label" style="" transform="translate(-23.46875, -10.5)"><rect/><foreignObject width="46.9375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>✅ 통과</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
+<h2>1. 스크리닝의 구조</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 714.516px; background-color: transparent;" viewBox="0 0 714.515625 463.921875" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M278.609,50.704L248.288,56.253C217.966,61.802,157.323,72.901,127.001,81.951C96.68,91,96.68,98,96.68,101.5L96.68,105" id="my-svg-L_S_Pre_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Pre_0" data-points="W3sieCI6Mjc4LjYwOTM3NSwieSI6NTAuNzAzNjU4MDg3NzE0ODN9LHsieCI6OTYuNjc5Njg3NSwieSI6ODR9LHsieCI6OTYuNjc5Njg3NSwieSI6MTA5fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M360.388,59L358.391,63.167C356.394,67.333,352.4,75.667,350.403,83.333C348.406,91,348.406,98,348.406,101.5L348.406,105" id="my-svg-L_S_Live_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Live_0" data-points="W3sieCI6MzYwLjM4Nzk5NTA0OTUwNSwieSI6NTl9LHsieCI6MzQ4LjQwNjI1LCJ5Ijo4NH0seyJ4IjozNDguNDA2MjUsInkiOjEwOX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M466.609,53.582L490.339,58.652C514.068,63.722,561.526,73.861,585.255,82.43C608.984,91,608.984,98,608.984,101.5L608.984,105" id="my-svg-L_S_Batch_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_Batch_0" data-points="W3sieCI6NDY2LjYwOTM3NSwieSI6NTMuNTgyNDk2MDMzODQ0NTN9LHsieCI6NjA4Ljk4NDM3NSwieSI6ODR9LHsieCI6NjA4Ljk4NDM3NSwieSI6MTA5fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M96.68,181L96.68,185.167C96.68,189.333,96.68,197.667,132.58,211.24C168.48,224.814,240.28,243.628,276.18,253.035L312.081,262.442" id="my-svg-L_Pre_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Pre_M_0" data-points="W3sieCI6OTYuNjc5Njg3NSwieSI6MTgxfSx7IngiOjk2LjY3OTY4NzUsInkiOjIwNn0seyJ4IjozMTUuOTQ5OTY1MTQ4ODQxNywieSI6MjYzLjQ1NjI4NDg1MTE1ODN9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M348.406,181L348.406,185.167C348.406,189.333,348.406,197.667,348.406,205.333C348.406,213,348.406,220,348.406,223.5L348.406,227" id="my-svg-L_Live_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Live_M_0" data-points="W3sieCI6MzQ4LjQwNjI1LCJ5IjoxODF9LHsieCI6MzQ4LjQwNjI1LCJ5IjoyMDZ9LHsieCI6MzQ4LjQwNjI1LCJ5IjoyMzF9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M608.984,181L608.984,185.167C608.984,189.333,608.984,197.667,571.649,211.284C534.313,224.902,459.642,243.803,422.306,253.254L384.971,262.705" id="my-svg-L_Batch_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Batch_M_0" data-points="W3sieCI6NjA4Ljk4NDM3NSwieSI6MTgxfSx7IngiOjYwOC45ODQzNzUsInkiOjIwNn0seyJ4IjozODEuMDkzMDcyMjQ1MDE3NiwieSI6MjYzLjY4NjgyMjI0NTAxNzZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M319.214,283.729L292.468,294.511C265.722,305.294,212.23,326.858,185.484,342.89C158.738,358.922,158.738,369.422,158.738,374.672L158.738,379.922" id="my-svg-L_M_BLOCK_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_BLOCK_0" data-points="W3sieCI6MzE5LjIxMzcxMzQ4Mzc5NTQ2LCJ5IjoyODMuNzI5MzM4NDgzNzk1NDZ9LHsieCI6MTU4LjczODI4MTI1LCJ5IjozNDguNDIxODc1fSx7IngiOjE1OC43MzgyODEyNSwieSI6MzgzLjkyMTg3NX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M359.565,301.763L362.477,309.54C365.388,317.316,371.212,332.869,374.123,345.895C377.035,358.922,377.035,369.422,377.035,374.672L377.035,379.922" id="my-svg-L_M_REV_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_REV_0" data-points="W3sieCI6MzU5LjU2NDk1NzYxMzkyNzgsInkiOjMwMS43NjMxNjczODYwNzIyfSx7IngiOjM3Ny4wMzUxNTYyNSwieSI6MzQ4LjQyMTg3NX0seyJ4IjozNzcuMDM1MTU2MjUsInkiOjM4My45MjE4NzV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M377.978,283.351L406.136,294.196C434.294,305.041,490.61,326.731,518.768,344.577C546.926,362.422,546.926,376.422,546.926,383.422L546.926,390.422" id="my-svg-L_M_OK_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_OK_0" data-points="W3sieCI6Mzc3Ljk3NzYwODgyNzg2NDIsInkiOjI4My4zNTA1MTYxNzIxMzU4fSx7IngiOjU0Ni45MjU3ODEyNSwieSI6MzQ4LjQyMTg3NX0seyJ4Ijo1NDYuOTI1NzgxMjUsInkiOjM5NC40MjE4NzV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_S_Pre_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_Live_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_Batch_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Pre_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Live_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Batch_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(158.73828125, 348.421875)"><g class="label" data-id="L_M_BLOCK_0" transform="translate(-32.0078125, -10.5)"><foreignObject width="64.015625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>확실한 일치</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(377.03515625, 348.421875)"><g class="label" data-id="L_M_REV_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>모호</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(546.92578125, 348.421875)"><g class="label" data-id="L_M_OK_0" transform="translate(-18.15625, -10.5)"><foreignObject width="36.3125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>불일치</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-S-0" data-look="classic" transform="translate(372.609375, 33.5)"><rect class="basic label-container" style="fill:#1a2e4a !important;stroke:#1a2e4a !important" x="-94" y="-25.5" width="188" height="51"/><g class="label" style="color:#fff !important" transform="translate(-64, -10.5)"><rect/><foreignObject width="128" height="21"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#fff !important" class="nodeLabel"><p>Sanctions Screening</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Pre-1" data-look="classic" transform="translate(96.6796875, 145)"><rect class="basic label-container" style="" x="-88.6796875" y="-36" width="177.359375" height="72"/><g class="label" style="" transform="translate(-58.6796875, -21)"><rect/><foreignObject width="117.359375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>A. 사전 Onboarding<br />이름·생년월일·국적</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Live-3" data-look="classic" transform="translate(348.40625, 145)"><rect class="basic label-container" style="" x="-113.046875" y="-36" width="226.09375" height="72"/><g class="label" style="" transform="translate(-83.046875, -21)"><rect/><foreignObject width="166.09375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>B. 실시간 Transaction<br />이름 + 지갑주소 + 상대 VASP</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Batch-5" data-look="classic" transform="translate(608.984375, 145)"><rect class="basic label-container" style="" x="-97.53125" y="-36" width="195.0625" height="72"/><g class="label" style="" transform="translate(-67.53125, -21)"><rect/><foreignObject width="135.0625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>C. 사후 Batch<br />명단 갱신 시 전체 재대조</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-M-7" data-look="classic" transform="translate(348.40625, 271.9609375)"><polygon points="40.9609375,0 81.921875,-40.9609375 40.9609375,-81.921875 0,-40.9609375" class="label-container" transform="translate(-40.4609375, 40.9609375)"/><g class="label" style="" transform="translate(-15.4609375, -10.5)"><rect/><foreignObject width="30.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>매칭?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-BLOCK-13" data-look="classic" transform="translate(158.73828125, 419.921875)"><rect class="basic label-container" style="fill:#fee2e2 !important;stroke:#dc2626 !important" x="-90.5078125" y="-36" width="181.015625" height="72"/><g class="label" style="" transform="translate(-60.5078125, -21)"><rect/><foreignObject width="121.015625" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>거래 차단·자산 처리<br />관할 절차 + STR 검토</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-REV-15" data-look="classic" transform="translate(377.03515625, 419.921875)"><rect class="basic label-container" style="fill:#fed7aa !important;stroke:#ea580c !important" x="-77.7890625" y="-36" width="155.578125" height="72"/><g class="label" style="" transform="translate(-47.7890625, -21)"><rect/><foreignObject width="95.578125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>분석가 검토<br />disposition 기록</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-OK-17" data-look="classic" transform="translate(546.92578125, 419.921875)"><rect class="basic label-container" style="fill:#d1fae5 !important;stroke:#10b981 !important" x="-42.1015625" y="-25.5" width="84.203125" height="51"/><g class="label" style="" transform="translate(-12.1015625, -10.5)"><rect/><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>통과</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
 <h3>왜 제재가 AML의 별도 축인가</h3>
-<p>제재(Sanctions)는 AML과 자주 묶이지만 <strong>방향이 다릅니다</strong>. AML은 범죄수익의 세탁을 막는 <strong>사후</strong> 통제라면, 제재는 특정 대상과의 거래 자체를 막는 <strong>사전</strong> 차단. 그래서 제재 스크리닝은 거래 발생 <strong>이전</strong>에 작동해야 의미가 있고, 이게 VASP가 <strong>Pre-transaction screening</strong> 인프라를 무겁게 구축해야 하는 이유입니다.</p>
-<h3>카테고리별</h3>
+<p>제재(Sanctions)는 AML과 자주 묶이지만 <strong>방향이 다릅니다</strong>. AML은 범죄수익의 세탁을 의심해 보고하는 통제라면, 제재는 지정된 대상과의 거래 자체를 막는 <strong>사전</strong> 차단입니다. 그래서 제재 스크리닝은 거래 발생 <strong>이전</strong>에 작동해야 의미가 있고, VASP가 <strong>Pre-transaction screening</strong> 인프라를 갖춰야 하는 이유입니다.</p>
+<h3>카테고리별 (예시)</h3>
 <table>
 <thead>
 <tr>
@@ -187,178 +192,163 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>국가 제재</strong></td>
-<td>북한, 이란, 시리아, 쿠바, 베네수엘라, 미얀마</td>
+<td><strong>국가·정권 프로그램</strong></td>
+<td>이란(E.O. 13902 — 2026-09-17 BitBank 지정 근거), 북한</td>
 </tr>
 <tr>
-<td><strong>러시아 분리 제재</strong></td>
-<td>푸틴 측근, 올리가르히, 러시아 은행 (2022~)</td>
+<td><strong>러시아 연계</strong></td>
+<td>A7 네트워크 — 2026-10-01 TCO 지정(B), FinCEN 하위대리인 자금이체 금지 특별조치 NPRM(proposed)</td>
+</tr>
+<tr>
+<td><strong>초국가범죄조직(TCO)</strong></td>
+<td>Prince Group — 2025-10-14 지정(146개 대상)</td>
+</tr>
+<tr>
+<td><strong>사이버 범죄·확산금융</strong></td>
+<td>DPRK 연계 탈취 자금</td>
 </tr>
 <tr>
 <td><strong>테러조직</strong></td>
-<td>알카에다, ISIS, Hamas, Hezbollah</td>
-</tr>
-<tr>
-<td><strong>마약 카르텔</strong></td>
-<td>멕시코·콜롬비아 카르텔</td>
-</tr>
-<tr>
-<td><strong>사이버 범죄</strong></td>
-<td>Lazarus, Evil Corp</td>
-</tr>
-<tr>
-<td><strong>확산금융</strong></td>
-<td>핵·미사일 관련</td>
-</tr>
-<tr>
-<td><strong>부패</strong></td>
-<td>Magnitsky Act 관련 (글로벌 인권 침해)</td>
+<td>관할별 지정 명단</td>
 </tr>
 </tbody>
 </table>
 <h3>제재 형태</h3>
 <ul>
-<li><strong>자산 동결 (Asset Freeze)</strong> — 미국 관할 내 자산 동결</li>
-<li><strong>거래 금지 (Transaction Ban)</strong> — 미국인·기업 거래 금지</li>
-<li><strong>2차 제재 (Secondary Sanctions)</strong> — 외국인이라도 미국 시장 접근 차단</li>
-<li><strong>무역 금지 (Trade Embargo)</strong> — 특정 품목·서비스 금지</li>
+<li><strong>자산 동결 (Blocking)</strong> — 관할 내 자산 동결</li>
+<li><strong>거래 금지</strong> — 관할 내 인·기업의 거래 금지</li>
+<li><strong>2차 제재 위험</strong> — 외국인이라도 미국 금융시스템 접근 제한 위험</li>
+<li><strong>금융시스템 차단 조치</strong> — FinCEN §311 최종규칙(Huione, 2025-10-14)이나 Combating Russian Money Laundering Act §9714 특별조치(A7, proposed)처럼 특정 기관·거래군과의 거래를 막는 조치. OFAC 지정과는 별개 수단이다(<a href="https://home.treasury.gov/news/press-releases/sb0278">재무부 sb0278</a>; <a href="https://public-inspection.federalregister.gov/2026-20371.pdf">Federal Register 2026-20371</a>)</li>
 </ul>
 <h3>실무 포인트</h3>
-<p>위 4개 형태 중 <strong>2차 제재</strong>가 한국 VASP에게 가장 실질적 위협입니다. 한국 거래소가 OFAC 제재 대상과 거래하면, OFAC는 "한국 회사를 직접 제재"할 권한이 있고, 제재되면 미국 은행·결제망 접근이 끊어집니다. 가상자산 사업은 달러 페그 스테이블코인·미국 소재 KYT 벤더·미국 클라우드에 의존하므로, 2차 제재는 사실상 <strong>사업 종료 수준</strong>의 리스크.</p>
+<p>한국 VASP가 미국 지정 대상과 거래하면 직접 형사 관할 여부와 별개로 <strong>미국 달러 결제망·스테이블코인 발행자·해외 거래 상대와의 관계</strong>에서 불이익을 받을 수 있습니다. 2차 제재의 구체 적용 범위는 프로그램별 E.O. 원문으로 확인합니다.</p>
 <hr />
 <h2>2. 핵심 리스트</h2>
 <h3>이 표를 어떻게 읽어야 하나</h3>
-<p>5개 리스트가 지역별로 독립적으로 발행되지만, 실무에서는 이 모두를 <strong>통합 스크리닝 DB</strong>로 관리합니다. 상용 벤더(World-Check 등)가 5개를 합쳐 일일 업데이트해주며, 회사는 이 통합본을 구독해 쓰는 구조.</p>
+<p>명단은 관할별로 독립 발행되지만, 실무에서는 <strong>통합 스크리닝 DB</strong>로 관리합니다. 상용 통합 DB를 구독하는 경우가 많지만, 갱신 지연이 생길 수 있으므로 1차 공고(예: OFAC Recent Actions)와 대조할 수 있어야 합니다.</p>
 <table>
 <thead>
 <tr>
 <th>리스트</th>
 <th>발행</th>
-<th>가상자산 포함?</th>
-<th>갱신</th>
+<th>가상자산 주소</th>
+<th>비고</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>OFAC SDN List</strong></td>
 <td>미국 재무부</td>
-<td>✅ (지갑주소 등재)</td>
-<td>수시</td>
+<td>기재될 수 있음</td>
+<td>기재 없는 지정도 있음(BitBank 2026-09-17)</td>
 </tr>
 <tr>
-<td><strong>OFAC Consolidated</strong></td>
-<td>미국 재무부 (SDN 외 추가)</td>
-<td>일부</td>
-<td>수시</td>
+<td><strong>UN 안보리 통합 명단</strong></td>
+<td>UN</td>
+<td>원문 확인</td>
+<td>이름·식별정보 중심</td>
 </tr>
 <tr>
-<td><strong>UN Consolidated</strong></td>
-<td>UN 안보리</td>
-<td>명시 X (이름 위주)</td>
-<td>수시</td>
-</tr>
-<tr>
-<td><strong>EU Consolidated Financial Sanctions</strong></td>
+<td><strong>EU 통합 금융제재 명단</strong></td>
 <td>EU</td>
-<td>일부</td>
-<td>수시</td>
+<td>원문 확인</td>
+<td></td>
 </tr>
 <tr>
-<td><strong>HM Treasury Sanctions List</strong></td>
+<td><strong>영국 제재 명단</strong></td>
 <td>영국</td>
-<td>일부</td>
-<td>수시</td>
+<td>원문 확인</td>
+<td>Prince Group은 FCDO가 미국과 공조 지정(2025-10-14)</td>
 </tr>
 <tr>
-<td><strong>한국 외교부 제재대상자</strong></td>
+<td><strong>한국 정부 지정 명단</strong></td>
 <td>한국</td>
-<td>(종속적, UN·OFAC 반영)</td>
-<td>수시</td>
+<td>원문 확인</td>
+<td>지정 근거 법령·고시는 원문 확인 필요</td>
 </tr>
 </tbody>
 </table>
 <h3>OFAC이 중심인 이유</h3>
-<p>OFAC SDN은 <strong>유일하게 가상자산 지갑주소를 명시</strong>합니다. UN·EU·외교부는 전통적 신원 정보(이름·생년월일) 중심으로 지갑주소 등재는 제한적. 그래서 가상자산 산업의 제재 스크리닝은 <strong>OFAC SDN을 축</strong>으로 설계하고, 나머지는 이름 매칭으로 보완하는 구조.</p>
+<p>가상자산 주소가 지정 공고에 직접 기재되는 대표 사례가 OFAC SDN입니다. 그래서 가상자산 제재 스크리닝은 OFAC SDN을 축으로 설계하는 경우가 많습니다. 다만 2026년 지정은 거래소·네트워크 단위가 많고 주소가 빠진 경우도 있어, <strong>상대 VASP 식별·실사</strong>가 주소 대조와 같은 무게로 필요합니다(<a href="../2-regulations/us-bsa-fincen.md"><code>../2-regulations/us-bsa-fincen.md</code></a> §3).</p>
 <hr />
-<h2>3. OFAC의 가상자산 지갑주소 등재 역사</h2>
-<h3>타임라인</h3>
+<h2>3. 2025~2026 OFAC·재무부 가상자산 관련 조치</h2>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 1790px; background-color: transparent;" viewBox="100 -58 1790 553.2000122070312" role="graphics-document document" aria-roledescription="timeline"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .edge{stroke-width:3;}#my-svg .section--1 rect,#my-svg .section--1 path,#my-svg .section--1 circle,#my-svg .section--1 path{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section--1 text{fill:#111418;}#my-svg .node-icon--1{font-size:40px;color:#111418;}#my-svg .section-edge--1{stroke:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth--1{stroke-width:17;}#my-svg .section--1 line{stroke:rgb(110.9999999999, 89.6538461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-0 rect,#my-svg .section-0 path,#my-svg .section-0 circle,#my-svg .section-0 path{fill:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .section-0 text{fill:#111418;}#my-svg .node-icon-0{font-size:40px;color:#111418;}#my-svg .section-edge-0{stroke:hsl(48.2926829268, 100%, 66.9607843137%);}#my-svg .edge-depth-0{stroke-width:14;}#my-svg .section-0 line{stroke:rgb(0, 32.8780487806, 168.5000000001);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-1 rect,#my-svg .section-1 path,#my-svg .section-1 circle,#my-svg .section-1 path{fill:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .section-1 text{fill:#111418;}#my-svg .node-icon-1{font-size:40px;color:#111418;}#my-svg .section-edge-1{stroke:hsl(45, 33.3333333333%, 70.2941176471%);}#my-svg .edge-depth-1{stroke-width:11;}#my-svg .section-1 line{stroke:rgb(50.5, 63.1249999999, 100.9999999998);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-2 rect,#my-svg .section-2 path,#my-svg .section-2 circle,#my-svg .section-2 path{fill:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-2 text{fill:#111418;}#my-svg .node-icon-2{font-size:40px;color:#111418;}#my-svg .section-edge-2{stroke:hsl(246.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-2{stroke-width:8;}#my-svg .section-2 line{stroke:rgb(104.596153846, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-3 rect,#my-svg .section-3 path,#my-svg .section-3 circle,#my-svg .section-3 path{fill:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-3 text{fill:#111418;}#my-svg .node-icon-3{font-size:40px;color:#111418;}#my-svg .section-edge-3{stroke:hsl(276.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-3{stroke-width:5;}#my-svg .section-3 line{stroke:rgb(76.8461538461, 110.9999999999, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-4 rect,#my-svg .section-4 path,#my-svg .section-4 circle,#my-svg .section-4 path{fill:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-4 text{fill:#111418;}#my-svg .node-icon-4{font-size:40px;color:#111418;}#my-svg .section-edge-4{stroke:hsl(306.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-4{stroke-width:2;}#my-svg .section-4 line{stroke:rgb(55.5, 110.9999999999, 61.9038461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-5 rect,#my-svg .section-5 path,#my-svg .section-5 circle,#my-svg .section-5 path{fill:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-5 text{fill:#111418;}#my-svg .node-icon-5{font-size:40px;color:#111418;}#my-svg .section-edge-5{stroke:hsl(336.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-5{stroke-width:-1;}#my-svg .section-5 line{stroke:rgb(55.5, 110.9999999999, 89.6538461538);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-6 rect,#my-svg .section-6 path,#my-svg .section-6 circle,#my-svg .section-6 path{fill:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-6 text{fill:#111418;}#my-svg .node-icon-6{font-size:40px;color:#111418;}#my-svg .section-edge-6{stroke:hsl(6.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-6{stroke-width:-4;}#my-svg .section-6 line{stroke:rgb(55.5, 104.596153846, 110.9999999999);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-7 rect,#my-svg .section-7 path,#my-svg .section-7 circle,#my-svg .section-7 path{fill:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .section-7 text{fill:#111418;}#my-svg .node-icon-7{font-size:40px;color:#111418;}#my-svg .section-edge-7{stroke:hsl(66.9230769231, 33.3333333333%, 75%);}#my-svg .edge-depth-7{stroke-width:-7;}#my-svg .section-7 line{stroke:rgb(47.4038461539, 42.5, 85);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-8 rect,#my-svg .section-8 path,#my-svg .section-8 circle,#my-svg .section-8 path{fill:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-8 text{fill:#111418;}#my-svg .node-icon-8{font-size:40px;color:#111418;}#my-svg .section-edge-8{stroke:hsl(126.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-8{stroke-width:-10;}#my-svg .section-8 line{stroke:rgb(110.9999999999, 55.5, 104.596153846);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-9 rect,#my-svg .section-9 path,#my-svg .section-9 circle,#my-svg .section-9 path{fill:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-9 text{fill:#111418;}#my-svg .node-icon-9{font-size:40px;color:#111418;}#my-svg .section-edge-9{stroke:hsl(156.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-9{stroke-width:-13;}#my-svg .section-9 line{stroke:rgb(110.9999999999, 55.5, 76.8461538461);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section-10 rect,#my-svg .section-10 path,#my-svg .section-10 circle,#my-svg .section-10 path{fill:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-10 text{fill:#111418;}#my-svg .node-icon-10{font-size:40px;color:#111418;}#my-svg .section-edge-10{stroke:hsl(186.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .edge-depth-10{stroke-width:-16;}#my-svg .section-10 line{stroke:rgb(110.9999999999, 61.9038461538, 55.5);stroke-width:3;}#my-svg .lineWrapper line{stroke:#111418;}#my-svg .disabled,#my-svg .disabled circle,#my-svg .disabled text{fill:#f7f5ef;}#my-svg .disabled text{fill:hsl(45, 0%, 85.2941176471%);}#my-svg .section--1[data-look="neo"] rect,#my-svg .section--1[data-look="neo"] path,#my-svg .section--1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section--1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] rect,#my-svg .section-0[data-look="neo"] path,#my-svg .section-0[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-0[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] rect,#my-svg .section-1[data-look="neo"] path,#my-svg .section-1[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-1[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] rect,#my-svg .section-2[data-look="neo"] path,#my-svg .section-2[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-2[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] rect,#my-svg .section-3[data-look="neo"] path,#my-svg .section-3[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-3[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] rect,#my-svg .section-4[data-look="neo"] path,#my-svg .section-4[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-4[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] rect,#my-svg .section-5[data-look="neo"] path,#my-svg .section-5[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-5[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] rect,#my-svg .section-6[data-look="neo"] path,#my-svg .section-6[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-6[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] rect,#my-svg .section-7[data-look="neo"] path,#my-svg .section-7[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-7[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] rect,#my-svg .section-8[data-look="neo"] path,#my-svg .section-8[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-8[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] rect,#my-svg .section-9[data-look="neo"] path,#my-svg .section-9[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-9[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] rect,#my-svg .section-10[data-look="neo"] path,#my-svg .section-10[data-look="neo"] circle{fill:#e5eaf2;stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-10[data-look="neo"] line{stroke:url(#my-svg-gradient);stroke-width:2;}#my-svg .section-root rect,#my-svg .section-root path,#my-svg .section-root circle{fill:hsl(216.9230769231, 33.3333333333%, 67.3529411765%);}#my-svg .section-root text{fill:#111418;}#my-svg .icon-container{height:100%;display:flex;justify-content:center;align-items:center;}#my-svg .edge{fill:none;}#my-svg .eventWrapper{filter:brightness(120%);}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><g/><defs><marker id="my-svg-arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"/></marker></defs><g class="taskWrapper" transform="translate(200, 50)"><g class="timeline-node section--1"><g><path id="my-svg-node-0" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line--1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025-03-21</tspan></text></g></g></g><g class="lineWrapper"><line x1="295" y1="114.8" x2="295" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(200, 250)"><g class="timeline-node section--1"><g><path id="my-svg-node-1" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line--1" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Tornado   Cash   SDN   삭제</tspan></text></g></g></g><g class="eventWrapper" transform="translate(200, 310)"><g class="timeline-node section--1"><g><path id="my-svg-node-2" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line--1" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">엔티티   1개   ·   ETH   주소</tspan><tspan x="0" dy="1.1em">90개</tspan></text></g></g></g><g class="taskWrapper" transform="translate(400, 50)"><g class="timeline-node section-0"><g><path id="my-svg-node-3" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-0" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2025-10-14</tspan></text></g></g></g><g class="lineWrapper"><line x1="495" y1="114.8" x2="495" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(400, 250)"><g class="timeline-node section-0"><g><path id="my-svg-node-4" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-0" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Prince   Group   TCO   지정</tspan><tspan x="0" dy="1.1em">146개   대상</tspan></text></g></g></g><g class="eventWrapper" transform="translate(400, 320.2000015258789)"><g class="timeline-node section-0"><g><path id="my-svg-node-5" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-0" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">FinCEN   Huione   Group</tspan><tspan x="0" dy="1.1em">311조   최종규칙</tspan></text></g></g></g><g class="taskWrapper" transform="translate(600, 50)"><g class="timeline-node section-1"><g><path id="my-svg-node-6" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-1" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2026-06-23</tspan></text></g></g></g><g class="lineWrapper"><line x1="695" y1="114.8" x2="695" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(600, 250)"><g class="timeline-node section-1"><g><path id="my-svg-node-7" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-1" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Prince   Group   추가   제재</tspan><tspan x="0" dy="1.1em">9명   ·   26개   법인</tspan></text></g></g></g><g class="taskWrapper" transform="translate(800, 50)"><g class="timeline-node section-2"><g><path id="my-svg-node-8" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-2" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2026-08-24</tspan></text></g></g></g><g class="lineWrapper"><line x1="895" y1="114.8" x2="895" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(800, 250)"><g class="timeline-node section-2"><g><path id="my-svg-node-9" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-2" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">Operation   Economic</tspan><tspan x="0" dy="1.1em">Outcast   개시</tspan></text></g></g></g><g class="taskWrapper" transform="translate(1000, 50)"><g class="timeline-node section-3"><g><path id="my-svg-node-10" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-3" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2026-09-17</tspan></text></g></g></g><g class="lineWrapper"><line x1="1095" y1="114.8" x2="1095" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(1000, 250)"><g class="timeline-node section-3"><g><path id="my-svg-node-11" class="node-bkg node-undefined" d="M0 55.2000015258789 v-50.2000015258789 q0,-5,5,-5 h180 q5,0,5,5 v55.2000015258789 H0 Z"/><line class="node-line-3" x1="0" y1="60.2000015258789" x2="190" y2="60.2000015258789"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">BitBank   등   이란   거래소</tspan><tspan x="0" dy="1.1em">지정   E.O.   13902</tspan></text></g></g></g><g class="eventWrapper" transform="translate(1000, 320.2000015258789)"><g class="timeline-node section-3"><g><path id="my-svg-node-12" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-3" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">공고에   주소   미기재</tspan></text></g></g></g><g class="taskWrapper" transform="translate(1200, 50)"><g class="timeline-node section-4"><g><path id="my-svg-node-13" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-4" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2026-10-01</tspan></text></g></g></g><g class="lineWrapper"><line x1="1295" y1="114.8" x2="1295" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(1200, 250)"><g class="timeline-node section-4"><g><path id="my-svg-node-14" class="node-bkg node-undefined" d="M0 45 v-40 q0,-5,5,-5 h180 q5,0,5,5 v45 H0 Z"/><line class="node-line-4" x1="0" y1="50" x2="190" y2="50"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">A7   Network   TCO   지정   B</tspan></text></g></g></g><g class="taskWrapper" transform="translate(1400, 50)"><g class="timeline-node section-5"><g><path id="my-svg-node-15" class="node-bkg node-undefined" d="M0 59.8 v-54.8 q0,-5,5,-5 h180 q5,0,5,5 v59.8 H0 Z"/><line class="node-line-5" x1="0" y1="64.8" x2="190" y2="64.8"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">2026-10-05</tspan></text></g></g></g><g class="lineWrapper"><line x1="1495" y1="114.8" x2="1495" y2="445.2000030517578" stroke-width="2" stroke="black" marker-end="url(#my-svg-arrowhead)" stroke-dasharray="5,5"/></g><g class="eventWrapper" transform="translate(1400, 250)"><g class="timeline-node section-5"><g><path id="my-svg-node-16" class="node-bkg node-undefined" d="M0 70.60000305175781 v-65.60000305175781 q0,-5,5,-5 h180 q5,0,5,5 v70.60000305175781 H0 Z"/><line class="node-line-5" x1="0" y1="75.60000305175781" x2="190" y2="75.60000305175781"/></g><g transform="translate(95, 10)"><text dy="1em" alignment-baseline="middle" dominant-baseline="middle" text-anchor="middle"><tspan x="0" dy="1em">FinCEN   A7   하위대리인</tspan><tspan x="0" dy="1.1em">특별조치   NPRM</tspan><tspan x="0" dy="1.1em">proposed</tspan></text></g></g></g><text x="545" font-size="4ex" font-weight="bold" y="20">미 재무부 가상자산 관련 제재·차단 2025-03 ~ 2026-10</text><g class="lineWrapper"><line x1="150" y1="164.8" x2="1840" y2="164.8" stroke-width="4" stroke="black" marker-end="url(#my-svg-arrowhead)"/></g></svg></div></p>
 <table>
 <thead>
 <tr>
-<th>연도</th>
-<th>대상</th>
-<th>비고</th>
+<th>일자</th>
+<th>조치</th>
+<th>상태(2026-10-21)</th>
+<th>출처</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>2018</td>
-<td>이란 BTC 주소 (Marinov, Khorashadizadeh)</td>
-<td>첫 가상자산 SDN</td>
+<td>2025-03-21</td>
+<td><strong>Tornado Cash SDN 삭제</strong> — 엔티티 1개·ETH 주소 90개(주 1·대체 89)</td>
+<td>해제 완료</td>
+<td><a href="https://ofac.treasury.gov/recent-actions/20250321">OFAC 2025-03-21</a></td>
 </tr>
 <tr>
-<td>2020</td>
-<td>DPRK 라자루스 관련 ETH·BTC</td>
-<td></td>
+<td>2025-10-14</td>
+<td>Prince Group TCO 지정(146개 대상, 영국 FCDO 공조), FinCEN Huione §311 최종규칙</td>
+<td>in-force</td>
+<td><a href="https://home.treasury.gov/news/press-releases/sb0278">재무부 sb0278</a></td>
 </tr>
 <tr>
-<td>2022-08</td>
-<td><strong>Tornado Cash 컨트랙트</strong></td>
-<td>DeFi 첫 제재</td>
+<td>2026-06-23</td>
+<td>Prince Group 관련 9명·26개 법인 추가, Huione 규칙에 H-Pay 추가 개정안</td>
+<td>지정 in-force / 개정안 proposed</td>
+<td><a href="https://home.treasury.gov/news/press-releases/sb0538">재무부 sb0538</a></td>
 </tr>
 <tr>
-<td>2022-11</td>
-<td>Hydra Market (다크넷)</td>
-<td></td>
+<td>2026-09-17</td>
+<td>이란 거래소 <strong>BitBank</strong>·개발사 Pishtaz Simorgh·개인 3인 지정(E.O. 13902) — "Operation Economic Outcast"(2026-08-24~)의 일부</td>
+<td>in-force</td>
+<td><a href="https://ofac.treasury.gov/recent-actions/20260917">OFAC 2026-09-17</a>; <a href="https://home.treasury.gov/news/press-releases/sb0632/">재무부 sb0632</a></td>
 </tr>
 <tr>
-<td>2024</td>
-<td>Garantex 추가 제재 (러시아)</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>2025-03-21</strong></td>
-<td><strong>Tornado Cash 제재 해제</strong></td>
-<td>5th Cir. Van Loon 판결 후</td>
+<td>2026-10-01</td>
+<td><strong>A7 Network</strong> TCO 지정(E.O. 13581, 개정 E.O. 13863)</td>
+<td>in-force(B — FinCEN NPRM 각주로 확인, OFAC 원 공고 미열람)</td>
+<td><a href="https://public-inspection.federalregister.gov/2026-20371.pdf">Federal Register 2026-20371</a></td>
 </tr>
 </tbody>
 </table>
-<h3>OFAC SDN 가상자산 검색</h3>
-<ul>
-<li>공식: https://sanctionssearch.ofac.treas.gov/</li>
-<li>가상자산 영역도 같은 검색</li>
-<li>API: 일부 벤더가 라이센스 (Chainalysis, TRM)</li>
-</ul>
+<p>2022년 Tornado Cash 최초 지정과 그 소송 경과, 2018~2024년의 개별 주소 등재 이력은 이 저장소 근거 자료에서 원문으로 확인하지 않았습니다(공개 근거 미확인) — <a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a>.</p>
 <h3>실무 포인트</h3>
-<p>OFAC는 <strong>SDN 업데이트를 예고 없이</strong> 수행합니다. 새 주소가 오전에 발표되면 그 시점부터 거래 차단 의무가 생기는 구조. 그래서 회사 시스템은 <strong>OFAC 변경 알림을 실시간 구독</strong>하고 <strong>자동 반영</strong>해야 하며, 수작업 업데이트 주기를 길게 두면 그 사이 새 SDN 주소와 거래가 발생할 위험이 있습니다.</p>
+<p>OFAC 지정은 <strong>예고 없이</strong> 공고됩니다. 공고 시점부터 거래 차단 의무가 생기므로, 시스템은 1차 공고(Recent Actions)를 주기적으로 확인하고 <strong>자동 반영</strong>해야 합니다. 갱신 주기는 회사가 위험평가로 정하고 근거를 남깁니다 — 업계 표준 주기에 대한 공개 근거는 없습니다.</p>
+<p><strong>삭제(해제)도 목록 변경입니다.</strong> Tornado Cash는 SDN에서 빠졌지만, 학계 측정(WWW '26)은 제재 후 957일 동안 입금액이 71.03% 줄었는데도 Ethereum 보안사고의 78.33%가 여전히 Tornado Cash를 거쳤다고 보고합니다(<a href="https://arxiv.org/abs/2507.11721">arXiv 2507.11721</a>). 목록 대조(제재 출구)와 위험 평가(AML 출구)를 분리해 두어야 해제와 동시에 통제가 풀리지 않습니다.</p>
 <hr />
 <h2>4. 스크리닝 매칭 방식</h2>
 <h3>A. 이름 매칭 (Fuzzy Matching)</h3>
-<p>동음이의·음역 다양성을 처리해야 하는 복잡한 문제입니다. "Mohammed"와 "Mohammad"는 같은 사람일 수도, 다른 사람일 수도 있습니다.</p>
+<p>동음이의·음역 다양성을 처리해야 하는 문제입니다. "Mohammed"와 "Mohammad"는 같은 사람일 수도, 다른 사람일 수도 있습니다.</p>
 <p>용어:
 - <strong>Fuzzy Matching</strong> — 완전 일치가 아닌 유사도 기반 매칭.
 - <strong>Levenshtein Distance</strong> — 한 문자열을 다른 문자열로 바꾸는 데 필요한 최소 편집 횟수.
 - <strong>Jaro-Winkler</strong> — 문자열 유사도 알고리즘. 짧은 공통 접두사에 가중.
 - <strong>Soundex</strong> — 음가 기반 매칭. 영어에 주로 사용.</p>
 <p><strong>트레이드오프</strong>:
-- <strong>너무 느슨</strong>: False Positive 폭발 → 업무 마비
+- <strong>너무 느슨</strong>: False Positive 폭증 → 업무 마비
 - <strong>너무 빡빡</strong>: False Negative → 진짜 제재 대상 통과</p>
 <h3>B. 보조 식별자</h3>
 <p>이름 매칭의 False Positive를 줄이는 핵심:</p>
 <ul>
 <li>생년월일</li>
 <li>국적·거주지</li>
-<li>신원확인번호 (passport 등)</li>
+<li>신원확인번호(여권 등)</li>
 <li>회사명·직책</li>
 </ul>
 <h3>C. 가상자산 지갑주소 매칭</h3>
 <ul>
-<li><strong>정확 매칭 (Exact Match)</strong> — 동일 주소</li>
-<li><strong>클러스터 매칭 (Extended)</strong> — 같은 클러스터 내 주소</li>
-<li><strong>Hop 노출 (Indirect)</strong> — N hop 내 도달 주소</li>
+<li><strong>정확 매칭 (Exact Match)</strong> — 공고에 기재된 동일 주소</li>
+<li><strong>클러스터 매칭</strong> — 분석 도구가 같은 주체로 묶은 주소(귀속 추정이므로 근거 기록 필요)</li>
+<li><strong>간접 노출</strong> — N hop 내 도달 주소. hop 수·비율 기준은 공개 표준이 없다</li>
 </ul>
+<h3>D. 상대 VASP 매칭</h3>
+<p>주소가 공고에 없는 거래소 단위 지정(BitBank)에는 <strong>상대 VASP 식별</strong>이 필요합니다. 트래블룰 메시지의 수신 VASP 정보, 상대 VASP 실사 기록이 입력이 됩니다. FATF 2021 가이던스는 트래블룰 이행 단락 안에서 제재 스크리닝을 다룹니다(para 193~195)(<a href="https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf">FATF 2021 RBA 가이던스</a>).</p>
 <h3>실무 포인트</h3>
-<p>이름 매칭의 Fuzzy 수준은 벤더마다 기본 설정이 다릅니다. 최초 도입 시 <strong>기본값 그대로 쓰면</strong> 한국에서는 "Kim"·"Lee" 같은 흔한 성씨에서 False Positive가 폭발합니다. 한국 운영 환경에 맞춘 <strong>튜닝</strong>(생년월일·국적 필수 매칭)이 도입 첫 1~2달의 핵심 과제.</p>
+<p>이름 매칭의 fuzzy 수준은 도구마다 기본 설정이 다릅니다. 기본값 그대로 쓰면 한국에서는 흔한 성씨에서 False Positive가 많이 생깁니다. 보조 식별자(생년월일·국적) 결합 규칙과 임계값을 <strong>자사 데이터로 검증해</strong> 정하고, 그 근거를 문서화합니다.</p>
 <hr />
 <h2>5. 스크리닝 시점 — 3단 체크</h2>
 <h3>A. 사전 (Onboarding) 스크리닝</h3>
@@ -369,33 +359,21 @@
 </ul>
 <h3>B. 실시간 (Transaction) 스크리닝</h3>
 <p>거래 발생 직전:
-- 송신·수신 wallet의 OFAC SDN 매칭
-- 카운터파티 VASP의 제재국 여부
-- 거래 메타데이터 (memo, tag) 매칭</p>
-<p>매칭되면 <strong>거래 차단 + 자동 알람</strong>.</p>
+- 송신·수신 주소의 SDN 등 명단 매칭
+- 상대 VASP의 지정 여부·소재 관할
+- 거래 메타데이터(memo, tag) 매칭</p>
+<p>매칭되면 <strong>거래 차단 + 알람</strong>.</p>
 <h3>C. 사후 (Periodic) 스크리닝</h3>
 <ul>
-<li>모든 고객·wallet을 주기적으로 (일·주·월) 전체 스크리닝</li>
-<li>새로 SDN 추가된 항목과 기존 데이터 매칭</li>
-<li>"잠재 노출" 발견 시 STR 검토</li>
+<li>명단이 갱신될 때마다 기존 고객·주소 전체 재대조</li>
+<li>새로 지정된 항목과 과거 거래 이력 대조</li>
+<li>잠재 노출 발견 시 STR 검토</li>
 </ul>
 <h3>실무 포인트</h3>
-<p>3단 체크 중 가장 자주 소홀해지는 게 <strong>C 사후 스크리닝</strong>입니다. 회사가 관리하는 기존 고객 수만 명을 매일 전체 재스크리닝하는 건 컴퓨팅 부담이 크지만, OFAC이 새 주소를 추가한 순간 <strong>기존 고객 중 그 주소를 쓰는 사람이 노출</strong>될 수 있습니다. 일 1회 배치 스크리닝은 필수 운영 항목.</p>
+<p>가장 자주 소홀해지는 게 <strong>C 사후 스크리닝</strong>입니다. 지정 공고가 나온 순간 기존 고객 중 그 주소·거래소와 거래한 사람이 드러날 수 있습니다. 명단 갱신 이벤트에 연동된 배치가 필수 운영 항목입니다.</p>
 <hr />
 <h2>6. 운영 흐름</h2>
-<pre><code>[ 신규 가입 ] → KYC + Sanctions Screening (이름·DOB·국적)
-                  ├─ Hit → 가입 거절
-                  └─ No Hit → 가입 승인
-
-[ 거래 요청 ] → Sanctions Screening (이름 + wallet 주소)
-                  ├─ Hit (high confidence) → 차단 + STR 보고
-                  ├─ Hit (low confidence) → 수동 검토
-                  └─ No Hit → 거래 진행
-
-[ 일일 배치 ] → 전체 고객 + wallet vs SDN 갱신본
-                  ├─ 신규 매칭 → 즉시 동결 + 분석 + STR
-                  └─ 기존 통과 → 다음 사이클
-</code></pre>
+<p><div class="mermaid-wrap mermaid-wrap--svg"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 721.469px; background-color: transparent;" viewBox="0 0 721.46875 654.5234375" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;fill:#111418;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f7f5ef;}#my-svg .error-text{fill:#080a10;stroke:#080a10;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#3a414a;stroke:#3a414a;}#my-svg .marker.cross{stroke:#3a414a;}#my-svg svg{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:14px;}#my-svg p{margin:0;}#my-svg .label{font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;color:#111418;}#my-svg .cluster-label text{fill:#080a10;}#my-svg .cluster-label span{color:#080a10;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#111418;color:#111418;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#e5eaf2;stroke:#1a2e4a;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#3a414a!important;stroke-width:0;stroke:#3a414a;}#my-svg .arrowheadPath{fill:#0b0b0b;}#my-svg .edgePath .path{stroke:#3a414a;stroke-width:1px;}#my-svg .flowchart-link{stroke:#3a414a;fill:none;}#my-svg .edgeLabel{background-color:#ffffff;text-align:center;}#my-svg .edgeLabel p{background-color:#ffffff;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#my-svg .cluster rect{fill:#f7f5ef;stroke:hsl(45, 0%, 85.2941176471%);stroke-width:1px;}#my-svg .cluster text{fill:#080a10;}#my-svg .cluster span{color:#080a10;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:'Pretendard Variable',Pretendard,'Malgun Gothic',sans-serif;font-size:12px;background:#f7f5ef;border:1px solid hsl(45, 0%, 85.2941176471%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#111418;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#ffffff;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#ffffff;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#ffffff;fill:#ffffff;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#1a2e4a;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#1a2e4a;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M133.773,99.313L140.249,99.313C146.724,99.313,159.674,99.313,172.815,99.313C185.956,99.313,199.286,99.313,205.952,99.313L212.617,99.313" id="my-svg-L_J_J1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_J_J1_0" data-points="W3sieCI6MTMzLjc3MzQzNzUsInkiOjk5LjMxMjV9LHsieCI6MTcyLjYyNSwieSI6OTkuMzEyNX0seyJ4IjoyMTYuNjE3MTg3NSwieSI6OTkuMzEyNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M383.767,83.838L398.005,80.933C412.243,78.027,440.719,72.217,467.254,69.312C493.789,66.406,518.383,66.406,530.68,66.406L542.977,66.406" id="my-svg-L_J1_J2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_J1_J2_0" data-points="W3sieCI6MzgzLjc2NzQ4NTIzODc5NDU2LCJ5Ijo4My44Mzc3OTc3Mzg3OTQ1Nn0seyJ4Ijo0NjkuMTk1MzEyNSwieSI6NjYuNDA2MjV9LHsieCI6NTQ2Ljk3NjU2MjUsInkiOjY2LjQwNjI1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M372.133,126.422L388.31,133.253C404.487,140.083,436.841,153.745,467.628,160.576C498.414,167.406,527.633,167.406,542.242,167.406L556.852,167.406" id="my-svg-L_J1_J3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_J1_J3_0" data-points="W3sieCI6MzcyLjEzMjcxOTg5MzIxNDgsInkiOjEyNi40MjE5Njc2MDY3ODUyfSx7IngiOjQ2OS4xOTUzMTI1LCJ5IjoxNjcuNDA2MjV9LHsieCI6NTYwLjg1MTU2MjUsInkiOjE2Ny40MDYyNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M133.773,394.215L140.249,394.215C146.724,394.215,159.674,394.215,169.65,394.215C179.625,394.215,186.625,394.215,190.125,394.215L193.625,394.215" id="my-svg-L_T_T1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_T_T1_0" data-points="W3sieCI6MTMzLjc3MzQzNzUsInkiOjM5NC4yMTQ4NDM3NX0seyJ4IjoxNzIuNjI1LCJ5IjozOTQuMjE0ODQzNzV9LHsieCI6MTk3LjYyNSwieSI6Mzk0LjIxNDg0Mzc1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M369.894,345.874L386.444,332.963C402.994,320.052,436.095,294.229,463.676,281.318C491.258,268.406,513.32,268.406,524.352,268.406L535.383,268.406" id="my-svg-L_T1_T2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_T1_T2_0" data-points="W3sieCI6MzY5Ljg5Mzk5MjIyNzc4OTgsInkiOjM0NS44NzQ0NjA5Nzc3ODk4fSx7IngiOjQ2OS4xOTUzMTI1LCJ5IjoyNjguNDA2MjV9LHsieCI6NTM5LjM4MjgxMjUsInkiOjI2OC40MDYyNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M418.234,394.215L426.728,394.215C435.221,394.215,452.208,394.215,475.311,394.215C498.414,394.215,527.633,394.215,542.242,394.215L556.852,394.215" id="my-svg-L_T1_T3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_T1_T3_0" data-points="W3sieCI6NDE4LjIzNDM3NSwieSI6Mzk0LjIxNDg0Mzc1fSx7IngiOjQ2OS4xOTUzMTI1LCJ5IjozOTQuMjE0ODQzNzV9LHsieCI6NTYwLjg1MTU2MjUsInkiOjM5NC4yMTQ4NDM3NX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M375.755,436.694L391.329,446.447C406.902,456.201,438.049,475.708,468.231,485.461C498.414,495.215,527.633,495.215,542.242,495.215L556.852,495.215" id="my-svg-L_T1_T4_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_T1_T4_0" data-points="W3sieCI6Mzc1Ljc1NTQwNTY4MjE1NjY2LCJ5Ijo0MzYuNjkzODEzMDY3ODQzMzR9LHsieCI6NDY5LjE5NTMxMjUsInkiOjQ5NS4yMTQ4NDM3NX0seyJ4Ijo1NjAuODUxNTYyNSwieSI6NDk1LjIxNDg0Mzc1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M147.625,621.023L151.792,621.023C155.958,621.023,164.292,621.023,175.385,621.023C186.479,621.023,200.333,621.023,207.26,621.023L214.188,621.023" id="my-svg-L_U_U1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_U_U1_0" data-points="W3sieCI6MTQ3LjYyNSwieSI6NjIxLjAyMzQzNzV9LHsieCI6MTcyLjYyNSwieSI6NjIxLjAyMzQzNzV9LHsieCI6MjE4LjE4NzUsInkiOjYyMS4wMjM0Mzc1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M397.672,621.023L409.592,621.023C421.513,621.023,445.354,621.023,465.102,621.023C484.849,621.023,500.503,621.023,508.329,621.023L516.156,621.023" id="my-svg-L_U1_U2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_U1_U2_0" data-points="W3sieCI6Mzk3LjY3MTg3NSwieSI6NjIxLjAyMzQzNzV9LHsieCI6NDY5LjE5NTMxMjUsInkiOjYyMS4wMjM0Mzc1fSx7IngiOjUyMC4xNTYyNSwieSI6NjIxLjAyMzQzNzV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_J_J1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 66.40625)"><g class="label" data-id="L_J1_J2_0" transform="translate(-8.8515625, -10.5)"><foreignObject width="17.703125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Hit</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 167.40625)"><g class="label" data-id="L_J1_J3_0" transform="translate(-19.6015625, -10.5)"><foreignObject width="39.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>No Hit</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_T_T1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 268.40625)"><g class="label" data-id="L_T1_T2_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>확실</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 394.21484375)"><g class="label" data-id="L_T1_T3_0" transform="translate(-12.1015625, -10.5)"><foreignObject width="24.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>모호</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 495.21484375)"><g class="label" data-id="L_T1_T4_0" transform="translate(-19.6015625, -10.5)"><foreignObject width="39.203125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>No Hit</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_U_U1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(469.1953125, 621.0234375)"><g class="label" data-id="L_U1_U2_0" transform="translate(-25.9609375, -10.5)"><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>신규 매칭</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-J-0" data-look="classic" transform="translate(77.8125, 99.3125)"><rect class="basic label-container" style="" x="-55.9609375" y="-25.5" width="111.921875" height="51"/><g class="label" style="" transform="translate(-25.9609375, -10.5)"><rect/><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>신규 가입</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-J1-1" data-look="classic" transform="translate(307.9296875, 99.3125)"><polygon points="91.3125,0 182.625,-91.3125 91.3125,-182.625 0,-91.3125" class="label-container" transform="translate(-90.8125, 91.3125)"/><g class="label" style="" transform="translate(-65.8125, -10.5)"><rect/><foreignObject width="131.625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>이름·생년월일·국적 대조</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-J2-3" data-look="classic" transform="translate(616.8125, 66.40625)"><rect class="basic label-container" style="fill:#fee2e2 !important" x="-69.8359375" y="-25.5" width="139.671875" height="51"/><g class="label" style="" transform="translate(-39.8359375, -10.5)"><rect/><foreignObject width="79.671875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>가입 거절·보류</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-J3-5" data-look="classic" transform="translate(616.8125, 167.40625)"><rect class="basic label-container" style="" x="-55.9609375" y="-25.5" width="111.921875" height="51"/><g class="label" style="" transform="translate(-25.9609375, -10.5)"><rect/><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>가입 승인</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-T-6" data-look="classic" transform="translate(77.8125, 394.21484375)"><rect class="basic label-container" style="" x="-55.9609375" y="-25.5" width="111.921875" height="51"/><g class="label" style="" transform="translate(-25.9609375, -10.5)"><rect/><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>거래 요청</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-T1-7" data-look="classic" transform="translate(307.9296875, 394.21484375)"><polygon points="110.3046875,0 220.609375,-110.3046875 110.3046875,-220.609375 0,-110.3046875" class="label-container" transform="translate(-109.8046875, 110.3046875)"/><g class="label" style="" transform="translate(-84.8046875, -10.5)"><rect/><foreignObject width="169.609375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>이름 + 주소 + 상대 VASP 대조</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-T2-9" data-look="classic" transform="translate(616.8125, 268.40625)"><rect class="basic label-container" style="fill:#fee2e2 !important" x="-77.4296875" y="-25.5" width="154.859375" height="51"/><g class="label" style="" transform="translate(-47.4296875, -10.5)"><rect/><foreignObject width="94.859375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>차단 + 보고 SOP</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-T3-11" data-look="classic" transform="translate(616.8125, 394.21484375)"><rect class="basic label-container" style="" x="-55.9609375" y="-25.5" width="111.921875" height="51"/><g class="label" style="" transform="translate(-25.9609375, -10.5)"><rect/><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>수동 검토</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-T4-13" data-look="classic" transform="translate(616.8125, 495.21484375)"><rect class="basic label-container" style="" x="-55.9609375" y="-25.5" width="111.921875" height="51"/><g class="label" style="" transform="translate(-25.9609375, -10.5)"><rect/><foreignObject width="51.921875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>거래 진행</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-U-14" data-look="classic" transform="translate(77.8125, 621.0234375)"><rect class="basic label-container" style="" x="-69.8125" y="-25.5" width="139.625" height="51"/><g class="label" style="" transform="translate(-39.8125, -10.5)"><rect/><foreignObject width="79.625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>명단 갱신 공고</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-U1-15" data-look="classic" transform="translate(307.9296875, 621.0234375)"><rect class="basic label-container" style="" x="-89.7421875" y="-25.5" width="179.484375" height="51"/><g class="label" style="" transform="translate(-59.7421875, -10.5)"><rect/><foreignObject width="119.484375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>전체 고객·주소 재대조</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-U2-17" data-look="classic" transform="translate(616.8125, 621.0234375)"><rect class="basic label-container" style="fill:#fee2e2 !important" x="-96.65625" y="-25.5" width="193.3125" height="51"/><g class="label" style="" transform="translate(-66.65625, -10.5)"><rect/><foreignObject width="133.3125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>조치 + 분석 + STR 검토</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a2e4a" stop-opacity="1"/><stop offset="100%" stop-color="hsl(48.2926829268, 60%, 81.9607843137%)" stop-opacity="1"/></linearGradient></svg></div></p>
 <hr />
 <h2>7. False Positive 처리 (Disposition)</h2>
 <h3>일반 시나리오</h3>
@@ -411,11 +389,11 @@
 <tbody>
 <tr>
 <td>TP-Confirmed</td>
-<td>진짜 매칭 → 차단 + STR</td>
+<td>진짜 매칭 → 차단 + 보고 절차</td>
 </tr>
 <tr>
 <td>FP-Different DOB</td>
-<td>DOB 다름, 통과</td>
+<td>생년월일 다름, 통과</td>
 </tr>
 <tr>
 <td>FP-Different Nationality</td>
@@ -433,7 +411,7 @@
 </table>
 <p>모든 disposition은 <strong>로그 기록 + 검사 시 증빙</strong>.</p>
 <h3>실무 포인트</h3>
-<p>Disposition 이력은 <strong>규제 검사의 핵심 증빙</strong>입니다. "왜 이 고객을 통과시켰나"에 대한 답이 없으면 검사에서 크게 지적받습니다. 시스템이 disposition 코드를 강제 입력받고 <strong>영구 보관</strong>하는 구조를 초기에 만들어두는 게 나중에 훨씬 편합니다.</p>
+<p>Disposition 이력은 <strong>검사의 핵심 증빙</strong>입니다. "왜 이 고객을 통과시켰나"에 대한 답이 없으면 지적받습니다. 시스템이 disposition 코드를 강제 입력받고 보존 정책에 따라 보관하는 구조를 초기에 만들어 둡니다.</p>
 <hr />
 <h2>8. 고난이도 케이스</h2>
 <h3>A. 동명이인 (Common Name)</h3>
@@ -442,14 +420,16 @@
 <p>한자·아랍어·러시아어 → 영문 음역 다양. "Kim" vs "Gim" vs "Kym".</p>
 <h3>C. 회사명 변형</h3>
 <p>"ABC Corp" vs "ABC Corporation" vs "ABC Co., Ltd." — 약어·띄어쓰기·콤마 차이.</p>
-<h3>D. Wallet 주소 — 클러스터 노출</h3>
-<p><strong>직접 매칭은 없지만 같은 클러스터에 SDN 주소가 있는</strong> 경우. 위험 노출 인정 → 강화 모니터링.</p>
-<h3>E. Privacy Coin 거래</h3>
-<p>추적 불가 → 사실상 모든 거래가 잠재 위험. 한국에선 거래소 상장 폐지로 우회.</p>
+<h3>D. 주소 없는 거래소·네트워크 지정</h3>
+<p>BitBank(2026-09-17)처럼 공고에 주소가 없거나, A7처럼 "네트워크가 통제하는 역외 기업" 전체가 대상이 되는 경우. 상대 VASP 식별과 거래 상대 실사로 대응합니다.</p>
+<h3>E. 동결 저항 자산</h3>
+<p>FATF 7차 Targeted Update(2026-07-16)는 VASP가 "issuer-level asset freeze/burn mechanisms"를 준수 안전장치로 믿을 수 없을 수도 있다고 결론 내렸고(para 35), 학계는 <strong>USDT 제재 주소의 7.3%, USDC의 18.7%가 동결 발효 전에 전액 인출</strong>됐다고 측정했습니다(<a href="https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf">7차 TU PDF</a>; <a href="https://arxiv.org/abs/2603.27739">arXiv 2603.27739</a>). 발행자 동결은 거래소 자체 스크리닝을 대체하지 못합니다.</p>
+<h3>F. 익명성강화코인</h3>
+<p>추적이 어려워 제재 노출 판단이 어렵습니다. EU AMLR 제79조는 익명성강화코인 취급 금지를 담고 있고 <strong>2027-07-10 적용 예정</strong>(enacted-not-in-force)입니다(<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202401624">EUR-Lex OJ L 2024/1624</a>). 한국 거래소별 취급 현황과 그 사유는 공개 근거로 확인하지 않았습니다.</p>
 <h3>실무 포인트</h3>
-<p>E번 Privacy Coin 대응은 "제재 스크리닝 자체를 포기"하는 게 아니라 <strong>상품 자체를 취급하지 않음</strong>으로 리스크를 제거하는 접근입니다. 이게 한국·일본 거래소가 privacy coin을 상장 폐지한 진짜 이유 — 기술적 어려움이 아니라 <strong>규제 리스크의 경제성</strong>.</p>
+<p>E·F는 "스크리닝을 더 정교하게"가 아니라 <strong>상품·상대방 정책</strong>으로 다루는 위험입니다. 어떤 자산·상대를 취급하지 않을지의 판단 근거를 위험평가 문서에 남깁니다.</p>
 <hr />
-<h2>9. 한국 특수 — 어디서 정보를 받나</h2>
+<h2>9. 한국 — 어디서 정보를 받나</h2>
 <table>
 <thead>
 <tr>
@@ -459,76 +439,215 @@
 </thead>
 <tbody>
 <tr>
-<td>외교부</td>
-<td>UN·EU·OFAC 반영 + 한국 자체</td>
+<td>한국 정부 지정 명단</td>
+<td>지정 근거 법령·고시와 공고 채널은 원문 확인 필요</td>
 </tr>
 <tr>
-<td>FIU</td>
-<td>가상자산 위험 wallet 정보 (협조 시)</td>
+<td>해외 1차 공고</td>
+<td>OFAC Recent Actions, UN·EU·영국 명단</td>
 </tr>
 <tr>
-<td>KISA</td>
-<td>사이버 위협 정보 (랜섬웨어 wallet 등)</td>
-</tr>
-<tr>
-<td>글로벌 벤더</td>
-<td>World-Check, Dow Jones, ComplyAdvantage</td>
-</tr>
-<tr>
-<td>KYT 벤더</td>
-<td>Chainalysis, TRM, Elliptic SDN wallet feed</td>
+<td>상용 통합 DB·블록체인 분석 도구</td>
+<td>명단 통합·주소 라벨. 커버리지·갱신 지연은 자사 주장(T5)이라 검증 필요</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2>10. 위반 시 처벌</h2>
-<h3>미국 OFAC (가장 강력)</h3>
+<h3>미국</h3>
 <ul>
-<li><strong>민사벌금</strong>: 거래당 최대 $300K+</li>
-<li><strong>형사</strong>: 최대 30년 징역, $1M+ 벌금</li>
-<li><strong>2차 제재</strong>: 외국인이라도 미국 시장 접근 차단</li>
+<li>위반 시 민사·형사 제재 대상. <strong>벌금 상한·형량은 해당 법령(IEEPA 등)·OFAC 집행 지침 원문으로 확인</strong> — 이 저장소 근거 자료로는 재확인하지 않았습니다.</li>
+<li>2025~2026 원문으로 확인되는 가상자산 집행은 개별 거래소 거액 합의보다 <strong>조직·네트워크 지정</strong>이 중심입니다(<a href="../6-cases/major-enforcement.md"><code>../6-cases/major-enforcement.md</code></a>).</li>
 </ul>
-<h3>사례</h3>
-<ul>
-<li><strong>Binance $4.3B (2023)</strong> — OFAC + FinCEN 결합. 가상자산 AML 사상 최대 단일 벌금.</li>
-<li><strong>Bittrex $29M (2022)</strong> — 이란·수단 고객 서비스.</li>
-<li><strong>BitGo $98K (2021)</strong> — 소규모지만 OFAC 제재 위반의 첫 가상자산 사례.</li>
-</ul>
+<h3>과거 대형 사건</h3>
+<p>Binance(2023)·Bittrex·BitGo 등의 제재 위반 합의 금액·형량·모니터십 기간은 <strong>공개 근거 미확인</strong>으로 이 저장소에서 수치를 삭제했습니다. 인용하려면 DOJ·FinCEN·OFAC 원 공고를 직접 확인합니다. Paxful에 대한 FinCEN $3.5M 민사벌금(2025-12-09)의 사유는 MSB 미등록·AML 프로그램 미비·SAR 미제출이며 제재 위반이 아닙니다(<a href="https://www.fincen.gov/news/news-releases/fincen-assesses-35-million-penalty-against-paxful-facilitating-suspicious">FinCEN</a>).</p>
 <h3>한국</h3>
 <ul>
-<li>외환거래법, 특정범죄가중처벌법 등</li>
-<li>외교부 제재 위반 시 형사처벌</li>
-<li>
-<ul>
-<li>특금법 위반 결합</li>
-</ul>
-</li>
+<li>국내 제재 위반의 처벌 근거 법령(외국환거래법 등)과 특금법 위반과의 관계는 원문 확인 필요</li>
 </ul>
 <h3>실무 포인트</h3>
-<p>Binance 사례가 업계에 남긴 교훈은 "2차 제재는 실존한다"는 것. 미국 이외 회사도 OFAC 제재 위반 시 단독으로 처벌받을 수 있다는 걸 거대 사례로 보여줬고, 그 이후 글로벌 VASP들의 제재 컴플라이언스 투자가 수직 상승했습니다. 한국 VASP도 2024~2025년 사이 OFAC 전담팀을 별도 운영하는 방향으로 조직이 재편되는 추세.</p>
+<p>2025~2026 집행 흐름이 남긴 교훈은 "지정 대상 <strong>주소</strong>"만이 아니라 "지정 <strong>조직·네트워크</strong>와의 직·간접 거래"를 차단해야 한다는 것입니다. 실무 우선순위는 ① 기본 의무의 작동 증거 ② 지정 네트워크와의 거래 차단입니다.</p>
 <hr />
 <h2>11. 체크리스트</h2>
-<pre><code>□ OFAC + UN + EU + 외교부 명단 일일 갱신
+<pre><code>□ OFAC · UN · EU · 영국 · 한국 명단 갱신 반영 (주기는 정책으로 정함)
 □ 사전 스크리닝 (onboarding)
 □ 실시간 스크리닝 (모든 거래)
-□ 사후 배치 스크리닝 (전체 고객)
-□ Wallet 주소 OFAC SDN 매칭
-□ KYT 벤더 SDN feed 통합
+□ 명단 갱신 이벤트 연동 사후 배치 (전체 고객·주소)
+□ 지갑주소 정확 매칭 + 클러스터·간접 노출 기준 문서화
+□ 상대 VASP 식별 — 주소 없는 거래소 지정 대응
+□ 트래블룰 수신 정보 스크리닝 연동
 □ False Positive disposition 로그
-□ 매칭 시 차단 + STR + 보고 SOP
-□ Adverse Media 모니터링
-□ 외환거래법 호환성 점검
-□ 임직원 교육 (OFAC 2차 제재 인식)
+□ 매칭 시 차단 + 보고 SOP
+□ 해제 공고 시 정책 변경 근거 기록 (목록 변경 vs 위험 평가)
+□ 임직원 교육
 </code></pre>
+<h2>💼 실무 현장 (Industry Reality)</h2>
+<h3>Fuzzy Matching False Positive 감축 기법</h3>
+<p>일반적으로 쓰는 방법(효과 수치는 데이터마다 다르며 공개 벤치마크 없음):</p>
+<ol>
+<li><strong>다축 매칭</strong>: 이름 단독 매칭은 HIT로 바로 처리하지 않고 <strong>이름 + 생년월일</strong> 또는 <strong>이름 + 국적</strong> 조합을 요구.</li>
+<li><strong>임계값 튜닝</strong>: 흔한 성씨에는 더 높은 유사도 임계값을 적용. 값은 자사 샘플로 검증.</li>
+<li><strong>Whitelist 관리</strong>: 반복 FP 고객-명단 항목 쌍은 승인 후 만료일 있는 화이트리스트로 관리하고 재검토.</li>
+<li><strong>2차 검토</strong>: 1차 HIT → 분석가 판단 + disposition 코드 강제 입력.</li>
+</ol>
+<p>이전 판의 "FP ~90% → ~70%", "월 3,000 → 1,000건"은 공개 근거가 없어 삭제했습니다.</p>
+<h3>명단 자동 동기화 파이프라인 (의사코드)</h3>
+<pre><code class="language-python"># 명단 갱신 동기화 예시 (의사코드) — 소스는 1차 공고·공식 배포 파일
+def sync_sanctions_list(source):
+    new_entries = fetch_and_parse(source)          # 이름·식별정보·주소
+    current = db.get_entries(source)
+
+    added = new_entries - current
+    removed = current - new_entries
+
+    if added:
+        for entry in added:
+            rescan_existing_customers(entry)       # 사후 스크리닝
+        notify_compliance(f&quot;신규 지정 {len(added)}건&quot;, added)
+        screening_engine.add(added)
+    if removed:
+        # 해제는 자동 통과가 아니라 정책 검토 대상
+        open_policy_review(removed)
+    db.update(source, new_entries)
+</code></pre>
+<p>거래소별 동기화 주기에 대한 공개 근거는 없습니다.</p>
+<h3>자주 나오는 오해</h3>
+<ul>
+<li><strong>"OFAC은 미국 회사만 해당"</strong> — 직접 관할과 별개로 달러 결제망·스테이블코인 발행자·해외 상대방 관계에서 영향을 받는다. 구체 적용은 프로그램별 원문 확인.</li>
+<li><strong>"Tornado Cash 제재 해제됐으니 이제 안전"</strong> — 해제는 목록 변경일 뿐이다. 위험 평가 쪽 근거(사고 자금 경유 비율 등)는 해제 전과 크게 다르지 않다.</li>
+<li><strong>"지갑 주소 SDN 매칭만 하면 됨"</strong> — 이름 + 주소 + 상대 VASP. 주소 없는 지정이 2026년에 실제로 나왔다.</li>
+<li><strong>"발행자가 동결하니 스테이블코인은 안전"</strong> — 동결 전 인출이 측정됐다(USDT 7.3%, USDC 18.7%).</li>
+<li><strong>"False Positive 줄이려 매칭을 느슨하게"</strong> — 보조 식별자 강화가 정답. 매칭 자체를 느슨하게 하면 FN이 생긴다.</li>
+</ul>
+<h3>한국 특수 현실</h3>
+<ul>
+<li>이전 판의 "DAXA 주도 공동 블랙리스트", "국정원 비공식 통보 경로", "4대 거래소 OFAC 전담 신설"은 공개 근거가 확인되지 않아 삭제했습니다.</li>
+<li>2027-02-19부터(enacted-not-in-force) 해외 VASP가 FATF 고위험국 소재이거나 무인허가이면 거래가 제한됩니다(감독규정 §28-2②, 2027-02 중 시행). 제재 스크리닝과 상대 VASP 3등급 평가를 같은 데이터로 운영하면 중복을 줄일 수 있습니다(<a href="../2-regulations/korea-fiu-act.md"><code>../2-regulations/korea-fiu-act.md</code></a> 5절).</li>
+</ul>
+<hr />
+<h2>12. Fuzzy Matching — 한국 이름 대응 설계</h2>
+<h3>12.1 문제 정의</h3>
+<p>한국은 소수 성씨 비중이 높아, 글로벌 기본 유사도 임계값을 그대로 쓰면 성씨만 같은 동명이인 HIT가 많이 생깁니다.</p>
+<p><strong>예</strong>: 고객 "Kim Min-soo 1990-01-01 KR" 대조 시
+- 명단 항목 "Kim Min-su 1985-03-15 KP"와 이름 유사도는 매우 높게 나온다(가상 예시)
+- 생년월일·국적이 다르므로 보조 식별자 규칙이 있으면 자동으로 FP 처리된다</p>
+<h3>12.2 한국 이름 대응 스크리닝 파이프라인 (설계 예시)</h3>
+<pre><code class="language-python">from jellyfish import jaro_winkler_similarity
+
+COMMON_KR_SURNAMES = {
+    &quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;, &quot;Jung&quot;, &quot;Jang&quot;,
+    &quot;Yoon&quot;, &quot;Cho&quot;, &quot;Kang&quot;, &quot;Lim&quot;, &quot;Han&quot;, &quot;Shin&quot;
+}
+
+# 임계값은 예시 — 자사 샘플로 검증해 정하고 근거를 문서화한다
+SURNAME_T = 0.95
+COMMON_T = 0.92
+DEFAULT_T = 0.88
+
+def screen_korean_customer(customer, sdn_list):
+    hits = []
+    for sdn in sdn_list:
+        # 1. 성씨 로마자 variant 매칭 (Kim/Gim/Ghim 등)
+        surname_match = any(
+            jaro_winkler_similarity(normalize_kr(customer.surname),
+                                    normalize_kr(v)) &gt;= SURNAME_T
+            for v in sdn.surname_variants
+        )
+        if not surname_match:
+            continue
+
+        # 2. 흔한 성씨면 full name 임계값 상향
+        threshold = COMMON_T if customer.surname in COMMON_KR_SURNAMES else DEFAULT_T
+        name_score = jaro_winkler_similarity(normalize(customer.full_name),
+                                             normalize(sdn.name))
+        if name_score &lt; threshold:
+            continue
+
+        # 3. 보조 식별자 (DOB OR Nationality)
+        dob_match = customer.dob and customer.dob == sdn.dob
+        nat_match = sdn.nationalities and customer.nationality in sdn.nationalities
+        if not (dob_match or nat_match):
+            continue
+
+        # 4. 승인된 화이트리스트 (만료일 있음)
+        if is_whitelisted(customer.id, sdn.id):
+            continue
+
+        hits.append((sdn, name_score, dob_match, nat_match))
+    return hits
+</code></pre>
+<p>주의: 보조 식별자를 "필수"로 두면 명단 항목에 생년월일·국적이 비어 있는 경우를 놓칩니다. 식별자가 비어 있는 항목은 별도 수동 검토 큐로 보내는 규칙이 필요합니다.</p>
+<h3>12.3 이름 정규화</h3>
+<pre><code class="language-python">import re
+
+NORMALIZATIONS = [
+    (r&quot;-&quot;, &quot;&quot;), (r&quot;,\s*&quot;, &quot; &quot;),
+    (&quot;min-soo&quot;, &quot;minsoo&quot;), (&quot;minsu&quot;, &quot;minsoo&quot;),
+    # 로마자 표기법 차이 예시
+    (&quot;hoon&quot;, &quot;hun&quot;), (&quot;seung&quot;, &quot;sung&quot;),
+]
+
+def normalize_kr(name: str) -&gt; str:
+    name = name.lower().strip()
+    for pat, rep in NORMALIZATIONS:
+        name = re.sub(pat, rep, name)
+    return &quot; &quot;.join(name.split())
+</code></pre>
+<h3>12.4 임계값 검증 방법</h3>
+<p>이전 판의 "Config별 FP/FN rate 표"와 "감독당국 기대 FN &lt; 3%"는 공개 근거가 없어 삭제했습니다. 대신 다음 절차로 자사 수치를 만듭니다.</p>
+<ol>
+<li>과거 HIT와 disposition 결과로 라벨 샘플 구성</li>
+<li>임계값·규칙 조합별 FP·FN을 측정</li>
+<li>선택한 조합과 그 이유(놓칠 수 있는 유형 포함)를 문서화하고 승인</li>
+<li>명단 구조가 바뀌면 재검증</li>
+</ol>
+<h3>12.5 SQL 구현 예시</h3>
+<pre><code class="language-sql">-- Jaro-Winkler + DOB/국적 필터 + 화이트리스트 제외 (함수명은 DB별로 다름)
+WITH candidates AS (
+  SELECT c.id AS cust_id, s.id AS sdn_id, c.surname,
+         JARO_WINKLER(c.full_name, s.name) AS score,
+         (c.dob = s.dob) AS dob_match,
+         (c.nationality = ANY(s.nationalities)) AS nat_match
+  FROM customers c
+  CROSS JOIN sanctions_list s
+  WHERE SOUNDEX(c.surname) = SOUNDEX(s.surname)  -- 1차 필터
+)
+SELECT * FROM candidates
+WHERE score &gt;= CASE
+    WHEN surname IN ('Kim','Lee','Park','Choi','Jung','Jang','Yoon','Cho','Kang')
+    THEN 0.92 ELSE 0.88 END                       -- 예시 임계값
+  AND (dob_match OR nat_match)
+  AND NOT EXISTS (
+      SELECT 1 FROM fp_whitelist w
+      WHERE w.cust_id = candidates.cust_id
+        AND w.sdn_id = candidates.sdn_id
+        AND w.expires_at &gt; CURRENT_DATE
+  );
+</code></pre>
+<h3>12.6 Whitelist 운영</h3>
+<p>한 번 "FP 확인" disposition을 받은 쌍은 <strong>만료일 있는 화이트리스트</strong>에 올려 동일 쌍의 재알람을 막습니다. 만료 기간은 정책으로 정합니다.</p>
+<pre><code class="language-sql">CREATE TABLE fp_whitelist (
+    cust_id BIGINT,
+    sdn_id BIGINT,
+    disposition_reason TEXT,
+    created_at TIMESTAMP,
+    expires_at TIMESTAMP,
+    created_by UUID,
+    PRIMARY KEY (cust_id, sdn_id)
+);
+-- 승인권자가 승인한 경우만 추가, 만료 시 재검증
+-- 명단 항목이 갱신되면 관련 화이트리스트도 재검토
+</code></pre>
+<p><strong>주의</strong>: 화이트리스트 자체가 검사 대상입니다. 승인 로그·만료 정책·재검증 주기를 문서화합니다.</p>
+<hr />
 <h2>더 읽을거리</h2>
 <ul>
 <li><a href="cdd-edd.md"><code>cdd-edd.md</code></a> — Onboarding 스크리닝 통합</li>
 <li><a href="str-ctr.md"><code>str-ctr.md</code></a> — 매칭 시 STR</li>
-<li><a href="../2-regulations/us-bsa-fincen.md"><code>../2-regulations/us-bsa-fincen.md</code></a> — OFAC 제도 상세</li>
-<li><a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a> — DeFi 제재 사례</li>
-<li><a href="https://ofac.treasury.gov/">OFAC 공식</a></li>
-<li><a href="https://sanctionssearch.ofac.treas.gov/">OFAC SDN List 검색</a></li>
-<li><a href="https://www.un.org/securitycouncil/content/un-sc-consolidated-list">UN Consolidated List</a></li>
+<li><a href="../2-regulations/us-bsa-fincen.md"><code>../2-regulations/us-bsa-fincen.md</code></a> — OFAC 2026 축, FinCEN 조치</li>
+<li><a href="../6-cases/tornado-cash.md"><code>../6-cases/tornado-cash.md</code></a> — 제재 해제와 위험 평가</li>
+<li><a href="../6-cases/major-enforcement.md"><code>../6-cases/major-enforcement.md</code></a> — Prince Group·Huione·BitBank·A7</li>
+<li><a href="https://ofac.treasury.gov/recent-actions">OFAC Recent Actions</a></li>
 </ul>
     </div>
     <div class="article-foot">

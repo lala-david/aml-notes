@@ -1,6 +1,6 @@
 # What is AML? — 자금세탁방지 기초
 
-> 자금세탁(Money Laundering)이란 무엇이고, AML(Anti-Money Laundering)이 왜 존재하는가. 이 글을 읽고 나면 "자금세탁 3단계"가 머릿속 그림으로 남고, 왜 AML이 단순 금융규제가 아니라 **범죄 억제 인프라**인지 설명할 수 있게 됩니다. 마지막 업데이트: 2026-04-17.
+> 자금세탁(Money Laundering)이란 무엇이고, AML(Anti-Money Laundering)이 왜 존재하는가. 이 글을 읽고 나면 "자금세탁 3단계"가 머릿속 그림으로 남고, 왜 AML이 단순 금융규제가 아니라 **범죄 억제 인프라**인지 설명할 수 있게 됩니다. 마지막 업데이트: 2026-10-21.
 
 ## TL;DR
 - **자금세탁(ML, Money Laundering)**: 범죄로 얻은 돈의 출처를 숨겨 합법적인 자금처럼 보이게 하는 행위
@@ -8,6 +8,7 @@
 - 자금세탁은 전통적으로 **3단계 모델**: Placement → Layering → Integration
 - 가상자산은 이 3단계가 다 **온체인에서** 일어날 수 있어서 추적은 쉬워졌지만 속도·규모가 폭증
 - AML 의무의 큰 줄기: **고객을 알고(KYC) → 거래를 모니터링하고(KYT/TM) → 의심되면 신고(STR)**
+- 가상자산 국제 기준의 뼈대는 **FATF R.15·INR.15**(2018-10 정의 신설, 2019-06 INR.15 채택). 가상자산 트래블룰의 원천은 R.16 본문이 아니라 **INR.15 §7(b)** 다
 
 ---
 
@@ -61,10 +62,10 @@ flowchart LR
 
 ### 왜 3단계인가
 
-1984년 미국 관세청 산하 조직이 처음 제안하고 FATF·UNODC가 표준으로 채택한 모델. 실제 자금세탁은 단계가 뚜렷이 구분되지 않고 섞여 돌아가지만, 이 모델은 **"어디에 방어선을 칠지"** 설계하는 데 유용해서 40년째 기본 프레임으로 쓰입니다.
+AML 교육에서 관용적으로 쓰는 설명 틀입니다(모델의 최초 제안자·연도는 이 저장소 근거 자료로 확인하지 않았습니다 — 공개 근거 미확인). 실제 자금세탁은 단계가 뚜렷이 구분되지 않고 섞여 돌아가지만, 이 모델은 **"어디에 방어선을 칠지"** 설계하는 데 유용합니다.
 
 용어:
-- **FATF (Financial Action Task Force)** — 국제자금세탁방지기구. 1989년 G7이 만든 국제기구로, 회원국에 권고안(Recommendation)을 발표.
+- **FATF (Financial Action Task Force)** — 국제자금세탁방지기구. 권고안(Recommendation)을 발표하는 정부간 기구(1989년 설립은 배경 사실로만 언급 — 보고서 부록 B #1).
 - **UNODC (UN Office on Drugs and Crime)** — UN 마약범죄국. 자금세탁 관련 통계·연구 발간.
 
 ### 한 줄 서사로 보는 3단계
@@ -100,7 +101,7 @@ flowchart LR
 - **Chain Hopping** — 서로 다른 블록체인 사이를 점프해 흔적을 흐리는 기법.
 - **Peel Chain** — 큰 금액에서 소액을 떼어내(peel) 다른 주소로 보내고 나머지는 또 다른 주소로, 긴 사슬 패턴.
 
-이 단계가 **가장 길고 창의적**입니다. 가상자산 환경에서는 layering 도구가 매년 새로 나옵니다 — 크로스체인 브리지가 2022~2023년에 터졌다면 2024~2025년엔 DeFi 프로토콜 기반 믹싱이 대세입니다. **온체인 분석(blockchain analytics)** 산업이 돈을 버는 지점이 바로 이 구간 — Chainalysis·Elliptic·TRM Labs 같은 회사의 기술은 대부분 "Layering을 풀어내는 휴리스틱"에 투자되어 있습니다.
+이 단계가 **가장 길고 창의적**입니다. 가상자산 환경에서는 layering 도구가 계속 바뀝니다. 연도별 "유행" 순위는 공개 근거가 없지만, 학계 측정은 몇 가지를 보여 줍니다. 크로스체인 추적은 휴리스틱에서 자동 매칭으로 넘어갔고(ABCTracer 12개 브리지 F1 91.75%, ConneX 5개 브리지 F1 0.9746 — 브리지 집합이 달라 직접 비교 불가)([arXiv 2504.01822](https://arxiv.org/abs/2504.01822); [arXiv 2511.01393](https://arxiv.org/abs/2511.01393)), Tornado Cash 제재 후 957일 동안 입금액은 71.03% 줄었지만 Ethereum 보안사고의 78.33%는 여전히 Tornado Cash를 거쳤습니다([arXiv 2507.11721](https://arxiv.org/abs/2507.11721)). **온체인 분석(blockchain analytics)** 도구가 주로 겨냥하는 구간이 바로 여기입니다.
 
 ### Stage 3. Integration (통합)
 
@@ -127,7 +128,7 @@ flowchart LR
 
 ### 실무 포인트
 
-가상자산에서는 이 3단계가 **모두 한 트랜잭션 안에 압축**되거나 **24시간 내에 다 끝날 수도** 있습니다 — 2025-02 Bybit 해킹(Lazarus)에서 48시간 내 $160M이 layering 완료된 게 상징적 사례입니다. 그래서 가상자산 AML은 **실시간성**이 절대적이고, 사후 조사로는 자산을 회수하지 못합니다. 이게 KYT(Know Your Transaction, 거래 확인) 실시간 모니터링이 사업 필수 기능이 된 배경입니다.
+가상자산에서는 이 3단계가 **짧은 시간 안에 압축**될 수 있습니다. FATF 6차 Targeted Update(2025-06-26)는 DPRK의 **Bybit USD 14.6억 탈취(회수율 3.8%)** 를 헤드라인으로 올렸고([6차 TU](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/2025-Targeted-Upate-VA-VASPs.pdf.coredownload.pdf)), 7차 TU(2026-07-16)는 VASP가 "detect rapid transfer of VAs using transactions monitoring and blockchain analytics tools"해야 한다고 처음 권고했습니다(권고 6-ii)([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)). 이전 판의 "Bybit 48시간 내 $160M layering"은 출처가 없어 삭제했습니다. 업계가 쓰는 "KYT"라는 말 자체는 FATF·MAS·한국 고시 어디에도 나오지 않고, 규범 용어는 거래모니터링(transaction monitoring)입니다.
 
 ---
 
@@ -149,9 +150,9 @@ flowchart LR
 그래서 TF는 **자금출처가 합법이어도** 차단 대상이 될 수 있습니다. 예를 들어 이슬라믹 스테이트(IS)가 자선단체를 가장해 정당한 기부금을 모은 뒤 무기 구매에 쓴다면, 그 기부금 자체는 범죄수익이 아니지만 CFT 위반이 됩니다. 이 차이가 **제재(sanctions) 스크리닝**을 실무의 핵심 통제로 만든 이유입니다 — 수취인 쪽 명단을 보는 일이기 때문.
 
 용어:
-- **Sanctions Screening (제재 스크리닝)** — 거래 당사자가 OFAC SDN, UN, EU, 외교부 제재대상자 명단에 해당하는지 실시간 매칭.
+- **Sanctions Screening (제재 스크리닝)** — 거래 당사자·지갑주소가 UN·미국 OFAC·EU·국내 제재대상자 명단에 해당하는지 대조.
 - **OFAC (Office of Foreign Assets Control)** — 미국 재무부 해외자산통제국. 제재 대상을 지정·집행하는 권한 보유.
-- **SDN List (Specially Designated Nationals List)** — OFAC가 발표하는 제재대상자 목록. 가상자산 주소도 포함됨.
+- **SDN List (Specially Designated Nationals List)** — OFAC가 발표하는 제재대상자 목록. 가상자산 주소가 실리는 경우도 있지만(예: 2025-03-21 삭제 전 Tornado Cash의 ETH 주소 90개), 2026-09-17 이란 거래소 BitBank 지정처럼 **주소 없이 지정되는 경우도 있다**([OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321); [OFAC 2026-09-17](https://ofac.treasury.gov/recent-actions/20260917)).
 
 ### 실무 포인트
 
@@ -163,31 +164,31 @@ flowchart LR
 
 ### 개요
 
-가상자산사업자(VASP, Virtual Asset Service Provider — 거래소·수탁·OTC 등)든 은행이든 결제사든, AML 의무의 뼈대는 거의 동일합니다. 관할(한국·미국·EU)에 따라 세부 조항과 임계금액만 달라집니다. 이 9개는 어떤 AML 교재에서도 반복 등장하므로 순서째로 암기해두면 이후 규제 문서를 읽을 때 뼈대가 됩니다.
+가상자산사업자(VASP, Virtual Asset Service Provider — 거래소·수탁·OTC 등)든 은행이든 결제사든, AML 의무의 뼈대는 거의 동일합니다. 관할(한국·미국·EU)에 따라 세부 조항과 금액 기준이 달라집니다. 이 9개는 어떤 AML 교재에서도 반복 등장하므로 순서째로 암기해두면 이후 규제 문서를 읽을 때 뼈대가 됩니다.
 
 ### 9개 의무 (가상자산 기준 Travel Rule 포함 시 10개)
 
 1. **신고·등록(Licensing)** — 당국에 사업자 등록. 한국은 FIU 신고, 미국은 FinCEN MSB 등록, EU는 MiCA CASP 라이선스.
-2. **고객확인(KYC/CDD)** — 누구와 거래하는지 확인. 신분증, 주소, 거래목적.
+2. **고객확인(KYC/CDD)** — 누구와 거래하는지 확인. 신분증, 주소, 거래목적. 한국 근거는 특금법 §5의2.
 3. **위험기반접근(RBA, Risk-Based Approach)** — 고객·상품·지역별 위험등급을 매기고 그에 비례해 통제 강도 조정. 저위험은 간소하게, 고위험은 두껍게.
 4. **강화실사(EDD, Enhanced Due Diligence)** — 고위험(PEP, 고위험국, 비대면+기타 위험요소) 고객에 추가 확인. 자금원천 증빙이 핵심.
 5. **거래모니터링(TM/KYT)** — 비정상 거래 패턴 탐지. 전통 금융은 TM(Transaction Monitoring), 가상자산은 KYT(Know Your Transaction)로 부름.
 6. **제재 스크리닝(Sanctions Screening)** — 고객·카운터파티·지갑주소가 제재 대상인지 실시간 대조.
-7. **의심거래보고(STR/SAR)** — 의심되면 즉시 FIU에 보고. STR(Suspicious Transaction Report, 한국·FATF 용어), SAR(Suspicious Activity Report, 미국 FinCEN 용어).
-8. **기록보관(Record Keeping)** — 한국은 **가상자산이용자보호법 §11로 거래정보 15년**, **특금법 §5의4로 AML 기록 5년**. 대상이 다르므로 둘 다 준수.
+7. **의심거래보고(STR/SAR)** — 의심되면 FIU에 보고. STR(Suspicious Transaction Report, 한국·FATF 용어), SAR(Suspicious Activity Report, 미국 FinCEN 용어). 한국 근거는 특금법 §4(금액 기준 없음), 고액현금거래보고(CTR)는 §4의2.
+8. **기록보관(Record Keeping)** — 한국은 특금법상 고객확인 자료·거래 기록 보존과 별도로, 가상자산이용자보호법 시행령 §13이 상시감시·조치 결과와 통보·신고·보고 기록을 보존 대상 가상자산거래기록에 넣습니다. 두 법의 대상·기간이 다르므로 각 기간은 법령 원문으로 확인하고, 겹치면 긴 쪽을 따릅니다([`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) §4).
 9. **내부통제(Internal Controls)** — AML 책임자(AMLO/MLRO) 임명, 정책·절차 문서화, 임직원 교육, 내부감사.
 
 **가상자산 추가 10번째**:
 
-10. **Travel Rule (FATF R.16)** — 일정 금액 이상 VASP 간 이전 시 송수신인 정보 동반. 한국은 100만원, 미국은 $3,000, EU는 임계 없음(1유로부터).
+10. **Travel Rule (FATF INR.15 §7(b))** — VASP 간 이전 시 송수신인 정보 동반. 관할마다 금액 구조가 다릅니다. 한국은 특금법 §5의3·시행령 §10의10 「100만원 이상」(2027-02-18까지) → **2027-02-19부터 기준금액 없이 전건**(대통령령 제36592호 2026-08-18 공포, enacted-not-in-force), 미국은 31 CFR 1010.410(f) "$3,000 or more", EU TFR은 **금액 기준 없이 전건**(EUR 1,000 이상 자기수탁 이전에는 소유·통제 검증)입니다. 상세는 [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md).
 
 용어:
-- **PEP (Politically Exposed Person)** — 정치적 주요인물. 고위 공직자·그 가족·측근. 부패 위험이 구조적으로 높아 자동 EDD.
-- **Travel Rule** — FATF 권고 16조. 전통 금융의 SWIFT 송금정보 동반을 가상자산으로 확장한 개념.
+- **PEP (Politically Exposed Person)** — 정치적 주요인물. 고위 공직자·그 가족·측근. 부패 위험이 구조적으로 높아 강화된 고객확인(EDD) 대상.
+- **Travel Rule** — 전신송금 정보 동반 원칙(R.16)을 VASP에 적용한 것. 법적 원천은 2019-06 신설된 INR.15 §7(b)이고, 2021 가이던스 para 178은 "Recommendation 16 applies in an amended way to VAs as set out in paragraph 7(b) of INR.15"라고 정리합니다([FATF 2021 RBA 가이던스](https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf)).
 
 ### 실무 포인트
 
-"우리 회사 AML 프로그램이 완성됐는가"를 점검할 때는 이 10개를 체크리스트로 만들어 각각에 **담당자·시스템·SLA·증빙**이 있는지 본다. 이 중 어느 하나라도 "사람만 있고 시스템이 없다"면 규제 검사에서 지적 대상입니다.
+AML 프로그램이 갖춰졌는지 점검할 때는 이 10개를 체크리스트로 만들어 각각에 **담당자·시스템·근거 조문·증빙**이 있는지 본다. 이 중 어느 하나라도 "사람만 있고 시스템이 없다"면 규제 검사에서 지적 대상입니다.
 
 ---
 
@@ -198,14 +199,14 @@ flowchart LR
 ```mermaid
 flowchart TB
     F["🌍 FATF<br/>40 Recommendations<br/>(국제 표준)"]
-    F -->|권고 → 국내법화| KR["🇰🇷 한국<br/>특금법 · 이용자보호법"]
+    F -->|권고 → 국내법화| KR["🇰🇷 한국<br/>특금법 · 이용자보호법<br/>통신사기피해환급법"]
     F -->|권고 → 국내법화| US["🇺🇸 미국<br/>BSA · PATRIOT Act"]
     F -->|권고 → 국내법화| EU["🇪🇺 EU<br/>MiCA · AMLR · TFR"]
     F -->|권고 → 국내법화| JP["🇯🇵 일본 · 싱가포르 · 홍콩"]
 
     KR --> KRS["감독: FIU · FSC · FSS"]
-    US --> USS["감독: FinCEN · OFAC · SEC · CFTC"]
-    EU --> EUS["감독: AMLA · ESMA · NCA"]
+    US --> USS["감독·집행: FinCEN · OFAC"]
+    EU --> EUS["AMLA · EBA · ESMA · 회원국 당국"]
 
     F -.평가.-> ME["Mutual Evaluation<br/>Grey/Black List"]
 
@@ -227,20 +228,20 @@ flowchart TB
 - 국가 신용등급 강등, 자본 유출
 - 외국인 투자 기피
 
-즉 국가 경제 자체가 타격을 입습니다. 2021~2025년 사이 터키·남아공·나이지리아·파키스탄이 Grey List에 올랐다가 빠지는 과정에서 이런 압력을 체감했습니다. 한국은 Grey List에 오른 적이 없지만, 바로 그 이유로 FATF 권고 이행에 민감합니다.
+등재가 특정 국가 경제에 준 영향의 수치는 이 저장소 근거 범위 밖입니다. 다만 각국 금융기관이 명단을 위험평가 입력으로 쓰기 때문에 해당 관할과의 거래에 강화 실사가 붙습니다. 2026-06-17~19 총회에서 보스니아헤르체고비나·이라크가 회색명단에 들어가고 알제리·나미비아가 빠져, 2026-10-21 기준 회색명단은 22개 관할입니다(B)([FATF 2026-06 총회 결과](https://www.fatf-gafi.org/en/publications/Fatfgeneral/outcomes-fatf-plenary-june-2026.html)). 다음 총회는 2026-10-26~30 예정입니다([FATF 일정표](https://www.fatf-gafi.org/en/calendars/events.html)).
 
 ### 가상자산에 대한 결정적 권고 2개
 
 가상자산 산업이 FATF 권고를 체감하는 지점은 거의 이 둘로 압축됩니다.
 
-- **FATF Recommendation 15 — VASP에 AML/CFT 의무 부과.** 가상자산사업자를 전통 금융기관과 동일한 AML 체계에 편입. 2019년 신설, 2021·2025년 개정.
-- **FATF Recommendation 16 — Travel Rule.** VASP 간 이전 시 송수신인 정보 동반 의무. 2019년 확장, 2025-06 해석지침 업데이트.
+- **FATF Recommendation 15(New technologies) + INR.15 — VASP에 AML/CFT 의무 부과.** 2018-10 R.15 개정으로 VA·VASP 정의가 용어집에 신설됐고, 2019-06 INR.15와 RBA 가이던스 초판이 채택됐습니다. 2021-10-28 개정 가이던스가 2019 초판을 대체합니다.
+- **트래블룰 — INR.15 §7(b).** VASP 간 이전 시 송수신인 정보 동반 의무. 문언에 금액 기준이 없고, USD/EUR 1,000은 바로 앞 §7(a)의 임시거래 CDD 기준입니다. **R.16은 2025-06 개정**됐지만 FATF는 VASP를 R.16에 직접 넣지 않고 R.15를 거쳐 간접 적용하며(설명서 para 54), 이행 기대시한은 2030년 말입니다(para 59)([R.16 개정 설명서](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/Explanatory%20note%20for%20revised%20R.16.pdf.coredownload.pdf)).
 
-R.15와 R.16은 한국 특금법 개정(2020-03, 2021-03)과 EU MiCA·TFR 제정(2023~2024)의 **직접 모태**가 됐습니다. 두 권고의 정확한 문언을 아는 것은 이후 모든 국가별 규제 학습의 출발점입니다. 자세한 내용은 [`../2-regulations/fatf.md`](../2-regulations/fatf.md) 참조.
+이 기준은 한국 특금법 개정(2020-03-24 개정, 2021-03-25 시행)과 EU MiCA·TFR(2024-12-30 적용)의 배경이 됐습니다. 두 권고의 정확한 문언을 아는 것은 이후 모든 국가별 규제 학습의 출발점입니다. 자세한 내용은 [`../2-regulations/fatf.md`](../2-regulations/fatf.md) 참조.
 
 ### 실무 포인트
 
-회사 AML 정책 문서 맨 앞에 "본 정책은 FATF Recommendation 10, 15, 16 및 한국 특금법 §5의2~§5의4에 근거한다"고 명시하면, 규제 검사관이 문서 구조를 이해하기 쉬워지고 내부 교육 자료에서도 "이 룰이 왜 있는가"를 거슬러 올라가 설명할 수 있습니다. 법적 근거 추적성(traceability)을 문서에 내재화하는 게 성숙한 AML 프로그램의 표식입니다.
+AML 정책 문서 맨 앞에 "본 정책은 FATF R.10·R.15(INR.15)·R.16 및 특금법 §4(STR)·§4의2(CTR)·§5의2(고객확인)·§5의3(트래블룰)에 근거한다"고 명시하면, 규제 검사관이 문서 구조를 이해하기 쉬워지고 내부 교육 자료에서도 "이 룰이 왜 있는가"를 거슬러 올라가 설명할 수 있습니다. 법적 근거 추적성(traceability)을 문서에 내재화하는 게 성숙한 AML 프로그램의 표식입니다.
 
 ---
 
@@ -250,80 +251,62 @@ R.15와 R.16은 한국 특금법 개정(2020-03, 2021-03)과 EU MiCA·TFR 제정
 **AML 9대 의무**: 신고 · KYC/CDD · RBA · EDD · TM/KYT · 제재 스크리닝 · STR · 기록보관 · 내부통제 (+ 가상자산 Travel Rule)
 **글로벌 구조**: FATF 권고 → 각국 국내법 → 감독기관 집행 → Mutual Evaluation 피드백 루프
 
+### 가상자산 AML 국제 기준 연대기
+
+```mermaid
+timeline
+    title FATF 가상자산 기준 — 원문으로 확인되는 이정표
+    2014-06 : Virtual Currencies Key Definitions 보고서
+    2018-10 : R.15 개정 — VA·VASP 정의 신설
+    2019-06 : INR.15 채택 — §7b 가상자산 트래블룰
+    2020-09-14 : Red Flag Indicators 58개 지표
+    2021-10-28 : 개정 RBA 가이던스
+    2025-06 : R.16 개정 — VASP는 R.15 경유
+    2026-07-16 : 7차 Targeted Update
+```
+
+출처: [보고서 연대기 표](../../reports/가상자산%20AML%20KYT%20FDS%20트래블룰%20흐름.md), [FATF Red Flag](https://www.fatf-gafi.org/en/publications/Methodsandtrends/Virtual-assets-red-flag-indicators.html), [7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf).
+
 ## 💼 실무 현장 (Industry Reality)
 
-### 한국 VASP 조직도
+> 이전 판의 거래소별 조직 인원·컴플라이언스 비율, 연봉, 분석가 1인당 처리량, 거래소별 벤더·사내 시스템명(예: "Lynx", "Sombrero"), Binance·OKX 합의 금액과 모니터십 조건, DAXA 공동 블랙리스트, 본인확인기관 점유 서술은 이 저장소 근거 자료로 확인되지 않아 삭제했습니다(공개 근거 미확인 — [`../6-cases/major-enforcement.md`](../6-cases/major-enforcement.md) 기준과 같음).
 
-**Upbit·Bithumb·Coinone·Korbit 공통 패턴**:
+### 조직 — 법이 요구하는 것과 확인되지 않는 것
 
-- **AMLO (자금세탁방지책임자)**: 임원급(보통 부사장·이사급). 특금법상 **지정 의무**이며 FIU에 이름·경력 신고.
-- **AML 분석팀 (Analysts)**: 6~15명. KYT Alert 큐 처리, STR 초안 작성, EDD 심사.
-- **KYT/KYC 엔지니어링**: 2~5명. 거래 모니터링 파이프라인 운영, 벤더 API 연동, 룰 배포.
-- **정책·감사 대응팀**: 2~4명. FIU 정기 검사·ISMS·외부감사 대응, 정책서 개정.
-- **법무·준법감시인(Compliance Officer)**: 별도 보직. AMLO와 협업하지만 직무 분리.
+- **보고책임자(AMLO)**: 특금법상 VASP는 보고책임자를 두고, 변경 시 신고합니다. 2026-08-20 이후 대주주 변경은 "30일 전 사전신고" 대상입니다([금융위 2026-08-13 신고매뉴얼](https://www.fsc.go.kr/no010101/87521)).
+- **AML 인력**: 2026-08-13 전면 개정된 신고매뉴얼은 **AML 인력 4인 이상**과 전산설비 국내 소재(클라우드 국내 리전 인정)를 정했습니다([금융위 2026-08-13](https://www.fsc.go.kr/no010101/87521)). 개별 거래소의 실제 인원·조직 구조는 공개 근거가 없습니다.
+- **글로벌 거래소 조직·보수 수준**: 공개 근거 미확인.
 
-**헤드카운트 현실**: 2026-Q1 기준 Upbit 전사 인원 ~650명 중 컴플라이언스(AML+CO) 라인은 ~45명(7% 수준). 이는 **DAXA 원화거래소 4사 중 최대 비율**. 글로벌과 비교하면 Coinbase는 전사 3,500명 중 컴플라이언스 ~500명(14%) — 한국 거래소가 상대적으로 얇은 편.
-
-### 글로벌 대형 거래소 조직
-
-- **Coinbase**: 컴플라이언스를 3개 독립팀으로 분리 — **FCI(Financial Crimes Investigations)**, **Sanctions Operations**, **AML Advisory**. 각 팀이 독립 예산·KPI·리포팅 라인.
-- **Binance**: 2023 DOJ 합의($4.3B) 이후 **5개 지역 hub**(두바이·런던·싱가포르·아부다비·바하마)에 독립 AMLO 배치. **DOJ·FinCEN 모니터(외부 감시관) 5년 상주**(2024-2029).
-- **Kraken**: 상대적으로 슬림 — 전사 ~2,000명 중 컴플라이언스 ~200명. "한 명이 여러 모자를 쓰는" 구조.
-- **OKX**: 2025-02 $504M 합의 후 **US CCO(Chief Compliance Officer) 신규 신설** + 뉴욕 본사 법인 분리.
-
-### AML 실무에서 매일 다루는 실제 워크플로
+### AML 실무에서 매일 다루는 워크플로
 
 ```mermaid
 flowchart LR
-    U[사용자 거래] --> K[KYT 엔진<br/>Chainalysis API]
-    K -->|Alert| Q[Alert 큐<br/>Slack · Jira]
-    Q --> A[Analyst 1차 리뷰]
-    A -->|FP| C[종결]
-    A -->|의심| I[조사 티켓]
-    I --> E[EDD 요청]
-    E -->|증빙 부족| S[STR 초안]
-    S --> L[AMLO 승인]
-    L --> F[FIU-TIS 제출]
+    U[사용자 거래] --> K["거래모니터링<br/>룰 + 블록체인 분석도구"]
+    K -->|알림| Q[알림 큐]
+    Q --> A[분석가 1차 검토]
+    A -->|오탐| C["종결 · 사유 기록"]
+    A -->|의심| I[조사]
+    I --> E[EDD · 자금원천 확인]
+    E -->|의심 해소 안 됨| S[STR 작성]
+    S --> L[보고책임자 결재]
+    L --> F["FIU 제출<br/>특금법 §4"]
     style K fill:#dbeafe
     style S fill:#fee2e2
     style F fill:#d1fae5
 ```
 
-"Alert → FP 분류 → 조사 → STR → 제출"이 하루 업무 순서. **80%는 FP(False Positive, 오탐)**이고, 실제 STR로 이어지는 건 **1~5%**.
+FATF 2021 가이던스 para 275~276은 "automated systems may be the only realistic method of monitoring transactions, and flagged transactions should go through human/expert analysis"라고 해 자동화와 사람의 검토를 함께 요구합니다([FATF 2021 가이던스 미러](https://www.onpcsb.ro/2022/01042022/Updated-Guidance-VA-VASP.pdf)). 알림 중 오탐 비율이나 STR 전환율에 대한 **가상자산 전용 공개 벤치마크는 없습니다**. 은행권 자료(EY 2018, 리테일 평균 14%)만 있습니다(B)([EY 2018](https://ey.com/content/dam/ey-unified-site/ey-com/en-uk/industries/financial-services/documents/ey-anti-money-laundering-transaction-monitoring-2018-emeia-survey.pdf)). 이전 판의 "80% 오탐, STR 전환 1~5%"는 근거가 없어 삭제했습니다.
 
-### 기술 스택 — 실제 회사에서 쓰는 도구
+### 한국 "이상거래"는 세 갈래다
 
-| 레이어 | 한국 VASP | 글로벌 |
-|---|---|---|
-| 스트리밍 | Kafka + Flink 또는 Spark Streaming | 동일 (Coinbase는 자체 "Sombrero") |
-| 그래프 DB | Neo4j (소규모), 자체 Postgres+recursive CTE | Neo4j · TigerGraph · Coinbase "Lynx" GNN |
-| KYT 벤더 | Chainalysis KYT + VerifyVASP(Chainalysis 내장) | Chainalysis · Elliptic · TRM Labs 병행 |
-| 알림 | Slack + Jira + PagerDuty | 동일 + 자체 case management tool |
-| BI·리포팅 | Tableau + Snowflake | Databricks · Snowflake · Looker |
-| STR 제출 | FIU-TIS 포털 (수기 업로드) | FinCEN BSA E-Filing (API) |
-
-### 주니어 AML Analyst 하루 (09:00~18:00)
-
-- **09:00~10:00** — 전날 야간 KYT Alert 큐 리뷰. 보통 30~80건. 80%는 즉시 FP로 종결.
-- **10:00~11:30** — EDD 케이스 — 자금원천 증빙 서류(급여명세서·거래내역·사업자등록증) 심사. 평균 5~10건/일.
-- **11:30~12:00** — OFAC SDN 일일 diff 확인 + 신규 제재 대상 주소 리스트 내부 블랙리스트 sync.
-- **13:00~15:00** — STR 초안 작성 (AMLO 승인 후 KoFIU FIU-TIS 포털 제출). 분석가 1인당 월 3~10건.
-- **15:00~16:30** — 주간 FP 분석 + 룰 튜닝 제안 (월 1회 **룰 위원회**에서 확정).
-- **16:30~18:00** — 고위험 거래 수동 모니터링 + 시니어 브리핑.
-
-**1~3년차 연봉(2026 한국 기준)**: 주니어 Analyst 4,500~6,500만원, 시니어 7,000~9,500만원, AMLO(임원급) 1.5~3억원. 글로벌은 Coinbase·Kraken US 기준 주니어 $90~120K, AMLO $300~500K(+equity).
+같은 "이상" 신호라도 법적 출구가 다릅니다. ① 전자금융 FDS·보이스피싱 임시조치(통신사기피해환급법, 거래소 2026-10-01~) ② 가상자산이용자보호법 §12 불공정거래 상시감시 ③ 특금법 §4 의심거래보고(STR). 셋을 섞으면 탐지는 했는데 틀린 출구로 보내는 "분류 실패"가 생깁니다([`../4-technology/fds.md`](../4-technology/fds.md)).
 
 ### 자주 나오는 오해
 
-- **"AML은 법무 업무"** — 한국은 준법(Compliance)으로 묶지만 **미국·EU는 Financial Crimes가 별도 C-level**. 법적 지식 + 데이터 엔지니어링 역량이 동시에 필요.
-- **"룰만 많이 쌓으면 된다"** — 룰 충돌·FP 폭증이 오히려 탐지 품질을 떨어뜨림. "튜닝된 룰 10개 > 기계 생성 룰 100개"가 실무 원칙.
-- **"STR 많이 내면 잘하는 것"** — KoFIU도 FIU도 **품질 > 수량**. 형식적 STR 남발은 검사에서 감점.
-
-### 한국 특수 현실
-
-- **금융위 TF 참여**: 한국 AMLO는 금융위·FIU 정책 TF에 실무자로 참여하는 일이 잦음. 공공·민간 경계가 미국보다 가까움.
-- **DAXA(Digital Asset eXchange Association)**: 원화거래소 5사 자율협의기구. 공동 제재 주소 리스트·공동 상장 심사 기준 운영.
-- **본인확인기관 독점**: PASS·NICE·KCB 3개사가 실명확인 API 독점 → 신규 VASP 진입 장벽의 하나.
+- **"AML은 법무 업무"** — 법적 지식과 데이터 엔지니어링 역량이 동시에 필요합니다. 조직상 위치는 회사마다 다릅니다.
+- **"룰만 많이 쌓으면 된다"** — FATF 2021 가이던스는 운영 룰의 무결성을 "regular basis"로 검증하라고 합니다. 룰 수보다 검증된 룰이 중요합니다.
+- **"STR 많이 내면 잘하는 것"** — STR은 "의심되는" 경우의 보고이고, 판단 근거가 기록돼 있어야 합니다. 상세는 [`../5-compliance/str-ctr.md`](../5-compliance/str-ctr.md).
+- **"트래블룰 위반으로 거래소가 제재받았다"** — 2024-01-01~2026-10-21 어느 관할에서도 트래블룰 위반을 독립 제재 사유로 명시한 사건은 확인되지 않았습니다. 두나무 과태료 352억원(2025-11-06)의 사유도 고객확인·거래제한·의심거래보고 위반이었습니다([FIU 보도자료 KDI 미러](https://eiec.kdi.re.kr/policy/materialView.do?num=273166)).
 
 ---
 

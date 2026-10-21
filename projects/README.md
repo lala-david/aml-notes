@@ -1,6 +1,6 @@
 # 🛠️ projects — 자동화 미니 프로젝트
 
-> 60일 챌린지의 **6개 미니 프로젝트** 코드 + 사양. 이 프로젝트들은 주별로 배운 개념을 **손으로 실행 가능한 코드**로 바꿔보고, 최종적으로 Capstone Risk Engine 설계서로 통합하기 위한 점진적 빌딩 블록입니다. 마지막 업데이트: 2026-04-17.
+> 60일 챌린지의 **6개 미니 프로젝트** 코드 + 사양. 이 프로젝트들은 주별로 배운 개념을 **손으로 실행 가능한 코드**로 바꿔보고, 최종적으로 Capstone Risk Engine 설계서로 통합하기 위한 점진적 빌딩 블록입니다. 마지막 업데이트: 2026-10-21.
 
 ## 왜 코드까지 작성하나
 
@@ -17,7 +17,7 @@
 | 05 | [`05-kyt-wrapper/`](05-kyt-wrapper/README.md) | W8 (D56) | KYT API 호출 wrapper |
 | 06 | [`06-capstone-risk-engine/`](06-capstone-risk-engine/DESIGN.md) | Capstone (D59) | Mini AML Risk Engine 설계서 |
 
-## 프로젝트 상태 (2026-04 기준)
+## 프로젝트 상태 (2026-10-21 기준)
 
 | # | 프로젝트 | 상태 | 난이도 | 예상 시간 |
 |---|---|---|---|---|
@@ -28,7 +28,7 @@
 | 05 | KYT API Wrapper | 스펙 | ⭐⭐⭐ | 주말 2일 |
 | 06 | Capstone — Mini Risk Engine | 스펙 | ⭐⭐⭐⭐⭐ | 2주 |
 
-- **스펙**: README.md(또는 DESIGN.md)에 설계 완료, 실제 코드는 학습자가 직접 작성. 2026-04 현재 6개 모두 이 상태.
+- **스펙**: README.md(또는 DESIGN.md)에 설계 완료, 실제 코드는 학습자가 직접 작성. 2026-10-21 기준 6개 모두 이 상태.
 - **진행 중**: 일부 코드 구현, 미완성.
 - **완료**: 동작 코드 + 테스트 + 예시 출력.
 
@@ -36,11 +36,18 @@
 
 ## 연결 구조 — 6개가 어떻게 합쳐지나
 
-```
-01 IVMS101 Builder  ─┐
-02 Onchain Tracer   ─┤
-03 Mixer Fetcher    ─┼──► 05 KYT Wrapper ──► 06 Capstone Risk Engine
-04 OFAC Screener    ─┘          (통합)           (전체 설계서)
+```mermaid
+flowchart LR
+    P1["01 IVMS101 Builder<br/>트래블룰 메시지"] --> P6["06 Capstone<br/>Risk Engine 설계서"]
+    P2["02 Onchain Tracer<br/>1·2-hop 추적"] --> P5["05 KYT Wrapper<br/>kyt_check"]
+    P3["03 Mixer Fetcher<br/>라벨 수집"] --> P5
+    P4["04 OFAC Screener<br/>SDN 주소 매칭"] --> P5
+    P5 --> P6
+    P6 --> O1["FDS·임시조치"]
+    P6 --> O2["시장감시 §12 통보"]
+    P6 --> O3["STR·EDD"]
+    style P5 fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style P6 fill:#e5eaf2,stroke:#1a2e4a
 ```
 
 - **01~04**는 각기 **독립된 학습용 기능**을 구현합니다.
@@ -100,45 +107,42 @@ OFAC_API_BASE=https://www.treasury.gov/ofac/downloads
 
 ## 💼 실무 현장 (Industry Reality)
 
-### 6개 프로젝트가 실제 회사에서 맡는 역할
+### 6개 프로젝트가 대응하는 실무 기능
 
-각 미니 프로젝트는 VASP 컴플 조직의 **한 기능 유닛**에 대응합니다. "이 기능만 떼어내 스타트업 만들 수도 있는" 단위.
+각 미니 프로젝트는 VASP 컴플라이언스 조직의 **한 기능**에 대응합니다. 오른쪽 열은 같은 기능을 제공한다고 공개적으로 표시한 제품의 예이며, 우열·점유율 평가가 아닙니다.
 
-| 프로젝트 | 담당 실무 팀 | 실제 벤더 대체재 |
+| 프로젝트 | 대응 실무 기능 | 공개된 유사 제품·표준의 예 |
 |---|---|---|
-| 01 IVMS101 Builder | Travel Rule 엔지니어링 | Notabene · VerifyVASP · CODE · TRISA |
-| 02 Onchain Tracer | Investigation(수사) · FCI | Chainalysis Reactor · TRM Forensics · Elliptic Investigator |
-| 03 Mixer Fetcher | Threat Intel · Label Ops | Chainalysis Labels · Elliptic · 자체 OSINT팀 |
-| 04 OFAC Screener | Sanctions Operations | NICE Actimize · Verafin · ComplyAdvantage |
-| 05 KYT Wrapper | KYT 엔지니어링 · AML Monitoring | Chainalysis KYT · Elliptic Navigator · TRM API |
-| 06 Capstone Risk Engine | Chief Compliance Office 전체 | Hummingbird · Unit21 (Case Management) 조합 |
+| 01 IVMS101 Builder | 트래블룰 메시징 | TRP(OpenVASP Association 관리) · TRISA · 솔루션 네트워크(VerifyVASP · CODE · GTR · Sygna 등) |
+| 02 Onchain Tracer | 조사(Investigation) | 블록체인 분석 벤더의 조사 도구 |
+| 03 Mixer Fetcher | 라벨·위협정보 관리 | 분석 벤더 라벨 피드, 공개 OSINT |
+| 04 OFAC Screener | 제재 스크리닝 | OFAC SDN 공식 데이터 + 워치리스트 스크리닝 제품 |
+| 05 KYT Wrapper | 거래모니터링·블록체인 분석 통합 | 블록체인 분석 벤더 API |
+| 06 Capstone Risk Engine | 컴플라이언스 전체 설계 | 케이스 관리·룰 엔진 제품 조합 |
 
-### 한국 VASP는 6개 중 몇 개를 자체 구축하나
+### 규범이 요구하는 것 — 무엇을 자체로, 무엇을 벤더로 할지는 공개 근거 없음
 
-**Upbit 기준 실제 구성** (2026 추정):
+- FATF 2021 RBA 가이던스 para 275~276은 지속 모니터링을 고객 프로파일 대비 거래 일관성 검증으로 정의하고, "automated systems may be the only realistic method of monitoring transactions, and flagged transactions should go through human/expert analysis"라고 합니다. para 277~278은 고위험 상황에서 모니터링을 "extend beyond the immediate transaction"하라고 요구합니다(02·05 프로젝트의 근거)([FATF 2021 RBA 가이던스](https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf)).
+- FATF 7차 Targeted Update(2026-07-16)는 VASP에 "transactions monitoring and blockchain analytics tools"로 급속 이전을 탐지하라고 처음 권고했습니다(권고 6-ii)([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
+- 한국 거래모니터링의 법적 근거는 FIU 고시 「자금세탁방지 업무규정」(제2025-2호, 2026-01-22 시행) 제76~81조이며, 본문에 "가상자산"이라는 단어는 없습니다([법제처 DRF](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000267264&type=XML)).
+- 한국 거래소별로 어떤 기능을 자체 구축하고 어떤 벤더를 쓰는지는 이 저장소가 1차 근거로 확인하지 않았습니다. 이전 판의 "특정 거래소 실제 구성", "6개 중 4개 자체 구축이 업계 표준"은 근거가 없어 삭제했습니다. 공개된 것은 FIU 자신의 2026-02-05 업무계획에 "체이널리시스(가상자산 분석도구) 도입"이 들어 있다는 사실 정도입니다([금융위 2026-02-05](https://fsc.go.kr/no010101/86209)).
 
-- **자체 구축**: Risk Engine 중 룰 엔진 · KYT wrapper · 자체 라벨 DB (한국 거래소 hot wallet 등)
-- **벤더 의존**: IVMS101(람다256 VerifyVASP) · KYT(Chainalysis) · KYC(ARGOS+PASS) · Sanctions(Chainalysis 내장+자체 외교부 매핑)
-- **하이브리드**: OFAC SDN crypto 스크리닝은 Chainalysis + 자체 일일 diff 동시 운영
+### 이 프로젝트와 프로덕션의 차이 (정성 비교)
 
-즉 **6개 중 4개는 "자체 구축 + 벤더 보완"**, **나머지 2개(IVMS101·KYT 원천 데이터)는 벤더 의존**이 한국 업계 표준. 완전 자체 구축은 현실적으로 Chainalysis 10년·수백 명·수억 달러 R&D를 혼자 따라잡는 일이라 **ROI가 맞지 않음**.
-
-### 프로덕션과 이 프로젝트의 결정적 차이
-
-| 항목 | 이 프로젝트 | 실제 프로덕션 |
+| 항목 | 이 프로젝트 | 프로덕션에서 추가로 필요한 것 |
 |---|---|---|
-| 데이터 규모 | 수천 건 JSON | Kafka 초당 수천 건 · 연 수십억 건 |
-| 지연시간(latency) | 응답 수 초 OK | p95 200ms 이하 (거래 블로킹 SLA) |
-| 라벨 DB | OFAC + 자체 수집 수백 개 | Chainalysis 10억+ 주소 매핑 |
-| 감사(Audit) | 없음 | 모든 판단 결과 5~15년 보관 + 근거 추적 |
-| 다중 체인 | ETH 단독 | BTC·ETH·Tron·Solana·BSC 등 20+ |
-| 장애대응 | 로컬 재실행 | PagerDuty · SRE on-call |
+| 데이터 규모 | 수천 건 JSON | 스트리밍 처리, 재처리 파이프라인 |
+| 지연시간 | 응답 수 초 OK | 출금 흐름을 막지 않는 응답 목표 — 수치 기준은 공개 근거 없음 |
+| 라벨 DB | OFAC + 자체 수집 | 벤더 라벨(규모는 벤더 자사 주장, 미검증) + 자체 라벨 |
+| 감사(Audit) | 없음 | 판단 결과·근거 보존 — 보존기간은 특금법·이용자보호법 원문 확인, 둘이 겹치면 긴 쪽 |
+| 다중 체인 | ETH 단독 | 브리지·크로스체인 추적 |
+| 법적 출구 | 단일 점수 | FDS·임시조치 / 이용자보호법 §12 통보 / 특금법 §4 STR 세 갈래 분리 |
 
-이 갭을 인지하고 Capstone 설계 시 **"어디까지 자체, 어디부터 벤더"**를 명확히 경계 짓는 연습이 핵심.
+마지막 행이 가장 중요합니다. 한국에서 "이상거래"는 ① 통신사기피해환급법(거래소 2026-10-01 시행)의 FDS·임시조치, ② 가상자산이용자보호법 §12 시장감시(금융위·금감원 통보), ③ 특금법 §4 의심거래보고(STR)를 각각 가리킵니다. Capstone 설계에서 이 셋을 하나의 BLOCK/STR 축으로 합치면 틀립니다.
 
 ### 이 프로젝트 6개를 포트폴리오로 쓸 때
 
-채용 관점에서 6개 모두 실행해 GitHub에 공개하면 **주니어 AML Analyst·KYT 엔지니어 지원 시 실무감각 어필**이 가능합니다. 단, README에 "학습용이며 실제 컴플 도구 아님"을 명시하고, **OFAC SDN 데이터 사용은 학습 목적 공개**임을 분명히 할 것. 한국 VASP AML 조직은 **"법·금융 + 데이터/엔지니어링"** 하이브리드 인재를 선호해 이 조합이 강점이 됩니다.
+GitHub에 공개한다면 README에 "학습용이며 실제 컴플라이언스 도구 아님"을 명시하고, OFAC SDN 데이터는 공개 데이터를 학습 목적으로 썼다는 점을 분명히 하세요.
 
 ## 참고
 

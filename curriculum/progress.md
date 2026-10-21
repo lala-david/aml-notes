@@ -1,6 +1,6 @@
 # Progress Tracker
 
-> **60일 챌린지 진척도**. 매일 체크 + 한 줄 메모. 이 트래커는 단순 완료 체크가 아니라 **"무엇을 배웠고 어디가 약한가"** 를 스스로 진단하는 도구입니다.
+> **60일 챌린지 진척도**. 매일 체크 + 한 줄 메모. 이 트래커는 단순 완료 체크가 아니라 **"무엇을 배웠고 어디가 약한가"** 를 스스로 진단하는 도구입니다. 체크포인트 문구는 2026-10-21 기준 정정된 노트·정본 보고서와 맞췄습니다. 마지막 업데이트: 2026-10-21.
 
 ## 사용법
 
@@ -68,11 +68,12 @@ Week 2 기대: ___________________
 ### Week 2 체크포인트
 
 - [ ] 특금법 정식명·약칭 외운다
-- [ ] VASP 신고 5요건(ISMS·실명계좌·AML 통제·AMLO·결격사유) 외운다
-- [ ] 한국 Travel Rule 임계 100만원 안다
-- [ ] 거래기록 보관: 이용자보호법 15년 / 특금법 5년 구분
+- [ ] VASP 신고 요건(ISMS·실명계정·AML 내부통제·결격사유) + 2026-08-20 추가 요건(대주주 심사·AML 인력 4인 이상·변경 30일 전 사전신고) 외운다
+- [ ] 한국 트래블룰: 특금법 §5의3, ~2027-02-18 "100만원 이상" / 2027-02-19~ 전건(enacted-not-in-force) 안다
+- [ ] 거래기록 보관: 이용자보호법 시행령 §13 15년 / 특금법·업무규정 5년(분석자료 5년 이상) 구분
 - [ ] STR 금액 무관·Tipping-off 금지 외운다
-- [ ] 2026-01 대주주 자격심사 강화 안다
+- [ ] 법률 제21358호: 2026-01-29 국회 통과 · 2026-02-19 공포 · 2026-08-20 시행 구분
+- [ ] 한국 "이상거래" 3제도(FDS 임시조치 · §12 시장감시 · STR) 구분
 - [ ] `_artifacts/d14_korea_law_table.md` 생성 완료
 
 ### Week 2 회고
@@ -94,13 +95,13 @@ Week 2 기대: ___________________
 
 ### Week 3 체크포인트
 
-- [ ] FATF 회원국(39+2)·한국 가입(2009) 안다
+- [ ] FATF 권고(soft law) → 상호평가 → 회색명단 구조, 한국 2020 MER R.15 "C"(개정 전 기준)·7차 TU "N/A" 안다
 - [ ] Mutual Evaluation 2축 + C/LC/PC/NC 등급 안다
-- [ ] R.15(VASP)·R.16(Travel Rule)·2025-06 개정 안다
-- [ ] 미국 BSA 1970 + USA PATRIOT 2001 안다
-- [ ] OFAC 2차 제재 개념 안다
-- [ ] MiCA 2024-12-30 시행·2026-07-01 grandfathering 종료 안다
-- [ ] EU TFR 임계 없음 안다
+- [ ] R.15 + INR.15 §7(b)(가상자산 트래블룰 원천) · 2025-06 R.16 개정(VASP는 R.15 경유, 이행 2030년 말) 안다
+- [ ] 미국 트래블룰 "$3,000 or more", 비수탁지갑·믹싱 §311 NPRM 2026-10-06 withdrawn 안다
+- [ ] OFAC 지정·§311 특별조치가 외국 VASP에 닿는 경로 + GENIUS Act(2025-07-18 서명, 시행 예상 2027-01-18, B) 안다
+- [ ] MiCA 발효 2023-06-29 · CASP 적용 2024-12-30 · 회원국별 경과기간 최장 2026-07-01 종료 안다
+- [ ] EU TFR 금액 기준 없이 전건 + 자기수탁 EUR 1,000 이상 소유·통제 검증, AMLR 2027-07-10 적용 예정 안다
 - [ ] `_artifacts/d21_global_travel_rule_compare.md` 생성 완료
 
 ### Week 3 회고
@@ -124,8 +125,8 @@ Week 2 기대: ___________________
 
 - [ ] Travel Rule 9단계 흐름 설명 가능
 - [ ] IVMS101 핵심 5객체(Originator·Beneficiary·OriginatingVASP·BeneficiaryVASP·TransferPath) 외운다
-- [ ] VerifyVASP vs CODE 소속 거래소 구분
-- [ ] Notabene Gateway + Sunrise Issue 관계 안다
+- [ ] VerifyVASP·CODE의 공개 사실(상호운용 표시)과 미확인 사항(거래소별 사용 네트워크) 구분
+- [ ] Sunrise Issue 정의와 대응(2021 가이던스 para 200–201, 한국 2027-02-19 해외 VASP 3등급) 안다
 - [ ] VASP Discovery 5가지 방법 안다
 - [ ] 🛠️ **프로젝트 01 IVMS101 빌더 작동** → `projects/01-ivms101-builder/`
 - [ ] 🛠️ 5개 테스트 케이스 통과
@@ -152,8 +153,8 @@ Sunrise Issue 해결책 선호도: ___________________
 - [ ] KYC 5단계·KYT 5단계 외운다
 - [ ] Common Input Ownership Heuristic 설명 가능
 - [ ] Change Detection·Deposit Heuristic 안다
-- [ ] Attribution DB = 벤더 moat 이유 이해
-- [ ] Exposure Score 공식(Direct·N-hop·가중치) 안다
+- [ ] 주소 귀속(attribution)의 한계 이해 — 분석도구도 실소유자 식별에 한계(NYDFS 2022)
+- [ ] Exposure Score는 공개 표준이 없는 가설 모델임을 안다(Direct·N-hop·가중치는 사내 설계)
 - [ ] Cross-chain tracing 한계 이해
 - [ ] 🛠️ **프로젝트 02 2-hop tracer 작동** → `projects/02-onchain-tracer/`
 - [ ] 🛠️ sample output 1개 이상 저장
@@ -178,9 +179,9 @@ Sunrise Issue 해결책 선호도: ___________________
 ### Week 6 체크포인트
 
 - [ ] 9유형(Mixer·ChainHop·Bridge·Peel·DEX·DeFi L/LP·Privacy Coin·NFT Wash·OTC) 외운다
-- [ ] Tornado Cash 타임라인(2022-08 → 2024-11 → 2025-03-21) 안다
+- [ ] Tornado Cash 흐름(2025-03-21 SDN 삭제 → 2025-08-06 Storm 평결 → 2026-10-06 믹싱 NPRM 철회) 안다
 - [ ] Monero/Zcash 기술 차이 안다
-- [ ] CMLN $16.1B·스테이블코인 84% 안다
+- [ ] 스테이블코인 비중 84%(Chainalysis, B)와 동결 전 인출(USDT 7.3%·USDC 18.7%) 안다 — CMLN 처리액 수치는 근거 미확인으로 삭제됨
 - [ ] Peel chain vs Smurfing 차이 안다
 - [ ] DeFi frontend 운영자 책임 가능성 안다
 - [ ] 🛠️ **프로젝트 03 Mixer fetcher 작동** → `projects/03-mixer-fetcher/`
@@ -205,7 +206,7 @@ Sunrise Issue 해결책 선호도: ___________________
 
 ### Week 7 체크포인트
 
-- [ ] CDD 4단계·재실사 주기(저5/중3/고1) 외운다
+- [ ] CDD 4단계 외우고, 재실사 주기를 정책에 명시해야 함을 안다(법정 연수는 원문 확인)
 - [ ] EDD 트리거 6가지 외운다
 - [ ] Source of Funds vs Source of Wealth 구분
 - [ ] STR 4요소(사실·의심사유·증빙·유관거래) 외운다
@@ -234,11 +235,11 @@ Sunrise Issue 해결책 선호도: ___________________
 
 ### Week 8 체크포인트
 
-- [ ] Bybit 2025-02-21 $1.46B + Lazarus 누적 $6.75B 안다
-- [ ] 48시간 playbook 5단계 설명 가능
+- [ ] Bybit USD 14.6억·회수율 3.8%(FATF 6차 TU) + 2025 북한 탈취액이 발행처별로 다름(Chainalysis 20억·TRM 19.2억, B) 안다
+- [ ] 7차 TU가 지목한 새 위험(제3자 인프라 공격·동결저항 스테이블코인·AI 딥페이크 채용사기) 안다
 - [ ] Tornado Cash 전체 흐름(제재·판결·해제·Storm 재판) 안다
-- [ ] Binance $4.3B·OKX $500M·Paxful $3.5M 사례 안다
-- [ ] Chainalysis Crypto Crime 2026 5대 통계 안다
+- [ ] Paxful $3.5M(2025-12-09)·Huione §311(2025-10-14)·두나무 352억원(2025-11-06) 안다 + 트래블룰 단독 제재 사례가 없다는 점 안다
+- [ ] Chainalysis(1,540억)·TRM(1,580억) 2025 불법 추정치와 분모 차이 안다
 - [ ] 🛠️ **프로젝트 05 KYT wrapper 작동** → `projects/05-kyt-wrapper/`
 - [ ] 🛠️ 5개 주소 sample 결과 저장
 
@@ -323,14 +324,14 @@ Sunrise Issue 해결책 선호도: ___________________
 완주 후 자신에게 솔직히:
 
 - [ ] 가상자산 AML 9대 의무를 **보지 않고** 외운다
-- [ ] 특금법 §5의2·§5의4의 핵심 의무를 조문 번호와 함께 말할 수 있다
-- [ ] FATF R.15·R.16의 역할 차이를 설명할 수 있다
+- [ ] 특금법 §4(STR)·§5의2(고객확인)·§5의3(트래블룰)의 핵심 의무를 조문 번호와 함께 말할 수 있다
+- [ ] FATF R.15·INR.15 §7(b)·R.16의 관계를 설명할 수 있다
 - [ ] KYC·KYT의 차이를 실무자에게 1분 안에 설명할 수 있다
 - [ ] Travel Rule 운영 9단계 흐름을 다이어그램 없이 말할 수 있다
-- [ ] OFAC 2차 제재가 한국 VASP에도 적용되는 이유를 설명할 수 있다
-- [ ] Bybit·Tornado Cash·Binance 세 사례의 교훈을 각각 한 줄로 쓸 수 있다
+- [ ] OFAC 지정·미국 특별조치가 한국 VASP에 영향을 주는 경로를 설명할 수 있다
+- [ ] Bybit·Tornado Cash·Paxful 세 사례의 교훈을 각각 한 줄로 쓸 수 있다
 - [ ] 자금세탁 9유형 중 6개 이상 이름·탐지 포인트를 들 수 있다
-- [ ] Chainalysis·TRM·Elliptic의 차별점을 구분할 수 있다
+- [ ] 분석 벤더의 마케팅 수치(T5)와 공개 1차 근거를 구분할 수 있다
 - [ ] 회사 AML 정책 목차(5 Pillars + 12 챕터)를 그릴 수 있다
 
 **8개 이상 ✓** → 다음 90일 로드맵 시작

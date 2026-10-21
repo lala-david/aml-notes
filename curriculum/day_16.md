@@ -1,10 +1,10 @@
 # Day 16 — FATF Recommendation 15 (VASP에 AML/CFT)
 
-> 가상자산을 AML 체계에 끌어들인 결정적 권고. ⏱️ ~70분.
+> 가상자산을 AML 체계에 끌어들인 결정적 권고. ⏱️ ~70분. 마지막 업데이트: 2026-10-21.
 
 ## 📖 오늘 뭘 배우나
 
-2018년 FATF R.15 개정으로 VASP가 전통 금융기관과 동일한 AML 의무자가 됐고, 이게 한국 특금법 2020 개정·EU MiCA·미국 FinCEN 가이던스의 **공통 모태**입니다. 오늘은 R.15의 VASP 정의를 한국 특금법 §2.1.하와 1:1 매핑해보면서, 두 문서가 얼마나 닮았는지 체감합니다.
+2018-10 FATF R.15 개정으로 용어집에 VA·VASP 정의가 신설됐고, 2019-06 INR.15가 VASP에 AML/CFT 의무와 트래블룰(§7(b))을 붙였습니다. 한국이 2020-03-24 특금법을 개정해 VASP 신고제를 넣은 직접 배경이 이것입니다. 오늘은 R.15의 VASP 정의를 한국 특금법 §2(정의)와 매핑해 보고, 2026-07-16 7차 Targeted Update가 R.15 이행에서 무엇을 드러냈는지 확인합니다.
 
 
 <!-- MAP-START -->
@@ -34,44 +34,67 @@ flowchart LR
 - [FATF Virtual Assets 페이지](https://www.fatf-gafi.org/en/topics/virtual-assets.html)
 
 ## 🛠️ 미니 챌린지 (~10분)
-- R.15 VASP 정의 5가지 행위 → 한국 특금법 §2.1.하의 행위와 1:1 매핑
+- R.15 VASP 정의 5가지 행위 → 한국 특금법 §2의 가상자산사업자 행위와 매핑
 - 차이점이 있다면 메모
 
 ## ✅ 체크포인트
 - [ ] R.15의 2018년 가상자산 포섭 안다
 - [ ] FATF-한국 특금법 매핑 가능
-- [ ] FATF가 stablecoin도 다룬다는 점 안다
+- [ ] FATF 2026-03-03 스테이블코인·비수탁지갑 보고서가 "기존 VASP 규율을 넘는 별도 체계를 요구하지 않는다"고 선을 그은 점 안다
 
 ## 💭 오늘의 한 줄
 
 ## 💼 실무 현장 (Industry Reality)
 
-### 한국 VASP에서는
+> 2026-10-21 판에서 이전 판의 "거래소들이 신고서에 R.15 매핑표 첨부", "커스터디 신고 지연으로 과징금이 흔한 패턴", Coinbase 내부 분류, "Binance가 R.15 불이행으로 사업권 상실", "한국 다음 평가 2026~2027 예정" 서술을 삭제했습니다. 공개 1차 근거가 없습니다.
 
-R.15의 VASP 정의 **5가지 행위**는 한국 특금법 §2.1.하에 거의 1:1로 복붙됨 — 이게 한국 컴플라이언스팀이 R.15 원문을 **정책서 첫 페이지**에 명시적으로 인용하는 이유. Upbit·Bithumb·Coinone·Korbit는 FIU 신고서 제출 시 "당사 사업 범위가 R.15 VASP 정의 5개 행위에 해당한다"는 사업범위 매핑표를 첨부한다. 신규 **커스터디 전용 사업자**(예: 한국 금융권 합작법인)는 "보관(Safekeeping)" 하나만 해당해도 특금법 §7 신고 의무 발생 → 이걸 몰라 신고 지연하다 과징금 맞는 게 흔한 패턴.
+### R.15 정의 5개 행위 → 한국 특금법 매핑 (학습용)
 
-### 글로벌에서는
-
-**Coinbase**는 FATF R.15 이행 관점에서 각국 사업권 확보를 **"R.15 기반 규제 vs 기타"**로 내부 분류한다. R.15가 국내법화된 관할(한국·EU·일본·싱가포르)은 표준 컴플라이언스 템플릿을 재활용할 수 있지만, 미이행국은 별도 법률 자문이 필요. **Binance**가 2019~2023 여러 관할에서 사업권을 잃은 주요 이유가 바로 R.15 불이행 — FATF가 해당국에 "Binance 감독 부재"를 지적하면 해당국이 인가 거절 또는 영업 중단 명령.
-
-### 규제 mapping 체크리스트
-
-R.15 정의 5개 행위 → 한국 특금법 매핑 (AMLO가 실제 쓰는 표):
-
-| R.15 행위 (영문) | 한국 특금법 §2.1.하 |
+| R.15 행위 (FATF 용어집) | 한국 특금법 §2 대응 |
 |---|---|
-| exchange between VA and fiat | 가상자산↔법정화폐 교환 |
+| exchange between VA and fiat | 가상자산 매도·매수 |
 | exchange between VAs | 가상자산 간 교환 |
 | transfer of VAs | 가상자산 이전 |
 | safekeeping/administration of VAs | 가상자산 보관·관리 |
-| financial services for VA issuance | 가상자산 발행 관련 금융서비스 |
+| financial services related to an issuer's offer/sale | 발행 관련 금융서비스(한국 법문 대응은 원문 대조) |
 
-### FATF 평가 캘린더 (실무자가 챙기는 것)
+정확한 문언 대조는 특금법 §2 원문으로 하세요. 보관만 해도 VASP 정의에 들어간다는 점이 실무상 가장 중요합니다.
 
-- FATF **Mutual Evaluation 보고서**: 한국 4차 평가 2020-04, 다음 평가 2026~2027 예정 → 한국 VASP는 평가 대비 **"R.15 이행 증빙 패키지"**를 선제 준비
-- FATF **Plenary** 연 3회(2월·6월·10월) → 여기서 Grey List 등재·해제 결정 → 한국 VASP 해외 송금 정책에 즉시 영향
+### 7차 TU가 VASP에 요구한 것 — 처음 등장한 "블록체인 분석"
+
+```mermaid
+flowchart TB
+    TU["FATF 7차 Targeted Update<br/>2026-07-16"] --> R5["권고 5-ii 통제 요소<br/>KYC · wallet screening · blacklisting<br/>whitelisting · freezing · blocking"]
+    TU --> R6a["권고 6-ii<br/>transactions monitoring and<br/>blockchain analytics tools로<br/>급속 이전 탐지"]
+    TU --> R6b["권고 6-iii<br/>소매 사용자로 위장한<br/>역외 VASP 계정 탐지"]
+    TU --> R6c["권고 6-iv<br/>브리지·믹서·크로스체인<br/>노출 평가"]
+    TU --> W["para 35 경고<br/>발행자 동결·소각에<br/>기댈 수 없을 수 있음"]
+    style TU fill:#1a2e4a,color:#fff,stroke:#1a2e4a
+    style W fill:#fee2e2,stroke:#dc2626
+```
+
+근거: [7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf).
+
+### R.15 이행 실태 — 7차 TU 수치
+
+| 항목 | 2026(7차) |
+|---|---|
+| 라이선스·등록 요구 | 73%(95/130) |
+| 실제 인가·등록 발급 | 58%(76/130) — 2025년 65%보다 하락 |
+| 역외 VASP에도 인가 요구 | 34%(39/114) |
+| 금지 접근 | 23%(33/144) — 2023년 11% |
+| DeFi 위험평가 완료 | 18%(26/142), DeFi 인가 2개·집행 1개 |
+| P2P 고위험 평가 / 시장지표 수집 | 88%(58/66) / 23%(31/133) |
+
+출처: 위 7차 TU PDF. 2026-03-11 역외 VASP 보고서는 활동기반 접근을 채택한 관할을 46%로 집계했습니다([FATF 2026-03-11](https://www.fatf-gafi.org/en/publications/Virtualassets/Understanding-Mitigating-Risks-Offshore-VASPs.html)).
+
+### FATF 일정 — 실무자가 챙기는 것
+
+- **회색명단**: 2026-06-17~19 총회 결과가 2026-10-21 기준 현행본(22개 관할, B). 다음 총회 **2026-10-26~30**(미개최)([FATF 일정표](https://www.fatf-gafi.org/en/calendars/events.html)).
+- **타겟보고서**: 스테이블코인·비수탁지갑(2026-03-03), 역외 VASP(2026-03-11), DeFi(2026-07-21). DeFi 보고서는 2021 가이던스의 DeFi 분석을 "updates and complements"하며 통제 존재를 기능적으로 판정하라고 권고합니다([FATF 2026-07-21](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-decentralised-finance-2026.html)).
 
 ### 자주 나오는 오해
 
-- **"R.15가 법이다"** — FATF는 법을 만들지 않는다. **권고 → 국내법화**가 있어야 강제력. 한국은 2020-03 특금법 개정으로 국내법화됨
-- **"커스터디는 AML 의무 없다"** — R.15 5개 행위에 "Safekeeping" 포함, 커스터디 단독 사업도 VASP
+- **"R.15가 법이다"** — FATF는 법을 만들지 않습니다. 한국은 2020-03-24 특금법 개정(2021-03-25 시행)으로 국내법화했습니다.
+- **"커스터디는 AML 의무 없다"** — R.15 정의에 safekeeping/administration이 들어 있어 보관 단독 사업도 VASP입니다.
+- **"DeFi 앱은 무조건 VASP"** — 2021 가이던스는 "A DeFi application … is not a VASP"이지만 통제력·영향력을 가진 사람은 VASP가 될 수 있다고 했습니다(para 66–69).

@@ -1,6 +1,6 @@
 # Project 04 — OFAC SDN Crypto Wallet Screener
 
-> 입력 주소가 OFAC SDN에 매칭되는지 자동 체크. (D49 미니 프로젝트)
+> 입력 주소가 OFAC SDN에 매칭되는지 자동 체크. (D49 미니 프로젝트) 마지막 업데이트: 2026-10-21.
 
 ![Status](https://img.shields.io/badge/상태-스펙_완료-blue)
 ![Difficulty](https://img.shields.io/badge/난이도-⭐⭐-orange)
@@ -32,7 +32,7 @@ flowchart LR
 
 ## 왜 이걸 만드나
 
-제재 스크리닝이 **왜 시스템 없이는 불가능한지** 체감하는 프로젝트. OFAC SDN은 수시 업데이트되고, SDN.xml 파싱·정규화·O(1) lookup·False Positive 처리 흐름까지 모두 자동화해야 실시간 거래 차단이 가능합니다. Week 7의 **5대 리스트·2차 제재·Binance $4.3B 교훈**이 왜 시스템 투자를 강제하는지 코드로 확인.
+제재 스크리닝이 **왜 시스템 없이는 불가능한지** 체감하는 프로젝트. OFAC SDN은 수시 업데이트되고, SDN.xml 파싱·정규화·O(1) lookup·False Positive 처리 흐름까지 모두 자동화해야 실시간 거래 차단이 가능합니다. Week 7의 **제재 리스트·2차 제재·목록 변경(지정과 해제)** 이 왜 시스템 투자를 강제하는지 코드로 확인.
 
 ## 학습 목표
 
@@ -52,13 +52,15 @@ flowchart LR
   "address": "0xABC...",
   "matched": true,
   "match_info": {
-    "entity_name": "Lazarus Group",
-    "sdn_id": "12345",
-    "programs": ["DPRK", "CYBER"],
-    "listed_date": "2020-08-15"
+    "entity_name": "EXAMPLE ENTITY",
+    "sdn_id": "00000",
+    "programs": ["EXAMPLE"],
+    "listed_date": "YYYY-MM-DD"
   }
 }
 ```
+
+> 위 값은 형식 예시(가상 값)입니다. 실제 엔티티명·ID·프로그램 태그는 SDN 파일에서 읽어 채웁니다.
 
 ## 인터페이스
 
@@ -89,6 +91,7 @@ def refresh_cache() -> int:
 3. 대소문자 다양 (0xABC vs 0xabc) → matched (정규화)
 4. 잘못된 형식 입력 → 에러 핸들링
 5. 벌크 100개 → 빠른 응답
+6. **해제된 주소** — 2025-03-21 SDN에서 삭제된 Tornado Cash ETH 주소 → matched: false, `delisted` 이력 표시 ([OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321))
 
 ## 산출물
 
@@ -105,47 +108,58 @@ def refresh_cache() -> int:
 
 ## 💼 실무 현장 (Industry Reality)
 
-### 실제 회사에서는 이 기능을 어떻게 쓰나
+### 이 기능이 놓이는 자리
 
-OFAC SDN 스크리닝은 VASP의 **무조건 실패 불가(zero-tolerance)** 통제입니다. Binance($4.3B)·OKX($504M)·Bittrex($30M)·Kraken($30M) 합의금 대부분이 제재 스크리닝 실패에서 촉발됐으므로, 한국 VASP도 **모든 온보딩·모든 입출금·모든 국가 IP**에 대해 실시간 매칭을 돌립니다. 자체 스크리너는 보통 **이름(자연인) + 가상자산 주소** 두 차원으로 분리되고, 이 프로젝트는 후자에 해당.
+```mermaid
+flowchart LR
+    SDN["OFAC SDN 갱신<br/>지정·해제"] --> D["diff<br/>added · removed"]
+    D --> C["캐시 갱신"]
+    C --> PRE["거래 전 스크리닝<br/>입출금 주소"]
+    C --> POST["사후 재스크리닝<br/>기존 고객 주소"]
+    PRE -->|일치| H["거래 보류·검토"]
+    POST -->|신규 일치| H
+    D -->|removed| R["차단 근거 해제 검토"]
+    H --> STR["필요 시 STR<br/>특금법 §4"]
+    style H fill:#fee2e2,stroke:#dc2626
+```
 
-### 프로덕션 아키텍처 비교
+제재 스크리닝은 **이름(자연인·법인)** 과 **가상자산 주소** 두 차원으로 나뉘고, 이 프로젝트는 후자입니다. OFAC SDN은 지갑주소를 명시적으로 등재하므로 주소 스크리닝의 축이 됩니다. 이전 판의 "Binance·OKX·Bittrex·Kraken 합의금 대부분이 제재 스크리닝 실패에서 촉발" 서술과 금액은 이 저장소의 근거 자료로 확인되지 않아 삭제했습니다([`../../notes/6-cases/major-enforcement.md`](../../notes/6-cases/major-enforcement.md)).
 
-| 항목 | 이 프로젝트(학습용) | 한국 VASP 프로덕션 |
+### 2025~2026 제재 흐름 — 목록은 "유형"보다 "네트워크"를 겨냥
+
+| 일자 | 조치 | 상태(2026-10-21) |
 |---|---|---|
-| 스크리닝 대상 | 가상자산 주소만 | 이름·생년월일·국적·주소·가상자산 주소 다차원 |
-| 매칭 알고리즘 | 정확 일치(exact) | Fuzzy matching(Levenshtein·Soundex·음차 변환·로마자 이형) |
-| 리스트 | OFAC SDN만 | OFAC + UN Consolidated + EU + UK HMT + 외교부 + DAXA + 내부 블랙리스트 7~10개 병합 |
-| 갱신 주기 | 일 1회 cron | OFAC 직접 구독(즉시) + 벤더 fuzzy 룰 동시 |
-| FP 처리 | 없음 | Case Management(Hummingbird·Unit21) → AMLO 리뷰 → Disposition(TP/FP) 로그 |
-| 감사 증거 | 없음 | 모든 스크리닝 결과 5~15년 보관, 규제 검사 시 근거 제시 |
+| 2025-03-21 | Tornado Cash SDN 삭제(엔티티 1·ETH 주소 90), Semenov [DPRK3] 유지 | 해제 완료 |
+| 2025-10-14 | Prince Group 초국가범죄조직 지정(146개 대상), Huione Group §311 최종규칙 | in-force |
+| 2026-09-17 | 이란 거래소 BitBank 등 E.O. 13902 지정("Operation Economic Outcast") | in-force |
+| 2026-10-01 | A7 네트워크 TCO 지정(B) | in-force |
+| 2026-10-06 | 믹싱 §311 NPRM·비수탁지갑 NPRM 철회 / A7 특별조치 NPRM | withdrawn / proposed |
 
-### 벤더 대체재
+출처: [OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321), [재무부 sb0278](https://home.treasury.gov/news/press-releases/sb0278), [OFAC 2026-09-17](https://ofac.treasury.gov/recent-actions/20260917), [Federal Register 2026-20429](https://public-inspection.federalregister.gov/2026-20429.pdf), [Federal Register 2026-20371](https://public-inspection.federalregister.gov/2026-20371.pdf).
 
-- **LSEG World-Check** — 이름·PEP 스크리닝의 사실상 표준. 은행·보험·VASP 공통. 연 $20K~수백만
-- **Dow Jones Risk Center** — World-Check 경쟁자, 언론 adverse media 강세
-- **ComplyAdvantage** — 스타트업·핀테크 친화, API 우선, 가격 저렴
-- **NICE Actimize WL-X** — 대형 은행용 워치리스트 엔진
-- **Chainalysis Sanctions Screening API** — 가상자산 주소 스크리닝 특화, KYT bundle
-- **OFAC SCDN 공식 API** — 무료, 기본 매칭만. 보조용
+FATF 7차 TU(2026-07-16)는 통제 요소로 "KYC, wallet screening, blacklisting, and, where appropriate, whitelisting mechanisms as well as freezing and blocking capabilities"를 열거했습니다(권고 5-ii)([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
 
-한국 VASP는 보통 **World-Check(이름) + Chainalysis(주소) + 자체 외교부 리스트** 조합으로 3중 운영.
+### 프로덕션과의 차이 (정성 비교)
 
-### 운영 KPI·SLA
+| 항목 | 이 프로젝트(학습용) | 운영에서 추가로 필요한 것 |
+|---|---|---|
+| 스크리닝 대상 | 가상자산 주소만 | 이름·생년월일·국적 등 다차원 |
+| 매칭 알고리즘 | 정확 일치 | 이름은 퍼지 매칭(로마자 이형 등) |
+| 리스트 | OFAC SDN만 | OFAC · UN · EU · 영국 · 한국 외교부 등 + 내부 리스트 |
+| FP 처리 | 없음 | 케이스 관리 → 검토 → 판정(TP/FP) 기록 |
+| 감사 증거 | 없음 | 스크리닝 결과 보존 — 기간은 법령 원문 확인 |
 
-- **매칭 지연시간**: 단건 p95 < 100ms (거래 블로킹에 영향 주지 않기 위해)
-- **FP rate**: 이름 매칭 70~90% FP는 업계 상수. Fuzzy threshold 튜닝으로 완화
-- **TP 미탐(miss)**: **0건이 KPI**. 미탐 1건 발생 시 규제 리스크 극대
-- **리스트 갱신 지연**: 신규 SDN 등재 → 시스템 반영 ≤ 1~4시간이 내부 표준
-- **Disposition SLA**: FP 판정 완료까지 ≤ 24시간
+### 운영 지표
+
+매칭 지연(p95), 이름 매칭 FP 비율, 갱신 반영 시간, 판정 SLA에 대한 공개 업계 벤치마크는 확인되지 않았습니다. 이전 판의 지연·FP 비율·반영 시간·판정 SLA 수치와 벤더 가격은 출처가 없어 삭제했습니다. 미탐 0건은 목표로 둘 수 있지만 수치 기준이 아니라 원칙입니다.
 
 ### 배포·운영 팁
 
-- **2차 제재(Secondary sanction) 주의**: OFAC은 **SDN 엔티티와 거래하는 제3자**까지 제재 가능(미국 외 기업 포함). 한국 VASP가 러시아 SDN과 한 단계 건너 연결되면 그 자체로 리스크.
-- **Strong hit vs Weak hit 구분**: 이름 완전 일치는 strong hit → 즉시 BLOCK. 로마자 유사만 일치는 weak hit → 생년월일·주소·여권 추가 확인. 한국 흔한 성(김·이·박)은 weak hit가 압도적 다수.
-- **주소 대소문자 정규화**: ETH 주소는 EIP-55 체크섬 대소문자 규칙이 있지만 **OFAC 리스트에는 소문자로 등재**되는 경우가 많음. lowercase 비교가 표준.
-- **리스트 diff 감시**: 신규 등재뿐 아니라 **해제(delisting)**도 체크. 제재 해제된 고객에 대한 지속 차단은 **고객 민원·소송** 사유가 됨.
-- **감사 증거 보관**: 모든 스크리닝 요청·응답을 **immutable log**(WORM 저장)로 보관. AWS S3 Object Lock 또는 WAL 기반 append-only DB가 흔한 선택.
+- **2차 제재**: OFAC는 SDN과 거래하는 제3자(미국 외 기업 포함)도 제재할 수 있습니다. 간접 연결은 cluster matching(보너스)로 다룹니다.
+- **Strong hit vs Weak hit**: 주소 완전 일치는 strong hit, 이름 유사 일치는 weak hit → 추가 식별정보 확인.
+- **주소 정규화**: ETH 주소는 EIP-55 체크섬 대소문자가 있으므로 소문자로 정규화해 비교하세요.
+- **해제(delisting) 감시**: 신규 등재뿐 아니라 해제도 diff로 잡으세요. Tornado Cash처럼 해제된 주소는 제재 근거로는 빠지지만 믹서 위험 라벨은 별도 축으로 남을 수 있습니다.
+- **감사 증거 보관**: 스크리닝 요청·응답을 변경 불가(append-only) 로그로 남기세요.
 
 ## 학습 자료
 

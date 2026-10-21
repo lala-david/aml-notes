@@ -1,60 +1,61 @@
 # Sanctions Screening — 제재 스크리닝
 
-> 거래 **전·중·후** 모든 단계에서 제재 대상자 차단. 이 글을 읽고 나면 OFAC 2차 제재가 왜 한국 거래소에도 실질적 강제력을 가지는지, 그리고 Binance $4.3B 사례가 왜 제재 위반 처벌의 상징이 됐는지 이해하게 됩니다. 마지막 업데이트: 2026-04-17.
+> 거래 **전·중·후** 모든 단계에서 제재 대상자 차단. 이 글을 읽고 나면 미국 제재 지정이 왜 한국 거래소 운영에도 실질적인 영향을 주는지, 그리고 2025~2026년 미국 제재가 "주소 목록"에서 **특정 조직·네트워크 지정**(Prince Group·Huione·BitBank·A7)으로 옮겨 가면서 주소 대조만으로는 왜 부족해졌는지 설명할 수 있게 됩니다. 마지막 업데이트: 2026-10-21.
+
+> **근거 범위**: `research/2026-10-*.md` 도시에·정본 보고서와 정정된 노트([`../2-regulations/us-bsa-fincen.md`](../2-regulations/us-bsa-fincen.md), [`../6-cases/major-enforcement.md`](../6-cases/major-enforcement.md), [`../6-cases/tornado-cash.md`](../6-cases/tornado-cash.md))에서 확인된 사실만 쓴다. 이전 판의 Binance·Bittrex·BitGo 벌금액·형량·모니터십, OFAC 벌금 상한, 2018~2024 주소 등재 연표, 거래소별 동기화 주기, DAXA 공동 블랙리스트, 비공식 통보 경로, FP 감축률·임계값 성능표는 이 근거 자료로 확인되지 않아 삭제했다(공개 근거 미확인).
 
 ## TL;DR
-- 핵심 리스트: **OFAC SDN (미국) · UN Consolidated · EU CFSP · HM Treasury (영국) · 한국 외교부**
-- 가상자산 추가: **OFAC SDN의 가상자산 지갑주소** — 거래 전 실시간 차단 필수
-- 매칭 방식: **이름(fuzzy) + 생년월일 + 국적 + 지갑주소(정확매칭)**
-- 사전·실시간·사후 모니터링 3중 체크
-- 위반 시 형사처벌 + 거대 벌금 (Binance $4.3B 사례)
+- 핵심 리스트: **OFAC SDN(미국) · UN 안보리 · EU · 영국 · 한국 정부 지정 명단**. 각 명단의 등재 형식(가상자산 주소 기재 여부)은 원 공고로 확인
+- **SDN에 가상자산 주소가 기재될 수 있다** — 그러면 거래 상대 주소 스크리닝 대상이 된다. 그러나 **2026-09-17 BitBank 지정 공고에는 디지털화폐 주소가 기재되지 않았다**([OFAC 2026-09-17](https://ofac.treasury.gov/recent-actions/20260917)) — 주소 대조만으로는 못 잡는다
+- 2025~2026 미국 축: Tornado Cash **SDN 삭제(2025-03-21)**, Prince Group TCO 지정·Huione §311 최종규칙(2025-10-14), BitBank 등 이란 거래소 지정(2026-09-17), A7 네트워크 TCO 지정(2026-10-01, B)
+- 매칭 방식: **이름(fuzzy) + 보조 식별자(생년월일·국적) + 지갑주소(정확매칭) + 상대 VASP 식별**
+- 사전·실시간·사후 3중 체크. 트래블룰 수신 정보도 제재 스크리닝 입력이다(FATF 2021 가이던스 para 193~195)
 
 ---
 
-## 1. 제재의 종류
+## 1. 스크리닝의 구조
 
 ```mermaid
 flowchart TB
-    S["🔍 Sanctions Screening"] --> Pre["A. 사전 (Onboarding)<br/>이름·DOB·국적"]
-    S --> Live["B. 실시간 (Transaction)<br/>이름 + 지갑주소"]
-    S --> Batch["C. 사후 (Daily Batch)<br/>전체 고객 재대조"]
-    Pre & Live & Batch --> M{"매칭?"}
-    M -->|YES + 확실| BLOCK["⛔ 차단 + STR"]
-    M -->|YES + 모호| REV["👀 분석가 검토 (FP disposition)"]
-    M -->|NO| OK["✅ 통과"]
+    S["Sanctions Screening"] --> Pre["A. 사전 Onboarding<br/>이름·생년월일·국적"]
+    S --> Live["B. 실시간 Transaction<br/>이름 + 지갑주소 + 상대 VASP"]
+    S --> Batch["C. 사후 Batch<br/>명단 갱신 시 전체 재대조"]
+    Pre --> M{"매칭?"}
+    Live --> M
+    Batch --> M
+    M -->|확실한 일치| BLOCK["거래 차단·자산 처리<br/>관할 절차 + STR 검토"]
+    M -->|모호| REV["분석가 검토<br/>disposition 기록"]
+    M -->|불일치| OK["통과"]
     style S fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style BLOCK fill:#fee2e2,stroke:#dc2626
     style REV fill:#fed7aa,stroke:#ea580c
     style OK fill:#d1fae5,stroke:#10b981
 ```
 
-
 ### 왜 제재가 AML의 별도 축인가
 
-제재(Sanctions)는 AML과 자주 묶이지만 **방향이 다릅니다**. AML은 범죄수익의 세탁을 막는 **사후** 통제라면, 제재는 특정 대상과의 거래 자체를 막는 **사전** 차단. 그래서 제재 스크리닝은 거래 발생 **이전**에 작동해야 의미가 있고, 이게 VASP가 **Pre-transaction screening** 인프라를 무겁게 구축해야 하는 이유입니다.
+제재(Sanctions)는 AML과 자주 묶이지만 **방향이 다릅니다**. AML은 범죄수익의 세탁을 의심해 보고하는 통제라면, 제재는 지정된 대상과의 거래 자체를 막는 **사전** 차단입니다. 그래서 제재 스크리닝은 거래 발생 **이전**에 작동해야 의미가 있고, VASP가 **Pre-transaction screening** 인프라를 갖춰야 하는 이유입니다.
 
-### 카테고리별
+### 카테고리별 (예시)
 
 | 카테고리 | 예시 |
 |---|---|
-| **국가 제재** | 북한, 이란, 시리아, 쿠바, 베네수엘라, 미얀마 |
-| **러시아 분리 제재** | 푸틴 측근, 올리가르히, 러시아 은행 (2022~) |
-| **테러조직** | 알카에다, ISIS, Hamas, Hezbollah |
-| **마약 카르텔** | 멕시코·콜롬비아 카르텔 |
-| **사이버 범죄** | Lazarus, Evil Corp |
-| **확산금융** | 핵·미사일 관련 |
-| **부패** | Magnitsky Act 관련 (글로벌 인권 침해) |
+| **국가·정권 프로그램** | 이란(E.O. 13902 — 2026-09-17 BitBank 지정 근거), 북한 |
+| **러시아 연계** | A7 네트워크 — 2026-10-01 TCO 지정(B), FinCEN 하위대리인 자금이체 금지 특별조치 NPRM(proposed) |
+| **초국가범죄조직(TCO)** | Prince Group — 2025-10-14 지정(146개 대상) |
+| **사이버 범죄·확산금융** | DPRK 연계 탈취 자금 |
+| **테러조직** | 관할별 지정 명단 |
 
 ### 제재 형태
 
-- **자산 동결 (Asset Freeze)** — 미국 관할 내 자산 동결
-- **거래 금지 (Transaction Ban)** — 미국인·기업 거래 금지
-- **2차 제재 (Secondary Sanctions)** — 외국인이라도 미국 시장 접근 차단
-- **무역 금지 (Trade Embargo)** — 특정 품목·서비스 금지
+- **자산 동결 (Blocking)** — 관할 내 자산 동결
+- **거래 금지** — 관할 내 인·기업의 거래 금지
+- **2차 제재 위험** — 외국인이라도 미국 금융시스템 접근 제한 위험
+- **금융시스템 차단 조치** — FinCEN §311 최종규칙(Huione, 2025-10-14)이나 Combating Russian Money Laundering Act §9714 특별조치(A7, proposed)처럼 특정 기관·거래군과의 거래를 막는 조치. OFAC 지정과는 별개 수단이다([재무부 sb0278](https://home.treasury.gov/news/press-releases/sb0278); [Federal Register 2026-20371](https://public-inspection.federalregister.gov/2026-20371.pdf))
 
 ### 실무 포인트
 
-위 4개 형태 중 **2차 제재**가 한국 VASP에게 가장 실질적 위협입니다. 한국 거래소가 OFAC 제재 대상과 거래하면, OFAC는 "한국 회사를 직접 제재"할 권한이 있고, 제재되면 미국 은행·결제망 접근이 끊어집니다. 가상자산 사업은 달러 페그 스테이블코인·미국 소재 KYT 벤더·미국 클라우드에 의존하므로, 2차 제재는 사실상 **사업 종료 수준**의 리스크.
+한국 VASP가 미국 지정 대상과 거래하면 직접 형사 관할 여부와 별개로 **미국 달러 결제망·스테이블코인 발행자·해외 거래 상대와의 관계**에서 불이익을 받을 수 있습니다. 2차 제재의 구체 적용 범위는 프로그램별 E.O. 원문으로 확인합니다.
 
 ---
 
@@ -62,45 +63,54 @@ flowchart TB
 
 ### 이 표를 어떻게 읽어야 하나
 
-5개 리스트가 지역별로 독립적으로 발행되지만, 실무에서는 이 모두를 **통합 스크리닝 DB**로 관리합니다. 상용 벤더(World-Check 등)가 5개를 합쳐 일일 업데이트해주며, 회사는 이 통합본을 구독해 쓰는 구조.
+명단은 관할별로 독립 발행되지만, 실무에서는 **통합 스크리닝 DB**로 관리합니다. 상용 통합 DB를 구독하는 경우가 많지만, 갱신 지연이 생길 수 있으므로 1차 공고(예: OFAC Recent Actions)와 대조할 수 있어야 합니다.
 
-| 리스트 | 발행 | 가상자산 포함? | 갱신 |
+| 리스트 | 발행 | 가상자산 주소 | 비고 |
 |---|---|---|---|
-| **OFAC SDN List** | 미국 재무부 | ✅ (지갑주소 등재) | 수시 |
-| **OFAC Consolidated** | 미국 재무부 (SDN 외 추가) | 일부 | 수시 |
-| **UN Consolidated** | UN 안보리 | 명시 X (이름 위주) | 수시 |
-| **EU Consolidated Financial Sanctions** | EU | 일부 | 수시 |
-| **HM Treasury Sanctions List** | 영국 | 일부 | 수시 |
-| **한국 외교부 제재대상자** | 한국 | (종속적, UN·OFAC 반영) | 수시 |
+| **OFAC SDN List** | 미국 재무부 | 기재될 수 있음 | 기재 없는 지정도 있음(BitBank 2026-09-17) |
+| **UN 안보리 통합 명단** | UN | 원문 확인 | 이름·식별정보 중심 |
+| **EU 통합 금융제재 명단** | EU | 원문 확인 | |
+| **영국 제재 명단** | 영국 | 원문 확인 | Prince Group은 FCDO가 미국과 공조 지정(2025-10-14) |
+| **한국 정부 지정 명단** | 한국 | 원문 확인 | 지정 근거 법령·고시는 원문 확인 필요 |
 
 ### OFAC이 중심인 이유
 
-OFAC SDN은 **유일하게 가상자산 지갑주소를 명시**합니다. UN·EU·외교부는 전통적 신원 정보(이름·생년월일) 중심으로 지갑주소 등재는 제한적. 그래서 가상자산 산업의 제재 스크리닝은 **OFAC SDN을 축**으로 설계하고, 나머지는 이름 매칭으로 보완하는 구조.
+가상자산 주소가 지정 공고에 직접 기재되는 대표 사례가 OFAC SDN입니다. 그래서 가상자산 제재 스크리닝은 OFAC SDN을 축으로 설계하는 경우가 많습니다. 다만 2026년 지정은 거래소·네트워크 단위가 많고 주소가 빠진 경우도 있어, **상대 VASP 식별·실사**가 주소 대조와 같은 무게로 필요합니다([`../2-regulations/us-bsa-fincen.md`](../2-regulations/us-bsa-fincen.md) §3).
 
 ---
 
-## 3. OFAC의 가상자산 지갑주소 등재 역사
+## 3. 2025~2026 OFAC·재무부 가상자산 관련 조치
 
-### 타임라인
+```mermaid
+timeline
+    title 미 재무부 가상자산 관련 제재·차단 2025-03 ~ 2026-10
+    2025-03-21 : Tornado Cash SDN 삭제
+               : 엔티티 1개 · ETH 주소 90개
+    2025-10-14 : Prince Group TCO 지정 146개 대상
+               : FinCEN Huione Group 311조 최종규칙
+    2026-06-23 : Prince Group 추가 제재 9명 · 26개 법인
+    2026-08-24 : Operation Economic Outcast 개시
+    2026-09-17 : BitBank 등 이란 거래소 지정 E.O. 13902
+               : 공고에 주소 미기재
+    2026-10-01 : A7 Network TCO 지정 B
+    2026-10-05 : FinCEN A7 하위대리인 특별조치 NPRM proposed
+```
 
-| 연도 | 대상 | 비고 |
-|---|---|---|
-| 2018 | 이란 BTC 주소 (Marinov, Khorashadizadeh) | 첫 가상자산 SDN |
-| 2020 | DPRK 라자루스 관련 ETH·BTC | |
-| 2022-08 | **Tornado Cash 컨트랙트** | DeFi 첫 제재 |
-| 2022-11 | Hydra Market (다크넷) | |
-| 2024 | Garantex 추가 제재 (러시아) | |
-| **2025-03-21** | **Tornado Cash 제재 해제** | 5th Cir. Van Loon 판결 후 |
+| 일자 | 조치 | 상태(2026-10-21) | 출처 |
+|---|---|---|---|
+| 2025-03-21 | **Tornado Cash SDN 삭제** — 엔티티 1개·ETH 주소 90개(주 1·대체 89) | 해제 완료 | [OFAC 2025-03-21](https://ofac.treasury.gov/recent-actions/20250321) |
+| 2025-10-14 | Prince Group TCO 지정(146개 대상, 영국 FCDO 공조), FinCEN Huione §311 최종규칙 | in-force | [재무부 sb0278](https://home.treasury.gov/news/press-releases/sb0278) |
+| 2026-06-23 | Prince Group 관련 9명·26개 법인 추가, Huione 규칙에 H-Pay 추가 개정안 | 지정 in-force / 개정안 proposed | [재무부 sb0538](https://home.treasury.gov/news/press-releases/sb0538) |
+| 2026-09-17 | 이란 거래소 **BitBank**·개발사 Pishtaz Simorgh·개인 3인 지정(E.O. 13902) — "Operation Economic Outcast"(2026-08-24~)의 일부 | in-force | [OFAC 2026-09-17](https://ofac.treasury.gov/recent-actions/20260917); [재무부 sb0632](https://home.treasury.gov/news/press-releases/sb0632/) |
+| 2026-10-01 | **A7 Network** TCO 지정(E.O. 13581, 개정 E.O. 13863) | in-force(B — FinCEN NPRM 각주로 확인, OFAC 원 공고 미열람) | [Federal Register 2026-20371](https://public-inspection.federalregister.gov/2026-20371.pdf) |
 
-### OFAC SDN 가상자산 검색
-
-- 공식: https://sanctionssearch.ofac.treas.gov/
-- 가상자산 영역도 같은 검색
-- API: 일부 벤더가 라이센스 (Chainalysis, TRM)
+2022년 Tornado Cash 최초 지정과 그 소송 경과, 2018~2024년의 개별 주소 등재 이력은 이 저장소 근거 자료에서 원문으로 확인하지 않았습니다(공개 근거 미확인) — [`../6-cases/tornado-cash.md`](../6-cases/tornado-cash.md).
 
 ### 실무 포인트
 
-OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오전에 발표되면 그 시점부터 거래 차단 의무가 생기는 구조. 그래서 회사 시스템은 **OFAC 변경 알림을 실시간 구독**하고 **자동 반영**해야 하며, 수작업 업데이트 주기를 길게 두면 그 사이 새 SDN 주소와 거래가 발생할 위험이 있습니다.
+OFAC 지정은 **예고 없이** 공고됩니다. 공고 시점부터 거래 차단 의무가 생기므로, 시스템은 1차 공고(Recent Actions)를 주기적으로 확인하고 **자동 반영**해야 합니다. 갱신 주기는 회사가 위험평가로 정하고 근거를 남깁니다 — 업계 표준 주기에 대한 공개 근거는 없습니다.
+
+**삭제(해제)도 목록 변경입니다.** Tornado Cash는 SDN에서 빠졌지만, 학계 측정(WWW '26)은 제재 후 957일 동안 입금액이 71.03% 줄었는데도 Ethereum 보안사고의 78.33%가 여전히 Tornado Cash를 거쳤다고 보고합니다([arXiv 2507.11721](https://arxiv.org/abs/2507.11721)). 목록 대조(제재 출구)와 위험 평가(AML 출구)를 분리해 두어야 해제와 동시에 통제가 풀리지 않습니다.
 
 ---
 
@@ -108,7 +118,7 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 
 ### A. 이름 매칭 (Fuzzy Matching)
 
-동음이의·음역 다양성을 처리해야 하는 복잡한 문제입니다. "Mohammed"와 "Mohammad"는 같은 사람일 수도, 다른 사람일 수도 있습니다.
+동음이의·음역 다양성을 처리해야 하는 문제입니다. "Mohammed"와 "Mohammad"는 같은 사람일 수도, 다른 사람일 수도 있습니다.
 
 용어:
 - **Fuzzy Matching** — 완전 일치가 아닌 유사도 기반 매칭.
@@ -117,7 +127,7 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 - **Soundex** — 음가 기반 매칭. 영어에 주로 사용.
 
 **트레이드오프**:
-- **너무 느슨**: False Positive 폭발 → 업무 마비
+- **너무 느슨**: False Positive 폭증 → 업무 마비
 - **너무 빡빡**: False Negative → 진짜 제재 대상 통과
 
 ### B. 보조 식별자
@@ -126,18 +136,22 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 
 - 생년월일
 - 국적·거주지
-- 신원확인번호 (passport 등)
+- 신원확인번호(여권 등)
 - 회사명·직책
 
 ### C. 가상자산 지갑주소 매칭
 
-- **정확 매칭 (Exact Match)** — 동일 주소
-- **클러스터 매칭 (Extended)** — 같은 클러스터 내 주소
-- **Hop 노출 (Indirect)** — N hop 내 도달 주소
+- **정확 매칭 (Exact Match)** — 공고에 기재된 동일 주소
+- **클러스터 매칭** — 분석 도구가 같은 주체로 묶은 주소(귀속 추정이므로 근거 기록 필요)
+- **간접 노출** — N hop 내 도달 주소. hop 수·비율 기준은 공개 표준이 없다
+
+### D. 상대 VASP 매칭
+
+주소가 공고에 없는 거래소 단위 지정(BitBank)에는 **상대 VASP 식별**이 필요합니다. 트래블룰 메시지의 수신 VASP 정보, 상대 VASP 실사 기록이 입력이 됩니다. FATF 2021 가이던스는 트래블룰 이행 단락 안에서 제재 스크리닝을 다룹니다(para 193~195)([FATF 2021 RBA 가이던스](https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf)).
 
 ### 실무 포인트
 
-이름 매칭의 Fuzzy 수준은 벤더마다 기본 설정이 다릅니다. 최초 도입 시 **기본값 그대로 쓰면** 한국에서는 "Kim"·"Lee" 같은 흔한 성씨에서 False Positive가 폭발합니다. 한국 운영 환경에 맞춘 **튜닝**(생년월일·국적 필수 매칭)이 도입 첫 1~2달의 핵심 과제.
+이름 매칭의 fuzzy 수준은 도구마다 기본 설정이 다릅니다. 기본값 그대로 쓰면 한국에서는 흔한 성씨에서 False Positive가 많이 생깁니다. 보조 식별자(생년월일·국적) 결합 규칙과 임계값을 **자사 데이터로 검증해** 정하고, 그 근거를 문서화합니다.
 
 ---
 
@@ -152,39 +166,40 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 ### B. 실시간 (Transaction) 스크리닝
 
 거래 발생 직전:
-- 송신·수신 wallet의 OFAC SDN 매칭
-- 카운터파티 VASP의 제재국 여부
-- 거래 메타데이터 (memo, tag) 매칭
+- 송신·수신 주소의 SDN 등 명단 매칭
+- 상대 VASP의 지정 여부·소재 관할
+- 거래 메타데이터(memo, tag) 매칭
 
-매칭되면 **거래 차단 + 자동 알람**.
+매칭되면 **거래 차단 + 알람**.
 
 ### C. 사후 (Periodic) 스크리닝
 
-- 모든 고객·wallet을 주기적으로 (일·주·월) 전체 스크리닝
-- 새로 SDN 추가된 항목과 기존 데이터 매칭
-- "잠재 노출" 발견 시 STR 검토
+- 명단이 갱신될 때마다 기존 고객·주소 전체 재대조
+- 새로 지정된 항목과 과거 거래 이력 대조
+- 잠재 노출 발견 시 STR 검토
 
 ### 실무 포인트
 
-3단 체크 중 가장 자주 소홀해지는 게 **C 사후 스크리닝**입니다. 회사가 관리하는 기존 고객 수만 명을 매일 전체 재스크리닝하는 건 컴퓨팅 부담이 크지만, OFAC이 새 주소를 추가한 순간 **기존 고객 중 그 주소를 쓰는 사람이 노출**될 수 있습니다. 일 1회 배치 스크리닝은 필수 운영 항목.
+가장 자주 소홀해지는 게 **C 사후 스크리닝**입니다. 지정 공고가 나온 순간 기존 고객 중 그 주소·거래소와 거래한 사람이 드러날 수 있습니다. 명단 갱신 이벤트에 연동된 배치가 필수 운영 항목입니다.
 
 ---
 
 ## 6. 운영 흐름
 
-```
-[ 신규 가입 ] → KYC + Sanctions Screening (이름·DOB·국적)
-                  ├─ Hit → 가입 거절
-                  └─ No Hit → 가입 승인
-
-[ 거래 요청 ] → Sanctions Screening (이름 + wallet 주소)
-                  ├─ Hit (high confidence) → 차단 + STR 보고
-                  ├─ Hit (low confidence) → 수동 검토
-                  └─ No Hit → 거래 진행
-
-[ 일일 배치 ] → 전체 고객 + wallet vs SDN 갱신본
-                  ├─ 신규 매칭 → 즉시 동결 + 분석 + STR
-                  └─ 기존 통과 → 다음 사이클
+```mermaid
+flowchart LR
+    J["신규 가입"] --> J1{"이름·생년월일·국적 대조"}
+    J1 -->|Hit| J2["가입 거절·보류"]
+    J1 -->|No Hit| J3["가입 승인"]
+    T["거래 요청"] --> T1{"이름 + 주소 + 상대 VASP 대조"}
+    T1 -->|확실| T2["차단 + 보고 SOP"]
+    T1 -->|모호| T3["수동 검토"]
+    T1 -->|No Hit| T4["거래 진행"]
+    U["명단 갱신 공고"] --> U1["전체 고객·주소 재대조"]
+    U1 -->|신규 매칭| U2["조치 + 분석 + STR 검토"]
+    style J2 fill:#fee2e2
+    style T2 fill:#fee2e2
+    style U2 fill:#fee2e2
 ```
 
 ---
@@ -199,8 +214,8 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 
 | 코드 | 의미 |
 |---|---|
-| TP-Confirmed | 진짜 매칭 → 차단 + STR |
-| FP-Different DOB | DOB 다름, 통과 |
+| TP-Confirmed | 진짜 매칭 → 차단 + 보고 절차 |
+| FP-Different DOB | 생년월일 다름, 통과 |
 | FP-Different Nationality | 국적 다름, 통과 |
 | FP-Different Address | 주소 다름, 통과 |
 | Pending | 추가 정보 필요 |
@@ -209,7 +224,7 @@ OFAC는 **SDN 업데이트를 예고 없이** 수행합니다. 새 주소가 오
 
 ### 실무 포인트
 
-Disposition 이력은 **규제 검사의 핵심 증빙**입니다. "왜 이 고객을 통과시켰나"에 대한 답이 없으면 검사에서 크게 지적받습니다. 시스템이 disposition 코드를 강제 입력받고 **영구 보관**하는 구조를 초기에 만들어두는 게 나중에 훨씬 편합니다.
+Disposition 이력은 **검사의 핵심 증빙**입니다. "왜 이 고객을 통과시켰나"에 대한 답이 없으면 지적받습니다. 시스템이 disposition 코드를 강제 입력받고 보존 정책에 따라 보관하는 구조를 초기에 만들어 둡니다.
 
 ---
 
@@ -227,171 +242,134 @@ Disposition 이력은 **규제 검사의 핵심 증빙**입니다. "왜 이 고�
 
 "ABC Corp" vs "ABC Corporation" vs "ABC Co., Ltd." — 약어·띄어쓰기·콤마 차이.
 
-### D. Wallet 주소 — 클러스터 노출
+### D. 주소 없는 거래소·네트워크 지정
 
-**직접 매칭은 없지만 같은 클러스터에 SDN 주소가 있는** 경우. 위험 노출 인정 → 강화 모니터링.
+BitBank(2026-09-17)처럼 공고에 주소가 없거나, A7처럼 "네트워크가 통제하는 역외 기업" 전체가 대상이 되는 경우. 상대 VASP 식별과 거래 상대 실사로 대응합니다.
 
-### E. Privacy Coin 거래
+### E. 동결 저항 자산
 
-추적 불가 → 사실상 모든 거래가 잠재 위험. 한국에선 거래소 상장 폐지로 우회.
+FATF 7차 Targeted Update(2026-07-16)는 VASP가 "issuer-level asset freeze/burn mechanisms"를 준수 안전장치로 믿을 수 없을 수도 있다고 결론 내렸고(para 35), 학계는 **USDT 제재 주소의 7.3%, USDC의 18.7%가 동결 발효 전에 전액 인출**됐다고 측정했습니다([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf); [arXiv 2603.27739](https://arxiv.org/abs/2603.27739)). 발행자 동결은 거래소 자체 스크리닝을 대체하지 못합니다.
+
+### F. 익명성강화코인
+
+추적이 어려워 제재 노출 판단이 어렵습니다. EU AMLR 제79조는 익명성강화코인 취급 금지를 담고 있고 **2027-07-10 적용 예정**(enacted-not-in-force)입니다([EUR-Lex OJ L 2024/1624](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202401624)). 한국 거래소별 취급 현황과 그 사유는 공개 근거로 확인하지 않았습니다.
 
 ### 실무 포인트
 
-E번 Privacy Coin 대응은 "제재 스크리닝 자체를 포기"하는 게 아니라 **상품 자체를 취급하지 않음**으로 리스크를 제거하는 접근입니다. 이게 한국·일본 거래소가 privacy coin을 상장 폐지한 진짜 이유 — 기술적 어려움이 아니라 **규제 리스크의 경제성**.
+E·F는 "스크리닝을 더 정교하게"가 아니라 **상품·상대방 정책**으로 다루는 위험입니다. 어떤 자산·상대를 취급하지 않을지의 판단 근거를 위험평가 문서에 남깁니다.
 
 ---
 
-## 9. 한국 특수 — 어디서 정보를 받나
+## 9. 한국 — 어디서 정보를 받나
 
 | 출처 | 무엇 |
 |---|---|
-| 외교부 | UN·EU·OFAC 반영 + 한국 자체 |
-| FIU | 가상자산 위험 wallet 정보 (협조 시) |
-| KISA | 사이버 위협 정보 (랜섬웨어 wallet 등) |
-| 글로벌 벤더 | World-Check, Dow Jones, ComplyAdvantage |
-| KYT 벤더 | Chainalysis, TRM, Elliptic SDN wallet feed |
+| 한국 정부 지정 명단 | 지정 근거 법령·고시와 공고 채널은 원문 확인 필요 |
+| 해외 1차 공고 | OFAC Recent Actions, UN·EU·영국 명단 |
+| 상용 통합 DB·블록체인 분석 도구 | 명단 통합·주소 라벨. 커버리지·갱신 지연은 자사 주장(T5)이라 검증 필요 |
 
 ---
 
 ## 10. 위반 시 처벌
 
-### 미국 OFAC (가장 강력)
+### 미국
 
-- **민사벌금**: 거래당 최대 $300K+
-- **형사**: 최대 30년 징역, $1M+ 벌금
-- **2차 제재**: 외국인이라도 미국 시장 접근 차단
+- 위반 시 민사·형사 제재 대상. **벌금 상한·형량은 해당 법령(IEEPA 등)·OFAC 집행 지침 원문으로 확인** — 이 저장소 근거 자료로는 재확인하지 않았습니다.
+- 2025~2026 원문으로 확인되는 가상자산 집행은 개별 거래소 거액 합의보다 **조직·네트워크 지정**이 중심입니다([`../6-cases/major-enforcement.md`](../6-cases/major-enforcement.md)).
 
-### 사례
+### 과거 대형 사건
 
-- **Binance $4.3B (2023)** — OFAC + FinCEN 결합. 가상자산 AML 사상 최대 단일 벌금.
-- **Bittrex $29M (2022)** — 이란·수단 고객 서비스.
-- **BitGo $98K (2021)** — 소규모지만 OFAC 제재 위반의 첫 가상자산 사례.
+Binance(2023)·Bittrex·BitGo 등의 제재 위반 합의 금액·형량·모니터십 기간은 **공개 근거 미확인**으로 이 저장소에서 수치를 삭제했습니다. 인용하려면 DOJ·FinCEN·OFAC 원 공고를 직접 확인합니다. Paxful에 대한 FinCEN $3.5M 민사벌금(2025-12-09)의 사유는 MSB 미등록·AML 프로그램 미비·SAR 미제출이며 제재 위반이 아닙니다([FinCEN](https://www.fincen.gov/news/news-releases/fincen-assesses-35-million-penalty-against-paxful-facilitating-suspicious)).
 
 ### 한국
 
-- 외환거래법, 특정범죄가중처벌법 등
-- 외교부 제재 위반 시 형사처벌
-- + 특금법 위반 결합
+- 국내 제재 위반의 처벌 근거 법령(외국환거래법 등)과 특금법 위반과의 관계는 원문 확인 필요
 
 ### 실무 포인트
 
-Binance 사례가 업계에 남긴 교훈은 "2차 제재는 실존한다"는 것. 미국 이외 회사도 OFAC 제재 위반 시 단독으로 처벌받을 수 있다는 걸 거대 사례로 보여줬고, 그 이후 글로벌 VASP들의 제재 컴플라이언스 투자가 수직 상승했습니다. 한국 VASP도 2024~2025년 사이 OFAC 전담팀을 별도 운영하는 방향으로 조직이 재편되는 추세.
+2025~2026 집행 흐름이 남긴 교훈은 "지정 대상 **주소**"만이 아니라 "지정 **조직·네트워크**와의 직·간접 거래"를 차단해야 한다는 것입니다. 실무 우선순위는 ① 기본 의무의 작동 증거 ② 지정 네트워크와의 거래 차단입니다.
 
 ---
 
 ## 11. 체크리스트
 
 ```
-□ OFAC + UN + EU + 외교부 명단 일일 갱신
+□ OFAC · UN · EU · 영국 · 한국 명단 갱신 반영 (주기는 정책으로 정함)
 □ 사전 스크리닝 (onboarding)
 □ 실시간 스크리닝 (모든 거래)
-□ 사후 배치 스크리닝 (전체 고객)
-□ Wallet 주소 OFAC SDN 매칭
-□ KYT 벤더 SDN feed 통합
+□ 명단 갱신 이벤트 연동 사후 배치 (전체 고객·주소)
+□ 지갑주소 정확 매칭 + 클러스터·간접 노출 기준 문서화
+□ 상대 VASP 식별 — 주소 없는 거래소 지정 대응
+□ 트래블룰 수신 정보 스크리닝 연동
 □ False Positive disposition 로그
-□ 매칭 시 차단 + STR + 보고 SOP
-□ Adverse Media 모니터링
-□ 외환거래법 호환성 점검
-□ 임직원 교육 (OFAC 2차 제재 인식)
+□ 매칭 시 차단 + 보고 SOP
+□ 해제 공고 시 정책 변경 근거 기록 (목록 변경 vs 위험 평가)
+□ 임직원 교육
 ```
 
 ## 💼 실무 현장 (Industry Reality)
 
 ### Fuzzy Matching False Positive 감축 기법
 
-한국 VASP에서 실제 효과 본 FP 감축 방법:
+일반적으로 쓰는 방법(효과 수치는 데이터마다 다르며 공개 벤치마크 없음):
 
-1. **다축 매칭 필수화**: 이름 단독 매칭 → 비활성. **이름 + 생년월일** 또는 **이름 + 국적** 조합만 HIT으로 처리.
-2. **스코어 임계값 튜닝**: Jaro-Winkler 0.85 → 0.92로 상향 (한국 흔한 성씨 대응).
-3. **Whitelist 관리**: 반복 FP 고객(동명이인 김민수 등)은 **5년 유효 화이트리스트** 등록 + 재검토 스케줄.
-4. **Secondary Review**: 1차 HIT → **분석가 2차 판단** + disposition 코드 강제 입력.
-5. **지역 필터**: 한국 거주자에게 중동 이름 매칭 HIT는 기본 FP 가정.
+1. **다축 매칭**: 이름 단독 매칭은 HIT로 바로 처리하지 않고 **이름 + 생년월일** 또는 **이름 + 국적** 조합을 요구.
+2. **임계값 튜닝**: 흔한 성씨에는 더 높은 유사도 임계값을 적용. 값은 자사 샘플로 검증.
+3. **Whitelist 관리**: 반복 FP 고객-명단 항목 쌍은 승인 후 만료일 있는 화이트리스트로 관리하고 재검토.
+4. **2차 검토**: 1차 HIT → 분석가 판단 + disposition 코드 강제 입력.
 
-**결과**: FP rate 기존 ~90% → ~70%로 감축. 월 처리 건수 3,000 → 1,000건 수준.
+이전 판의 "FP ~90% → ~70%", "월 3,000 → 1,000건"은 공개 근거가 없어 삭제했습니다.
 
-### OFAC SDN.XML 자동화 파이프라인
+### 명단 자동 동기화 파이프라인 (의사코드)
 
 ```python
-# 일일 자동 sync 예시 (의사코드)
-import requests
-from datetime import datetime
+# 명단 갱신 동기화 예시 (의사코드) — 소스는 1차 공고·공식 배포 파일
+def sync_sanctions_list(source):
+    new_entries = fetch_and_parse(source)          # 이름·식별정보·주소
+    current = db.get_entries(source)
 
-def sync_ofac_sdn():
-    url = "https://www.treasury.gov/ofac/downloads/sdn.xml"
-    r = requests.get(url)
-    new_addrs = parse_digital_currency_addresses(r.content)
-    
-    added = new_addrs - db.get_all_sdn_addrs()
-    removed = db.get_all_sdn_addrs() - new_addrs
-    
+    added = new_entries - current
+    removed = current - new_entries
+
     if added:
-        # 1. 기존 고객 재스캔
-        for addr in added:
-            scan_existing_customers(addr)
-        # 2. AMLO 알림
-        notify_amlo(f"신규 SDN 주소 {len(added)}건", added)
-        # 3. KYT 블랙리스트 반영
-        kyt_api.add_to_blacklist(added)
-    db.update(new_addrs)
+        for entry in added:
+            rescan_existing_customers(entry)       # 사후 스크리닝
+        notify_compliance(f"신규 지정 {len(added)}건", added)
+        screening_engine.add(added)
+    if removed:
+        # 해제는 자동 통과가 아니라 정책 검토 대상
+        open_policy_review(removed)
+    db.update(source, new_entries)
 ```
 
-**실무 운영**: Upbit·Bithumb 모두 **15분~1시간 주기 sync**. OFAC 공식 RSS feed 구독 + XML 파싱.
-
-### OFAC 2차 제재 공포 — Binance 사례의 교훈
-
-Binance $4.3B (2023-11) DOJ 합의의 충격:
-
-- **CZ 개인**: 4개월 실형 + $50M 개인 벌금 (2024-05)
-- **회사**: $4.3B 벌금 + **DOJ 외부 모니터 5년 상주** (2024-2029)
-- **영향**: 글로벌 VASP 제재 투자 **3~5배 증가**
-- **한국**: 이후 4대 거래소 모두 OFAC 전담 담당자 신설 (이전에는 AML 팀 겸임)
-
-### 제재 위반 사례로 배운 핵심 레슨
-
-- **Bittrex $29M (2022)**: 이란·수단 IP 거주자를 수년간 방치 — **IP geolocation 필수화** 계기
-- **BitGo $98K (2021)**: 소액이지만 "OFAC 제재는 소규모도 처벌"의 첫 시그널
-- **Paxful $3.5M (2025)**: P2P 거래에서 제재국 사용자 차단 미흡
-
-### 한국 외교부 제재 특수성
-
-- **UN·OFAC 반영**: 자체 제재 적지만 UN·OFAC 실질 반영
-- **북한 관련**: 외교부 + 국정원 + 통일부 협력. VASP는 FIU 통해 우회 전달
-- **러시아 관련**: 2022-03 이후 급증. 원자재·금융 관련 기업·개인 다수 등재
-
-### 주니어 Sanctions Analyst 일상
-
-- OFAC SDN 업데이트 발생 시 즉시 알림 받음 → 10분 내 시스템 반영 확인
-- 주간 FP 리뷰: 반복 매칭되는 고객 화이트리스트 갱신
-- 월간 보고: "이번 달 신규 SDN N건, 재스캔 결과 0건 매칭" 형식
-- 분기: 외교부·UN·EU 리스트 통합 검증
+거래소별 동기화 주기에 대한 공개 근거는 없습니다.
 
 ### 자주 나오는 오해
 
-- **"OFAC은 미국 회사만 해당"** — 2차 제재로 사실상 글로벌 적용. 달러 페그 USDT·AWS·Github 사용하면 모두 OFAC 관할.
-- **"Tornado Cash 제재 해제됐으니 이제 안전"** — 업계는 **여전히 위험 카테고리** 유지. 한국·미국 거래소 모두 관련 주소 거부 지속.
-- **"지갑 주소 SDN 매칭만 하면 됨"** — **이름 + 주소 + 클러스터 3축** 필수. 주소 매칭만 의존하면 신규 주소·주소 변경 시 놓침.
-- **"False Positive 줄이려 매칭을 느슨하게"** — 보조 식별자 강화(DOB·국적)가 정답. 매칭 자체를 느슨하게 하면 FN(진짜 놓침) 발생.
+- **"OFAC은 미국 회사만 해당"** — 직접 관할과 별개로 달러 결제망·스테이블코인 발행자·해외 상대방 관계에서 영향을 받는다. 구체 적용은 프로그램별 원문 확인.
+- **"Tornado Cash 제재 해제됐으니 이제 안전"** — 해제는 목록 변경일 뿐이다. 위험 평가 쪽 근거(사고 자금 경유 비율 등)는 해제 전과 크게 다르지 않다.
+- **"지갑 주소 SDN 매칭만 하면 됨"** — 이름 + 주소 + 상대 VASP. 주소 없는 지정이 2026년에 실제로 나왔다.
+- **"발행자가 동결하니 스테이블코인은 안전"** — 동결 전 인출이 측정됐다(USDT 7.3%, USDC 18.7%).
+- **"False Positive 줄이려 매칭을 느슨하게"** — 보조 식별자 강화가 정답. 매칭 자체를 느슨하게 하면 FN이 생긴다.
 
 ### 한국 특수 현실
 
-- **원화 페그 스테이블코인 논의**: OFAC 의존도 낮추려는 동기. KRW-USD peg 스테이블코인 2단계 입법에서 논의 중.
-- **4대 거래소 OFAC SDN 공유**: DAXA 주도 **지갑 주소 공동 블랙리스트**. OFAC 발표 후 4사 모두 동기화.
-- **국정원·외교부 별도 채널**: 북한 관련 주소는 공식 OFAC 반영 전에 국정원이 4대 거래소에 개별 통보하는 비공식 경로 존재.
+- 이전 판의 "DAXA 주도 공동 블랙리스트", "국정원 비공식 통보 경로", "4대 거래소 OFAC 전담 신설"은 공개 근거가 확인되지 않아 삭제했습니다.
+- 2027-02-19부터(enacted-not-in-force) 해외 VASP가 FATF 고위험국 소재이거나 무인허가이면 거래가 제한됩니다(감독규정 §28-2②, 2027-02 중 시행). 제재 스크리닝과 상대 VASP 3등급 평가를 같은 데이터로 운영하면 중복을 줄일 수 있습니다([`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) 5절).
 
 ---
 
-## 12. Fuzzy Matching — 한국 특화 임계값 튜닝
+## 12. Fuzzy Matching — 한국 이름 대응 설계
 
 ### 12.1 문제 정의
 
-한국 성씨 Kim/Lee/Park/Choi/Jung이 **상위 5개만으로 인구 50%**. 글로벌 기본 Jaro-Winkler 0.85 threshold 적용 시 False Positive 폭증 (일 alert 수백 건).
+한국은 소수 성씨 비중이 높아, 글로벌 기본 유사도 임계값을 그대로 쓰면 성씨만 같은 동명이인 HIT가 많이 생깁니다.
 
-**예**: 고객 "Kim Min-soo 1990-01-01 KR" screen 시
-- OFAC SDN "Kim Min-su 1985-03-15 KP" (북한)과 Jaro-Winkler = 0.97
-- 기본 threshold 0.85로는 HIT → 분석가 수동 disposition 필요
-- 하루 수백 건 이런 식 → 주니어 분석가 시간의 30%가 FP 처리로 소진
+**예**: 고객 "Kim Min-soo 1990-01-01 KR" 대조 시
+- 명단 항목 "Kim Min-su 1985-03-15 KP"와 이름 유사도는 매우 높게 나온다(가상 예시)
+- 생년월일·국적이 다르므로 보조 식별자 규칙이 있으면 자동으로 FP 처리된다
 
-### 12.2 한국 특화 스크리닝 파이프라인
+### 12.2 한국 이름 대응 스크리닝 파이프라인 (설계 예시)
 
 ```python
 from jellyfish import jaro_winkler_similarity
@@ -401,100 +379,91 @@ COMMON_KR_SURNAMES = {
     "Yoon", "Cho", "Kang", "Lim", "Han", "Shin"
 }
 
-def screen_korean_customer(customer: Customer, sdn_list: list[SDN]) -> list[Hit]:
+# 임계값은 예시 — 자사 샘플로 검증해 정하고 근거를 문서화한다
+SURNAME_T = 0.95
+COMMON_T = 0.92
+DEFAULT_T = 0.88
+
+def screen_korean_customer(customer, sdn_list):
     hits = []
     for sdn in sdn_list:
         # 1. 성씨 로마자 variant 매칭 (Kim/Gim/Ghim 등)
         surname_match = any(
-            jaro_winkler_similarity(
-                normalize_kr(customer.surname),
-                normalize_kr(variant)
-            ) >= 0.95
-            for variant in sdn.surname_variants
+            jaro_winkler_similarity(normalize_kr(customer.surname),
+                                    normalize_kr(v)) >= SURNAME_T
+            for v in sdn.surname_variants
         )
         if not surname_match:
             continue
 
-        # 2. 한국 상위 성씨면 full name threshold 상향 (0.92)
-        threshold = 0.92 if customer.surname in COMMON_KR_SURNAMES else 0.88
-        name_score = jaro_winkler_similarity(
-            normalize(customer.full_name),
-            normalize(sdn.name)
-        )
+        # 2. 흔한 성씨면 full name 임계값 상향
+        threshold = COMMON_T if customer.surname in COMMON_KR_SURNAMES else DEFAULT_T
+        name_score = jaro_winkler_similarity(normalize(customer.full_name),
+                                             normalize(sdn.name))
         if name_score < threshold:
             continue
 
-        # 3. 보조 식별자 필수 (DOB OR Nationality)
+        # 3. 보조 식별자 (DOB OR Nationality)
         dob_match = customer.dob and customer.dob == sdn.dob
         nat_match = sdn.nationalities and customer.nationality in sdn.nationalities
         if not (dob_match or nat_match):
             continue
 
-        # 4. Whitelist 체크 (5년 유효)
-        if (customer.id, sdn.id) in WHITELIST_5Y:
+        # 4. 승인된 화이트리스트 (만료일 있음)
+        if is_whitelisted(customer.id, sdn.id):
             continue
 
-        hits.append(Hit(
-            sdn=sdn,
-            name_score=name_score,
-            dob_match=dob_match,
-            nat_match=nat_match,
-        ))
+        hits.append((sdn, name_score, dob_match, nat_match))
     return hits
 ```
+
+주의: 보조 식별자를 "필수"로 두면 명단 항목에 생년월일·국적이 비어 있는 경우를 놓칩니다. 식별자가 비어 있는 항목은 별도 수동 검토 큐로 보내는 규칙이 필요합니다.
 
 ### 12.3 이름 정규화
 
 ```python
+import re
+
+NORMALIZATIONS = [
+    (r"-", ""), (r",\s*", " "),
+    ("min-soo", "minsoo"), ("minsu", "minsoo"),
+    # 로마자 표기법 차이 예시
+    ("hoon", "hun"), ("seung", "sung"),
+]
+
 def normalize_kr(name: str) -> str:
-    # 다양한 로마자 표기 통일
-    NORMALIZATIONS = [
-        # 하이픈·쉼표 제거
-        (r"-", ""), (r",\s*", " "),
-        # 이름 로마자 variants
-        ("gil-dong", "gildong"),
-        ("min-soo", "minsoo"), ("minsu", "minsoo"),
-        # McCune-Reischauer vs Revised Romanization
-        ("hoon", "hun"), ("seung", "sung"),
-    ]
     name = name.lower().strip()
     for pat, rep in NORMALIZATIONS:
-        import re
         name = re.sub(pat, rep, name)
     return " ".join(name.split())
 ```
 
-### 12.4 Threshold 성능 비교 (실제 한국 VASP 추정)
+### 12.4 임계값 검증 방법
 
-고객 DB 1M건 × OFAC SDN 1.5K 전수 스크리닝 결과 (샘플링 기반):
+이전 판의 "Config별 FP/FN rate 표"와 "감독당국 기대 FN < 3%"는 공개 근거가 없어 삭제했습니다. 대신 다음 절차로 자사 수치를 만듭니다.
 
-| Config | FP rate | FN rate | 일 평균 alert |
-|---|---|---|---|
-| JW 0.85 단독 | ~90% | ~0.5% | 200+ |
-| JW 0.92 + DOB 필수 | ~45% | ~1.5% | 80 |
-| JW 0.92 + DOB + 성씨필터 | ~25% | ~2% | 30 |
-| Full pipeline (위 12.2) | ~12% | ~3% | 10~15 |
+1. 과거 HIT와 disposition 결과로 라벨 샘플 구성
+2. 임계값·규칙 조합별 FP·FN을 측정
+3. 선택한 조합과 그 이유(놓칠 수 있는 유형 포함)를 문서화하고 승인
+4. 명단 구조가 바뀌면 재검증
 
-**Trade-off**: FN 증가 (놓치는 진짜 hit). 감독당국 기대 수준은 FN < 3%이지만, 전략적으로 FN을 0.5%까지 낮추려면 FP 90% 감수해야 함.
-
-### 12.5 SQL 구현 (Snowflake·Postgres)
+### 12.5 SQL 구현 예시
 
 ```sql
--- Jaro-Winkler + DOB/국적 필터 + 성씨 roll-up
+-- Jaro-Winkler + DOB/국적 필터 + 화이트리스트 제외 (함수명은 DB별로 다름)
 WITH candidates AS (
-  SELECT c.id AS cust_id, s.id AS sdn_id,
+  SELECT c.id AS cust_id, s.id AS sdn_id, c.surname,
          JARO_WINKLER(c.full_name, s.name) AS score,
          (c.dob = s.dob) AS dob_match,
          (c.nationality = ANY(s.nationalities)) AS nat_match
   FROM customers c
-  CROSS JOIN ofac_sdn s
+  CROSS JOIN sanctions_list s
   WHERE SOUNDEX(c.surname) = SOUNDEX(s.surname)  -- 1차 필터
 )
 SELECT * FROM candidates
 WHERE score >= CASE
-    WHEN cust_id IN (SELECT id FROM customers WHERE surname IN
-        ('Kim','Lee','Park','Choi','Jung','Jang','Yoon','Cho','Kang'))
-    THEN 0.92 ELSE 0.88 END
+    WHEN surname IN ('Kim','Lee','Park','Choi','Jung','Jang','Yoon','Cho','Kang')
+    THEN 0.92 ELSE 0.88 END                       -- 예시 임계값
   AND (dob_match OR nat_match)
   AND NOT EXISTS (
       SELECT 1 FROM fp_whitelist w
@@ -504,9 +473,9 @@ WHERE score >= CASE
   );
 ```
 
-### 12.6 Whitelist 운영 (FP disposition 재활용)
+### 12.6 Whitelist 운영
 
-한 번 "FP 확인" disposition 받은 hit은 **5년 whitelist**에 올려서 동일 pair 재-alert 방지.
+한 번 "FP 확인" disposition을 받은 쌍은 **만료일 있는 화이트리스트**에 올려 동일 쌍의 재알람을 막습니다. 만료 기간은 정책으로 정합니다.
 
 ```sql
 CREATE TABLE fp_whitelist (
@@ -518,20 +487,18 @@ CREATE TABLE fp_whitelist (
     created_by UUID,
     PRIMARY KEY (cust_id, sdn_id)
 );
-
--- AMLO가 승인한 경우만 whitelist에 추가
--- 5년 뒤 자동 만료 → 재검증 필요 (SDN list 업데이트 반영)
+-- 승인권자가 승인한 경우만 추가, 만료 시 재검증
+-- 명단 항목이 갱신되면 관련 화이트리스트도 재검토
 ```
 
-**주의**: Whitelist 자체가 감독 검사 대상. AMLO 승인 로그·만료 정책·재검증 주기 문서화 필수.
+**주의**: 화이트리스트 자체가 검사 대상입니다. 승인 로그·만료 정책·재검증 주기를 문서화합니다.
 
 ---
 
 ## 더 읽을거리
 - [`cdd-edd.md`](cdd-edd.md) — Onboarding 스크리닝 통합
 - [`str-ctr.md`](str-ctr.md) — 매칭 시 STR
-- [`../2-regulations/us-bsa-fincen.md`](../2-regulations/us-bsa-fincen.md) — OFAC 제도 상세
-- [`../6-cases/tornado-cash.md`](../6-cases/tornado-cash.md) — DeFi 제재 사례
-- [OFAC 공식](https://ofac.treasury.gov/)
-- [OFAC SDN List 검색](https://sanctionssearch.ofac.treas.gov/)
-- [UN Consolidated List](https://www.un.org/securitycouncil/content/un-sc-consolidated-list)
+- [`../2-regulations/us-bsa-fincen.md`](../2-regulations/us-bsa-fincen.md) — OFAC 2026 축, FinCEN 조치
+- [`../6-cases/tornado-cash.md`](../6-cases/tornado-cash.md) — 제재 해제와 위험 평가
+- [`../6-cases/major-enforcement.md`](../6-cases/major-enforcement.md) — Prince Group·Huione·BitBank·A7
+- [OFAC Recent Actions](https://ofac.treasury.gov/recent-actions)
