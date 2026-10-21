@@ -5,7 +5,7 @@
 추상 의무(OBL) 하나에 걸린 각국 조문(PROV)의 IMPOSES 한정자를 모아
 관할 비교표를 생성한다. 손으로 유지하던 비교표를 질의 결과로 대체하는 것이 목적이다.
 
-설계 근거: docs/ontology/01-semantic-layer.md §2.1
+설계 근거: 추상 의무(OBL) 하나에 각국 조문(PROV)이 IMPOSES 로 걸리고, 관할별 차이는 엣지 한정자에 담긴다.
 
 Usage:
     python scripts/build_crosswalk.py                    # 전체 의무

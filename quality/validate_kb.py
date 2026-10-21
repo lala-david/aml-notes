@@ -2,10 +2,8 @@
 """
 지식베이스 검증기 — 불변식 강제
 
-docs/ontology/04-node-edge-spec.md §8 (I-1~I-12)
-docs/ontology/05-identifier-scheheme.md §7 (ID-1~ID-8)
-docs/ontology/06-timeline-model.md §8 (T-1~T-7)
-docs/governance/01-data-quality.md §4 (Q-1~Q-8)
+규칙 정의: kb/schema/schema.yaml (invariants) · docs/governance/01-data-quality.md §4 (Q-1~Q-8)
+ID-*·T-*·SRC-* 규칙은 이 파일의 각 check_* 함수 docstring 이 정의다.
 
 Usage:
     python quality/validate_kb.py [--kb-root kb] [--report quality/dq_report.md]
@@ -92,18 +90,17 @@ class KB:
     states: list[tuple[Path, int, dict]] = field(default_factory=list)
     metrics: list[tuple[Path, int, dict]] = field(default_factory=list)
     contradictions: list[tuple[Path, int, dict]] = field(default_factory=list)
-    alog: list[tuple[Path, int, dict]] = field(default_factory=list)
-    ontology: dict = field(default_factory=dict)
+    schema: dict = field(default_factory=dict)
 
 
 # ─────────────────────────────────────────────────────────────
 # 로딩
 # ─────────────────────────────────────────────────────────────
 
-def load_ontology(kb_root: Path) -> dict:
-    path = kb_root / "schema" / "ontology.yaml"
+def load_schema(kb_root: Path) -> dict:
+    path = kb_root / "schema" / "schema.yaml"
     if not path.exists():
-        raise FileNotFoundError(f"온톨로지 파일 없음: {path}")
+        raise FileNotFoundError(f"스키마 파일 없음: {path}")
     with path.open(encoding="utf-8") as f:
         return yaml.safe_load(f)
 
@@ -141,7 +138,7 @@ def iter_jsonl(base: Path) -> Iterable[tuple[Path, int, dict]]:
 
 
 def load_kb(kb_root: Path, findings: list[Finding]) -> KB:
-    kb = KB(ontology=load_ontology(kb_root))
+    kb = KB(schema=load_schema(kb_root))
 
     for path in iter_node_files(kb_root):
         try:
@@ -182,8 +179,6 @@ def load_kb(kb_root: Path, findings: list[Finding]) -> KB:
         kb.states.append((path, lineno, rec))
     for path, lineno, rec in iter_jsonl(kb_root / "metrics"):
         kb.metrics.append((path, lineno, rec))
-    for path, lineno, rec in iter_jsonl(kb_root / "alog"):
-        kb.alog.append((path, lineno, rec))
 
     return kb
 
@@ -249,8 +244,8 @@ def check_schema(kb: KB, kb_root: Path, findings: list[Finding]) -> None:
 
 def check_ids(kb: KB, kb_root: Path, findings: list[Finding]) -> None:
     """ID-1·ID-2·ID-4·ID-5·ID-6"""
-    classes = kb.ontology.get("classes", {})
-    ns = kb.ontology.get("namespaces", {})
+    classes = kb.schema.get("classes", {})
+    ns = kb.schema.get("namespaces", {})
     allowed_ns = set(ns.get("jurisdictional", [])) | set(ns.get("special", {}))
 
     for node in kb.nodes.values():
@@ -270,7 +265,7 @@ def check_ids(kb: KB, kb_root: Path, findings: list[Finding]) -> None:
         # ID-2 클래스 존재
         if prefix not in classes:
             findings.append(Finding("ID-2", SEVERITY_BLOCK, str(node.path),
-                                    f"온톨로지에 없는 클래스: {prefix}"))
+                                    f"스키마에 없는 클래스: {prefix}"))
         # type 필드와 ID 접두어 일치
         if node.type and node.type != prefix:
             findings.append(Finding("ID-2", SEVERITY_BLOCK, str(node.path),
@@ -360,7 +355,7 @@ def check_references(kb: KB, findings: list[Finding]) -> None:
 
 def check_predicates(kb: KB, findings: list[Finding]) -> None:
     """엣지 술어의 정의역·치역 검사"""
-    preds = kb.ontology.get("predicates", {})
+    preds = kb.schema.get("predicates", {})
     for node in kb.nodes.values():
         for i, edge in enumerate(node.edges):
             where = f"{node.path}:edges[{i}]"
@@ -390,7 +385,7 @@ def check_predicates(kb: KB, findings: list[Finding]) -> None:
 def check_evidence(kb: KB, findings: list[Finding]) -> None:
     """I-1 무증거 노드 금지 · I-7 FACT 증거 결속"""
     exempt = set()
-    for inv in kb.ontology.get("invariants", []):
+    for inv in kb.schema.get("invariants", []):
         if inv.get("id") == "I-1":
             exempt = set(inv.get("exempt_classes") or [])
     for node in kb.nodes.values():
@@ -548,7 +543,7 @@ def check_isolated(kb: KB, findings: list[Finding]) -> None:
 
 def check_symmetry(kb: KB, findings: list[Finding]) -> None:
     """I-11 대칭 술어의 양방향 존재"""
-    preds = kb.ontology.get("predicates", {})
+    preds = kb.schema.get("predicates", {})
     symmetric = {p for p, spec in preds.items() if (spec or {}).get("symmetric")}
     pairs: set[tuple[str, str, str]] = set()
     for node in kb.nodes.values():
@@ -618,66 +613,6 @@ def check_relative_time(kb: KB, findings: list[Finding]) -> None:
                     "Q-5", SEVERITY_WARN, f"{node.path}:{fpath}",
                     f"상대 시간 표현 '{m.group(0)}' — 절대일자 병기 필요"
                 ))
-
-
-def check_alog(kb: KB, findings: list[Finding]) -> None:
-    """K-3 · K-5 · K-8 — 액션 로그 무결성."""
-    known = all_ids(kb)
-    for path, lineno, rec in kb.alog:
-        where = f"{path}:{lineno}"
-        if "__parse_error__" in rec:
-            findings.append(Finding("PARSE", SEVERITY_BLOCK, where, rec["__parse_error__"]))
-            continue
-
-        action_id = rec.get("action")
-        action = kb.nodes.get(action_id or "")
-        if action_id and action is None:
-            findings.append(Finding(
-                "K-3", SEVERITY_BLOCK, where,
-                f"ALOG.action 이 실존하지 않음: {action_id} — ACTION 노드 등재 필요"
-            ))
-
-        actor_id = rec.get("actor")
-        actor = kb.nodes.get(actor_id or "")
-        if actor_id and actor is None:
-            findings.append(Finding("K-3", SEVERITY_BLOCK, where,
-                                    f"ALOG.actor 가 실존하지 않음: {actor_id}"))
-        # K-5 실행 권한 확인
-        elif actor and action_id:
-            allowed = set(actor.raw.get("can_execute") or [])
-            denied = set(actor.raw.get("cannot_execute") or [])
-            if action_id in denied:
-                findings.append(Finding("K-5", SEVERITY_BLOCK, where,
-                                        f"{actor_id} 는 {action_id} 실행이 명시적으로 금지됨"))
-            elif allowed and action_id not in allowed:
-                findings.append(Finding(
-                    "K-5", SEVERITY_WARN, where,
-                    f"{actor_id}.can_execute 에 {action_id} 없음 — 권한 정의 갱신 필요"
-                ))
-
-        # K-3 대상 노드 실존
-        for target in rec.get("targets") or []:
-            if isinstance(target, str) and ":" in target and target not in known:
-                findings.append(Finding(
-                    "K-3", SEVERITY_WARN, where,
-                    f"ALOG.targets 항목이 실존하지 않음: {target}"
-                ))
-
-        # K-4 제안 필수 액션은 proposal 을 가져야 한다.
-        # 소급 기록(backfill)은 예외 — 액션 런타임 도입 이전의 변경을 사후 기록한 것이므로
-        # 제안 절차가 존재하지 않았다. 다만 backfill 임을 명시해야 면제된다.
-        is_backfill = rec.get("actor_identity") == "backfill"
-        if action and action.raw.get("requires_proposal") and not rec.get("proposal"):
-            if not is_backfill:
-                findings.append(Finding(
-                    "K-4", SEVERITY_WARN, where,
-                    f"{action_id} 는 requires_proposal 이나 proposal 이 비어 있음 "
-                    f"(소급 기록이면 actor_identity: backfill 로 표기할 것)"
-                ))
-
-        if rec.get("result") not in ("applied", "rejected", "rolled_back"):
-            findings.append(Finding("K-1", SEVERITY_BLOCK, where,
-                                    f"ALOG.result 값이 유효하지 않음: {rec.get('result')!r}"))
 
 
 def check_source_registry(kb: KB, repo_root: Path, findings: list[Finding]) -> None:
@@ -909,7 +844,6 @@ def main() -> int:
     check_symmetry(kb, findings)
     check_units(kb, findings)
     check_relative_time(kb, findings)
-    check_alog(kb, findings)
     check_source_registry(kb, repo_root, findings)
     check_forbidden_terms(kb, repo_root, findings)
 

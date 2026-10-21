@@ -24,7 +24,7 @@
 ```mermaid
 flowchart TB
     A["① 스키마 검증<br/>JSON Schema"] --> B["② 참조 무결성<br/>댕글링 ID 0"]
-    B --> C["③ 온톨로지 제약<br/>술어 정의역·치역"]
+    B --> C["③ 스키마 제약<br/>술어 정의역·치역"]
     C --> D["④ 시간 정합성<br/>구간 중첩·순서"]
     D --> E["⑤ 증거 결속<br/>무증거 노드 검출"]
     E --> F["⑥ 인용 검증<br/>quote 가 원문에 실재"]
@@ -84,7 +84,7 @@ flowchart LR
 
 ## 4. 무결성 규칙 목록
 
-[`../ontology/04-node-edge-spec.md §8`](../ontology/04-node-edge-spec.md) 의 I-1 ~ I-12, [`06-timeline-model.md §8`](../ontology/06-timeline-model.md) 의 T-1 ~ T-7, [`../ontology/05-identifier-scheme.md §7`](../ontology/05-identifier-scheme.md) 의 ID-1 ~ ID-8 을 통합 집행한다.
+[`../../kb/schema/schema.yaml`](../../kb/schema/schema.yaml) 의 불변식(I-·T-)과 [`../../quality/validate_kb.py`](../../quality/validate_kb.py) 의 식별자 규칙(ID-)을 통합 집행한다.
 
 추가 규칙:
 

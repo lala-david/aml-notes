@@ -18,16 +18,15 @@ python quality/validate_kb.py --today 2026-12-31  # 기준일 지정 (SLA 테스
 
 **종료 코드**: `0` 통과 · `1` 차단 위반 존재 · `2` 실행 오류
 
-검사 계층 9단계 — 스키마 → 참조 무결성 → 온톨로지 제약 → 시간 정합성 → 증거 결속 →
+검사 계층 9단계 — 스키마 → 참조 무결성 → 술어 제약 → 시간 정합성 → 증거 결속 →
 인용 검증 → 링크 헬스 → 중복 탐지 → 금칙어.
 
 | 규칙군 | 정의 문서 |
 |---|---|
-| I-1 ~ I-12 | [`docs/ontology/04-node-edge-spec.md`](../docs/ontology/04-node-edge-spec.md) §8 |
-| ID-1 ~ ID-9 | [`docs/ontology/05-identifier-scheme.md`](../docs/ontology/05-identifier-scheme.md) §7 |
-| T-1 ~ T-7 | [`docs/ontology/06-timeline-model.md`](../docs/ontology/06-timeline-model.md) §8 |
+| I-1 ~ I-12, T-1 ~ T-2 | `kb/schema/schema.yaml` 의 `invariants` |
+| ID-1 ~ ID-9 | `validate_kb.py` 의 `check_ids` |
 | Q-1 ~ Q-8 | [`01-data-quality.md`](../docs/governance/01-data-quality.md) §4 |
-| ONT-1 ~ ONT-3 | 술어 정의역·치역 — `kb/schema/ontology.yaml` |
+| ONT-1 ~ ONT-3 | 술어 정의역·치역 — `kb/schema/schema.yaml` |
 
 **차단 vs 경고**: 기계적으로 판정 가능하고 오탐이 없는 것만 차단합니다. 경고를 차단으로 만들면
 CI 가 상시 빨간불이 되어 아무도 보지 않게 됩니다.

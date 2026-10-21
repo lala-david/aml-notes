@@ -2,6 +2,33 @@
 
 > 본 저장소의 주요 변경 이력. [Keep a Changelog](https://keepachangelog.com/) 형식을 따르며, 날짜는 KST 기준입니다.
 
+## [1.1.0] — 2026-10-21
+
+**온톨로지 설계 계층과 사이트 설계를 걷어냄 — 데이터와 검증기만 남긴다**
+
+### Removed
+
+- `docs/ontology/` 6건 — 의미·동적·운동 계층 설계, 노드/엣지 명세, 식별자 체계, 타임라인 모델
+- `docs/architecture/01-overview.md` (3계층 총론) · `03-site-blueprint.md` (공개 사이트 설계)
+- `docs/adr/0001` (프로퍼티 그래프 vs RDF) · `0004` (Kinetic 계층 정정) · `docs/references.md` (온톨로지 방법론 저작자 표시)
+- Kinetic 계층 노드 전체 — `kb/entities/actions/`(6) · `functions/`(1) · `roles/`(3) · `kb/alog/`(11건)
+- 온톨로지 방법론 출처 노드 `SRC:jp-leadingai` · `DOC:jp-leadingai-palantir-ontology`
+- 스키마에서 `ACTION`·`FUNC`·`ROLE`·`ALOG` 클래스, 관련 술어 9개, 불변식 K-1~K-8
+- `PLAN.md` 의 Phase 6 (공개 사이트)
+
+### Changed
+
+- `kb/schema/ontology.yaml` → `kb/schema/schema.yaml` — 클래스·술어·불변식의 유일한 정의
+- `quality/validate_kb.py` — 스키마 경로 변경, 액션 로그 검사 제거
+- README·docs·kb·quality·scripts 문서의 온톨로지 서술과 깨진 링크 정리
+
+### 유지
+
+- 지식 데이터 전부 (규범·조문·유형론·지표·사실·상충 레지스트리) — 노드 264, 검증 차단 0
+- ADR-0002 (이중시간) · ADR-0003 (파일 SSOT) — 데이터 모델 결정이므로 남김
+
+---
+
 ## [1.0.0] — 2026-07-30
 
 **성격 전환: 학습 교재 → 질의 가능한 지식베이스**

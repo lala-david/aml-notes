@@ -1,6 +1,5 @@
-# 가상자산 AML 지식베이스 온톨로지 — 기계판
-# 규범적 정의는 docs/ontology/04-node-edge-spec.md
-# 이 파일은 validator·빌더가 직접 소비한다. 문서와 불일치 시 문서가 우선하며 즉시 동기화할 것.
+# 가상자산 AML 지식베이스 — 데이터 스키마 (기계판)
+# 클래스·술어·불변식의 유일한 정의다. validator·빌더가 직접 소비한다.
 
 version: "0.1.0"
 updated: "2026-07-30"
@@ -408,73 +407,8 @@ classes:
       caveat: { type: text }
 
 # ─────────────────────────────────────────────────────────────
-# L3 · KINETIC — 동사의 세계 (쓰기·실행)
-# 근거: DOC:jp-leadingai-palantir-ontology · ADR-0004
-# Kinetics = Action / Function / Dynamic security. 수집이 아니다.
-# ─────────────────────────────────────────────────────────────
-
-  ACTION:
-    layer: kinetic
-    label: { ko: "액션", en: "Action type" }
-    dir: "kb/entities/actions"
-    required: [action_kind, change_set, authorized_roles]
-    fields:
-      action_kind: { type: enum, values: [governance, operational] }
-      tier: { type: string, desc: "L1-write | L2-write | funnel-write | external" }
-      change_set: { type: object, desc: "creates / modifies / never_touches" }
-      submission_criteria: { type: list, desc: "충족하지 않으면 실행 거부" }
-      side_effects: { type: list }
-      authorized_roles: { type: list, desc: "ROLE ID 목록" }
-      requires_proposal: { type: boolean, desc: "브랜치-리뷰-머지 필수 여부" }
-      reversible_by: { type: ref, target: ACTION }
-      implements_obligation: { type: ref, target: OBL, desc: "운용 액션이 이행하는 의무" }
-
-  FUNC:
-    layer: kinetic
-    label: { ko: "함수", en: "Function" }
-    dir: "kb/entities/functions"
-    required: [func_kind, deterministic]
-    fields:
-      func_kind: { type: enum, values: [derivation, scoring, validation, projection] }
-      inputs: { type: list }
-      output: { type: string }
-      deterministic: { type: boolean, desc: "동일 입력 → 동일 출력 보장" }
-      implementation: { type: string, desc: "구현 파일 경로. 미구현이면 null" }
-      cache_invalidated_by: { type: list, desc: "ACTION ID 목록" }
-
-  ROLE:
-    layer: kinetic
-    label: { ko: "역할", en: "Role" }
-    dir: "kb/entities/roles"
-    required: [can_execute]
-    fields:
-      can_execute: { type: list, desc: "ACTION ID 목록" }
-      cannot_execute: { type: list, desc: "명시적 금지 — can_execute 보다 우선" }
-      scope: { type: object, desc: "node_types / jurisdictions / properties" }
-      constraints: { type: list }
-      is_agent: { type: boolean, desc: "AI 에이전트 역할이면 true — 직접 실행 불가" }
-
-  ALOG:
-    layer: kinetic
-    label: { ko: "액션 로그", en: "Action log" }
-    dir: "kb/alog"
-    storage: jsonl
-    append_only: true
-    required: [action, actor, executed_at, targets, result]
-    fields:
-      action: { type: ref, target: ACTION }
-      actor: { type: ref, target: ROLE }
-      actor_identity: { type: string, desc: "사람·에이전트 식별자" }
-      basis: { type: string, desc: "TASK / SIGNAL / manual" }
-      proposal: { type: string, desc: "PR 참조" }
-      executed_at: { type: datetime }
-      targets: { type: list, desc: "영향받은 노드 ID" }
-      change: { type: object, desc: "created / modified (전·후 값)" }
-      result: { type: enum, values: [applied, rejected, rolled_back] }
-
-# ─────────────────────────────────────────────────────────────
-# FUNNEL — 계층이 아니라 온톨로지를 채우는 인프라 (ADR-0004)
-# 사실 후보까지만 만든다. 후보가 지식이 되는 것은 ACTION 을 통해서다.
+# FUNNEL — 수집 인프라. 사실 후보까지만 만든다.
+# 후보가 지식이 되는 것은 사람의 검토(PR 리뷰)를 거친 뒤다.
 # ─────────────────────────────────────────────────────────────
 
   FEED:
@@ -620,17 +554,6 @@ predicates:
   MEASURES:         { label_ko: "측정", from: [METRIC], to: ["*"], symmetric: false }
   CAUSED:           { label_ko: "유발", from: [EVT], to: [EVT], symmetric: false, qualifiers: [mechanism, lag_days, confidence, basis] }
 
-  # L3 KINETIC — 동사 (ADR-0004)
-  MODIFIES:              { label_ko: "수정", from: [ACTION], to: ["*"], symmetric: false, qualifiers: [properties] }
-  AUTHORIZES:            { label_ko: "승인", from: [ROLE], to: [ACTION], symmetric: false }
-  EMITS_LOG:             { label_ko: "로그 기록", from: [ACTION], to: [ALOG], symmetric: false }
-  LOGGED_ON:             { label_ko: "기록 대상", from: [ALOG], to: ["*"], symmetric: false }
-  EXECUTED_BY:           { label_ko: "실행 주체", from: [CTL], to: [ACTION], symmetric: false }
-  IMPLEMENTS_OBLIGATION: { label_ko: "의무 이행", from: [ACTION], to: [OBL], symmetric: false }
-  COMPUTES_OVER:         { label_ko: "계산 범위", from: [FUNC], to: ["*"], symmetric: false }
-  REVERSED_BY:           { label_ko: "~로 취소", from: [ACTION], to: [ACTION], symmetric: false }
-  INVALIDATES_CACHE:     { label_ko: "캐시 무효화", from: [ACTION], to: [FUNC], symmetric: false }
-
   # FUNNEL 흐름 — 계층 아님
   EMITS:            { label_ko: "산출", from: [FEED], to: [ITEM], symmetric: false }
   PRODUCED_BY:      { label_ko: "생성 주체", from: [ITEM], to: [RUN], symmetric: false }
@@ -648,9 +571,8 @@ predicates:
 invariants:
   - id: I-1
     rule: "모든 노드는 evidence 를 1개 이상 갖는다"
-    # ACTION·FUNC·ROLE 은 외부 사실이 아니라 내부 설계 산출물이므로 외부 증거를 요구하지 않는다.
     # SRC 는 세계에 대한 주장이 아니라 출처 인프라 기술(記述)이다. 대신 tier_basis 를 강제한다(SRC-6).
-    exempt_classes: [CONCEPT, CAP, ACTION, FUNC, ROLE, SRC]
+    exempt_classes: [CONCEPT, CAP, SRC]
   - id: I-2
     rule: "PROV 는 정확히 하나의 REG 에 PART_OF 로 연결된다"
   - id: I-3
@@ -679,24 +601,6 @@ invariants:
     rule: "CAUSED 엣지의 basis 는 temporal_only 가 아니다"
   - id: T-1
     rule: "모든 EVT 는 date_precision 을 명시한다"
-
-  # ── L3 KINETIC (ADR-0004) ──
-  - id: K-1
-    rule: "모든 액션 실행은 정확히 하나의 ALOG 를 생성한다"
-  - id: K-2
-    rule: "ALOG 는 수정·삭제되지 않는다 (append-only)"
-  - id: K-3
-    rule: "ALOG.targets 의 모든 노드는 실존해야 한다"
-  - id: K-4
-    rule: "requires_proposal: true 인 액션의 ALOG 는 proposal 을 가져야 한다"
-  - id: K-5
-    rule: "ALOG.actor 는 해당 액션을 실행할 권한이 있는 ROLE 이어야 한다"
-  - id: K-6
-    rule: "액션의 change_set.never_touches 필드가 변경되면 실행을 거부한다"
-  - id: K-7
-    rule: "is_agent: true 인 ROLE 은 can_execute 가 비어 있어야 한다 (제안만 가능)"
-  - id: K-8
-    rule: "action_kind: operational 인 ACTION 은 implements_obligation 을 가져야 한다"
 
 # 신선도 SLA (일 단위)
 freshness_sla:

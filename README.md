@@ -3,12 +3,11 @@
 > **질의 가능한 규제 지식 그래프 + 매일 갱신되는 수집 파이프라인.**
 > 산문 교재가 아니라, 산문 아래에 시점 질의가 되는 그래프를 깐 지식 저장소.
 
-![as of](https://img.shields.io/badge/as%20of-2026--08--04-blue)
+![as of](https://img.shields.io/badge/as%20of-2026--10--21-blue)
 ![License CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
-![ontology](https://img.shields.io/badge/ontology-38%20classes%20%C2%B7%2059%20predicates-4f46e5)
-![nodes](https://img.shields.io/badge/KB%20nodes-276-059669)
+![nodes](https://img.shields.io/badge/KB%20nodes-264-059669)
 ![feeds](https://img.shields.io/badge/sources-33%20live%20%2F%2050-ea580c)
-![docs](https://img.shields.io/badge/design%20docs-21-orange)
+![docs](https://img.shields.io/badge/design%20docs-10-orange)
 ![status](https://img.shields.io/badge/KB-under%20construction-yellow)
 
 ---
@@ -49,64 +48,9 @@ flowchart LR
     style E fill:#fff7ed
 ```
 
-- **설계부터** → [`docs/README.md`](docs/README.md) · [`docs/PLAN.md`](docs/PLAN.md)
+- **설계부터** → [`docs/README.md`](docs/README.md) · [`docs/PLAN.md`](docs/PLAN.md) · [`kb/schema/schema.yaml`](kb/schema/schema.yaml)
 - **AML 처음** → [`curriculum/day_01.md`](curriculum/day_01.md)
 - **주제만 빠르게** → [`notes/README.md`](notes/README.md)
-
----
-
-## 🏗 3계층 온톨로지
-
-```mermaid
-flowchart TB
-    subgraph FN["🔻 FUNNEL — 유입 인프라 (계층 아님)"]
-        direction LR
-        F["FEED"] --> R["RUN"] --> I["ITEM"] --> SG["SIGNAL"] --> T["TASK"]
-    end
-    subgraph L3["⚙️ L3 KINETIC — 무엇을 바꿀 수 있는가 (동사)"]
-        direction LR
-        AC["ACTION"] --> AL["ALOG"]
-        RO["ROLE"] -.authorizes.-> AC
-        FU["FUNC"]
-    end
-    subgraph L2["🕒 L2 DYNAMIC — 언제 무엇이 참이었는가"]
-        direction LR
-        D["DOC"] --> FA["FACT"] --> EV["EVENT"] --> ST["STATE"]
-    end
-    subgraph L1["🧠 L1 SEMANTIC — 무엇이 존재하는가 (명사)"]
-        direction LR
-        JU["JUR"] --> OR["ORG"] --> RE["REG"] --> PR["PROV"] --> OB["OBL"] --> CT["CTL"]
-        TY["TYP"] --> TE["TEC"] --> IN["IND"]
-    end
-    T ==>|제안| AC
-    AC ==>|실행| FA
-    EV ==>|상태 전이| ST
-    ST ==>|현행값 투영| L1
-    L1 ==>|감시 대상 지정| F
-    FU -.computes over.-> L1
-
-    style L1 fill:#eef2ff,stroke:#4f46e5
-    style L2 fill:#ecfdf5,stroke:#059669
-    style L3 fill:#fef2f2,stroke:#dc2626
-    style FN fill:#fff7ed,stroke:#ea580c
-```
-
-계층은 단방향이 아니라 **순환**합니다. 이것이 지식베이스가 스스로 갱신되는 메커니즘입니다.
-
-| 계층 | 역할 | 변경 빈도 | 변경 주체 |
-|---|---|---|---|
-| **L1 의미** (명사) | 무엇이 존재하고 어떤 관계인가 | 월~분기 | 사람 (PR 리뷰 필수) |
-| **L2 동적** (시간) | 언제 무엇이 참이었는가 — 이중시간 | 일~주 | 자동 제안 + 사람 승인 |
-| **L3 운동** (동사) | 무엇을 바꿀 수 있고 누가 바꿨는가 | 명세는 분기 | 실행은 권한 통제 |
-| *Funnel* (인프라) | 수집·정규화·변화탐지 — **사실 후보까지만** | 일 | 자동 |
-
-**Funnel 은 계층이 아닙니다.** 수집한 것이 곧 지식이 되면 검증 게이트가 무력화됩니다.
-후보가 지식이 되는 것은 `ACTION` 을 통해서입니다.
-
-→ [`docs/ontology/04-node-edge-spec.md`](docs/ontology/04-node-edge-spec.md) (38 클래스 · 60+ 술어)
-
-Semantics/Kinetics 이분은 Palantir Foundry 온톨로지 모델에서 차용했고, L2 이중시간은
-규제 도메인을 위해 추가했습니다. 저작자 표시와 채택·확장 범위 → [`docs/references.md`](docs/references.md)
 
 ---
 
@@ -115,25 +59,22 @@ Semantics/Kinetics 이분은 Palantir Foundry 온톨로지 모델에서 차용�
 ```
 ├── 📘 docs/          설계 문서 — 여기서 시작
 │   ├── PLAN.md          마스터 계획
-│   ├── architecture/    3계층 총론 · 저장소 위상 · 사이트(보류)
-│   ├── ontology/        의미·동적·운동 계층 · 노드/엣지 명세 · 타임라인
+│   ├── architecture/    저장소 위상
 │   ├── governance/      데이터 품질 · 출처·확신도 · 검증 워크플로
 │   ├── ingestion/       소스 레지스트리 · 일일 파이프라인
 │   └── adr/             아키텍처 결정 기록
 │
 ├── 🧠 kb/            지식 그래프 — SSOT · 커밋·리뷰 대상 → [kb/README.md](kb/README.md)
-│   ├── schema/          온톨로지 기계판 · JSON Schema
+│   ├── schema/          데이터 스키마 기계판 · JSON Schema
 │   ├── entities/        노드 인스턴스 (1 노드 = 1 YAML)
 │   │   ├── jurisdictions/ regulators/ regulations/{reg}/provisions/
 │   │   ├── obligations/ controls/ concepts/ risks/
 │   │   ├── typologies/ techniques/ indicators/
 │   │   ├── chains/ assets/ protocols/ vasps/ vendors/ threat-actors/
-│   │   ├── events/ eras/ incidents/ enforcement/ cases/
-│   │   └── actions/ functions/ roles/     ← L3 운동 계층
+│   │   └── events/ eras/ incidents/ enforcement/ cases/
 │   ├── facts/           원자적 사실 + 상충 레지스트리 (JSONL)
 │   ├── states/          구간 상태 — 이중시간 (JSONL)
 │   ├── metrics/         관측 수치 시계열 (JSONL)
-│   ├── alog/            액션 로그 — append-only (JSONL)
 │   ├── sources/         출처(SRC)·문서(DOC) 레지스트리
 │   └── derived/         🤖 생성물 — 직접 편집 금지
 │
@@ -165,8 +106,7 @@ Semantics/Kinetics 이분은 Palantir Foundry 온톨로지 모델에서 차용�
 
 | 원칙 | 강제 수단 |
 |---|---|
-| AI 는 제안만, 확정은 사람 | `ROLE:x-agent` 의 `can_execute` 를 스키마가 빈 배열로 강제 (K-7) |
-| 변경 경로는 모델 안에 | `ACTION.change_set.never_touches` — 임의 필드 변경 차단 |
+| AI 는 제안만, 확정은 사람 | 리서치 산출물은 `_research/` 에만. `kb/` 반영은 PR 리뷰를 거친다 |
 | 증거 없는 노드 금지 | 불변식 I-1 — 모든 노드가 최소 1개 출처 문서에 결속 |
 | 시점 없는 주장 금지 | 모든 사실에 유효기간. 상대 시간 표현("현재", "최근") 검출 |
 | 제안 ≠ 시행 | 상태기계 9단계 고정. `proposed`/`enacted`/`in_force` 혼동 차단 |
@@ -216,7 +156,6 @@ Semantics/Kinetics 이분은 Palantir Foundry 온톨로지 모델에서 차용�
 | **B · 기술·시장** | 2008~ 프로토콜·사고·세탁 기법 진화 |
 | **C · 한국** | 2001~ 국내 법제·시장·집행 |
 
-→ [`docs/ontology/06-timeline-model.md`](docs/ontology/06-timeline-model.md)
 
 ---
 
@@ -272,19 +211,18 @@ python print/generator.py all
 
 | 항목 | 수 |
 |---|---:|
-| **KB 노드** | **276** *(목표 1,200)* |
-| ├ 엔티티 (semantic 203 · kinetic 10 · dynamic 1) | 214 |
-| └ 출처(SRC) · 문서(DOC) | 42 · 20 |
+| **KB 노드** | **264** *(목표 1,200)* |
+| ├ 엔티티 | 204 |
+| └ 출처(SRC) · 문서(DOC) | 41 · 19 |
 | 규범 · 조문 (REG · PROV) | 16 · 16 |
-| 원자적 사실 · 구간 상태 | 34 · 3 |
+| 원자적 사실 · 구간 상태 | 35 · 3 |
 | 상충 레지스트리 | 7 *(전부 판정 완료)* |
-| 액션 로그 | 11 |
-| 온톨로지 클래스 / 술어 / 불변식 | 38 / 59 / 22 |
-| 설계 문서 · ADR | 21 · 4 |
+| 스키마 클래스 / 술어 / 불변식 | 34 / 50 / 14 |
+| 설계 문서 · ADR | 10 · 2 |
 | 수집 소스 (가동 / 전체) | 33 / 50 *(실측 88 후보)* |
 | 산문 | 137 파일 · 30,297 줄 |
 
-> ⚠️ **KB 는 구축 초기입니다.** 온톨로지·파이프라인·검증 체계는 완성되었고
+> ⚠️ **KB 는 구축 초기입니다.** 스키마·파이프라인·검증 체계는 완성되었고
 > 노드 대량 등재가 다음 단계입니다.
 > `techniques/`(62) · `indicators/`(63) · `typologies/`(8) 은 등재를 시작했고,
 > `protocols/` · `vasps/` · `threat-actors/` · `chains/` · `assets/` · `risks/` ·

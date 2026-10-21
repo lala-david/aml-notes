@@ -1,7 +1,7 @@
 # ADR-0002 · 이중시간(bitemporal) 모델 채택
 
 - **상태**: 채택 (2026-07-30)
-- **관련**: [`../ontology/02-dynamic-layer.md`](../ontology/02-dynamic-layer.md)
+- **관련**: `kb/schema/schema.yaml` (FACT·STATE 클래스)
 
 ## 맥락
 

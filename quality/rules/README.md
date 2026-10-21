@@ -35,8 +35,7 @@ CI 에서는 시크릿을 파일로 풀어놓고 검증기를 실행한다.
 
 | 규칙군 | 정의 문서 |
 |---|---|
-| I-1 ~ I-12 | [`../../docs/ontology/04-node-edge-spec.md §8`](../../docs/ontology/04-node-edge-spec.md) |
-| ID-1 ~ ID-8 | [`../../docs/ontology/05-identifier-scheme.md §7`](../../docs/ontology/05-identifier-scheme.md) |
-| T-1 ~ T-7 | [`../../docs/ontology/06-timeline-model.md §8`](../../docs/ontology/06-timeline-model.md) |
+| I-1 ~ I-12, T-1 ~ T-2 | `kb/schema/schema.yaml` 의 `invariants` |
+| ID-1 ~ ID-9 | `quality/validate_kb.py` 의 `check_ids` |
 | Q-1 ~ Q-8 | [`../../docs/governance/01-data-quality.md §4`](../../docs/governance/01-data-quality.md) |
-| ONT-1 ~ ONT-3 | 술어 정의역·치역 — `kb/schema/ontology.yaml` 의 `predicates` |
+| ONT-1 ~ ONT-3 | 술어 정의역·치역 — `kb/schema/schema.yaml` 의 `predicates` |

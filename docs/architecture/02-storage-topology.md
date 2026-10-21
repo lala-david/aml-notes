@@ -26,7 +26,7 @@
 ```
 kb/
 ├── schema/
-│   ├── ontology.yaml
+│   ├── schema.yaml
 │   ├── node.schema.json
 │   ├── edge.schema.json
 │   └── types/{TYPE}.schema.json

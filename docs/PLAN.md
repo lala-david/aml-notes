@@ -11,7 +11,7 @@
 
 | # | 조건 | 측정 |
 |---|---|---|
-| 1 | 온톨로지 3계층이 확정되고 전 지식이 그 위에 올라가 있다 | 노드 1,200+, 고립 노드 0 |
+| 1 | 데이터 스키마가 확정되고 전 지식이 그 위에 올라가 있다 | 노드 1,200+, 고립 노드 0 |
 | 2 | 모든 사실이 출처까지 추적된다 | 추적성 100%, 무증거 노드 0 |
 | 3 | 시점 질의가 가능하다 | `as_of(T)` 로 임의 시점 규제 지형 재구성 |
 | 4 | 매일 자동으로 갱신된다 | 파이프라인 30일 무중단, 소스 50+ |
@@ -31,7 +31,7 @@ gantt
     axisFormat %m/%d
 
     section P1 기반
-    온톨로지 설계          :done, p1a, 2026-07-30, 1d
+    스키마 설계            :done, p1a, 2026-07-30, 1d
     리서치 함대 1파        :active, p1b, 2026-07-30, 2d
     검증·정본화            :p1c, after p1b, 3d
 
@@ -53,8 +53,6 @@ gantt
     리서치 2파 (심층)      :p5a, after p3c, 7d
     유형론·지표 체계화     :p5b, after p5a, 5d
 
-    section P6 공개
-    사이트 (Go+React)      :p6, after p4c, 1d
 ```
 
 ---
@@ -65,21 +63,15 @@ gantt
 
 | 산출물 | 위치 |
 |---|---|
-| 3계층 아키텍처 | `docs/architecture/01-overview.md` |
-| 의미 계층 설계 | `docs/ontology/01-semantic-layer.md` |
-| 동적 계층 설계 (이중시간) | `docs/ontology/02-dynamic-layer.md` |
-| 운동 계층 설계 (파이프라인) | `docs/ontology/03-kinetic-layer.md` |
-| 노드·엣지 전체 명세 | `docs/ontology/04-node-edge-spec.md` |
-| 식별자 체계 | `docs/ontology/05-identifier-scheme.md` |
-| 타임라인 데이터 모델 | `docs/ontology/06-timeline-model.md` |
-| 기계판 온톨로지 | `kb/schema/ontology.yaml` |
+| 저장소 위상 | `docs/architecture/02-storage-topology.md` |
+| 이중시간 모델 결정 | `docs/adr/0002-bitemporal-model.md` |
+| 기계판 스키마 | `kb/schema/schema.yaml` |
 | JSON Schema | `kb/schema/node.schema.json`, `edge.schema.json` |
 | 데이터 품질 프레임워크 | `docs/governance/01-data-quality.md` |
 | 출처·확신도·계보 | `docs/governance/02-provenance-confidence.md` |
 | 검증 워크플로 | `docs/governance/03-review-workflow.md` |
 | 소스 레지스트리 설계 | `docs/ingestion/01-source-registry.md` |
 | 일일 파이프라인 설계 | `docs/ingestion/02-daily-pipeline.md` |
-| 사이트 스케치 (보류) | `docs/architecture/03-site-blueprint.md` |
 | 리서치 작업표준 | `_research/BRIEF.md` |
 
 ### 3.2 리서치 함대 1파 (10기)
@@ -178,8 +170,8 @@ flowchart LR
 
 | 작업 | 목표 |
 |---|---|
-| L1 노드 1차 구축 | 1,200 노드 ([`ontology/01-semantic-layer.md §5`](ontology/01-semantic-layer.md)) |
-| L2 사실 결속 | 검증된 원자적 사실 전량 |
+| 엔티티 노드 1차 구축 | 1,200 노드 |
+| 사실 결속 | 검증된 원자적 사실 전량 |
 | 타임라인 3트랙 | 사건 140+, 인과 엣지, 국면 노드 |
 | 크로스워크 | 관할 비교표 자동 생성 |
 | `build_graph` 구현 | SSOT → 그래프·인덱스·파생물 재생성 |
@@ -216,12 +208,6 @@ flowchart LR
 | 탐지 지표 정교화 | 오탐률·데이터 요건 |
 | 학술 문헌 | 알고리즘 원논문 확보 |
 | 관할 확대 | 1파 미포함 관할 |
-
----
-
-## 8. Phase 6 — 공개 사이트
-
-**최종 단계 결정사항.** Go 백엔드 + React 프론트. 착수 전제조건 6개를 모두 충족한 뒤에만 시작한다. → [`architecture/03-site-blueprint.md`](architecture/03-site-blueprint.md)
 
 ---
 
@@ -269,7 +255,7 @@ flowchart TB
 |---|---|---|
 | 국내 기관 사이트가 해외 CI 러너 차단 | 한국 수집 절반 손실 | 리서치 단계 실측 필수, 차단 시 대체 실행환경 |
 | 규제 원문 접근 제한 (403·PDF 절단) | 확신도 하락 | 스냅샷 보관 + 2파에서 원문 재확보 |
-| 온톨로지 조기 확정으로 인한 경직 | 재작업 | ADR 로 변경 이력 관리, 클래스 폭증 금지 |
+| 스키마 조기 확정으로 인한 경직 | 재작업 | ADR 로 변경 이력 관리, 클래스 폭증 금지 |
 | 검증 큐 과부하 | 게이트 무력화 | 큐 위생 지표 + 필터 학습 |
 | 미검증 부채 누적 | 신뢰도 붕괴 | 5% 상한 강제 |
 | 리서치 도시에 간 상충 방치 | 잘못된 지식 정본화 | 교차 검증 단계 필수화 |

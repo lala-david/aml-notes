@@ -15,7 +15,7 @@
     "predicate": {
       "type": "string",
       "pattern": "^[A-Z][A-Z_]*$",
-      "description": "ontology.yaml 의 predicates 에 정의된 것만 허용"
+      "description": "schema.yaml 의 predicates 에 정의된 것만 허용"
     },
     "from": {
       "type": "string",
@@ -27,7 +27,7 @@
     },
     "qualifiers": {
       "type": "object",
-      "description": "술어별 한정자. 스키마는 ontology.yaml 참조.",
+      "description": "술어별 한정자. 스키마는 schema.yaml 참조.",
       "properties": {
         "threshold": { "type": ["number", "null"] },
         "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },

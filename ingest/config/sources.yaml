@@ -709,7 +709,7 @@ feeds:
     blocker: "OC 발급 필요"
     enabled: false
 
-  # ⭐ 온톨로지 자동 구축 3종 — 손으로 만들려던 관계를 API 가 직접 준다
+  # ⭐ 그래프 자동 구축 3종 — 손으로 만들려던 관계를 API 가 직접 준다
   - id: "FEED:kr-law-delegation"
     src: "SRC:kr-lawgokr"
     label: { ko: "위임법령 조회", en: "Delegation mapping" }
@@ -732,7 +732,7 @@ feeds:
       반환 필드: 위임구분 · 위임법령일련번호 · 위임법령조문정보 · 링크텍스트 · 조항호목.
       트래블룰의 3단 위임(법률 제5조의3 → 제6조제3항 → 시행령 제10조의10)을
       손으로 추적했는데, 이 API 가 조항호목 단위로 직접 준다.
-      → 신규 술어 DELEGATES_TO 필요 (온톨로지 확장 과제).
+      → 신규 술어 DELEGATES_TO 필요 (스키마 확장 과제).
     probe: { status: "unverified", note: "OC 발급 후 실측 필요" }
     blocker: "BLK-01 OC 발급"
     enabled: false

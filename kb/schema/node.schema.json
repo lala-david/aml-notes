@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/aml-kb/node.schema.json",
   "title": "AML KB Node",
-  "description": "지식베이스 노드 공통 스키마. 클래스별 확장 필드는 kb/schema/types/{TYPE}.schema.json 에서 allOf 로 결합한다. 규범적 정의는 docs/ontology/04-node-edge-spec.md.",
+  "description": "지식베이스 노드 공통 스키마. 클래스·술어·불변식 정의는 kb/schema/schema.yaml.",
   "type": "object",
   "required": [
     "id",
@@ -47,9 +47,6 @@
         "ENF",
         "INC",
         "CASE",
-        "ACTION",
-        "FUNC",
-        "ROLE",
         "FEED",
         "PROD"
       ]
@@ -59,10 +56,9 @@
       "enum": [
         "semantic",
         "dynamic",
-        "kinetic",
         "funnel"
       ],
-      "description": "funnel 은 온톨로지 계층이 아니라 이를 채우는 인프라 (ADR-0004)"
+      "description": "funnel 은 지식 계층이 아니라 이를 채우는 수집 인프라"
     },
     "label": {
       "type": "object",
@@ -221,7 +217,7 @@
         },
         "qualifiers": {
           "type": "object",
-          "description": "술어별 추가 속성. 허용 키는 ontology.yaml 의 predicates[].qualifiers 로 검증."
+          "description": "술어별 추가 속성. 허용 키는 schema.yaml 의 predicates[].qualifiers 로 검증."
         },
         "valid_from": {
           "type": [
@@ -291,53 +287,6 @@
           "required": [
             "type"
           ]
-        }
-      }
-    },
-    {
-      "description": "운용 액션은 이행하는 의무를 명시해야 한다 (조문→의무→통제→액션 사슬)",
-      "if": {
-        "properties": {
-          "type": {
-            "const": "ACTION"
-          },
-          "action_kind": {
-            "const": "operational"
-          }
-        },
-        "required": [
-          "type",
-          "action_kind"
-        ]
-      },
-      "then": {
-        "required": [
-          "implements_obligation"
-        ]
-      }
-    },
-    {
-      "description": "에이전트 역할은 어떤 액션도 직접 실행할 수 없다",
-      "if": {
-        "properties": {
-          "type": {
-            "const": "ROLE"
-          },
-          "is_agent": {
-            "const": true
-          }
-        },
-        "required": [
-          "type",
-          "is_agent"
-        ]
-      },
-      "then": {
-        "properties": {
-          "can_execute": {
-            "type": "array",
-            "maxItems": 0
-          }
         }
       }
     }

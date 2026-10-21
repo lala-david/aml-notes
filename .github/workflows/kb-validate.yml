@@ -1,7 +1,7 @@
 name: KB Validate
 
 # 지식 그래프 무결성 검증 — 차단 위반이 있으면 merge 를 막는다.
-# 규칙 정의: docs/ontology/04-node-edge-spec.md §8, docs/governance/01-data-quality.md §4
+# 규칙 정의: kb/schema/schema.yaml (invariants), docs/governance/01-data-quality.md §4
 
 on:
   pull_request:

@@ -1,7 +1,6 @@
 # 일일 수집 파이프라인 — 운영 설계
 
 > **구현 위치**: `ingest/` · **실행**: GitHub Actions cron → 규모 확대 시 전용 러너
-> **설계 근거**: [`../ontology/03-kinetic-layer.md`](../ontology/03-kinetic-layer.md)
 
 ---
 
@@ -356,7 +355,7 @@ flowchart LR
 | 하드코딩된 `FEEDS` 딕셔너리 | `ingest/config/sources.yaml` 로 이관 + 실측 검증 |
 | 키워드 단순 매칭 | `classify.py` 관련성 점수 + 노드 매칭 |
 | 주간 실행 | 일일 실행 (+ 제재 명단 2회) |
-| 이슈 생성으로 종료 | SIGNAL → TASK → L2 승격까지 연결 |
+| 이슈 생성으로 종료 | SIGNAL → TASK → FACT 승격까지 연결 |
 | 결과 미보존 (artifact 90일) | `data/` 영구 보존 + 계보 기록 |
 
 전환 기간에는 **병행 운영**하고, 신규 파이프라인이 기존 결과를 재현하는지 확인한 뒤 교체한다.

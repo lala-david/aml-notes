@@ -21,7 +21,7 @@ python scripts/build_crosswalk.py --stdout --as-of 2020-01-01   # 시점 질의
 `--as-of` 는 엣지의 `valid_from`/`valid_to` 를 기준으로 해당 시점에 유효했던 관계만 반환합니다.
 2020-01-01 로 돌리면 한국 트래블룰 조문이 정확히 빠집니다(시행 2022-03-25).
 
-설계 근거 → [`docs/ontology/01-semantic-layer.md`](../docs/ontology/01-semantic-layer.md) §2.1
+추상 의무는 관할에서 탈각된 노드이고, 관할별 차이(임계값·통화)는 조문→의무 엣지의 한정자에 담깁니다.
 
 ---
 
