@@ -62,10 +62,12 @@ edges:
         초과 시 송신인 신원확인·검증 의무가 추가되고 주소·고유식별번호
         또는 생년월일·설립지 중 하나가 더해진다.
         싱가포르 국내 중개기관 앞으로는 고유거래참조번호와 수신인 정보만
-        보내고 나머지는 요청 시 3영업일 내 제공하는 완화가 있다(¶13.5).
-    valid_from: null
+        보내고 나머지는 요청 시 3영업일 내 제공하는 완화가 있다(¶13.5; S$1,500
+        초과 이전은 ¶13.8 이 같은 완화를 정한다). ¶13.9 「immediately and securely」 제출,
+        ¶13.11 미준수 시 이전 실행 금지. ¶13 에 비호스팅 지갑 전용 조항은 없다.
+    valid_from: "2024-04-04"
     valid_to: null
-    recorded_at: "2026-08-04"
+    recorded_at: "2026-10-21"
     evidence:
       - doc: "DOC:sg-mas-psn02"
         confidence: "A"
@@ -77,14 +79,27 @@ edges:
           message or payment instruction that accompanies or relates to the
           value transfer the following …
         retrieved: "2026-08-04"
+      - doc: "DOC:sg-mas-psn02-amendment-2025"
+        confidence: "A"
+        locator: "¶1.2 (효력 2024-04-04) · ¶13.8 · ¶13.11"
+        retrieved: "2026-10-21"
 evidence:
   - doc: "DOC:sg-mas-psn02"
     confidence: "A"
     locator: "¶13.4 · ¶13.5 · ¶13.6"
     retrieved: "2026-08-04"
+  - doc: "DOC:sg-mas-psn02-amendment-2025"
+    confidence: "A"
+    locator: "¶1.2 · 개정 고지 ¶3 · ¶13.8~13.14"
+    retrieved: "2026-10-21"
+amendment_history:
+  - issued: "2024-04-02"
+    in_force: "2024-04-04"
+  - revised: "2025-06-30"
+    in_force: "2025-07-01"
 created_at: "2026-08-04"
-updated_at: "2026-08-04"
-review_due: "2026-11-02"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   MAS 고시 원문(2025-06-30 최종개정본)을 받아 제13절을 축조 확인했다.
 
@@ -106,6 +121,15 @@ curator_note: >
   당국·법집행 요청 시 제공, 수익기관에는 전체 제공이 조건이다.
   국경 간 이전에는 적용되지 않는다.
 
-  【미확인】 ¶13.8(¶13.6 의 예외)의 내용을 확인하지 않았다.
-  또한 이 고시가 DPT 서비스 전반을 다루므로 「가상자산 이전」과
+  【미확인 — 2026-08-04 기록】 ¶13.8(¶13.6 의 예외)의 내용을 확인하지 않았다.
+  → 【2026-10-21 해소, 보고서 부록 A-30】 ¶13.8 은 S$1,500 초과 이전에서 싱가포르 소재
+  중개기관 앞으로 고유거래참조번호 + 수익자 정보만 보내고 나머지는 3영업일 내 제공하는 완화다
+  (¶13.5 의 초과 구간판). research/2026-10-travel-rule.md F-047 (T1/A).
+  · 효력: 2024-04-04(¶1.2), 개정분 2025-07-01(2025-06-30 최종개정) — IMPOSES valid_from 을
+    2024-04-04 로 채웠다(null 에서 채움, recorded_at 2026-10-21).
+  · ¶13.9 「immediately and securely」, ¶13.11 미준수 시 이전 실행 금지, ¶13.12·¶13.14 수익기관의
+    누락정보 탐지·집행·거절·보류 정책. ¶13 에 비호스팅 지갑 전용 조항 없음(확인 범위).
+  · MAS 집행조치 색인(2026-05-25~2026-10-14 구간, 1쪽만 점검)에 ¶13 관련 건 없음(B).
+  · 2026-10-21 기준 in-force, 2026-08-04 이후 변경 없음.
+  남은 과제: 이 고시가 DPT 서비스 전반을 다루므로 「가상자산 이전」과
   「가치이전」의 범위가 완전히 일치하는지 제2절 정의를 확인해야 한다.

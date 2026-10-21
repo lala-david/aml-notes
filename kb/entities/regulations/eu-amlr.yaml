@@ -31,9 +31,18 @@ evidence:
   - doc: "DOC:x-source-probe-20260730"
     confidence: "C"
     retrieved: "2026-07-30"
+  - doc: "DOC:eu-amla-rts-final-20261001"
+    confidence: "A"
+    locator: "본문"
+    quote: "The final draft standards have now been submitted to the European Commission."
+    retrieved: "2026-10-21"
+  - doc: "DOC:eu-eba-amla-handover-2026"
+    confidence: "A"
+    locator: "페이지 본문"
+    retrieved: "2026-10-21"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-10-28"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   확신도 C — 도시에 확인 사실이나 DOC 노드 미등재. CELEX 32024R1624 확보 필요.
 
@@ -41,3 +50,16 @@ curator_note: >
   AML 본체(AMLR·AMLD6)는 2027-07-10 까지 미적용이다. 이 비대칭이 EU 서술의
   가장 흔한 오류원이며, 리서치 1파도 이를 지적했다.
   → lifecycle STATE 를 enacted(적용 전)로 기록해야 한다.
+
+  【2026-10-21 갱신】
+  · 2024-06-19 관보 게재(OJ L 2024/1624), 적용개시 2027-07-10 — 기준일 상태 enacted-not-in-force.
+    제79조 익명성강화코인 취급 금지도 2027-07-10 부터.
+  · 2026-01-01 EU 차원 AML/CFT 규칙제정·가이던스 권한이 EBA 에서 AMLA 로 이관(AMLAR Art. 54).
+    기존 EBA 가이드라인은 AMLA 가 대체할 때까지 유효(DOC:eu-eba-amla-handover-2026).
+  · 2026-10-01 AMLA 가 AMLR 하위 RTS 3건 최종안을 집행위에 제출 — ① CDD Art. 28(1)
+    ② 거래관계·일회성거래 기준 Art. 19(9) ③ 그룹 요건 Art. 16(4)·17(3). 상태 submitted
+    (집행위 채택·관보 전). 적용은 발효 후 6개월(축구 에이전트·구단 2029-07-10).
+    CASP 특칙 언급 없음(DOC:eu-amla-rts-final-20261001).
+  · RTS 를 별도 REG 노드로 둘지는 채택(관보 게재) 시점에 결정 — 지금은 이 노드의 노트로만 둔다.
+  · CELEX 32024R1624 원문 DOC 는 아직 없음 — HAS_JURISDICTION 엣지 증거가 C 로 남은 이유.
+

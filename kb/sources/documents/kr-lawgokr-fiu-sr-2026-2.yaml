@@ -1,0 +1,38 @@
+id: "DOC:kr-lawgokr-fiu-sr-2026-2"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보 보고 및 감독규정 (금융정보분석원 고시 제2026-2호)"
+  en: "Regulation on Reporting and Supervision of Specified Financial Transaction Information, KoFIU Notice No.\
+    \ 2026-2"
+  short: "감독규정 제2026-2호"
+summary: >-
+  2026-08-20 발령·시행된 감독규정 일부개정. 외국 가상자산사업자·자기수탁 주소와의 거래 기준(제28조의2)을 두되, 제26조·제28조의2·제31조제3호는 공포 후 6개월이 경과한 날부터 시행하도록
+  유예했다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/DRF/lawSearch.do?OC=test&target=admrul&type=JSON&query=%ED%8A%B9%EC%A0%95%20%EA%B8%88%EC%9C%B5%EA%B1%B0%EB%9E%98%EC%A0%95%EB%B3%B4%20%EB%B3%B4%EA%B3%A0%20%EB%B0%8F%20%EA%B0%90%EB%8F%85%EA%B7%9C%EC%A0%95"
+published: "2026-08-20"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "aml"
+- "travel-rule"
+- "enacted-not-in-force"
+external_ids:
+  notice_no: "2026-2"
+evidence:
+- doc: "DOC:kr-lawgokr-fiu-sr-2026-2"
+  confidence: "A"
+  locator: "부칙 (제2026-2호)"
+  quote: "이 규정은 2026년 8월 20일부터 시행한다."
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  이 DOC 의 URL 은 법제처 행정규칙 검색 목록이다. 조문 원문(제28조의2)과 제2026-2호 부칙 단서는 현행본 DOC:kr-lawgokr-fiu-sr-2026-3 (행정규칙일련번호 2100000285986)
+  응답에서 읽었다. 부칙 「공포 후 6개월」의 기산점이 확정되지 않아 제28조의2 시행일은 2027-02-19 또는 2027-02-21 로 갈린다(travel-rule 도시에 F-019, 보고서 부록
+  B #11).

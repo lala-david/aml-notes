@@ -1,0 +1,28 @@
+id: "DOC:us-fr-2026-20429"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FinCEN CVC 믹싱 §311 제안규칙 철회 공고 (FR 2026-20429)"
+  en: "Withdrawal of Proposed Rule — Special Measure Regarding CVC Mixing as a Class of Transactions of Primary Money Laundering Concern"
+  short: "FR 2026-20429 믹싱 철회"
+summary: >
+  FinCEN 이 2023-10-23 공고한 CVC 믹싱 §311 제안규칙(88 FR 72701)을 철회한다는 연방관보 공고. 2026-10-06 게재 일정(public inspection). 사유는 합법적 활동에 대한 위축 효과와 보고 부담. 공고 머리말의 RIN 은 1506-AB47 로 적혀 있어 원 NPRM 의 RIN 1506-AB64 와 다르다.
+src: "SRC:us-federalregister"
+url: "https://public-inspection.federalregister.gov/2026-20429.pdf"
+published: "2026-10-06"
+accessed: "2026-10-21"
+doc_kind: "filing"
+language: "en"
+translation: false
+tags: ["us", "fincen", "section-311", "mixer", "withdrawn"]
+evidence:
+  - doc: "DOC:us-fr-2026-20429"
+    confidence: "A"
+    locator: "Summary / Supplementary Information"
+    quote: "FinCEN is withdrawing the proposed rulemaking published at 88 FR 72701 (October 23, 2023)"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  상태 전이 근거 문서: 믹싱 §311 NPRM proposed → withdrawn(관보 2026-10-06). FinCEN 보도자료(https://www.fincen.gov/news/news-releases/fincen-announces-withdrawals-proposed-digital-asset-related-rules, 2026-10-05)는 철회를 'deregulatory agenda' 의 일부로 설명한다. RIN 표기 상충(원 NPRM 1506-AB64 vs 공고 1506-AB47)은 공고 오기로 보이며, 식별은 88 FR 72701 인용으로 한다(research/2026-10-aml-landscape.md C-02). public-inspection URL 은 게재 후 federalregister.gov 정식 문서 URL 로 바뀔 수 있다 — 스냅샷 미설정.

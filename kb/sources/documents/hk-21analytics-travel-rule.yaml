@@ -1,0 +1,31 @@
+id: "DOC:hk-21analytics-travel-rule"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "21 Analytics — 홍콩 트래블룰 규제 요약"
+  en: "21 Analytics — Hong Kong Travel Rule Regulation"
+  short: "21 Analytics HK"
+summary: >
+  홍콩 트래블룰이 2023-06-01 시행됐고, 금액과 무관하게 정보가 필요하며 HKD 8,000 미만은 정보가
+  적고, 자기수탁 지갑 이전에도 정보 수집·위험평가가 필요하다고 요약한다.
+src: "SRC:ch-21analytics"
+url: "https://21analytics.co/travel-rule-regulations/hong-kong-travel-rule-regulation"
+accessed: "2026-10-21"
+doc_kind: "blog"
+language: "en"
+translation: false
+tags: ["hk", "travel-rule", "unhosted-wallet"]
+evidence:
+  - doc: "DOC:hk-21analytics-travel-rule"
+    confidence: "B"
+    locator: "본문"
+    quote: >
+      The Travel Rule went live on 1 June 2023. / Irrespective of the transaction
+      value, Travel Rule information is required. / less information is required
+      for transactions under HKD 8000
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-048·F-049 (T3/B). 벤더 요약이므로 자기수탁 지갑 취급 서술은 B.

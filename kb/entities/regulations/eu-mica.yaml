@@ -12,8 +12,8 @@ plain: >
 summary: >
   EU 암호자산 시장의 인가·영업행위·발행 규율을 담은 규정. 단계별로 적용되어
   스테이블코인(Title III·IV)은 2024-06-30, CASP(암호자산서비스제공자)는
-  2024-12-30 적용 개시되었다. 회원국별 경과규정은 6~18개월로 갈렸고
-  2026-07-01 EU 전역에서 종료되었다.
+  2024-12-30 적용 개시되었다(발효는 2023-06-29). 회원국별 경과규정은 6~18개월로
+  갈렸고 2026-07-01 EU 전역에서 종료된 것으로 이전 조사가 기록했다(2026-10 재확인 안 됨).
 reg_kind: "regulation-eu"
 citation: "Regulation (EU) 2023/1114"
 binding: "binding"
@@ -28,6 +28,10 @@ edges:
       - doc: "DOC:x-source-probe-20260730"
         confidence: "C"
         retrieved: "2026-07-30"
+      - doc: "DOC:eu-mica-2023-1114"
+        confidence: "A"
+        locator: "Article 3(1)(5)"
+        retrieved: "2026-10-21"
   - predicate: "ISSUED_BY"
     to: "ORG:eu-commission"
     evidence:
@@ -38,9 +42,17 @@ evidence:
   - doc: "DOC:x-source-probe-20260730"
     confidence: "C"
     retrieved: "2026-07-30"
+  - doc: "DOC:eu-mica-2023-1114"
+    confidence: "A"
+    locator: "Article 3(1)(5)"
+    retrieved: "2026-10-21"
+  - doc: "DOC:eu-esma-casps-20261019"
+    confidence: "A"
+    locator: "CSV 전체 (rows=379, distinct LEI=376)"
+    retrieved: "2026-10-21"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-10-28"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   확신도 C — 리서치 도시에(eu-uk-regime, T1 28건)에서 사실은 확인되었으나
   아직 KB 에 DOC 노드로 등재하지 않았다. EUR-Lex CELEX 32023R1114 를 DOC 으로
@@ -52,3 +64,16 @@ curator_note: >
 
   EUR-Lex 는 robots.txt 로 원문 경로 크롤링을 금지한다. CELLAR SPARQL
   (SRC:eu-publications) 을 써야 한다.
+
+  【2026-10-21 갱신】
+  · 원문 DOC(DOC:eu-mica-2023-1114, CELLAR 내용협상으로 확보)를 HAS_JURISDICTION·노드 증거에
+    추가 — 위 "DOC 노드 미등재" 과제는 해소. x-source-probe 증거는 이력으로 남긴다.
+  · 인가 통계: ESMA 임시 CASP 등록부 2026-10-19 갱신본 379행·고유 LEI 376개, 본국별
+    DE 109·FR 36·NL 29·CY 25·MT 23, 인가 종료일 기재 2건(DOC:eu-esma-casps-20261019).
+    행 수 ≠ 사업자 수(동일 LEI 다중행 3건). 등록부는 주간 갱신되므로 수치는 METRIC 로 옮길 후보.
+  · MiCA 재검토: AMLA 가 2026-10-07 집행위 MiCA 재검토 의견수렴에 AML 우선과제 5개
+    (스테이킹·대출, DeFi 통제자 정의, 무인가 스테이블코인, ART 발행자, 국경간 감독 정보요건)를 제출
+    (https://www.amla.europa.eu/amla-identifies-amlcft-priorities-review-mica_en). 개정은 입법 제안 전.
+  · ISSUED_BY ORG:eu-commission 은 잠정이다 — MiCA 는 유럽의회·이사회 규정이다. 발행 주체
+    모델링 ADR 확정 시 함께 정리할 것.
+

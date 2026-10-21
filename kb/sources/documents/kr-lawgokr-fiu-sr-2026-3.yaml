@@ -1,0 +1,41 @@
+id: "DOC:kr-lawgokr-fiu-sr-2026-3"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보 보고 및 감독규정 (금융정보분석원 고시 제2026-3호, 현행)"
+  en: "Regulation on Reporting and Supervision of Specified Financial Transaction Information, KoFIU Notice No.\
+    \ 2026-3 (current)"
+  short: "감독규정 제2026-3호"
+summary: >-
+  2026-10-02 발령·시행된 감독규정 일부개정으로 2026-10-21 기준 현행본이다. 응답 원문에 제28조의2(외국 가상자산사업자 등과의 거래 기준) 문언과 제2026-2호 부칙이 함께 들어
+  있다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000285986&type=XML"
+published: "2026-10-02"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "aml"
+- "travel-rule"
+external_ids:
+  notice_no: "2026-3"
+  admrul_seq: "2100000285986"
+evidence:
+- doc: "DOC:kr-lawgokr-fiu-sr-2026-3"
+  confidence: "A"
+  locator: "헤더·부칙 (제2026-3호)"
+  quote: "행정규칙일련번호 2100000285986 / 발령일자 20261002 / 발령번호 2026-3 / 시행일자 20261002 / 제개정구분 일부개정"
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-fiu-sr-2026-3"
+  confidence: "A"
+  locator: "제28조의2 제3항"
+  quote: "영 제10조의20제7호나목에서 \"금융정보분석원장이 정하여 고시하는 금액\"이란 1천만원을 말한다."
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  제2026-3호의 개정 내용은 XML 에 개정이유가 없어 확인하지 못했다. 2026-07-30 저장소가 최신본으로 기록한 제2024-1호(FACT:0000018)는 2026-10-21 기준 낡았다.

@@ -1,0 +1,27 @@
+id: "IND:x-sanctioned-jurisdiction-ip"
+type: "IND"
+layer: "semantic"
+label:
+  ko: "비신뢰·제재 관할·기존 플래그 IP 발 거래"
+summary: >
+  신뢰되지 않는 IP, 제재 대상 관할의 IP, 이전에 의심으로 플래그된 IP 에서 거래가 개시된다.
+signal_type: "network"
+tags: ["indicator", "network", "fatf-red-flag"]
+evidence:
+  - doc: "DOC:intl-fatf-va-red-flags-2020"
+    confidence: "A"
+    locator: "RF-S2 · para 14 · pp.12–15"
+    quote: "Transactions initiated from non-trusted IP addresses, IP addresses from sanctioned jurisdictions, or IP addresses previously flagged as suspicious"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  **단일 지표만으로 범죄를 시사하지 않는다.** 원문 스스로 "The mere presence of a red flag
+  indicator is not necessarily a basis for a suspicion of ML or TF"(para 8, p.4)라고 적는다.
+  합리적 사업적 설명이 없는 상태에서 복수 지표가 동시 발현할 때 비로소 의심의 근거가 된다.
+
+  확신도 A — FATF Red Flag Indicators(2020-09-14) 원문 RF-S2 에서 직접 옮겼다
+  (research/2026-10-fatf-virtual-asset-reports.md §3A-3 에서 저장소 63지표와 대응 없음으로 확인).
+  원문은 탐지 임계값을 정하지 않으므로 rule_sketch 를 두지 않았다.
+  fp_risk 미기입 — 공개 근거 없음.

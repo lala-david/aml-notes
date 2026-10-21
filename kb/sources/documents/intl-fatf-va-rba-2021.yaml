@@ -1,0 +1,38 @@
+id: "DOC:intl-fatf-va-rba-2021"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FATF 가상자산·VASP 위험기반접근 개정 가이던스 (2021)"
+  en: "Updated Guidance for a Risk-Based Approach to Virtual Assets and Virtual Asset Service Providers"
+  short: "FATF VA/VASP RBA Guidance 2021"
+summary: >
+  FATF 가 2021-10-28 발간한 가상자산·VASP 위험기반접근 개정 가이던스로, 2019 초판을
+  통합·대체한다. 6대 개정 초점은 VA·VASP 정의 명확화, 스테이블코인, P2P 거래 위험,
+  라이선스·등록, 트래블룰 이행, 감독기관 간 정보공유 원칙이다. PDF 111쪽, 인쇄 pp.1–109,
+  단락 1–357.
+src: "SRC:intl-fatf"
+url: "https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf"
+published: "2021-10-28"
+accessed: "2026-10-21"
+doc_kind: "official-guidance"
+language: "en"
+translation: false
+tags: ["fatf", "guidance", "risk-based-approach", "virtual-assets", "vasp", "travel-rule"]
+evidence:
+  - doc: "DOC:intl-fatf-va-rba-2021"
+    confidence: "A"
+    locator: "Executive Summary · p.6"
+    quote: "This document incorporates and supersedes the 2019 Guidance."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  FATF 공식 페이지:
+  https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html
+  — 2026-10-21 접속 시 페이지 상단에 "This guidance document does not reflect revisions to the
+  FATF standards made after its date of publication, including the 2025 revisions to
+  Recommendation 1" 고지가 있다. 트래블룰 단락(para 175–204, 281–294)은 2025-06-18 R.16 개정
+  (DOC:intl-fatf-r16-explanatory-note)과 함께 읽어야 한다. 주요 위치: DeFi para 66–69,
+  P2P 위험 para 37–41, P2P 완화조치 para 105–106, de minimis para 191–192.
+  locator 의 "p." 는 인쇄 쪽. content_hash·snapshot_path 미설정.

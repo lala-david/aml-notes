@@ -1,0 +1,39 @@
+id: "DOC:sg-mas-psn02-amendment-2025"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "MAS 고시 PSN02 — 2025-06-30 개정 대조판"
+  en: "MAS Notice PSN02 — amendment version (last revised 30 June 2025)"
+  short: "PSN02 개정 대조판 2025"
+summary: >
+  PSN02(2024-04-02 발행, 2024-04-04 효력)의 2025-06-30 최종개정 변경추적판. 개정분은 2025-07-01
+  효력. 제13절(¶13.3~13.14) 가치이전 동반정보 문언과 ¶6.27(FATF 기준 감독을 받지 않는 상대와의
+  DPT 이전 시 강화조치)을 확인할 수 있다.
+src: "SRC:sg-mas"
+url: "https://www.mas.gov.sg/-/media/amld-amendments---30-june-2025/mas-notice-psn02-amendment--new.pdf"
+accessed: "2026-10-21"
+published: "2025-06-30"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["sg", "aml", "travel-rule", "dpt", "amendment"]
+external_ids:
+  notice_no: "PSN02"
+evidence:
+  - doc: "DOC:sg-mas-psn02-amendment-2025"
+    confidence: "A"
+    locator: "¶1.2 · 개정 고지 ¶3 · ¶13.11"
+    quote: >
+      1.2 This Notice shall take effect from 4 April 2024. / 3. The amendments
+      reflected in this document shall take effect on 1 July 2025. /
+      13.11 Where the ordering institution is unable to comply with the
+      requirements in paragraphs 13.3 to 13.10, it shall not execute or arrange
+      for the value transfer.
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-045~F-047 (T1/A). 변경추적판(reference only)이며 Published
+  Version 이 우선한다는 고지가 문서에 있다. 2026 년 추가 개정은 발견되지 않았다.
+  접근 시 Referer 헤더 필요(DOC:sg-mas-psn02 curator_note 참조).

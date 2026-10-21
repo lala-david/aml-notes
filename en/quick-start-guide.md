@@ -1,15 +1,16 @@
 # Quick Start Guide — For International Readers
 
-> How to navigate this repository if you do not read Korean. Three learning paths tailored by goal. Reference date: 2026-04.
+> How to navigate this repository if you do not read Korean. Three learning paths tailored by goal. Last updated: 2026-10-21.
 
 ---
 
 ## Before You Start
 
-- This repository's primary content is **in Korean** (approximately 22,000 lines).
+- This repository's primary content is **in Korean**.
 - The English edition in [`../en/`](./) is a **gateway**, not a translation.
 - For any deep dive, follow the Korean link — consider using browser translation or a reliable human translator for critical work.
-- All English documents reflect the state of Korean regulation as of **April 2026**.
+- This guide was updated on **2026-10-21**. Other English documents may lag behind the Korean notes; the canonical source is the Korean report [`../reports/가상자산 AML KYT FDS 트래블룰 흐름.md`](../reports/가상자산%20AML%20KYT%20FDS%20트래블룰%20흐름.md).
+- **One Korean word, three legal regimes.** "이상거래" (abnormal trading) is *not* the Korean term for STR. Korea runs three separate regimes that all get loosely called "abnormal transaction" monitoring: (1) fraud detection (FDS) and voice-phishing temporary measures under the Telecommunications Fraud Refund Act, applying to exchanges from 2026-10-01; (2) market surveillance under VAUPA Article 12; (3) suspicious transaction reporting (STR) under Tukgeumbeop Article 4. Each has a different legal basis, output and recipient. See [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md).
 
 ---
 
@@ -26,20 +27,21 @@ Target audience: global VASPs, M&A teams, country-GM hires preparing a Korean st
    - [`../notes/2-regulations/korea-fiu-act.md`](../notes/2-regulations/korea-fiu-act.md) — Tukgeumbeop article-by-article.
    - [`../notes/2-regulations/korea-user-protection.md`](../notes/2-regulations/korea-user-protection.md) — VAUPA.
    - [`../notes/7-vendors/korea-solutions.md`](../notes/7-vendors/korea-solutions.md) — local vendor ecosystem.
-   - [`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md) — the full 901-line inspection workbook.
+   - [`../notes/5-compliance/inspection-response.md`](../notes/5-compliance/inspection-response.md) — the full inspection workbook (now split by regime: FIU / VAUPA Art. 12 / Telecommunications Fraud Refund Act).
+   - [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md) — FDS vs market surveillance vs STR.
 
 ### Practical next steps (10 items)
 
 1. Confirm business model fit — retail KRW exchange, B2B custody, staking, or DeFi frontend each hit different legal regimes.
-2. Engage Korean counsel early (Kim & Chang, Sejong, Lee & Ko, Yulchon, and Bae Kim & Lee are the common choices).
-3. Pre-align with a tier-1 bank on the real-name account partnership. Without this, KYW fiat on-ramps are unavailable.
-4. Start the ISMS certification track with KISA (6-12 months).
-5. Recruit an AMLO candidate with 3+ years of Korean financial AML experience.
-6. Map your controls against both Tukgeumbeop and VAUPA simultaneously.
-7. Sign preliminary term sheets with a KYT vendor (Chainalysis dominates) and a Travel Rule provider (VerifyVASP or CODE).
-8. Prepare for the 2026-01 enhanced major shareholder review — 3-6 months of lead time.
-9. Evaluate DAXA membership implications. Non-membership effectively means no retail KRW pair.
-10. Build a KoFIU and FSS inspection readiness plan from day one (see [`inspection-response-summary.md`](inspection-response-summary.md)).
+2. Engage Korean counsel early.
+3. Pre-align with a bank on the real-name account partnership. Without this, KRW fiat on-ramps are unavailable.
+4. Start the ISMS certification track with KISA early; plan the timeline with your advisers.
+5. Recruit an AMLO candidate with Korean financial AML experience. The FIU registration manual revised on 2026-08-13 requires at least 4 AML staff and domestic location of IT facilities (domestic cloud regions accepted).
+6. Map your controls against Tukgeumbeop, VAUPA (including Art. 12 market surveillance) and — for exchanges — the Telecommunications Fraud Refund Act (temporary measures, payment suspension and victim refunds, in force for exchanges since 2026-10-01).
+7. Choose a blockchain analytics (KYT) provider and a Travel Rule solution through your own PoC; this repository does not rank vendors.
+8. Plan for major-shareholder changes: the 2026-08-13 registration manual requires prior notice 30 days before the change.
+9. Evaluate DAXA self-regulation (e.g. the withdrawal-delay standard rules in force since 2026-04-07).
+10. Build a KoFIU and FSS inspection readiness plan from day one (see [`inspection-response-summary.md`](inspection-response-summary.md)). Note the changes taking effect on 2027-02-19 (enacted-not-in-force as of 2026-10-21): the KRW 1 million Travel Rule threshold is removed, transfers to self-hosted wallets are allowed only between the same person, and transfers of KRW 10 million or more to foreign VASPs or self-hosted wallets require an in-house suspicious-transaction monitoring system — **not** automatic STR filing.
 
 ---
 
@@ -110,7 +112,10 @@ Korean AML uses specific terms that rarely translate cleanly. Some high-frequenc
 | 신고 | Singo | Registration or filing |
 | 실명계좌 | Silmyeong Gyejwa | Real-name account |
 | 대주주 | Daejuju | Major shareholder |
-| 이상거래보고 | Isang Georae Bogo | Suspicious Transaction Report (STR) |
+| 의심거래보고 | Uisim Georae Bogo | Suspicious Transaction Report (STR) — Tukgeumbeop Art. 4 |
+| 이상거래 | Isang Georae | Abnormal trading — VAUPA Art. 12 market surveillance (not STR) |
+| 이상금융거래 | Isang Geumyung Georae | Abnormal financial transaction — the FDS (fraud detection) term |
+| 임시조치 | Imsi Jochi | Temporary measure — delay/suspension of withdrawals or virtual-asset transfers (Telecommunications Fraud Refund Act Art. 2-5) |
 | 콜드월렛 | Kold Wollet | Cold wallet |
 
 Full Korean-English glossary: [`../notes/glossary.md`](../notes/glossary.md).

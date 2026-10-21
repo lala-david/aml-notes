@@ -1,0 +1,54 @@
+id: "PROV:gb-mlr2017-reg34a"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "MLR 2017 규정 34A (암호자산 코레스 관계 강화 고객확인)"
+  en: "MLR 2017 regulation 34A — enhanced due diligence for cryptoasset correspondent relationships"
+  short: "MLR 2017 reg 34A"
+plain: >
+  영국 거래소·수탁지갑 사업자가 해외의 비슷한 사업자와 거래 관계(코레스 관계)를 맺을 때 강화된 고객확인을
+  하라는 조문입니다. 2026-06-09 개정령으로 들어왔지만 2027-02-01 부터 시행됩니다(2026-10-21 기준 미시행).
+summary: >
+  S.I. 2026/621 규정 20 이 신설한 조문. 암호자산 교환·수탁지갑 사업자가 제3국 유사 사업자와
+  「correspondent relationship」을 맺을 때 사업 성격 정보 수집·고위경영진 승인 등 강화 CDD 를
+  하고, 셸 사업자와의 관계를 금지한다. reg 1(4)에 따라 2027-02-01 시행 —
+  2026-10-21 기준 enacted-not-in-force. 비호스팅 지갑·고위험 제3국 문언은 없다.
+parent_reg: "REG:gb-mlr2017"
+citation_path: "regulation 34A"
+heading: "Cryptoasset correspondent relationships"
+language: "en"
+lifecycle_state: "enacted"
+in_force_from: "2027-02-01"
+text_orig: >
+  "correspondent relationship" means the relationship between and among
+  cryptoasset exchange providers, … including relationships established for
+  transactions in, or transfers of, cryptoassets; (정의 부분 축약 인용)
+tags: ["gb", "counterparty-due-diligence", "crypto-asset", "enacted-not-in-force"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:gb-mlr2017"
+    valid_from: "2027-02-01"
+    evidence:
+      - doc: "DOC:gb-legis-si-2026-621"
+        confidence: "A"
+        locator: "regulation 20 · regulation 1(4)"
+        retrieved: "2026-10-21"
+evidence:
+  - doc: "DOC:gb-legis-si-2026-621"
+    confidence: "A"
+    locator: "regulation 20 (reg 34A 신설) · regulation 1(4)"
+    quote: >
+      "correspondent relationship" means the relationship between and among
+      cryptoasset exchange providers, … including relationships established for
+      transactions in, or transfers of, cryptoassets;
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-02-08"
+curator_note: >
+  보고서 부록 A-22 신설. research/2026-10-travel-rule.md F-034 (T1/A).
+  상태: enacted-not-in-force(2027-02-01 시행). PART_OF 엣지 valid_from 을 시행일로 두어
+  시점 질의가 2027-02-01 전에는 이 조문을 현행으로 세지 않게 했다.
+  트래블룰 자체(정보 전달)가 아니라 FATF 「counterparty VASP due diligence」의 영국판으로,
+  트래블룰 운영과 직결된다. 대응하는 OBL 노드가 없어 IMPOSES 는 걸지 않았다.
+  review_due 는 시행일 직후로 잡았다 — 시행 전환 확인.

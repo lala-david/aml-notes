@@ -274,7 +274,7 @@ classes:
       src: { type: ref, target: SRC }
       url: { type: url }
       published: { type: date }
-      doc_kind: { type: enum, values: [statute-text, official-guidance, press-release, report, filing, judgment, dataset, article, blog] }
+      doc_kind: { type: enum, values: [statute-text, standard, official-guidance, press-release, report, filing, judgment, dataset, article, blog] }
       content_hash: { type: string }
       snapshot_path: { type: string, desc: "본문 스냅샷 (링크 사망 대비)" }
       accessed: { type: date }

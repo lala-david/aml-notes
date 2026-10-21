@@ -1,0 +1,28 @@
+id: "DOC:us-fr-2026-20430"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FinCEN 비수탁지갑 제안규칙 철회 공고 (FR 2026-20430)"
+  en: "Withdrawal of Proposed Rule — Requirements for Certain Transactions Involving Convertible Virtual Currency or Digital Assets"
+  short: "FR 2026-20430 비수탁지갑 철회"
+summary: >
+  FinCEN 이 2020-12-23 공고한 비수탁지갑 관련 CVC/LTDA 거래 보고·기록·신원확인 제안규칙(85 FR 83840)을 철회한다는 연방관보 공고. 2026-10-06 게재 일정. FinCEN 은 이 NPRM 에 대해 추가 조치를 하지 않겠다고 밝혔다.
+src: "SRC:us-federalregister"
+url: "https://public-inspection.federalregister.gov/2026-20430.pdf"
+published: "2026-10-06"
+accessed: "2026-10-21"
+doc_kind: "filing"
+language: "en"
+translation: false
+tags: ["us", "fincen", "unhosted-wallet", "withdrawn"]
+evidence:
+  - doc: "DOC:us-fr-2026-20430"
+    confidence: "A"
+    locator: "Summary"
+    quote: "FinCEN is withdrawing the proposed rule published at 85 FR 83840 (December 23, 2020)"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  이전 조사(FACT:0000011·0000012, SRC:us-federalregister tier_basis)는 '규칙 철회는 관보에 공고되지 않을 수 있다'·'관보 공고 없음'으로 기록했다. 이 공고로 비수탁지갑 규칙은 관보 철회가 실제로 게재됐다. 통합의제상 종결(2024-04-12)과 관보 철회(2026-10-06)는 별개 행정행위로 기록한다(research/2026-10-aml-landscape.md C-03). 해당 FACT 의 정정은 facts 담당 작업에서 새 줄로 처리할 것.

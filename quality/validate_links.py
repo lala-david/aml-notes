@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import re
 import sys
+from urllib.parse import unquote
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,7 +51,7 @@ def main():
             if not bare or is_external(ref):
                 continue
             # backtick wrapped paths
-            bare = bare.strip().strip("`")
+            bare = unquote(bare.strip().strip("`"))
             # resolve relative to file
             try:
                 target = (f.parent / bare).resolve()

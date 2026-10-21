@@ -1,0 +1,45 @@
+id: "DOC:gb-legis-si-2026-621"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "자금세탁·테러자금조달 (개정) 규정 2026 (S.I. 2026/621)"
+  en: "The Money Laundering and Terrorist Financing (Amendment) Regulations 2026 (S.I. 2026/621)"
+  short: "S.I. 2026/621"
+summary: >
+  2026-06-09 제정, 2026-06-30 시행(일부 2027-02-01)된 MLR 2017 개정령.
+  규정 32 가 reg 64C(4)의, 규정 33 이 reg 64G(1)(b)의 「1,000 euros」를 「£800」으로 치환했다.
+  규정 20 은 암호자산 사업자 간 코레스 관계 강화 CDD(reg 34A)를 신설하며, reg 1(4)에 따라
+  그 부분은 2027-02-01 시행이다.
+src: "SRC:gb-legislation"
+url: "https://www.legislation.gov.uk/uksi/2026/621/made"
+accessed: "2026-10-21"
+published: "2026-06-09"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["gb", "aml", "travel-rule", "crypto-asset", "amendment"]
+external_ids:
+  si_number: "S.I. 2026/621"
+evidence:
+  - doc: "DOC:gb-legis-si-2026-621"
+    confidence: "A"
+    locator: "regulation 32 · regulation 33"
+    quote: >
+      In regulation 64C(4), for "1,000 euros" substitute "£800". /
+      In regulation 64G(1)(b), for "1,000 euros" substitute "£800".
+    retrieved: "2026-10-21"
+  - doc: "DOC:gb-legis-si-2026-621"
+    confidence: "A"
+    locator: "regulation 20 (reg 34A 신설) · regulation 1(4) (2027-02-01 시행)"
+    quote: >
+      "correspondent relationship" means the relationship between and among
+      cryptoasset exchange providers, … including relationships established for
+      transactions in, or transfers of, cryptoassets;
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-031·F-034 (T1/A). 같은 개정령이 reg 15(3)(b)를 £1,000,
+  reg 27(1)(b)·(7E)를 £800 으로 바꿨다(F-031) — 트래블룰 밖 조문이라 PROV 로 등재하지 않았다.
+  reg 34A 는 2026-10-21 기준 enacted-not-in-force 다. 2027-02-01 이후 상태 전환을 재확인할 것.

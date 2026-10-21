@@ -1,0 +1,20 @@
+id: "SRC:ch-21analytics"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "21 Analytics"
+  en: "21 Analytics"
+summary: >
+  스위스 트래블룰 솔루션 업체. 관할별 트래블룰 규제 요약·용어집을 공개한다.
+  2026-10-21 기준 도메인을 21analytics.ch → 21analytics.co 로 이전(301)했다.
+tier: "T3"
+tier_basis: >
+  트래블룰 솔루션 벤더의 규제 요약. 이해관계자 자료이므로 단독으로는 B 를 넘기지 않는다.
+publisher_kind: "vendor"
+base_url: "https://21analytics.co"
+language: "en"
+paywall: false
+tags: ["ch", "vendor", "travel-rule"]
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"

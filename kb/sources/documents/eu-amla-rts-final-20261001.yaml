@@ -1,0 +1,28 @@
+id: "DOC:eu-amla-rts-final-20261001"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "AMLA, AMLR 최초 RTS 3건 최종안 집행위 제출 보도자료 (2026-10-01)"
+  en: "AMLA finalises key standards for the private sector"
+  short: "AMLA RTS 제출 2026-10-01"
+summary: >
+  AMLA 가 AMLR 하위 규제기술기준(RTS) 3건 — 고객확인(Art. 28(1)), 거래관계·일회성거래 식별기준(Art. 19(9)), 그룹 차원 요건(Art. 16(4)·17(3)) — 의 최종안을 2026-10-01 유럽집행위에 제출했다고 발표. 적용은 발효 후 6개월, 축구 에이전트·구단은 2029-07-10.
+src: "SRC:eu-amla"
+url: "https://www.amla.europa.eu/press-release-amla-finalises-key-standards-private-sector_en"
+published: "2026-10-01"
+accessed: "2026-10-21"
+doc_kind: "press-release"
+language: "en"
+translation: false
+tags: ["eu", "amla", "amlr", "rts", "cdd"]
+evidence:
+  - doc: "DOC:eu-amla-rts-final-20261001"
+    confidence: "A"
+    locator: "본문"
+    quote: "The final draft standards have now been submitted to the European Commission."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  상태는 submitted-to-Commission — 집행위 채택·관보 게재 전이다. 보도자료에 CASP 특칙 언급은 없다. 같은 기관의 2026-10-07 MiCA 재검토 의견(https://www.amla.europa.eu/amla-identifies-amlcft-priorities-review-mica_en)은 별도 DOC 미등재.

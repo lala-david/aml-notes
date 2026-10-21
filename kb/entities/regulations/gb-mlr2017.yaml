@@ -7,20 +7,23 @@ label:
   short: "MLR 2017"
 aliases: ["MLR 2017", "MLRs", "SI 2017/692", "영국 MLR"]
 plain: >
-  영국의 자금세탁방지 핵심 규정입니다. 2022년에 암호자산 편이 새로 붙어서, 거래소가 코인을 보낼 때 송신인
-  정보를 함께 보내야 합니다. 금액이 얼마든 기본 정보는 보내야 합니다.
+  영국의 자금세탁방지 핵심 규정입니다. 2022년 개정령(S.I. 2022/860)으로 암호자산 편이 새로 붙어 2023-09-01
+  부터, 거래소가 코인을 보낼 때 송신인 정보를 함께 보내야 합니다. 금액이 얼마든 기본 정보는 보내야 합니다.
 summary: >
   영국 AML 체계의 중심 2차 입법(Statutory Instrument). FCA 등록제·고객확인·
   기록보존 의무의 근거이며, 제7A편(Part 7A)이 암호자산 이전 시 정보 동반
-  의무를 정한다. 기본 의무(규정 64C(1))에는 금액 기준이 없고,
-  £800 은 추가 정보 항목을 요구하는 별개 기준이다.
+  의무를 정한다(S.I. 2022/860 으로 신설, 2023-09-01 시행). 기본 의무(규정 64C(1))에는
+  금액 기준이 없고, 추가 정보 항목을 요구하는 별개 기준은 1,000 euros(2023-09-01~2026-06-29)
+  → £800(2026-06-30~, S.I. 2026/621)이다. 같은 개정령이 신설한 코레스 관계 강화 CDD
+  (규정 34A)는 2027-02-01 시행 예정(enacted-not-in-force)이다.
 reg_kind: "regulation"
-citation: "SI 2017/692"
+citation: "SI 2017/692 (Part 7A 신설: S.I. 2022/860, 2023-09-01 시행 / 개정: S.I. 2026/621, 2026-06-30 시행·reg 34A 는 2027-02-01)"
 binding: "binding"
 language: "en"
 tags: ["gb", "aml", "travel-rule", "crypto-asset"]
 external_ids:
   si_number: "SI 2017/692"
+  amending_si: "S.I. 2022/860; S.I. 2026/621"
 edges:
   - predicate: "HAS_JURISDICTION"
     to: "JUR:gb"
@@ -34,9 +37,17 @@ evidence:
     confidence: "A"
     locator: "Part 7A"
     retrieved: "2026-08-04"
+  - doc: "DOC:gb-legis-mlr2017-reg64c-20230901"
+    confidence: "A"
+    locator: "주석 F1 — Pt. 7A inserted (1.9.2023) by S.I. 2022/860"
+    retrieved: "2026-10-21"
+  - doc: "DOC:gb-legis-si-2026-621"
+    confidence: "A"
+    locator: "regulation 20 · 32 · 33 · 1(4)"
+    retrieved: "2026-10-21"
 created_at: "2026-08-04"
-updated_at: "2026-08-04"
-review_due: "2026-11-02"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   제7A편의 규정 64C 를 PROV 노드로 분리했다.
 
@@ -46,9 +57,14 @@ curator_note: >
   어느 술어로 무엇을 걸지는 「발행 주체 모델링 ADR」 과제에 걸려 있다
   (REG:us-bsa·REG:kr-tfia 와 동일 사유). 추측으로 채우지 않는다.
 
+  【2026-10-21 갱신 — 보고서 부록 A-22】
+  · 제7A편 신설 개정령 S.I. 2022/860 확정(legislation.gov.uk 64C 2023-09-01 판 주석 F1).
+    시행일 2023-09-01 → PROV:gb-mlr2017-reg64c 의 valid_from 채움.
+  · S.I. 2026/621(2026-06-09 제정·2026-06-30 시행) 반영 — reg 64C(4)·64G(1)(b)
+    1,000 euros → £800. 산문·KB 의 「£800」은 2026-06-30 이후에만 맞다.
+  · PROV 신설: reg 64G(비호스팅 지갑), reg 34A(2027-02-01 시행, enacted-not-in-force).
+
   【미등재 — 과제】
-  · 제7A편을 신설한 개정령(SI 2022/860 으로 추정) 원문 미확보.
-    신설 시점을 확인해야 valid_from 을 채울 수 있다.
   · 암호자산 활동을 RAO 규제활동으로 편입하는 전환(JUR:gb 서술 참조)은
     별개 법령 계통이며 미등재.
-  · 규정 64D 이후(수익자 측 의무·미비 정보 처리) 미등재.
+  · 규정 64D·64E·64F·64H(수익자 측 의무·미비 정보 처리 등) 미등재. 64G 는 등재.

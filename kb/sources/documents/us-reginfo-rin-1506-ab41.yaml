@@ -1,0 +1,32 @@
+id: "DOC:us-reginfo-rin-1506-ab41"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "통합규제의제 2025년 봄판 — RIN 1506-AB41 ($250 기준 하향안)"
+  en: "Unified Agenda Spring 2025 — RIN 1506-AB41"
+  short: "RIN 1506-AB41 (Spring 2025)"
+summary: >
+  FinCEN·FRB 의 국경 간 자금이체 기록·트래블룰 기준 $3,000→$250 하향 및 CVC 명확화 NPRM
+  (85 FR 68005, 2020-10-27)의 의제 기록. 「Completed Actions — Withdrawn 04/16/2025」로 종결됐다.
+  연방관보에는 별도 철회 고시가 없다.
+src: "SRC:us-reginfo"
+url: "https://www.reginfo.gov/public/do/eAgendaViewRule?pubId=202504&RIN=1506-AB41"
+accessed: "2026-10-21"
+published: "2025"
+doc_kind: "official-guidance"
+language: "en"
+translation: false
+tags: ["us", "fincen", "travel-rule", "withdrawn"]
+evidence:
+  - doc: "DOC:us-reginfo-rin-1506-ab41"
+    confidence: "A"
+    locator: "Timetable"
+    quote: "NPRM 10/27/2020 (85 FR 68005) / NPRM Comment Period End 11/27/2020 / Withdrawn 04/16/2025"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-037 (T1/A). 철회일 2025-04-16 확정. 상태 withdrawn.
+  published 는 의제 판(Spring 2025)의 정확한 발간일을 확인하지 않아 연도만 적었다.
+  저장소 산문의 「US 2025 개정 제안 $1,000」은 존재가 확인되지 않는다(보고서 부록 A-25).

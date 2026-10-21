@@ -28,13 +28,25 @@ edges:
       - doc: "DOC:x-source-probe-20260730"
         confidence: "C"
         retrieved: "2026-07-30"
+      - doc: "DOC:eu-tfr-2023-1113"
+        confidence: "A"
+        locator: "Article 14(1)"
+        retrieved: "2026-10-21"
 evidence:
   - doc: "DOC:x-source-probe-20260730"
     confidence: "C"
     retrieved: "2026-07-30"
+  - doc: "DOC:eu-tfr-2023-1113"
+    confidence: "A"
+    locator: "Article 14(1)"
+    retrieved: "2026-10-21"
+  - doc: "DOC:eu-eba-amla-handover-2026"
+    confidence: "A"
+    locator: "페이지 본문 — 기존 EBA 가이드라인 유효"
+    retrieved: "2026-10-21"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-10-28"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   확신도 C — 도시에 확인 사실이나 DOC 노드 미등재. CELEX 32023R1113 확보 필요.
 
@@ -42,3 +54,15 @@ curator_note: >
   자금이체(fiat)의 EUR 1,000 완화 규정은 가상자산 이체에 적용되지 않는다.
   EUR 1,000 은 제14조(5)의 **자기수탁 주소 소유확인 트리거**다.
   이 구분을 PROV 노드로 분리 등재해야 한다 — 조문 확보 후 과제.
+
+  【2026-10-21 갱신】
+  · 원문 DOC(DOC:eu-tfr-2023-1113)를 증거에 추가 — "DOC 노드 미등재" 과제 해소. 적용 2024-12-30, in-force.
+  · EUR 1,000 의 위치: Art 14(5)·16(2) 의 자기수탁 주소 소유·통제 평가 발동선("amounts to or exceeds").
+    정보 동반 의무(Art 14(1))에는 금액이 없다 — EBA 는 전문 30항을 근거로 "all crypto-asset transfers
+    are subject to the same requirements regardless of their amount" 라고 해석.
+  · EBA 트래블룰 가이드라인(EBA/GL/2024/11, 2024-07-04 발간, 2024-12-30 적용): ¶24 기술적 한계 유예
+    2025-07-31 종료, ¶83 자기수탁 검증 방법 최소 1종, ¶86 화이트리스트, §4.7 반복 누락 기관 3개월 내 보고.
+    가이드라인 원문 DOC 는 아직 없음(https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf).
+  · 2026-01-01 EBA→AMLA 권한 이관 후에도 EBA/GL/2024/11 은 AMLA 가 대체할 때까지 유효
+    (DOC:eu-eba-amla-handover-2026).
+

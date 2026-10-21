@@ -11,16 +11,18 @@ plain: >
   수상한 거래를 보고할 의무를 지게 됐습니다.
 summary: >
   대한민국 자금세탁방지 기본법. 2020년 개정으로 가상자산사업자를 규제 대상에
-  편입하여 신고 의무(제7조), 고객확인(제5조의2), 트래블룰(제5조의3), 의심거래보고
-  등을 부과한다. 가상자산 정의는 가상자산이용자보호법 제2조를 상호참조한다.
+  편입하여 신고 의무(제7조), 고객확인(제5조의2), 가상자산 이전 시 정보제공(제5조의3·제6조제3항),
+  의심거래보고(제4조) 등을 부과한다. 가상자산 정의는 가상자산이용자보호법 제2조를 상호참조한다.
 reg_kind: "statute"
-citation: "법률 제19563호 (현행 시행본) / 법률 제21358호 (2026-08-20 시행 예정)"
+citation: "법률 제21857호 (2026-08-04 공포, 2026-10-02 시행, 타법개정, 현행) ← 법률 제21358호 (2026-02-19 공포, 2026-08-20 시행)"
 binding: "binding"
 language: "ko"
 tags: ["korea", "aml", "vasp-registration", "travel-rule"]
 external_ids:
-  law_no_current: "19563"
-  law_no_pending: "21358"
+  law_no_current: "21857"
+  law_no_previous: "21358"
+  law_go_kr_id: "009244"
+  law_go_kr_seq: "290725"
 edges:
   - predicate: "HAS_JURISDICTION"
     to: "JUR:kr"
@@ -43,20 +45,40 @@ edges:
         confidence: "B"
         retrieved: "2026-07-30"
 evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21857"
+    confidence: "A"
+    locator: "law.go.kr DRF lawSearch target=law (JSON)"
+    quote: "법령ID 009244 / 법령일련번호 290725 / 공포일자 20260804 / 공포번호 21857 / 시행일자 20261002 / 제개정구분명 타법개정"
+    retrieved: "2026-10-21"
   - doc: "DOC:kr-lawgokr-tfia-21358"
     confidence: "A"
     retrieved: "2026-07-30"
+  - doc: "DOC:kr-fsc-20260811-tfia-sd"
+    confidence: "A"
+    locator: "시행일 안내"
+    quote: "신고제와 퇴직자 제재통보 부분: 2026.8.20."
+    retrieved: "2026-10-21"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-08-27"
+updated_at: "2026-10-21"
+review_due: "2027-02-19"
 curator_note: >
   생애주기 상태는 이 노드의 속성이 아니라 kb/states/ 의 STATE 레코드로 관리한다
-  (L1 에 시간을 넣지 않는 원칙). 현행 시행본은 법률 제19563호(공포 2023-07-18,
-  시행 2024-07-19, 타법개정)이며, 법률 제21358호가 2026-08-20 시행 예정이다.
+  (L1 에 시간을 넣지 않는 원칙).
+
+  【2026-10-21 정정】 2026-07-30 판의 citation 「법률 제19563호(현행 시행본) / 법률 제21358호
+  (2026-08-20 시행 예정)」은 둘 다 낡았다. 법률 제21358호(대주주 심사·신고 조건부 수리·퇴직자
+  제재통보)는 2026-08-20 시행됐고(in-force, EVT:kr-tfia-21358-effective-2026), 이어 법률
+  제21857호(2026-08-04 공포, 타법개정)가 2026-10-02 부터 현행본이다(FACT:0000207).
+  2026-01-29 본회의 통과 보도자료는 제5조의3(가상자산 이전 시 정보제공) 개정을 언급하지 않는다 —
+  트래블룰 변화는 법률이 아니라 시행령(대통령령 제36592호)에서 일어났다.
+
+  kb/states/2026.jsonl 의 STATE:00001(lifecycle, 법률 제19563호)·STATE:00002
+  (pending_amendment_law_no=21358, valid_to null)은 이 정정에 맞춰 마감해야 하나 이 작업 범위
+  밖이다 → 재검토 과제.
 
   ISSUED_BY 를 ORG:kr-kofiu 로 둔 것은 잠정 처리다. 법률의 발의·공포 주체는
   국회·정부이며 FIU 는 집행기관이므로, ORG:kr-nabo / ORG:kr-fsc 노드 생성 후
   정정해야 한다. → 재검토 과제.
 
-  IMPLEMENTS → REG:intl-fatf-r16 엣지가 누락되어 있다. FATF 도시에 검증 완료 후
-  추가할 것. 현재 추가하면 미검증 노드 참조가 되므로 보류.
+  IMPLEMENTS → REG:intl-fatf-r16 엣지는 두지 않는다 — CTR:00002 판정대로 VASP 트래블룰의
+  국제 근거는 INR.15 §7(b) 다.

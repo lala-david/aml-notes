@@ -1,0 +1,21 @@
+id: "SRC:us-treasury"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "미국 재무부"
+  en: "U.S. Department of the Treasury"
+  short: "Treasury"
+summary: >
+  미 재무부 공식 사이트(home.treasury.gov). 의회 보고서·보도자료를 발간한다.
+  FinCEN·OFAC 는 별도 SRC 로 관리한다.
+tier: "T1"
+tier_basis: >
+  정부기관이 자기 소관 사항을 직접 발간하는 공식 경로.
+publisher_kind: "government"
+base_url: "https://home.treasury.gov"
+language: "en"
+paywall: false
+tags: ["us"]
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-04-19"

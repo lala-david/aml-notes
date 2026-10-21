@@ -1,0 +1,28 @@
+id: "DOC:eu-esma-casps-20261019"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "ESMA 임시 MiCA 등록부 — CASP 목록 CSV (2026-10-19 갱신)"
+  en: "ESMA interim MiCA register — CASPS.csv"
+  short: "ESMA CASPS.csv 2026-10-19"
+summary: >
+  ESMA 가 MiCA IT 시스템 통합 전까지 주간 갱신하는 임시 CASP 등록부. 2026-10-19 갱신본은 데이터 379행·고유 LEI 376개, 본국별 DE 109·FR 36·NL 29·CY 25·MT 23 순이며 인가 종료일 기재 행은 2건이다.
+src: "SRC:eu-esma"
+url: "https://www.esma.europa.eu/sites/default/files/2024-12/CASPS.csv"
+published: "2026-10-19"
+accessed: "2026-10-21"
+doc_kind: "dataset"
+language: "en"
+translation: false
+tags: ["eu", "esma", "mica", "casp", "register"]
+evidence:
+  - doc: "DOC:eu-esma-casps-20261019"
+    confidence: "A"
+    locator: "CSV 전체 (rows=379, distinct LEI=376)"
+    quote: "ae_competentAuthority,ae_homeMemberState,ae_lei_name,ae_lei,ae_lei_cou_code,ae_commercial_name"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  같은 URL 이 매주 덮어써지므로 published 는 이 스냅샷의 갱신일이다. 행 수와 사업자 수는 완전히 일치하지 않는다(동일 LEI 다중행 3건). 안내 페이지 https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica 'Last update: 19 October 2026'. snapshot_path 미설정 — 시계열 비교하려면 스냅샷 보관 필요.

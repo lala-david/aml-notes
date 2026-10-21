@@ -1,0 +1,48 @@
+id: "DOC:kr-lawgokr-tfia-sd-36592"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보의 보고 및 이용 등에 관한 법률 시행령 (대통령령 제36592호, 시행예정 판본)"
+  en: "TFIA Enforcement Decree, Presidential Decree No. 36592 (scheduled version)"
+  short: "특금법 시행령 제36592호"
+summary: >-
+  2026-08-18 공포된 특금법 시행령 일부개정령. 본칙은 2026-08-20 시행됐고, 부칙 제1조 단서가 제10조의2·제10조의5제6항·제10조의10·제10조의20·제16조의2제1호·제4호 개정규정을
+  공포 후 6개월이 경과한 날(법제처 시행일 색인 2027-02-19)부터 시행하게 한다. 트래블룰 기준금액(100만원) 폐지와 해외 VASP·자기수탁 주소 차등 규율이 여기 들어 있다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&MST=288765&efYd=20270219&type=XML"
+published: "2026-08-18"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "travel-rule"
+- "enacted-not-in-force"
+external_ids:
+  decree_no: "36592"
+  law_go_kr_mst: "288765"
+evidence:
+- doc: "DOC:kr-lawgokr-tfia-sd-36592"
+  confidence: "A"
+  locator: "부칙 제1조"
+  quote: "이 영은 2026년 8월 20일부터 시행한다. 다만, 제10조의2, 제10조의5제6항, 제10조의10, 제10조의20 및 제16조의2제1호ㆍ제4호의 개정규정은 공포 후 6개월이 경과한\
+    \ 날부터 시행한다."
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-tfia-sd-36592"
+  confidence: "A"
+  locator: "제10조의10 제1호 (efYd=20270219 판)"
+  quote: "정보제공은 가상자산사업자가 다른 가상자산사업자에게 가상자산을 이전하는 모든 경우에 할 것"
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-tfia-sd-36592"
+  confidence: "A"
+  locator: "제10조의10 제1호 (efYd=20260820 판 — 2026-10-21 현재 효력)"
+  quote: "1백만원 이상에 상당하는 가상자산을 이전하는 경우에 할 것"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  같은 MST(288765)를 efYd=20260820 으로 조회하면 2026-10-21 현재 효력 있는 제10조의10 제1호(「1백만원 이상」)가 나온다 — https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&MST=288765&efYd=20260820&type=XML
+  . 법제처 eflaw 색인은 이 판본을 「공포일자 20260818 / 공포번호 36592 / 시행일자 20270219 / 시행예정」으로 표시한다. 언론의 2027-02-20 은 채택하지 않는다(공포일을
+  08-19 로 가정한 계산으로 보임). 조문 단위 메타데이터의 「조문시행일자 20260820」은 부칙과 충돌하는 레코드 결함이다(research/2026-10-travel-rule.md F-012·F-014).

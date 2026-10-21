@@ -58,7 +58,8 @@ edges:
       scope_note: >
         금액 기준 없음 — 법률·정령·성령 세 층위에서 확인.
         정령 지정 국가·지역 소재 외국 암호자산교환업자는 적용 제외.
-    valid_from: null
+        시행일 2023-06-01 은 확신도 B (research/2026-10-travel-rule.md F-043).
+    valid_from: "2023-06-01"
     valid_to: null
     recorded_at: "2026-08-04"
     evidence:

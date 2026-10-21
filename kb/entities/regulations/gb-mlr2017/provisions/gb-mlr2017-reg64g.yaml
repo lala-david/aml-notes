@@ -1,0 +1,77 @@
+id: "PROV:gb-mlr2017-reg64g"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "MLR 2017 규정 64G (비호스팅 지갑 관련 이전)"
+  en: "MLR 2017 regulation 64G — cryptoasset transfers involving unhosted wallets"
+  short: "MLR 2017 reg 64G"
+plain: >
+  영국 거래소가 개인 지갑(비호스팅 지갑)과 코인을 주고받을 때 적용되는 조문입니다. 거래소는 고객에게
+  빠진 정보를 요청할 수 있고, 요청한 정보를 받지 못하면 코인을 내줄 수 없습니다. 지갑 소유를 증명하라는
+  의무는 없습니다.
+summary: >
+  비호스팅 지갑 이전에서 암호자산 사업자는 고객(송신인 또는 수익자)에게 누락 정보를 요청할 수 있고,
+  고객이 수익자이며 연결 이전 합산 금액이 기준 이상이면 송신인 심화정보도 요청할 수 있다.
+  요청 여부는 위험평가(관계·이전의 목적·성격, 금액·빈도, 관계 지속기간)에 따른다.
+  요청 정보를 받지 못하면 「must not make the cryptoasset available to the beneficiary」.
+  (1)(b)의 금액은 1,000 euros(2023-09-01~2026-06-29) → £800(2026-06-30~, S.I. 2026/621 규정 33).
+parent_reg: "REG:gb-mlr2017"
+citation_path: "regulation 64G"
+heading: "Cryptoasset transfers involving unhosted wallets"
+language: "en"
+depth_thresholds:
+  - paragraph: "64G(1)(b)"
+    amount: 1000
+    currency: "EUR"
+    valid_from: "2023-09-01"
+    valid_to: "2026-06-29"
+    evidence:
+      - doc: "DOC:gb-legis-si-2026-621"
+        confidence: "A"
+        locator: "regulation 33 (치환 전 문언 「1,000 euros」)"
+        retrieved: "2026-10-21"
+  - paragraph: "64G(1)(b)"
+    amount: 800
+    currency: "GBP"
+    valid_from: "2026-06-30"
+    valid_to: null
+    amended_by: "S.I. 2026/621 regulation 33"
+    evidence:
+      - doc: "DOC:gb-legis-si-2026-621"
+        confidence: "A"
+        locator: "regulation 33"
+        quote: 'In regulation 64G(1)(b), for "1,000 euros" substitute "£800".'
+        retrieved: "2026-10-21"
+tags: ["gb", "travel-rule", "unhosted-wallet", "time-split"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:gb-mlr2017"
+    valid_from: "2023-09-01"
+    evidence:
+      - doc: "DOC:gb-legis-mlr2017-reg64g"
+        confidence: "A"
+        locator: "regulation 64G"
+        retrieved: "2026-10-21"
+evidence:
+  - doc: "DOC:gb-legis-mlr2017-reg64g"
+    confidence: "A"
+    locator: "regulation 64G"
+    quote: >
+      may request from its customer (whether the originator or the beneficiary) /
+      it must not make the cryptoasset available to the beneficiary
+    retrieved: "2026-10-21"
+  - doc: "DOC:gb-legis-si-2026-621"
+    confidence: "A"
+    locator: "regulation 33"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  보고서 부록 A-22 신설. research/2026-10-travel-rule.md F-033(T1/A)·F-031.
+  【IMPOSES 엣지 미기재 — 의도적】 이 조문은 송신인 정보 「전달」 의무(OBL:x-travel-rule-originator)가
+  아니라 비호스팅 지갑 이전의 정보 요청 재량·지급 보류를 정한다. 대응하는 추상 의무 노드가
+  저장소에 없어 추측으로 걸지 않았다 — OBL 신설 과제.
+  【관할 비교】 EU(검증 방법 열거)·스위스(소유 증명 필수)·한국 2027(동일인만 허용)과 달리
+  영국은 소유 증명 의무가 없다. 소유 검증 방법은 JMLSG 가이던스 영역(미확인).
+  valid_from 2023-09-01 은 제7A편 신설일(DOC:gb-legis-mlr2017-reg64c-20230901 주석 F1)이다.

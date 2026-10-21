@@ -1,0 +1,53 @@
+id: "EVT:kr-tfia-21358-effective-2026"
+type: "EVT"
+layer: "dynamic"
+label:
+  ko: "특금법 개정 법률 제21358호 시행 (신고제·퇴직자 제재통보)"
+  en: "TFIA amendment Act No. 21358 enters into force"
+track: "C"
+evt_kind: "legislative"
+occurred_on: "2026-08-20"
+announced_on: "2026-08-20"
+date_precision: "day"
+jurisdiction: "JUR:kr"
+impact: "M"
+plain: >
+  거래소 신고 제도를 강화한 특금법 개정이 2026-08-20 시행됐습니다. 같은 날 시행령 본칙과 FIU 감독규정
+  개정(제2026-2호)도 함께 시행됐습니다.
+summary: >
+  법률 제21358호(2026-02-19 공포; 대주주 심사·신고 조건부 수리·퇴직자 제재통보)가 2026-08-20 시행됐다. 같은 날
+  대통령령 제36592호 본칙과 FIU 고시 제2026-2호(감독규정)가 시행됐다. 2026-08-13 FIU·금감원은 이에 맞춘
+  신고매뉴얼 전면 개정안을 공표했다.
+tags: ["korea", "tfia", "vasp-registration", "in-force"]
+edges:
+  - predicate: "CHANGES_STATE_OF"
+    to: "REG:kr-tfia"
+    qualifiers:
+      attribute: "in_force_law_no"
+      from_value: "19563"
+      to_value: "21358"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-21358"
+        confidence: "A"
+        locator: "부칙 <제21358호, 2026.2.19.> 제1조"
+        quote: "이 법은 공포 후 6개월이 경과한 날부터 시행한다."
+        retrieved: "2026-07-30"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-21358"
+    confidence: "A"
+    locator: "부칙 <제21358호, 2026.2.19.> 제1조"
+    quote: "이 법은 공포 후 6개월이 경과한 날부터 시행한다."
+    retrieved: "2026-07-30"
+  - doc: "DOC:kr-fsc-20260811-tfia-sd"
+    confidence: "A"
+    locator: "시행일 안내"
+    quote: "신고제와 퇴직자 제재통보 부분: 2026.8.20."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >
+  EVT:kr-tfia-21358-promulgated-2026 의 curator_note 가 시행일 도래 시 만들라고 남긴 노드다. 이어 법률 제21857호
+  (2026-08-04 공포, 타법개정)가 2026-10-02 부터 현행본이다(FACT:0000207) — 타법개정이라 별도 EVT 를 두지 않았다.
+  kb/states 의 STATE:00002(pending_amendment_law_no=21358, valid_to null)는 2026-08-19 로 마감되어야 하나 이 작업
+  범위 밖이다 → 재검토 과제.

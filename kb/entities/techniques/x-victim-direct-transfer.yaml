@@ -22,12 +22,20 @@ edges:
       - doc: "DOC:x-typology-taxonomy-2026"
         confidence: "B"
         retrieved: "2026-07-31"
+  - predicate: "DETECTED_BY"
+    to: "IND:x-tech-unfamiliar-sender"
+    evidence:
+      - doc: "DOC:intl-fatf-va-red-flags-2020"
+        confidence: "A"
+        locator: "RF-S12 · para 14 · pp.12–15"
+        quote: "Such persons could be money mules"
+        retrieved: "2026-10-21"
 evidence:
   - doc: "DOC:x-typology-taxonomy-2026"
     confidence: "B"
     retrieved: "2026-07-31"
 created_at: "2026-07-31"
-updated_at: "2026-07-31"
+updated_at: "2026-10-21"
 review_due: "2026-10-28"
 curator_note: >
   확신도 B — 원천은 리서치 도시에이며 FATF 원문(2020 Red Flag Indicators,

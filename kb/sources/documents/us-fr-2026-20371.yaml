@@ -1,0 +1,28 @@
+id: "DOC:us-fr-2026-20371"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FinCEN A7 네트워크 하위대리인 자금이체 금지 특별조치 제안규칙 (FR 2026-20371)"
+  en: "Imposition of Special Measure Prohibiting the Transmittal of Funds Involving A7 Network Sub-Agents (NPRM)"
+  short: "FR 2026-20371 A7 특별조치 NPRM"
+summary: >
+  FinCEN 이 Combating Russian Money Laundering Act §9714(a) 에 따라 A7 Network 가 통제하는 역외 기업(Sub-Agents)과의 거래를 러시아 불법금융 관련 주요 자금세탁 우려 거래군으로 보고 미국 금융기관의 자금이체를 금지하려는 특별조치 NPRM(RIN 1506-AB77, 도켓 FINCEN-2026-0265). 2026-10-05 관보 게재, 의견 30일. 상태 proposed.
+src: "SRC:us-federalregister"
+url: "https://public-inspection.federalregister.gov/2026-20371.pdf"
+published: "2026-10-05"
+accessed: "2026-10-21"
+doc_kind: "filing"
+language: "en"
+translation: false
+tags: ["us", "fincen", "special-measure", "a7", "russia", "proposed"]
+evidence:
+  - doc: "DOC:us-fr-2026-20371"
+    confidence: "A"
+    locator: "Summary · 각주 1"
+    quote: "finding transactions involving any company operating outside of the United States that is controlled by the A7 Network, a sanctions evasion and money laundering service with ties to Russia"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  근거 권한은 §311 이 아니라 §9714 다. 각주 1 이 OFAC 의 2026-10-01 A7 Network TCO 지정(E.O. 13581, 개정 E.O. 13863)을 인용한다 — OFAC 원 공고는 미열람이라 그 사실은 B 로 다룬다. A7 이 Garantex·Grinex·A7A5 등과 연계된다고 기술. 의견 마감은 관보 게재 후 30일 — 최종화 감시 대상.

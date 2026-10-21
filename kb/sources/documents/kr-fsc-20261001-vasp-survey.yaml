@@ -1,0 +1,30 @@
+id: "DOC:kr-fsc-20261001-vasp-survey"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "금융위원회·FIU 보도자료 — '26년 상반기 가상자산사업자 실태조사 결과 (2026-10-01)"
+summary: >-
+  기준 2026-06-30 실태조사. 조사대상 26개(거래소 17·지갑보관 9), 총 출고 62.8조원 중 트래블룰 적용 9.5조원.
+src: "SRC:kr-fsc"
+url: "https://www.fsc.go.kr/no010101/87835"
+published: "2026-10-01"
+accessed: "2026-10-21"
+doc_kind: "press-release"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "travel-rule"
+- "statistics"
+evidence:
+- doc: "DOC:kr-fsc-20261001-vasp-survey"
+  confidence: "A"
+  locator: "본문"
+  quote: "17개 거래소, 9개 지갑·보관업자"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  트래블룰 적용 비중 약 15% 는 100만원 기준·국내 VASP 간 이전에 한정된 2026-10-21 현재 제도의 결과로 읽힌다 — 2027-02-19 이후 비교 기준선. 수치는 aml-landscape
+  도시에 F-039(수집기 요약 경유).

@@ -1,0 +1,35 @@
+id: "DOC:gb-legis-mlr2017-reg64c-current"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "MLR 2017 규정 64C — 최신 반영본(2026-10-21 열람)"
+  en: "MLR 2017 regulation 64C — latest available (revised) version"
+  short: "MLR reg 64C (latest)"
+summary: >
+  2026-10-20 까지의 개정을 반영한 규정 64C 최신본. (3)·(4)의 발동 조건, (5)·(6) 정보 항목,
+  (8) 송신인 정보 검증, (9) 완전 준수 전 이전 금지를 확인할 수 있다. (4)의 금액은 「£800」이다.
+src: "SRC:gb-legislation"
+url: "https://www.legislation.gov.uk/uksi/2017/692/regulation/64C"
+accessed: "2026-10-21"
+published: "2026-06-30"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["gb", "travel-rule", "crypto-asset"]
+evidence:
+  - doc: "DOC:gb-legis-mlr2017-reg64c-current"
+    confidence: "A"
+    locator: "regulation 64C(3)·(4)·(5)·(6)·(8)·(9)"
+    quote: >
+      the cryptoasset business of the originator must not make the transfer until
+      it has fully complied with this regulation (64C(9) 요지 — 축약 인용)
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-032 (T1/A). 도시에가 125자 인용 제한으로 (9)를
+  요지만 인용했으므로 quote 는 축약임을 표시했다. (3)은 「every cryptoasset business in
+  the transfer chain … carries on business in the UK」이면 적용(요청 시 3영업일 내 제공),
+  그렇지 않으면 (4)가 적용된다(£800 이상 시 (6) 정보 동반).
+  published 는 이 판본의 마지막 실체 개정 시행일(S.I. 2026/621, 2026-06-30)이다.

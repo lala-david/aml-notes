@@ -1,15 +1,15 @@
 # Travel Rule Protocols — 기술 표준 / 메시징 프로토콜
 
-> Travel Rule을 **실제로 어떻게** 메시지로 주고받는가. 이 글을 읽고 나면 "IVMS101은 표준이고 TRISA는 프로토콜이다"라는 흔한 혼동을 정리하고, 왜 2026년에도 Notabene Gateway가 가장 실용적 선택이 되는지 이해하게 됩니다. 마지막 업데이트: 2026-04-17.
+> Travel Rule 을 **실제로 어떻게** 메시지로 주고받는가. 이 글을 읽고 나면 "IVMS 101 은 데이터 모델이고 TRISA·TRP 는 프로토콜이다"라는 구분을 정리하고, 관할별 검증 규칙을 조문 문언에 맞게 짜는 법을 이해하게 됩니다. 마지막 업데이트: 2026-10-21.
 
-> **이 파일의 역할**: Travel Rule의 **기술 상세** — IVMS101 스키마·검증 Validator·TRISA/TRP/VerifyVASP/CODE/Notabene 프로토콜 비교·Protocol Interop Matrix. 법적 근거는 [`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) §5 참조, 개념·역사·운영 흐름은 [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) 참조.
+> **이 파일의 역할**: Travel Rule 의 **기술 상세** — IVMS 101.2023 데이터 모델·관할별 검증 규칙·프로토콜 공개 사실·상호운용 설계. 법적 근거는 [`../2-regulations/korea-fiu-act.md`](../2-regulations/korea-fiu-act.md) §5, 개념·관할 비교·운영 흐름은 [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) 참조. 근거 도시에: [`../../research/2026-10-travel-rule.md`](../../research/2026-10-travel-rule.md) §4.11.
 
 ## TL;DR
-- **메시지 표준 = IVMS101** (사실상 글로벌 표준, 모든 프로토콜이 페이로드로 사용)
-- **전송 프로토콜**은 다양: TRP, TRISA, OpenVASP, VerifyVASP, CODE, Notabene Gateway
-- 두 가지 모델: **분산형 (TRISA, OpenVASP)** vs **폐쇄형 (VerifyVASP, CODE)**
-- **상호운용성(interoperability)** 이 가장 큰 기술 과제 — Notabene Gateway가 부상한 이유
-- **VASP Discovery** (지갑 → VASP 매핑)는 별도 인프라 (DTI, GLEIF LEI, attribution DB)
+- **데이터 모델 = IVMS 101.2023**(2023-08 발행, interVASP ISWG 유지, 2024-06-04 갱신 공표). "IVMS101 v2" 는 없음
+- **전송 프로토콜**은 여러 개: TRP(OpenVASP Association 관리), TRISA, 솔루션 네트워크(VerifyVASP·CODE·GTR·Sygna 등). 어느 것도 모든 상대방을 덮지 못함
+- **관할별 필수 항목은 조문이 정함** — EU TFR 제14조(1)은 주소 **또는** 생년월일·출생지, IVMS 101.2023 제약 C1 도 자연인 송신인에 4종 중 **1개 이상**. "EU 모든 필드 필수"는 틀림
+- 미국 기준은 31 CFR 1010.410(f) **USD 3,000 이상** 그대로. $250 하향안은 2025-04-16 철회, "$1,000 개정 제안"은 존재 확인 안 됨
+- 메시지 실패율·지연·SLA·오류 분포에 대한 **공개 벤치마크는 없음** — 이 문서의 이전 판 수치는 출처가 없어 삭제
 
 ---
 
@@ -17,434 +17,386 @@
 
 ```mermaid
 flowchart TB
-    L1["📦 메시지 표준<br/>무엇을 담는가"] --> M["IVMS101<br/>(JSON Schema)"]
-    L2["📡 전송 프로토콜<br/>어떻게 주고받는가"] --> P1["TRISA · TRP · OpenVASP"]
-    L2 --> P2["VerifyVASP · CODE<br/>Notabene · Sygna"]
-    L3["🔎 VASP Discovery<br/>누가 누구인가"] --> D1["Attribution DB"]
-    L3 --> D2["Directory · DTI · LEI"]
-    L1 -.같은 IVMS101 메시지.-> L2
-    L2 -.라우팅 시 별도 식별.-> L3
+    L1["메시지 데이터 모델<br/>무엇을 담는가"] --> M["IVMS 101.2023<br/>스키마는 구현체가 별도 관리"]
+    L2["전송 프로토콜<br/>어떻게 주고받는가"] --> P1["TRP · TRISA"]
+    L2 --> P2["솔루션 네트워크<br/>VerifyVASP · CODE · GTR · Sygna 등"]
+    L3["VASP Discovery<br/>상대가 누구인가"] --> D1["블록체인 분석 · 제3자 데이터"]
+    L3 --> D2["Directory · LEI · DTI"]
+    L1 -.같은 IVMS 페이로드.-> L2
+    L2 -.라우팅 전 별도 식별.-> L3
     style L1 fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style L2 fill:#c9a646,color:#fff,stroke:#c9a646
     style L3 fill:#4a5f7e,color:#fff,stroke:#4a5f7e
 ```
 
-
 ### 왜 혼동이 자주 일어나나
 
-Travel Rule 구현에서 용어 혼동의 대부분은 **"메시지에 뭘 넣을지"(표준)** 와 **"어떻게 주고받을지"(프로토콜)** 와 **"누구에게 보낼지"(Discovery)** 가 서로 다른 층위라는 걸 몰라서 생깁니다. 이 3개는 독립적으로 선택할 수 있으며, 같은 IVMS101 메시지를 다른 프로토콜로 주고받을 수 있습니다.
-
-### 이 표를 어떻게 읽어야 하나
-
-3개 층을 세로로 잡고 각각의 역할·예시를 병렬 비교. 회사가 Travel Rule 시스템을 설계할 때 **각 층마다 별도 결정**이 필요합니다.
+Travel Rule 구현 용어 혼동의 대부분은 **"메시지에 뭘 넣을지"(데이터 모델)**, **"어떻게 주고받을지"(프로토콜)**, **"누구에게 보낼지"(Discovery)** 가 서로 다른 층위라는 걸 놓쳐서 생깁니다. 같은 IVMS 101 페이로드를 다른 프로토콜로 주고받을 수 있습니다.
 
 | 구분 | 역할 | 예시 |
 |---|---|---|
-| **메시지 표준** | 무엇을 담는가 (필드 구조) | IVMS101 |
-| **전송 프로토콜** | 어떻게 주고받는가 (네트워크) | TRISA, TRP, OpenVASP, VerifyVASP, CODE |
-| **VASP Discovery** | 누가 누구인가 (라우팅) | Attribution DB, DTI, GLEIF LEI |
+| **메시지 데이터 모델** | 무엇을 담는가 (필드 구조) | IVMS 101.2023 |
+| **전송 프로토콜** | 어떻게 주고받는가 (네트워크) | TRP, TRISA, 솔루션 네트워크 |
+| **VASP Discovery** | 상대가 누구인가 (라우팅) | 블록체인 분석, Directory, LEI, DTI |
 
 ---
 
-## 2. IVMS101 — 메시지 표준 상세
+## 2. IVMS 101.2023 — 데이터 모델 상세
 
 ### 정체성
 
-- **InterVASP Messaging Standard 101**
-- 2020년 InterVASP Joint Working Group (JWG) 합의
-- 참여사: Sygna(CoolBitX), TRISA(CipherTrace), Notabene, Securrency 등
-- JSON Schema 기반
+- **IVMS 101** — interVASP 데이터 모델 표준. 2020-05 원판은 JWG 가, 현행 **「IVMS 101.2023, interVASP data model standard Issue 1 FINAL」**(Published August 2023)은 GDF·OpenVASP·VASPnet 이 2023-04 결성한 interVASP Standards Working Group(ISWG, GDF Open Standards Council 산하)이 유지([interVASP](https://intervasp.org/))
+- ISWG 는 2024-06-04 갱신을 공표: "The ISWG released an update to IVMS 101 on 4 June 2024."
+- **표준 문서에는 JSON/XML 스키마가 포함되지 않습니다** — 스키마는 구현체가 따로 관리합니다
+- 2020→2023 변경 목록(errata)은 이 저장소가 확인하지 못했습니다
 
-### 왜 표준이 필요했나
+### 2023판에서 정식화된 것 (원문 확인)
 
-2019~2020년 초기에는 각 프로토콜이 자체 메시지 형식을 썼습니다. TRISA는 TRISA대로, Sygna는 Sygna대로. 결과: A 거래소가 TRISA로 보낸 메시지를 B 거래소가 Sygna로 받으면 **필드 변환 과정에서 정보 손실**이 발생. 이 문제를 풀려고 주요 플레이어들이 모여 합의한 공통 JSON 스키마가 IVMS101.
+출처: [IVMS 101.2023 PDF](https://cdn.jsdelivr.net/npm/ivms101@2.0.0/specs/ivms101-2023.pdf)(npm 패키지 미러 — 패키지 버전 2.0.0 은 표준 판 명칭이 아님)
 
-### 핵심 데이터 모델
+| 항목 | 내용 |
+|---|---|
+| PayloadVersionCode | `101` / `101.2023` |
+| LEIText | ISO 17442, 20자 |
+| NationalIdentifierTypeCode | ISO 20022 TypeOfIdentification4Code 제한, `LEIX` 포함 |
+| 제약 C1 | 자연인 송신인: geographicAddress(GEOG·HOME·BIZZ) **및/또는** customerIdentification **및/또는** nationalIdentification **및/또는** dateAndPlaceOfBirth — **1개 이상 필수** |
+| 제약 C7 | 법인 식별 유형은 RAID / MISC / LEIX / TXID |
+| 제약 C9 | LEIX 면 registrationAuthority 금지, 비LEIX 면 필수 |
+| 제약 C10·C11 | GLEIF RA 목록, validLEI |
+| 주소유형 GEOG | IVMS 고유 추가 |
 
-```
-IVMS101 Message
-├── Originator (송신인)
-│   ├── OriginatorPersons: [NaturalPerson | LegalPerson]
-│   └── AccountNumbers: [지갑주소]
-├── Beneficiary (수신인)
-│   ├── BeneficiaryPersons: [...]
-│   └── AccountNumbers: [...]
-├── OriginatingVASP
-├── BeneficiaryVASP
-├── TransferPath
-└── PayloadMetadata
-```
+> C1 원문: "If the originator is a NaturalPerson either (geographicAddress with an addressType value of 'GEOG' or 'HOME' or 'BIZZ') and/or customerIdentification and/or nationalIdentification and/or dateAndPlaceOfBirth is required."
 
-### NaturalPerson 필드 — 필수 vs 선택
+### NaturalPerson 필드 — "선택"이 아니라 "택1 이상"
 
-- **Name** (필수): primary + secondary identifier
-- **GeographicAddress** (선택)
-- **NationalIdentification** (선택): passport, ID 등
-- **DateAndPlaceOfBirth** (선택)
-- **CountryOfResidence** (선택)
-- **CustomerIdentification** (선택)
+이전 판은 DateAndPlaceOfBirth 를 단순 "선택"으로 적었습니다. 2023판 C1 에 따르면 주소·고객식별번호·국가식별번호·생년월일·출생지는 **각각은 선택이지만 넷 중 하나는 반드시 있어야** 합니다.
 
-### 관할별 차이 처리
+### 관할별 차이 처리 — 조문 문언 기준
 
-- **한국**: 신원확인번호 대신 이름·주소 조합 가능
-- **EU TFR**: 모든 필드 필수 (강제력 ↑)
-- **미국 BSA**: 이름·주소·계좌 + (1만 USD 초과 시 ID#)
+| 관할 | 조문 | 송신인 필수 항목(요지) |
+|---|---|---|
+| 🇪🇺 EU | TFR 제14조(1) | 성명·DLT 주소·계정번호·**주소 또는 생년월일·출생지**·LEI 등. 금액 간소화 없음 |
+| 🇬🇧 영국 | MLR reg 64C(5)·(6) | (5) 성명, 계좌번호 또는 고유거래식별자 / (6) 개인: 고객식별번호·주소·신분증 번호·생년월일+출생지 **중 하나** — (4)항 금액(2026-06-30~ £800, 그 전 1,000 euros) 이상 |
+| 🇸🇬 싱가포르 | PSN02 ¶13.4·¶13.6 | ≤S$1,500: 4항목 / >S$1,500: 신원확인·검증 + 주소·고유식별번호·생년월일 **중 하나** |
+| 🇰🇷 한국 2027-02-19~ | 시행령 §10-10 ②·③ | 동시: 성명·가상자산주소 / **요청 시 3영업일**: 주민등록번호(법인등록번호)·여권번호·외국인등록번호 |
+| 🇺🇸 미국 | 31 CFR 1010.410(f) | USD 3,000 이상 이체지시: 송신인 성명·계좌번호·주소·금액·실행일·수취 금융기관 |
+
+근거: [EBA/GL/2024/11](https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf) · [MLR reg 64C](https://www.legislation.gov.uk/uksi/2017/692/regulation/64C) · [MAS PSN02](https://www.mas.gov.sg/-/media/amld-amendments---30-june-2025/mas-notice-psn02-amendment--new.pdf) · [법제처 시행예정 판본](https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&MST=288765&efYd=20270219&type=XML) · [Cornell LII](https://www.law.cornell.edu/cfr/text/31/1010.410).
 
 ### 실무 포인트
 
-IVMS101 validator 구현에서 가장 어려운 부분은 **관할별 필수 필드 차이** 처리입니다. 한국 송신 → EU 수신일 경우 수신 측은 EU 기준으로 검증하므로 한국이 채워준 필드가 EU 기준에 부족할 수 있습니다. 이 mismatch를 **거절**할지 **보완 요청**할지의 정책을 회사 차원에서 명문화해야 합니다.
+검증기에서 가장 어려운 부분은 **관할별 필수 항목을 조문 문언대로 옮기는 것**입니다. "택일" 조문(EU 주소 또는 생년월일, 영국 (6)항 중 하나)을 "전부 필수"로 구현하면 적법한 메시지를 거절하고, 금액 구간을 시점 없이 하드코딩하면 과거 거래 재검증이 틀립니다. 누락 시 **거절할지 보완 요청할지**는 회사 정책으로 명문화하되, 근거 조문(영국 64C(9), 싱가포르 ¶13.11·¶13.14, EU EBA GL §4.7)을 함께 적어 두십시오.
 
 ---
 
-## N. IVMS101 Validator — 관할별 엄밀 구현
+## N. IVMS 101 Validator — 관할별 구현
 
-### N.1 관할별 필수·선택 필드
+### N.1 관할별 규칙 — 택일 조건과 시점을 표현한다
 
-실제 현장에서 TR 메시지 검증 실패의 90%는 **관할별 요구 필드 차이**. 한국/EU/미국 주요 차이:
+검증 실패 원인 비율에 대한 공개 통계는 없습니다. 아래는 조문 문언을 코드로 옮기는 **구조 예시**입니다(필드 경로는 단순화).
 
 ```python
+from datetime import date
+
+# 금액 구간은 반드시 유효 구간과 함께 둔다. valid_to 는 마지막 유효일(포함).
+DEPTH_THRESHOLDS = {
+    "GB": [  # MLR reg 64C(4) — 의무 발동이 아니라 (6)항 심화정보 기준
+        {"amount": 1000, "currency": "EUR", "valid_from": date(2023, 9, 1), "valid_to": date(2026, 6, 29)},
+        {"amount": 800,  "currency": "GBP", "valid_from": date(2026, 6, 30), "valid_to": None},
+    ],
+    "SG": [  # PSN02 ¶13.6 — 'exceeds' 이므로 정확히 1,500 은 하위 구간
+        {"amount": 1500, "currency": "SGD", "comparator": "gt", "valid_from": date(2024, 4, 4), "valid_to": None},
+    ],
+}
+
 JURISDICTION_RULES = {
-    "KR": {  # 특금법 §5의3 + FIU 고시
-        "originator.name.nameIdentifier": REQUIRED,     # 한글 + 영문 병기
-        "originator.geographicAddress": REQUIRED,       # 임계 100만원 이상
-        "originator.nationalIdentification": HASHED,    # PIPA 대응, 원문 전송 금지
-        "originator.dateOfBirth": OPTIONAL,
-        "beneficiary.name.nameIdentifier": REQUIRED,
-        "beneficiary.accountNumber": REQUIRED,          # 지갑 주소
+    "EU": {  # TFR 제14조(1) — 금액 무관 전건
+        "required": ["originator.name", "originator.accountNumber",
+                     "beneficiary.name", "beneficiary.accountNumber"],
+        # 주소 또는 생년월일·출생지 — 택일
+        "one_of": [["originator.geographicAddress",
+                    "originator.dateAndPlaceOfBirth"]],
     },
-    "EU": {  # TFR (2024-12-30 시행) - 1 EUR부터 전체
-        "originator.name.nameIdentifier": REQUIRED,
-        "originator.geographicAddress": REQUIRED,
-        "originator.dateOfBirth": REQUIRED,             # EU 추가 필수
-        "originator.placeOfBirth": REQUIRED,            # EU 추가 필수
-        "originator.customerNumber": REQUIRED,
-        "beneficiary.name.nameIdentifier": REQUIRED,
-        "beneficiary.accountNumber": REQUIRED,
+    "KR_2027": {  # 시행령 §10-10 (2027-02-19~, enacted-not-in-force)
+        "required": ["originator.name", "originator.accountNumber",
+                     "beneficiary.name", "beneficiary.accountNumber"],
+        # 주민등록번호 등은 동시 전송 항목이 아니라 '요청 시 3영업일' 항목
+        "on_request": ["originator.nationalIdentification"],
     },
-    "US": {  # FinCEN Travel Rule 31 CFR 1010.410(f)
-        "originator.name.nameIdentifier": REQUIRED,
-        "originator.geographicAddress": REQUIRED,       # $3,000 이상 (2025 개정 제안 $1,000)
-        "originator.accountNumber": REQUIRED,
-        "originator.dateOfBirth": OPTIONAL,
-        "beneficiary.name.nameIdentifier": REQUIRED,
+    "US": {  # 31 CFR 1010.410(f) — USD 3,000 이상에서 의무 발동(A형)
+        "trigger": {"amount": 3000, "currency": "USD", "comparator": "gte"},
+        "required": ["originator.name", "originator.accountNumber",
+                     "originator.geographicAddress"],
     },
 }
+
+# IVMS 101.2023 제약 C1 — 자연인 송신인
+C1_ANY_OF = ["originator.geographicAddress",      # addressType GEOG/HOME/BIZZ
+             "originator.customerIdentification",
+             "originator.nationalIdentification",
+             "originator.dateAndPlaceOfBirth"]
 ```
+
+이전 판의 규칙 중 다음은 근거가 없거나 틀려서 뺐습니다: "EU dateOfBirth·placeOfBirth REQUIRED"(TFR 은 주소와 택일), "US 2025 개정 제안 $1,000"(존재 확인 안 됨, $250 안은 2025-04-16 철회), "KR nationalIdentification HASHED"(2027 판 제3호는 요청 시 정보 제공을 정할 뿐 해시 전송 근거 없음), "KR 이름 한글+영문 병기 필수"(조문 근거 없음).
 
 ### N.2 Validator 구현 (Python pseudocode)
 
 ```python
-def validate_ivms101(msg: dict, jurisdiction: str) -> ValidationResult:
+def validate_ivms101(msg: dict, jurisdiction: str, transfer_date: date) -> ValidationResult:
     errors = []
     rules = JURISDICTION_RULES[jurisdiction]
 
-    for field_path, requirement in rules.items():
-        value = get_nested(msg, field_path)
-        if requirement == REQUIRED and not value:
-            errors.append(f"Missing required: {field_path}")
-        elif requirement == HASHED and value:
-            if not looks_like_hash(value):  # SHA-256 hex 64자
-                errors.append(f"{field_path} must be hashed (PIPA)")
+    for path in rules.get("required", []):
+        if not get_nested(msg, path):
+            errors.append(f"Missing required: {path}")
 
-    # Cross-field 검증
-    if jurisdiction == "KR":
-        name = get_nested(msg, "originator.name.nameIdentifier")
-        if not (has_hangul(name) and has_latin(name)):
-            errors.append("한국: 이름은 한글+영문 병기 필수")
+    for group in rules.get("one_of", []):
+        if not any(get_nested(msg, p) for p in group):
+            errors.append(f"Need at least one of: {group}")
 
-    # ISO 3166 country code 검증
-    for path in ["originator.geographicAddress.countryCode",
-                 "beneficiary.geographicAddress.countryCode"]:
-        cc = get_nested(msg, path)
-        if cc and cc not in ISO_3166_ALPHA2:
-            errors.append(f"Invalid country code: {path}={cc}")
+    # IVMS 101.2023 C1 — 관할과 무관한 데이터 모델 제약
+    if is_natural_person(msg, "originator") and not any(get_nested(msg, p) for p in C1_ANY_OF):
+        errors.append("IVMS 101.2023 C1: address/customerId/nationalId/DOB 중 1개 이상 필요")
 
-    return ValidationResult(passed=len(errors) == 0, errors=errors)
+    # 심화 기준은 이전 시점의 구간으로 판정
+    tier = active_threshold(DEPTH_THRESHOLDS.get(jurisdiction, []), transfer_date)
+    if tier and exceeds(msg["amount"], tier):
+        errors += check_depth_fields(msg, jurisdiction)
+
+    return ValidationResult(passed=not errors, errors=errors)
 ```
 
 ### N.3 카운터파티 이름 일치 검증 (Fuzzy Matching)
 
-IVMS101 메시지의 originator·beneficiary 이름이 **카운터파티 KYC DB와 일치하는지** 검증. 한국은 로마자 표기 다양성 때문에 특히 까다로움.
+IVMS 메시지의 originator·beneficiary 이름이 **자사 KYC DB 와 일치하는지** 검증합니다. 로마자 표기 다양성 때문에 정규화가 필요합니다. 유사도 임계값은 조문이 정하지 않으므로 자사 데이터로 보정해야 하며, 아래 값은 예시입니다.
 
 ```python
 from jellyfish import jaro_winkler_similarity
 
-def verify_name_match(
-    submitted: str,      # IVMS101로 받은 이름
-    kyc_db: str,         # 우리 KYC DB의 이름
-    jurisdiction: str
-) -> bool:
-    threshold = 0.92 if jurisdiction == "KR" else 0.88
-    score = jaro_winkler_similarity(normalize(submitted), normalize(kyc_db))
-    return score >= threshold
+def verify_name_match(submitted: str, kyc_db: str, threshold: float) -> bool:
+    # threshold 는 자사 오탐·미탐 실측으로 정한다 (공개 기준값 없음)
+    return jaro_winkler_similarity(normalize(submitted), normalize(kyc_db)) >= threshold
 
 def normalize(name: str) -> str:
-    # 케이스·공백·하이픈·쉼표 정규화
     name = name.lower().strip()
-    REPLACEMENTS = [("gil-dong", "gildong"), ("kim, ", "kim "), ("-", ""), (",", "")]
-    for old, new in REPLACEMENTS:
+    for old, new in [("-", ""), (",", "")]:
         name = name.replace(old, new)
-    return " ".join(name.split())  # 다중 공백 1개로
+    return " ".join(name.split())
 ```
 
-### N.4 오류 분포 (실제 현장)
+### N.4 오류 분포
 
-Travel Rule 메시지 실패 Top 5 (Notabene·VerifyVASP 종합 추정):
+이전 판의 "오류 Top 5(35%/22%/18%/12%/8%)" 표는 어떤 공개 출처로도 확인되지 않아 삭제했습니다. 거절률·필드 누락률·이름 불일치율에 대한 공개 통계는 2026-10-21 기준 없습니다. 자사 실패 로그를 오류 유형별로 집계해 기준선을 만드십시오.
 
-| 오류 | 비율 | 원인 |
-|---|---|---|
-| 관할 필드 불일치 | 35% | EU DoB 누락 등 |
-| 이름 로마자 불일치 | 22% | Hong Gildong vs Hong Gil-dong |
-| 주소 format 오류 | 18% | 국가별 주소 구조 다름 |
-| PIPA 원문 전송 | 12% | 한국 주민번호 평문 전송 |
-| Country code 오류 | 8% | ISO 3166 alpha-2 아닌 값 |
-| 기타 | 5% | |
+```mermaid
+flowchart TD
+    IN["수신 IVMS 101.2023 메시지"] --> V1{"PayloadVersionCode<br/>101 또는 101.2023"}
+    V1 -->|불일치| X1["형식 오류 - 보완 요청"]
+    V1 -->|일치| V2{"자연인 송신인 C1<br/>주소·고객ID·국가ID·생년월일<br/>중 1개 이상"}
+    V2 -->|없음| X2["C1 위반 - 보완 요청"]
+    V2 -->|있음| V3{"송신 관할 조문<br/>필수·택일 항목"}
+    V3 -->|누락| X3["누락 - 정책에 따라<br/>보류·거절·위험기반 판단"]
+    V3 -->|충족| V4{"이전 시점의<br/>금액 구간 심화 항목"}
+    V4 -->|누락| X3
+    V4 -->|충족| OK["수신 확인"]
+    style OK fill:#d1fae5
+    style X3 fill:#fee2e2
+```
 
 ---
 
 ## M. Protocol Interoperability — 라우팅·재시도·Fallback
 
-### M.1 한국 4대 거래소 기준 라우팅 (현실)
+### M.1 경로별 지연
 
-| From | To | Protocol 경로 | p50 latency |
-|---|---|---|---|
-| Upbit | Bithumb | VerifyVASP ↔ CODE (bilateral) | ~2~3초 |
-| Upbit | Coinbase (US) | VerifyVASP → Notabene Gateway → TRISA | ~5~10초 |
-| Bithumb | Binance | CODE → Notabene Gateway → Binance internal | ~3~7초 |
-| Any KR | 미연결 VASP | Gateway discovery → VASP Directory lookup | ~20~60초 or Sunrise |
+이전 판의 경로별 p50 지연(~2~3초, ~5~10초 등) 표는 출처가 없어 삭제했습니다. 지연·타임아웃은 상대 네트워크와 계약 조건에 따라 다르므로 자사 측정값을 쓰십시오.
 
-### M.2 실패 모드 + 재시도 전략
+### M.2 실패 모드 + 재시도 전략 (설계 예시)
 
 ```python
 class TravelRuleRouter:
-    MAX_RETRIES = 3
-    BACKOFF_BASE = 2  # 지수 백오프 초
-    TIMEOUTS = {  # 각 프로토콜별 SLA
-        "TRISA": 15, "CODE": 10, "VerifyVASP": 10,
-        "TRP": 20, "Notabene": 30
-    }
+    MAX_RETRIES = 3          # 예시 값
+    BACKOFF_BASE = 2         # 지수 백오프(초), 예시 값
+    # 프로토콜별 타임아웃은 상대 네트워크 계약·실측으로 정한다 (공개 SLA 없음)
 
-    async def send(self, msg: IVMS101, target_vasp: str):
+    async def send(self, msg, target_vasp: str):
         protocol, endpoint = await self.discover_route(target_vasp)
-
         for attempt in range(self.MAX_RETRIES):
             try:
                 return await self._send(msg, protocol, endpoint,
-                                        timeout=self.TIMEOUTS[protocol])
+                                        timeout=self.timeouts[protocol])
             except TimeoutError:
                 await asyncio.sleep(self.BACKOFF_BASE ** attempt)
-                continue
             except AuthError as e:
                 if e.code == "cert_expired":
                     await self.refresh_cert()
                     continue
                 raise
             except IVMS101ValidationError as e:
-                # 관할별 필드 fallback mapping
                 msg = self.mapper.fallback(msg, target_jurisdiction=e.jurisdiction)
-                continue
             except UnreachableError:
-                if protocol != "Notabene":
-                    # Gateway fallback
-                    return await self.send_via_gateway(msg, target_vasp)
-                raise
+                return await self.handle_unreachable(msg, target_vasp)
         raise UndeliverableError(target_vasp)
 ```
 
-### M.3 Sunrise Issue (미연결 카운터파티) 처리
+### M.3 Sunrise Issue (미연결 카운터파티) 처리 — 정책과 근거 조문
 
 ```python
-def handle_sunrise(msg: IVMS101, target_vasp: str, policy: SunrisePolicy):
-    # 1. VASP Directory (Notabene·TRISA GDS) 검색
+def handle_sunrise(msg, target_vasp: str, policy: str):
     discovered = await discover_vasp(target_vasp)
     if discovered:
         return await send_tr(msg, discovered)
 
-    # 2. 24시간 hold + 재시도
-    if policy == "HOLD_24H":
-        await queue.delay(msg, target_vasp, delay_hours=24)
+    if policy == "HOLD":
+        # 보류 후 재시도. 보류 기간은 조문이 정하지 않음 — 자사 정책
+        await queue.delay(msg, target_vasp)
         return Status.PENDING
-
-    # 3. 정책에 따라 자체 결정
-    elif policy == "ALLOW_WITH_RECORD":
-        # 거래 진행 + 내부 기록 (FIU 검사 시 제시 가능)
-        await audit_log.record(msg, reason="sunrise_allowed")
-        return Status.SENT_WITHOUT_TR
+    elif policy == "COLLECT_AND_RECORD":
+        # 영국 FCA 2023-08-17: 미시행 관할로는 정보를 수집·검증·보관한 뒤 이전 가능
+        # FATF 2021 para 200–201: 계약·사업관행, first-party 이전 한정 등 위험기반 대응
+        await audit_log.record(msg, reason="sunrise_counterparty")
+        return Status.SENT_WITH_RECORD
     elif policy == "REJECT":
-        # 거래 거절 + 사용자 안내
+        # 영국 reg 64C(9), 싱가포르 PSN02 ¶13.11 — 완전 준수 불가 시 이전 금지
         return Status.REJECTED
 ```
 
+관할별로 허용되는 정책이 다릅니다. 영국·싱가포르에서 송신 측이 정보를 갖추지 못하면 이전 자체가 금지되고, EU 는 sunrise 상대를 고위험 요소로 분류하며 반복 누락 기관을 식별 후 3개월 안에 보고하게 하고(EBA GL §4.5·§4.7), 한국은 2027-02-19 부터 상대 VASP 의 트래블룰 이행을 저위험 허용 요건으로 둡니다(고시 §28-2②).
+
 ### M.4 Discovery 메커니즘
 
-| 방식 | 장점 | 단점 |
+| 방식 | 공개 근거로 확인된 내용 | 한계 |
 |---|---|---|
-| Notabene VASP Directory | 최대 커버리지 (1,500+ VASP) | 중앙화 (Notabene 의존) |
-| TRISA GDS (Global Directory Service) | 분산·오픈 | 커버리지 제한 |
-| VerifyVASP 폐쇄 회원사 | 한국 4대 보장 | 비회원 접근 불가 |
-| DNS-based (TRP) | 간단 | 엔진 구축 필요 |
-| 하드코딩 peering (CODE) | 확실 | 신규 추가 느림 |
+| 블록체인 분석·제3자 데이터 | EBA GL ¶77~78 이 자기수탁 판단 수단으로 열거 | FATF 2021 para 197(a): 주소만으로 VASP 를 정확히 식별할 기술적 수단 없음 |
+| TRISA Global Directory Service | trisa.dev 가 GDS 를 설명(자사 페이지, B) | 운영 상태·회원 수 미확인 |
+| 솔루션 네트워크 회원 디렉터리 | VerifyVASP·CODE·GTR 등 | 비회원 접근 범위는 계약 사항 |
+| LEI(ISO 17442) | IVMS 101.2023 C9~C11 | 법인만 |
+| DTI(ISO 24165) | TRP 가 호환 명시 | 토큰 식별자이지 VASP 식별자가 아님 |
+
+네트워크별 VASP 수는 자사 주장이라 인용하지 않습니다.
 
 ### M.5 상태 전이 다이어그램
 
 ```mermaid
 stateDiagram-v2
     [*] --> Discovering
-    Discovering --> Routing: VASP 발견
-    Discovering --> Sunrise: 미발견
+    Discovering --> Routing: VASP 식별
+    Discovering --> Sunrise: 식별 실패 또는 미연결
     Routing --> Sending
-    Sending --> Delivered: 성공
-    Sending --> Retry: Timeout / Auth 실패
-    Sending --> Mapping: IVMS101 검증 실패
-    Retry --> Sending: attempt<3
-    Retry --> Failed: attempt≥3
-    Mapping --> Sending: fallback 적용
-    Sunrise --> Held: 24h hold 정책
-    Sunrise --> Sent: 기록만 남기고 진행
+    Sending --> Delivered: 수신 확인
+    Sending --> Retry: Timeout 또는 인증 실패
+    Sending --> Mapping: 데이터 모델 검증 실패
+    Retry --> Sending: 재시도 한도 이내
+    Retry --> Failed: 재시도 한도 초과
+    Mapping --> Sending: 보완 후 재전송
+    Sunrise --> Held: 보류 정책
+    Sunrise --> Recorded: 수집·검증·보관 후 진행
     Sunrise --> Rejected: 거절 정책
     Held --> Discovering: 재시도
     Delivered --> [*]
+    Recorded --> [*]
     Failed --> [*]
+    Rejected --> [*]
 ```
 
-### M.6 SLA 목표 (한국 VASP 프로덕션)
+### M.6 SLA
 
-| 지표 | 목표 | 현실 |
-|---|---|---|
-| 정상 TR 메시지 p50 | < 5초 | 2~3초 (같은 컨소시엄) |
-| 정상 TR 메시지 p99 | < 30초 | 15~25초 |
-| Sunrise 처리율 | < 10% | 한국 5~15% |
-| 24h 내 delivery 성공률 | > 95% | 실제 90~97% |
-| IVMS101 validation 1차 pass | > 80% | 실제 60~75% |
+이전 판의 SLA 표(p50·p99·Sunrise 처리율 5~15%·delivery 90~97%·1차 pass 60~75%)는 출처가 없어 삭제했습니다. 규범상 시간 요건은 "즉시(immediately)" — FATF 2021 para 185·187 은 이전 이전·동시·병행 전송을 뜻하고 사후 전송을 허용하지 않습니다 — 와 요청 기반 제공 기한(영국 reg 64C(3) 3영업일, 한국 2027 판 제3호 3영업일)뿐입니다.
 
 ---
 
-## 3. 주요 전송 프로토콜
+## 3. 주요 전송 프로토콜 — 공개 사실 (2026-10-21)
 
-### A. TRISA (Travel Rule Information Sharing Architecture)
+벤더 간 우열 평가는 하지 않습니다. 자사 페이지에서 확인한 내용은 (B) 로 표시합니다.
 
-- **운영**: TRISA 비영리 (CipherTrace 시작 → Mastercard 인수)
-- **모델**: 분산형, 인증서 기반 (PKI)
-- **특징**: VASP가 X.509 인증서로 신원 확인, peer-to-peer gRPC 통신, 오픈소스
-- **장점**: 누구나 참여 가능, 중앙 의존 적음
-- **단점**: 운영 복잡, VASP 식별이 별도 필요
+### A. TRP (Travel Rule Protocol)
 
-### B. TRP (Travel Rule Protocol)
+- **관리**: OpenVASP Association(Zug)이 TRP 표준을 관리하는 협회. 주간 TRP Working Group, GitLab 공개 사양(CC BY-SA 4.0)
+- **모델**: "Bilateral exchange of encrypted data (VASP-to-VASP). No data or metadata is ever exchanged with any third party." ISO 24165(DTI)·IVMS101 호환
+- 현행 TRP 버전 번호는 사이트에 표시되지 않음. Notabene 는 "Every Notabene customer has a live TRP 1.0 endpoint" 라고 밝힘(B)
+- 근거: [OpenVASP TRP](https://www.openvasp.org/trp), [GitLab](https://gitlab.com/OpenVASP/travel-rule-protocol), [Notabene TRP](https://notabene.id/travel-rule-messaging-protocols/trp)
 
-- **운영**: 21 Analytics, ING 등 주도
-- **모델**: REST API 기반
-- **특징**: 가벼움, 표준 HTTP/HTTPS, JWT 또는 인증서 인증, 빠른 구현
-- **장점**: 단순함, 구현 공수 낮음
-- **단점**: 분산형이지만 식별 메커니즘 별도 필요
+### B. OpenVASP
 
-### C. OpenVASP
+이전 판의 "OpenVASP: Ethereum·ENS·Whisper 기반, 활용도 낮음"은 2020년 이전 설계 서술입니다. 2026-10-21 기준 OpenVASP Association 은 **TRP 의 모체 협회**이며 TRP 는 활동 중입니다([OpenVASP](https://www.openvasp.org/)).
 
-- **운영**: OpenVASP Association (Bitcoin Suisse, Sygnum 등)
-- **모델**: 분산형, Ethereum 기반
-- **특징**: ENS, Whisper messaging 활용
-- **현황**: 2026년 시점 **활용도 낮음** (TRISA·TRP 우세)
+### C. TRISA (Travel Rule Information Sharing Architecture)
+
+- gRPC/protobuf 기반 오픈소스 프로토콜 + Global Directory Service(B)
+- 오픈소스 노드 **Envoy** 가 TRISA 와 TRP 를 모두 지원한다고 밝힘(B)
+- GitHub trisacrypto/trisa 공개. 2026-10-21 trisa.io 는 응답하지 않음 — 접속 불가만으로 운영 중단을 추정하지 말 것
+- 근거: [trisa.dev](https://trisa.dev/), [GitHub](https://github.com/trisacrypto/trisa)
 
 ### D. VerifyVASP
 
-- **운영**: 람다256 (Upbit 자회사) + Chainalysis 합작
-- **모델**: 폐쇄형 컨소시엄 (사전 검증된 VASP만 참여)
-- **사용**: Upbit 외 다수 글로벌 거래소
-- **특징**: 카운터파티 신뢰성 보장, 한국 4대 거래소 중 Upbit 채택, CODE와 연동 완료
+- 홈페이지에 TravelRule API·VerifyName API·VerifyWallet 제품 표시(B). 운영 주체는 홈페이지에 명시되지 않음
+- 근거: [VerifyVASP](https://www.verifyvasp.com/)
 
 ### E. CODE
 
-- **운영**: 코드 (빗썸 + 코빗 + 코인원 합작법인)
-- **모델**: 폐쇄형 컨소시엄
-- **사용**: 빗썸·코빗·코인원 + 일부 외부
-- **특징**: 한국 컨소시엄, 2022 시행 시점부터 운영, VerifyVASP와 연동
+- 운영: CODE Inc.(B). 홈페이지가 CodeVASP·VerifyVASP·GTR·Sumsub·Sygna·Notabene·CryptoSwift 와의 상호운용을 표시(B)
+- 지분 구조는 공개 1차 근거로 확인되지 않음
+- 근거: [CODE](https://www.codevasp.com/)
 
-### F. Notabene Gateway
+### F. Notabene
 
-- **운영**: Notabene Inc. (미국)
-- **모델**: SaaS 게이트웨이 + 멀티프로토콜
-- **특징**: TRISA·TRP·OpenVASP·VerifyVASP·CODE 등 **다중 프로토콜 동시 지원**, 한 번 연결로 다 처리, VASP Discovery 통합
-- **사용**: 1,500+ VASP
-- **왜 부상했나**: **Sunrise Issue 해결책**. 다양한 프로토콜을 운영하는 전 세계 VASP들과 일일이 연결하지 않고, Notabene을 허브로 두는 구조.
+- 제품 SafeTransact·Notabene Flow·TAP, OpenVASP 회원, TRP 1.0 엔드포인트 지원(B). 2026-07-23 Ripple 전략투자 발표(금액 비공개, B)
+- 근거: [Notabene](https://notabene.id/about-us)
 
 ### G. Sygna (CoolBitX)
 
-- **운영**: 대만 CoolBitX
-- **사용**: 아시아권 거래소 다수
-- **특징**: 자체 hub 구조
+- Sygna Bridge 2.0·IVMS101 지원 표시(B). Sumsub·GTR·CODE 가 지원 프로토콜로 올림
+- 근거: [Sygna](https://www.sygna.io/)
 
-### H. 기타
+### H. GTR (Global Travel Rule)
 
-- **Sumsub Travel Rule**: KYC와 통합
-- **Global Travel Rule (GTR)**: BitGo 등 일부 사용
+- **운영 주체: Infozone Technologies Pte. Ltd.(싱가포르)**. 홈페이지에 얼라이언스 회원 목록과 지원 프로토콜(Code·Sumsub·Sygna·Fireblocks) 표시(B)
+- 이전 판의 "BitGo 등 일부 사용"은 근거가 없어 삭제
+- 근거: [GTR](https://www.globaltravelrule.com/)
+
+### I. 기타
+
+- **Sumsub Travel Rule** — 자체·GTR·CODE·TRP·Sygna 5개 프로토콜 연동 표시(B)([Sumsub](https://sumsub.com/protocols/))
 
 ### 실무 포인트
 
-프로토콜 선택은 **고객 지리적 분포**로 결정합니다. 한국 로컬 집중이면 VerifyVASP 또는 CODE, 아시아권 중심이면 Sygna + 이상 하나, 글로벌이면 Notabene + TRISA 조합이 일반적. "한 프로토콜만 쓰겠다"는 전략은 Sunrise Issue로 빠르게 한계에 부딪힙니다.
+프로토콜 선택은 **고객의 출금 상대방이 어느 네트워크에 있는가**로 정합니다. 어느 네트워크도 모든 상대방을 덮지 못하므로, 선택과 별개로 미연결 상대방 정책(§M.3)을 먼저 정해야 합니다. 가격·커버리지 비교는 공개 1차 근거가 없어 이 문서에서 다루지 않습니다.
 
 ---
 
-## 4. 분산형 vs 폐쇄형 — 트레이드오프
+## 4. 분산형 vs 폐쇄형 — 설계 트레이드오프
 
-### 이 표를 어떻게 읽어야 하나
+두 모델은 신뢰를 어디에 두느냐가 다릅니다. 아래는 구조적 비교이며 어느 쪽이 낫다는 평가가 아닙니다.
 
-두 모델은 **철학이 다릅니다**. 분산형은 "누구나 참여할 수 있어야 공정하다", 폐쇄형은 "서로 신뢰할 수 있는 회원사끼리만 주고받자". 어느 쪽이 맞다는 답은 없고, **관할과 시장 구조**에 따라 선택됩니다.
-
-| 항목 | 분산형 (TRISA, OpenVASP) | 폐쇄형 (VerifyVASP, CODE) |
+| 항목 | 양자 간 오픈 표준 (TRP, TRISA) | 회원제 네트워크 (솔루션 네트워크) |
 |---|---|---|
-| **참여 진입장벽** | 낮음 (오픈) | 높음 (검증 필요) |
-| **신뢰 모델** | 인증서 + 검증 | 컨소시엄 사전 검증 |
-| **확장성** | 높음 (이론) | 낮음 (회원사 한정) |
-| **라우팅** | 별도 식별 필요 | 컨소시엄 내 자동 |
-| **운영 책임** | 각자 | 컨소시엄 운영자 |
-| **한국 적합성** | 낮음 | 높음 (실제 채택) |
-
-### 한국이 폐쇄형을 택한 이유
-
-한국 4대 거래소는 **사업자 수가 적고 상호 신뢰 구축이 상대적으로 쉬운** 시장 구조. 분산형 인증서 관리보다 **합작법인 거버넌스**가 더 간단하게 문제를 해결. 반면 미국·EU는 VASP가 수백 개로 많아 폐쇄형 컨소시엄이 사실상 불가능하고, 분산형 + 게이트웨이 모델이 현실적.
+| 참여 | 사양 공개, 각자 구현 | 네트워크 가입 |
+| 신뢰 모델 | 인증서·양자 간 확인 | 네트워크 운영자의 회원 검증 |
+| 라우팅 | 상대 식별을 별도로 해야 함 | 네트워크 내 디렉터리 |
+| 운영 책임 | 각 VASP | 운영자 + 회원 |
 
 ### 실무 포인트
 
-한국 시장에 진입하는 외국 VASP는 **VerifyVASP 또는 CODE 회원 가입을 먼저 준비**하는 게 실무입니다. 자체 TRISA·TRP만 운영하고 한국 거래소로 출금이 오기를 기다리면 한국 측이 메시지를 받지 못해 거래가 막힙니다. Notabene Gateway를 쓰면 자동 연결되지만 별도 비용.
+한국 시장에 들어오는 외국 VASP 는 국내 사업자가 연결된 네트워크와의 경로를 먼저 확인해야 합니다. 2027-02-19 부터는 한국 VASP 가 해외 VASP 의 AML·트래블룰 이행을 평가해 허용 등급을 정하므로(고시 §28-2), 메시지 경로뿐 아니라 **평가에 필요한 자료(인허가·트래블룰 이행 근거)** 를 함께 준비하는 편이 낫습니다.
 
 ---
 
-## 5. VASP Discovery — 지갑 주소가 어느 VASP인가
+## 5. VASP Discovery — 지갑 주소가 어느 VASP 인가
 
 ### 문제
 
-출금 주소 `0xABC...`가 들어오면, **어느 VASP의 것인지** 알아야 그 VASP에게 메시지를 보낼 수 있습니다. 지갑 주소만 봐서는 식별 불가.
+FATF 2021 가이던스 para 197(a): "the FATF is not aware of any technically proven means of identifying the VASP that manages the beneficiary wallet exhaustively, precisely, and accurately … from the VA address alone"([FATF 2021 RBA 가이던스](https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Updated-Guidance-VA-VASP.pdf.coredownload.pdf)).
 
-### 해결책 5가지
+### 수단
 
-#### A. Attribution DB 활용
-
-- Chainalysis·TRM·Elliptic의 라벨 DB
-- 알려진 거래소 deposit 주소 → 해당 거래소 식별
-- **자체 deposit 주소 ≠ 거래소 식별 정보 누락 가능성** — 라벨링이 최신이 아닐 수 있음
-
-#### B. VASP Directory 서비스
-
-- OpenVASP Directory, TRISA Directory, Notabene Directory
-- 각 VASP의 메시징 endpoint + 인증서 등록
-- 카운터파티 직접 조회
-
-#### C. DTI (Digital Token Identifier, ISO 24165)
-
-- ISO 표준 토큰 식별자 + VASP LEI 연결
-- 2024년부터 EU 등 채택 시작
-
-#### D. GLEIF LEI (Legal Entity Identifier)
-
-- 법인 식별 글로벌 표준
-- VASP가 LEI 보유 시 메시지에 포함
-
-#### E. 카운터파티 직접 등록
-
-- VASP끼리 사전에 주소 화이트리스트 교환
+- **블록체인 분석·제3자 데이터·메시징 식별자** — EBA GL ¶77~78 이 자기수탁 판단 수단으로 열거. 불가하면 고객에게 직접 확인하고, 상대가 CASP 로 판명되면 상대 CASP 를 정확히 식별
+- **네트워크 디렉터리** — TRISA GDS, 솔루션 네트워크 회원 목록
+- **LEI(ISO 17442)** — IVMS 101.2023 의 법인 식별(C9~C11)
+- **DTI(ISO 24165)** — 토큰 식별자. TRP 가 호환을 명시
 
 ### 실무 포인트
 
-현실적으로는 A + B 조합이 대부분입니다. Attribution DB로 1차 식별하고, 식별 안 되거나 모호하면 Directory 조회. 그래도 안 되면 **수동 검토 큐**로 넘기는 게 실무 흐름. 완벽한 자동화는 불가능하며, 매달 수백~수천 건의 수동 처리가 남습니다.
+라벨 DB 로 1차 식별하고, 모호하면 디렉터리 조회, 그래도 안 되면 고객 확인·수동 검토로 넘기는 것이 EBA GL ¶77~78 의 순서와도 맞습니다. 7차 TU 는 상대방 VASP 식별을 "completely and accurately" 수행하고 소매고객으로 위장한 역외 VASP 계정을 탐지하라고 권고합니다([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
 
 ---
 
@@ -452,44 +404,40 @@ stateDiagram-v2
 
 ### Sunrise Issue (미시행 관할 카운터파티)
 
-일부 국가는 Travel Rule 시행 안 함 → 메시지 수신할 인프라 없음. **해결**: 폴백 정책 (송금 보류, 수동 확인, 거절).
+일부 관할은 Travel Rule 을 시행하지 않아 메시지를 받을 수단이 없습니다. 2026-07-16 기준 FATF 조사 109 관할 중 91(83%)이 입법, 11 관할이 입법 진행 중입니다. 대응 정책은 §M.3.
 
 ### Protocol Mismatch
 
-A 거래소는 TRISA 사용, B는 VerifyVASP 사용 → 직접 호환 안 됨.
-- **해결 1**: Notabene Gateway 같은 멀티프로토콜 hub
-- **해결 2**: 양 프로토콜 동시 지원 (한국: VerifyVASP + CODE 양쪽 가입)
+양쪽이 다른 네트워크를 쓰면 직접 호환되지 않습니다. 해결은 (1) 상호운용 연동을 표시한 네트워크 이용, (2) 복수 네트워크 동시 가입, (3) 자체 멀티 프로토콜 어댑터입니다.
 
-### Schema Version Mismatch
+### Data Model Version Mismatch
 
-IVMS101에도 마이너 버전 차이 존재 → 필드 매핑 mismatch 가능성.
-- **해결**: 표준 컨버터 / fallback 매핑
+PayloadVersionCode 가 `101` 과 `101.2023` 으로 나뉩니다. 수신 측은 두 값을 모두 처리하고, 2023판 제약(C1·C9~C11)을 어느 버전 메시지에 적용할지 정책으로 정해야 합니다.
 
 ### 실무 포인트
 
-세 mismatch 중 **Protocol Mismatch**가 운영상 가장 빈번한 실패 원인. 이를 방어하려면 회사 Travel Rule 시스템이 **멀티 프로토콜 어댑터**를 갖는 게 이상적이지만 공수 부담이 큽니다. 대안은 Notabene Gateway 같은 SaaS에 위임하는 것.
+EU 에서는 EBA GL ¶24 의 기술적 한계 보완 유예가 2025-07-31 에 끝났습니다. 2025-08-01 이후에는 프로토콜 간 변환에서 생긴 필드 누락을 기술적 한계로 정당화할 수 없습니다([EBA/GL/2024/11](https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf)).
 
 ---
 
 ## 7. 한국 시장 운영 패턴
 
 ```
-Upbit (VerifyVASP)
-  ├─ 해외 VASP에게 송금: VerifyVASP 직접 또는 Notabene Gateway 경유
-  └─ 빗썸·코빗·코인원에게 송금: VerifyVASP ↔ CODE 연동
-
-빗썸·코빗·코인원 (CODE)
-  ├─ 해외 VASP에게 송금: CODE 또는 Notabene Gateway
-  └─ Upbit에게 송금: CODE ↔ VerifyVASP 연동
-
-수탁업자 — Travel Rule 적용 범위 검토 필요
-  ├─ 고객 출금 시 외부 VASP로 가면 적용
-  └─ 내부 wallet 간 이동은 적용 X
+국내 VASP → 국내 VASP
+  └─ ~2027-02-18: 100만원 이상만 정보제공 / 2027-02-19~: 모든 이전
+국내 VASP → 해외 VASP
+  └─ 2027-02-19~: 고시 §28-2 평가 — 저위험 허용 / 그 외 동일인 간만 / 고위험 제한
+국내 VASP → 자기수탁 주소
+  └─ 2027-02-19~: 동일인 간만 허용 (증명 방법 미지정)
+수탁업자 내부 지갑 간 이동
+  └─ "다른 가상자산사업자에게 이전" 이 아니므로 정보제공 대상 아님
 ```
+
+근거: [법제처 시행예정 판본](https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&MST=288765&efYd=20270219&type=XML), [감독규정 FIU 고시 제2026-2호](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000285986&type=XML). 2027-02-19 규정은 2026-10-21 기준 enacted-not-in-force 이고, 고시 §28-2 시행일은 기산점 문제로 미확정입니다.
 
 ### 실무 포인트
 
-수탁업자는 "내부 wallet 간 이동" 이 **Travel Rule 적용 대상이 아니라는 점**이 실무 포인트. 고객 자산을 한 콜드월렛에서 다른 콜드월렛으로 옮기는 것은 "VASP 간 이전"이 아닌 "내부 운영". 이 구분을 정책에 명문화하지 않으면 불필요한 Travel Rule 메시지를 발송하게 됩니다.
+시행령 §10-10 은 "가상자산사업자가 **다른 가상자산사업자에게** 가상자산을 이전하는" 경우를 규율합니다. 같은 사업자의 콜드월렛 간 이동은 이 문언에 들어오지 않으므로, 정책에 이 구분을 명문화해 두면 불필요한 메시지 발송을 막을 수 있습니다.
 
 ---
 
@@ -498,153 +446,104 @@ Upbit (VerifyVASP)
 ```
 [ User Request: 출금 ]
         ▼
-[ KYC / KYT 1차 체크 ]
+[ KYC / 거래모니터링 1차 체크 ]
         ▼
 [ Sanctions Screening ]
         ▼
-[ Travel Rule SDK ]
-   ├─ Counterparty Discovery (Attribution DB)
-   ├─ IVMS101 Message Build
-   ├─ Protocol Selection (TRISA / VerifyVASP / CODE / ...)
-   ├─ Send via Notabene Gateway or Direct
+[ Travel Rule 모듈 ]
+   ├─ Counterparty Discovery (블록체인 분석 → 디렉터리 → 고객 확인)
+   ├─ 상대 VASP 실사 결과 조회 (한국 2027-02-19~ 고시 §28-2 등급)
+   ├─ IVMS 101.2023 페이로드 구성 (관할·시점별 항목)
+   ├─ Protocol Selection
    ▼
 [ Counterparty VASP Response ]
    ├─ Accept → 계속
    ├─ Reject → 송금 거절, 사용자 통지
    ├─ Hold → 수동 검토
-   └─ Timeout → 폴백 정책
+   └─ Timeout → 폴백 정책 (§M.3)
         ▼
 [ On-chain Broadcast ]
         ▼
-[ Travel Rule Message 보관 (15년) ]
+[ 메시지·판단 기록 보관 — 보존기간은 관할별 기록보존 조문으로 확인 ]
 ```
 
 ### 실무 포인트
 
-이 흐름에서 가장 자주 고장 나는 지점은 **Counterparty Response의 Timeout** 처리. 카운터파티가 응답하지 않을 때 얼마나 기다리고 어떻게 처리할지에 대한 정책이 명확해야 합니다. 너무 짧으면 Timeout 폴백이 남발되고, 너무 길면 사용자 UX가 망가집니다. 실무 표준은 **15초~60초 대기 + 폴백**.
+가장 자주 고장 나는 지점은 **상대방 무응답** 처리입니다. 대기 시간과 폴백 정책은 조문이 정하지 않으므로 회사 정책으로 정하되, FATF 의 "즉시"(사후 전송 금지) 요건과 충돌하지 않게 "정보 확인 전 온체인 이전 여부"를 명시해야 합니다.
 
 ---
 
 ## 9. 회사 도입 체크리스트
 
 ```
-□ 메인 프로토콜 선택 (한국이면 VerifyVASP 또는 CODE)
-□ 글로벌 호환성 (Notabene Gateway 등 검토)
-□ IVMS101 메시지 검증 로직
-□ Counterparty Discovery 인프라
-□ 미연결 카운터파티 폴백 정책 명문화
-□ 메시지 보관 (한국 15년, EU 5년 등)
-□ PII 암호화 + 접근 통제
-□ Audit Log
-□ 시간 동기화 (NTP) — 메시지 timestamp 일치
-□ 인증서 갱신 자동화 (TRISA의 경우)
+□ 출금 상대방 분포에 맞는 네트워크·프로토콜 선택
+□ IVMS 101.2023 검증 (PayloadVersionCode, C1, LEI 제약)
+□ 관할별 규칙을 조문 문언대로 — 택일 조건, 금액 구간의 유효기간
+□ Counterparty Discovery 절차 (분석 → 디렉터리 → 고객 확인)
+□ 미연결 카운터파티 정책 명문화 + 근거 조문
+□ 메시지 보존기간 — 관할별 기록보존 조문 확인 (통합 공개 근거 없음)
+□ 개인정보 암호화 + 접근 통제, 국외이전 근거 (EU: GDPR 제5장)
+□ Audit Log, 시간 동기화(NTP)
+□ 인증서 갱신 자동화 (인증서 기반 프로토콜)
+□ 한국 2027-02-19 전환: 전건 처리량, 요청 시 3영업일 응답, 자기수탁 동일인 확인
 ```
 
 ---
 
 ## 요약 부록 — 빠른 참조용
 
-**3층 구조**: 메시지(IVMS101) / 프로토콜(TRISA·VerifyVASP·CODE·Notabene…) / Discovery(Attribution DB·DTI·LEI)
-**모델 2분법**: 분산형(TRISA, OpenVASP) vs 폐쇄형(VerifyVASP, CODE)
-**한국 현실**: Upbit = VerifyVASP / 빗썸·코빗·코인원 = CODE / 두 솔루션 상호 연동
-**글로벌 실무**: Notabene Gateway가 멀티프로토콜 허브로 사실상 표준
+**3층 구조**: 데이터 모델(IVMS 101.2023) / 프로토콜(TRP·TRISA·솔루션 네트워크) / Discovery(분석·디렉터리·LEI·DTI)
+**판 명칭**: IVMS 101.2023 이 현행. "v2" 없음
+**검증 원칙**: 조문의 택일 조건 그대로, 금액 구간은 시점과 함께
+**수치**: 지연·SLA·실패율 공개 벤치마크 없음 — 자사 실측
 
 ## 💼 실무 현장 (Industry Reality)
 
-### Notabene Gateway 실사용 — 멀티프로토콜 허브
-
-Notabene은 2020년 뉴욕 창업, 2026년 기준 **1,500+ VASP 연결**. 한 VASP가 Notabene 1곳에 연결하면 전 세계 다른 VASP와 자동 라우팅:
+### 상호운용 지도 — 자사 페이지가 표시한 연동
 
 ```mermaid
 flowchart LR
-    VASP_A[한국 VASP A] --> NOTA[Notabene Gateway]
-    NOTA --> TRISA[TRISA 네트워크]
-    NOTA --> TRP[TRP 네트워크]
-    NOTA --> VV[VerifyVASP]
-    NOTA --> CODE[CODE]
-    NOTA --> SYGNA[Sygna]
-    TRISA --> VASP_B[미국 VASP B]
-    VV --> VASP_C[한국 Upbit]
-    style NOTA fill:#1a2e4a,color:#fff
+    CODE["CODE"] --- VV["VerifyVASP"]
+    CODE --- GTR["GTR<br/>Infozone Technologies"]
+    CODE --- SUM["Sumsub"]
+    CODE --- SYG["Sygna"]
+    CODE --- NB["Notabene"]
+    SUM --- GTR
+    SUM --- TRP["TRP<br/>OpenVASP Association"]
+    SUM --- SYG
+    NB --- TRP
+    ENV["TRISA Envoy 노드"] --- TRP
+    ENV --- TRISA["TRISA"]
 ```
 
-**가격**: 월 구독제, 소형 $5K~$20K/월, 대형 $50K+/월. 글로벌 영업 VASP에 사실상 필수.
+근거: [CODE](https://www.codevasp.com/), [Sumsub](https://sumsub.com/protocols/), [Notabene TRP](https://notabene.id/travel-rule-messaging-protocols/trp), [trisa.dev](https://trisa.dev/) — 모두 자사 페이지(B), 2026-10-21 열람. 연결선은 "연동을 표시함"이지 품질·커버리지를 뜻하지 않습니다.
 
-### Notabene Gateway vs 한국 컨소시엄 선택 기준
+### 가격·커버리지·통계
 
-| 기준 | Notabene | VerifyVASP | CODE |
-|---|---|---|---|
-| 글로벌 커버리지 | ★★★★★ | ★★★★ | ★★★ |
-| 한국 4사 연결 | △ (VV/CODE 경유) | ◎ | ◎ |
-| 초기 연동 공수 | 2~4주 | 4~8주 | 4~8주 |
-| 월 비용 | 중~고 | 포함 (회원사 구조) | 포함 |
-| 한국어 지원 | ❌ | ✅ | ✅ |
-| 적합 사업자 | 글로벌 지향 | Upbit·Chainalysis 기반 | 빗썸·코빗·코인원 |
-
-### 실제 메시지 교환 로그 샘플 (의사 데이터)
-
-```json
-{
-  "msg_id": "tr-2026-04-15-001",
-  "timestamp": "2026-04-15T14:32:11Z",
-  "status": "ACCEPTED",
-  "protocol": "VerifyVASP",
-  "originator_vasp": "Upbit (Dunamu)",
-  "beneficiary_vasp": "Bithumb",
-  "originator": {
-    "name": "김**수",  // 마스킹된 표현
-    "wallet": "bc1q...abc",
-    "country": "KR"
-  },
-  "beneficiary": {
-    "name": "이**영",
-    "wallet": "bc1q...xyz"
-  },
-  "amount_krw": 5000000,
-  "routing_latency_ms": 847
-}
-```
-
-### Sunrise Issue — 한국 VASP 실제 Timeout 통계
-
-대형 한국 거래소 월간 Travel Rule 통계 (추정):
-
-- 전체 송금 시도: **50,000~100,000건/월**
-- Travel Rule 필요: 약 **30~40%** (100만원 이상)
-- **자동 성공**: ~85%
-- **카운터파티 Timeout**: ~8% → 폴백 처리
-- **거절/취소**: ~5% → 미신고 VASP·blacklist
-- **수동 리뷰**: ~2%
+이전 판의 Notabene 가격(월 $5K~$50K+), 벤더 별점 비교표, "대형 거래소 월간 통계(자동 성공 ~85%, Timeout ~8% 등)", 의사 메시지 로그의 지연값은 모두 공개 출처가 없어 삭제했습니다. 벤더 설문 중 공개된 것은 Notabene 「State of Crypto Travel Rule 2025」(VASP 91·규제기관 10 설문)뿐이며, 거절률·필드 누락률 통계는 그 보고서에도 없습니다.
 
 ### 자주 나오는 오해
 
-- **"IVMS101만 지원하면 Travel Rule 완성"** — 메시지 형식만 맞추는 건 기본. 실제론 **프로토콜 선택 + VASP Discovery + 폴백 정책**이 3대 축.
-- **"Notabene Gateway = 특정 프로토콜"** — Notabene은 메시지 라우터. 실제 전송은 여전히 TRISA·TRP·VerifyVASP 등 하부 프로토콜이 담당.
-- **"VerifyVASP ↔ CODE 연동 = 완전 투명"** — 실제 운영에선 월 1~2회 API 타임아웃 장애. 담당 엔지니어 on-call 필요.
-
-### 주니어 KYT 엔지니어 하루 — Travel Rule 관련
-
-- 전날 Travel Rule 실패 로그 (보통 5~20건) 분석: timeout, schema mismatch, counterparty unknown
-- 신규 글로벌 VASP 연결 요청 (Notabene Directory에서 추가) 처리
-- IVMS101 schema validator 업데이트 (EU TFR 필드 변경 등)
-- 월간 AMLO 브리핑: "어느 카운터파티로 반복 실패, 차단 제안"
+- **"IVMS101 만 지원하면 Travel Rule 완성"** — 데이터 모델은 기본입니다. 실제로는 **프로토콜 선택 + VASP Discovery + 미연결 정책**이 함께 있어야 합니다
+- **"IVMS101 v2 로 곧 바뀐다"** — 현행판 명칭은 IVMS 101.2023 입니다. npm 패키지 버전 2.0.0 과 혼동하지 마십시오
+- **"EU 는 생년월일 필수"** — TFR 제14조(1)은 주소 또는 생년월일·출생지입니다
+- **"게이트웨이 = 특정 프로토콜"** — 허브는 라우터이고, 실제 전송은 하부 프로토콜이 담당합니다
+- **"메시지 15년 보관이 법정 의무"** — 이 저장소는 그 근거 조문을 확인하지 못했습니다. 관할별 기록보존 조문을 직접 확인하십시오
 
 ### 한국 특수 현실
 
-- **VerifyVASP ↔ CODE 연동이 2022-05 완성**: 3개월간 Upbit ↔ 빗썸 송금 불가 경험이 업계 트라우마. 이후 **이중 가입**이 표준.
-- **Notabene은 한국 공식 진출 안 함**: 대형 거래소는 Notabene 직접 계약 or 글로벌 거래소 경유. 중소는 거의 미사용.
-- **메시지 15년 보관**: 이용자보호법 §11 적용 해석. WORM 스토리지 필수, 무결성 해시 체크 정기 감사.
-- **개인정보 국외이전**: 한국 고객 정보가 해외 VASP에 넘어가는 순간 PIPA 국외이전 동의 필요. 대부분 이용약관에 포괄 동의 받지만, 개인정보보호위원회(PIPC) 가이드 점차 엄격화 중.
+- **2027-02-19 전건화**: 2026 상반기 총 출고 62.8조원 중 트래블룰 적용은 9.5조원(약 15%)이었습니다([금융위 2026-10-01](https://www.fsc.go.kr/no010101/87835)). 전건화되면 메시지 대상 이전이 크게 늘 수 있는 구조입니다
+- **요청 기반 추가정보**: 2027 판 제3호 정보(주민등록번호 등)는 동시 전송이 아니라 요청일부터 3영업일 이내 제공입니다 — 요청 수신·응답 큐가 별도로 필요합니다
+- **개인정보 국외이전**: 한국 개인정보보호위원회의 트래블룰 관련 의결·안내는 이 저장소가 확인하지 못했습니다
 
 ---
 
 ## 더 읽을거리
-- [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) — Travel Rule 운영 전반
-- [`../7-vendors/travel-rule-vendors.md`](../7-vendors/travel-rule-vendors.md) — 벤더 비교
+- [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) — Travel Rule 운영 전반·관할 비교
+- [`../7-vendors/travel-rule-vendors.md`](../7-vendors/travel-rule-vendors.md) — 벤더 공개 사실
 - [`../7-vendors/korea-solutions.md`](../7-vendors/korea-solutions.md) — 한국 시장
-- [Notabene — IVMS101 분석](https://notabene.id/travel-rule-messaging-protocols/ivms-101)
-- [Notabene — VerifyVASP 분석](https://notabene.id/travel-rule-messaging-protocols/verifyvasp)
-- [21 Analytics — Open-Source IVMS101](https://www.21analytics.co/blog/21-analytics-open-sources-its-intervasp-ivms-101-implementation/)
-- [Sygna — IVMS101 합의 발표](https://www.sygna.io/blog/joint-working-group-adopts-ivms101-crypto-messaging-standard-for-fatf-travel-rule/)
-- [VerifyVASP IVMS101 문서](https://www.verifyvasp.com/)
-- [CodeVASP 공식 사이트](https://www.codevasp.com/ko)
+- [interVASP — IVMS 101.2023](https://intervasp.org/)
+- [IVMS 101.2023 PDF (npm 미러)](https://cdn.jsdelivr.net/npm/ivms101@2.0.0/specs/ivms101-2023.pdf)
+- [OpenVASP — TRP](https://www.openvasp.org/trp)
+- [trisa.dev](https://trisa.dev/)
+- [EBA Travel Rule Guidelines](https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf)

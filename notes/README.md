@@ -1,6 +1,6 @@
 # 📖 Notes — 토픽별 학습 노트
 
-> 가상자산 AML을 7개 카테고리 + 용어집으로 정리. 어디서부터 봐야 할지 모를 때 → 1번부터 순서대로.
+> 가상자산 AML을 7개 카테고리 + 용어집으로 정리. 어디서부터 봐야 할지 모를 때 → 1번부터 순서대로. 마지막 업데이트: 2026-10-21.
 
 ---
 
@@ -38,7 +38,7 @@ flowchart LR
 - [`why-crypto-different.md`](1-foundations/why-crypto-different.md) — 왜 가상자산 AML은 다른가?
 - [`key-concepts.md`](1-foundations/key-concepts.md) — KYC/KYT/CDD/EDD/STR/CTR/PEP/BO
 
-### 2️⃣ [`2-regulations/`](2-regulations/) — 규제 (5 파일 + README)
+### 2️⃣ [`2-regulations/`](2-regulations/) — 규제 (6 파일 + README)
 누가 무슨 룰을 만드는가. 한국 → 글로벌 순.
 
 - [`README.md`](2-regulations/README.md) — 규제 맵 + 핵심 일정
@@ -58,13 +58,14 @@ VASP가 떠안는 의무 + Travel Rule + 자금세탁 패턴.
 - [`onchain-typology.md`](3-crypto-aml/onchain-typology.md) — 온체인 자금세탁 7유형
 - [`defi-nft-risks.md`](3-crypto-aml/defi-nft-risks.md) — DeFi / NFT / Privacy coin 리스크
 
-### 4️⃣ [`4-technology/`](4-technology/) — 기술 (3 파일 + README)
-KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
+### 4️⃣ [`4-technology/`](4-technology/) — 기술 (4 파일 + README)
+KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징 + FDS(사기 탐지).
 
 - [`README.md`](4-technology/README.md) — 폴더 가이드
 - [`kyc-kyt.md`](4-technology/kyc-kyt.md) — KYC vs KYT
 - [`blockchain-analytics.md`](4-technology/blockchain-analytics.md) — 클러스터링 + Attribution + Exposure
 - [`travel-rule-protocols.md`](4-technology/travel-rule-protocols.md) — IVMS101 + TRP/TRISA/VerifyVASP/CODE/Notabene
+- [`fds.md`](4-technology/fds.md) — FDS · 이용자보호법 §12 시장감시 · STR — "이상거래" 세 제도의 경계, 통신사기피해환급법 거래소 적용(2026-10-01)
 
 ### 5️⃣ [`5-compliance/`](5-compliance/) — 컴플라이언스 운영 (5 파일 + README)
 실제 운영. CDD/EDD 절차, STR 작성, 제재 스크리닝, 내부통제, 검사 대응.
@@ -74,7 +75,7 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`str-ctr.md`](5-compliance/str-ctr.md) — 의심거래/현금거래 보고
 - [`sanctions-screening.md`](5-compliance/sanctions-screening.md) — OFAC/UN/EU 제재 매칭
 - [`internal-controls.md`](5-compliance/internal-controls.md) — 5 pillars + 3LoD + AMLO
-- [`inspection-response.md`](5-compliance/inspection-response.md) — FIU·FSS 검사 대응 워크북 (40 체크리스트·서류 40종)
+- [`inspection-response.md`](5-compliance/inspection-response.md) — FIU·FSS 검사 대응 워크북 (체크리스트·필수 서류, "이상거래" 제도별 3분할)
 
 ### 6️⃣ [`6-cases/`](6-cases/) — 사례 (5 파일 + README)
 실제 사건에서 배우기.
@@ -86,7 +87,7 @@ KYC/KYT 시스템 + 블록체인 분석 + Travel Rule 메시징.
 - [`circle-stablecoin-freeze.md`](6-cases/circle-stablecoin-freeze.md) — Circle USDC freeze + 스테이블코인 발행자의 AML 권한
 - [`korea-enforcement.md`](6-cases/korea-enforcement.md) — 🇰🇷 한국 실제 사건 (Terra·Wemix·특금법 신고 대란·DAXA 공동조치)
 
-### 7️⃣ [`7-vendors/`](7-vendors/) — 벤더 (3 파일 + README)
+### 7️⃣ [`7-vendors/`](7-vendors/) — 벤더 (4 파일 + README)
 시장에 있는 솔루션 지도.
 
 - [`README.md`](7-vendors/README.md) — 폴더 가이드
@@ -109,6 +110,7 @@ ABC 순 약어 + 한국어→영어 매핑.
 | 🌐 Travel Rule 헷갈림 | [`3-crypto-aml/travel-rule.md`](3-crypto-aml/travel-rule.md) |
 | 🔬 온체인 분석 원리 | [`4-technology/blockchain-analytics.md`](4-technology/blockchain-analytics.md) |
 | 📋 STR 어떻게 작성? | [`5-compliance/str-ctr.md`](5-compliance/str-ctr.md) |
+| 🛡️ FDS·보이스피싱 임시조치 vs §12 시장감시 vs STR 헷갈림 | [`4-technology/fds.md`](4-technology/fds.md) |
 | 💥 Bybit hack 자세히 | [`6-cases/lazarus-dprk.md`](6-cases/lazarus-dprk.md) |
 | 🛒 KYT 벤더 비교 | [`7-vendors/analytics-vendors.md`](7-vendors/analytics-vendors.md) |
 | 🔤 약어 모름 | [`glossary.md`](glossary.md) |

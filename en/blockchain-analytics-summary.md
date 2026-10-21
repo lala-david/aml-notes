@@ -1,15 +1,28 @@
 # Blockchain Analytics — Technical Summary
 
-> Summary of the algorithmic core of crypto AML: clustering, attribution, exposure scoring, cross-chain bridge matching, and the Korean fuzzy matching problem for sanctions screening. Condensed from [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) (685 lines) and [`../notes/5-compliance/sanctions-screening.md`](../notes/5-compliance/sanctions-screening.md). For the full pseudocode, SQL, and vendor-comparison tables, see the Korean originals.
+> Summary of the algorithmic core of crypto AML: clustering, attribution, exposure, cross-chain bridge matching, and the Korean name-matching problem in sanctions screening. Condensed from [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) and [`../notes/5-compliance/sanctions-screening.md`](../notes/5-compliance/sanctions-screening.md). Last updated: 2026-10-21.
+
+> **Correction notice (2026-10-21).** Earlier versions of this summary carried Precision/Recall/F1 tables for CIOH, CoinJoin filtering and GNNs, attributed to Meiklejohn 2013, Möser & Böhme 2017, Androulaki 2013 and Bellei 2024. None of those papers report those figures (see `kb/facts/contradictions.jsonl` CTR:00007). The tables have been removed, together with the vendor exposure formula, category weights, vendor decay constants, per-bridge accuracy table, and the Korean fuzzy-matching performance table, none of which had a public source. Weber 2019, Elliptic++ and Elliptic2 figures were corrected against the original papers. Sources: `research/2026-10-academic-literature.md` §8 and the canonical report's Appendix A-38/A-39.
 
 ## TL;DR
 
-- Blockchain analytics sits on two pillars: **Clustering** (which addresses belong to one entity) and **Attribution** (which entity is that).
-- Core heuristics: **Common Input Ownership (CIOH)**, Change Detection, Deposit Heuristic, behavior-based.
-- Bitcoin (UTXO) clustering is stronger than Ethereum (account-model), which leans more on attribution databases.
-- Exposure Score is the main KYT output: weighted sum of direct and indirect (N-hop) risk exposure with time decay.
-- Cross-chain tracing reduces to **bridge event matching** by nonce, amount tolerance, and time window.
-- Korean sanctions screening needs custom fuzzy matching — the top five Korean surnames account for roughly 50% of the population, which breaks default Jaro-Winkler thresholds.
+- Blockchain analytics sits on two pillars: **Clustering** (which addresses belong to one entity) and **Attribution** (which entity that is). Exposure assessment sits on top.
+- Core heuristics: **Common Input Ownership (CIOH)**, change detection, deposit heuristic, behavior-based. **There is no standardized accuracy figure for them.** Möser & Narayanan state that "current techniques rely on heuristics that have not been rigorously evaluated or optimized" ([arXiv 2107.05749](https://arxiv.org/abs/2107.05749)).
+- Bitcoin (UTXO) has a structural clustering signal; Ethereum (account model) leans more on attribution data.
+- No vendor reviewed in this repository's 2026-10 research publishes its hop limit, decay function or category weights. Treat exposure scores as non-reproducible.
+- Cross-chain tracing matured in 2025 into automated matching systems, but studies use different bridge sets and definitions, so **their numbers cannot be compared**.
+- Privacy protocols are now measured by anonymity-set reduction and bits of anonymity lost, not "traceable / untraceable".
+
+```mermaid
+flowchart LR
+    TX["On-chain ledger"] --> CL["Clustering<br/>CIOH · change · deposit"]
+    CL --> CC{"Cluster-collapse check"}
+    CC -->|"ok"| AT["Attribution<br/>cluster to entity"]
+    CC -->|"suspect"| CL
+    LB["Label sources<br/>own deposits · public addresses · law enforcement · sanctions lists · OSINT"] --> AT
+    AT --> EX["Exposure<br/>direct · indirect · cross-chain"]
+    EX --> HR["Alert to human review"]
+```
 
 ---
 
@@ -28,15 +41,17 @@ def common_input_ownership(tx: Transaction) -> set[Address] | None:
 
 ### Why it works
 
-In Bitcoin's UTXO model, spending any UTXO requires its private key. Multiple inputs in the same transaction therefore imply a **common key controller**. Even if a user splits funds across 100 addresses, the moment they consolidate two UTXOs in a single transaction, the whole set collapses into one cluster. This makes Bitcoin de-anonymization a matter of time — and is the technical foundation Chainalysis was built on.
+In Bitcoin's UTXO model, spending any UTXO requires its private key. Multiple inputs in the same transaction therefore suggest a **common key controller**. Even if a user splits funds across many addresses, consolidating them in one transaction links them into one cluster.
 
 ### Limits
 
 - **UTXO-only**. Ethereum accounts have a single `from`, so CIOH does not apply.
 - **CoinJoin** (Wasabi, Samourai Whirlpool, JoinMarket) intentionally combines inputs from different entities, breaking the assumption.
-- **Custodial hot wallets** combine many customers' funds. The cluster identifies the exchange correctly, but not individual customers.
+- **Custodial hot wallets** combine many customers' funds. The cluster identifies the exchange, but not individual customers.
 
-### CoinJoin fingerprint pre-filter
+### CoinJoin fingerprint pre-filter (illustrative)
+
+Not any vendor's implementation. Denomination constants are placeholders and must be filled from each wallet's own documentation.
 
 ```python
 def is_coinjoin(tx: Transaction) -> bool:
@@ -48,12 +63,12 @@ def is_coinjoin(tx: Transaction) -> bool:
     if not uniform_outputs:
         return False
 
-    # Known fixed denominations (Wasabi 0.1 BTC, Samourai 0.001 / 0.01 / 0.1)
-    KNOWN_DENOMS = {0.1e8, 0.01e8, 0.001e8}
+    # Wallet-specific fixed denominations — values differ by wallet and version
+    KNOWN_DENOMS = load_wallet_denominations()
     if any(a in KNOWN_DENOMS for a in uniform_outputs):
         return True
 
-    # Wasabi ~1:1.5 input:output, Whirlpool 5:5
+    # Symmetric input/output counts
     if len(tx.inputs) >= 5 and len(tx.outputs) >= 5:
         if abs(len(tx.inputs) - len(tx.outputs)) <= 1:
             return True
@@ -61,126 +76,37 @@ def is_coinjoin(tx: Transaction) -> bool:
     return False
 ```
 
-### Accuracy benchmarks
+### Accuracy — what the literature actually says
 
-| Dataset | Precision | Recall | F1 | Source |
-|---|---|---|---|---|
-| Bitcoin mainnet random sample | 0.95-0.98 | 0.99 | 0.97 | Meiklejohn et al. 2013 |
-| Elliptic (200K labels) | 0.87 | 0.93 | 0.90 | Weber et al. 2019 |
-| CoinJoin-inclusive sample | 0.75 | 0.98 | 0.85 | Möser & Böhme 2017 |
-| Elliptic2 (2024) + fingerprint filter | 0.95 | 0.92 | 0.93 | Bellei et al. 2024 |
+- Möser & Narayanan (FC 2022) evaluated 26 change-heuristic variants; "Most achieve true positive rates between 10-30%". Their random-forest model reached a TPR of 82% at 0.1% FPR versus 37% for threshold voting (confidence B; body figures verified in the repository's wave-1 research).
+- In the same paper, unconstrained change merging inflated the Mt. Gox cluster to 224 million addresses (+1596%). **Cluster collapse** is the operational risk that matters more than any single accuracy number (B).
+- In vendor proofs-of-concept, ask how ground truth was built, how cluster collapse is detected, and how past decisions are rolled back — not "what is your accuracy".
 
 ---
 
-## 2. Exposure Score Formula
+## 2. Exposure
 
 ### Definition
 
-An Exposure Score quantifies on a 0-100 scale how tightly an address (or cluster) is linked — within **N hops** — to known risk entities (OFAC SDN, mixers, darknet markets, ransomware).
+Exposure quantifies how an address (or cluster) is linked to known risk entities (sanctioned parties, mixers, darknet markets, stolen funds).
 
-- **Direct (1-hop)**: address transacts directly with a risk entity
-- **Indirect (N-hop, N >= 2)**: reaches a risk entity through intermediaries (usually analyzed up to 5 hops; beyond that the signal drowns in noise)
+- **Direct**: the address transacts with a risk entity
+- **Indirect**: the risk entity is reached through intermediaries
 
-### Generalized formula
+The normative basis for looking past the immediate counterparty is FATF's 2021 RBA Guidance, para 277: enhanced monitoring should "extend beyond the immediate transaction between the VASP or its customer or counterparty", and thresholds "should be reviewed on a regular basis" ([FATF 2021](https://www.onpcsb.ro/2022/01042022/Updated-Guidance-VA-VASP.pdf)). FATF's 7th Targeted Update (2026-07-16) recommends that VASPs "detect rapid transfer of VAs using transactions monitoring and blockchain analytics tools" and assess exposure to "protocols, bridges, mixers, cross-chain tools" ([FATF 7th TU](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
 
-```
-score = clip(
-    Σ (e_direct_i × w_cat_i × f_amount × f_behavior)
-    + Σ (e_indirect_j × w_cat_j × decay(age_j) × f_amount),
-    0, 100
-)
-```
+### What can be said about the formula
 
-Where:
-
-- e_direct_i, e_indirect_j: exposure percentage or amount share per category
-- w_cat: category weight (see below)
-- decay(age) = exp(-λ × age_days / 365), λ defaults to 0.5 (varies by vendor)
-- f_amount = min(1 + ln(tx_krw / 100M), 1.3), floor 0
-- f_behavior = 1.0 (normal), 1.2-1.5 (smurfing, pass-through, layering)
-
-### Category weights (generalized estimates)
-
-| Category | Direct | 2-hop | 3-hop | Rationale |
-|---|---|---|---|---|
-| OFAC SDN | 10.0 | 5.0 | 2.0 | Country-level sanctions — highest |
-| UN / EU sanctions | 8.0 | 4.0 | 1.5 | |
-| Ransomware | 6.0 | 3.0 | 1.0 | Direct criminal proceeds |
-| Mixer (Tornado, Wasabi) | 5.0 | 2.0 | 0.5 | Intentional obfuscation |
-| Darknet market | 4.0 | 1.5 | 0.3 | |
-| Stolen funds | 3.0 | 1.5 | 0.3 | Victim assets |
-| High-risk exchange | 1.5 | 0.5 | 0.1 | Weak regulation |
-| Gambling | 0.5 | 0 | 0 | Legal but notable |
-
-### Vendor-specific lambda (estimated)
-
-| Vendor | λ | Philosophy |
-|---|---|---|
-| Chainalysis | 0.5 | Balanced |
-| TRM Labs | 0.3 | Long-tail tracking (CT-focused) |
-| Elliptic | 0.6 | Short-window focus (EU TFR zero-threshold) |
-
-### Worked example
-
-**Scenario**: Korean VASP customer A withdraws KRW 500M to 0xABC...
-
-KYT results:
-- Direct: Tornado Cash 5% (USD 20K), 180 days old
-- 2-hop: OFAC SDN (Ren Fiery) 8%, 365 days old
-- Direct: Binance (not high-risk) 0%, excluded
-- Behavior: normal, f_behavior = 1.0
-- Amount factor: f_amount = min(1 + ln(5), 1.3) = 1.3
-
-Calculation:
+The previous "generalized vendor formula", category weight table, vendor λ table, "usually up to 5 hops", worked example and override factors were removed: there is no public source for any of them. Structurally:
 
 ```
-direct_tornado  = 5 × 5.0 × 1.3 × 1.0                              = 32.5
-indirect_ofac   = 8 × 5.0 × exp(-0.5 × 365/365) × 1.3 × 1.0
-                = 8 × 5.0 × 0.61 × 1.3                             = 31.72
-score           = clip(32.5 + 31.72, 0, 100)                       = 64.22  -> 64 (HIGH)
+# Teaching structure only — not any vendor's formula, no coefficients defined
+exposure(addr) = Σ_category  f( direct share, indirect share, age, amount )
 ```
 
-Action: BLOCK + auto-STR trigger.
+### A score is not an STR
 
-### SQL reproduction
-
-```sql
-WITH exposures AS (
-  SELECT 'Tornado'  AS category, 5.0 AS e_pct, 5.0 AS w, 1.0       AS decay, 1.3 AS f_amt, 1.0 AS f_beh
-  UNION ALL
-  SELECT 'OFAC_SDN',             8.0,          5.0,    EXP(-0.5),            1.3,         1.0
-)
-SELECT LEAST(SUM(e_pct * w * decay * f_amt * f_beh), 100) AS risk_score
-FROM exposures;
--- result: 64.22
-```
-
-### Override factors (FP reduction)
-
-Raw KYT scores, applied directly, yield FP rates of 30-50%. Production VASPs apply customer-attribute-based overrides:
-
-```
-score_final = score × override_factor
-```
-
-- KYC Tier 3 (passport + address verification + SoF evidence): × 0.7
-- 2+ years of clean transaction history: × 0.85
-- Receiver is internal customer: × 0.6
-- Abnormal behavior (late-night, high velocity): × 1.2
-
-### Threshold tuning
-
-Monthly retune against target FP = 5%, FN = 1%:
-
-```python
-def tune_threshold(alerts, labels, target_fp=0.05, target_fn=0.01):
-    from sklearn.metrics import roc_curve
-    fpr, tpr, thresholds = roc_curve(labels, [a.score for a in alerts])
-    fnr = 1 - tpr
-    candidates = [(t, f, n) for t, f, n in zip(thresholds, fpr, fnr)
-                  if f <= target_fp and n <= target_fn]
-    return max(candidates, key=lambda x: x[0])[0] if candidates else None
-```
+The old worked example ended in "BLOCK + auto-STR". That is wrong. An exposure score is an **input** to block / notify / report decisions, and FATF 2021 para 276 requires that "flagged transactions should go through human/expert analysis". Korea's AML/CFT Business Regulation sets out the transaction-monitoring system in Articles 76–81 ([law.go.kr](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000267264&type=XML)).
 
 ---
 
@@ -188,28 +114,24 @@ def tune_threshold(alerts, labels, target_fp=0.05, target_fn=0.01):
 
 ### Problem
 
-Funds flowing across chains (Ethereum -> Polygon -> Arbitrum -> Optimism, and so on) move through **bridge contracts**. Each chain's transactions are independent — KYT must reconnect them.
+Funds moving across chains (Ethereum → Polygon → Arbitrum → Optimism, and so on) pass through **bridge contracts**. Each chain's transactions are independent, so the two legs must be re-linked. ConneX frames failed pairing of the two legs as the main cause of tracing failure ([arXiv 2511.01393](https://arxiv.org/abs/2511.01393)).
 
-### Bridge event structure
+### Bridge event structure (reference — confirm against each contract's ABI)
 
-| Chain | Event | Key fields | Nonce? |
+| Chain / bridge | Event | Key fields | Sequence field |
 |---|---|---|---|
 | Polygon PoS | LockEvent | (user, token, amount, targetChain, depositCount) | Yes |
 | Arbitrum | OutboundTransfer | (token, from, to, seqNumber, amount) | Yes |
 | Optimism | WithdrawalInitiated | (l1Token, l2Token, from, to, amount, nonce) | Yes |
 | Wormhole | LogMessagePublished | (sender, sequence, nonce, payload) | Yes |
 | LayerZero | PacketSent | (dstEid, receiver, payload) | Generic — payload decoding required |
-| Hop Protocol | TransferSentToL2 | (chainId, recipient, amount, transferId) | transferId acts as nonce |
+| Hop Protocol | TransferSentToL2 | (chainId, recipient, amount, transferId) | transferId |
 
-### Matching algorithm
+### Matching algorithm (illustrative)
 
 ```python
-def match_bridge_events(
-    lock_events: list[LockEvent],
-    mint_events: list[MintEvent],
-    time_window: int = 300,           # seconds
-    amount_tolerance: float = 0.005,  # 0.5%
-) -> list[tuple[LockEvent, MintEvent]]:
+def match_bridge_events(lock_events, mint_events, time_window, amount_tolerance):
+    # time_window / amount_tolerance: set per bridge, direction and asset type
     matches = []
     for lock in lock_events:
         candidates = []
@@ -220,198 +142,162 @@ def match_bridge_events(
                 continue
             if abs(mint.amount - lock.amount) / lock.amount > amount_tolerance:
                 continue
-            # Nonce match is deterministic
             if hasattr(lock, 'nonce') and hasattr(mint, 'nonce'):
                 if lock.nonce == mint.nonce:
-                    candidates = [mint]
+                    candidates = [mint]   # deterministic
                     break
             candidates.append(mint)
         if len(candidates) == 1:
             matches.append((lock, candidates[0]))
         elif len(candidates) > 1:
-            # Fallback: pick the closest amount
             best = min(candidates, key=lambda m: abs(m.amount - lock.amount))
-            matches.append((lock, best))
-        # Zero candidates: Sunrise (destination not yet received) — requeue
+            matches.append((lock, best))  # fallback — log the ambiguity
+        # zero candidates: destination not yet observed — requeue
     return matches
 ```
 
-### Accuracy by bridge type
+### Measured results (do not compare across rows)
 
-| Bridge | Nonce match | Accuracy | Notes |
+The earlier per-bridge "accuracy" table (Polygon 97–99%, LayerZero Generic 40–60%, …) had no source and was removed.
+
+| Study | Scope | Reported result | Source |
 |---|---|---|---|
-| Polygon PoS | Yes | 97-99% | Standard |
-| Arbitrum | Yes | 96-99% | seqNumber is deterministic |
-| Optimism | Yes | 96-99% | Standard |
-| Wormhole | Yes (VAA) | 94-98% | Requires VAA validation |
-| Hop Protocol | transferId | 92-96% | Indirect via transferRoot |
-| LayerZero OFT | Generic | 85-92% | Only token-bridge payloads |
-| LayerZero Generic | Decoder needed | 40-60% | Per-DApp custom decoder |
+| ABCTracer (Lin et al., 2025) | 12 mainstream bridges | Bidirectional tracing F1 91.75% | [arXiv 2504.01822](https://arxiv.org/abs/2504.01822) |
+| ConneX (Liang et al., 2025) | 5 bridges, ~500k transactions | Average F1 0.9746 | [arXiv 2511.01393](https://arxiv.org/abs/2511.01393) |
+| Yan, Huang & Tessone (2025) | Ethereum–Polygon, 2020-08-28 to 2023-08-28 | Deposits matched 93.04–99.65%, withdrawals 67.55–92.78% by asset type (B) | [arXiv 2504.15449](https://arxiv.org/abs/2504.15449) |
+
+In the third study the withdrawal time window (~6.4 days) was about 380× the deposit window (~24 minutes), and ERC20 withdrawals were the weakest (B). Confidence should differ by **direction and asset type**, even within one bridge. No common cross-chain benchmark exists as of 2026-10-21.
 
 ### Limits
 
-- Multi-hop chains (ETH -> Polygon -> Arbitrum -> BSC) multiply errors: 3 hops at 90% each yields ~0.73.
-- Centralized OTC or P2P transfers have **no on-chain bridge events** — untraceable.
-- Liquidity-based bridges (THORChain, Across) pool funds, breaking 1-to-1 sender-to-receiver linkage.
+- Errors accumulate across successive bridges. The old "3 hops at 90% ≈ 0.73" calculation multiplied unsourced figures and was removed.
+- Centralized OTC or P2P transfers leave no on-chain bridge events.
+- Liquidity-pool bridges (THORChain, Across) break 1-to-1 sender-to-receiver linkage.
 
 ---
 
-## 4. Korean Fuzzy Matching for Sanctions
+## 4. Privacy Protocols, Mixers and Monero
+
+| Target | Measurement | Source |
+|---|---|---|
+| Railgun (Ethereum) | 17.65% of withdrawals uniquely linked to a deposit; median anonymity loss 3.42 bits | [arXiv 2606.25926](https://arxiv.org/abs/2606.25926) |
+| Railgun + Hinkal, 6 EVM chains | 186,356 unshields; public-token constraints alone shrink the average anonymity set by 40.1–59.0% | [arXiv 2608.22987](https://arxiv.org/abs/2608.22987) |
+| Tornado Cash sanctions | Deposits fell 71.03% over 957 days, yet 78.33% of Ethereum security incidents still used it (WWW '26) | [arXiv 2507.11721](https://arxiv.org/abs/2507.11721) |
+| Stablecoin freezes | 7.3% of sanctioned USDT addresses and 18.7% of USDC addresses withdrew in full before the freeze took effect | [arXiv 2603.27739](https://arxiv.org/abs/2603.27739) |
+
+The Tornado Cash deposit/withdrawal clustering preprint (arXiv 2510.09433) was withdrawn by its authors on 2025-11-18; do not cite its figures.
+
+**Monero.** "Untraceable" is too strong. Hammad & Victor (IEEE ICBC 2024) found that wallet-bug heuristics ("10 Block Decoy Bug", "Differ-by-one"), P2Pool output merging and Mordinal-derived heuristics were mostly high-precision on 2019–2023 data, but the bugs were patched in early 2023 and do not apply to later transactions ([arXiv 2408.05332](https://arxiv.org/abs/2408.05332)).
+
+---
+
+## 5. Korean Name Matching in Sanctions Screening
 
 ### Problem
 
-The top five Korean surnames (Kim, Lee, Park, Choi, Jung) cover roughly 50% of the population. Applying the default global Jaro-Winkler threshold of 0.85 produces hundreds of false positives per day.
+A small number of Korean surnames are very common, and romanization varies (e.g. Kim / Gim). Applying a generic global similarity threshold to Korean names produces many false positives against sanctions lists that include DPRK nationals. The earlier version quoted surname-share percentages, analyst-time shares, and a threshold-performance table for a "representative Korean VASP"; none had a public source and they were removed.
 
-**Example**: Customer "Kim Min-soo 1990-01-01 KR" screens against OFAC SDN "Kim Min-su 1985-03-15 KP" (North Korea). Jaro-Winkler similarity: 0.97. At the default threshold this becomes a HIT, requiring manual analyst disposition. At a large Korean VASP, junior analysts spend ~30% of their time clearing exactly this kind of FP.
-
-### Tuned pipeline
+### Tuned pipeline (illustrative — thresholds are parameters to calibrate, not recommendations)
 
 ```python
 from jellyfish import jaro_winkler_similarity
 
-COMMON_KR_SURNAMES = {
-    "Kim", "Lee", "Park", "Choi", "Jung", "Jang",
-    "Yoon", "Cho", "Kang", "Lim", "Han", "Shin",
-}
-
-def screen_korean_customer(customer: Customer, sdn_list: list[SDN]) -> list[Hit]:
+def screen_korean_customer(customer, sdn_list, cfg) -> list:
     hits = []
     for sdn in sdn_list:
         # 1. Surname variant match (Kim / Gim / Ghim etc.)
-        surname_match = any(
-            jaro_winkler_similarity(
-                normalize_kr(customer.surname),
-                normalize_kr(variant)
-            ) >= 0.95
-            for variant in sdn.surname_variants
-        )
-        if not surname_match:
+        if not any(jaro_winkler_similarity(normalize_kr(customer.surname),
+                                           normalize_kr(v)) >= cfg.surname_min
+                   for v in sdn.surname_variants):
             continue
-
-        # 2. Raise threshold to 0.92 if surname is a top Korean one
-        threshold = 0.92 if customer.surname in COMMON_KR_SURNAMES else 0.88
-        name_score = jaro_winkler_similarity(
-            normalize(customer.full_name),
-            normalize(sdn.name)
-        )
+        # 2. Stricter full-name threshold for very common surnames
+        threshold = (cfg.common_surname_threshold
+                     if customer.surname in cfg.common_surnames
+                     else cfg.default_threshold)
+        name_score = jaro_winkler_similarity(normalize(customer.full_name),
+                                             normalize(sdn.name))
         if name_score < threshold:
             continue
-
         # 3. Require a secondary identifier (DOB or nationality)
         dob_match = customer.dob and customer.dob == sdn.dob
         nat_match = sdn.nationalities and customer.nationality in sdn.nationalities
         if not (dob_match or nat_match):
             continue
-
-        # 4. Whitelist (5-year validity)
-        if (customer.id, sdn.id) in WHITELIST_5Y:
+        # 4. Documented, time-limited whitelist of cleared pairs
+        if (customer.id, sdn.id) in cfg.whitelist:
             continue
-
-        hits.append(Hit(
-            sdn=sdn,
-            name_score=name_score,
-            dob_match=dob_match,
-            nat_match=nat_match,
-        ))
+        hits.append((sdn, name_score, dob_match, nat_match))
     return hits
 ```
 
-### Name normalization
+Calibrate thresholds on your own labelled alert history and document the trade-off: lowering false positives raises false negatives. FATF 2021 para 277 expects such thresholds to be reviewed regularly.
 
-```python
-def normalize_kr(name: str) -> str:
-    import re
-    name = name.lower().strip()
-    NORMALIZATIONS = [
-        (r"-", ""), (r",\s*", " "),
-        ("gil-dong", "gildong"),
-        ("min-soo", "minsoo"), ("minsu", "minsoo"),
-        # McCune-Reischauer vs Revised Romanization
-        ("hoon", "hun"), ("seung", "sung"),
-    ]
-    for pat, rep in NORMALIZATIONS:
-        name = re.sub(pat, rep, name)
-    return " ".join(name.split())
-```
+---
 
-### Threshold performance (representative Korean VASP, 1M customer DB x 1.5K OFAC SDN)
+## 6. Public Datasets and Per-paper Results
 
-| Configuration | FP rate | FN rate | Daily alerts |
+### Datasets
+
+| Dataset | Year | Size (as stated in the paper) | Labels | Source |
+|---|---|---|---|---|
+| Elliptic | 2019 | 203,769 transaction nodes, 234,355 edges, 166 features, 49 time steps | 4,545 illicit (2%), 42,019 licit (21%), rest unlabelled | [arXiv 1908.02591](https://arxiv.org/abs/1908.02591) |
+| Elliptic++ | 2023 (KDD 2023) | 822k+ wallet addresses, 56 features, 1.27M temporal interactions | Transaction and address level | [arXiv 2306.06108](https://arxiv.org/abs/2306.06108) |
+| Elliptic2 | 2024 | **122K labelled subgraphs** (121,810), 49M node clusters, 196M edge transactions | 119,047 licit / 2,763 suspicious (B) | [arXiv 2404.19109](https://arxiv.org/abs/2404.19109) |
+| BABD-13 | 2022 arXiv / 2024 IEEE TIFS | 544,462 labels, 148 features, 13 address types | 13 behavior classes | [arXiv 2204.05746](https://arxiv.org/abs/2204.05746) |
+
+The earlier "Elliptic++ (2022), ~840K tx, 1.6M addresses" and "Elliptic2 ~122M tx" were wrong on year and scale: Elliptic2's 122 refers to **122 thousand labelled subgraphs**, not 122 million transactions. The unsourced "WalletExplorer dump" row was removed.
+
+### Per-paper results — do not merge into one table
+
+The old "Bitcoin clustering accuracy" table mixed clustering and classification papers and quoted figures that are not in those papers. It was removed. What the papers actually report:
+
+| Paper | Task | Reported | Note |
 |---|---|---|---|
-| Jaro-Winkler 0.85 alone | ~90% | ~0.5% | 200+ |
-| JW 0.92 + DOB required | ~45% | ~1.5% | ~80 |
-| JW 0.92 + DOB + surname filter | ~25% | ~2% | ~30 |
-| Full pipeline (above) | ~12% | ~3% | 10-15 |
+| Weber et al. 2019 | Elliptic transaction classification (illicit class) | Random Forest (all features + node embeddings) P 0.971 / R 0.675 / F1 0.796; GCN 0.812 / 0.512 / 0.628 | Body figures, B. Best model is RF, not a GNN. All models collapsed after the dark-market shutdown at time step 43 |
+| Bellei et al. 2024 | Elliptic2 subgraph classification | GLASS F1 0.933, PR-AUC 0.208, ROC-AUC 0.889 | Body figures, B. Roughly 1 in 4 predicted-suspicious subgraphs is truly suspicious |
+| Xiang et al. 2022/2024 (BABD) | Address behavior multiclass | Accuracy 93.24–97.13% across 5 models | Abstract |
+| Akter et al. 2026 | Elliptic temporal split | Extra Trees AUPRC 0.570 vs GraphSAGE 0.311 | B |
+| Alarab et al. 2020 | Elliptic GCN | Not verified (ACM abstract not accessed) | Venue is ACM ICMLT 2020 |
 
-**Trade-off**: lower FP means more FN. Supervisors expect FN below 3%; driving FN to 0.5% forces FP close to 90%, which is operationally unmanageable.
+---
 
-### SQL implementation (Snowflake or Postgres)
+## 7. Research Directions 2025–2026
 
-```sql
-WITH candidates AS (
-  SELECT c.id AS cust_id, s.id AS sdn_id,
-         JARO_WINKLER(c.full_name, s.name) AS score,
-         (c.dob = s.dob) AS dob_match,
-         (c.nationality = ANY(s.nationalities)) AS nat_match
-  FROM customers c
-  CROSS JOIN ofac_sdn s
-  WHERE SOUNDEX(c.surname) = SOUNDEX(s.surname)  -- primary filter
-)
-SELECT * FROM candidates
-WHERE score >= CASE
-    WHEN cust_id IN (SELECT id FROM customers
-                     WHERE surname IN ('Kim','Lee','Park','Choi','Jung',
-                                       'Jang','Yoon','Cho','Kang'))
-    THEN 0.92 ELSE 0.88 END
-  AND (dob_match OR nat_match);
+```mermaid
+timeline
+    title Crypto AML research timeline
+    2019 : Elliptic dataset - transaction node classification
+    2023 : Elliptic++ - 822k+ wallet addresses added
+    2024 : Elliptic2 - 122K labelled subgraphs, subgraph classification
+    2025 : Cross-chain automated matching - ABCTracer, ConneX
+         : Mixer account association - StealthLink, HiLoMix
+    2026 : Privacy leakage measurement - Railgun, Hinkal
+         : Benchmark scepticism - TransXion, tree ensembles vs GNN
 ```
 
----
-
-## 5. Clustering Benchmarks
-
-### Public datasets
-
-| Dataset | Year | Size | Labels | Use |
-|---|---|---|---|---|
-| Elliptic | 2019 | 203K nodes, 234K edges | 23% labeled | First public AML graph |
-| Elliptic++ | 2022 | ~840K tx, 1.6M addresses | Both addresses and transactions | Extended edition |
-| Elliptic2 | 2024 | ~122M tx, 196M transactions | Subgraph-level labels | Shape-aware |
-| BABD-13 | 2022 | 13 behavior classes | Supervised | Address classification |
-| WalletExplorer dump | Continuous | ~8M addresses | Exchange-tagged | Label seed |
-
-### Bitcoin clustering accuracy
-
-| Method | Precision | Recall | F1 | Source |
-|---|---|---|---|---|
-| CIOH only | 0.87 | 0.93 | 0.90 | Meiklejohn 2013 reproduction |
-| CIOH + Change Detection | 0.91 | 0.95 | 0.93 | Androulaki 2013 |
-| CIOH + CoinJoin Fingerprint | 0.95 | 0.92 | 0.93 | Möser 2017 basis |
-| Random Forest (Elliptic) | 0.93 | 0.77 | 0.84 | Weber 2019 |
-| GCN (Graph Conv Network) | 0.92 | 0.83 | 0.87 | Weber 2019 |
-| GAT (Graph Attention) | 0.94 | 0.86 | 0.90 | Alarab 2020 |
-| Shape-based SSL (Elliptic2) | 0.96 | 0.89 | 0.92 | Bellei 2024 |
-| Chainalysis Behavior (proprietary) | ~0.97 (claim) | ~0.95 (claim) | — | Vendor-internal |
+Five shifts: node classification → subgraph / path / intent tracing; automated cross-chain matching; quantitative measurement of privacy protocols; larger-scale fraud measurement (270 million address-poisoning attempts, USENIX Security 2025, [arXiv 2501.16681](https://arxiv.org/abs/2501.16681)); and explicit benchmark scepticism. Three gaps as of 2026-10-21: no peer-reviewed causal study of Travel Rule effects, no LLM AML evaluation on real crypto data (all synthetic), and no academic evaluation of self-hosted wallet ownership verification.
 
 ---
 
-## 6. References
+## 8. References
 
-- Meiklejohn et al. (2013) — "A Fistful of Bitcoins" (IMC). The original formalization of CIOH and change detection.
-- Androulaki et al. (2013) — "Evaluating User Privacy in Bitcoin" (FC). Empirical clustering evaluation.
-- Möser and Böhme (2017) — "Anonymous Alone? Measuring Bitcoin's Second-Generation Anonymization Techniques" (ESORICS). CoinJoin analysis.
-- Weber et al. (2019) — "Anti-Money Laundering in Bitcoin with Graph Convolutional Networks". Elliptic release.
-- Harlev et al. (2018) — "Breaking Bad: De-Anonymising Entity Types on the Bitcoin Blockchain".
-- Bellei et al. (2024) — "Shape vs. Structure: Topology-Aware Self-Supervised Learning for AML on Elliptic2".
-- Xiang et al. (2022) — "BABD: A Bitcoin Address Behavior Dataset".
+- Meiklejohn et al. (2013) — "A Fistful of Bitcoins: Characterizing Payments Among Men with No Names" (ACM IMC 2013).
+- Androulaki et al. (2013) — "Evaluating User Privacy in Bitcoin" (Financial Cryptography 2013, DOI 10.1007/978-3-642-39884-1_4).
+- Möser & Böhme (2017) — "Anonymous Alone? Measuring Bitcoin's Second-Generation Anonymization Techniques" (IEEE EuroS&PW 2017, DOI 10.1109/eurospw.2017.48).
+- Harlev et al. (2018) — "Breaking Bad: De-Anonymising Entity Types on the Bitcoin Blockchain Using Supervised Machine Learning" (HICSS 2018, DOI 10.24251/hicss.2018.443).
+- Weber et al. (2019) — "Anti-Money Laundering in Bitcoin: Experimenting with Graph Convolutional Networks for Financial Forensics" (KDD 2019 workshop, [arXiv 1908.02591](https://arxiv.org/abs/1908.02591)).
+- Möser & Narayanan (2022) — "Resurrecting Address Clustering in Bitcoin" (FC 2022, [arXiv 2107.05749](https://arxiv.org/abs/2107.05749)).
+- Elmougy & Liu (2023) — "Demystifying Fraudulent Transactions and Illicit Nodes in the Bitcoin Network for Financial Forensics" (KDD 2023, Elliptic++).
+- Bellei et al. (2024) — "The Shape of Money Laundering: Subgraph Representation Learning on the Blockchain with the Elliptic2 Dataset" (KDD MLF Workshop 2024, [arXiv 2404.19109](https://arxiv.org/abs/2404.19109)). Supervised subgraph classification — not self-supervised and not a clustering paper.
+- Xiang et al. (2024) — "BABD: A Bitcoin Address Behavior Dataset for Pattern Analysis" (IEEE TIFS 19).
 - Farrugia et al. (2020) — "Detection of Illicit Accounts over the Ethereum Blockchain".
+- 2025–2026 papers: see [`../deep/papers.md`](../deep/papers.md) §7.
 
 ---
 
 ## Korean Source
 
-The Korean notes go deeper on pseudocode, SQL, vendor-specific behaviors, the self-build vs vendor debate, Reactor operator workflow, and industry economics:
-
-- [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) — Core analytics (685 lines)
-- [`../notes/5-compliance/sanctions-screening.md`](../notes/5-compliance/sanctions-screening.md) — Korean fuzzy matching detail
-- [`../notes/7-vendors/analytics-vendors.md`](../notes/7-vendors/analytics-vendors.md) — Vendor comparison (Chainalysis, TRM, Elliptic, Crystal)
+- [`../notes/4-technology/blockchain-analytics.md`](../notes/4-technology/blockchain-analytics.md) — core analytics
+- [`../notes/5-compliance/sanctions-screening.md`](../notes/5-compliance/sanctions-screening.md) — Korean name matching detail
+- [`../notes/7-vendors/analytics-vendors.md`](../notes/7-vendors/analytics-vendors.md) — vendor overview
+- [`../research/2026-10-academic-literature.md`](../research/2026-10-academic-literature.md) — 70-paper literature dossier (check each item's confidence before citing)

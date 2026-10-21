@@ -1,0 +1,42 @@
+id: "DOC:kr-lawgokr-vaupa"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "가상자산 이용자 보호 등에 관한 법률 (현행, 2026-10-02 시행)"
+  en: "Act on the Protection of Virtual Asset Users (current)"
+  short: "가상자산이용자보호법"
+summary: >-
+  법제처 국가법령정보센터의 가상자산이용자보호법 현행본(법률 제21857호 타법개정, 2026-10-02 시행). 제10조(불공정거래행위 등 금지), 제12조(이상거래에 대한 감시), 제17조(과징금),
+  제19조(벌칙), 제22조(과태료) 문언을 담는다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290735&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR"
+published: "2026-08-04"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "user-protection"
+- "market-abuse"
+external_ids:
+  law_no_current: "21857"
+  law_no_enacted: "19563"
+  lsi_seq: "290735"
+evidence:
+- doc: "DOC:kr-lawgokr-vaupa"
+  confidence: "A"
+  locator: "제12조 제1항"
+  quote: "가상자산시장을 개설ㆍ운영하는 가상자산사업자는 가상자산의 가격이나 거래량이 비정상적으로 변동하는 거래 등 대통령령으로 정하는 이상거래(이하 \"이상거래\"라 한다)를 상시 감시하고 이용자\
+    \ 보호 및 건전한 거래질서 유지를 위하여 금융위원회가 정하는 바에 따라 적절한 조치를 취하여야 한다."
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-vaupa"
+  confidence: "A"
+  locator: "제22조 제1항 제6호·제7호"
+  quote: "6. 제12조제1항을 위반하여 이상거래에 대해 적절한 조치를 취하지 아니한 자 7. 제12조제2항에 따른 통보ㆍ보고를 하지 아니하거나 거짓으로 통보ㆍ보고한 자"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  제정 법률 제19563호(2023-07-18 공포), 시행 2024-07-19(부칙 제1조 「공포 후 1년」). published 는 현행본을 만든 법률 제21857호의 공포일이다.

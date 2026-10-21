@@ -29,9 +29,22 @@ evidence:
   - doc: "DOC:intl-fatf-recommendations"
     confidence: "A"
     retrieved: "2026-07-30"
+  - doc: "DOC:intl-fatf-va-rba-2021"
+    confidence: "A"
+    locator: "para 178"
+    quote: "Recommendation 16 applies in an amended way to VAs as set out in paragraph 7(b) of INR.15"
+    retrieved: "2026-10-21"
+  - doc: "DOC:intl-fatf-r16-explanatory-note"
+    confidence: "A"
+    locator: "para 54"
+    retrieved: "2026-10-21"
+  - doc: "DOC:intl-fatf-tu7-2026"
+    confidence: "A"
+    locator: "para 5–6, 24–25 · Annex A 각주 3"
+    retrieved: "2026-10-21"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-10-30"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
 curator_note: >
   이 노드가 가상자산 트래블룰 계보의 실제 뿌리다 — R.16 이 아니다 (CTR:00002).
   2025-06 개정으로 확대된 정보요건은 INR.15 각주 48(→INR.16 §9 참조)을 경유해
@@ -40,3 +53,16 @@ curator_note: >
   binding: soft-law — 권고안은 조약이 아니다. 그러나 회색명단 등재 위험이
   사실상의 강제력을 만든다. 이 이중성은 IMPLEMENTS 엣지의 fidelity 한정자로
   각국 이행 충실도를 기록해 표현한다.
+
+  【2026-10-21 갱신】
+  · 계보 고정: 2018-10 R.15 개정(VA·VASP 정의) → 2019-06 INR.15 채택(§7(b) 트래블룰) →
+    2021-10-28 개정 RBA 가이던스(2019판 대체, para 178 이 위 관계를 명문화, DOC:intl-fatf-va-rba-2021).
+    "2019년 R.16 개정으로 VA 확장" 서술은 오류.
+  · 이행 현황(DOC:intl-fatf-tu7-2026, 2026-07-16): 2026-04 기준 R.15 평가 149개 관할
+    C 1·LC 51(34%)·PC 64(43%)·NC 33(22%). 트래블룰 입법 83%(91/109), 그중 60%(55/91)는
+    트래블룰 감독·집행 조치 전무(본문 para 25 — 요약문 "almost half" 와 내부 불일치, 본문 채택).
+  · 한국: 2020 MER 은 R.15 "C"(2019-06 개정 이전 기준), 7차 TU Annex A 는 "N/A"(개정 기준 미평가).
+    개정 기준 등급은 2026-04 기준 없음. 이 사실은 IMPLEMENTS 엣지의 fidelity 한정자 후보이나,
+    국내 REG 노드(kr-tfia) 측 엣지는 다른 작업 담당이라 여기서는 노트로만 둔다.
+  · 관련 FATF 문서: DOC:intl-fatf-va-red-flags-2020(2020-09-14, 6범주·58지표).
+

@@ -1,0 +1,66 @@
+id: "REG:kr-fiu-supervisory-rule"
+type: "REG"
+layer: "semantic"
+label:
+  ko: "특정 금융거래정보 보고 및 감독규정"
+  en: "Regulation on Reporting and Supervision of Specified Financial Transaction Information"
+  short: "감독규정(FIU 고시)"
+aliases: ["특금법 감독규정", "FIU 감독규정", "특정 금융거래정보 보고 및 감독규정"]
+plain: >
+  특금법과 시행령이 "자세한 기준은 FIU 가 고시하라"고 넘긴 부분을 담은 FIU 고시입니다. 2027년부터 해외 거래소·
+  개인지갑으로 보낼 때의 허용 기준과 1천만원 감시 금액이 여기 적혀 있습니다.
+summary: >
+  금융정보분석원장이 고시하는 행정규칙. 2026-10-21 기준 현행본은 고시 제2026-3호(2026-10-02 발령·시행)이며,
+  직전 제2026-2호(2026-08-20 발령·시행)가 외국 가상자산사업자·자기수탁 주소와의 거래 기준(제28조의2)을
+  두었다. 제28조의2 는 부칙에 따라 「공포 후 6개월이 경과한 날」부터 시행하며 2026-10-21 기준
+  enacted-not-in-force 다. 「특정 금융거래정보 보고 등에 관한 검사 및 제재규정」과는 별개의 행정규칙이다.
+reg_kind: "subordinate-rule"
+citation: "금융정보분석원 고시 제2026-3호 (2026-10-02 발령·시행, 일부개정, 현행) ← 제2026-2호 (2026-08-20 발령·시행, 일부개정; 제26조·제28조의2·제31조제3호는 공포 후 6개월 경과일 시행)"
+promulgated: "2026-10-02"
+binding: "binding"
+language: "ko"
+tags: ["korea", "aml", "travel-rule", "subordinate-legislation"]
+external_ids:
+  notice_no_current: "2026-3"
+  notice_no_previous: "2026-2"
+  admrul_seq_current: "2100000285986"
+edges:
+  - predicate: "HAS_JURISDICTION"
+    to: "JUR:kr"
+    evidence:
+      - doc: "DOC:kr-lawgokr-fiu-sr-2026-3"
+        confidence: "A"
+        retrieved: "2026-10-21"
+  - predicate: "ISSUED_BY"
+    to: "ORG:kr-kofiu"
+    evidence:
+      - doc: "DOC:kr-lawgokr-fiu-sr-2026-3"
+        confidence: "A"
+        locator: "법제처 행정규칙 — 금융정보분석원 고시"
+        retrieved: "2026-10-21"
+evidence:
+  - doc: "DOC:kr-lawgokr-fiu-sr-2026-3"
+    confidence: "A"
+    locator: "헤더"
+    quote: "행정규칙일련번호 2100000285986 / 발령일자 20261002 / 발령번호 2026-3 / 시행일자 20261002 / 제개정구분 일부개정"
+    retrieved: "2026-10-21"
+  - doc: "DOC:kr-lawgokr-fiu-sr-2026-2"
+    confidence: "A"
+    locator: "부칙 (제2026-2호)"
+    quote: "이 규정은 2026년 8월 20일부터 시행한다."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-02-22"
+curator_note: >
+  2026-07-30 저장소는 이 규정의 최신본을 제2024-1호(2024-06-27)로 기록했다(FACT:0000018). 2026-08-20
+  제2026-2호, 2026-10-02 제2026-3호로 두 번 개정됐다(FACT:0000209). 제2026-3호의 개정 내용은 법제처
+  XML 에 개정이유가 없어 확인하지 못했다.
+
+  제2026-2호 부칙: 본칙 2026-08-20 시행, 제26조(환산 기준)·제28조의2·제31조제3호는 「공포 후 6개월이
+  경과한 날」 시행, 시행 전 신고 사업자에 대해 별표2 제1호가목(부채비율)·별표3 은 시행 후 1년이 경과한 날부터
+  적용. 「공포 후 6개월」의 기산점이 미확정이라 제28조의2 시행일은 2027-02-19 또는 2027-02-21 로 갈린다
+  (FACT:0000206) — 산문에는 날짜를 확정하지 말고 「2027-02 중, 미확정」으로 쓴다.
+
+  같은 FIU 고시 계열의 「자금세탁방지 및 공중협박자금조달금지에 관한 업무규정」(AML 업무규정, 고시 제2025-2호,
+  2025-10-22 발령, 2026-01-22 시행 — 보고서 연대기 표)은 별개 규범이며 이 노드에 포함하지 않는다.

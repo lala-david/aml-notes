@@ -1,0 +1,68 @@
+id: "EVT:kr-tfia-sd-36592-promulgated-2026"
+type: "EVT"
+layer: "dynamic"
+label:
+  ko: "특금법 시행령 대통령령 제36592호 공포 (트래블룰 기준금액 폐지 확정)"
+  en: "TFIA Enforcement Decree, Presidential Decree No. 36592 promulgated"
+track: "C"
+evt_kind: "legislative"
+occurred_on: "2026-08-18"
+announced_on: "2026-08-18"
+date_precision: "day"
+jurisdiction: "JUR:kr"
+impact: "H"
+plain: >
+  트래블룰 100만원 기준을 없애는 시행령 개정이 공포됐습니다. 본칙은 2026-08-20 시행됐지만, 기준금액 폐지와 해외
+  거래소·개인지갑 규율은 6개월 뒤인 2027-02-19 부터 적용됩니다.
+summary: >
+  2026-08-11 국무회의 의결을 거쳐 대통령령 제36592호가 2026-08-18 공포됐다. 본칙 2026-08-20 시행. 부칙 제1조
+  단서로 제10조의2·제10조의5제6항·제10조의10·제10조의20·제16조의2제1호·제4호 개정규정은 공포 후 6개월이
+  경과한 날(2027-02-19)부터 시행한다. 제10조의10 은 「1백만원 이상」→「모든 경우」, 제10조의20 은 해외 VASP 평가·
+  자기수탁 주소 거래 기준과 1천만원 범위 자체 의심거래 감시체계를 신설한다.
+significance: >
+  2026-07-30 저장소가 proposed 로 기록한 하위법령 개정(CTR:00004)이 enacted 로 바뀐 시점이다. 한국 트래블룰은
+  2027-02-19 부터 A형(의무에 금액)에서 「전건 + 요청 시 추가정보」 구조로 바뀌고, 해외 VASP·자기수탁 지갑과의
+  이전에 처음으로 법령상 차등 규율이 생긴다. 2026-10-21 기준 해당 조문은 enacted-not-in-force 이며 효력 있는
+  기준은 여전히 100만원이다.
+tags: ["korea", "travel-rule", "enacted-not-in-force"]
+edges:
+  - predicate: "CHANGES_STATE_OF"
+    to: "PROV:kr-tfia-sd-art10-10"
+    qualifiers:
+      attribute: "travel_rule_threshold"
+      from_value: "1000000 KRW (2022-03-25~)"
+      to_value: "none_all_transfers (2027-02-19~)"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+        confidence: "A"
+        locator: "제10조의10 제1호 (efYd=20270219 판), 부칙 제1조"
+        retrieved: "2026-10-21"
+  - predicate: "CHANGES_STATE_OF"
+    to: "REG:kr-tfia-sd"
+    qualifiers:
+      attribute: "subordinate_legislation_status"
+      from_value: "proposed"
+      to_value: "enacted"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+        confidence: "A"
+        locator: "eflaw 레코드 — 공포일자 20260818 / 공포번호 36592"
+        retrieved: "2026-10-21"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+    confidence: "A"
+    locator: "부칙 제1조"
+    quote: "이 영은 2026년 8월 20일부터 시행한다. 다만, 제10조의2, 제10조의5제6항, 제10조의10, 제10조의20 및 제16조의2제1호ㆍ제4호의 개정규정은 공포 후 6개월이 경과한 날부터 시행한다."
+    retrieved: "2026-10-21"
+  - doc: "DOC:kr-fsc-20260811-tfia-sd"
+    confidence: "A"
+    locator: "국무회의 의결 보도자료"
+    quote: "트래블룰 기준금액(100만원) 폐지"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-02-22"
+curator_note: >
+  시행(2027-02-19)은 아직 발생하지 않았으므로 별도 EVT 를 만들지 않았다. 시행일 도래 시
+  EVT:kr-tfia-sd-36592-effective-2027 을 만들고 법제처 「현행」 전환을 확인할 것. 언론의 2027-02-20 은 채택하지
+  않는다(FACT:0000202). 감독규정 제28조의2 시행일은 별도로 미확정이다(FACT:0000206).

@@ -1,6 +1,6 @@
 # AML Glossary — English/Korean Bilingual
 
-> Bilingual glossary of AML, cryptocurrency, and Korean regulatory terms. Roughly 200 entries organized A-Z. Aimed at international readers who need the Korean context behind each term. For the original Korean version, see [`../notes/glossary.md`](../notes/glossary.md).
+> Bilingual glossary of AML, cryptocurrency, and Korean regulatory terms. Roughly 200 entries organized A-Z. Aimed at international readers who need the Korean context behind each term. For the original Korean version, see [`../notes/glossary.md`](../notes/glossary.md). Last updated: 2026-10-21.
 
 Core entries carry an "Industry practice" note — a one-or-two-line sketch of how the term actually gets used in Korean VASP operations.
 
@@ -14,9 +14,9 @@ The body of laws, regulations, and procedures designed to prevent criminals from
 **Industry practice**: A Korean VASP's AML program is the sum of nine statutory duties — registration, KYC, EDD, KYT, sanctions, STR, Travel Rule, recordkeeping, and internal controls. The "AML lead" usually owns all nine.
 
 ### AMLA — Anti-Money Laundering Authority
-EU AML supervisor, headquartered in Frankfurt and operational from 2025.
+EU AML supervisor, headquartered in Frankfurt. AML/CFT rule-making and guidance powers moved from the EBA to AMLA on 2026-01-01.
 
-**Industry practice**: Scheduled to begin direct supervision of about 40 large cross-border financial institutions around 2028. Whether a Korean VASP expanding into the EU appears on that list dictates how hands-on its supervision will be.
+**Industry practice**: On 2026-10-01 AMLA submitted its first three final AMLR RTS drafts to the Commission (not yet adopted). Direct supervision is aimed at roughly 40 financial institutions (groups) operating in six or more member states — not a VASP-specific list, and whether CASPs are included has not been published (B).
 
 ### AMLD — Anti-Money Laundering Directive
 EU AML directive series. AMLD5 is in force; AMLD6 is being transposed.
@@ -62,7 +62,7 @@ The ultimate natural-person owner of a legal entity (25%+ in Korea).
 Global crypto exchange. Not registered in Korea; partially blocked by FIU-coordinated addresses.
 
 ### Bithumb
-Korean Big-4 exchange. Banking partner: NH NongHyup. KYT: Chainalysis + CODE.
+Korean KRW exchange. Banking partner: NH NongHyup. (KYT vendor attribution removed — no public source.)
 
 ### BSA — Bank Secrecy Act (1970)
 US foundational AML law.
@@ -72,7 +72,7 @@ US foundational AML law.
 ### Bridge
 Cross-chain asset transfer infrastructure.
 
-**Industry practice**: When a withdrawal address is a bridge contract, the next hop cannot be traced natively. Many Korean VASPs auto-queue such transactions for STR review.
+**Industry practice**: When a withdrawal address is a bridge contract, the next hop is hard to trace with simple heuristics. Bridge exposure is an input to the STR **review** queue, not an automatic STR.
 
 ## C
 
@@ -93,9 +93,9 @@ Standard due diligence.
 Layering across chains: BTC → ETH → Tron → BNB.
 
 ### Chainalysis
-US blockchain analytics company, de facto industry standard.
+US blockchain analytics company.
 
-**Industry practice**: Considered the reference tool by US federal agencies. Easiest to have admitted as evidence in Korean inspections. Used by most of the Korean Big 4.
+**Industry practice**: KoFIU's 2026-02-05 work plan included adopting Chainalysis as a virtual-asset analytics tool. Exchange-by-exchange adoption is not publicly sourced and is not listed here.
 
 ### CIOH — Common Input Ownership Heuristic
 "All inputs of a Bitcoin transaction are controlled by the same entity."
@@ -113,7 +113,7 @@ Grouping addresses estimated to belong to one entity.
 ### CMLN — Chinese Money Laundering Network
 Chinese-language money-laundering networks.
 
-**Industry practice**: Telegram/WeChat OTC plus "laundering-as-a-service". Serves as Lazarus's laundering partner. Processed an estimated USD 16.1B in 2025.
+**Industry practice**: Telegram/WeChat OTC plus "laundering-as-a-service". Volume estimates differ by analytics firm and definition, so none is quoted here.
 
 ### CODE
 Korean Travel Rule consortium (Bithumb, Korbit, Coinone joint venture).
@@ -194,6 +194,11 @@ The degree to which an address is directly or indirectly connected to risk categ
 
 ## F
 
+### FDS — Fraud Detection System (이상금융거래탐지시스템)
+The FSS (2014-12-10) defined it as a system that "analyses e-finance access information and transaction history to detect and block abnormal transactions".
+
+**Industry practice**: A **parallel regime to AML, not a sub-module**. Its purpose is protecting users' assets (account takeover, voice phishing); its outputs are **temporary measures** (delay/suspension) and payment suspension, not STRs. The Electronic Financial Supervisory Regulation does not use the term FDS; the operative statutory basis is Article 2-5 of the Telecommunications Fraud Refund Act, which applies to virtual-asset exchanges from 2026-10-01. See [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md).
+
 ### FATF — Financial Action Task Force
 International AML body.
 
@@ -218,7 +223,7 @@ Korean prudential and conduct supervisor. Inspects user protection under VAUPA.
 ## G
 
 ### GENIUS Act
-US stablecoin statute (July 2025). Full effect 2027-01.
+US stablecoin statute, signed 2025-07-18. Enacted-not-in-force as of 2026-10-21; effectiveness is expected on the statutory outer date of 2027-01-18 (B).
 
 ### GLEIF LEI — Legal Entity Identifier
 Global standard for legal-entity identification.
@@ -278,7 +283,9 @@ Korean Big-4 exchange. Banking partner: Shinhan Bank. Travel Rule: CODE.
 
 ### KYT — Know Your Transaction
 
-**Industry practice**: Complements KYC rather than replacing it. KYT alone gives you "address risk"; STRs still need the "who" from KYC.
+An **industry term** — "KYT" appears in no FATF, MAS or Korean regulatory text. The normative wording is "ongoing monitoring" (FATF 2021 guidance para 275), "transactions monitoring and blockchain analytics tools" (FATF 7th Targeted Update, 2026-07-16), and in Korea the "transaction monitoring system" of Articles 76–81 of the KoFIU AML Regulation.
+
+**Industry practice**: Complements KYC rather than replacing it. KYT alone gives you "address risk"; STRs still need the "who" from KYC. The legal exit for a KYT alert is the STR — keep it separate from FDS temporary measures and VAUPA Art. 12 notifications.
 
 ## L
 
@@ -321,7 +328,12 @@ Value extracted by reordering block transactions.
 
 ### MiCA — Markets in Crypto-Assets Regulation
 
-**Industry practice**: Fully in force 2024-12-30; grandfathering ends 2026-07-01. EU passporting lets a single national license cover 27 member states.
+**Industry practice**: Entered into force 2023-06-29; applicable from 2024-12-30. EU passporting lets one member-state authorisation cover the Union. ESMA's interim CASP register had 379 rows on 2026-10-19.
+
+### Market Surveillance (시장감시 / 이상거래에 대한 감시)
+VAUPA Article 12 "surveillance of abnormal trading". Exchanges must continuously monitor trading that risks breaching the Article 10 unfair-trading prohibitions and **notify** the FSC and FSS (or report to investigators when the violation is sufficiently proven).
+
+**Industry practice**: Measures are set by Article 3 of the Virtual Asset Market Investigation Regulation (caution notices, issuer inquiry/disclosure, order limits, trading halts). Breach: administrative fine up to KRW 100 million (Art. 22(1)6–7). Distinct from both FDS and STR.
 
 ### Mixer / Tumbler
 Fund-mixing services.
@@ -468,7 +480,9 @@ A crypto-asset designed to maintain a stable value, usually pegged to fiat (USDC
 
 ### STR — Suspicious Transaction Report (의심거래보고)
 
-**Industry practice**: No amount threshold — suspicion alone triggers the report. Supervisors are actually **more** suspicious of firms filing few STRs. Tipping off the customer is a separate offense.
+Korean statutory term: **의심거래보고** (Tukgeumbeop Art. 4) — not "이상거래보고".
+
+**Industry practice**: No amount threshold — suspicion alone triggers the report. Tipping off the customer is a separate offense. Inputs include KYT and front-line alerts, and also FDS alerts and Art. 12 market-surveillance findings — but those regimes' own outputs (temporary measures, notifications) are not STRs. From 2027-02-19, transfers of KRW 10 million or more to foreign VASPs or self-hosted wallets require an in-house suspicious-transaction monitoring system — not automatic STR filing.
 
 ### Sumsub
 Global KYC vendor headquartered in the UK.
@@ -476,7 +490,7 @@ Global KYC vendor headquartered in the UK.
 ### Sunrise Issue
 Travel Rule inconsistency across jurisdictions.
 
-**Industry practice**: The reason Notabene Gateway became the global leader. Full resolution is not expected before the FATF 2030 deadline, so fallback policies are mandatory.
+**Industry practice**: Per the FATF 7th Targeted Update (2026-07-16), 83% (91/109) of responding jurisdictions have enacted the Travel Rule, but 60% (55/91) of those have taken no supervisory or enforcement action. Counterparty due diligence and fallback policies are needed. Korea will differentiate foreign VASPs by risk tier from 2027-02-19.
 
 ## T
 
@@ -490,7 +504,12 @@ EU Travel Rule.
 ### Tipping-off
 Informing a customer that an STR has been filed. Prohibited.
 
-**Industry practice**: Tukgeumbeop §9 — up to one year in prison or KRW 10M fine. When explaining an account closure, use generic language like "pursuant to internal policy".
+**Industry practice**: Prohibited and punishable under Tukgeumbeop (check the article and penalty in the statute — earlier versions of this glossary cited conflicting articles and penalties and were removed). When explaining an account closure, use generic language like "pursuant to internal policy".
+
+### Temporary Measure (임시조치)
+Telecommunications Fraud Refund Act Article 2-5: financial institutions must run continuous self-checks and, where an account is presumed to be used for telecom fraud, delay or suspend transfers, withdrawals or **virtual-asset transfers**, notify the user immediately, verify identity, and lift the measure if unfounded.
+
+**Industry practice**: Applies to virtual-asset exchanges from 2026-10-01 (Act No. 21503, in force). Notification, release and identity-verification records must be kept (Art. 2-5(4)). This is the legal output of FDS — different from an AML transaction refusal.
 
 ### TM — Transaction Monitoring
 
@@ -526,7 +545,7 @@ Short name for 특정 금융거래정보의 보고 및 이용 등에 관한 법�
 ### Unhosted Wallet
 Personal wallet outside any VASP.
 
-**Industry practice**: Korean Big-4 exchanges run an **external-wallet registration regime**. Proof of wallet ownership (Satoshi Test or signed message) is required before withdrawal.
+**Industry practice**: As of 2026-10-21 Korean law does not directly regulate self-hosted wallet transfers. From 2027-02-19, transfers to addresses the VASP does not exclusively control are allowed only when the customer and counterparty are the same person (Enforcement Decree Art. 10-20(8), Supervisory Regulation Art. 28-2(4)); the verification method is not prescribed (enacted-not-in-force).
 
 ### Upbit
 Largest Korean exchange (Dunamu). Banking partner: K-Bank. Travel Rule: VerifyVASP.
@@ -563,7 +582,7 @@ Korean Travel Rule solution (Lambda256 + Chainalysis). Upbit is the anchor membe
 ### Wash Trading
 Artificial trades to inflate price or volume.
 
-**Industry practice**: Especially prevalent in NFTs — Chainalysis estimated 25-50% of the 2022-2023 NFT market was wash trading.
+**Industry practice**: In Korea, an Article 10 unfair-trading offence under VAUPA and a target of Article 12 market surveillance. On 2026-09-23 the FSC referred a case in which a business executive hired a market maker to wash-trade over 90% of a token's volume.
 
 ### Wolfsberg Group
 Industry body of global banks on AML good-practice standards (HSBC, Citi, JPMorgan, and others).
@@ -597,7 +616,7 @@ A specific zero-knowledge proof construction (used by Tornado Cash, Zcash).
 
 | Term | Jurisdiction | Meaning |
 |---|---|---|
-| **STR** | FATF, Korea, EU, Singapore | Suspicious transaction report. Korean basis: Tukgeumbeop §5-3. |
+| **STR** | FATF, Korea, EU, Singapore | Suspicious transaction report. Korean basis: Tukgeumbeop Art. 4 (Art. 5-3 is the Travel Rule). |
 | **SAR** | US (FinCEN) | Suspicious activity report. BSA 31 CFR 1020.320. Can be filed on suspicious activity even without a completed transaction — broader. |
 
 ### Travel Rule vs Wire Transfer Rule
@@ -620,8 +639,20 @@ A specific zero-knowledge proof construction (used by Tornado Cash, Zcash).
 
 | Term | Meaning |
 |---|---|
-| **Tipping-off** | Revealing an STR to the customer. Prohibited under Tukgeumbeop §5-2 ⑤ — up to 5 years imprisonment. |
+| **Tipping-off** | Revealing an STR to the customer. Prohibited under Tukgeumbeop (check article and penalty in the statute). |
 | **Disclosure** | Generic disclosure. Tipping-off is a specifically prohibited form. |
+
+### 이상거래 vs 이상금융거래 vs 의심거래
+
+The most frequently conflated trio in Korea. Legal basis, purpose, output and recipient all differ. Details: [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md).
+
+| Term | Source | Purpose | Output | Recipient |
+|---|---|---|---|---|
+| **이상금융거래** (FDS) | FSS/FSI FDS Operating Guideline (2023-10-05); "accounts suspected of fraud damage" under the Telecommunications Fraud Refund Act | Protect users' assets (account takeover, voice phishing) | Temporary measure (delay/suspension), payment suspension, refund | FSC Financial Security Division, FSS Financial Fraud Response Unit, FSI |
+| **이상거래** (VAUPA Art. 12) | VAUPA Art. 12, Enforcement Decree Art. 18 | Detect unfair trading (market integrity) | Notification to FSC/FSS; caution notices, order limits, trading halts | FSC Virtual Asset Division, FSS Virtual Asset Investigation Office |
+| **의심거래** (STR) | Tukgeumbeop Art. 4 | Counter ML/TF | Suspicious transaction report, refusal, EDD | KoFIU |
+
+"이상거래보고" (abnormal-transaction report) exists in no Korean statute. Use "의심거래보고" for STR.
 
 ### PEP vs BO
 
@@ -642,6 +673,12 @@ A specific zero-knowledge proof construction (used by Tornado Cash, Zcash).
 | 고객실사 | CDD |
 | 강화된 고객실사 | EDD |
 | 의심거래보고 | STR |
+| 이상거래 (VAUPA Art. 12) | Abnormal trading — market surveillance target |
+| 이상금융거래 | Abnormal financial transaction (FDS term) |
+| 이상금융거래탐지시스템 | Fraud Detection System (FDS) |
+| 임시조치 | Temporary measure (Telecommunications Fraud Refund Act Art. 2-5) |
+| 지급정지 | Payment suspension |
+| 거래모니터링체계 | Transaction monitoring (industry term: KYT) |
 | 고액현금거래보고 | CTR |
 | 가상자산사업자 | VASP |
 | 실소유자 | Beneficial Owner |
@@ -690,5 +727,6 @@ If AML is new to you, memorize these 15 first — the rest will come naturally i
 ## Further Reading
 
 - [`../notes/glossary.md`](../notes/glossary.md) — Original Korean glossary, with more 💡 Industry notes
+- [`../notes/4-technology/fds.md`](../notes/4-technology/fds.md) — FDS vs market surveillance vs STR (Korean)
 - [`korea-aml-overview.md`](korea-aml-overview.md) — Korean AML framework overview
 - [`regulatory-comparison.md`](regulatory-comparison.md) — Korea vs US, EU, Asia

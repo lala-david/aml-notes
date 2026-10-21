@@ -1,0 +1,29 @@
+id: "DOC:kr-fsc-20260128-asap-12w"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "금융위원회 보도자료 — ASAP 출범 12주 성과 (2026-01-28)"
+summary: >-
+  2025-10-29~2026-01-21 12주간 186.5억원 피해 방지, 2,705개 계좌 지급정지 등 조치. 통신사·제2금융권·가상자산거래소 순차 참여 확대.
+src: "SRC:kr-fsc"
+url: "https://www.fsc.go.kr/no010101/86149"
+published: "2026-01-28"
+accessed: "2026-10-21"
+doc_kind: "press-release"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "fraud"
+- "voice-phishing"
+evidence:
+- doc: "DOC:kr-fsc-20260128-asap-12w"
+  confidence: "A"
+  locator: "본문"
+  quote: "통신사·제2금융권·가상자산거래소 순차적으로 참여 확대"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  성과 수치는 금융당국 공표치다.

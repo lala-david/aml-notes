@@ -1,0 +1,27 @@
+id: "IND:x-wealth-from-va-ico-only"
+type: "IND"
+layer: "semantic"
+label:
+  ko: "재산원의 대부분이 VA·ICO 투자"
+summary: >
+  고객 재산원의 대부분이 가상자산·ICO(사기성 ICO 포함) 투자에서 나온다.
+signal_type: "kyc"
+tags: ["indicator", "kyc", "fatf-red-flag"]
+evidence:
+  - doc: "DOC:intl-fatf-va-red-flags-2020"
+    confidence: "A"
+    locator: "RF-F7 · para 15 · p.15"
+    quote: "Bulk of a customer's source of wealth is derived from investments in VAs, ICOs, or fraudulent ICOs, etc."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  **단일 지표만으로 범죄를 시사하지 않는다.** 원문 스스로 "The mere presence of a red flag
+  indicator is not necessarily a basis for a suspicion of ML or TF"(para 8, p.4)라고 적는다.
+  합리적 사업적 설명이 없는 상태에서 복수 지표가 동시 발현할 때 비로소 의심의 근거가 된다.
+
+  확신도 A — FATF Red Flag Indicators(2020-09-14) 원문 RF-F7 에서 직접 옮겼다
+  (research/2026-10-fatf-virtual-asset-reports.md §3A-3 에서 저장소 63지표와 대응 없음으로 확인).
+  원문은 탐지 임계값을 정하지 않으므로 rule_sketch 를 두지 않았다.
+  fp_risk 미기입 — 공개 근거 없음.

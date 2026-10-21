@@ -8,22 +8,29 @@ label:
 aliases: ["이용자보호법", "가상자산법", "VAUPA"]
 plain: >
   이용자를 보호하고 시세조종 같은 불공정거래를 처벌하는 법률입니다. 자금세탁을 막는 특금법과 짝을 이루며, 두 법이
-  "가상자산"의 뜻을 서로 참조합니다.
+  "가상자산"의 뜻을 서로 참조합니다. 거래소에 시세조종 같은 이상거래를 늘 감시하라는 의무(제12조)도 여기 있습니다.
 summary: >
-  가상자산 이용자 보호와 불공정거래 규율을 담당하는 법률. 2024-07-19 시행.
-  예치금 보호·이상거래 감시 의무·불공정거래 처벌을 규정한다.
-  특금법(AML)과 2축을 이루며 가상자산 정의를 상호참조한다.
+  가상자산 이용자 보호와 불공정거래 규율을 담당하는 법률. 제정 법률 제19563호(2023-07-18 공포),
+  2024-07-19 시행. 2026-10-21 기준 현행본은 법률 제21857호(2026-08-04 타법개정, 2026-10-02 시행).
+  예치금·가상자산 보관, 불공정거래 금지(제10조), 이상거래 상시감시(제12조), 과징금(제17조)·벌칙(제19조)·
+  과태료(제22조)를 규정한다. 특금법(AML)과 2축을 이루며 가상자산 정의를 상호참조한다.
 reg_kind: "statute"
+citation: "법률 제21857호 (2026-08-04 공포, 2026-10-02 시행, 타법개정, 현행) ← 제정 법률 제19563호 (2023-07-18 공포, 2024-07-19 시행)"
+promulgated: "2023-07-18"
 binding: "binding"
 language: "ko"
 tags: ["korea", "user-protection", "market-abuse"]
+external_ids:
+  law_no_current: "21857"
+  law_no_enacted: "19563"
+  lsi_seq: "290735"
 edges:
   - predicate: "HAS_JURISDICTION"
     to: "JUR:kr"
     evidence:
-      - doc: "DOC:kr-lawgokr-tfia-21358"
-        confidence: "B"
-        retrieved: "2026-07-30"
+      - doc: "DOC:kr-lawgokr-vaupa"
+        confidence: "A"
+        retrieved: "2026-10-21"
   - predicate: "ISSUED_BY"
     to: "ORG:kr-fsc"
     evidence:
@@ -31,18 +38,26 @@ edges:
         confidence: "B"
         retrieved: "2026-07-30"
 evidence:
+  - doc: "DOC:kr-lawgokr-vaupa"
+    confidence: "A"
+    locator: "현행본 헤더·부칙"
+    retrieved: "2026-10-21"
   - doc: "DOC:kr-lawgokr-tfia-21358"
     confidence: "B"
     locator: "특금법 제2조제1호 하목·제3호 상호참조"
     retrieved: "2026-07-30"
 created_at: "2026-07-30"
-updated_at: "2026-07-30"
-review_due: "2026-10-28"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
 curator_note: >
-  확신도 B — 현재 증거가 특금법 문서의 상호참조뿐이다. 이용자보호법 자체의
-  법령 원문(법령ID 확보 필요)으로 재결속하고 조문을 PROV 로 분리할 것.
-  OC 발급 후 law.go.kr 에서 수집 가능하다.
+  【2026-10-21 갱신】 이용자보호법 자체 원문(법제처 lsiSeq=290735, efYd=20261002)으로 재결속해 확신도를
+  A 로 올렸다(FACT:0000212). 제12조(이상거래에 대한 감시)를 PROV:kr-vaupa-art12 로 분리했다. 제12조의
+  하위 규범 — 시행령 제18조(이상거래의 범위)와 금융위 고시 「가상자산시장조사업무규정」 제3조·제4조 — 은
+  아직 REG 노드가 없어 DELEGATES_TO 엣지 대신 PROV:kr-vaupa-art12 의 curator_note 에 적었다 → REG 신설 과제.
+
+  ISSUED_BY → ORG:kr-fsc 는 소관 부처 기준의 잠정 처리다(발령 주체 모델링 미해결 — REG:kr-tfia 와 동일 논점).
 
   【2축 구조】 특금법 제2조제1호 하목·제3호가 이 법 제2조를 참조하므로,
   가상자산 정의가 두 법 사이에 결합되어 있다. 정의 변경 시 양쪽 모두 영향받는다.
-  → CONCEPT:x-virtual-asset 의 DEFINES 엣지로 표현할 것.
+  → PROV:kr-vaupa-art2 의 DEFINES 엣지로 표현했다. 통신사기피해환급법 제2조제1호 하목도 이 법 제2조제2호·
+  제4호를 인용해 「가상자산거래소」를 정의한다(REG:kr-tsf-act).

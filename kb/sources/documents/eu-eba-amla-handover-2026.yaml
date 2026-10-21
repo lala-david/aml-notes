@@ -1,0 +1,28 @@
+id: "DOC:eu-eba-amla-handover-2026"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "EBA AML/CFT 페이지 — 2026-01-01 AMLA 권한 이관 안내"
+  en: "EBA — Anti-money laundering and countering the financing of terrorism (mandate transfer to AMLA)"
+  short: "EBA→AMLA 이관 안내"
+summary: >
+  EBA 가 2026-01-01 부터 EU 차원의 AML/CFT 정책·가이던스 권한이 AMLA 로 넘어갔고, 기존 EBA AML/CFT 가이드라인·기준(트래블룰 가이드라인 포함)은 AMLA 가 대체할 때까지 유효하다고 안내하는 페이지(AMLAR Art. 54).
+src: "SRC:eu-eba"
+url: "https://www.eba.europa.eu/regulation-and-policy/anti-money-laundering-and-countering-financing-terrorism"
+published: "2026-01-01"
+accessed: "2026-10-21"
+doc_kind: "official-guidance"
+language: "en"
+translation: false
+tags: ["eu", "eba", "amla", "mandate-transfer"]
+evidence:
+  - doc: "DOC:eu-eba-amla-handover-2026"
+    confidence: "A"
+    locator: "페이지 본문"
+    quote: "all existing EBA AML/CFT guidelines and standards remain valid until AMLA replaces them."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  published 는 이관 발효일로 기재했다 — 페이지 자체의 정확한 게시일은 미확인. 같은 페이지 팩트시트의 'by 2025' 표기와 본문 날짜가 어긋나나 본문(2026-01-01)을 채택. 2026 년 이후 EU 차원 AML 가이던스는 EBA 가 아니라 AMLA 명의다.

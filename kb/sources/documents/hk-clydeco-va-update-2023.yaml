@@ -1,0 +1,35 @@
+id: "DOC:hk-clydeco-va-update-2023"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "Clyde & Co — 홍콩 가상자산 규제 업데이트 (2023-06-07)"
+  en: "Clyde & Co — Hong Kong Virtual Assets Regulatory Update (7 June 2023)"
+  short: "Clyde & Co HK VA 2023-06"
+summary: >
+  홍콩 AMLO 개정·VATP 체제와 SFC AML 지침 개정 요건이 2023-06-01 발효했고, SFC 가 가상자산
+  이전 정보의 「as soon as practicable after the virtual asset transfer」 제출을 2024-01-01 까지
+  과도조치로 수용했다고 요약한다.
+src: "SRC:gb-clydeco"
+url: "https://www.clydeco.com/en/insights/2023/06/hong-kong-virtual-assets-regulatory-update"
+accessed: "2026-10-21"
+published: "2023-06-07"
+doc_kind: "article"
+language: "en"
+translation: false
+tags: ["hk", "travel-rule", "vatp"]
+evidence:
+  - doc: "DOC:hk-clydeco-va-update-2023"
+    confidence: "B"
+    locator: "본문"
+    quote: >
+      have become effective on 1 June 2023 / as soon as practicable after the
+      virtual asset transfer to be acceptable as an interim measure until 1 January 2024
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-048 (T3/B). DOC:hk-21analytics-travel-rule 과 일치 — T3 복수
+  일치로 B. eLegislation 원문·AMLO 개정령 시행 부칙은 미확보이므로 A 로 올리지 않는다.
+  「홍콩 트래블룰 2024-06-01」은 어느 출처에서도 트래블룰 일자로 확인되지 않는다 —
+  기존 SFO 인가 VATP 의 12개월 과도기간 종료와 혼동된 것으로 보인다(보고서 부록 A-31).

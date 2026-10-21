@@ -1,12 +1,12 @@
-# Travel Rule 벤더 — 시장 지도
+# Travel Rule 벤더 — 공개 사실 지도
 
-> 메시징 프로토콜 + Travel Rule SaaS 시장. 이 글을 읽고 나면 "한국에서는 왜 VerifyVASP·CODE·Notabene 이 3개가 사실상 전부인지"를 시장 구조적으로 설명할 수 있게 됩니다. 마지막 업데이트: 2026-04-17.
+> 메시징 프로토콜·Travel Rule 솔루션 시장을 **공개 자료로 확인되는 사실만** 정리합니다. 이 글을 읽고 나면 각 네트워크가 무엇이고 누가 운영하며 서로 어떻게 연동된다고 밝히는지, 그리고 무엇이 확인되지 않았는지를 구분할 수 있게 됩니다. 벤더 간 우열·추천·가격은 다루지 않습니다. 마지막 업데이트: 2026-10-21.
 
 ## TL;DR
-- 시장 양상: **컨소시엄형 (VerifyVASP, CODE, Sygna)** vs **SaaS Gateway (Notabene)** vs **분산형 (TRISA, TRP)**
-- 한국 양강: **VerifyVASP** (Upbit + 글로벌) + **CODE** (빗썸·코빗·코인원)
-- 글로벌 1위: **Notabene** (1,500+ VASP, 멀티프로토콜 게이트웨이)
-- 핵심 선택 기준: **카운터파티 호환성** + **Sunrise 대응** + **IVMS101 충실도**
+- 모델은 셋: **양자 간 오픈 표준**(TRP·TRISA) · **회원제 솔루션 네트워크**(VerifyVASP·CODE·GTR·Sygna 등) · **멀티프로토콜 연동을 표시하는 솔루션**(Sumsub·Notabene·CODE 등)
+- 2026-10-21 기준 정정: **OpenVASP Association 은 TRP 표준을 관리하는 협회**(이전 판의 "Ethereum·ENS·Whisper 기반"은 2020년 이전 설계), **GTR 운영 주체는 Infozone Technologies(싱가포르)**(이전 판의 "BitGo 등 컨소시엄"은 근거 없음), 데이터 모델 현행판은 **IVMS 101.2023**("IVMS101 v2" 없음)
+- 네트워크 규모(VASP 수)·가격·성공률·가입 소요기간은 **공개 1차 근거가 없거나 자사 주장**이라 이 문서에서 뺐습니다
+- 벤더 선택의 기준은 "누가 1위인가"가 아니라 **우리 출금 상대방이 어느 네트워크에 있는가**와 **미연결 상대방 정책**입니다
 
 ---
 
@@ -14,340 +14,241 @@
 
 ```mermaid
 flowchart TB
-    M["📨 IVMS101<br/>(공통 페이로드)"] --> CON["컨소시엄형<br/>VerifyVASP · CODE · Sygna"]
-    M --> SAAS["SaaS Gateway<br/>Notabene (1,500+ VASP)"]
-    M --> DIST["분산형<br/>TRISA · TRP · OpenVASP"]
-    CON -.한국 친화.-> KR["🇰🇷 4대 거래소"]
-    SAAS -.멀티프로토콜 허브.-> ALL["✅ Sunrise 해결책"]
-    DIST -.오픈 PKI.-> OPEN["누구나 참여"]
+    M["IVMS 101.2023<br/>공통 데이터 모델"] --> OPEN["양자 간 오픈 표준<br/>TRP · TRISA"]
+    M --> NET["회원제 솔루션 네트워크<br/>VerifyVASP · CODE · GTR · Sygna"]
+    M --> HUB["멀티프로토콜 연동 표시<br/>Sumsub · Notabene · CODE"]
+    OPEN -.사양 공개·각자 구현.-> O2["상대 식별은 별도"]
+    NET -.회원 디렉터리.-> N2["비회원 접근은 계약 사항"]
+    HUB -.여러 네트워크 중개.-> H2["실제 전송은 하부 프로토콜"]
     style M fill:#1a2e4a,color:#fff,stroke:#1a2e4a
-    style SAAS fill:#fff7d6,stroke:#c9a646
-    style ALL fill:#d1fae5,stroke:#10b981
 ```
 
+### 세 모델의 차이
 
-```
-[ 메시지 표준: IVMS101 (모두 공통 사용) ]
-                  │
-   ┌──────────────┼──────────────┬──────────────────┐
-   ▼              ▼              ▼                  ▼
-컨소시엄형        SaaS           분산형            특화형
-─────────       ─────          ─────             ─────
-VerifyVASP     Notabene       TRISA            Sumsub TR
-CODE           Sumsub TR      TRP              Sygna
-Global TR      Global TR      OpenVASP         (KYC 통합)
-
-사전 검증     멀티프로토콜    오픈 PKI          KYC 결합
-회원사만      Gateway         누구나 참여
-```
-
-### 세 모델의 본질적 차이
-
-- **컨소시엄형** — "서로 신뢰할 수 있는 회원사끼리만 주고받자". 진입 장벽 높음, 신뢰 자동화.
-- **SaaS Gateway** — "우리가 다양한 프로토콜을 중개해준다". 다수 프로토콜 연결의 허브.
-- **분산형** — "누구나 인증서로 참여할 수 있다". 오픈이지만 식별 인프라 별도 필요.
+- **양자 간 오픈 표준** — 사양이 공개돼 있고 각 VASP 가 구현합니다. TRP 는 "Bilateral exchange of encrypted data (VASP-to-VASP). No data or metadata is ever exchanged with any third party" 라고 설명합니다([OpenVASP TRP](https://www.openvasp.org/trp)).
+- **회원제 솔루션 네트워크** — 운영자가 회원을 검증하고 디렉터리를 제공합니다.
+- **멀티프로토콜 연동** — 한 솔루션이 여러 네트워크와의 연동을 표시합니다. 허브는 라우터이고, 실제 전송은 하부 프로토콜이 담당합니다.
 
 ---
 
-## 2. 주요 벤더 상세
+## 2. 주요 벤더·프로토콜 — 공개 사실
 
-### A. Notabene — 글로벌 1위 게이트웨이
+아래는 2026-10-21 각 자사 페이지 열람 결과입니다(T3, 확신도 B). 네트워크 규모 수치는 자사 주장이라 인용하지 않습니다.
 
-- **본사**: 미국 뉴욕, 2020 설립
-- **포지션**: **글로벌 1위 + 멀티프로토콜 Gateway**
-- **사용자**: 1,500+ VASP
-- **특징**:
-  - **Notabene Gateway** — TRISA·TRP·VerifyVASP·CODE 등 다중 프로토콜 동시 연결
-  - **Sunrise Issue 해결책**으로 부상
-  - VASP Discovery 통합
-- **장점**: 한 번 연결로 글로벌 호환
-- **약점**: 기업 가입비, 운영자 의존
+### A. Notabene
 
-**왜 대세가 됐나**: Sunrise Issue — 전 세계 VASP가 서로 다른 프로토콜을 쓰는 현실에서 모든 프로토콜을 직접 구현하는 건 공수·비용이 너무 큼. Notabene이 "우리가 다 연결해주겠다"는 SaaS 모델로 빈자리를 정확히 채웠습니다.
+- 제품: SafeTransact·Notabene Flow·TAP. OpenVASP 회원. "Every Notabene customer has a live TRP 1.0 endpoint."
+- 2026-07-23 Ripple 의 전략투자(금액 비공개) 발표
+- 근거: [Notabene About](https://notabene.id/about-us), [Notabene TRP](https://notabene.id/travel-rule-messaging-protocols/trp), [Ripple 투자 발표](https://notabene.id/post/notabene-announces-strategic-investment-from-ripple)
 
-### B. VerifyVASP — 한국·아시아 컨소시엄
+### B. VerifyVASP
 
-- **운영**: 람다256 (두나무 자회사) + Chainalysis
-- **포지션**: **한국 + 아시아 컨소시엄**
-- **사용**: Upbit, Bithumb Singapore, OKX 등 글로벌
-- **특징**:
-  - 사전 검증 컨소시엄 (closed)
-  - **Chainalysis attribution 통합** — Travel Rule 메시지 + KYT 동시 커버
-  - 한국 4대 거래소 중 Upbit 채택
-- **장점**: 회원사 신뢰성, 한국 친화
-- **약점**: 비회원사와 직접 호환 X (CODE·Notabene와 연동 필요)
+- 홈페이지에 TravelRule API·VerifyName API·VerifyWallet 제품 표시
+- **운영 주체는 홈페이지에 명시되지 않음.** 이전 판의 "람다256 + Chainalysis 합작" 지분 구조는 2026-10-21 공개 1차 근거로 확인되지 않았습니다
+- 근거: [VerifyVASP](https://www.verifyvasp.com/)
 
-### C. CODE (CodeVASP) — 한국 3사 합작
+### C. CODE (CodeVASP)
 
-- **운영**: 코드 (빗썸 + 코빗 + 코인원 합작법인)
-- **포지션**: **한국 컨소시엄**
-- **사용**: 빗썸, 코빗, 코인원 + 일부 외부
-- **특징**:
-  - 폐쇄형 컨소시엄
-  - 2022 시행 시점부터 운영
-  - VerifyVASP와 연동
-- **장점**: 한국 시장 깊이, 합작 거래소 자체 운영
-- **약점**: 글로벌 호환성 한정
+- 운영: CODE Inc. 홈페이지 상호운용 목록에 CodeVASP·VerifyVASP·GTR·Sumsub·Sygna·Notabene·CryptoSwift 표시
+- 2026-03-25 비호스팅 지갑 식별 솔루션 게시
+- 이전 판의 "빗썸·코빗·코인원 3사 합작" 지분 구조는 홈페이지에서 확인되지 않음(2022 보도 기반으로만 전해짐)
+- 근거: [CODE](https://www.codevasp.com/)
 
-### D. Sumsub Travel Rule — KYC 통합
+### D. Sumsub Travel Rule
 
-- **본사**: 영국 (Sumsub은 KYC 1위 중 하나)
-- **포지션**: **KYC + Travel Rule 통합**
-- **특징**: KYC SDK 사용 중인 VASP에게 자연스러운 추가
-- **장점**: KYC와 동일 인프라
-- **약점**: KYC 미사용 시 매력 적음
+- 자체·GTR·CODE·TRP·Sygna 5개 프로토콜 연동 표시. 비호스팅 지갑은 자체 프로토콜과 블록체인 분석 파트너를 통한 "multiple verification methods"로 검증한다고 적음
+- 이전 판의 "본사 영국"은 이번 조사에서 확인하지 못해 삭제
+- 근거: [Sumsub Protocols](https://sumsub.com/protocols/)
 
-### E. Sygna — 아시아 강세
+### E. Sygna (CoolBitX)
 
-- **운영**: CoolBitX (대만)
-- **포지션**: **아시아권 강세**
-- **사용**: 일본, 동남아 거래소 다수
-- **특징**: 자체 hub 구조
+- Sygna Bridge 2.0·IVMS101 지원 표시. Sumsub·GTR·CODE 가 지원 프로토콜로 올림
+- 이전 판의 "일본·동남아 거래소 다수"는 근거가 없어 삭제
+- 근거: [Sygna](https://www.sygna.io/)
 
 ### F. Global Travel Rule (GTR)
 
-- **운영**: BitGo 등 컨소시엄
-- **사용**: 일부 미국·중남미
+- **운영: Infozone Technologies Pte. Ltd.(싱가포르)**. 홈페이지에 얼라이언스 회원 목록과 지원 프로토콜(Code·Sumsub·Sygna·Fireblocks), 제품(API·Manual·Wallet Verification·Out-Of-Network) 표시
+- 이전 판의 "BitGo 등 컨소시엄, 일부 미국·중남미"는 근거가 없어 삭제
+- 근거: [GTR](https://www.globaltravelrule.com/)
 
-### G. TRISA — 분산형 오픈소스
+### G. TRISA
 
-- **운영**: 비영리 (CipherTrace 시작 → Mastercard 인수)
-- **포지션**: **분산형 오픈소스**
-- **특징**: PKI 기반, gRPC, 오픈
-- **사용**: 일부 LATAM, 신흥시장
+- gRPC/protobuf 기반 오픈소스 프로토콜 + Global Directory Service. 오픈소스 노드 **Envoy** 가 TRISA 와 TRP 를 모두 지원한다고 밝힘
+- 2026-10-21 trisa.io 는 응답하지 않음 — 접속 불가만으로 운영 중단을 추정하지 말 것
+- 이전 판의 "일부 LATAM, 신흥시장 사용"은 근거가 없어 삭제
+- 근거: [trisa.dev](https://trisa.dev/), [GitHub trisacrypto/trisa](https://github.com/trisacrypto/trisa)
 
-### H. TRP (Travel Rule Protocol)
+### H. TRP (Travel Rule Protocol) · OpenVASP
 
-- **운영**: 21 Analytics + ING 등
-- **특징**: REST API 기반, 가벼움
+- **OpenVASP Association(Zug)이 TRP 표준을 관리**. 주간 TRP Working Group, GitLab 공개 사양(CC BY-SA 4.0), ISO 24165(DTI)·IVMS101 호환. TRP 벤더로 21 Analytics 등을 듦
+- 현행 TRP 버전 번호는 사이트에 표시되지 않음
+- 근거: [OpenVASP](https://www.openvasp.org/), [OpenVASP TRP](https://www.openvasp.org/trp), [GitLab](https://gitlab.com/OpenVASP/travel-rule-protocol)
+
+### I. 21 Analytics
+
+- 도메인을 21analytics.ch → 21analytics.co 로 이전(301). AOPP(주소 소유 증명 프로토콜) 용어집 운영
+- 근거: [21 Analytics AOPP](https://21analytics.co/glossary/address-ownership-proof-protocol-aopp)
 
 ### 실무 포인트
 
-한국 시장에서 4번째 이후 벤더(Sumsub, Sygna 등)는 **특정 상황에서만 의미**가 있습니다. 주력은 VerifyVASP·CODE·Notabene 3개 중 선택. 신규 VASP라면 먼저 Notabene으로 빠르게 진입하고, 시장 안정화 후 한국 컨소시엄 가입을 검토하는 단계적 전략이 가장 흔합니다.
+위 사실은 모두 **자사가 자기에 대해 밝힌 것**입니다. 연동 목록은 "연동을 표시함"이지 품질·커버리지·안정성을 뜻하지 않습니다. 실제 도입 판단은 우리 출금 상대방 목록을 들고 각 네트워크에 직접 확인해야 합니다.
 
 ---
 
-## 3. 벤더 선택 매트릭스
+## 3. 벤더 선택 — 확인할 질문
 
-### 이 표를 어떻게 읽어야 하나
+이전 판의 "회사 유형별 추천" 표는 우열 평가여서 삭제했습니다. 대신 규범이 요구하는 것에서 출발한 질문 목록입니다.
 
-회사 유형별 추천. "한 번에 모두 해결"하는 솔루션은 거의 없고, **메인 프로토콜 + 글로벌 호환 확장**의 조합이 표준. 한국 대형 거래소가 "VerifyVASP + Notabene" 처럼 양쪽을 쓰는 이유.
-
-| 회사 유형 | 추천 |
-|---|---|
-| **한국 거래소 (대형)** | VerifyVASP 또는 CODE + Notabene Gateway (글로벌) |
-| **한국 수탁업자** | (Travel Rule 적용 범위 검토 후) Notabene 또는 컨소시엄 |
-| **글로벌 거래소** | Notabene Gateway (멀티프로토콜) |
-| **소규모 VASP** | Notabene SaaS 또는 Sumsub (KYC 결합) |
-| **EU CASP** | Notabene + TRP (TFR 임계 없음 대응) |
-| **신흥시장 VASP** | TRISA (오픈소스, 무료 가능) |
+| 질문 | 왜 필요한가 | 근거 |
+|---|---|---|
+| 우리 출금 상대방 상위 N 곳이 이 네트워크(또는 연동 네트워크)에 있는가 | 미연결이면 정보를 보낼 수 없음 | FATF 2021 para 200–201 (sunrise 대응) |
+| IVMS 101.2023 의 C1·LEI 제약(C9~C11)을 검증하는가 | 현행 데이터 모델 제약 | [IVMS 101.2023](https://cdn.jsdelivr.net/npm/ivms101@2.0.0/specs/ivms101-2023.pdf) |
+| 관할별 금액 구간을 **시점과 함께** 설정할 수 있는가 | 영국 1,000 euros(~2026-06-29) → £800(2026-06-30~) | [S.I. 2026/621](https://www.legislation.gov.uk/uksi/2026/621/made) |
+| 한국 2027-02-19 전건화·요청 시 3영업일 추가정보를 지원하는가 | 금액 게이트 제거, 요청 응답 큐 | [시행령 §10-10 시행예정 판본](https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&MST=288765&efYd=20270219&type=XML) |
+| 상대 VASP 실사 자료(인허가·트래블룰 이행)를 남길 수 있는가 | 한국 2027-02-19~ 고시 §28-2 등급 판정 | [감독규정 FIU 고시 제2026-2호](https://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=2100000285986&type=XML) |
+| 자기수탁 지갑 검증 방법은 무엇이고 어느 규범의 방법에 해당하는가 | EU 는 1종 이상 열거, 한국 2027 은 동일인 요건만 | [EBA/GL/2024/11](https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf) ¶83 |
+| 메시지·판단 기록을 내보낼 수 있는가 | 벤더 교체 시 기록 보존 | — |
 
 ---
 
 ## 4. 통합 vs 분리
 
-### Travel Rule + KYT 통합 운영
+### Travel Rule + 거래모니터링 운영
 
 ```
-KYC (Sumsub·ARGOS)
-  └─ Travel Rule (Sumsub 또는 Notabene)
-       └─ KYT (Chainalysis·TRM)
-            └─ Risk Engine (자체)
+KYC
+  └─ Travel Rule 메시징
+       └─ 거래모니터링 · 블록체인 분석
+            └─ 내부 위험판단 엔진
 ```
 
-### 통합형 단일 벤더
-
-- Sumsub: KYC + Travel Rule
-- TRM Labs: KYT + Travel Rule (TRM Travel Rule)
-- Chainalysis: KYT (Travel Rule 자체 모듈은 미약, VerifyVASP 합작 통해 제공)
+FATF 7차 TU(2026-07-16)는 VASP 에 "transactions monitoring and blockchain analytics tools" 로 급속 이전을 탐지하라고 권고하지만, 이것은 트래블룰 메시징과 별개 통제입니다([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)). 이전 판의 "Chainalysis 는 VerifyVASP 합작을 통해 Travel Rule 제공", "TRM Travel Rule" 서술은 이번 조사에서 1차 확인되지 않아 뺐습니다.
 
 ### 실무 포인트
 
-"단일 벤더가 다 해준다"는 편리함은 있지만 **벤더 종속 리스크**가 큼. 시스템 장애 시 영향 범위가 넓고, 벤더 교체가 어려워집니다. 각 영역별 최적 벤더를 선택하고 내부 Risk Engine에서 통합하는 구조가 규모 있는 회사의 선택.
+단일 벤더 통합은 편하지만 **벤더 종속**이 생깁니다. 어떤 구조든 메시지 원문·판단 근거·상대방 평가 기록을 자사 쪽에 보관해 두면 교체 비용이 줄어듭니다.
 
 ---
 
-## 5. 한국 시장 운영 패턴 (2026 기준)
+## 5. 한국 시장 운영 패턴
 
 ```
-Upbit (VerifyVASP 회원)
-  ├─ 빗썸·코빗·코인원 (CODE) → VerifyVASP ↔ CODE 연동으로 송수신
-  ├─ 글로벌 VASP → VerifyVASP 직접 또는 Notabene Gateway
-  └─ 미연결 VASP → 송금 거절 또는 수동 검토
-
-빗썸·코빗·코인원 (CODE 회원)
-  ├─ Upbit → CODE ↔ VerifyVASP 연동
-  ├─ 글로벌 VASP → CODE 또는 Notabene Gateway
-  └─ 미연결 → 동일
-
-Custody · 신규 VASP
-  └─ Travel Rule 적용 범위 점검 (직접 이전 행위 발생 시)
-     ├─ 컨소시엄 가입 (VerifyVASP 또는 CODE) — 비용 + 검증
-     └─ Notabene Gateway — 빠른 진입
+국내 VASP ↔ 국내 VASP
+  ├─ ~2027-02-18: 100만원 이상만 정보제공 (in-force)
+  └─ 2027-02-19~: 모든 이전 (enacted-not-in-force)
+국내 VASP → 해외 VASP
+  └─ 2027-02-19~: 저위험 허용 / 그 외 동일인 간만 / 고위험 제한 (고시 §28-2②)
+국내 VASP → 자기수탁 주소
+  └─ 2027-02-19~: 동일인 간만 허용, 위험 현저하면 제한 (고시 §28-2④)
 ```
+
+2026 상반기 총 출고 62.8조원 중 트래블룰 적용은 9.5조원(약 15%)이었습니다([금융위 2026-10-01](https://www.fsc.go.kr/no010101/87835)). 국내 사업자 간 메시지는 솔루션 네트워크를 통해 오가고, CODE 홈페이지는 VerifyVASP 를 상호운용 목록에 올리고 있습니다(B). 거래소별로 어느 네트워크를 쓰는지는 이 저장소가 1차 근거로 확인하지 않았습니다.
 
 ### 실무 포인트
 
-신규 VASP에게 가장 흔한 질문: "VerifyVASP에 가입할까 CODE에 가입할까?" 답은 **양쪽 다 가입**(운영 가능하면)이 이상적이지만, 현실적으로는 **Notabene 먼저 + 이후 컨소시엄 단계적 가입**이 현실적. 컨소시엄 가입은 사전 검증 과정이 수개월 걸릴 수 있습니다.
+2027-02-19 이후 해외 VASP 허용 여부는 메시지 연결뿐 아니라 **상대 VASP 평가 결과**로 갈립니다. 벤더가 연결을 제공해도 평가가 "그 외" 등급이면 동일인 이전만 허용됩니다.
 
 ---
 
 ## 6. POC 체크리스트
 
 ```
-□ 우리가 받는 카운터파티 VASP 호환 여부
-□ IVMS101 메시지 정확도 (필드 누락·오류)
-□ 응답 속도 (p99) — 사용자 UX 영향
-□ Sunrise 폴백 정책 지원
-□ 한국 100만원 임계 자동 계산
-□ 미연결 카운터파티 처리 흐름
-□ 메시지 보관 (15년) 지원
-□ PII 암호화 + 한국 PIPA 호환
-□ 한국어 + 한국 시간대 지원
-□ 가격 모델 (트랜잭션당 vs 정액)
+□ 우리 출금 상대방 목록 기준 연결 여부 실측
+□ IVMS 101.2023 검증 (PayloadVersionCode 101/101.2023, C1, LEI)
+□ 응답 시간 — 자사 실측 (공개 SLA 벤치마크 없음)
+□ 미연결 상대방 정책 설정 (보류·수집 후 진행·거절)
+□ 관할별 금액 구간의 유효기간 설정 (영국 2026-06-30 전환 등)
+□ 한국 2027-02-19: 금액 게이트 해제, 요청 시 3영업일 응답
+□ 상대 VASP 평가 자료 보관
+□ 메시지 보존 — 관할별 기록보존 조문으로 기간 확인
+□ 개인정보 암호화, 국외이전 근거
+□ 기록 export 조항
 ```
 
 ---
 
-## 7. 가격 (참고치)
+## 7. 가격
 
-- 소규모: $20K~$50K/년 + 트랜잭션당 ~$0.10
-- 중규모: $80K~$200K/년
-- 대규모 거래소: $500K~$1M+/년
-- 컨소시엄 가입비: 별도 (VerifyVASP·CODE는 회원사 협의)
-
-### 실무 포인트
-
-Travel Rule 비용은 **트랜잭션 규모에 연동**되는 경우가 많아서, 거래량이 급증할 때 비용이 예상을 넘을 수 있습니다. 계약 시 **볼륨 상한과 추가 요금 구조**를 명확히 해두는 게 중요.
+이전 판의 가격 참고치(연 $20K~$1M+, 거래당 ~$0.10)는 출처가 없어 삭제했습니다. 가격은 공개되지 않으므로 견적으로만 확인할 수 있습니다.
 
 ---
 
-## 8. 미래 트렌드
+## 8. 2026-10-21 기준 변화와 남은 미확인
 
-### 표준화·단일화
+### 표준
 
-- IVMS101 v2 등 표준 발전
-- DTI (ISO 24165) 토큰 식별자 + LEI 결합
-- AI 기반 자동 매칭
+- **IVMS 101.2023** 이 현행판(2023-08 발행, ISWG 2024-06-04 갱신 공표). "IVMS101 v2" 전망은 근거가 없습니다
+- DTI(ISO 24165)는 TRP 가 호환을 명시, LEI(ISO 17442)는 IVMS 101.2023 제약 C9~C11
 
-### 호환성 강화
+### FATF
 
-- 멀티프로토콜 Gateway 표준화
-- VASP Directory 글로벌화
+- R.16 개정(2025-06 총회)은 VASP 에 R.15 를 거쳐 간접 적용, 이행 기대시한 2030-12-31
+- R.16 이행 가이던스 초안 의견수렴 2026-06-24~2026-08-21, 2026-10-21 기준 최종본 미발간(proposed)
+- 이전 판의 "2026 후반 가이던스 → 모든 벤더 업데이트", "2030 발효"는 각각 낡거나 부정확한 표현이라 고쳤습니다
 
-### Privacy 강화
+### 미확인으로 남은 것
 
-- ZKP 기반 PII 보호
-- Selective disclosure
+- 각 네트워크 회원 수·거래량 — 자사 주장만 있음
+- VerifyVASP·CODE 지분 구조, 상호 연동 완료 시점
+- 서명 표준(EIP-191/BIP-137) 사용 여부 등 자기수탁 검증 방식의 벤더별 세부
 
-### FATF R.16 개정 반영
-
-- 2026 후반 가이던스 → 모든 벤더 업데이트
-- 2030 발효 대비 시스템 차세대화
+```mermaid
+timeline
+    title 트래블룰 표준·프로토콜 공개 이력
+    2020-05 : IVMS 101 원판 - JWG
+    2023-04 : interVASP ISWG 결성
+    2023-08 : IVMS 101.2023 발행
+    2024-06-04 : ISWG IVMS 101 갱신 공표
+    2025-06 : FATF R.16 개정 채택
+    2026-03-25 : CODE 비호스팅 지갑 식별 솔루션 게시
+    2026-07-23 : Ripple의 Notabene 전략투자 발표
+```
 
 ## 💼 실무 현장 (Industry Reality)
 
-### Notabene Gateway vs 한국 컨소시엄 선택 기준 (실제 결정 트리)
+### 선택 흐름 — 우열이 아니라 상대방에서 출발
 
 ```mermaid
 flowchart TB
-    Q1{주 고객이 한국?}
-    Q1 -->|Yes 80%+| Q2{어느 거래소와 주로 거래?}
-    Q1 -->|No, 글로벌| NOTA[Notabene 메인]
-    Q2 -->|Upbit 중심| VV[VerifyVASP 필수]
-    Q2 -->|Bithumb·Coinone·Korbit 중심| CODE[CODE 필수]
-    Q2 -->|양쪽 모두| BOTH[양사 동시 가입]
-    VV --> GLOBAL{글로벌 파트너 있음?}
-    CODE --> GLOBAL
-    BOTH --> GLOBAL
-    GLOBAL -->|Yes| ADD[+ Notabene Gateway]
-    GLOBAL -->|No| DONE[단일 운영]
-    NOTA --> DONE2[단일 운영]
-    style VV fill:#dbeafe
-    style CODE fill:#dbeafe
-    style NOTA fill:#fff7d6
+    S["출금 상대방 목록 추출"] --> C{"상대방이 연결된<br/>네트워크 확인"}
+    C -->|한 네트워크에 집중| ONE["해당 네트워크 연결"]
+    C -->|여러 네트워크에 분산| MANY["복수 가입 또는<br/>연동 표시 솔루션"]
+    ONE --> P{"미연결 상대방 정책"}
+    MANY --> P
+    P --> R["보류 · 수집 후 진행 · 거절<br/>근거 조문 명시"]
+    R --> K{"한국 2027-02-19~<br/>상대 VASP 평가"}
+    K -->|저위험| OK["허용"]
+    K -->|그 외| SAME["동일인 간만 허용"]
+    K -->|고위험| NO["제한"]
 ```
-
-### 실제 한국 VASP의 Travel Rule 스택 (2026-Q1)
-
-| 거래소 | 메인 | 글로벌 확장 | 비고 |
-|---|---|---|---|
-| Upbit | VerifyVASP | Notabene Gateway | Chainalysis 통합 |
-| Bithumb | CODE | Notabene Gateway | |
-| Coinone | CODE | 글로벌 확장 검토 중 | |
-| Korbit | CODE | 제한적 | 보수적 운영 |
-
-### 컨소시엄 가입 프로세스 실제 경험
-
-**VerifyVASP 가입 (평균 2~4개월)**:
-1. 서류 제출: 사업자등록, 특금법 신고 수리증, AMLO 정보, ISMS 인증
-2. 기술 연동 테스트: API key 발급, sandbox 테스트, IVMS101 메시지 검증
-3. 실운영 검증: 수 회 실제 메시지 송수신 후 승인
-4. 월 회원비 + 거래당 수수료 지급
-
-**CODE 가입 (평균 2~3개월)**:
-1. 서류: 동일
-2. 3사(빗썸·코빗·코인원) 합의 필요
-3. 기술 연동 + 실운영 검증
-4. 비용 구조는 VerifyVASP와 유사
-
-### Notabene Gateway 실제 통합 경험
-
-- **연동 공수**: 2~4주 (API 기반, SDK 제공)
-- **비용**: 초기 연동비 + 월 구독 + 거래당 수수료 (글로벌 VASP 라우팅)
-- **커버리지**: 1,500+ VASP, 대부분 글로벌 대형 거래소 포함
-- **한국 연동**: VerifyVASP·CODE와 **간접 라우팅** — 직접 회원사 아니라 중개
-
-### Sunrise Issue 실제 대응 — 한국 거래소 월간 패턴
-
-대형 한국 거래소 월간 Travel Rule 실패 분석 (추정):
-
-- **전체 시도**: ~30,000~50,000건 (100만원 이상 출금 기준)
-- **카운터파티 식별 실패** (무명 VASP): ~5% → 수동 검토
-- **미연결 VASP**: ~3% → 거절 or 수동
-- **API timeout**: ~2% → 재시도
-- **Schema mismatch**: ~1% → 폴백
-- **성공**: ~89%
 
 ### 자주 나오는 오해
 
-- **"VerifyVASP ↔ CODE 연동으로 한국 안에서는 완벽"** — 실무는 월 1~2회 API 장애·타임아웃. on-call 엔지니어 필수.
-- **"Notabene만 있으면 글로벌 OK"** — 한국 거래소 연동은 **VerifyVASP/CODE 경유 간접**. 직접 회원사 필요 시 별도 가입.
-- **"Travel Rule은 100만원 이상만"** — 한국 특금법 기준. **EU TFR은 1 EUR부터**. 글로벌 영업 시 가장 엄격 기준 필요.
-- **"개인지갑 출금에도 Travel Rule"** — 개인지갑(unhosted)은 Travel Rule 대상 아님. 대신 **외부지갑 등록제** + Satoshi Test.
-
-### 주니어 Travel Rule 엔지니어 하루
-
-- **오전**: 전날 실패 로그 분석 (5~20건), 분류: timeout·schema·unknown
-- **점심 전**: 신규 글로벌 VASP 연결 요청 처리 (Notabene Directory)
-- **오후**: IVMS101 validator 업데이트 (EU TFR 필드 변경 등)
-- **금요일**: 주간 Travel Rule 성공률 리포트 AMLO 제출
+- **"Travel Rule 은 100만원 이상만"** — 한국 ~2027-02-18 기준입니다. 2027-02-19 부터 전건이고, EU TFR 은 처음부터 금액 무관 전건입니다
+- **"개인지갑 출금은 Travel Rule 과 무관"** — 관할마다 다릅니다. EU 는 EUR 1,000 이상이면 자기수탁 주소 소유·통제 평가(TFR 제14조(5)·EBA GL ¶83), 영국은 reg 64G(정보 요청·미수령 시 지급 금지), 한국은 2027-02-19 부터 동일인 간만 허용(고시 §28-2④)
+- **"외부지갑 등록제는 자율규제일 뿐"** — 2026-10-21 기준으로는 맞지만 2027-02-19 부터 동일인 요건이 고시 의무가 됩니다
+- **"GTR 은 BitGo 컨소시엄"** — 운영 주체는 Infozone Technologies(싱가포르)입니다
+- **"OpenVASP 는 Ethereum 기반 메시징"** — OpenVASP Association 은 TRP 를 관리하는 협회입니다
+- **"FIU 에 트래블룰 실패율을 분기 보고한다"** — 그런 보고 의무의 근거 조문은 이 저장소가 확인하지 못했습니다
 
 ### 한국 특수 현실
 
-- **VerifyVASP ↔ CODE 연동 3개월 공백 (2022-03~05)**: Upbit ↔ 빗썸 간 송금 불가 → 이후 **양사 동시 가입** 표준
-- **외부지갑 등록 24h 홀드**: DAXA 공동 자율규제. Travel Rule과 별도 레이어
-- **개인정보 국외이전**: PIPA 국외이전 동의 필요. 이용약관 포괄 동의로 처리하지만 PIPC 가이드 엄격화
-- **FIU 정기 보고**: Travel Rule 실패율·거절율·수동 처리 건수를 분기별 FIU 보고 (비공식 모니터링)
-- **Notabene 한국 미진출**: Notabene은 한국 공식 오피스 없음. 대형 거래소는 본사 계약, 중소는 거의 미사용
-
-### 가격 협상 실제 팁
-
-- **컨소시엄**: 회원사 합의 가격 (개별 협상 여지 적음)
-- **Notabene**: 거래량 기반, 초기 6개월 할인 요청 가능
-- **2~3년 장기 계약**: 15~25% 할인
-- **락인 리스크**: 메시지 아카이브 export 조항 필수 (벤더 교체 시 이전 메시지 보존)
+- **2027-02-19 전환**: 정보제공 전건화, 추가정보 요청 시 3영업일, 해외 VASP 3등급, 자기수탁 동일인 요건, 1천만원 이상 자체 의심거래 감시체계가 같은 날 시작합니다(감독규정 §28-2 시행일은 기산점 문제로 미확정)
+- **제재 현실**: 두나무 과태료 352억원(2025-11-06 결정)의 사유는 고객확인·거래제한·의심거래보고 위반이고 트래블룰은 포함되지 않았습니다([FIU 보도자료 KDI 미러](https://eiec.kdi.re.kr/policy/materialView.do?num=273166))
+- 이전 판의 "연동 3개월 공백", "외부지갑 24h 홀드", "Notabene 한국 미진출", 거래소별 스택 표·평가, 가입 소요기간·할인율은 공개 근거가 없어 삭제했습니다
 
 ---
 
 ## 더 읽을거리
-- [`analytics-vendors.md`](analytics-vendors.md) — KYT 벤더 비교
+- [`analytics-vendors.md`](analytics-vendors.md) — KYT 벤더
 - [`korea-solutions.md`](korea-solutions.md) — 한국 시장 솔루션
-- [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) — Travel Rule 운영
+- [`../3-crypto-aml/travel-rule.md`](../3-crypto-aml/travel-rule.md) — Travel Rule 운영·관할 비교
 - [`../4-technology/travel-rule-protocols.md`](../4-technology/travel-rule-protocols.md) — 프로토콜 기술
-- [Notabene 공식](https://notabene.id/)
-- [VerifyVASP 공식](https://www.verifyvasp.com/)
-- [CodeVASP 공식](https://www.codevasp.com/ko)
-- [TRISA 공식](https://trisa.io/)
-- [21 Analytics (TRP)](https://www.21analytics.co/)
-- [Sumsub Travel Rule](https://sumsub.com/travel-rule/)
+- [`../../research/2026-10-travel-rule.md`](../../research/2026-10-travel-rule.md) §4.11 — 벤더 사실 출처·확신도
+- [OpenVASP — TRP](https://www.openvasp.org/trp)
+- [interVASP](https://intervasp.org/)
+- [trisa.dev](https://trisa.dev/)
+- [GTR](https://www.globaltravelrule.com/)
+- [CODE](https://www.codevasp.com/)
+- [VerifyVASP](https://www.verifyvasp.com/)

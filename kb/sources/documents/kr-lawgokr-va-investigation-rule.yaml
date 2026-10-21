@@ -1,0 +1,34 @@
+id: "DOC:kr-lawgokr-va-investigation-rule"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "가상자산시장조사업무규정 (금융위원회 고시 제2026-39호, 현행)"
+  en: "Regulation on Virtual Asset Market Investigation (FSC Notice No. 2026-39)"
+  short: "가상자산시장조사업무규정"
+summary: >-
+  금융위원회 고시. 제3조가 이상거래 발생 시 거래소가 취할 조치(거래유의 안내·조회공시·주문 제한·거래 중지)를, 제4조가 수사기관 신고 요건을 정한다. 제정 고시 제2024-38호(2024-07-10,
+  2024-07-19 시행), 현행 제2026-39호(2026-09-23, 2026-10-02 시행).
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/LSW/admRulInfoR.do?admRulSeq=2100000285440&chrClsCd=010201"
+published: "2026-09-23"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "market-abuse"
+external_ids:
+  notice_no: "2026-39"
+  admrul_seq: "2100000285440"
+evidence:
+- doc: "DOC:kr-lawgokr-va-investigation-rule"
+  confidence: "A"
+  locator: "제4조 제1항"
+  quote: "1. 법 제10조를 위반한 혐의가 충분히 증명된 경우 2. 법 제10조를 위반한 혐의로 수사기관이 수사 중인 사건과 관련하여 수사기관의 요청이 있는 경우"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  「가상자산업감독규정」(고시 제2024-37호)에는 이상거래 조문이 없다 — 상시감시 세부는 이 규정에만 있다(fds 도시에 F-025).

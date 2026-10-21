@@ -1,0 +1,24 @@
+id: "SRC:us-lii"
+type: "SRC"
+layer: "semantic"
+label:
+  ko: "코넬대 법률정보연구소 (LII) CFR 미러"
+  en: "Cornell Law School Legal Information Institute (LII)"
+  short: "Cornell LII"
+summary: >
+  eCFR 과 동기화되는 연방규정(CFR) 미러. 조문 머리에 시행 예정 개정·연기 주석을 함께 보여 준다.
+  2026-10-21 ecfr.gov 본문이 unblock 리다이렉트를 반환해 대체 경로로 썼다.
+tier: "T1"
+tier_basis: >
+  정부 원문(eCFR)을 그대로 옮긴 미러. 원문의 권위는 eCFR 에 있으며, 미러 동기화 지연 가능성이 있어
+  가능하면 eCFR API 로 교차 확인한다.
+publisher_kind: "academic"
+base_url: "https://www.law.cornell.edu/cfr/text"
+language: "en"
+paywall: false
+tags: ["us", "statute-text", "mirror"]
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-04-19"
+curator_note: >
+  research/2026-10-travel-rule.md §6 SRC-us-lii-cfr. SRC:us-ecfr 의 대체 경로이며 별개 발행처가 아니다.

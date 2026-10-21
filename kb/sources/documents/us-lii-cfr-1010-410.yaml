@@ -1,0 +1,34 @@
+id: "DOC:us-lii-cfr-1010-410"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "31 CFR 1010.410 — Cornell LII 판 (2026-10-21 열람)"
+  en: "31 CFR § 1010.410 — Cornell LII"
+  short: "31 CFR 1010.410 (LII)"
+summary: >
+  31 CFR 1010.410 의 LII 미러. (f)항 「$3,000 or more」 문언과 함께, 조문에 걸린 미시행 개정
+  89 FR 72274(2024-09-04)가 91 FR 36(2026-01-02)으로 2028-01-01 까지 연기됐다는 주석을 보여 준다.
+src: "SRC:us-lii"
+url: "https://www.law.cornell.edu/cfr/text/31/1010.410"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "en"
+translation: false
+tags: ["us", "travel-rule", "threshold"]
+evidence:
+  - doc: "DOC:us-lii-cfr-1010-410"
+    confidence: "A"
+    locator: "§ 1010.410(f) · 머리 주석"
+    quote: >
+      shall include in any transmittal order for a transmittal of funds in the
+      amount of $3,000 or more, information as required in this paragraph (f) /
+      This amendment was delayed until Jan. 1, 2028, at 91 FR 36, Jan. 2, 2026.
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  research/2026-10-travel-rule.md F-036·F-038 (T1/A). 89 FR 72274 는 투자자문업자 AML/CFT 규칙
+  (FR 2024-19260)이 1010.410(e)(6) 제외목록에 투자자문업자를 추가한 개정이다(Federal Register API
+  요약: "Amends 1010.410(e)(6) to add investment advisers to the exclusion list.") —
+  가상자산 트래블룰((f)항)과 무관하다.

@@ -755,14 +755,17 @@ flowchart LR
 # ================================================================
 # Capstone (57~60)
 # ================================================================
-DIAGRAMS[57] = """\
-```mermaid
+DIAGRAMS[57] = """\n```mermaid
 flowchart LR
     ML["🤖 AI·ML"] --> C["클러스터링 보조"]
-    ML --> I["이상 탐지"]
-    ML --> W["NFT wash trading"]
+    ML --> A["온체인 이상 패턴<br/>anomaly 탐지"]
+    ML --> P["피싱·rug pull·<br/>address poisoning"]
     ML --> N["새 mixer 식별"]
-    ML --> S["Scam 사전 탐지"]
+    A --> OUT{"어느 법적 출구?"}
+    P --> OUT
+    OUT --> F["FDS 임시조치<br/>통신사기피해환급법"]
+    OUT --> M["시장감시 통보<br/>이용자보호법 §12"]
+    OUT --> S["STR<br/>특금법 §4"]
     ML -.한계.-> L["라벨 부족 · Adversarial · 설명가능성"]
     style ML fill:#1a2e4a,color:#fff,stroke:#1a2e4a
     style L fill:#fed7aa,stroke:#ea580c

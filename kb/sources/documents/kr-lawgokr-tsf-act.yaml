@@ -1,0 +1,46 @@
+id: "DOC:kr-lawgokr-tsf-act"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "전기통신금융사기 피해 방지 및 피해자산 환급에 관한 특별법 (현행, 2026-10-02 시행)"
+  en: "Special Act on the Prevention of Telecommunications Financial Fraud and Refund of Damaged Assets (current)"
+  short: "통신사기피해환급법"
+summary: >-
+  법제처 현행본(법률 제22047호, 2026-09-29 일부개정, 2026-10-02 시행). 법률 제21503호(2026-03-31 공포, 2026-10-01 시행) 부칙과 개정 문언을 포함한다.
+  제2조제1호 하목으로 가상자산거래소가 「금융회사등」에 들어가고, 제2조의5가 임시조치를 의무화한다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290245&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR"
+published: "2026-09-29"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "fraud"
+- "voice-phishing"
+external_ids:
+  law_no_current: "22047"
+  lsi_seq: "290245"
+evidence:
+- doc: "DOC:kr-lawgokr-tsf-act"
+  confidence: "A"
+  locator: "부칙 <법률 제21503호, 2026. 3. 31.> 제1조"
+  quote: "이 법은 공포 후 6개월이 경과한 날부터 시행한다."
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-tsf-act"
+  confidence: "A"
+  locator: "제2조의5 제1항"
+  quote: "금융회사등은 다음 각 호의 어느 하나에 해당하는 경우 해당 이용자 계좌등의 전부 또는 일부에 대하여 이체, 송금, 출금 또는 가상자산 이전을 지연시키거나 일시 정지하는 조치(이하 \"\
+    임시조치\"라 한다)를 하여야 한다."
+  retrieved: "2026-10-21"
+- doc: "DOC:kr-lawgokr-tsf-act"
+  confidence: "A"
+  locator: "제2조제1호 하목"
+  quote: "「가상자산 이용자 보호 등에 관한 법률」 제2조제4호의 가상자산시장을 개설ㆍ운영하는 같은 조 제2호의 가상자산사업자(이하 \"가상자산거래소\"라 한다)"
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  법률 제21503호 단독 판본 URL 은 확보하지 않았다. 21503호의 공포일·시행일·부칙은 이 현행본의 부칙 목록으로 확인했다(fds 도시에 F-010·F-011).

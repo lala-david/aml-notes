@@ -2,13 +2,27 @@
 
 > 학습·업무에 자주 필요한 **1차·2차 자료**. 이 글은 "어떤 상황에서 어느 링크를 봐야 하나"의 이정표입니다.
 
-> **마지막 갱신**: 2026-04-23
-> **다음 리뷰**: 2026-07 (분기 리뷰)
+> **마지막 갱신**: 2026-10-21
+> **다음 리뷰**: 2027-01 (분기 리뷰)
 > **리뷰 주기**: 분기별 전수 (깨진 URL·신규 규제 링크 점검)
 
 ## 이 페이지를 어떻게 쓰나
 
 AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부 정책 문서·STR 보고서·감독 대응 시 "특금법 §5의2" 같은 조문을 찾거나, "FATF R.16 원문이 어디에 있는지" 빠르게 접근할 수 있어야 합니다. 이 페이지는 **북마크 모음**으로 활용하세요 — 암기는 필요 없지만 **어디에 있는지는** 기억해야 합니다.
+
+```mermaid
+flowchart TD
+    Q["인용할 사실"] --> T{"무엇에 관한 사실인가"}
+    T -->|"법령·시행일"| L1["법제처 원문<br/>시행일 색인 확인"]
+    T -->|"국제기준"| L2["FATF 원문 PDF"]
+    T -->|"시장 규모 통계"| L3["분석업체 리포트 원문<br/>정의·분모·하한 여부 병기"]
+    T -->|"논문 수치"| L4["arXiv·출판사 초록<br/>철회 여부 확인"]
+    L1 --> X["뉴스·법무법인 해설은<br/>원문 확인 뒤 보조로만"]
+    L2 --> X
+    L3 --> X
+    L4 --> X
+    style X fill:#fff7d6,stroke:#c9a646
+```
 
 ---
 
@@ -35,12 +49,19 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [FATF 공식](https://www.fatf-gafi.org/)
 - [FATF — Virtual Assets 페이지](https://www.fatf-gafi.org/en/topics/virtual-assets.html)
 - [FATF — 40 Recommendations](https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html)
-- [FATF — 2025 Targeted Update on VAs and VASPs (PDF)](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/2025-Targeted-Upate-VA-VASPs.pdf.coredownload.pdf)
+- [FATF — 7th Targeted Update on VAs and VASPs, 2026-07-16 (PDF)](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)
+- [FATF — 6th Targeted Update on VAs and VASPs, 2025-06-26 (PDF)](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/2025-Targeted-Upate-VA-VASPs.pdf.coredownload.pdf)
+- [FATF — Updated Guidance for a Risk-Based Approach to VAs and VASPs, 2021-10-28 (PDF, 루마니아 FIU 미러)](https://www.onpcsb.ro/2022/01042022/Updated-Guidance-VA-VASP.pdf)
+- [FATF — Targeted Report on Stablecoins and Unhosted Wallets, 2026-03-03](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-stablecoins-unhosted-wallets.html)
+- [FATF — Understanding and Mitigating the Risks of Offshore VASPs, 2026-03-11](https://www.fatf-gafi.org/en/publications/Virtualassets/Understanding-Mitigating-Risks-Offshore-VASPs.html)
+- [FATF — Targeted Report on Regulatory Challenges from DeFi, 2026-07-21](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-decentralised-finance-2026.html)
 - [FATF — Updated R.16 Explanatory Note (PDF)](https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/Explanatory%20note%20for%20revised%20R.16.pdf.coredownload.pdf)
 
 ### 미국
 
 - [FinCEN 공식](https://www.fincen.gov/)
+- [NYDFS — 블록체인 분석 사용 가이던스, 2022-04-28](https://www.dfs.ny.gov/industry_guidance/industry_letters/il20220428_guidance_use_blockchain_analytics)
+- [FBI IC3 — 2025 Annual Report (PDF)](https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf)
 - [OFAC 공식](https://ofac.treasury.gov/)
 - [OFAC SDN List 검색](https://sanctionssearch.ofac.treas.gov/)
 - [DOJ Cryptocurrency 페이지](https://www.justice.gov/criminal)
@@ -56,6 +77,9 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [UN Consolidated Sanctions List](https://www.un.org/securitycouncil/content/un-sc-consolidated-list)
 - [UNODC — Money Laundering](https://www.unodc.org/unodc/en/money-laundering/overview.html)
 - [Wolfsberg Group](https://www.wolfsberg-group.org/)
+- [BIS — Annual Economic Report 2026, Ch. III (2026-06-23)](https://www.bis.org/publ/arpdf/ar2026e3.htm)
+- [ECB — Occasional Paper No. 382, CAMEG 2025 초록집 (2026-03-23, PDF)](https://www.ecb.europa.eu/pub/pdf/scpops/ecb.op382.en.pdf)
+- [FSB — Global Stablecoin Arrangements: Cross-border vulnerabilities (2026-10-12)](https://www.fsb.org/2026/10/global-stablecoin-arrangements-cross-border-vulnerabilities-and-financial-stability-monitoring/)
 
 ### 실무 포인트
 
@@ -67,9 +91,11 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 
 ### 산업 리포트
 
-- [Chainalysis — Crypto Crime Report (연간)](https://www.chainalysis.com/reports/crypto-crime-2026/)
-- [TRM Labs — Reports](https://www.trmlabs.com/resources)
-- [Elliptic — Reports](https://www.elliptic.co/resources)
+- [Chainalysis — 2026 Crypto Crime Report 서론 (2026-01-08)](https://www.chainalysis.com/blog/2026-crypto-crime-report-introduction/)
+- [TRM Labs — 2026 Crypto Crime Report (2026-01-28)](https://www.trmlabs.com/reports-and-whitepapers/2026-crypto-crime-report)
+- [Elliptic — Typologies Report 2025 (2025-09-30)](https://www.elliptic.co/insights/elliptics-typologies-report-innovating-to-fight-financial-crime-in-an-age-of-rapid-change/)
+
+> 두 분석업체의 2025년 불법 규모(1,540억 vs 1,580억 달러)는 정의·분모가 달라 비교하면 안 됩니다. 정리는 [`reports.md`](reports.md) §2.
 - [Crystal Intelligence — Reports](https://crystalintelligence.com/)
 - [38 North — DPRK 관련](https://www.38north.org/)
 - [Basel AML Index](https://www.baselgovernance.org/basel-aml-index)
@@ -101,7 +127,7 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - [Akin Gump — FinTech](https://www.akingump.com/en/services/practices/financial-services-fintech)
 - [Mayer Brown — FinTech](https://www.mayerbrown.com/en/capabilities/practices/financial-services-regulatory-and-enforcement)
 
-**실무 포인트**: 법무법인 인사이트는 **"판결·규제가 실무에 어떤 영향을 주는지"** 를 번역해줍니다. Latham의 US Crypto Policy Tracker는 미국 가상자산 법 변화를 타임라인으로 정리해 참조용 최강.
+**실무 포인트**: 법무법인 인사이트는 **"판결·규제가 실무에 어떤 영향을 주는지"**를 해설해 줍니다. 다만 입법예고안 기준 요약이 공포본과 다른 경우가 있으므로(예: 한국 트래블룰 시행령 — 공포 2026-08-18, 시행 2027-02-19), 날짜·의무는 법제처 원문으로 다시 확인하세요.
 
 ### 컨설팅·Big4 인사이트
 
@@ -169,10 +195,15 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 
 ## 5. 학술·깊은 학습
 
+- [Möser & Narayanan — Resurrecting Address Clustering in Bitcoin (arXiv 2107.05749)](https://arxiv.org/abs/2107.05749)
+- [Weber et al. — Elliptic 데이터셋 논문 (arXiv 1908.02591)](https://arxiv.org/abs/1908.02591)
+- [Elmougy & Liu — Elliptic++ (arXiv 2306.06108)](https://arxiv.org/abs/2306.06108)
+- [Bellei et al. — Elliptic2 (arXiv 2404.19109)](https://arxiv.org/abs/2404.19109)
 - [Heuristic-Based Address Clustering in Bitcoin (논문)](https://www.researchgate.net/publication/347083664_Heuristic-Based_Address_Clustering_in_Bitcoin)
-- [BIS — CBDC and AML](https://www.bis.org/)
-- [IMF Working Papers — Crypto](https://www.imf.org/en/Publications/WP)
-- [SSRN — Crypto AML 검색](https://www.ssrn.com/)
+- [arXiv cs.CR 최신 목록](https://arxiv.org/list/cs.CR/recent)
+- [IMF Working Papers](https://www.imf.org/en/Publications/WP)
+- [SSRN](https://www.ssrn.com/)
+- 2025~2026 논문 목록은 [`papers.md`](papers.md) §7
 
 ---
 
@@ -209,7 +240,8 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 - 한국 규제: "특금법", "가상자산사업자", "FIU 보도자료"
 - FATF: "FATF Recommendation 15", "FATF Travel Rule guidance"
 - 사례: "OFAC enforcement crypto YYYY", "FinCEN crypto penalty YYYY"
-- 데이터: "Chainalysis crypto crime report YYYY"
+- 데이터: "crypto crime report YYYY" — 결과에서 분석업체 원 리포트의 방법론 절을 찾을 것
+- 논문: "arXiv <번호>" — 버전 이력에서 철회(withdrawn) 여부 확인
 
 ### 실무 포인트
 
@@ -217,51 +249,25 @@ AML 실무는 **"정확한 출처"를 인용하는 일**이 잦습니다. 내부
 
 ## 💼 실무 현장 (Industry Reality)
 
+> 2026-10-21 정리: 이전 판의 특정 거래소의 내부 정책정보 플랫폼, 컨설팅사 보고서 판매 방식, 법집행기관의 벤더 포털 사용, "AMLO가 주 단위로 여는 1차 자료 TOP 10(추정)", "LLM 1차 번역이 업계 표준화" 같은 서술은 공개 출처가 없어 삭제했습니다.
+
 ### 이 링크 모음을 실무에서 어떻게 쓰나
 
-링크 모음은 AML 실무자의 **북마크 레이어**입니다. 실제 회사에서는 다음 형태로 관리:
-
-- **팀 Notion·Confluence**: 위 링크들을 카테고리별 DB로 유지 + "마지막 확인 시점" 필드 추가
-- **STR 작성 템플릿**: 법령 조문·FATF 권고 링크를 템플릿에 미리 박아두어 분석가가 매번 찾지 않도록
-- **감독 검사 대응 키트**: 검사 당일 노트북에 **1차 자료 북마크 폴더** 단독 구성. FIU·금융위 원문, 특금법·이용자보호법 조문, FATF 2025 Update PDF 오프라인 저장
-- **온보딩 패키지**: 신입 분석가에게 위 링크 리스트를 `.webloc`·Chrome bookmark 폴더로 일괄 제공
-
-### 한국 VASP AMLO는 무엇을 보나
-
-실제 AMLO가 **주 단위로 열어보는 1차 자료 TOP 10** (추정):
-
-1. 국가법령정보센터 — 특금법·이용자보호법 조문(개정 추적)
-2. FSC 보도자료 — 분기 정책 발표, 대외 공문 원출처
-3. KoFIU 자료실 — STR 통계·검사 사례·연차보고서
-4. FATF 공식 — R.15·R.16·연간 Targeted Update
-5. OFAC SDN 검색 — 신규 등재 확인
-6. 법률신문 가상자산 칼럼 — 판결·개정 해설
-7. 김·장·광장 인사이트 — 한국어 실무 번역
-8. DAXA 공지 — 자율규제 개정
-9. Chainalysis Insights 블로그 — 업계 트렌드
-10. TRM Blog — 사고 분석 실시간
-
-### 글로벌 컴플팀은 어떻게 소화하나
-
-- **Coinbase·Kraken**: 자체 **Policy Intelligence 플랫폼** 구축. Latham Crypto Tracker 등 외부 링크를 자동 크롤링 → Slack 채널에 변화 알림
-- **Big 4 컨설팅(PwC·Deloitte·EY·KPMG)**: 위 링크를 기반으로 분기 가상자산 트렌드 보고서 발간 → VASP 고객사에 유료 판매. AMLO가 본인 회사 자료로 재가공
-- **법집행 연합**: FBI·DOJ·IRS-CI는 Chainalysis·TRM 포털을 직접 사용. 공공-민간 정보 교환의 주요 채널
+- **팀 위키**: 링크를 카테고리별로 유지하고 "마지막 확인일" 필드를 둡니다. FATF 사이트는 접속이 막히는 경우가 있어(2026-10 조사에서 403 다수) 미러·PDF 사본 위치도 함께 적어 두면 좋습니다.
+- **STR·정책 문서 템플릿**: 법령 조문·FATF 문단 링크를 템플릿에 미리 넣어 둡니다.
+- **감독 검사 대응**: 1차 자료 북마크를 따로 모아 두고, 인용한 수치마다 출처 URL·확인일을 기록합니다.
 
 ### 자주 나오는 오해
 
-- **"뉴스 기사만 보면 충분"** — 뉴스는 편집·번역 과정에서 사실 왜곡 빈번. **1차 자료(원문·보도자료·공식 PDF)**를 직접 확인하는 습관이 실무 정확성의 기반.
-- **"링크 모음 = 외워야 함"** — 외울 필요 없음. **"어디에 있는지"** 만 기억. 검사·STR 작성 시 3분 내에 원문 찾을 수 있으면 충분.
-- **"영어 원문은 어렵다"** — FATF·OFAC 문서는 법률 영어지만 **템플릿 반복**이 많아 10회 읽으면 친숙해짐. ChatGPT·Claude로 1차 번역 후 원문 교차 확인하는 방식이 업계 표준화.
+- **"뉴스 기사만 보면 충분"** — 날짜·금액이 편집 과정에서 바뀌는 경우가 있습니다. 1차 원문(법령·보도자료·공식 PDF)을 직접 확인하세요.
+- **"링크 모음 = 외워야 함"** — 외울 필요는 없고 **어디에 있는지**만 알면 됩니다.
+- **"분석업체 리포트 링크 하나면 된다"** — 정의가 다른 두 리포트를 함께 보지 않으면 수치의 의미를 오독합니다.
 
 ### 실무자가 이 영역을 따라잡는 루틴
 
-- **월 1회 15분** — 링크 모음 `.md` 전체 훑기. 깨진 링크·새 규제 페이지 업데이트
-- **뉴스 알림 설정** — Google Alert("특금법", "가상자산사업자", "crypto enforcement"), FSC·FIU 공지 RSS
-- **분기 1회 30분** — FATF 공식 페이지 신규 문서 확인, Latham Crypto Tracker 타임라인 훑기
-- **연 2회 반일** — 국가법령정보센터에서 특금법·이용자보호법 조문 전체 재확인(개정 누적 파악)
-- **사건 발생 시** — 직접 링크에서 OFAC·FinCEN·DOJ 합의문 원문 확인(언론 기사는 참고만)
-
-이 루틴 유지 시 **법적·규제 디테일에서 동료 대비 우위**. 한국 VASP에서 "법령 원문을 직접 찾는 AMLO"는 생각보다 적어 차별점이 큼.
+- **월 1회** — 링크 전체 훑기, 깨진 링크 수정(`quality/check_external_urls.py`)
+- **분기 1회** — FATF 신규 발간물 확인
+- **법령 개정 시** — 법제처에서 공포일·시행일을 따로 확인(공포 ≠ 시행)
 
 ## 더 읽을거리
 

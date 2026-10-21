@@ -1,0 +1,28 @@
+id: "DOC:jp-fsa-diet-bills-2026"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "金融庁 국회 제출 법률안 — 금융상품거래법·자금결제법 개정법(2026)"
+  en: "FSA — Bills submitted to the 221st Diet (FIEA and PSA amendment)"
+  short: "金融庁 국회제출법안 2026"
+summary: >
+  금융청 국회 제출 법률안 페이지. 「金融商品取引法及び資金決済に関する法律の一部を改正する法律」이 2026-04-10 제출되어 2026-07-15 성립했다고 기재한다. 암호자산 규제를 자금결제법에서 금융상품거래법으로 이관하는 개정이며, 이관 조항 시행일은 2026-10-21 기준 미정이다.
+src: "SRC:jp-fsa"
+url: "https://www.fsa.go.jp/common/diet/index.html"
+published: "2026-07-15"
+accessed: "2026-10-21"
+doc_kind: "official-guidance"
+language: "ja"
+translation: false
+tags: ["jp", "fsa", "fiea", "crypto-asset", "enacted-not-in-force"]
+evidence:
+  - doc: "DOC:jp-fsa-diet-bills-2026"
+    confidence: "A"
+    locator: "제221회 국회 제출 법률안 목록"
+    quote: "令和８年４月10日提出 / 令和８年７月15日成立"
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  published 는 성립일로 기재. 공포일·법률번호·정령 시행기한은 단일 T4 출처라 이 문서의 증거 범위가 아니다 — 확정하지 말 것(보고서 부록 B #12). 2026-06-01 시행된 令和7年 개정 자금결제법과는 별개 법. 범수법 제10조의5 연동 개정 여부는 미확인.

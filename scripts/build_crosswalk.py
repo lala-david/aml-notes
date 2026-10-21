@@ -137,13 +137,25 @@ def render(obl_id: str, obl: dict, rows: list[dict], at: date | None) -> str:
         jur = NAMESPACE_LABEL.get(r["namespace"], r["namespace"])
         thr = f"{r['threshold']:,}" if isinstance(r["threshold"], (int, float)) else "임계값 없음"
         cur = r["currency"] or "—"
-        period = f"{r['valid_from'] or '?'} ~ {r['valid_to'] or '현재'}"
+        # 열린 구간은 "시작일 ~" 로만 적는다. "현재"라고 쓰면 아직 시행되지 않은
+        # 미래 구간(예: 공포됐으나 미시행인 개정)이 시행 중인 것처럼 읽힌다.
+        # 실행 시각에 의존하면 CI 재현성이 깨지므로 오늘 날짜로 판정하지 않는다.
+        period = f"{r['valid_from'] or '시행일 미등재'} ~ {r['valid_to'] or ''}".rstrip()
         lines.append(
             f"| {jur} | `{r['citation'] or r['prov']}` | {thr} | {cur} | {period} | {r['confidence']} |"
         )
 
+    lines += [
+        "",
+        "> 유효기간의 「시작일 ~」 은 종료일이 정해지지 않은 구간이다. 시작일이 미래면 공포됐으나 아직 시행되지 않은 것이다.",
+    ]
+
     lines += ["", "## 등재된 조문", ""]
+    seen: set[str] = set()
     for r in sorted(rows, key=lambda x: x["prov"]):
+        if r["prov"] in seen:
+            continue
+        seen.add(r["prov"])
         lines.append(f"- `{r['prov']}` — {r['prov_label']} (소속 규범 `{r['reg']}`)")
 
     missing = [ns for ns in ("us", "eu", "gb", "jp", "sg", "hk", "au")

@@ -5,7 +5,7 @@
 
 ![as of](https://img.shields.io/badge/as%20of-2026--10--21-blue)
 ![License CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
-![nodes](https://img.shields.io/badge/KB%20nodes-264-059669)
+![nodes](https://img.shields.io/badge/KB%20nodes-333-059669)
 ![feeds](https://img.shields.io/badge/sources-33%20live%20%2F%2050-ea580c)
 ![docs](https://img.shields.io/badge/design%20docs-10-orange)
 ![status](https://img.shields.io/badge/KB-under%20construction-yellow)
@@ -51,6 +51,7 @@ flowchart LR
 - **설계부터** → [`docs/README.md`](docs/README.md) · [`docs/PLAN.md`](docs/PLAN.md) · [`kb/schema/schema.yaml`](kb/schema/schema.yaml)
 - **AML 처음** → [`curriculum/day_01.md`](curriculum/day_01.md)
 - **주제만 빠르게** → [`notes/README.md`](notes/README.md)
+- **흐름을 한 번에** → [가상자산 AML·KYT·FDS·트래블룰 연대기 보고서 (2026-10-21)](reports/가상자산%20AML%20KYT%20FDS%20트래블룰%20흐름.md) · [리서치 도시에](research/README.md)
 
 ---
 
@@ -211,12 +212,12 @@ python print/generator.py all
 
 | 항목 | 수 |
 |---|---:|
-| **KB 노드** | **264** *(목표 1,200)* |
-| ├ 엔티티 | 204 |
-| └ 출처(SRC) · 문서(DOC) | 41 · 19 |
-| 규범 · 조문 (REG · PROV) | 16 · 16 |
-| 원자적 사실 · 구간 상태 | 35 · 3 |
-| 상충 레지스트리 | 7 *(전부 판정 완료)* |
+| **KB 노드** | **333** *(목표 1,200)* |
+| ├ 엔티티 | 232 |
+| └ 출처(SRC) · 문서(DOC) | 45 · 56 |
+| 규범 · 조문 (REG · PROV) | 18 · 21 |
+| 원자적 사실 · 구간 상태 | 49 · 3 |
+| 상충 레지스트리 | 7 *(전부 판정 완료 · CTR:00004 2026-10-21 재판정)* |
 | 스키마 클래스 / 술어 / 불변식 | 34 / 50 / 14 |
 | 설계 문서 · ADR | 10 · 2 |
 | 수집 소스 (가동 / 전체) | 33 / 50 *(실측 88 후보)* |
@@ -224,12 +225,13 @@ python print/generator.py all
 
 > ⚠️ **KB 는 구축 초기입니다.** 스키마·파이프라인·검증 체계는 완성되었고
 > 노드 대량 등재가 다음 단계입니다.
-> `techniques/`(62) · `indicators/`(63) · `typologies/`(8) 은 등재를 시작했고,
+> `techniques/`(62) · `indicators/`(80) · `typologies/`(8) 은 등재를 시작했고,
 > `protocols/` · `vasps/` · `threat-actors/` · `chains/` · `assets/` · `risks/` ·
 > `cases/` · `incidents/` · `enforcement/` 는 아직 비어 있습니다.
 >
-> 트래블룰 의무는 **8개 관할**(국제기준·EU·영국·일본·한국·미국·홍콩·싱가포르·호주)의
-> 근거 조문을 원문으로 확인해 등재했습니다 —
+> 트래블룰 의무는 국제기준과 **8개 관할**(EU·영국·일본·한국·미국·홍콩·싱가포르·호주)의
+> 근거 조문을 원문으로 확인해 등재했습니다. 한국 100만원 기준은 2027-02-19 폐지가
+> 확정됐으나 그 전까지는 유효합니다(대통령령 제36592호, enacted-not-in-force) —
 > `python scripts/build_crosswalk.py` 로 비교표가 생성됩니다.
 >
 > 알려진 부채와 진행 상황 → [`kb/README.md`](kb/README.md) · [`docs/PLAN.md`](docs/PLAN.md)

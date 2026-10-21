@@ -1,351 +1,223 @@
 # Circle USDC 동결 — 스테이블코인 발행자의 AML 권한과 한계
 
-> 가상자산 발행자가 **자금세탁·해킹·제재 대상 자산을 직접 동결**할 수 있는가? Circle의 USDC freeze 사례들은 스테이블코인 발행자의 AML 권한·한계·논란을 보여주는 분기점. 이 글을 읽고 나면 왜 "중앙화 스테이블코인"이 가상자산 AML의 핵심 player이자 동시에 논쟁 대상이 됐는지, 그리고 한국 VASP가 USDC를 취급하며 어떤 리스크를 인지해야 하는지 설명할 수 있게 됩니다. 마지막 업데이트: 2026-04-23.
+> 발행자가 **제재·범죄 관련 자산을 직접 동결**할 수 있다는 것은 스테이블코인을 AML의 "집행 레이어"로 만든다. 그런데 2026년 FATF·BIS·학계는 같은 결론에 도달했다 — **발행자 동결에 기대서는 안 된다.** 이 글을 읽고 나면 동결이 왜 늦을 수 있는지(동결 전 인출: USDC 18.7%·USDT 7.3%), 범죄조직이 왜 "동결 면역" 스테이블코인을 직접 발행했는지(FATF 7차 TU para 35), 그리고 각 관할이 발행자 의무를 어떻게 법제화하고 있는지 설명할 수 있게 됩니다. 마지막 업데이트: 2026-10-21.
+
+> **근거 범위**: `research/2026-10-*.md` 도시에와 정본 보고서에서 confidence A(일부 B, "(B)" 표시)로 확인된 사실만 쓴다. 이전 판의 Circle 누적 동결액·사례 수, 사건별 동결액(Tornado·Ronin·Bybit 등), 발행자별 연간 동결 주소 수, Circle 내부 처리 시간·환수율, 한국 거래소별 USDC 정책·보유 비중, DAXA 공동 가이드·30분 공유 규칙은 이 근거 자료로 확인되지 않아 삭제했다. Tether·T3 FCU 누적 동결액 보도는 C 등급이라 쓰지 않는다.
 
 ## TL;DR
 
-- USDC 발행자 **Circle은 smart contract 레벨에서 특정 주소 freeze 가능** (`blacklist()` 함수)
-- 2020~2025 기간 **누적 ~$500M+ freeze** (총 **100+ 주소 사례**)
-- 주요 트리거: **OFAC 제재 + 법원 영장 + 자체 위험 평가(KYT)**
-- **논란**: 중앙화 발행자가 사용자 자산 임의 동결 가능 → 가상자산의 검열 저항성 훼손
-- 한국 영향: USDC 거래는 가능하나 **freeze 리스크 상시 인지** + DAXA 공동 가이드상 단일 스테이블코인 의존 회피
+- 중앙화 스테이블코인(USDC·USDT 등)은 **발행자가 컨트랙트 수준에서 특정 주소의 송수신을 막을 수 있는 구조**다. Circle 개별 동결 건수·금액은 이 저장소 근거 자료에서 확인되지 않았다(공개 근거 미확인)
+- **동결은 늦을 수 있다**: Ethereum 2017-11~2025-08 데이터(동결 가치 15억 달러 초과)에서 **USDC 제재 주소의 18.7%, USDT의 7.3%가 동결 발효 전에 전액 인출**됐다("Sanction-Evasion MEV")
+- **FATF 7차 TU(2026-07-16) para 35**: 제3자 발행자가 USD 2,900만 이상을 동결하자 범죄 복합체가 "immune to asset freezing"을 내세운 자체 스테이블코인을 발행 → VASP는 "issuer-level asset freeze/burn mechanisms"를 준수 안전장치로 믿을 수 없을 수 있다
+- **FATF 2026-03-03 보고서**: 발행자에게 동결·소각·회수, 환매 시 CDD, allow/deny-listing 같은 통제를 요구하는 것을 모범사례로 제시. 다만 FATF 기준이 VASP 규율을 넘는 별도 스테이블코인 체계를 요구하지는 않는다
+- **미국 GENIUS Act**: 2025-07-18 서명(enacted-not-in-force), 허가 발행자(PPSI)의 BSA 편입 NPRM 2026-04-10(proposed), 법 시행은 2027-01-18 예상(B)
+- 한국: 7차 TU Annex A에서 "스테이블코인 발행자 등록·인가 요구"는 **No**
 
 ---
 
-## 1. Circle USDC freeze 메커니즘
+## 1. 발행자 동결 메커니즘
 
-### 기술 구조
+### 기술 구조 (개념)
 
-USDC의 ERC-20 smart contract에는 **`blacklist(address)` 함수**가 포함돼 있습니다. Circle의 지정 운영자(`blacklister`)가 이 함수를 호출하면:
-
-- 해당 주소는 **모든 USDC 송수신 차단**
-- 보유 USDC = "동결" (zero out 아님, 단순 거래 불가 상태)
-- 해당 주소가 다른 사람에게서 USDC를 받는 것도 불가
-- 해제 시 다시 활용 가능 (Circle 운영자가 `unBlacklist()` 호출)
-
-### 소스 코드 발췌
+중앙화 스테이블코인 컨트랙트에는 발행자가 지정한 권한 주소가 특정 주소를 **차단 목록**에 올리는 기능이 있다. 차단된 주소는 해당 토큰을 보내지도 받지도 못한다. 잔액이 사라지는 것은 아니고, 차단이 풀리면 다시 쓸 수 있다.
 
 ```solidity
-function blacklist(address _account) external onlyBlacklister {
-    _blacklisted[_account] = true;
-    emit Blacklisted(_account);
-}
-
-function unBlacklist(address _account) external onlyBlacklister {
-    _blacklisted[_account] = false;
-    emit UnBlacklisted(_account);
-}
-
-modifier notBlacklisted(address _account) {
-    require(!_blacklisted[_account], "Blacklistable: account is blacklisted");
-    _;
-}
+// 개념 예시 — 실제 USDC 컨트랙트 코드가 아니다. 원문은 발행자 공개 코드로 확인할 것
+modifier notBlocked(address a) { require(!blocked[a], "blocked"); _; }
+function block(address a) external onlyComplianceRole { blocked[a] = true; }
+function transfer(address to, uint256 v) external notBlocked(msg.sender) notBlocked(to) { /* ... */ }
 ```
 
-주요 전송 함수(`transfer`, `transferFrom`, `mint`, `burn`)가 모두 `notBlacklisted` modifier로 감싸져 있어, blacklist 주소는 **모든 흐름에서 차단**됩니다.
+권한 분리(동결 권한·발행 권한·업그레이드 권한)의 구체 구조와 Circle의 공식 동결 정책 문언은 이 근거 자료에서 확인하지 않았다 — **공개 근거 미확인**.
 
-### 권한 구조
+### 동결은 "일반 트랜잭션"이다
 
-- **Blacklister**: Circle이 지정한 특정 주소 — 일반적으로 Circle 내부 compliance 팀 운영 multisig
-- **Master Minter**: USDC 발행·소각 권한 (별개)
-- **Owner (Circle)**: 컨트랙트 업그레이드·Blacklister 지정 권한
+Wu 외(2026)의 핵심 관찰은 **동결도 블록에 들어가야 효력이 생기는 트랜잭션**이라는 점이다. 그래서 제재 대상의 인출 트랜잭션과 블록 순서를 놓고 경쟁한다([arXiv 2603.27739](https://arxiv.org/abs/2603.27739), 프리프린트).
 
-이 구조는 **Circle이 운영을 잃어도(해킹 등) 악용을 최소화**하기 위한 분리. 그러나 **Circle 자체는 최종 통제권 보유**.
+```mermaid
+flowchart LR
+    D["제재 지정·수사 요청"] --> I["발행자가<br/>동결 트랜잭션 제출"]
+    D --> W["대상이 인출 트랜잭션 제출"]
+    I --> R{"블록 순서 경쟁"}
+    W --> R
+    R -->|"동결이 먼저"| F["자산 동결"]
+    R -->|"인출이 먼저"| E["동결 전 전액 인출<br/>USDC 18.7% · USDT 7.3%"]
+    E --> N["다른 체인·토큰·VASP로 이동"]
+    style E fill:#fee2e2
+    style F fill:#d1fae5
+```
 
-### 비교: 다른 스테이블코인 freeze 권한
-
-| 스테이블코인 | 발행자 | Freeze 권한 | 2024 기준 사용 빈도 |
-|---|---|---|---|
-| **USDC** | Circle | ✓ Smart contract level | 연 50+ 주소 |
-| **USDT** | Tether | ✓ Smart contract level | 연 200+ 주소 (업계 최다) |
-| **BUSD** | Paxos | ✓ (과거) | 종료 — 2024-02 발행 중단 |
-| **DAI** | MakerDAO | ✗ (직접 freeze 불가) | N/A — 그러나 USDC 담보 비중 때문에 간접 영향 |
-| **FDUSD** | First Digital Labs | ✓ | 낮음 (~연 5~10) |
-| **PYUSD** | Paxos (PayPal) | ✓ | 낮음 |
-| **USDe** (Ethena) | Ethena Labs | ✓ (제한적) | 매우 낮음 |
+| 측정 | 결과 |
+|---|---|
+| 데이터 | Ethereum USDT·USDC 집행·회피 종단 데이터 2017-11~2025-08, 동결 가치 15억 달러 초과 |
+| 동결 발효 전 전액 인출 | **USDC 제재 주소의 18.7%, USDT의 7.3%** |
+| 해석 | 회피는 MEV 전문 행위자에 집중. 준수하는 발행자도 순서 시장에 참여하는 것이 합리적이 된다 |
+| 한계 | Ethereum 한정(Tron 등 미포함). 선행 인출이 모두 회피 의도인지는 식별 불가 |
 
 ### 실무 포인트
 
-"스테이블코인은 가상자산"이라고 일반화되지만, **중앙화 스테이블코인(USDC·USDT·FDUSD)은 발행자 통제 하의 자산**입니다. 이는 탈중앙 가상자산(BTC·ETH) 과는 근본적으로 다른 특성이며, AML 관점에서는 **발행자 협조가 실질적 동결 수단**. 한국 VASP가 USDC·USDT를 취급할 때 이 특성을 고객에게 명확히 공지해야 합니다.
+거래소가 "의심 자금이 USDC/USDT라 발행자가 동결해 줄 것"이라고 가정하면, 측정상 상당 비율이 그 전에 빠져나간다. **거래소 자체 입금 차단·출금 보류가 1차 통제**이고, 발행자 동결은 보완이다.
 
 ---
 
-## 2. 주요 freeze 사례 5개
+## 2. 2026년 공적 문서가 말하는 것
 
-### 2.1 Tornado Cash 제재 대응 (2022-08)
+### FATF 7차 TU — 동결 저항형 스테이블코인 (2026-07-16)
 
-- **2022-08-08**: OFAC가 Tornado Cash smart contract을 SDN에 등재
-- **2022-08-09 (제재 다음 날)**: Circle이 **Tornado Cash 관련 주소의 USDC 보유분 즉시 freeze**
-- 대상: 약 **75,000 USDC 상당**, 여러 주소 포함
-- 의미: **스테이블코인 발행자의 검열 권한이 현실화된 첫 상징적 사례**
+7차 TU para 35는 이를 새 유형으로 기록했다: "the deliberate issuance of proprietary stablecoins specifically designed to circumvent law enforcement intervention". 캄보디아 소재 금융 복합체가 "immune to asset freezing"을 내세운 USD 연동 스테이블코인을 발행했는데, 그 계기는 **제3자 스테이블코인 발행자가 이 복합체 연계 지갑의 USD 2,900만 이상을 동결한 사건**이었다. FATF의 결론은 VASP를 포함한 의무주체가 "may be unable to rely on issuer-level asset freeze/burn mechanisms as a compliance safeguard"라는 것이다([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)).
 
-논란의 양면:
-- **옹호 측**: OFAC 제재 준수 의무 → Circle은 미국 법인, 따라야 함
-- **비판 측**: Tornado 풀에는 합법 사용자도 다수 존재 → 무차별 freeze로 합법 사용자 자산이 인질화됨
-- **일부 사용자 소송 제기**: 합법 사용이 입증되면 해제 요청, 대부분 Circle 개별 심사 후 해제 (시간 소요)
+같은 보고서 권고 5-ii는 VASP 통제 요소로 "KYC, wallet screening, blacklisting, and, where appropriate, whitelisting mechanisms as well as freezing and blocking capabilities"를 열거한다 — **동결·차단 역량을 VASP 자신이 갖추라는 것**이다.
 
-### 2.2 Lazarus Group 자금 freeze (2023~2025)
+### FATF 스테이블코인·비수탁지갑 보고서 (2026-03-03)
 
-Lazarus가 해킹 탈취 자산을 USDC로 변환해 세탁하는 시점에 Circle이 탐지·freeze한 다수 사례.
+- 2025년 중반 기준 스테이블코인 250종 이상, 시총 USD 3,000억 초과. Chainalysis의 "2025년 불법 VA 거래량의 84%가 스테이블코인" 추정을 인용
+- 모범사례: 발행자에게 "the ability to freeze, burn, or withdraw stablecoins in the secondary market, conduct customer due diligence at redemption, and, where appropriate, implement smart contract controls, such as allow-listing … and deny-listing"을 요구
+- 선 긋기: "the FATF Standards do not require jurisdictions to adopt regulatory frameworks for stablecoin arrangements beyond those already applicable to VASPs"
 
-| 시점 | 사건 | Circle freeze 규모 |
-|---|---|---|
-| 2022-04 | Ronin Bridge 자금 일부가 USDC로 변환 | ~$1.7M (초기), 이후 확대 |
-| 2023-06 | Atomic Wallet 해킹 자금 USDC 추적 | ~$0.5M |
-| 2024-06 | DMM Bitcoin (일본) 해킹 자금 일부 | ~$2M |
-| 2025-02 | **Bybit $1.46B 해킹** 자금 중 USDC 변환분 | ~**$5M+** (초기 48시간 내) |
+출처: [FATF 2026-03-03](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-stablecoins-unhosted-wallets.html)
 
-탐지 경로:
-1. FBI / Chainalysis / TRM이 Lazarus 주소 cluster 확인
-2. Circle에 freeze 요청 (공식 레터 또는 긴급 채널)
-3. Circle 내부 compliance 팀이 24~72시간 내 판단·실행
-4. 한국 거래소도 DAXA·Chainalysis 채널을 통해 **freeze 정보 실시간 공유**
+### BIS 연차경제보고서 (2026-06-23)
 
-### 2.3 거래소 협조 freeze — Kraken·Coinbase·한국 4대 (2024~)
+"stablecoins account for a significant share of illicit on-chain activity"라고 하며, 발행자 동결과 분석업체 지원이 "cannot replace routine, large-scale AML/CFT controls"라고 했다([BIS AER 2026](https://www.bis.org/publ/arpdf/ar2026e3.htm)).
 
-거래소가 의심 거래를 탐지하고 **Circle에 즉시 freeze 요청**하는 패턴이 2024년 이후 표준화:
+### 업계 보고서 수치 (B)
 
-- 피해자 신고 → 거래소 조사 → Lazarus·해킹 관련 확인
-- 거래소 compliance 담당이 Circle compliance에 **긴급 이메일 + API 요청**
-- Circle 내부 심사 (통상 **24시간 이내 처리**)
-- freeze 후 법원 명령 받을 때까지 유지 → 이후 피해자 환수
+- Chainalysis: 2025년 불법 거래량의 **84%** 가 스테이블코인(분모: 불법 거래량)([Chainalysis](https://www.chainalysis.com/blog/2026-crypto-crime-report-introduction/))
+- TRM: 2025년 제재 주체·관할 유입의 **약 95%** 가 스테이블코인, 검증된 사기 유입의 **84%** 가 스테이블코인([TRM](https://www.trmlabs.com/reports-and-whitepapers/2026-crypto-crime-report))
 
-한국 거래소(업비트·빗썸·코인원·코빗)도 2024년부터 이 워크플로를 활용, 국내 피싱 피해자 자금 중 USDC 부분을 다수 회수.
+두 회사의 "84%"는 분모가 다르다(불법 거래량 전체 vs 검증된 사기 유입). 같은 수치로 인용하지 않는다.
 
-### 2.4 Phishing 피해 자산 freeze (2024~)
+### 실무 포인트
 
-- 피해자 신고 → Circle 자체 위험 평가 (KYT + 거래소 제공 정보)
-- Circle 자체 판단으로 freeze 가능 (법원 영장 불필요 — 논란 지점)
-- **평균 처리 시간**: 24~72시간
-- **피해자 환수율**: ~30~50% — 피싱 자금이 이미 추가 이동·환전된 후에는 회수 어려움
-- 2024년 한 해 Circle은 phishing 관련 **~$X.XM (공개 수치 없음)** freeze한 것으로 업계 추정
-
-### 2.5 OFAC 제재 대상 직접 freeze (지속)
-
-- OFAC SDN 명단에 신규 주소 추가 시 Circle이 **자동 freeze**
-- OFAC SDN API 일별 갱신 → Circle 내부 시스템 자동 동기화
-- 2020~2025 누적 **OFAC SDN 기반 freeze**: **수천 개 주소**
-- 주요 대상: 러시아 제재, 이란 관련, 테러자금조달 관련 주소
-
-### Circle 공식 freeze 정책 요약
-
-Circle의 공식 Compliance Statement (2023~)에 따르면 freeze 트리거는 3가지:
-
-1. **OFAC/제재 요구사항**: 의무적 freeze
-2. **법 집행 기관 요청**: FBI·DOJ·한국 수사기관 등의 공식 요청 (영장 포함 또는 제외)
-3. **자체 위험 평가**: 명확한 자금세탁·범죄 증거 발견 시 Circle 재량으로 freeze
+FATF·BIS·학계가 2026년에 같은 방향을 가리킨다. 거래소의 스테이블코인 위험평가에는 ① 발행자가 동결 기능·정책을 갖췄는가 ② 동결 저항을 표방하는 토큰인가 ③ 자체 차단·보류로 동결 공백을 메울 수 있는가 — 세 항목이 들어가야 한다.
 
 ---
 
-## 3. 법적·윤리적 논란
+## 3. 법적·윤리적 논점
 
-### A. 중앙화 발행자의 자산 통제력
+### A. 집행 레이어로서의 한계
 
-스테이블코인의 가치 제안은 **"안정성 + 신뢰"** — 1:1 달러 페깅 보장 + 즉시 환전성. 그러나 freeze 권한은 이 신뢰의 한 축을 **Circle의 선의·정확성**에 의존하게 만듭니다.
+- **시간**: 동결은 트랜잭션 경쟁이라 늦을 수 있다(§1).
+- **범위**: 발행자가 동결할 수 있는 것은 자기 토큰뿐이다. 다른 토큰·체인으로 바뀐 뒤에는 닿지 않는다.
+- **회피 설계**: 범죄조직이 동결 기능 없는 자체 토큰을 쓰면 발행자 동결이라는 수단 자체가 사라진다(7차 TU para 35).
 
-- **"Circle이 잘못 freeze하면?"**: 항소 절차가 명확하지 않음. 개별 이메일·법무팀 접촉 → Circle 재량 판단
-- **DeFi 통합 시 시스템 리스크**: USDC가 DAI 담보·Curve 유동성 풀·수많은 DeFi 프로토콜의 기반 자산 → Circle의 대규모 freeze가 **연쇄적 시스템 영향**
-- **2023-03 SVB 사태 교훈**: Silicon Valley Bank 파산 시 USDC 일시 de-peg → Circle 신뢰성 이슈. freeze 권한은 그 신뢰의 연장선
+### B. 검열 저항성과의 긴장
 
-### B. 검열 저항성(censorship resistance) 훼손
+탈중앙 자산(BTC·ETH)은 특정 주체가 동결할 수 없다. 중앙화 스테이블코인은 발행자 정책에 따라 동결된다. 이 트레이드오프 자체는 구조적 사실이지만, 발행자별 동결 빈도 비교(이전 판의 "연 50+ vs 200+")는 근거가 확인되지 않아 삭제했다.
 
-가상자산의 본래 가치 명제 중 하나는 **검열 저항성** — 정부·기관이 사용자 자산을 임의 차단하지 못함.
+### C. 절차적 정당성
 
-- 중앙화 스테이블코인의 freeze는 이 가치 **정면 위배**
-- 비교 구도:
-  - **Bitcoin·BTC**: 누구도 freeze 불가능 (탈중앙)
-  - **USDC**: Circle 단독 freeze 가능 (중앙화)
-  - 트레이드오프: **"탈중앙 순수성 vs 중앙화 효율성(제재 대응·피해자 환수)"**
-
-업계 이념 분열:
-- **Bitcoin maximalist·사이퍼펑크**: USDC 같은 중앙화 스테이블코인은 "가상자산의 배신"
-- **실용주의자**: freeze 덕분에 범죄 자금 환수·제재 준수 가능 → 주류 수용 기반
-
-### C. 법원 명령 없는 freeze — Due Process 부재
-
-Circle이 **자체 판단으로 freeze**할 때 고려할 due process 이슈:
-
-- 법원 영장·판결 없이 freeze 가능 → 피해자 주장만으로 타인 자산 동결 가능성
-- **무고한 피해자 가능성**: 중간 거래로 의심 자금이 이동한 경우, 최종 수취자는 무관할 수 있음
-- **요구**: 법원 영장 의무화 (일부 법학자 주장) vs Circle의 신속 대응 가치 (48시간 자금세탁 완료 현실)
-- 현행 실무: **OFAC·법 집행 공식 요청**은 영장 없이도 가능, **자체 판단 freeze**는 Circle이 증거 수준 자체 평가
-
-### D. DAO·거버넌스 스테이블코인과의 비교
-
-- **DAI (MakerDAO)**: 토큰 자체 freeze 불가. 그러나 **USDC 담보 비중** 때문에 Circle freeze 시 DAI 시스템 연쇄 영향
-- **크립토 원주의자 선호**: RAI·LUSD 등 USDC 담보 없는 스테이블코인
-- **현실**: DAI조차 2020~2024 동안 **USDC 담보 비중 50%+** 유지 → 완전한 탈중앙 불가
+어떤 근거(공식 제재·수사기관 요청·발행자 자체 판단)로 동결하는지, 오동결 시 해제 절차가 무엇인지는 발행자 정책과 관할 법에 달려 있다. 각 관할이 이를 법제화하는 중이다(§6).
 
 ---
 
 ## 4. 한국 VASP 영향
 
-### Freeze 리스크 관리
-
-- 한국 거래소가 USDC 보유 시 → Circle freeze 위험 **상시 인지**
-- **DAXA 공동 가이드 (2024-11)**: USDT·USDC 비중 **분산** 권고, 단일 스테이블코인 의존 회피
-- 거래소 hot wallet·cold wallet이 blacklist되면 **사용자 출금 중단** 위험 → 보유 스테이블코인 다변화
-- **Travel Rule 메시지**: USDC 관련 의심 거래 시 수취 VASP에 freeze 가능성 사전 고지 관행
-
-### 사용자 보호 — 한국 피해자가 freeze 당한 경우
-
-| 단계 | 실무 조치 |
-|---|---|
-| 1. 피해자 인지 | 출금 실패·거래 불가 확인 시 거래소·Circle 공지 확인 |
-| 2. Circle 직접 항소 | Circle Compliance 이메일 (영문) — 본인 자금 증빙, 합법 사용 설명 |
-| 3. 거래소 협조 요청 | 한국 거래소의 compliance 팀이 Circle과의 기존 채널로 중재 요청 |
-| 4. 법적 대응 | 한국 법원 청구 어려움 — Circle은 **미국 법인(보스턴)**, 재판관할 문제 |
-| 5. 평균 처리 | 합법 입증 시 **2주~3개월** freeze 해제. 불법 관련이면 영구 freeze 가능 |
-
-### 한국 4대 거래소의 USDC 정책 (2026-Q1)
-
-| 거래소 | USDC 지원 | Freeze 대응 |
-|---|---|---|
-| **업비트** | 원화 + BTC 마켓 | Circle 공식 채널 직접 연결, 피해자 환수 협조 다수 사례 |
-| **빗썸** | 원화 마켓 | 2024-06 Circle 파트너십 체결, freeze 정보 실시간 수신 |
-| **코인원** | 원화 마켓 | DAXA 공동 대응 |
-| **코빗** | 원화 마켓 | DAXA 공동 대응 |
+- **한국은 발행자 인가 체계가 아직 없다**: 7차 TU Annex A의 한국 행에서 "스테이블코인 발행자 등록·인가 요구"는 **No**다(위험평가·입법·검사·집행·트래블룰은 Yes)([7차 TU PDF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)). 원화 스테이블코인 입법 논의는 C 등급 보도뿐이라 여기서 다루지 않는다.
+- **법정 지연·정지 의무가 먼저 작동한다**: 2026-10-01부터 통신사기피해환급법상 "금융회사등"에 가상자산거래소가 포함돼, 피해의심거래계좌등으로 추정되면 **가상자산 이전을 지연·일시정지**해야 한다(제2조의5)([법제처 통신사기피해환급법](https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290245&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR); [금융위 2026-03-13](https://www.fsc.go.kr/no010101/86446)). 보이스피싱 피해금이 스테이블코인이어도 거래소의 1차 의무는 발행자 요청이 아니라 이 법정 조치다.
+- 한국 거래소별 USDC 지원·동결 대응 채널·보유 비중은 공개 근거가 확인되지 않았다.
 
 ### 실무 포인트
 
-한국 사용자가 Circle freeze를 직접 상대하는 경우 **언어 장벽 + 법역 장벽**이 큰 어려움입니다. 이때 **거래소 compliance 팀의 중재**가 실질적 해결 수단. 개인이 직접 영문으로 대응하는 것보다 거래소를 통한 루트가 회수율·처리속도 모두 우위. 따라서 한국 거래소와 Circle 간 평소 협력 관계 유지는 **소비자 보호의 숨은 인프라**.
+한국 거래소 내부 절차는 **"자체 조치(법정 지연·정지, 입금 차단) → 발행자 동결 요청"** 순서로 써야 한다. 발행자 동결이 성공하더라도 그 사이 거래소가 아무 조치를 하지 않았다면 법정 의무 이행 여부가 따로 문제된다.
 
 ---
 
-## 5. 한국 USDC 시장 현황
+## 5. 발행자 의무의 법제화 — 관할별 상태 (2026-10-21)
 
-### 거래 규모
+| 관할 | 문서 | 발행자 동결·추적 관련 | 상태 |
+|---|---|---|---|
+| FATF | 스테이블코인·비수탁지갑 보고서(2026-03-03) | 동결·소각·회수, 환매 시 CDD, allow/deny-listing을 모범사례로 | 발간(비구속) |
+| 미국 | GENIUS Act(2025-07-18 서명) | PPSI를 BSA 금융기관으로 편입하는 AML/CFT·제재 NPRM(2026-04-10), CIP NPRM(2026-06-22) | 법 enacted-not-in-force(시행 2027-01-18 예상, B) / NPRM proposed |
+| 미국 | GENIUS §3 NPRM(관보 2026-08-18) | 의견 2026-10-19 마감 | proposed |
+| 싱가포르 | MAS PSA 개정 의견수렴(2026-09-01~10-16) | 발행자의 "technical capability to trace, freeze, and/or burn" | proposed(B) |
+| 홍콩 | HKMA 발행 인가 | 인가 2개(2026-04-10) | in-force |
+| 한국 | — | 발행자 등록·인가 요구 없음(7차 TU Annex A) | — |
 
-- 4대 거래소 모두 USDC 상장 (원화 또는 BTC 마켓)
-- 거래량: BTC·ETH·USDT 다음 대형 페어 (통상 **4~6위**)
-- 2024~2025 USDC 원화 거래량 증가 추세 — Tether FUD 영향으로 USDC 비중 상승
+출처: [FATF 2026-03-03](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-stablecoins-unhosted-wallets.html) · [재무부 2026-03 의회보고서](https://home.treasury.gov/system/files/246/GENIUS-Act-Illicit-Finance-Innovation-Congressional-Report-March-2026.pdf) · [Federal Register API](https://www.federalregister.gov/api/v1/documents.json?conditions%5Bterm%5D=%221010.410%22&conditions%5Bagencies%5D%5B%5D=financial-crimes-enforcement-network&order=newest&per_page=20) · [Federal Register 2026-16796](https://public-inspection.federalregister.gov/2026-16796.pdf) · [Jones Day](https://www.jonesday.com/en/insights/2026/08/us-treasury-proposes-genius-act-rules-for-stablecoin-issuance-offer-and-sale) · [Allen & Gledhill](https://www.allenandgledhill.com/sg/perspectives/articles/33474/sgkh-mas-consults-on-amendments-to-payment-services-act-2019-to-implement-stablecoin-regulatory-framework) · [HKMA](https://www.hkma.gov.hk/eng/regulatory-resources/registers/register-of-licensed-stablecoin-issuers/)
 
-### 사용 패턴
+```mermaid
+timeline
+    title 스테이블코인 발행자 AML 규율 2025~2028
+    2025-07-18 : 미국 GENIUS Act 서명
+    2026-03-03 : FATF 스테이블코인·비수탁지갑 보고서
+    2026-04-10 : 미국 PPSI AML/CFT·제재 NPRM
+               : 홍콩 발행 인가 2개
+    2026-06-22 : 미국 PPSI CIP NPRM
+    2026-06-23 : BIS 연차경제보고서
+    2026-07-16 : FATF 7차 TU para 35 동결 저항형 토큰
+    2026-08-18 : GENIUS 3조 NPRM 관보
+    2026-09-01 : 싱가포르 MAS 의견수렴 개시 B
+    2027-01-18 : GENIUS 법정 최종 시행기한 예상 B
+    2028-07-18 : GENIUS DASP 비허가 스테이블코인 취급 금지 B
+```
 
-- **현물 거래용**: 알트코인 매매 시 USDT 대안
-- **DeFi 입출금용**: 해외 DeFi 프로토콜(Aave·Compound·Curve) 연계
-- **기관·OTC**: 대규모 자금 이동 시 USDC 선호 (Tether freeze 빈도가 더 높아 체감 리스크 비교)
-
-### DAXA 합의 — USDC 공통 정책
-
-- **USDC 의심 거래 발견 시**: 한 거래소가 탐지하면 **30분 내 DAXA 채널로 공유** → 전체 4개사 동시 감시
-- **Circle freeze 요청**: DAXA 공동 명의로 Circle에 요청 시 응답성 상향 (단일 거래소 요청 대비)
-- **스테이블코인 위험 가중치**: 내부 위험 평가에서 USDT·USDC **대비 가중치 분산** 기준 문서화
-
----
-
-## 6. 미래 전망
-
-### GENIUS Act (미국, 2027-01-18 시행) 영향
-
-- **Guiding and Establishing National Innovation for US Stablecoins Act**
-- 핵심: 스테이블코인 발행자에 **연방 은행 수준 규제 적용** — BSA·AML 명확 편입
-- **Circle 등 발행자의 freeze 권한 법제화**: 현재 자율 운영 → 법적 의무·권한 명문화
-- 예상 효과:
-  - freeze 기준·절차가 **더 명확화**
-  - 피해자 항소 절차 표준화
-  - 발행자 책임 명확 (잘못된 freeze 시 배상 의무 등)
-  - 신규 발행자 진입 장벽 상승
-
-### EU MiCA (2024-12 시행, 2026 완전 적용)
-
-- **ART (Asset-Referenced Token)** 및 **EMT (E-Money Token)** 발행자 의무 규정
-- freeze 권한 **명시적 규정** 포함 — 유럽에서 발행 또는 유통되는 스테이블코인
-- **Circle Europe**: 프랑스 등지에서 MiCA license 확보 추진 중
-- 한국 영향: 글로벌 발행자의 **다중 법역 compliance** → 한국 거래소에서도 유럽 기준 자동 반영
-
-### 스테이블코인 발행자 = 가상자산 AML 핵심 player
-
-- 2025~ 업계 인식: **거래소와 블록체인 분석 벤더만이 AML 주체가 아님** — 스테이블코인 발행자가 **실시간 자산 통제력** 보유한 3번째 축
-- **Travel Rule 확장**: 발행자도 일부 의무 주체로 편입 논의 (FATF·FSB)
-- **한국 정책 논의**: 국내 스테이블코인 발행자(KRW-stablecoin) 출현 시 동일 프레임워크 적용 검토 (금융위 2025 보고서)
+이전 판의 "MiCA 2026 완전 적용", "Circle Europe 라이선스", "발행자 트래블룰 편입 논의(FATF·FSB)", "금융위 2025 보고서"는 근거 자료에서 확인되지 않아 삭제했다.
 
 ---
 
-## 7. 학습 포인트
+## 6. 학습 포인트
 
 ```
-- Circle의 USDC freeze 권한은 smart contract 레벨 — 기술·법적으로 작동
-- 2020~2025 누적 ~$500M+ / 100+ 주소 freeze, OFAC·법 집행·자체 판단 3개 트리거
-- 스테이블코인 발행자가 가상자산 AML의 3번째 축(거래소·KYT 벤더에 이어)
-- 검열 저항성 훼손 논쟁은 미해결 — DAI·분산형 스테이블코인 대안은 제한적
-- 한국 VASP는 freeze 리스크 상시 인지 + 다변화 전략 + Circle 협력 채널 필수
-- GENIUS Act·MiCA가 freeze 권한을 법제화하는 방향으로 2027~2028 정비 예정
+- 발행자 동결은 트랜잭션 경쟁이다 — 동결 전 전액 인출 USDC 18.7%·USDT 7.3%
+- FATF 7차 TU: 동결 면역 자체 스테이블코인 등장 → 발행자 동결에 의존 불가
+- FATF가 VASP에 요구하는 것은 자체 동결·차단 역량(권고 5-ii)
+- "84%"는 Chainalysis(불법 거래량)와 TRM(검증 사기 유입)의 분모가 다르다
+- 한국은 발행자 인가 체계 없음(Annex A No), 거래소 법정 지연·정지 의무는 2026-10-01부터
 ```
 
 ## 💼 실무 현장 (Industry Reality)
 
-### Circle freeze 요청의 실제 워크플로 (한국 거래소 관점)
-
-**Case: 2025-02 Bybit 해킹 자금 중 USDC가 한국 거래소로 유입 시도**
+### 의심 스테이블코인 유입 시 처리 순서 (한국 거래소)
 
 ```mermaid
-flowchart LR
-    HACK[Bybit 해킹<br/>$1.46B] --> KYT[Chainalysis<br/>실시간 경보]
-    KYT --> KEX[한국 거래소<br/>KYT 시스템]
-    KEX --> BLOCK[입금 주소 임시 차단]
-    BLOCK --> DAXA[DAXA 공동 채널<br/>4개사 동시 경보]
-    DAXA --> CIRCLE[Circle Compliance<br/>긴급 요청]
-    CIRCLE --> FREEZE[blacklist 실행<br/>~24h 내]
-    FREEZE --> RECOV[환수 절차 개시]
-    style HACK fill:#fee2e2
-    style FREEZE fill:#fef3c7
-    style RECOV fill:#d1fae5
+flowchart TB
+    A["의심 스테이블코인 입금 탐지"] --> B{"어느 법적 출구인가"}
+    B -->|"보이스피싱 피해의심"| C["통신사기피해환급법<br/>이전 지연·일시정지<br/>2026-10-01~"]
+    B -->|"제재 대상 노출"| D["거래 거절 + 보고 검토"]
+    B -->|"자금세탁 의심"| E["특금법 STR 검토"]
+    C --> F["발행자 동결 요청<br/>보완 수단"]
+    D --> F
+    E --> F
+    F --> G["동결 실패 대비<br/>자체 보류 유지·추적 기록"]
+    style C fill:#dbeafe
+    style D fill:#fee2e2
+    style E fill:#fef3c7
 ```
 
-**실무 타임라인**:
-- T+0: 한국 거래소 KYT가 Lazarus cluster 입금 시도 탐지
-- T+15분: compliance 팀 내부 보고 + DAXA 공유
-- T+1시간: Circle compliance 팀에 영문 메일·API 요청
-- T+24시간: Circle 내부 심사·blacklist 실행
-- T+48시간: 자금 freeze 완료, 법적 환수 절차 개시
+이전 판의 "T+15분 DAXA 공유 → T+24시간 blacklist" 타임라인, Bybit USDC 사례 흐름도, 거래소별 스테이블코인 보유 비중 표는 근거가 없어 삭제했다. 발행자 응답 시간에 대한 공개 벤치마크는 없다.
 
-### 한국 VASP의 스테이블코인 다변화 정책 (2026-Q1)
+### 위험평가 항목 — 토큰 단위
 
-| 거래소 | 총 스테이블코인 보유 대비 USDC 비중 | USDT 비중 | 기타 (FDUSD 등) |
-|---|---|---|---|
-| 업비트 | ~35% | ~60% | ~5% |
-| 빗썸 | ~40% | ~55% | ~5% |
-| 코인원 | ~30% | ~65% | ~5% |
-| 코빗 | ~35% | ~60% | ~5% |
-
-※ 추정치. 2024-11 DAXA 공동 가이드 이후 **단일 스테이블코인 의존 상한 70%** 자율 목표.
+| 항목 | 질문 | 근거 |
+|---|---|---|
+| 발행자 통제 | 동결·소각·회수 기능과 공개 정책이 있는가 | FATF 2026-03-03 |
+| 동결 저항 표방 | "동결 불가"를 마케팅하는 토큰인가 | 7차 TU para 35 |
+| 발행자 규율 | 인가 관할(미국 PPSI·홍콩 인가 등) 발행인가 | §5 표 |
+| 체인 | 동결 측정이 없는 체인(Tron 등)인가 | Wu 외 2026 한계 |
 
 ### 자주 나오는 오해
 
-- **"Circle freeze면 내 USDC가 사라진다"** — 아님. **동결**이지 **소각**이 아님. 해제 시 복원.
-- **"법원 명령 없이 freeze 불가"** — 가능. Circle은 자체 판단으로 freeze 가능 (due process 논란 지점)
-- **"USDC는 안전해서 freeze 안 당함"** — OFAC 제재·범죄 관련이면 즉시 freeze. 합법 사용자도 간접 연루 시 영향 가능.
-- **"USDC보다 USDT가 freeze 자주"** — 맞음 (Tether 연 200+ vs Circle 연 50+). 다만 Circle은 더 투명하게 공개 경향.
-- **"DAI는 안전한 대안"** — DAI도 USDC 담보 비중 50%+라 Circle freeze 간접 영향권. 완전 탈중앙 아님.
-
-### 주니어 Analyst 일상 — 스테이블코인 freeze 관련
-
-- **매일**: OFAC SDN 업데이트 확인, Circle·Tether 공지 블로그 체크
-- **주간**: DAXA 채널에서 freeze 요청·완료 사례 리뷰, 자사 KYT 룰 업데이트
-- **사고 발생 시**: Circle Compliance 직접 소통 (영문 이메일 + 공식 긴급 채널), 24시간 내 freeze 요청 완료 목표
-- **분기 1회**: 스테이블코인 비중 리포트 작성, 경영진 대상 리스크 보고
+- **"동결되면 끝"** — 동결 발효 전 인출이 측정돼 있다(USDC 18.7%·USDT 7.3%).
+- **"스테이블코인은 발행자가 막아 주니 거래소 통제는 덜 해도 된다"** — FATF 7차 TU와 BIS가 반대로 말한다.
+- **"동결은 소각"** — 동결은 송수신 차단이다. 소각·회수는 별도 기능이며 FATF는 둘을 구분해 열거한다.
+- **"84%는 같은 통계"** — Chainalysis와 TRM의 분모가 다르다.
 
 ### 한국 특수 현실
 
-- **원화 마켓 거래량 큰 USDC**: 한국 투자자가 직접 보유 비중 높음 → freeze 발생 시 **소비자 민원 폭증 리스크**
-- **언어·법역 장벽**: 한국 개인이 Circle을 직접 상대하기 어려움 → **거래소 compliance 팀 중재가 현실적 해결**
-- **국내 발행 스테이블코인 논의**: 2025~ KRW-stablecoin 발행 논의 — 국내 발행이면 **금융위 감독 하 freeze 기준** 한국 법 적용 가능
-- **피해자 환수 전담 조직**: 빗썸·업비트 등은 **해킹·피싱 환수 전담팀** 운영 — Circle·Tether 대응 전문가 상주
-- **DAXA + 경찰청 사이버수사대**: 3자 공조로 피해 자금 추적·freeze·환수 진행. 한국 특유의 빠른 공조 체계
+- 거래소의 1차 의무는 법정 지연·정지(2026-10-01~)다. 발행자 동결 요청은 그 위에 얹는 보완 수단이다.
+- 발행자 등록·인가 체계가 없으므로(Annex A No), 한국 거래소가 취급 토큰의 발행자 통제 수준을 직접 평가해야 한다.
 
 ---
 
 ## 더 읽을거리
 
-- [`tornado-cash.md`](tornado-cash.md) — 2022 Tornado 제재의 USDC 즉시 freeze 사례
-- [`lazarus-dprk.md`](lazarus-dprk.md) — Lazarus 자금 USDC 변환 패턴·Bybit freeze 사례
-- [`major-enforcement.md`](major-enforcement.md) — 거래소 enforcement와 스테이블코인 freeze 협업
-- [`../3-crypto-aml/vasp-obligations.md`](../3-crypto-aml/vasp-obligations.md) — VASP 의무 중 스테이블코인 취급
+- [`tornado-cash.md`](tornado-cash.md) — 제재 목록과 위험 평가의 분리
+- [`lazarus-dprk.md`](lazarus-dprk.md) — DPRK와 캄보디아 복합체
+- [`major-enforcement.md`](major-enforcement.md) — Huione·Prince Group 조치
+- [`../3-crypto-aml/vasp-obligations.md`](../3-crypto-aml/vasp-obligations.md) — VASP 의무
 - [`../5-compliance/sanctions-screening.md`](../5-compliance/sanctions-screening.md) — OFAC SDN 스크리닝 절차
-- [`../7-vendors/analytics-vendors.md`](../7-vendors/analytics-vendors.md) — Chainalysis·TRM의 freeze 협조 워크플로
-- [Circle Transparency · Compliance Statement](https://www.circle.com/en/transparency)
-- [Circle USDC Blacklist Smart Contract (Etherscan)](https://etherscan.io/address/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48#code)
-- [GENIUS Act 본문 (S.919, 119th Congress)](https://www.congress.gov/bill/119th-congress/senate-bill/919)
-- [EU MiCA — ART/EMT Issuer Obligations](https://eur-lex.europa.eu/eli/reg/2023/1114/oj)
-- [Chainalysis — Stablecoin Freeze Trends (2024)](https://www.chainalysis.com/blog/stablecoin-freeze-2024/)
+- [Wu 외 — Ordering Power is Sanctioning Power (arXiv 2603.27739)](https://arxiv.org/abs/2603.27739)
+- [FATF — Targeted Report on Stablecoins and Unhosted Wallets (2026-03-03)](https://www.fatf-gafi.org/en/publications/Virtualassets/targeted-report-stablecoins-unhosted-wallets.html)
+- [FATF 7차 Targeted Update (2026-07-16)](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/7th-targeted-update-on-implementation-fatf-standards-vas-vasps-2026.pdf.coredownload.pdf)
+- [BIS Annual Economic Report 2026](https://www.bis.org/publ/arpdf/ar2026e3.htm)

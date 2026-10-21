@@ -1,0 +1,43 @@
+id: "DOC:intl-fatf-va-red-flags-2020"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "FATF 가상자산 자금세탁·테러자금조달 위험징후(Red Flag Indicators) 보고서 (2020)"
+  en: "Virtual Assets — Red Flag Indicators of Money Laundering and Terrorist Financing"
+  short: "FATF VA Red Flag Indicators 2020"
+summary: >
+  FATF 가 2020-09-14 발간한 가상자산 위험징후 보고서. 6개 범주(거래·거래 패턴·익명성·
+  송수신인·자금원/재산원·지리적 위험)에 상위 지표 58개와 번호 사례 13건(+무번호 박스 1건)을
+  싣는다. 2017–2020년 관할 제출 사례 100건 이상에 기반한다. PDF 24쪽, 인쇄 본문 pp.1–20.
+src: "SRC:intl-fatf"
+url: "https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/Virtual-Assets-Red-Flag-Indicators.pdf"
+published: "2020-09-14"
+accessed: "2026-10-21"
+doc_kind: "report"
+language: "en"
+translation: false
+tags: ["fatf", "red-flag-indicators", "virtual-assets", "kyt"]
+evidence:
+  - doc: "DOC:intl-fatf-va-red-flags-2020"
+    confidence: "A"
+    locator: "para 6 · p.4"
+    quote: "more than one hundred case studies contributed by jurisdictions from 2017-2020"
+    retrieved: "2026-10-21"
+  - doc: "DOC:intl-fatf-va-red-flags-2020"
+    confidence: "A"
+    locator: "para 8 · p.4"
+    quote: "The mere presence of a red flag indicator is not necessarily a basis for a suspicion of ML or TF, but could prompt further monitoring and examination."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-19"
+curator_note: >
+  정식 인용명은 "FATF (2020), Money Laundering and Terrorist Financing Red Flag Indicators
+  Associated with Virtual Assets"(판권면). FATF 공식 페이지:
+  https://www.fatf-gafi.org/en/publications/Methodsandtrends/Virtual-assets-red-flag-indicators.html
+  (브라우저 UA·Accept 헤더 없으면 403 — SRC:intl-fatf 참조). locator 의 "p." 는 인쇄 쪽이며
+  PDF 쪽과 다르다. 범주별 위치: 거래 para 11·pp.5–6, 거래 패턴 para 12·pp.7–8,
+  익명성 para 13·pp.9–10, 송수신인 para 14·pp.12–15, 자금원 para 15·p.15, 지리 para 16·p.17.
+  원문 스스로 감독 체크리스트가 아니라고 밝힌다(para 20, p.19). RF-ID 체계(RF-T1 등)는
+  원문이 아니라 research/2026-10-fatf-virtual-asset-reports.md §3A-3 의 부여 번호다.
+  content_hash·snapshot_path 미설정.

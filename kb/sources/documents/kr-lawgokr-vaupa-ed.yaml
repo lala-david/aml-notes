@@ -1,0 +1,36 @@
+id: "DOC:kr-lawgokr-vaupa-ed"
+type: "DOC"
+layer: "semantic"
+label:
+  ko: "가상자산 이용자 보호 등에 관한 법률 시행령 (현행, 2026-10-02 시행)"
+  en: "Enforcement Decree of the Act on the Protection of Virtual Asset Users (current)"
+  short: "가상자산이용자보호법 시행령"
+summary: >-
+  현행 대통령령 제36728호(2026-09-29 타법개정, 2026-10-02 시행). 제18조가 법 제12조의 이상거래를 불공정거래 금지의무 위반 우려가 있는 거래·행위로 정의하고, 제13조가 상시감시·조치
+  결과와 통보·신고·보고 기록을 보존 대상 거래기록에 넣는다.
+src: "SRC:kr-lawgokr"
+url: "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290171&efYd=20261002&ancYnChk=0&chrClsCd=010202&urlMode=lsInfoR"
+published: "2026-09-29"
+accessed: "2026-10-21"
+doc_kind: "statute-text"
+language: "ko"
+translation: false
+tags:
+- "korea"
+- "user-protection"
+- "market-abuse"
+external_ids:
+  decree_no_current: "36728"
+  decree_no_enacted: "34658"
+  lsi_seq: "290171"
+evidence:
+- doc: "DOC:kr-lawgokr-vaupa-ed"
+  confidence: "A"
+  locator: "제18조"
+  quote: "가상자산시장에서 법 제10조제1항부터 제5항까지의 규정에 따른 불공정거래행위 등의 금지의무를 위반할 우려가 있는 거래 또는 행위로서 다음 각 호의 어느 하나에 해당하는 경우를 말한다."
+  retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-01-21"
+curator_note: >-
+  최초 대통령령 제34658호(2024-07-02 공포, 2024-07-19 시행).

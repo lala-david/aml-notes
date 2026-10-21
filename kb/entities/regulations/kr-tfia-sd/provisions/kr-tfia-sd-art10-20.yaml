@@ -1,0 +1,88 @@
+id: "PROV:kr-tfia-sd-art10-20"
+type: "PROV"
+layer: "semantic"
+label:
+  ko: "특금법 시행령 제10조의20 제7호·제8호 (외국 가상자산사업자·자기수탁 주소와의 이전거래)"
+  en: "TFIA Enforcement Decree Article 10-20 items 7-8"
+  short: "시행령 제10조의20 제7호·제8호"
+plain: >
+  2027-02-19 부터 해외 거래소나 개인지갑으로 가상자산을 보낼 때 지켜야 할 기준을 정한 조항입니다. 구체적인 기준과
+  1천만원이라는 금액은 FIU 고시에 다시 넘깁니다.
+summary: >
+  대통령령 제36592호가 개정한 조문(2027-02-19 시행, 2026-10-21 기준 enacted-not-in-force). 제7호는 외국
+  가상자산사업자와의 이전거래에서 FIU 고시 방법으로 AML 조치를 평가하고 고시 기준에 맞게 거래할 것(가목),
+  「1천만원 이상의 범위에서 금융정보분석원장이 정하여 고시하는 금액 이상」 거래에 자체 의심거래 감시체계를
+  구축·운영할 것(나목)을 요구한다. 제8호는 「독점적인 관리 권한을 가지지 않은 가상자산주소」(자기수탁 지갑)를
+  이용하는 상대방과의 이전거래에 고시 기준 준수(가목)와 제7호나목 이행(나목)을 요구한다.
+parent_reg: "REG:kr-tfia-sd"
+citation_path: "제10조의20 제7호·제8호"
+language: "ko"
+text_orig: >
+  (제8호 본문) 가상자산사업자가 독점적인 관리 권한을 가지지 않은 가상자산주소를 이용하는 거래 상대방과
+  가상자산 이전거래를 하는 경우에는 다음 각 목의 사항을 이행할 것 / (제7호나목) 자체적인 의심거래 감시체계를
+  구축ㆍ운영할 것 / (제7호나목 금액) 1천만원 이상의 범위에서 금융정보분석원장이 정하여 고시하는 금액 이상 —
+  인용은 travel-rule 도시에 F-015·F-020 이 옮긴 문언까지만이다
+tags: ["korea", "travel-rule", "self-hosted-wallet", "counterparty-due-diligence", "enacted-not-in-force"]
+edges:
+  - predicate: "PART_OF"
+    to: "REG:kr-tfia-sd"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+        confidence: "A"
+        locator: "제10조의20 (efYd=20270219 판)"
+        retrieved: "2026-10-21"
+  # 금액 위임 — 상한(ceiling)이 아니라 하한이다: "1천만원 이상의 범위에서"
+  - predicate: "DELEGATES_TO"
+    to: "PROV:kr-fiu-supervisory-rule-art28-2"
+    qualifiers:
+      delegation_kind: "threshold"
+      currency: "KRW"
+    valid_from: "2027-02-19"
+    valid_to: null
+    recorded_at: "2026-10-21"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+        confidence: "A"
+        locator: "제10조의20 제7호나목 (efYd=20270219 판)"
+        quote: "1천만원 이상의 범위에서 금융정보분석원장이 정하여 고시하는 금액 이상"
+        retrieved: "2026-10-21"
+  # 기준 위임 — 외국 VASP 평가 방법·거래 기준(제7호가목), 자기수탁 주소 거래 기준(제8호가목)
+  - predicate: "DELEGATES_TO"
+    to: "PROV:kr-fiu-supervisory-rule-art28-2"
+    qualifiers:
+      delegation_kind: "criteria"
+    valid_from: "2027-02-19"
+    valid_to: null
+    recorded_at: "2026-10-21"
+    evidence:
+      - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+        confidence: "A"
+        locator: "제10조의20 제7호가목·제8호가목 (efYd=20270219 판)"
+        quote: "가상자산사업자가 독점적인 관리 권한을 가지지 않은 가상자산주소를 이용하는 거래 상대방과 가상자산 이전거래를 하는 경우에는 다음 각 목의 사항을 이행할 것"
+        retrieved: "2026-10-21"
+evidence:
+  - doc: "DOC:kr-lawgokr-tfia-sd-36592"
+    confidence: "A"
+    locator: "제10조의20 제7호·제8호 (efYd=20270219 판), 부칙 제1조 단서"
+    retrieved: "2026-10-21"
+  - doc: "DOC:kr-fsc-20260330-tfia-sd-notice"
+    confidence: "A"
+    locator: "입법예고안 — 공포본과 대조용"
+    quote: "1,000만원 이상 거래에 대해서는 위험도와 관계없이 의심거래로 보아 금융정보분석원에 보고하도록 한다."
+    retrieved: "2026-10-21"
+created_at: "2026-10-21"
+updated_at: "2026-10-21"
+review_due: "2027-02-22"
+curator_note: >
+  【입법예고안과 공포본의 차이】 2026-03-30 입법예고안은 1,000만원 이상 거래를 「위험도와 관계없이
+  의심거래로 보아」 보고하게 했다(자동 STR). 공포본 제7호나목은 「자체적인 의심거래 감시체계를
+  구축ㆍ운영할 것」이다(FACT:0000204). 「1천만원 이상 자동 STR」 서술은 공포본 기준으로 틀렸다.
+
+  「개인지갑」이라는 용어는 법령에 없다 — 법령상 표현은 「독점적인 관리 권한을 가지지 않은 가상자산주소」다.
+  소유 증명 방법은 시행령도 고시(제28조의2제4항)도 정하지 않는다.
+
+  이 조문의 제1호~제6호 등 기존 문언은 등재하지 않았다 — 이 노드는 제36592호가 개정한 제7호·제8호만 다룬다.
+  수취 VASP 측 정보 확보 의무(제10조의5제6항)는 도시에가 문언을 확보하지 못해 별도 PROV 로 만들지 않았다.
+
+  IMPOSES 엣지를 두지 않았다 — 이 의무(상대방 VASP 평가·자기수탁 주소 거래 제한·자체 감시체계)에 맞는
+  OBL 노드가 아직 없다(OBL:x-travel-rule-originator 는 송신인 정보 전달 의무라 맞지 않음). → OBL 신설 과제.
